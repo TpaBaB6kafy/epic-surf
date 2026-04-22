@@ -103,11 +103,11 @@ export default function EpicSurfLanding() {
       {/* 4. GALLERY */}
       <section className="py-12 bg-epicDark overflow-hidden">
         <div className="flex w-[200%] animate-marquee gap-4">
-          {[1,2,3,4,5,6].map((img, idx) => (
-             <div key={idx} className="w-[300px] h-[400px] md:w-[400px] md:h-[500px] bg-epicPink rounded-2xl flex-shrink-0 overflow-hidden relative">
-               <img src={`https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=400&auto=format&fit=crop&sig=${idx}`} alt="Surf Vibe" className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-500 cursor-pointer" />
-             </div>
-          ))}
+          {["/surf1.jpg","/surf2.jpg","/surf3.jpg","/surf4.jpg","/surf5.jpg","/surf6.jpg"].map((src, idx) => (
+  <div key={idx} className="w-[300px] h-[400px] md:w-[400px] md:h-[500px] bg-epicPink rounded-2xl flex-shrink-0 overflow-hidden relative">
+    <img src={src} alt="Surf Vibe" className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-500 cursor-pointer" />
+  </div>
+))}
         </div>
       </section>
 
