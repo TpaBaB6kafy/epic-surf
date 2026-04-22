@@ -92,7 +92,7 @@ export default function EpicSurfLanding() {
               <li className="flex items-center gap-2">✔️ Воск включен</li>
               <li className="flex items-center gap-2">✔️ Помощь в подборе под волну</li>
             </ul>
-            <div className="text-xl font-black mb-6">от 150,000 VND / час</div>
+            <div className="text-xl font-black mb-6">2 часа — всего 250,000 VN</div>
             <button className="w-full bg-epicDark text-white group-hover:bg-epicCoral py-4 rounded-xl font-bold transition-colors">
               Выбрать доску
             </button>
