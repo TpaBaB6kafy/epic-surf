@@ -160,7 +160,7 @@ export default function EpicSurfLanding() {
       </footer>
 
       {/* 7. ПЛАВАЮЩИЙ WHATSAPP */}
-      <a href="https://wa.me/123456789" target="_blank" rel="noreferrer" 
+      <a href="https://wa.me/+79027613478" target="_blank" rel="noreferrer" 
          className="fixed bottom-6 right-6 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform z-50 flex items-center justify-center group">
         <MessageCircle size={32} />
         <span className="absolute right-16 bg-epicDark text-white text-sm px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
