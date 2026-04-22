@@ -77,7 +77,7 @@ export default function EpicSurfLanding() {
               <li className="flex items-center gap-2">✔️ Сертифицированный инструктор</li>
               <li className="flex items-center gap-2">✔️ Фото и видео разбор</li>
             </ul>
-            <div className="text-xl font-black mb-6">от 800,000 VND / урок</div>
+            <div className="text-xl font-black mb-6">от 900,000 VND / урок</div>
             <button className="w-full bg-epicDark text-white group-hover:bg-epicCoral py-4 rounded-xl font-bold transition-colors">
               Записаться
             </button>
