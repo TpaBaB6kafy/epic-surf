@@ -10,6 +10,7 @@ export default function EpicSurfLanding() {
   // СЛОВАРЬ ПЕРЕВОДОВ
   const translations = {
     ru: {
+      contactUs: "Связаться с нами", // ЗАПЯТАЯ ЗДЕСЬ БЫЛА НУЖНА!
       navLessons: "Уроки",
       navRentals: "Аренда",
       btnBook: "Записаться",
@@ -41,6 +42,7 @@ export default function EpicSurfLanding() {
       ]
     },
     en: {
+      contactUs: "Contact us", // И ЗДЕСЬ ТОЖЕ!
       navLessons: "Lessons",
       navRentals: "Rentals",
       btnBook: "Book Now",
@@ -254,13 +256,38 @@ export default function EpicSurfLanding() {
         </div>
       </footer>
 
-      {/* 7. WHATSAPP */}
-      <a href="https://wa.me/123456789" target="_blank" rel="noreferrer" className="fixed bottom-8 right-8 bg-[#25D366] p-5 rounded-full shadow-2xl z-50 hover:scale-110 transition-transform group">
-        <MessageCircle size={32} color="white" />
-        <span className="absolute right-20 bg-white text-epicDark text-[10px] font-bold px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap uppercase tracking-widest shadow-xl">
-          {t.waTooltip}
-        </span>
-      </a>
+      {/* 7. MULTI-MESSENGER FLOAT */}
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col-reverse items-end gap-3 group">
+        
+        {/* Кнопка-триггер */}
+        <div className="bg-epicRed text-white p-5 rounded-full shadow-2xl cursor-pointer hover:rotate-12 transition-all relative">
+          <MessageCircle size={32} />
+          <span className="absolute top-0 right-0 w-4 h-4 bg-[#25D366] border-2 border-white rounded-full animate-ping"></span>
+        </div>
+
+        {/* Панель с мессенджерами */}
+        <div className="flex flex-col gap-3 mb-2 opacity-0 translate-y-10 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300">
+          
+          {/* WHATSAPP */}
+          <a href="https://wa.me/84383880164" target="_blank" rel="noreferrer" className="flex items-center gap-3 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform relative group/item">
+            <span className="absolute right-16 bg-white text-epicDark text-[10px] font-bold px-3 py-1 rounded-lg shadow-xl opacity-0 group-hover/item:opacity-100 transition-opacity whitespace-nowrap uppercase tracking-widest">WhatsApp</span>
+            <MessageCircle size={24} />
+          </a>
+
+          {/* TELEGRAM */}
+          <a href="https://t.me/danangsurf" target="_blank" rel="noreferrer" className="flex items-center gap-3 bg-[#0088cc] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform relative group/item">
+            <span className="absolute right-16 bg-white text-epicDark text-[10px] font-bold px-3 py-1 rounded-lg shadow-xl opacity-0 group-hover/item:opacity-100 transition-opacity whitespace-nowrap uppercase tracking-widest">Telegram</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+          </a>
+
+          {/* ZALO */}
+          <a href="https://zalo.me/84383880164" target="_blank" rel="noreferrer" className="flex items-center gap-3 bg-[#0068ff] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform relative group/item">
+            <span className="absolute right-16 bg-white text-epicDark text-[10px] font-bold px-3 py-1 rounded-lg shadow-xl opacity-0 group-hover/item:opacity-100 transition-opacity whitespace-nowrap uppercase tracking-widest">Zalo</span>
+            <div className="w-6 h-6 flex items-center justify-center font-black text-xs border-2 border-white rounded-md">Z</div>
+          </a>
+
+        </div>
+      </div>
 
       {/* 8. MODAL */}
       <AnimatePresence>
