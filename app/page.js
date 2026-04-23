@@ -72,8 +72,22 @@ export default function EpicSurfLanding() {
       </header>
 
       {/* 2. HERO SECTION */}
+      {/* 2. HERO SECTION */}
       <section className="relative h-screen flex items-center justify-center bg-epicDark overflow-hidden pt-20">
-        <div className="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=2070')] bg-cover bg-center" />
+        
+        {/* 🎬 ФОНОВОЕ ВИДЕО */}
+        {/* Свойства autoPlay, loop, muted и playsInline ОБЯЗАТЕЛЬНЫ, чтобы видео само играло на телефонах! */}
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="absolute inset-0 w-full h-full object-cover opacity-40"
+        >
+          {/* Пока тут стоит временное видео из интернета для теста. */}
+          {/* Ниже я расскажу, как заменить его на твое собственное! */}
+          <source src="https://cdn.pixabay.com/video/2016/09/21/5412-183785467_large.mp4" type="video/mp4" />
+        </video>
         
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <motion.h1 
@@ -91,30 +105,12 @@ export default function EpicSurfLanding() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-epicPink/80 text-lg md:text-xl mb-10 max-w-2xl mx-auto"
+            className="text-epicPink/80 text-lg md:text-xl max-w-2xl mx-auto"
           >
             Серф-школа для любого уровня. Уроки, аренда досок и лучшее комьюнити во Вьетнаме.
           </motion.p>
           
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="flex flex-col md:flex-row gap-4 justify-center"
-          >
-            {/* КНОПКА УРОКА */}
-            <button 
-              onClick={() => setBookingUrl(links.group)}
-              className="bg-epicRed hover:bg-epicCoral text-white px-8 py-4 rounded-full font-bold text-lg transition-all shadow-xl shadow-epicRed/20">
-              Book a Lesson
-            </button>
-            {/* КНОПКА АРЕНДЫ */}
-            <button 
-              onClick={() => setBookingUrl(links.rental)}
-              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-epicDark px-8 py-4 rounded-full font-bold text-lg transition-all">
-              Rent a Board
-            </button>
-          </motion.div>
+          {/* Кнопки отсюда удалены! */}
         </div>
       </section>
 
