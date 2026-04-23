@@ -72,11 +72,9 @@ export default function EpicSurfLanding() {
       </header>
 
       {/* 2. HERO SECTION */}
-      {/* 2. HERO SECTION */}
       <section className="relative h-screen flex items-center justify-center bg-epicDark overflow-hidden pt-20">
         
         {/* 🎬 ФОНОВОЕ ВИДЕО */}
-        {/* Свойства autoPlay, loop, muted и playsInline ОБЯЗАТЕЛЬНЫ, чтобы видео само играло на телефонах! */}
         <video 
           autoPlay 
           loop 
@@ -84,9 +82,8 @@ export default function EpicSurfLanding() {
           playsInline 
           className="absolute inset-0 w-full h-full object-cover opacity-40"
         >
-          {/* Пока тут стоит временное видео из интернета для теста. */}
-          {/* Ниже я расскажу, как заменить его на твое собственное! */}
           <source src="/hero-surf.mp4" type="video/mp4" />
+        </video> {/* <=== ВОТ ЭТОТ ТЕГ МЫ ПОТЕРЯЛИ! */}
         
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <motion.h1 
@@ -108,49 +105,8 @@ export default function EpicSurfLanding() {
           >
             Серф-школа для любого уровня. Уроки, аренда досок и лучшее комьюнити во Вьетнаме.
           </motion.p>
-          
-          {/* Кнопки отсюда удалены! */}
         </div>
       </section>
-
-      {/* 3. УСЛУГИ */}
-      <section id="lessons" className="py-24 px-6 max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-black text-center mb-16 uppercase">
-          Choose Your <span className="text-epicRed">Ride</span>
-        </h2>
-
-        {/* 📱 MOBILE CAROUSEL */}
-        <div className="md:hidden overflow-visible mb-12">
-          <motion.div
-            drag="x"
-            dragConstraints={{ left: -900, right: 0 }}
-            className="flex gap-6 cursor-grab active:cursor-grabbing px-2"
-          >
-            {lessonCards.map((item, i) => (
-              <motion.div
-                key={i}
-                whileTap={{ scale: 0.95 }}
-                // Добавили flex flex-col, убрали relative
-                className="min-w-[85%] bg-epicPink rounded-[32px] p-8 flex-shrink-0 shadow-xl flex flex-col"
-              >
-                <div className="mb-4">{item.icon}</div>
-                <div className="text-sm text-epicRed font-bold mb-2 uppercase tracking-wide">{item.badge}</div>
-                <h3 className="text-2xl font-bold mb-3">{item.title}</h3>
-                {/* Добавили flex-1 чтобы описание растягивалось */}
-                <p className="text-epicDark/70 mb-6 flex-1">{item.desc}</p>
-                <div className="text-2xl font-black mb-6">{item.price}</div>
-                
-                <button
-                  onClick={() => setBookingUrl(item.link)}
-                  // Убрали абсолютное позиционирование, добавили mt-auto
-                  className="w-full bg-epicDark text-white py-4 rounded-xl font-bold hover:bg-epicCoral transition-colors mt-auto"
-                >
-                  Book Now
-                </button>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
 
         {/* 💻 DESKTOP GRID */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
