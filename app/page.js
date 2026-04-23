@@ -284,7 +284,7 @@ export default function EpicSurfLanding() {
             >
               {/* WHATSAPP */}
               <a 
-                href="https://wa.me/84XXXXXXXXX" 
+                href="https://wa.me/84383880164" 
                 target="_blank" rel="noreferrer"
                 className="w-14 h-14 flex items-center justify-center bg-[#25D366] text-white rounded-full shadow-xl active:scale-95 transition-transform"
               >
@@ -293,7 +293,7 @@ export default function EpicSurfLanding() {
 
               {/* TELEGRAM */}
               <a 
-                href="https://t.me/YOUR_USERNAME" 
+                href="https://t.me/danangsurf" 
                 target="_blank" rel="noreferrer"
                 className="w-14 h-14 flex items-center justify-center bg-[#0088cc] text-white rounded-full shadow-xl active:scale-95 transition-transform"
               >
@@ -302,7 +302,7 @@ export default function EpicSurfLanding() {
 
               {/* ZALO */}
               <a 
-                href="https://zalo.me/84XXXXXXXXX" 
+                href="https://zalo.me/84383880164" 
                 target="_blank" rel="noreferrer"
                 className="w-14 h-14 flex items-center justify-center bg-[#0068ff] text-white rounded-full shadow-xl active:scale-95 transition-transform"
               >
