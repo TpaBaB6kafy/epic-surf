@@ -257,55 +257,66 @@ export default function EpicSurfLanding() {
         </div>
       </footer>
 
-      {/* 7. MULTI-MESSENGER FLOAT */}
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col-reverse items-end gap-3">
+      {/* 7. EPIC MESSENGERS (SIMPLE & FAST) */}
+      <div className="fixed bottom-6 right-6 z-[60] flex flex-col-reverse items-end gap-4">
         
-        {/* Кнопка-триггер (теперь реагирует на onClick) */}
-        <div 
+        {/* ГЛАВНАЯ КНОПКА (Триггер) */}
+        <button 
           onClick={() => setIsChatOpen(!isChatOpen)}
-          className={`bg-epicRed text-white p-5 rounded-full shadow-2xl cursor-pointer transition-all relative z-10 ${isChatOpen ? 'rotate-[135deg] bg-epicDark' : 'hover:rotate-12'}`}
+          className={`w-16 h-16 flex items-center justify-center rounded-full shadow-2xl transition-all duration-300 active:scale-90 ${isChatOpen ? 'bg-epicDark rotate-[135deg]' : 'bg-epicRed rotate-0'}`}
         >
-          {isChatOpen ? <X size={32} /> : <MessageCircle size={32} />}
+          {isChatOpen ? <X size={32} color="white" /> : <MessageCircle size={32} color="white" />}
+          
+          {/* Пульсирующая точка (видна только когда закрыто) */}
           {!isChatOpen && (
-            <span className="absolute top-0 right-0 w-4 h-4 bg-[#25D366] border-2 border-white rounded-full animate-ping"></span>
+            <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#25D366] border-4 border-epicWhite rounded-full animate-ping"></span>
           )}
-        </div>
+        </button>
 
-        {/* Панель с мессенджерами (управляется через переменную isChatOpen) */}
+        {/* ПАНЕЛЬ С ИКОНКАМИ (Без лишнего текста) */}
         <AnimatePresence>
           {isChatOpen && (
             <motion.div 
-              initial={{ opacity: 0, y: 20, scale: 0.8 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 20, scale: 0.8 }}
-              className="flex flex-col gap-3 mb-2"
+              initial={{ opacity: 0, scale: 0.5, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.5, y: 20 }}
+              className="flex flex-col gap-4 mb-2"
             >
               {/* WHATSAPP */}
-              <a href="https://wa.me/84383880164" target="_blank" rel="noreferrer" className="flex items-center gap-3 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform relative group">
-                <span className="absolute right-16 bg-white text-epicDark text-[10px] font-bold px-3 py-1 rounded-lg shadow-xl whitespace-nowrap uppercase tracking-widest">WhatsApp</span>
-                <MessageCircle size={24} />
+              <a 
+                href="https://wa.me/84XXXXXXXXX" 
+                target="_blank" rel="noreferrer"
+                className="w-14 h-14 flex items-center justify-center bg-[#25D366] text-white rounded-full shadow-xl active:scale-95 transition-transform"
+              >
+                <MessageCircle size={28} />
               </a>
 
               {/* TELEGRAM */}
-              <a href="https://t.me/danangsurf" target="_blank" rel="noreferrer" className="flex items-center gap-3 bg-[#0088cc] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform relative group">
-                <span className="absolute right-16 bg-white text-epicDark text-[10px] font-bold px-3 py-1 rounded-lg shadow-xl whitespace-nowrap uppercase tracking-widest">Telegram</span>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+              <a 
+                href="https://t.me/YOUR_USERNAME" 
+                target="_blank" rel="noreferrer"
+                className="w-14 h-14 flex items-center justify-center bg-[#0088cc] text-white rounded-full shadow-xl active:scale-95 transition-transform"
+              >
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
               </a>
 
               {/* ZALO */}
-              <a href="https://zalo.me/84383880164" target="_blank" rel="noreferrer" className="flex items-center gap-3 bg-[#0068ff] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform relative group">
-                <span className="absolute right-16 bg-white text-epicDark text-[10px] font-bold px-3 py-1 rounded-lg shadow-xl whitespace-nowrap uppercase tracking-widest">Zalo</span>
-                <div className="w-6 h-6 flex items-center justify-center font-black text-xs border-2 border-white rounded-md">Z</div>
+              <a 
+                href="https://zalo.me/84XXXXXXXXX" 
+                target="_blank" rel="noreferrer"
+                className="w-14 h-14 flex items-center justify-center bg-[#0068ff] text-white rounded-full shadow-xl active:scale-95 transition-transform"
+              >
+                <div className="font-black text-lg tracking-tighter">Z</div>
               </a>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Фоновая подложка (чтобы закрыть меню кликом в любое место экрана) */}
+        {/* Прозрачный слой для закрытия при клике мимо (только если открыто) */}
         {isChatOpen && (
           <div 
             onClick={() => setIsChatOpen(false)} 
-            className="fixed inset-0 z-0 bg-transparent" 
+            className="fixed inset-0 z-[-1] bg-black/5 backdrop-blur-[2px]" 
           />
         )}
       </div>
