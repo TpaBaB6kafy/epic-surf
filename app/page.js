@@ -1,8 +1,55 @@
 "use client";
-import { motion } from "framer-motion";
-import { Waves, MapPin, Award, Star, Phone, MessageCircle } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Waves, MapPin, Award, Star, Phone, MessageCircle, X } from "lucide-react";
 
 export default function EpicSurfLanding() {
+  // === ПАМЯТЬ ДЛЯ МОДАЛКИ (Хранит ссылку на нужный виджет Altegio) ===
+  const [bookingUrl, setBookingUrl] = useState(null);
+
+  // Ссылки Altegio
+  const links = {
+    group: "https://n1304231.alteg.io/company/1248257/activity/select?o=m-1act2026-04-23",
+    personal: "https://n1304231.alteg.io/company/1248257/personal/select-time?o=m-1",
+    rental: "https://n1304231.alteg.io/company/1248257/personal/select-services?o=m-1"
+  };
+
+  // Данные карточек с привязкой нужной ссылки
+  const lessonCards =[
+    {
+      title: "Group Lesson",
+      price: "900,000 VND",
+      badge: "Most Popular",
+      desc: "Perfect for beginners",
+      icon: <Waves size={40} className="text-epicRed" />,
+      link: links.group
+    },
+    {
+      title: "Split Lesson",
+      price: "1,200,000 VND",
+      badge: "Best Value",
+      desc: "2 people, more attention",
+      icon: <Award size={40} className="text-epicRed" />,
+      link: links.personal // Персональная ветка
+    },
+    {
+      title: "Private Lesson",
+      price: "1,800,000 VND",
+      badge: "Premium",
+      desc: "1-on-1 coaching",
+      icon: <Star size={40} className="text-epicRed" />,
+      link: links.personal // Персональная ветка
+    },
+    {
+      title: "Advanced / Line-up",
+      price: "Custom",
+      badge: "Pro Only",
+      desc: "For experienced surfers",
+      icon: <Waves size={40} className="text-epicRed" />,
+      link: links.personal // Либо можно дать ссылку на WhatsApp
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-epicWhite font-sans text-epicDark overflow-x-hidden">
       
@@ -16,7 +63,9 @@ export default function EpicSurfLanding() {
             <a href="#lessons" className="hover:text-epicCoral transition-colors">Lessons</a>
             <a href="#rentals" className="hover:text-epicCoral transition-colors">Rentals</a>
           </nav>
-          <button className="bg-epicRed hover:bg-epicCoral text-white px-6 py-2 rounded-full font-bold transition-all shadow-lg shadow-epicRed/30 hover:scale-105">
+          <button 
+            onClick={() => setBookingUrl(links.group)}
+            className="bg-epicRed hover:bg-epicCoral text-white px-6 py-2 rounded-full font-bold transition-all shadow-lg shadow-epicRed/30 hover:scale-105">
             Book Now
           </button>
         </div>
@@ -53,10 +102,16 @@ export default function EpicSurfLanding() {
             transition={{ delay: 0.6 }}
             className="flex flex-col md:flex-row gap-4 justify-center"
           >
-            <button className="bg-epicRed hover:bg-epicCoral text-white px-8 py-4 rounded-full font-bold text-lg transition-all shadow-xl shadow-epicRed/20">
+            {/* КНОПКА УРОКА */}
+            <button 
+              onClick={() => setBookingUrl(links.group)}
+              className="bg-epicRed hover:bg-epicCoral text-white px-8 py-4 rounded-full font-bold text-lg transition-all shadow-xl shadow-epicRed/20">
               Book a Lesson
             </button>
-            <button className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-epicDark px-8 py-4 rounded-full font-bold text-lg transition-all">
+            {/* КНОПКА АРЕНДЫ */}
+            <button 
+              onClick={() => setBookingUrl(links.rental)}
+              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-epicDark px-8 py-4 rounded-full font-bold text-lg transition-all">
               Rent a Board
             </button>
           </motion.div>
@@ -65,150 +120,85 @@ export default function EpicSurfLanding() {
 
       {/* 3. УСЛУГИ */}
       <section id="lessons" className="py-24 px-6 max-w-7xl mx-auto">
-  <h2 className="text-4xl md:text-5xl font-black text-center mb-16 uppercase">
-    Choose Your <span className="text-epicRed">Ride</span>
-  </h2>
+        <h2 className="text-4xl md:text-5xl font-black text-center mb-16 uppercase">
+          Choose Your <span className="text-epicRed">Ride</span>
+        </h2>
 
-  {/* 📱 MOBILE */}
-  <div className="md:hidden overflow-visible">
-    <motion.div
-      drag="x"
-      dragConstraints={{ left: -900, right: 0 }}
-      className="flex gap-6 cursor-grab active:cursor-grabbing"
-    >
-      {[
-        {
-          title: "Group Lesson",
-          price: "900,000 VND",
-          badge: "Most Popular",
-          desc: "Perfect for beginners",
-          icon: <Waves size={40} className="text-epicRed" />
-        },
-        {
-          title: "Split Lesson",
-          price: "1,200,000 VND",
-          badge: "Best Value",
-          desc: "2 people, more attention",
-          icon: <Award size={40} className="text-epicRed" />
-        },
-        {
-          title: "Private Lesson",
-          price: "1,800,000 VND",
-          badge: "Premium",
-          desc: "1-on-1 coaching",
-          icon: <Star size={40} className="text-epicRed" />
-        },
-        {
-          title: "Advanced / Line-up",
-          price: "Custom",
-          badge: "Pro Only",
-          desc: "For experienced surfers",
-          icon: <Waves size={40} className="text-epicRed" />
-        }
-      ].map((item, i) => (
-
-        <motion.div
-          key={i}
-          whileTap={{ scale: 0.95 }}
-          className="min-w-[85%] bg-epicPink rounded-[32px] p-8 flex-shrink-0 shadow-xl"
-        >
-          <div className="mb-4">{item.icon}</div>
-
-          <div className="text-sm text-epicRed font-bold mb-2">
-            {item.badge}
-          </div>
-
-          <h3 className="text-2xl font-bold mb-3">
-            {item.title}
-          </h3>
-
-          <p className="text-epicDark/70 mb-6">
-            {item.desc}
-          </p>
-
-          <div className="text-xl font-black mb-6">
-            {item.price}
-          </div>
-
-          <button
-            onClick={() => setShowForm(true)}
-            className="w-full bg-epicDark text-white py-4 rounded-xl font-bold hover:bg-epicCoral transition-colors"
+        {/* 📱 MOBILE CAROUSEL */}
+        <div className="md:hidden overflow-visible mb-12">
+          <motion.div
+            drag="x"
+            dragConstraints={{ left: -900, right: 0 }}
+            className="flex gap-6 cursor-grab active:cursor-grabbing"
           >
-            Book Now
-          </button>
-        </motion.div>
-
-      ))}
-    </motion.div>
-  </div>
-
-  {/* 💻 DESKTOP */}
-  <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-    {[
-      {
-        title: "Group Lesson",
-        price: "900,000 VND",
-        badge: "Most Popular",
-        desc: "Perfect for beginners",
-        icon: <Waves size={40} className="text-epicRed" />
-      },
-      {
-        title: "Split Lesson",
-        price: "1,200,000 VND",
-        badge: "Best Value",
-        desc: "2 people, more attention",
-        icon: <Award size={40} className="text-epicRed" />
-      },
-      {
-        title: "Private Lesson",
-        price: "1,800,000 VND",
-        badge: "Premium",
-        desc: "1-on-1 coaching",
-        icon: <Star size={40} className="text-epicRed" />
-      },
-      {
-        title: "Advanced / Line-up",
-        price: "Custom",
-        badge: "Pro Only",
-        desc: "For experienced surfers",
-        icon: <Waves size={40} className="text-epicRed" />
-      }
-    ].map((item, i) => (
-
-      <motion.div
-        key={i}
-        whileHover={{ scale: 1.05 }}
-        className="bg-epicPink rounded-[32px] p-8 shadow-xl"
-      >
-        <div className="mb-4">{item.icon}</div>
-
-        <div className="text-sm text-epicRed font-bold mb-2">
-          {item.badge}
+            {lessonCards.map((item, i) => (
+              <motion.div
+                key={i}
+                whileTap={{ scale: 0.95 }}
+                className="min-w-[85%] bg-epicPink rounded-[32px] p-8 flex-shrink-0 shadow-xl relative"
+              >
+                <div className="mb-4">{item.icon}</div>
+                <div className="text-sm text-epicRed font-bold mb-2 uppercase tracking-wide">{item.badge}</div>
+                <h3 className="text-2xl font-bold mb-3">{item.title}</h3>
+                <p className="text-epicDark/70 mb-6 min-h-[48px]">{item.desc}</p>
+                <div className="text-2xl font-black mb-6">{item.price}</div>
+                <button
+                  onClick={() => setBookingUrl(item.link)}
+                  className="w-full bg-epicDark text-white py-4 rounded-xl font-bold hover:bg-epicCoral transition-colors absolute bottom-8 left-0 right-0 mx-8 w-[calc(100%-64px)]"
+                >
+                  Book Now
+                </button>
+                {/* Распорка для абсолютной кнопки */}
+                <div className="h-14"></div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
 
-        <h3 className="text-2xl font-bold mb-3">
-          {item.title}
-        </h3>
-
-        <p className="text-epicDark/70 mb-6">
-          {item.desc}
-        </p>
-
-        <div className="text-xl font-black mb-6">
-          {item.price}
+        {/* 💻 DESKTOP GRID */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          {lessonCards.map((item, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.05 }}
+              className="bg-epicPink rounded-[32px] p-8 shadow-xl flex flex-col"
+            >
+              <div className="mb-4">{item.icon}</div>
+              <div className="text-sm text-epicRed font-bold mb-2 uppercase tracking-wide">{item.badge}</div>
+              <h3 className="text-2xl font-bold mb-3">{item.title}</h3>
+              <p className="text-epicDark/70 mb-6 flex-1">{item.desc}</p>
+              <div className="text-2xl font-black mb-8">{item.price}</div>
+              <button
+                onClick={() => setBookingUrl(item.link)}
+                className="w-full bg-epicDark text-white py-4 rounded-xl font-bold hover:bg-epicCoral transition-colors mt-auto"
+              >
+                Book Now
+              </button>
+            </motion.div>
+          ))}
         </div>
 
-        <button
-          onClick={() => setShowForm(true)}
-          className="w-full bg-epicDark text-white py-4 rounded-xl font-bold hover:bg-epicCoral transition-colors"
-        >
-          Book Now
-        </button>
-      </motion.div>
+        {/* 🏄‍♂️ КАРТОЧКА АРЕНДЫ (Широкая на всю ширину) */}
+        <div id="rentals" className="bg-epicDark text-white rounded-[32px] p-8 md:p-12 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
+          <div>
+            <div className="text-epicCoral font-bold mb-2 uppercase tracking-wide">Gear up</div>
+            <h3 className="text-3xl md:text-4xl font-bold mb-4">Board Rentals</h3>
+            <p className="text-white/70 max-w-xl">
+              Огромный выбор досок в идеальном состоянии: от безопасных софтбордов для новичков до быстрых шортбордов. Поможем подобрать доску под текущие волны на Микхе.
+            </p>
+          </div>
+          <div className="w-full md:w-auto flex flex-col items-center md:items-end">
+            <div className="text-2xl font-black mb-4">от 150,000 VND <span className="text-sm font-normal text-white/50">/ час</span></div>
+            <button
+              onClick={() => setBookingUrl(links.rental)}
+              className="w-full md:w-auto px-12 bg-epicRed text-white py-4 rounded-xl font-bold hover:bg-epicCoral transition-colors"
+            >
+              Арендовать доску
+            </button>
+          </div>
+        </div>
 
-    ))}
-  </div>
-</section>
+      </section>
 
       {/* 4. GALLERY */}
       <section className="py-12 bg-epicDark overflow-hidden">
@@ -245,7 +235,6 @@ export default function EpicSurfLanding() {
             <p className="text-epicPink/70 mb-6">Дананг, пляж Микхе.<br/>Открыты с 06:00 до 18:00</p>
             <div className="flex gap-4">
               <a href="#" className="hover:text-epicCoral transition-colors">
-                {/* SVG Иконка Instagram вместо удаленной из библиотеки */}
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
               </a>
               <a href="#" className="hover:text-epicCoral transition-colors"><Phone /></a>
@@ -277,6 +266,60 @@ export default function EpicSurfLanding() {
           Chat with us!
         </span>
       </a>
+
+      {/* ========================================================= */}
+      {/* 8. ALTEGIO BOOKING MODAL (ВСПЛЫВАЮЩЕЕ ОКНО ДЛЯ ЗАПИСИ) */}
+      {/* ========================================================= */}
+      <AnimatePresence>
+        {bookingUrl && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-6">
+            
+            {/* Темный фон (при клике закрывается) */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setBookingUrl(null)}
+              className="absolute inset-0 bg-epicDark/80 backdrop-blur-sm cursor-pointer"
+            />
+            
+            {/* Само белое окно */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-4xl h-[85vh] sm:h-[90vh] bg-epicWhite rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl flex flex-col z-10"
+            >
+              {/* Шапка модалки */}
+              <div className="flex justify-between items-center p-4 md:p-6 border-b border-epicPink bg-white">
+                <h3 className="font-bold text-xl uppercase tracking-tight">
+                  <span className="text-epicRed">Epic</span> Booking
+                </h3>
+                <button 
+                  onClick={() => setBookingUrl(null)} 
+                  className="p-2 bg-epicPink text-epicDark hover:bg-epicCoral hover:text-white rounded-full transition-all"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+              
+              {/* Фрейм Altegio */}
+              <div className="flex-1 w-full bg-white relative">
+                {/* Анимация загрузки */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-8 h-8 border-4 border-epicPink border-t-epicRed rounded-full animate-spin"></div>
+                </div>
+                {/* Сам виджет */}
+                <iframe 
+                  src={bookingUrl} 
+                  className="w-full h-full relative z-10 border-none rounded-b-2xl md:rounded-b-3xl" 
+                  title="Online Booking"
+                />
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
     </div>
   );
