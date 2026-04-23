@@ -64,24 +64,80 @@ export default function EpicSurfLanding() {
       </section>
 
       {/* 3. УСЛУГИ */}
-      <section id="lessons" className="py-24 px-6 max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-black text-center mb-16 uppercase">Choose Your <span className="text-epicRed">Ride</span></h2>
+      <section id="lessons" className="py-20 bg-epicWhite overflow-hidden">
+  <h2 className="text-4xl md:text-5xl font-black text-center mb-12 uppercase">
+    Choose Your <span className="text-epicRed">Ride</span>
+  </h2>
+
+  <div className="overflow-hidden">
+    <motion.div
+      drag="x"
+      dragConstraints={{ left: -900, right: 0 }}
+      className="flex gap-6 px-6 cursor-grab active:cursor-grabbing"
+    >
+      {[
+        {
+          title: "Group Lesson",
+          price: "900,000 VND",
+          badge: "Most Popular",
+          desc: "Perfect for beginners. Fun and social vibe."
+        },
+        {
+          title: "Split Lesson",
+          price: "1,200,000 VND",
+          badge: "Best Value",
+          desc: "2 people, more attention, faster progress."
+        },
+        {
+          title: "Private Lesson",
+          price: "1,800,000 VND",
+          badge: "Premium",
+          desc: "1-on-1 coaching. Fastest way to improve."
+        },
+        {
+          title: "Advanced / Line-up",
+          price: "Custom",
+          badge: "Advanced Only",
+          desc: "For experienced surfers. Real ocean skills."
+        }
+      ].map((item, idx) => (
         
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-epicPink rounded-[32px] p-8 hover:-translate-y-2 transition-transform duration-300 group">
-            <Waves size={48} className="text-epicRed mb-6" />
-            <h3 className="text-3xl font-bold mb-4">Surf Lessons</h3>
-            <p className="text-epicDark/80 mb-6 min-h-[60px]">Для новичков и продолжающих. Индивидуальный подход и разбор ошибок.</p>
-            <ul className="space-y-3 mb-8 font-medium">
-              <li className="flex items-center gap-2">✔️ Доска и рашгард включены</li>
-              <li className="flex items-center gap-2">✔️ Сертифицированный инструктор</li>
-              <li className="flex items-center gap-2">✔️ Фото и видео разбор</li>
-            </ul>
-            <div className="text-xl font-black mb-6">от 900,000 VND / урок</div>
-            <button className="w-full bg-epicDark text-white group-hover:bg-epicCoral py-4 rounded-xl font-bold transition-colors">
-              Записаться
-            </button>
+        <motion.div
+          key={idx}
+          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.05 }}
+          className="min-w-[85%] md:min-w-[320px] bg-epicPink rounded-[32px] p-8 flex-shrink-0 shadow-xl"
+        >
+          
+          <div className="text-sm text-epicRed font-bold mb-3">
+            {item.badge}
           </div>
+
+          <h3 className="text-3xl font-bold mb-3">
+            {item.title}
+          </h3>
+
+          <p className="text-epicDark/70 mb-6">
+            {item.desc}
+          </p>
+
+          <div className="text-2xl font-black mb-6">
+            {item.price}
+          </div>
+
+          <button
+            onClick={() => setShowForm(true)}
+            className="w-full bg-epicDark text-white py-4 rounded-xl font-bold hover:bg-epicCoral transition-colors"
+          >
+            Book Now
+          </button>
+
+        </motion.div>
+
+      ))}
+    </motion.div>
+  </div>
+</section>
 
           <div id="rentals" className="bg-epicPink rounded-[32px] p-8 hover:-translate-y-2 transition-transform duration-300 group">
             <Award size={48} className="text-epicRed mb-6" />
