@@ -45,42 +45,152 @@ export default function EpicSurfLanding() {
         </div>
       </section>
 
-      {/* LESSONS CAROUSEL */}
-      <section id="lessons" className="py-20 overflow-hidden">
-        <h2 className="text-4xl text-center mb-10 font-black">
-          Choose Your Ride
-        </h2>
+     {/* LESSONS CAROUSEL */}
+<section id="lessons" className="py-20 bg-epicWhite">
+  <h2 className="text-4xl md:text-5xl font-black text-center mb-12 uppercase">
+    Choose Your <span className="text-epicRed">Ride</span>
+  </h2>
 
+  {/* 📱 MOBILE SWIPE */}
+  <div className="md:hidden overflow-hidden">
+    <motion.div
+      drag="x"
+      dragConstraints={{ left: -900, right: 0 }}
+      className="flex gap-6 px-6 cursor-grab active:cursor-grabbing"
+    >
+      {[
+        {
+          title: "Group Lesson",
+          price: "900,000 VND",
+          badge: "Most Popular",
+          desc: "Perfect for beginners",
+          icon: <Waves size={40} className="text-epicRed" />
+        },
+        {
+          title: "Split Lesson",
+          price: "1,200,000 VND",
+          badge: "Best Value",
+          desc: "2 people, more attention",
+          icon: <Award size={40} className="text-epicRed" />
+        },
+        {
+          title: "Private Lesson",
+          price: "1,800,000 VND",
+          badge: "Premium",
+          desc: "1-on-1 coaching",
+          icon: <Star size={40} className="text-epicRed" />
+        },
+        {
+          title: "Advanced / Line-up",
+          price: "Custom",
+          badge: "Pro Only",
+          desc: "For experienced surfers",
+          icon: <Waves size={40} className="text-epicRed" />
+        }
+      ].map((item, i) => (
+        
         <motion.div
-          drag="x"
-          dragConstraints={{ left: -900, right: 0 }}
-          className="flex gap-6 px-6"
+          key={i}
+          whileTap={{ scale: 0.95 }}
+          className="min-w-[85%] bg-epicPink rounded-3xl p-6 shadow-xl flex flex-col"
         >
-          {[
-            { title: "Group", price: "900k", badge: "Popular" },
-            { title: "Split", price: "1200k", badge: "Best Value" },
-            { title: "Private", price: "1800k", badge: "Premium" },
-            { title: "Advanced", price: "Custom", badge: "Pro" },
-          ].map((item, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ scale: 1.05 }}
-              className="min-w-[85%] bg-epicPink p-6 rounded-3xl"
-            >
-              <div className="text-red-500 mb-2">{item.badge}</div>
-              <h3 className="text-2xl font-bold">{item.title}</h3>
-              <div className="text-xl font-black my-4">{item.price}</div>
+          <div className="mb-4">{item.icon}</div>
 
-              <button
-                onClick={() => setShowForm(true)}
-                className="bg-black text-white w-full py-3 rounded-xl"
-              >
-                Book
-              </button>
-            </motion.div>
-          ))}
+          <div className="text-sm text-epicRed font-bold mb-2">
+            {item.badge}
+          </div>
+
+          <h3 className="text-2xl font-bold mb-2">
+            {item.title}
+          </h3>
+
+          <p className="text-epicDark/70 mb-4">
+            {item.desc}
+          </p>
+
+          <div className="text-xl font-black mb-4">
+            {item.price}
+          </div>
+
+          <button
+            onClick={() => setShowForm(true)}
+            className="mt-auto bg-epicDark text-white py-3 rounded-xl font-bold hover:bg-epicCoral transition-colors"
+          >
+            Book Now
+          </button>
         </motion.div>
-      </section>
+
+      ))}
+    </motion.div>
+  </div>
+
+  {/* 💻 DESKTOP GRID */}
+  <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-8 px-6 max-w-7xl mx-auto">
+    {[
+      {
+        title: "Group Lesson",
+        price: "900,000 VND",
+        badge: "Most Popular",
+        desc: "Perfect for beginners",
+        icon: <Waves size={40} className="text-epicRed" />
+      },
+      {
+        title: "Split Lesson",
+        price: "1,200,000 VND",
+        badge: "Best Value",
+        desc: "2 people, more attention",
+        icon: <Award size={40} className="text-epicRed" />
+      },
+      {
+        title: "Private Lesson",
+        price: "1,800,000 VND",
+        badge: "Premium",
+        desc: "1-on-1 coaching",
+        icon: <Star size={40} className="text-epicRed" />
+      },
+      {
+        title: "Advanced / Line-up",
+        price: "Custom",
+        badge: "Pro Only",
+        desc: "For experienced surfers",
+        icon: <Waves size={40} className="text-epicRed" />
+      }
+    ].map((item, i) => (
+
+      <motion.div
+        key={i}
+        whileHover={{ scale: 1.05 }}
+        className="bg-epicPink rounded-3xl p-6 shadow-xl flex flex-col"
+      >
+        <div className="mb-4">{item.icon}</div>
+
+        <div className="text-sm text-epicRed font-bold mb-2">
+          {item.badge}
+        </div>
+
+        <h3 className="text-2xl font-bold mb-2">
+          {item.title}
+        </h3>
+
+        <p className="text-epicDark/70 mb-4">
+          {item.desc}
+        </p>
+
+        <div className="text-xl font-black mb-4">
+          {item.price}
+        </div>
+
+        <button
+          onClick={() => setShowForm(true)}
+          className="mt-auto bg-epicDark text-white py-3 rounded-xl font-bold hover:bg-epicCoral transition-colors"
+        >
+          Book Now
+        </button>
+      </motion.div>
+
+    ))}
+  </div>
+</section>
 
       {/* RENTALS */}
       <section id="rentals" className="py-20 px-6">
