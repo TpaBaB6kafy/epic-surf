@@ -26,7 +26,7 @@ export default function EpicSurfLanding() {
     },
     {
       title: "Split Lesson",
-      price: "1,200,000 VND",
+      price: "2,500,000 VND",
       badge: "Best Value",
       desc: "2 people, more attention",
       icon: <Award size={40} className="text-epicRed" />,
@@ -42,7 +42,7 @@ export default function EpicSurfLanding() {
     },
     {
       title: "Advanced / Line-up",
-      price: "Custom",
+      price: "2,400,000 VND",
       badge: "Pro Only",
       desc: "For experienced surfers",
       icon: <Waves size={40} className="text-epicRed" />,
@@ -183,14 +183,14 @@ export default function EpicSurfLanding() {
         {/* 🏄‍♂️ КАРТОЧКА АРЕНДЫ (Широкая на всю ширину) */}
         <div id="rentals" className="bg-epicDark text-white rounded-[32px] p-8 md:p-12 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
-            <div className="text-epicCoral font-bold mb-2 uppercase tracking-wide">Gear up</div>
-            <h3 className="text-3xl md:text-4xl font-bold mb-4">Board Rentals</h3>
+            <div className="text-epicCoral font-bold mb-2 uppercase tracking-wide">Привезем на спот</div>
+            <h3 className="text-3xl md:text-4xl font-bold mb-4">Аренда досок</h3>
             <p className="text-white/70 max-w-xl">
-              Огромный выбор досок в идеальном состоянии: от безопасных софтбордов для новичков до быстрых шортбордов. Поможем подобрать доску под текущие волны на Микхе.
+              Огромный выбор досок в идеальном состоянии: от безопасных софтбордов для новичков до быстрых шортбордов. Поможем подобрать доску под текущие волны.
             </p>
           </div>
           <div className="w-full md:w-auto flex flex-col items-center md:items-end">
-            <div className="text-2xl font-black mb-4">от 150,000 VND <span className="text-sm font-normal text-white/50">/ час</span></div>
+            <div className="text-2xl font-black mb-4">от 250,000 VND <span className="text-sm font-normal text-white/50">/ час</span></div>
             <button
               onClick={() => setBookingUrl(links.rental)}
               className="w-full md:w-auto px-12 bg-epicRed text-white py-4 rounded-xl font-bold hover:bg-epicCoral transition-colors"
