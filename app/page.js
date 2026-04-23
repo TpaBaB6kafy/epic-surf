@@ -70,7 +70,7 @@ export default function EpicSurfLanding() {
   </h2>
 
   {/* 📱 MOBILE */}
-  <div className="md:hidden overflow-hidden">
+  <div className="md:hidden overflow-visible">
     <motion.div
       drag="x"
       dragConstraints={{ left: -900, right: 0 }}
