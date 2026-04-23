@@ -6,6 +6,7 @@ import { Waves, MapPin, Award, Star, Phone, MessageCircle, X, Globe } from "luci
 export default function EpicSurfLanding() {
   const [lang, setLang] = useState('ru'); // По умолчанию русский
   const [bookingUrl, setBookingUrl] = useState(null);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   // СЛОВАРЬ ПЕРЕВОДОВ
   const translations = {
@@ -257,36 +258,56 @@ export default function EpicSurfLanding() {
       </footer>
 
       {/* 7. MULTI-MESSENGER FLOAT */}
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col-reverse items-end gap-3 group">
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col-reverse items-end gap-3">
         
-        {/* Кнопка-триггер */}
-        <div className="bg-epicRed text-white p-5 rounded-full shadow-2xl cursor-pointer hover:rotate-12 transition-all relative">
-          <MessageCircle size={32} />
-          <span className="absolute top-0 right-0 w-4 h-4 bg-[#25D366] border-2 border-white rounded-full animate-ping"></span>
+        {/* Кнопка-триггер (теперь реагирует на onClick) */}
+        <div 
+          onClick={() => setIsChatOpen(!isChatOpen)}
+          className={`bg-epicRed text-white p-5 rounded-full shadow-2xl cursor-pointer transition-all relative z-10 ${isChatOpen ? 'rotate-[135deg] bg-epicDark' : 'hover:rotate-12'}`}
+        >
+          {isChatOpen ? <X size={32} /> : <MessageCircle size={32} />}
+          {!isChatOpen && (
+            <span className="absolute top-0 right-0 w-4 h-4 bg-[#25D366] border-2 border-white rounded-full animate-ping"></span>
+          )}
         </div>
 
-        {/* Панель с мессенджерами */}
-        <div className="flex flex-col gap-3 mb-2 opacity-0 translate-y-10 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300">
-          
-          {/* WHATSAPP */}
-          <a href="https://wa.me/84383880164" target="_blank" rel="noreferrer" className="flex items-center gap-3 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform relative group/item">
-            <span className="absolute right-16 bg-white text-epicDark text-[10px] font-bold px-3 py-1 rounded-lg shadow-xl opacity-0 group-hover/item:opacity-100 transition-opacity whitespace-nowrap uppercase tracking-widest">WhatsApp</span>
-            <MessageCircle size={24} />
-          </a>
+        {/* Панель с мессенджерами (управляется через переменную isChatOpen) */}
+        <AnimatePresence>
+          {isChatOpen && (
+            <motion.div 
+              initial={{ opacity: 0, y: 20, scale: 0.8 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.8 }}
+              className="flex flex-col gap-3 mb-2"
+            >
+              {/* WHATSAPP */}
+              <a href="https://wa.me/84383880164" target="_blank" rel="noreferrer" className="flex items-center gap-3 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform relative group">
+                <span className="absolute right-16 bg-white text-epicDark text-[10px] font-bold px-3 py-1 rounded-lg shadow-xl whitespace-nowrap uppercase tracking-widest">WhatsApp</span>
+                <MessageCircle size={24} />
+              </a>
 
-          {/* TELEGRAM */}
-          <a href="https://t.me/danangsurf" target="_blank" rel="noreferrer" className="flex items-center gap-3 bg-[#0088cc] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform relative group/item">
-            <span className="absolute right-16 bg-white text-epicDark text-[10px] font-bold px-3 py-1 rounded-lg shadow-xl opacity-0 group-hover/item:opacity-100 transition-opacity whitespace-nowrap uppercase tracking-widest">Telegram</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-          </a>
+              {/* TELEGRAM */}
+              <a href="https://t.me/danangsurf" target="_blank" rel="noreferrer" className="flex items-center gap-3 bg-[#0088cc] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform relative group">
+                <span className="absolute right-16 bg-white text-epicDark text-[10px] font-bold px-3 py-1 rounded-lg shadow-xl whitespace-nowrap uppercase tracking-widest">Telegram</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+              </a>
 
-          {/* ZALO */}
-          <a href="https://zalo.me/84383880164" target="_blank" rel="noreferrer" className="flex items-center gap-3 bg-[#0068ff] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform relative group/item">
-            <span className="absolute right-16 bg-white text-epicDark text-[10px] font-bold px-3 py-1 rounded-lg shadow-xl opacity-0 group-hover/item:opacity-100 transition-opacity whitespace-nowrap uppercase tracking-widest">Zalo</span>
-            <div className="w-6 h-6 flex items-center justify-center font-black text-xs border-2 border-white rounded-md">Z</div>
-          </a>
+              {/* ZALO */}
+              <a href="https://zalo.me/84383880164" target="_blank" rel="noreferrer" className="flex items-center gap-3 bg-[#0068ff] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform relative group">
+                <span className="absolute right-16 bg-white text-epicDark text-[10px] font-bold px-3 py-1 rounded-lg shadow-xl whitespace-nowrap uppercase tracking-widest">Zalo</span>
+                <div className="w-6 h-6 flex items-center justify-center font-black text-xs border-2 border-white rounded-md">Z</div>
+              </a>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        </div>
+        {/* Фоновая подложка (чтобы закрыть меню кликом в любое место экрана) */}
+        {isChatOpen && (
+          <div 
+            onClick={() => setIsChatOpen(false)} 
+            className="fixed inset-0 z-0 bg-transparent" 
+          />
+        )}
       </div>
 
       {/* 8. MODAL */}
