@@ -86,8 +86,7 @@ export default function EpicSurfLanding() {
         >
           {/* Пока тут стоит временное видео из интернета для теста. */}
           {/* Ниже я расскажу, как заменить его на твое собственное! */}
-          <source src="https://cdn.pixabay.com/video/2016/09/21/5412-183785467_large.mp4" type="video/mp4" />
-        </video>
+          <source src="/hero-surf.mp4" type="video/mp4" />
         
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <motion.h1 
