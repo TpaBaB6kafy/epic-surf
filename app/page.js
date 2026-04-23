@@ -123,7 +123,7 @@ export default function EpicSurfLanding() {
       {/* 2. HERO SECTION */}
       <section className="relative h-screen flex items-center justify-center bg-epicDark overflow-hidden">
         <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40">
-          <source src="/hero-surf.mp4" type="video/mp4" />
+          <source src="/hero-surf1.mp4" type="video/mp4" />
         </video>
         
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto pt-20">
