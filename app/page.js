@@ -211,15 +211,55 @@ export default function EpicSurfLanding() {
         </div>
       </section>
 
-      {/* 4. GALLERY */}
-      <section className="py-24 bg-epicDark overflow-hidden">
-        <div className="flex w-[200%] animate-marquee gap-6">
-          {[1,2,3,4,5,6].map((img, idx) => (
-             <div key={idx} className="w-[300px] h-[450px] md:w-[450px] md:h-[600px] bg-epicPink rounded-[40px] flex-shrink-0 overflow-hidden">
-               <img src={`https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=600&auto=format&fit=crop&sig=${idx}`} alt="Surf" className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700 hover:scale-110" />
-             </div>
+      {/* 4. EPIC GALLERY (DOUBLE MARQUEE) */}
+      <section className="py-24 bg-epicDark overflow-hidden flex flex-col gap-6">
+        
+        {/* ВЕРХНЯЯ ЛЕНТА (Фото 1-10) — Едет влево */}
+        <div className="flex w-[200%] md:w-[150%] animate-marquee gap-4">
+          {[...Array(10)].map((_, i) => (
+            <div key={`top-${i}`} className="w-[280px] h-[380px] md:w-[400px] md:h-[500px] flex-shrink-0 rounded-[40px] overflow-hidden shadow-2xl group relative">
+              <img 
+                src={`/gallery/${i + 1}.webp`} 
+                alt={`Surf Lesson ${i + 1}`}
+                className="object-cover w-full h-full transition-all duration-700 group-hover:scale-110 grayscale-[0.3] group-hover:grayscale-0"
+                // Если файла нет, подставляем заглушку, но лог 404 всё равно будет в консоли, пока файл не появится
+                onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=600'; }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-epicDark/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </div>
+          ))}
+          {/* Дубликат для бесконечной ленты */}
+          {[...Array(10)].map((_, i) => (
+            <div key={`top-dup-${i}`} className="w-[280px] h-[380px] md:w-[400px] md:h-[500px] flex-shrink-0 rounded-[40px] overflow-hidden">
+              <img src={`/gallery/${i + 1}.webp`} className="object-cover w-full h-full" alt="Surf" />
+            </div>
           ))}
         </div>
+
+        {/* НИЖНЯЯ ЛЕНТА (Фото 11-20) — Едет вправо */}
+        <div className="flex w-[200%] md:w-[150%] animate-marquee-reverse gap-4">
+          {[...Array(10)].map((_, i) => {
+            const imgNum = i + 11;
+            return (
+              <div key={`bottom-${imgNum}`} className="w-[280px] h-[380px] md:w-[400px] md:h-[500px] flex-shrink-0 rounded-[40px] overflow-hidden shadow-2xl group relative">
+                <img 
+                  src={`/gallery/${imgNum}.webp`} 
+                  alt={`Surf Lesson ${imgNum}`}
+                  className="object-cover w-full h-full transition-all duration-700 group-hover:scale-110 grayscale-[0.3] group-hover:grayscale-0"
+                  onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=600'; }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-epicDark/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </div>
+            );
+          })}
+          {/* Дубликат для бесконечной ленты */}
+          {[...Array(10)].map((_, i) => (
+            <div key={`bottom-dup-${i}`} className="w-[280px] h-[380px] md:w-[400px] md:h-[500px] flex-shrink-0 rounded-[40px] overflow-hidden">
+              <img src={`/gallery/${i + 11}.webp`} className="object-cover w-full h-full" alt="Surf" />
+            </div>
+          ))}
+        </div>
+
       </section>
 
       {/* 5. REVIEWS */}
