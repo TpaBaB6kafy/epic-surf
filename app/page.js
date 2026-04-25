@@ -206,31 +206,97 @@ export default function EpicSurfLanding() {
         </div>
       </section>
 
-      {/* 7. FOOTER */}
-      <footer className="bg-epicDark text-white py-24 px-6 border-t border-white/10">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-20 text-center md:text-left border-b border-white/10 pb-20">
-          <div>
-            <div className="text-3xl font-black tracking-tighter uppercase mb-8 italic">EPIC <span className="text-epicRed">SURF</span></div>
-            <p className="text-white/50 text-lg leading-relaxed">{t.footerLocation}</p>
-          </div>
-          <div className="flex flex-col items-center gap-6">
-            <h4 className="font-black text-xl uppercase tracking-widest text-white">Socials</h4>
-            <div className="flex gap-8">
-              <a href="#" className="hover:text-epicRed transition-all scale-125"><MessageCircle size={28} /></a>
-              <a href="tel:+84383880164" className="hover:text-epicRed transition-all scale-125"><Phone size={28} /></a>
+      {/* 6. FINAL FOOTER WITH INTEGRATED MAP */}
+      <footer id="location" className="bg-epicDark text-white pt-24 pb-12 px-6 border-t border-white/5">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-12 gap-16 mb-20">
+            
+            {/* ЛЕВАЯ КОЛОНКА: ИНФО (5 из 12 частей) */}
+            <div className="lg:col-span-5 space-y-12 flex flex-col justify-between">
+              <div className="space-y-6 text-center md:text-left">
+                <div className="text-4xl font-black tracking-tighter uppercase italic">
+                  EPIC <span className="text-epicRed">SURF</span>
+                </div>
+                <p className="text-white/50 text-xl leading-relaxed max-w-sm mx-auto md:mx-0">
+                  {t.heroSub}
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-8 text-center md:text-left">
+                <div className="space-y-4">
+                  <h4 className="font-bold uppercase tracking-widest text-[10px] text-epicRed">{t.footerNav}</h4>
+                  <nav className="flex flex-col gap-3 text-white/70 text-sm font-bold">
+                    <a href="#lessons" className="hover:text-epicRed transition-colors uppercase tracking-tight">{t.navLessons}</a>
+                    <a href="#rentals" className="hover:text-epicRed transition-colors uppercase tracking-tight">{t.navRentals}</a>
+                  </nav>
+                </div>
+                <div className="space-y-4">
+                  <h4 className="font-bold uppercase tracking-widest text-[10px] text-epicRed">Socials</h4>
+                  <div className="flex gap-4 justify-center md:justify-start">
+                    <a href="https://instagram.com" target="_blank" className="p-3 bg-white/5 rounded-full hover:bg-epicRed transition-all">
+                      <InstagramIcon />
+                    </a>
+                    <a href="tel:+84383880164" className="p-3 bg-white/5 rounded-full hover:bg-epicRed transition-all">
+                      <Phone size={20} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-8 border-t border-white/5 text-center md:text-left">
+                <div className="flex items-center justify-center md:justify-start gap-3 text-white/50 mb-2 font-black uppercase tracking-widest text-[10px]">
+                  <MapPin size={16} className="text-epicRed" />
+                  {t.locationAddress}
+                </div>
+                <p className="text-white/80 font-medium">{t.footerLocation}</p>
+              </div>
             </div>
+
+            {/* ПРАВАЯ КОЛОНКА: КАРТА + КНОПКА (7 из 12 частей) */}
+            <div className="lg:col-span-7 flex flex-col gap-6">
+              {/* Контейнер самой карты */}
+              <div className="h-[400px] lg:h-full min-h-[450px] rounded-[40px] overflow-hidden border border-white/10 relative shadow-2xl bg-black/20">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1024.2523782017452!2d108.25027605520296!3d16.046658364986484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217f20b1fa357%3A0xa323fdd182ae974!2sEPIC%20Surf%20School%20Da%20Nang!5e1!3m2!1sru!2s!4v1777015710238!5m2!1sru!2s" 
+                  className="w-full h-full border-none lg:grayscale lg:invert lg:contrast-125 lg:opacity-60 lg:hover:grayscale-0 lg:hover:invert-0 lg:hover:opacity-100 transition-all duration-1000"
+                  allowFullScreen="" 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+                
+                {/* Бейдж сверху */}
+                <div className="absolute top-6 left-6 pointer-events-none">
+                   <div className="bg-epicRed text-white px-4 py-2 rounded-xl font-black text-[10px] uppercase tracking-widest shadow-2xl">Our Spot</div>
+                </div>
+              </div>
+
+              {/* КНОПКА ПОД КАРТОЙ (На мобилках — на всю ширину, на десктопе — аккуратно под карту) */}
+              <a 
+                href={links.googleMaps} 
+                target="_blank" 
+                rel="noreferrer" 
+                className="w-full bg-white text-epicDark py-6 rounded-3xl font-black uppercase text-sm tracking-widest hover:bg-epicRed hover:text-white transition-all shadow-xl text-center"
+              >
+                {t.btnOpenMaps}
+              </a>
+            </div>
+
           </div>
-          <div className="flex flex-col items-center md:items-end justify-center">
-             <MapPin className="text-epicRed mb-6 h-12 w-12" />
-             <a href={links.googleMaps} target="_blank" className="text-xs border-2 border-white/10 px-8 py-3 rounded-full hover:bg-white hover:text-epicDark font-bold uppercase transition-all">Open Maps</a>
+
+          {/* Копирайт */}
+          <div className="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-white/5 text-[10px] font-bold uppercase tracking-[0.4em] text-white/10">
+            <div>© 2026 Epic Surf School Da Nang</div>
+            <div className="mt-4 md:mt-0 tracking-[0.2em]">Crafted for the ocean</div>
           </div>
         </div>
-        <div className="text-center pt-12 text-[10px] uppercase font-bold tracking-[0.3em] opacity-20">© 2026 Epic Surf School</div>
       </footer>
 
-      {/* 8. MESSENGERS */}
+      {/* 7. MESSENGERS (Float) */}
       <div className="fixed bottom-6 right-6 z-[60] flex flex-col-reverse items-end gap-4">
-        <button onClick={() => setIsChatOpen(!isChatOpen)} className={`w-16 h-16 flex items-center justify-center rounded-full shadow-2xl transition-all duration-300 active:scale-90 ${isChatOpen ? 'bg-epicDark rotate-[135deg]' : 'bg-epicRed'}`}>
+        <button 
+          onClick={() => setIsChatOpen(!isChatOpen)} 
+          className={`w-16 h-16 flex items-center justify-center rounded-full shadow-2xl transition-all duration-300 active:scale-90 ${isChatOpen ? 'bg-epicDark rotate-[135deg]' : 'bg-epicRed rotate-0'}`}
+        >
           {isChatOpen ? <X size={32} color="white" /> : <MessageCircle size={32} color="white" />}
           {!isChatOpen && <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#25D366] border-4 border-epicWhite rounded-full animate-ping"></span>}
         </button>
@@ -238,7 +304,9 @@ export default function EpicSurfLanding() {
           {isChatOpen && (
             <motion.div initial={{ opacity: 0, scale: 0.5, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.5, y: 20 }} className="flex flex-col gap-4 mb-2">
               <a href={links.whatsapp} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#25D366] text-white rounded-full shadow-xl active:scale-95 transition-transform"><MessageCircle size={28} /></a>
-              <a href={links.telegram} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#0088cc] text-white rounded-full shadow-xl active:scale-95 transition-transform"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></a>
+              <a href={links.telegram} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#0088cc] text-white rounded-full shadow-xl active:scale-95 transition-transform">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+              </a>
               <a href={links.zalo} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#0068ff] text-white rounded-full shadow-xl active:scale-95 transition-transform"><div className="font-black text-lg tracking-tighter uppercase">Z</div></a>
             </motion.div>
           )}
@@ -246,12 +314,12 @@ export default function EpicSurfLanding() {
         {isChatOpen && <div onClick={() => setIsChatOpen(false)} className="fixed inset-0 z-[-1] bg-black/5 backdrop-blur-[2px]" />}
       </div>
 
-      {/* 9. MODAL */}
+      {/* 8. MODAL (Altegio) */}
       <AnimatePresence>
         {bookingUrl && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 md:p-6">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setBookingUrl(null)} className="absolute inset-0 bg-epicDark/90 backdrop-blur-md cursor-pointer" />
-            <motion.div initial={{ opacity: 0, scale: 0.9, y: 40 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 40 }} className="relative w-full max-w-5xl h-[85vh] bg-epicWhite rounded-[40px] overflow-hidden z-10 flex flex-col shadow-2xl">
+            <motion.div initial={{ opacity: 0, scale: 0.9, y: 40 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 40 }} className="relative w-full max-w-5xl h-[85vh] bg-epicWhite rounded-[40px] overflow-hidden z-10 flex flex-col shadow-2xl border border-white/10">
               <div className="flex justify-between items-center p-6 border-b border-epicPink bg-epicWhite text-epicDark font-black uppercase tracking-widest text-[10px]">
                 <span>{t.modalTitle}</span>
                 <button onClick={() => setBookingUrl(null)} className="p-2 bg-epicPink rounded-full text-epicDark"><X size={18} /></button>
@@ -263,7 +331,13 @@ export default function EpicSurfLanding() {
           </div>
         )}
       </AnimatePresence>
-
     </div>
+  );
+}
+
+// Мини-компонент иконки Instagram (т.к. Lucide её убрали)
+function InstagramIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
   );
 }
