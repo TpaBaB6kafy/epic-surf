@@ -11,22 +11,6 @@ export default function EpicSurfLanding() {
 
   const translations = {
     ru: {
-      whyTitle: "Почему",
-      whyTitleEpic: "Epic",
-      whyISA: "ISA Сертификация",
-      whyISADesc: "Наши инструкторы имеют международные сертификаты ISA. Безопасность — наш главный приоритет.",
-      whyVibe: "Твой вайб",
-      whyVibeDesc: "Мы не просто школа, мы — комьюнити. Бесплатные фото, кокосы и лучший чилл на пляже.",
-      whyGear: "Премиум стафф",
-      whyGearDesc: "Только свежее оборудование. Регулярно обновляем доски и лайкры для твоего комфорта.",
-      faqTitle: "Вопросы и",
-      faqTitleEnd: "Ответы",
-      faqItems: [
-        { q: "Нужно ли уметь плавать?", a: "Желательно уметь держаться на воде. Уроки проходят на безопасной глубине, а инструктор всегда рядом." },
-        { q: "Что брать с собой?", a: "Купальник/плавки, полотенце, солнцезащитный крем и хорошее настроение. Лайкру и цинк мы дадим." },
-        { q: "В какое время лучше приходить?", a: "Серфинг зависит от приливов и ветра. Обычно мы катаемся утром или перед закатом. Напишите нам — мы подскажем лучшее время на завтра." }
-      ],
-      reviewsLink: "Читать все отзывы на Google Maps",
       contactUs: "Связаться с нами",
       navLessons: "Уроки",
       navRentals: "Аренда",
@@ -45,47 +29,60 @@ export default function EpicSurfLanding() {
       rentalUnit: "Сессия / 2 часа",
       rentalBtn: "Арендовать",
       reviewsTitle: "Лучшие вайбы в Дананге",
-      reviewText: "Потрясающий опыт! Поймал свою первую волну уже через 20 минут! Инструктор сделал всё очень простым и безопасным.",
-      
+      reviewsLink: "Читать все отзывы на Google Maps",
       locationTitle: "Найди наш",
       locationTitleSpot: "Спот",
-      locationSubtitle: "Мы находимся в самом центре пляжа Микхе",
       locationAddress: "Пляж Микхе, Дананг",
       locationLandmark: "Ищите красный флаг EPIC SURF на песке",
       btnOpenMaps: "Открыть в Картах",
-      footerLocation: "Дананг, пляж Микхе. 06:00 — 18:00",
       footerNav: "Навигация",
       footerMaps: "Карты",
       modalTitle: "Запись",
       featureLycra: "Лайкры и цинк",
       featureSizes: "Все размеры",
-      featureWetsuits: "Гидрокостюмы",
+      featureWetsuits: "Гидро-\nкостюмы",
       featureDelivery: "Привозим на спот",
       boardTypes: ["Софтборды", "Лонгборды", "Малибу", "Шортборды"],
+      whyISA: "ISA Сертификация",
+      whyISADesc: "Наши инструкторы имеют международные сертификаты ISA. Безопасность — наш приоритет.",
+      whyVibe: "Твой вайб",
+      whyVibeDesc: "Мы не просто школа, мы — комьюнити. Бесплатные фото, кокосы и лучший чилл на пляже.",
+      whyGear: "Премиум стафф",
+      whyGearDesc: "Только свежее оборудование. Регулярно обновляем доски и лайкры для твоего комфорта.",
+      faqTitle: "Вопросы и",
+      faqTitleEnd: "Ответы",
+      faqItems: [
+        { q: "Нужно ли уметь плавать?", a: "Желательно уметь держаться на воде. Уроки проходят на безопасной глубине, а инструктор всегда рядом." },
+        { q: "Что брать с собой?", a: "Купальник/плавки, полотенце, солнцезащитный крем и хорошее настроение. Лайкру и цинк мы дадим." },
+        { q: "В какое время лучше приходить?", a: "Серфинг зависит от приливов и ветра. Обычно мы катаемся утром или перед закатом. Напишите нам — мы подскажем лучшее время на завтра." }
+      ],
+      // КАРТОЧКИ УРОКОВ (RU) — БЕЗ НИХ БЫЛА ОШИБКА
       cards: [
-        { title: "Групповой урок", badge: "Популярно", desc: "До 4-х человек на инструктора. Идеально для новичков.", price: "900,000 VND" },
+        { title: "Групповой урок", badge: "Популярно", desc: "Идеально для новичков. До 4-х человек на инструктора.", price: "900,000 VND" },
         { title: "Сплит урок", badge: "Выгодно", desc: "Для 2-х человек. Больше внимания тренера. Цена за двоих.", price: "2,500,000 VND" },
         { title: "Приватный урок", badge: "Премиум", desc: "Индивидуальная тренировка для быстрого прогресса.", price: "1,800,000 VND" },
         { title: "Line-up / Pro", badge: "Для опытных", desc: "Выход на лайнап с гидом. Поиск лучших пиков.", price: "2,400,000 VND" }
+      ],
+      // ТВОИ РЕАЛЬНЫЕ ОТЗЫВЫ (RU)
+      reviewsList: [
+        {
+          name: "Evgenia",
+          text: "Отличные уроки! Пошла с друзьями просто попробовать и ребята влюбили меня в серф! Очень понятные объяснения по технике, много практики в воде, классная обратная связь и фото/видео после каждого урока. Буду ходить еще, спасибо Паше и Ксюше! 🔥",
+          date: "Неделю назад"
+        },
+        {
+          name: "Дмитрий Харламов",
+          text: "Отличная команда! На второй день уже тренировали повороты и разгрузку, хотя волны были слабые. Место подбирали заранее. Паша — очень крутой инструктор с чувством юмора! И фотосессия бонусом. 👍",
+          date: "2 недели назад"
+        },
+        {
+          name: "Peter Thanh",
+          text: "Despite of the bad weather the instructor was very friendly and teach very well also ther sevices were great. I can only recommend this surf school for beginner. 👌",
+          date: "Месяц назад"
+        }
       ]
     },
     en: {
-      whyTitle: "Why",
-      whyTitleEpic: "Epic",
-      whyISA: "ISA Certified",
-      whyISADesc: "Our instructors are ISA certified professionals. Safety is our #1 priority.",
-      whyVibe: "The Surf Vibe",
-      whyVibeDesc: "More than a school — we are a community. Free photos, coconuts, and best beach chill.",
-      whyGear: "Premium Gear",
-      whyGearDesc: "Top-tier equipment only. We regularly update our boards and rashguards for your comfort.",
-      faqTitle: "FAQ",
-      faqTitleEnd: "",
-      faqItems: [
-        { q: "Do I need to be a strong swimmer?", a: "Basic swimming skills are enough. Lessons are held in safe depths with the instructor by your side." },
-        { q: "What should I bring?", a: "Swimwear, towel, and sunscreen. We provide rashguards and zinc." },
-        { q: "When is the best time to surf?", a: "It depends on tides and wind. Usually mornings or sunsets. Text us, and we'll check tomorrow's forecast for you." }
-      ],
-      reviewsLink: "Read more on Google Maps",
       contactUs: "Contact us",
       navLessons: "Lessons",
       navRentals: "Rentals",
@@ -104,27 +101,58 @@ export default function EpicSurfLanding() {
       rentalUnit: "2 hour / Session",
       rentalBtn: "Rent Now",
       reviewsTitle: "The best surf vibes",
-      reviewText: "Amazing experience! Caught my first wave in 20 minutes! This school is pure fire.",
+      reviewsLink: "Read more on Google Maps",
       locationTitle: "Find the",
       locationTitleSpot: "Spot",
       locationSubtitle: "In the heart of My Khe Beach",
       locationAddress: "My Khe Beach, Da Nang",
-      locationLandmark: "Look for EPIC SURF flag on the sand",
+      locationLandmark: "Look for the Red EPIC SURF flag on the sand",
       btnOpenMaps: "Open in Google Maps",
-      footerLocation: "My Khe Beach, Da Nang. 06:00 — 18:00",
       footerNav: "Navigation",
-      footerMaps: "Open Maps",
+      footerMaps: "Maps",
       modalTitle: "Booking",
       featureLycra: "Rashguards & Zinc",
       featureSizes: "All Sizes",
       featureWetsuits: "Wetsuits",
       featureDelivery: "Spot Delivery",
       boardTypes: ["Softboards", "Longboards", "Malibus", "Shortboards"],
+      whyISA: "ISA Certified",
+      whyISADesc: "Our instructors are ISA certified professionals. Safety is our #1 priority.",
+      whyVibe: "The Surf Vibe",
+      whyVibeDesc: "More than a school — we are a community. Free photos, coconuts, and best beach chill.",
+      whyGear: "Premium Gear",
+      whyGearDesc: "Top-tier equipment only. We regularly update our boards and rashguards for your comfort.",
+      faqTitle: "FAQ",
+      faqTitleEnd: "",
+      faqItems: [
+        { q: "Do I need to be a strong swimmer?", a: "Basic swimming skills are enough. Lessons are held in safe depths with the instructor by your side." },
+        { q: "What should I bring?", a: "Swimwear, towel, and sunscreen. We provide rashguards and zinc." },
+        { q: "When is the best time to surf?", a: "It depends on tides and wind. Usually mornings or sunsets. Text us, and we'll check tomorrow's forecast for you." }
+      ],
+      // КАРТОЧКИ УРОКОВ (EN)
       cards: [
-        { title: "Group Lesson", badge: "Most Popular", desc: "Max 4 people per instructor. Perfect for beginners.", price: "900,000 VND" },
+        { title: "Group Lesson", badge: "Most Popular", desc: "Perfect for beginners. Max 4 people per instructor.", price: "900,000 VND" },
         { title: "Split Lesson", badge: "Best Value", desc: "For 2 people. More coach attention. Price for both.", price: "2,500,000 VND" },
         { title: "Private Lesson", badge: "Premium", desc: "1-on-1 coaching for maximum progress.", price: "1,800,000 VND" },
         { title: "Line-up / Pro", badge: "Advanced", desc: "Guiding to the best peaks for experienced surfers.", price: "2,400,000 VND" }
+      ],
+      // ТВОИ РЕАЛЬНЫЕ ОТЗЫВЫ (EN)
+      reviewsList: [
+        {
+          name: "Evgenia",
+          text: "Great lessons! Went with friends to try it out and the team made us fall in love with surfing! Very clear technique explanations, lots of practice, and awesome photo/video feedback after every lesson. 🔥",
+          date: "1 week ago"
+        },
+        {
+          name: "Dmitry Kharlamov",
+          text: "Excellent team! By the second day, we were already practicing turns and compression. Pasha is a very cool instructor with a great sense of humor! Plus, you get a bonus photoshoot. 👍",
+          date: "2 weeks ago"
+        },
+        {
+          name: "Peter Thanh",
+          text: "Despite of the bad weather the instructor was very friendly and teach very well also ther sevices were great. I can only recommend this surf school for beginner. 👌",
+          date: "1 month ago"
+        }
       ]
     }
   };
@@ -389,32 +417,70 @@ export default function EpicSurfLanding() {
       {/* 5. REVIEWS (GOOGLE MAPS STYLE) */}
       <section className="py-24 bg-epicPink border-y border-white/50">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            {[...Array(5)].map((_, i) => <Star key={i} size={24} className="text-epicRed fill-epicRed" />)}
+          
+          {/* Рейтинг сверху */}
+          <div className="flex flex-col items-center mb-16">
+            <div className="flex items-center gap-1 mb-2">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={20} className="text-epicRed fill-epicRed" />
+              ))}
+            </div>
+            <div className="text-epicDark font-black uppercase tracking-widest text-xs">
+              Excellent 5/5 on Google Maps
+            </div>
           </div>
-          <h2 className="text-4xl md:text-7xl font-black mb-16 uppercase tracking-tighter text-epicDark leading-none">
+
+          <h2 className="text-4xl md:text-7xl font-black mb-20 uppercase tracking-tighter text-epicDark leading-none">
             {t.reviewsTitle}
           </h2>
           
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            {[1, 2, 3].map((rev) => (
-              <div key={rev} className="bg-white p-8 rounded-[40px] shadow-xl text-left border border-white relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-4 opacity-10"><MessageCircle size={60} /></div>
-                <p className="text-epicDark font-medium italic mb-6 text-sm">"{t.reviewText}"</p>
-                <div className="flex items-center gap-3 border-t border-epicPink pt-4">
-                  <div className="w-10 h-10 bg-epicDark rounded-full" />
-                  <div className="text-xs font-black uppercase tracking-widest text-epicDark">Sarah Thompson</div>
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            {t.reviewsList.map((rev, i) => (
+              <motion.div 
+                key={i} 
+                whileHover={{ y: -5 }}
+                className="bg-white p-10 rounded-[40px] shadow-xl text-left border border-white relative flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="flex gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} size={14} className="text-epicRed fill-epicRed" />
+                      ))}
+                    </div>
+                    {/* Иконка Google G */}
+                    <div className="w-5 h-5 opacity-20">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                    </div>
+                  </div>
+                  <p className="text-epicDark font-medium leading-relaxed mb-8 text-lg italic">
+                    "{rev.text}"
+                  </p>
                 </div>
-              </div>
+                
+                <div className="flex items-center gap-4 border-t border-epicPink pt-6">
+                  {/* Заглушка аватара (первая буква имени) */}
+                  <div className="w-12 h-12 bg-epicDark text-white rounded-full flex items-center justify-center font-black uppercase text-sm">
+                    {rev.name.charAt(0)}
+                  </div>
+                  <div>
+                    <div className="text-sm font-black uppercase tracking-widest text-epicDark">{rev.name}</div>
+                    <div className="text-[10px] uppercase opacity-40 font-bold">{rev.date}</div>
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </div>
 
           <a 
-            href="https://maps.app.goo.gl/JXG7MGM5F35kavZJ6" // ЗАМЕНИ НА СВОЮ ССЫЛКУ
+            href="https://www.google.com/maps/place/EPIC+Surf+School+Da+Nang/@16.0464674,108.2504812,17z/data=!4m8!3m7!1s0x314217f20b1fa357:0xa323fdd182ae974!8m2!3d16.0464674!4d108.2504812!9m1!1b1!16s%2Fg%2F11vlwxw7nd?entry=ttu" 
             target="_blank"
-            className="inline-flex items-center gap-2 text-epicRed font-black uppercase text-xs tracking-widest hover:underline"
+            className="group inline-flex items-center gap-3 text-epicRed font-black uppercase text-xs tracking-[0.2em] hover:opacity-70 transition-all"
           >
-            {t.reviewsLink} <Globe size={14} />
+            <span>{t.reviewsLink}</span>
+            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-lg group-hover:translate-x-2 transition-transform">
+               <Globe size={14} />
+            </div>
           </a>
         </div>
       </section>
