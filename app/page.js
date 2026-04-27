@@ -260,40 +260,61 @@ export default function EpicSurfLanding() {
         </div>
       </section>
 
-      {/* 3. SERVICES */}
-      <section id="lessons" className="py-24 px-6 max-w-7xl mx-auto">
+       <section id="lessons" className="py-24 px-6 max-w-7xl mx-auto">
         <h2 className="text-4xl md:text-6xl font-black text-center mb-16 uppercase tracking-tighter text-epicDark">
           {t.sectionTitle} <span className="text-epicRed italic">{t.sectionTitleRide}</span>
         </h2>
 
-        {/* MOBILE CAROUSEL */}
+        {/* MOBILE CAROUSEL (с фото) */}
         <div className="md:hidden overflow-visible mb-12">
           <motion.div drag="x" dragConstraints={{ left: -950, right: 0 }} className="flex gap-6 px-2 cursor-grab active:cursor-grabbing">
             {t.cards.map((item, i) => (
-              <div key={i} className="min-w-[280px] bg-epicPink rounded-[40px] p-8 shadow-xl flex flex-col border border-white/50">
-                <div className="mb-6"><Waves size={40} className="text-epicRed" /></div>
-                <div className="text-[10px] text-epicRed font-bold mb-2 uppercase tracking-widest">{item.badge}</div>
-                <h3 className="text-2xl font-bold mb-3 uppercase tracking-tight text-epicDark">{item.title}</h3>
-                <p className="text-epicDark/70 mb-8 text-sm leading-relaxed flex-1">{item.desc}</p>
-                <div className="text-2xl font-black mb-6 text-epicDark">{item.price}</div>
-                <button onClick={() => setBookingUrl(i === 0 ? links.group : links.personal)} className="w-full bg-epicDark text-white py-4 rounded-2xl font-bold uppercase text-xs tracking-widest active:scale-95 transition-all shadow-md">{t.btnBook}</button>
+              <div key={i} className="min-w-[280px] bg-epicPink rounded-[40px] overflow-hidden shadow-xl flex flex-col border border-white/50">
+                {/* Фото в мобилке */}
+                <div className="h-40 overflow-hidden relative">
+                  <img 
+                    src={`/gallery/lesson-${i + 1}.webp`} 
+                    alt={item.title}
+                    className="w-full h-full object-cover grayscale-[0.2]"
+                    onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=600'; }}
+                  />
+                </div>
+                <div className="p-8 flex flex-col flex-1">
+                  <div className="mb-4"><Waves size={40} className="text-epicRed" /></div>
+                  <div className="text-[10px] text-epicRed font-bold mb-2 uppercase tracking-widest">{item.badge}</div>
+                  <h3 className="text-2xl font-bold mb-3 uppercase tracking-tight text-epicDark">{item.title}</h3>
+                  <p className="text-epicDark/70 mb-8 text-sm leading-relaxed flex-1">{item.desc}</p>
+                  <div className="text-2xl font-black mb-6 text-epicDark">{item.price}</div>
+                  <button onClick={() => setBookingUrl(i === 0 ? links.group : links.personal)} className="w-full bg-epicDark text-white py-4 rounded-2xl font-bold uppercase text-xs active:scale-95 transition-all shadow-md">{t.btnBook}</button>
+                </div>
               </div>
             ))}
           </motion.div>
         </div>
 
-        {/* DESKTOP GRID */}
+        {/* DESKTOP GRID (с фото) */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {t.cards.map((item, i) => (
-            <motion.div key={i} whileHover={{ y: -10 }} className="bg-epicPink rounded-[40px] p-8 shadow-lg flex flex-col border border-white/50 group">
-              <div className="mb-6 transition-transform group-hover:scale-110 duration-300">
-                {i === 1 ? <Award size={40} className="text-epicRed" /> : i === 2 ? <Star size={40} className="text-epicRed" /> : <Waves size={40} className="text-epicRed" />}
+            <motion.div key={i} whileHover={{ y: -10 }} className="bg-epicPink rounded-[40px] overflow-hidden shadow-lg flex flex-col border border-white/50 group transition-all">
+              {/* Фото в десктопе */}
+              <div className="h-44 overflow-hidden relative">
+                <img 
+                  src={`/gallery/lesson-${i + 1}.webp`} 
+                  alt={item.title}
+                  className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500"
+                  onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=600'; }}
+                />
               </div>
-              <div className="text-[10px] text-epicRed font-bold mb-2 uppercase tracking-widest">{item.badge}</div>
-              <h3 className="text-2xl font-bold mb-3 uppercase tracking-tight text-epicDark">{item.title}</h3>
-              <p className="text-epicDark/70 mb-8 text-sm leading-relaxed flex-1">{item.desc}</p>
-              <div className="text-2xl font-black mb-8 tracking-tighter text-epicDark">{item.price}</div>
-              <button onClick={() => setBookingUrl(i === 0 ? links.group : links.personal)} className="w-full bg-epicDark text-white py-4 rounded-2xl font-bold uppercase text-xs tracking-widest hover:bg-epicRed transition-all shadow-md">{t.btnBook}</button>
+              <div className="p-8 flex flex-col flex-1">
+                <div className="mb-6 text-epicRed transition-transform group-hover:scale-110 duration-300">
+                  {i === 1 ? <Award size={40} /> : i === 2 ? <Star size={40} /> : <Waves size={40} />}
+                </div>
+                <div className="text-[10px] text-epicRed font-bold mb-2 uppercase tracking-widest">{item.badge}</div>
+                <h3 className="text-2xl font-bold mb-3 uppercase tracking-tight text-epicDark">{item.title}</h3>
+                <p className="text-epicDark/70 mb-8 text-sm leading-relaxed flex-1">{item.desc}</p>
+                <div className="text-2xl font-black mb-8 tracking-tighter text-epicDark">{item.price}</div>
+                <button onClick={() => setBookingUrl(i === 0 ? links.group : links.personal)} className="w-full bg-epicDark text-white py-4 rounded-2xl font-bold uppercase text-xs tracking-widest hover:bg-epicRed transition-all shadow-md">{t.btnBook}</button>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -448,10 +469,7 @@ export default function EpicSurfLanding() {
                         <Star key={i} size={14} className="text-epicRed fill-epicRed" />
                       ))}
                     </div>
-                    {/* Иконка Google G */}
-                    <div className="w-5 h-5 opacity-20">
-                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-                    </div>
+                    
                   </div>
                   <p className="text-epicDark font-medium leading-relaxed mb-8 text-lg italic">
                     "{rev.text}"
