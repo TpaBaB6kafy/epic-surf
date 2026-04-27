@@ -169,24 +169,43 @@ export default function EpicSurfLanding() {
   };
 
   return (
-    <div className="min-h-screen bg-epicWhite font-sans text-epicDark overflow-x-hidden transition-colors duration-500">
+    <div className="min-h-screen bg-epicWhite font-sans text-epicDark overflow-x-hidden transition-colors duration-500 scroll-smooth">
       
       {/* 1. HEADER */}
-      <header className="fixed top-0 w-full bg-epicWhite/80 backdrop-blur-md z-50 border-b border-epicPink">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="text-xl md:text-2xl font-black tracking-tighter uppercase">
+      <header className="fixed top-0 w-full bg-epicWhite/90 backdrop-blur-md z-50 border-b border-epicPink">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex justify-between items-center text-epicDark">
+          
+          {/* LOGO */}
+          <div className="text-xl md:text-2xl font-black tracking-tighter uppercase flex-shrink-0">
             EPIC <span className="text-epicRed italic">SURF</span>
           </div>
-          <div className="flex items-center gap-3 md:gap-6">
+
+          {/* QUICK NAV (Desktop & Tablet) */}
+          <nav className="hidden md:flex items-center gap-6 lg:gap-10">
+            <a href="#lessons" className="text-[10px] font-black uppercase tracking-[0.2em] hover:text-epicRed transition-colors">{t.navLessons}</a>
+            <a href="#rentals" className="text-[10px] font-black uppercase tracking-[0.2em] hover:text-epicRed transition-colors">{t.navRentals}</a>
+            <a href="#location" className="text-[10px] font-black uppercase tracking-[0.2em] hover:text-epicRed transition-colors">{t.footerMaps}</a>
+          </nav>
+
+          {/* RIGHT SIDE: LANG + BOOK */}
+          <div className="flex items-center gap-2 md:gap-6">
+            {/* Ссылки для мобилки (иконки вместо текста) */}
+            <div className="flex md:hidden items-center gap-4 mr-2">
+              <a href="#lessons" className="text-epicDark/50 hover:text-epicRed"><Waves size={20} /></a>
+              <a href="#location" className="text-epicDark/50 hover:text-epicRed"><MapPin size={20} /></a>
+            </div>
+
             <button 
               onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')}
-              className="flex items-center gap-2 font-bold text-[10px] uppercase tracking-widest bg-epicPink px-3 py-2 rounded-full hover:bg-epicRed hover:text-white transition-all text-epicDark"
+              className="flex items-center gap-2 font-bold text-[10px] uppercase bg-epicPink px-3 py-2 rounded-full hover:bg-epicRed hover:text-white transition-all text-epicDark"
             >
-              <Globe size={14} /> {lang === 'ru' ? 'EN' : 'RU'}
+              <Globe size={14} /> 
+              <span className="hidden sm:inline">{lang === 'ru' ? 'EN' : 'RU'}</span>
             </button>
+
             <button 
               onClick={() => setBookingUrl(links.group)} 
-              className="bg-epicRed text-white px-5 py-2 rounded-full font-bold uppercase text-[10px] tracking-widest shadow-lg shadow-epicRed/30 active:scale-95 transition-all"
+              className="bg-epicRed text-white px-4 md:px-6 py-2 rounded-full font-bold uppercase text-[10px] tracking-widest shadow-lg shadow-epicRed/30 active:scale-95 transition-all flex-shrink-0"
             >
               {t.btnBook}
             </button>
@@ -436,7 +455,7 @@ export default function EpicSurfLanding() {
       </section>
 
       {/* 5. REVIEWS (GOOGLE MAPS STYLE) */}
-      <section className="py-24 bg-epicPink border-y border-white/50">
+      <section id="reviews" className="py-24 bg-epicPink border-y border-white/50">
         <div className="max-w-7xl mx-auto px-6 text-center">
           
           {/* Рейтинг сверху */}
