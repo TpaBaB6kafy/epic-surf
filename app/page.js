@@ -1,15 +1,32 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Waves, MapPin, Award, Star, Phone, MessageCircle, X, Globe } from "lucide-react";
+import { Waves, MapPin, Award, Star, Phone, MessageCircle, X, Globe, ShieldCheck, Users } from "lucide-react";
 
 export default function EpicSurfLanding() {
   const [lang, setLang] = useState('ru'); 
   const [bookingUrl, setBookingUrl] = useState(null);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [openFaq, setOpenFaq] = useState(null);
 
   const translations = {
     ru: {
+      whyTitle: "Почему",
+      whyTitleEpic: "Epic",
+      whyISA: "ISA Сертификация",
+      whyISADesc: "Наши инструкторы имеют международные сертификаты ISA. Безопасность — наш главный приоритет.",
+      whyVibe: "Твой вайб",
+      whyVibeDesc: "Мы не просто школа, мы — комьюнити. Бесплатные фото, кокосы и лучший чилл на пляже.",
+      whyGear: "Премиум стафф",
+      whyGearDesc: "Только свежее оборудование. Регулярно обновляем доски и лайкры для твоего комфорта.",
+      faqTitle: "Вопросы и",
+      faqTitleEnd: "Ответы",
+      faqItems: [
+        { q: "Нужно ли уметь плавать?", a: "Желательно уметь держаться на воде. Уроки проходят на безопасной глубине, а инструктор всегда рядом." },
+        { q: "Что брать с собой?", a: "Купальник/плавки, полотенце, солнцезащитный крем и хорошее настроение. Лайкру и цинк мы дадим." },
+        { q: "В какое время лучше приходить?", a: "Серфинг зависит от приливов и ветра. Обычно мы катаемся утром или перед закатом. Напишите нам — мы подскажем лучшее время на завтра." }
+      ],
+      reviewsLink: "Читать все отзывы на Google Maps",
       contactUs: "Связаться с нами",
       navLessons: "Уроки",
       navRentals: "Аренда",
@@ -29,6 +46,7 @@ export default function EpicSurfLanding() {
       rentalBtn: "Арендовать",
       reviewsTitle: "Лучшие вайбы в Дананге",
       reviewText: "Потрясающий опыт! Поймал свою первую волну уже через 20 минут! Инструктор сделал всё очень простым и безопасным.",
+      
       locationTitle: "Найди наш",
       locationTitleSpot: "Спот",
       locationSubtitle: "Мы находимся в самом центре пляжа Микхе",
@@ -52,6 +70,22 @@ export default function EpicSurfLanding() {
       ]
     },
     en: {
+      whyTitle: "Why",
+      whyTitleEpic: "Epic",
+      whyISA: "ISA Certified",
+      whyISADesc: "Our instructors are ISA certified professionals. Safety is our #1 priority.",
+      whyVibe: "The Surf Vibe",
+      whyVibeDesc: "More than a school — we are a community. Free photos, coconuts, and best beach chill.",
+      whyGear: "Premium Gear",
+      whyGearDesc: "Top-tier equipment only. We regularly update our boards and rashguards for your comfort.",
+      faqTitle: "FAQ",
+      faqTitleEnd: "",
+      faqItems: [
+        { q: "Do I need to be a strong swimmer?", a: "Basic swimming skills are enough. Lessons are held in safe depths with the instructor by your side." },
+        { q: "What should I bring?", a: "Swimwear, towel, and sunscreen. We provide rashguards and zinc." },
+        { q: "When is the best time to surf?", a: "It depends on tides and wind. Usually mornings or sunsets. Text us, and we'll check tomorrow's forecast for you." }
+      ],
+      reviewsLink: "Read more on Google Maps",
       contactUs: "Contact us",
       navLessons: "Lessons",
       navRentals: "Rentals",
@@ -142,6 +176,59 @@ export default function EpicSurfLanding() {
             {t.heroTitle} <br/><span className="text-epicRed italic">{t.heroTitleEpic}</span> {t.heroTitleEnd}
           </motion.h1>
           <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto font-medium">{t.heroSub}</p>
+        </div>
+      </section>
+
+{/* 4. WHY EPIC SECTION — ТЕПЕРЬ ОН ЗДЕСЬ (МЕЖДУ HERO И УСЛУГАМИ) */}
+      <section className="py-20 bg-epicWhite px-6 border-b border-epicPink/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-12">
+            
+            {/* Карточка 1: Безопасность */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center text-center space-y-4"
+            >
+              <div className="w-20 h-20 bg-epicPink rounded-[30px] flex items-center justify-center text-epicRed shadow-sm">
+                <ShieldCheck size={40} />
+              </div>
+              <h3 className="text-xl font-black uppercase text-epicDark tracking-tight">{t.whyISA}</h3>
+              <p className="text-epicDark/60 leading-relaxed text-sm max-w-[280px]">{t.whyISADesc}</p>
+            </motion.div>
+
+            {/* Карточка 2: Комьюнити */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="flex flex-col items-center text-center space-y-4"
+            >
+              <div className="w-20 h-20 bg-epicPink rounded-[30px] flex items-center justify-center text-epicRed shadow-sm">
+                <Users size={40} />
+              </div>
+              <h3 className="text-xl font-black uppercase text-epicDark tracking-tight">{t.whyVibe}</h3>
+              <p className="text-epicDark/60 leading-relaxed text-sm max-w-[280px]">{t.whyVibeDesc}</p>
+            </motion.div>
+
+            {/* Карточка 3: Снаряжение */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="flex flex-col items-center text-center space-y-4"
+            >
+              <div className="w-20 h-20 bg-epicPink rounded-[30px] flex items-center justify-center text-epicRed shadow-sm">
+                <Award size={40} />
+              </div>
+              <h3 className="text-xl font-black uppercase text-epicDark tracking-tight">{t.whyGear}</h3>
+              <p className="text-epicDark/60 leading-relaxed text-sm max-w-[280px]">{t.whyGearDesc}</p>
+            </motion.div>
+
+          </div>
         </div>
       </section>
 
@@ -299,15 +386,71 @@ export default function EpicSurfLanding() {
         </div>
       </section>
 
-      {/* 5. REVIEWS */}
-      <section className="py-32 bg-epicPink text-epicDark text-center">
-        <div className="max-w-4xl mx-auto px-6">
-          <Star className="text-epicRed mx-auto mb-10 h-16 w-16 fill-current" />
-          <h2 className="text-4xl md:text-6xl font-black mb-16 uppercase tracking-tighter italic text-epicDark">"{t.reviewsTitle}"</h2>
-          <div className="bg-epicWhite p-10 md:p-16 rounded-[50px] shadow-2xl border border-white max-w-2xl mx-auto relative">
-             <div className="absolute -top-6 -left-6 text-epicRed opacity-20"><Waves size={80} /></div>
-             <p className="text-xl md:text-3xl font-medium italic mb-12 text-epicDark leading-tight relative z-10">"{t.reviewText}"</p>
-             <div className="font-black text-xl uppercase tracking-widest">— Sarah T., Australia</div>
+      {/* 5. REVIEWS (GOOGLE MAPS STYLE) */}
+      <section className="py-24 bg-epicPink border-y border-white/50">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            {[...Array(5)].map((_, i) => <Star key={i} size={24} className="text-epicRed fill-epicRed" />)}
+          </div>
+          <h2 className="text-4xl md:text-7xl font-black mb-16 uppercase tracking-tighter text-epicDark leading-none">
+            {t.reviewsTitle}
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            {[1, 2, 3].map((rev) => (
+              <div key={rev} className="bg-white p-8 rounded-[40px] shadow-xl text-left border border-white relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-4 opacity-10"><MessageCircle size={60} /></div>
+                <p className="text-epicDark font-medium italic mb-6 text-sm">"{t.reviewText}"</p>
+                <div className="flex items-center gap-3 border-t border-epicPink pt-4">
+                  <div className="w-10 h-10 bg-epicDark rounded-full" />
+                  <div className="text-xs font-black uppercase tracking-widest text-epicDark">Sarah Thompson</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <a 
+            href="https://maps.app.goo.gl/JXG7MGM5F35kavZJ6" // ЗАМЕНИ НА СВОЮ ССЫЛКУ
+            target="_blank"
+            className="inline-flex items-center gap-2 text-epicRed font-black uppercase text-xs tracking-widest hover:underline"
+          >
+            {t.reviewsLink} <Globe size={14} />
+          </a>
+        </div>
+      </section>
+
+      {/* 6. FAQ SECTION */}
+      <section className="py-24 bg-epicWhite px-6">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-16 text-center text-epicDark">
+            {t.faqTitle} <span className="text-epicRed italic">{t.faqTitleEnd}</span>
+          </h2>
+          <div className="space-y-4">
+            {t.faqItems.map((item, idx) => (
+              <div key={idx} className="border-b border-epicPink pb-4">
+                <button 
+                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                  className="w-full flex justify-between items-center py-4 text-left group"
+                >
+                  <span className="font-black uppercase tracking-tight text-lg md:text-xl text-epicDark group-hover:text-epicRed transition-colors">{item.q}</span>
+                  <div className={`transition-transform duration-300 ${openFaq === idx ? 'rotate-45' : ''}`}>
+                    <X size={24} className="text-epicRed" />
+                  </div>
+                </button>
+                <AnimatePresence>
+                  {openFaq === idx && (
+                    <motion.div 
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <p className="pb-4 text-epicDark/60 leading-relaxed">{item.a}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
           </div>
         </div>
       </section>
