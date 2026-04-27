@@ -1,16 +1,44 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react"; // Добавили useEffect
 import { motion, AnimatePresence } from "framer-motion";
-import { Waves, MapPin, Award, Star, Phone, MessageCircle, X, Globe, ShieldCheck, Users } from "lucide-react";
+import { Waves, MapPin, Award, Star, Phone, MessageCircle, X, Globe, ShieldCheck, Users, Wind, Thermometer, ArrowUp } from "lucide-react";
 
 export default function EpicSurfLanding() {
   const [lang, setLang] = useState('ru'); 
   const [bookingUrl, setBookingUrl] = useState(null);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
+const [forecast, setForecast] = useState(null);
 
+  useEffect(() => {
+    async function getForecast() {
+      try {
+        const marineRes = await fetch(`https://marine-api.open-meteo.com/v1/marine?latitude=16.061&longitude=108.247&current=wave_height,wave_period`);
+        const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=16.061&longitude=108.247&current=wind_speed_10m,wind_direction_10m`);
+        const marine = await marineRes.json();
+        const weather = await weatherRes.json();
+        setForecast({
+          height: marine.current.wave_height,
+          period: marine.current.wave_period,
+          windSpeed: weather.current.wind_speed_10m,
+          windDir: weather.current.wind_direction_10m,
+          water: 26
+        });
+      } catch (e) { console.error(e); }
+    }
+    getForecast();
+  }, []);
   const translations = {
     ru: {
+      forecastTitle: "Условия на",
+      forecastTitleSpot: "Сегодня",
+      forecastWaveHeight: "Высота волны",
+      forecastPeriod: "Период",
+      forecastWind: "Ветер",
+      forecastWater: "Вода",
+      forecastDir: "Направление",
+      forecastStatusGood: "Идеально для обучения",
+      forecastStatusHigh: "Только для опытных",
       contactUs: "Связаться с нами",
       navLessons: "Уроки",
       navRentals: "Аренда",
@@ -83,6 +111,15 @@ export default function EpicSurfLanding() {
       ]
     },
     en: {
+      forecastTitle: "Current",
+      forecastTitleSpot: "Forecast",
+      forecastWaveHeight: "Wave Height",
+      forecastPeriod: "Period",
+      forecastWind: "Wind",
+      forecastWater: "Water",
+      forecastDir: "Direction",
+      forecastStatusGood: "Perfect for beginners",
+      forecastStatusHigh: "Advanced surfers only",
       contactUs: "Contact us",
       navLessons: "Lessons",
       navRentals: "Rentals",
@@ -275,6 +312,67 @@ export default function EpicSurfLanding() {
               <p className="text-epicDark/60 leading-relaxed text-sm max-w-[280px]">{t.whyGearDesc}</p>
             </motion.div>
 
+          </div>
+        </div>
+      </section>
+      {/* SWELL REPORT HYBRID DASHBOARD */}
+      <section className="py-12 bg-epicWhite px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-epicDark rounded-[40px] overflow-hidden shadow-2xl border border-white/5 flex flex-col lg:flex-row min-h-[500px]">
+            
+            {/* Левая панель: Цифры */}
+            <div className="lg:w-2/5 p-8 md:p-12 flex flex-col justify-between relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/10">
+              <Waves size={300} className="absolute -right-20 -top-20 text-white/5 pointer-events-none" />
+              
+              <div className="relative z-10 space-y-10">
+                <div className="space-y-4 text-white">
+                  <div className="flex items-center gap-3">
+                    <span className="w-2 h-2 bg-[#00FF41] rounded-full animate-pulse shadow-[0_0_10px_#00FF41]"></span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40">{t.forecastTitle} {t.forecastTitleSpot}</span>
+                  </div>
+                  <div className="flex items-baseline gap-3">
+                    <span className="text-7xl font-black tracking-tighter">{forecast?.height || "0.8"}</span>
+                    <span className="text-2xl font-bold text-epicRed italic">m</span>
+                  </div>
+                  <div className="inline-block bg-epicRed text-white px-4 py-1 rounded-full font-black text-[10px] uppercase tracking-widest">
+                    {(forecast?.height || 0.8) < 1.2 ? t.forecastStatusGood : t.forecastStatusHigh}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-y-8 gap-x-4 text-white">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 opacity-30 text-[10px] font-bold uppercase tracking-widest"><Waves size={14} /> {t.forecastPeriod}</div>
+                    <p className="text-2xl font-black">{forecast?.period || "7.5"}<span className="text-xs ml-1 opacity-30 italic">s</span></p>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 opacity-30 text-[10px] font-bold uppercase tracking-widest"><Wind size={14} /> {t.forecastWind}</div>
+                    <p className="text-2xl font-black">{Math.round(forecast?.windSpeed || 12)}<span className="text-xs ml-1 opacity-30 italic">km/h</span></p>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 opacity-30 text-[10px] font-bold uppercase tracking-widest"><Globe size={14} /> {t.forecastDir}</div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-6 h-6 flex items-center justify-center bg-epicRed rounded-full text-white" style={{ transform: `rotate(${forecast?.windDir || 225}deg)` }}>
+                        <ArrowUp size={14} strokeWidth={4} />
+                      </div>
+                      <span className="text-xl font-black uppercase">SW</span>
+                    </div>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 opacity-30 text-[10px] font-bold uppercase tracking-widest"><Thermometer size={14} /> {t.forecastWater}</div>
+                    <p className="text-2xl font-black">26<span className="text-xs ml-1 opacity-30 italic">°C</span></p>
+                  </div>
+                </div>
+              </div>
+              <div className="relative z-10 pt-8 text-[9px] font-bold text-white/20 uppercase tracking-[0.3em]">Live Spot Data • My Khe</div>
+            </div>
+
+            {/* Правая панель: Windy */}
+            <div className="lg:w-3/5 h-[350px] lg:h-auto bg-black relative">
+              <iframe 
+                src="https://embed.windy.com/embed2.html?lat=16.061&lon=108.247&detailLat=16.059&detailLon=108.274&width=650&height=450&zoom=11&level=surface&overlay=waves&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1" 
+                className="w-full h-full border-none opacity-70 grayscale-[0.5] contrast-125 hover:grayscale-0 hover:opacity-100 transition-all duration-1000"
+              ></iframe>
+            </div>
           </div>
         </div>
       </section>
