@@ -39,6 +39,10 @@ export default function EpicSurfLanding() {
       footerNav: "Навигация",
       footerMaps: "Карты",
       modalTitle: "Запись",
+      featureWax: "Воск включен",
+      featureLeash: "Лиш и плавники",
+      featureSizes: "Все размеры",
+      boardTypes: ["Софтборды", "Лонгборды", "Малибу", "Шортборды"],
       cards: [
         { title: "Групповой урок", badge: "Популярно", desc: "До 4-х человек на инструктора. Идеально для новичков.", price: "900,000 VND" },
         { title: "Сплит урок", badge: "Выгодно", desc: "Для 2-х человек. Больше внимания тренера. Цена за двоих.", price: "2,500,000 VND" },
@@ -76,6 +80,10 @@ export default function EpicSurfLanding() {
       footerNav: "Navigation",
       footerMaps: "Open Maps",
       modalTitle: "Booking",
+      featureWax: "Wax included",
+      featureLeash: "Leash & Fins",
+      featureSizes: "All Sizes",
+      boardTypes: ["Softboards", "Longboards", "Malibus", "Shortboards"],
       cards: [
         { title: "Group Lesson", badge: "Most Popular", desc: "Max 4 people per instructor. Perfect for beginners.", price: "900,000 VND" },
         { title: "Split Lesson", badge: "Best Value", desc: "For 2 people. More coach attention. Price for both.", price: "2,500,000 VND" },
@@ -174,19 +182,91 @@ export default function EpicSurfLanding() {
         </div>
 
         {/* RENTALS CARD */}
-        <div id="rentals" className="bg-epicDark text-white rounded-[40px] p-8 md:p-16 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-12 mt-12 overflow-hidden relative">
-          <div className="relative z-10 text-center md:text-left">
-            <div className="text-epicRed font-bold mb-4 uppercase tracking-[0.3em] text-xs">{t.rentalBadge}</div>
-            <h3 className="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tighter">{t.rentalTitle} <span className="text-epicRed italic">{t.rentalTitleSurf}</span></h3>
-            <p className="text-white/60 text-lg leading-relaxed max-w-xl">{t.rentalDesc}</p>
-          </div>
-          <div className="relative z-10 flex flex-col items-center md:items-end w-full md:w-auto">
-            <div className="text-3xl font-black mb-6 tracking-tighter text-center md:text-right">
-              {t.rentalPrice} <br/><span className="text-sm font-normal opacity-40 uppercase tracking-widest">{t.rentalUnit}</span>
+        <div id="rentals" className="bg-epicDark text-white rounded-[40px] overflow-hidden shadow-2xl mt-12 border border-white/5">
+          <div className="flex flex-col lg:flex-row">
+            
+            {/* Левая часть: Горизонтальная галерея досок */}
+            <div className="lg:w-1/2 relative bg-[#1a1a1a]">
+              <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide h-[350px] lg:h-full min-h-[400px]">
+                {/* Цикл по 4 видам досок (нужно закинуть фото board-1.webp и т.д. в public/gallery/) */}
+                {[1, 2, 3, 4].map((num, idx) => (
+                  <div key={num} className="min-w-full h-full snap-center relative group">
+                    <img 
+                      src={`/gallery/board-${num}.webp`} 
+                      alt={t.boardTypes[idx]}
+                      className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700"
+                      onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1537519646099-335112f03225?q=80&w=800'; }}
+                    />
+                    {/* Подпись типа доски поверх фото */}
+                    <div className="absolute bottom-6 left-6 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-xl">
+                      <span className="text-xs font-black uppercase tracking-widest">{t.boardTypes[idx]}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              {/* Подсказка, что можно листать (только на мобилках) */}
+              <div className="absolute top-1/2 right-4 -translate-y-1/2 lg:hidden animate-pulse">
+                <div className="bg-epicRed p-2 rounded-full shadow-lg">
+                   <Globe size={16} className="rotate-90" />
+                </div>
+              </div>
             </div>
-            <button onClick={() => setBookingUrl(links.rental)} className="w-full md:w-auto px-12 bg-epicRed text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-white hover:text-epicRed transition-all shadow-xl shadow-epicRed/20">
-              {t.rentalBtn}
-            </button>
+
+            {/* Правая часть: Контент и Иконки */}
+            <div className="lg:w-1/2 p-8 md:p-16 flex flex-col justify-between bg-epicDark">
+              <div>
+                <div className="text-epicRed font-bold mb-4 uppercase tracking-[0.3em] text-xs">
+                  {t.rentalBadge}
+                </div>
+                <h3 className="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tighter leading-tight">
+                  {t.rentalTitle} <span className="text-epicRed italic">{t.rentalTitleSurf}</span>
+                </h3>
+                <p className="text-white/60 text-lg leading-relaxed max-w-xl mb-10">
+                  {t.rentalDesc}
+                </p>
+
+                {/* Блок с мини-иконками (Улучшено) */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+                  <div className="flex items-center gap-3 group">
+                    <div className="p-3 bg-white/5 rounded-xl group-hover:bg-epicRed transition-colors">
+                      <Waves size={20} className="text-epicRed group-hover:text-white" />
+                    </div>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-white/80">{t.featureWax}</span>
+                  </div>
+                  
+                  <div className="flex items-center gap-3 group">
+                    <div className="p-3 bg-white/5 rounded-xl group-hover:bg-epicRed transition-colors">
+                      <Award size={20} className="text-epicRed group-hover:text-white" />
+                    </div>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-white/80">{t.featureLeash}</span>
+                  </div>
+
+                  <div className="flex items-center gap-3 group">
+                    <div className="p-3 bg-white/5 rounded-xl group-hover:bg-epicRed transition-colors">
+                      <Globe size={20} className="text-epicRed group-hover:text-white" />
+                    </div>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-white/80">{t.featureSizes}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8 border-t border-white/5 pt-8">
+                <div className="text-3xl font-black tracking-tighter text-center md:text-left">
+                  {t.rentalPrice} <br/>
+                  <span className="text-sm font-normal opacity-40 uppercase tracking-widest">
+                    {t.rentalUnit}
+                  </span>
+                </div>
+                <button 
+                  onClick={() => setBookingUrl(links.rental)} 
+                  className="w-full md:w-auto px-12 py-5 bg-epicRed text-white rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-white hover:text-epicRed transition-all shadow-xl shadow-epicRed/20 active:scale-95"
+                >
+                  {t.rentalBtn}
+                </button>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
