@@ -625,7 +625,6 @@ export default function EpicSurfLanding() {
       <div className="fixed bottom-6 right-6 z-[60] flex flex-col-reverse items-end gap-4">
         <button onClick={() => setIsChatOpen(!isChatOpen)} className={`w-16 h-16 flex items-center justify-center rounded-full shadow-2xl transition-all duration-300 active:scale-90 ${isChatOpen ? 'bg-epicDark rotate-[135deg]' : 'bg-epicRed rotate-0'}`}>
           {isChatOpen ? <X size={32} color="white" /> : <MessageCircle size={32} color="white" />}
-          {!isChatOpen && <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#25D366] border-4 border-epicWhite rounded-full animate-ping"></span>}
         </button>
         <AnimatePresence>
           {isChatOpen && (
