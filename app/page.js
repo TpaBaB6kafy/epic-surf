@@ -39,9 +39,10 @@ export default function EpicSurfLanding() {
       footerNav: "Навигация",
       footerMaps: "Карты",
       modalTitle: "Запись",
-      featureWax: "Воск включен",
-      featureLeash: "Лиш и плавники",
+      featureLycra: "Лайкры и цинк",
       featureSizes: "Все размеры",
+      featureWetsuits: "Гидрокостюмы",
+      featureDelivery: "Привозим на спот",
       boardTypes: ["Софтборды", "Лонгборды", "Малибу", "Шортборды"],
       cards: [
         { title: "Групповой урок", badge: "Популярно", desc: "До 4-х человек на инструктора. Идеально для новичков.", price: "900,000 VND" },
@@ -80,9 +81,10 @@ export default function EpicSurfLanding() {
       footerNav: "Navigation",
       footerMaps: "Open Maps",
       modalTitle: "Booking",
-      featureWax: "Wax included",
-      featureLeash: "Leash & Fins",
+      featureLycra: "Rashguards & Zinc",
       featureSizes: "All Sizes",
+      featureWetsuits: "Wetsuits",
+      featureDelivery: "Spot Delivery",
       boardTypes: ["Softboards", "Longboards", "Malibus", "Shortboards"],
       cards: [
         { title: "Group Lesson", badge: "Most Popular", desc: "Max 4 people per instructor. Perfect for beginners.", price: "900,000 VND" },
@@ -185,10 +187,9 @@ export default function EpicSurfLanding() {
         <div id="rentals" className="bg-epicDark text-white rounded-[40px] overflow-hidden shadow-2xl mt-12 border border-white/5">
           <div className="flex flex-col lg:flex-row">
             
-            {/* Левая часть: Горизонтальная галерея досок */}
+            {/* Левая часть: Галерея досок (БЕЗ иконки Globe) */}
             <div className="lg:w-1/2 relative bg-[#1a1a1a]">
               <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide h-[350px] lg:h-full min-h-[400px]">
-                {/* Цикл по 4 видам досок (нужно закинуть фото board-1.webp и т.д. в public/gallery/) */}
                 {[1, 2, 3, 4].map((num, idx) => (
                   <div key={num} className="min-w-full h-full snap-center relative group">
                     <img 
@@ -197,23 +198,16 @@ export default function EpicSurfLanding() {
                       className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700"
                       onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1537519646099-335112f03225?q=80&w=800'; }}
                     />
-                    {/* Подпись типа доски поверх фото */}
                     <div className="absolute bottom-6 left-6 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-xl">
                       <span className="text-xs font-black uppercase tracking-widest">{t.boardTypes[idx]}</span>
                     </div>
                   </div>
                 ))}
               </div>
-              
-              {/* Подсказка, что можно листать (только на мобилках) */}
-              <div className="absolute top-1/2 right-4 -translate-y-1/2 lg:hidden animate-pulse">
-                <div className="bg-epicRed p-2 rounded-full shadow-lg">
-                   <Globe size={16} className="rotate-90" />
-                </div>
-              </div>
+              {/* Иконка Globe удалена отсюда */}
             </div>
 
-            {/* Правая часть: Контент и Иконки */}
+            {/* Правая часть: Контент и 4 иконки */}
             <div className="lg:w-1/2 p-8 md:p-16 flex flex-col justify-between bg-epicDark">
               <div>
                 <div className="text-epicRed font-bold mb-4 uppercase tracking-[0.3em] text-xs">
@@ -226,28 +220,51 @@ export default function EpicSurfLanding() {
                   {t.rentalDesc}
                 </p>
 
-                {/* Блок с мини-иконками (Улучшено) */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
-                  <div className="flex items-center gap-3 group">
-                    <div className="p-3 bg-white/5 rounded-xl group-hover:bg-epicRed transition-colors">
-                      <Waves size={20} className="text-epicRed group-hover:text-white" />
+                {/* Сетка преимуществ: 2x2 */}
+                <div className="grid grid-cols-2 gap-6 mb-12">
+                  
+                  {/* 1. Лайкры и цинк (Твой UV SVG) */}
+                  <div className="flex items-center gap-4 group/feat">
+                    <div className="p-4 bg-white/5 rounded-2xl group-hover:bg-epicRed transition-all flex-shrink-0">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-epicRed group-hover:text-white transition-colors duration-300">
+                        <path d="M12 3V4.5M17 13C17 11.6739 16.4732 10.4021 15.5355 9.46447C14.5979 8.52678 13.3261 8 12 8C10.6739 8 9.40215 8.52678 8.46447 9.46447C7.52678 10.4021 7 11.6739 7 13M5.988 6.99L4.928 5.929M22 13H20.5M3.5 13H2M19.07 5.929L18.01 6.989M6.5 16V19C6.5 19.943 6.5 20.414 6.793 20.707C7.086 21 7.557 21 8.5 21C9.443 21 9.914 21 10.207 20.707C10.5 20.414 10.5 19.943 10.5 19V16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                        <path d="M13.5 16L15.5 21L17.5 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
                     </div>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-white/80">{t.featureWax}</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-white/80 leading-tight">{t.featureLycra}</span>
                   </div>
                   
-                  <div className="flex items-center gap-3 group">
-                    <div className="p-3 bg-white/5 rounded-xl group-hover:bg-epicRed transition-colors">
-                      <Award size={20} className="text-epicRed group-hover:text-white" />
+                  {/* 2. Все размеры (Твой Surfboard SVG) */}
+                  <div className="flex items-center gap-4 group/feat">
+                    <div className="p-4 bg-white/5 rounded-2xl group-hover:bg-epicRed transition-all flex-shrink-0">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-epicRed group-hover:text-white transition-colors duration-300">
+                        <path d="M5.678 20.5C4.936 18.536 4.5 15.966 4.5 13.185C4.5 10.23 4.992 7.52 5.816 5.521C6.226 4.523 6.736 3.666 7.338 3.047C7.944 2.425 8.691 2 9.548 2C10.407 2 11.154 2.425 11.759 3.047C12.362 3.666 12.871 4.523 13.282 5.521C13.3847 5.77033 13.482 6.03 13.574 6.3C13.6867 6.13867 13.8 5.983 13.914 5.833C14.553 4.998 15.248 4.318 15.974 3.887C16.702 3.453 17.517 3.239 18.33 3.457C19.144 3.675 19.743 4.267 20.157 5.007C20.569 5.744 20.832 6.68 20.967 7.723C21.238 9.813 21.017 12.486 20.273 15.265C19.746 17.232 19.017 19.025 18.18 20.5H20C20.1989 20.5 20.3897 20.579 20.5303 20.7197C20.671 20.8603 20.75 21.0511 20.75 21.25C20.75 21.4489 20.671 21.6397 20.5303 21.7803C20.3897 21.921 20.1989 22 20 22H4C3.80109 22 3.61032 21.921 3.46967 21.7803C3.32902 21.6397 3.25 21.4489 3.25 21.25C3.25 21.0511 3.32902 20.8603 3.46967 20.7197C3.61032 20.579 3.80109 20.5 4 20.5H5.678ZM7.203 6.092C6.47 7.869 6 10.377 6 13.185C6 16.119 6.513 18.718 7.297 20.5H10.085C9.761 18.372 9.971 15.595 10.744 12.712C11.204 10.993 11.818 9.41 12.522 8.056C12.3616 7.38681 12.152 6.73037 11.895 6.092C11.528 5.202 11.11 4.53 10.685 4.093C10.262 3.659 9.878 3.5 9.549 3.5C9.219 3.5 8.836 3.659 8.413 4.093C7.987 4.53 7.569 5.201 7.203 6.092ZM16.427 20.5C17.036 19.5432 17.551 18.5299 17.965 17.474L15.529 15.248C15.4404 15.1667 15.3335 15.108 15.2175 15.0766C15.1014 15.0453 14.9795 15.0423 14.862 15.068L11.639 15.778C11.377 17.588 11.379 19.222 11.605 20.5H16.427ZM13.222 10.091L15.622 9.563C15.9741 9.4855 16.3396 9.49374 16.6879 9.58702C17.0361 9.6803 17.3568 9.85589 17.623 10.099L19.437 11.757C19.614 10.322 19.622 9.011 19.48 7.917C19.36 6.988 19.136 6.255 18.848 5.74C18.561 5.228 18.245 4.987 17.942 4.906C17.64 4.826 17.245 4.876 16.741 5.176C16.234 5.477 15.674 6.001 15.106 6.744C14.436 7.621 13.786 8.761 13.222 10.091ZM12.592 11.766C12.3296 12.5579 12.1086 13.363 11.93 14.178L14.539 13.604C14.8912 13.5263 15.257 13.5345 15.6054 13.6278C15.9538 13.7211 16.2747 13.8967 16.541 14.14L18.513 15.942C18.7659 15.1469 18.9772 14.3391 19.146 13.522L16.611 11.206C16.5222 11.1251 16.4153 11.0667 16.2992 11.0357C16.1831 11.0047 16.0613 11.0021 15.944 11.028L12.592 11.766Z" fill="currentColor"/>
+                      </svg>
                     </div>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-white/80">{t.featureLeash}</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-white/80 leading-tight">{t.featureSizes}</span>
                   </div>
 
-                  <div className="flex items-center gap-3 group">
-                    <div className="p-3 bg-white/5 rounded-xl group-hover:bg-epicRed transition-colors">
-                      <Globe size={20} className="text-epicRed group-hover:text-white" />
+                  {/* 3. Гидрокостюмы (Твой Surfing SVG) */}
+                  <div className="flex items-center gap-4 group/feat">
+                    <div className="p-4 bg-white/5 rounded-2xl group-hover:bg-epicRed transition-all flex-shrink-0">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-epicRed group-hover:text-white transition-colors duration-300">
+                        <path d="M2.5 22.5006V21.5006H3C3.53333 21.5006 4.04667 21.4173 4.54 21.2506C5.03333 21.0839 5.52 20.8533 6 20.5586C6.48 20.8533 6.96667 21.0829 7.46 21.2476C7.95333 21.4123 8.46667 21.4946 9 21.4946C9.53333 21.4946 10.051 21.4123 10.553 21.2476C11.055 21.0829 11.5373 20.8529 12 20.5576C12.48 20.8529 12.9667 21.0829 13.46 21.2476C13.9533 21.4123 14.4667 21.4946 15 21.4946C15.5333 21.4946 16.051 21.4123 16.553 21.2476C17.055 21.0829 17.5373 20.8529 18 20.5576C18.4627 20.8529 18.945 21.0839 19.447 21.2506C19.949 21.4173 20.4667 21.5006 21 21.5006H21.5V22.5006H21C20.522 22.5006 20.033 22.4349 19.533 22.3036C19.033 22.1723 18.522 21.9689 18 21.6936C17.478 21.9689 16.967 22.1723 16.467 22.3036C15.967 22.4349 15.478 22.5006 15 22.5006C14.522 22.5006 14.033 22.4349 13.533 22.3036C13.033 22.1723 12.522 21.9689 12 21.6936C11.478 21.9689 10.967 22.1723 10.467 22.3036C9.967 22.4349 9.478 22.5006 9 22.5006C8.522 22.5006 8.033 22.4349 7.533 22.3036C7.033 22.1723 6.522 21.9689 6 21.6936C5.478 21.9689 4.967 22.1723 4.467 22.3036C3.967 22.4349 3.478 22.5006 3 22.5006H2.5ZM8.692 4.30859L14.05 5.29459C14.2067 5.32793 14.3643 5.39726 14.523 5.50259C14.6823 5.60793 14.8113 5.75526 14.91 5.94459L15.785 7.49459C16.2183 8.24459 16.815 8.86893 17.575 9.36759C18.335 9.86626 19.169 10.1543 20.077 10.2316V11.2506C18.9303 11.1613 17.885 10.7946 16.941 10.1506C15.9957 9.50726 15.234 8.63493 14.656 7.53359L11.329 9.96259L15.5 13.2506V17.1006C15.7413 17.2713 16.0413 17.4979 16.4 17.7806C16.7587 18.0633 17.042 18.2906 17.25 18.4626C17.0413 18.6339 16.738 18.7856 16.34 18.9176C15.9427 19.0496 15.496 19.1156 15 19.1156C14.4767 19.1156 13.9533 19.0156 13.43 18.8156C12.9073 18.6156 12.4307 18.2989 12 17.8656C11.5693 18.2989 11.1243 18.6063 10.665 18.7876C10.2063 18.9676 9.76667 19.0709 9.346 19.0976C9.30733 19.0976 9.27 19.0943 9.234 19.0876C9.19733 19.0823 9.16167 19.0739 9.127 19.0626C7.51367 18.0659 6.17267 17.0099 5.104 15.8946C4.03467 14.7793 3.5 13.9063 3.5 13.2756C3.5 12.9643 3.64567 12.7573 3.937 12.6546C4.22767 12.5519 4.532 12.5006 4.85 12.5006C5.308 12.5006 5.956 12.6066 6.794 12.8186C7.632 13.0306 8.59533 13.3726 9.684 13.8446L8.345 8.89059L12.316 6.00059L11.703 5.89059C11.3697 5.82926 11.0063 5.75859 10.613 5.67859C10.2197 5.59859 9.85667 5.52793 9.524 5.46659C9.19133 5.40526 8.98733 5.36859 8.912 5.35659L6.336 7.12759L5.769 6.30459L8.692 4.30859ZM10.108 10.6586L10.731 14.2696C11.2837 14.5376 11.887 14.8603 12.541 15.2376C13.1943 15.6156 13.8473 15.9979 14.5 16.3846V13.9426L10.108 10.6586ZM17 5.19259C16.54 5.19259 16.143 5.02593 15.809 4.69259C15.475 4.35793 15.308 3.96059 15.308 3.50059C15.308 3.04059 15.4747 2.64359 15.808 2.30959C16.1413 1.97559 16.5387 1.80859 17 1.80859C17.4613 1.80859 17.8583 1.97526 18.191 2.30859C18.525 2.64326 18.692 3.04059 18.692 3.50059C18.692 3.96059 18.5253 4.35759 18.192 4.69159C17.8573 5.02559 17.46 5.19259 17 5.19259Z" fill="currentColor"/>
+                      </svg>
                     </div>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-white/80">{t.featureSizes}</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-white/80 leading-tight">{t.featureWetsuits}</span>
                   </div>
+
+                  {/* 4. Привозим на спот (Твой Beach SVG) */}
+                  <div className="flex items-center gap-4 group/feat">
+                    <div className="p-4 bg-white/5 rounded-2xl group-hover:bg-epicRed transition-all flex-shrink-0">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-epicRed group-hover:text-white transition-colors duration-300">
+                        <path d="M21 20.9992C18.801 19.7722 15.584 18.9992 12 18.9992C8.416 18.9992 5.199 19.7722 3 20.9992M9.5 6.44917C7.833 6.11417 5 6.44917 3.5 9.48217M9.5 6.44917C12 5.94717 15 7.47117 15 11.4972M9.5 6.44917C8.5 4.43317 6.5 2.94017 3 4.95217M9.5 6.45017C10.5 6.95417 11.5 8.47717 11.5 11.9992M9.5 6.49917C8.5 8.33217 6.5 13.4992 6.5 19.4992" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M19 7C20.1046 7 21 6.10457 21 5C21 3.89543 20.1046 3 19 3C17.8954 3 17 3.89543 17 5C17 6.10457 17.8954 7 19 7Z" stroke="currentColor" strokeWidth="1.5"/>
+                      </svg>
+                    </div>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-white/80 leading-tight">{t.featureDelivery}</span>
+                  </div>
+
                 </div>
               </div>
 
