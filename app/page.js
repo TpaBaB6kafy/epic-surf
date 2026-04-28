@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Waves, MapPin, Award, Star, Phone, MessageCircle, 
-  X, Globe, ShieldCheck, Users, Wind, Thermometer, ArrowUp 
+  X, Globe, ShieldCheck, Users, Wind, Thermometer, ArrowUp
 } from "lucide-react";
 
 export default function EpicSurfLanding() {
@@ -132,7 +132,11 @@ export default function EpicSurfLanding() {
     whatsapp: "https://wa.me/84383880164",
     telegram: "https://t.me/danangsurf",
     zalo: "https://zalo.me/84383880164",
-    googleMaps: "https://www.google.com/maps/place/EPIC+Surf+School+Da+Nang/@16.0464674,108.2504812,17z"
+    googleMaps: "https://www.google.com/maps/place/EPIC+Surf+School+Da+Nang/@16.0464674,108.2504812,17z",
+    instagram: "https://instagram.com/epicsurf_danang",
+    facebook: "https://facebook.com/epicsurf.vn",
+    youtube: "https://youtube.com/@epicsurf",
+    threads: "https://threads.net/@epicsurf_danang"
   };
 
   return (
@@ -232,7 +236,7 @@ export default function EpicSurfLanding() {
           ))}
         </div>
 
-        {/* RENTALS (FIXED) */}
+        {/* RENTALS */}
         <div id="rentals" className="bg-epicDark text-white rounded-[40px] overflow-hidden shadow-2xl mt-12 border border-white/5 scroll-mt-24">
           <div className="flex flex-col lg:flex-row items-stretch">
             <div className="lg:w-1/2 relative bg-[#1a1a1a] min-h-[400px]">
@@ -333,7 +337,7 @@ export default function EpicSurfLanding() {
         </div>
       </section>
 
-      {/* 7. GALLERY (MOVED HERE) */}
+      {/* 7. GALLERY MARQUEE (MOVED TO BOTTOM) */}
       <section className="py-24 bg-epicDark overflow-hidden flex flex-col gap-6">
         <div className="flex w-[200%] animate-marquee gap-4">
           {[...Array(20)].map((_, i) => (
@@ -344,23 +348,51 @@ export default function EpicSurfLanding() {
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* 8. FOOTER */}
       <footer id="location" className="bg-epicDark text-white pt-24 pb-12 px-6 border-t border-white/5 scroll-mt-24">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-16 mb-20 text-center md:text-left">
             <div className="lg:col-span-5 space-y-12">
-              <div><div className="text-4xl font-black tracking-tighter uppercase mb-6 italic">EPIC <span className="text-epicRed">SURF</span></div><p className="text-white/50 text-xl leading-relaxed max-w-sm mx-auto md:mx-0">{t.heroSub}</p></div>
-              <div className="grid sm:grid-cols-2 gap-8 text-sm font-bold uppercase">
-                <nav className="flex flex-col gap-3"><a href="#lessons" className="hover:text-epicRed transition-colors">{t.navLessons}</a><a href="#how-it-works" className="hover:text-epicRed transition-colors">{t.navHow}</a></nav>
-                <div className="flex gap-4 justify-center md:justify-start"><a href="#" className="p-3 bg-white/5 rounded-full hover:bg-epicRed transition-all"><InstagramIcon /></a><a href="tel:+84383880164" className="p-3 bg-white/5 rounded-full hover:bg-epicRed transition-all"><Phone size={20} /></a></div>
+              <div>
+                <div className="text-4xl font-black tracking-tighter uppercase mb-6 italic">EPIC <span className="text-epicRed">SURF</span></div>
+                <p className="text-white/50 text-xl leading-relaxed max-w-sm mx-auto md:mx-0">{t.heroSub}</p>
               </div>
-              <div className="pt-8 border-t border-white/5 font-black uppercase text-[10px] tracking-widest text-white/50"><div className="flex items-center justify-center md:justify-start gap-3 mb-2"><MapPin size={16} className="text-epicRed" /> {t.locationAddress}</div><p className="text-white/80 font-medium normal-case tracking-normal italic text-sm">{t.locationLandmark}</p></div>
+
+              {/* SOCIAL LINKS (FIXED) */}
+              <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+                <a href={links.instagram} target="_blank" className="p-4 bg-white/5 rounded-full hover:bg-epicRed hover:scale-110 transition-all text-white">
+                  <InstagramIcon />
+                </a>
+                <a href={links.facebook} target="_blank" className="p-4 bg-white/5 rounded-full hover:bg-epicRed hover:scale-110 transition-all text-white">
+                  <FacebookIcon />
+                </a>
+                <a href={links.youtube} target="_blank" className="p-4 bg-white/5 rounded-full hover:bg-epicRed hover:scale-110 transition-all text-white">
+                  <YoutubeIcon />
+                </a>
+                <a href={links.threads} target="_blank" className="p-4 bg-white/5 rounded-full hover:bg-epicRed hover:scale-110 transition-all text-white">
+                  <ThreadsIcon />
+                </a>
+                <a href="tel:+84383880164" className="p-4 bg-white/5 rounded-full hover:bg-epicRed hover:scale-110 transition-all text-white">
+                  <Phone size={20} />
+                </a>
+              </div>
+
+              <div className="pt-8 border-t border-white/5 font-black uppercase text-[10px] tracking-widest text-white/50">
+                <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
+                  <MapPin size={16} className="text-epicRed" /> {t.locationAddress}
+                </div>
+                <p className="text-white/80 font-medium normal-case tracking-normal italic text-sm">{t.locationLandmark}</p>
+              </div>
             </div>
+            
             <div className="lg:col-span-7 h-[450px] rounded-[40px] overflow-hidden border border-white/10 shadow-2xl relative">
               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1024.2523782017452!2d108.25027605520296!3d16.046658364986484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217f20b1fa357%3A0xa323fdd182ae974!2sEPIC%20Surf%20School%20Da%20Nang!5e1!3m2!1sru!2s!4v1777015710238!5m2!1sru!2s" className="w-full h-full border-none lg:grayscale lg:invert lg:contrast-125 lg:opacity-60 lg:hover:grayscale-0 lg:hover:invert-0 transition-all duration-1000" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
-          <div className="flex justify-between items-center pt-12 border-t border-white/5 text-[10px] font-bold uppercase tracking-[0.4em] text-white/20"><div>© 2026 Epic Surf School</div><div>Ride Every Day</div></div>
+          <div className="flex justify-between items-center pt-12 border-t border-white/5 text-[10px] font-bold uppercase tracking-[0.4em] text-white/20">
+            <div>© 2026 Epic Surf School</div>
+            <div>Ride Every Day</div>
+          </div>
         </div>
       </footer>
 
@@ -392,4 +424,8 @@ export default function EpicSurfLanding() {
   );
 }
 
+// ICONS
 function InstagramIcon() { return (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>); }
+function FacebookIcon() { return (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>); }
+function YoutubeIcon() { return (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>); }
+function ThreadsIcon() { return (<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19.25 20.25C17.25 21.75 14.5 22.5 12 22.5C6.75 22.5 2.5 18.25 2.5 13C2.5 7.75 6.75 3.5 12 3.5C14.5 3.5 16.75 4.5 18.25 6C19.75 7.5 20.5 9.75 20.5 12.25C20.5 14.75 19.5 16.5 18 17.5C16.5 18.5 14.5 18.5 13 17.5C12.5 17.15 12.15 16.75 11.85 16.25C11.15 16.85 10.25 17.25 9.25 17.25C7.25 17.25 5.75 15.75 5.75 13.5C5.75 11.25 7.25 9.75 9.25 9.75C10.25 9.75 11.15 10.15 11.85 10.75C12.15 10.25 12.5 9.75 13 9.75C15 9.75 16.5 11.25 16.5 13.5C16.5 15.75 15 17.25 13 17.25C12.75 17.25 12.5 17.25 12.25 17.15C12.5 17.75 13 18.25 13.5 18.5" /></svg>); }
