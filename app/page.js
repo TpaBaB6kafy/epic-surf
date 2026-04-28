@@ -193,23 +193,44 @@ export default function EpicSurfLanding() {
         </div>
       </section>
 
-      {/* 2.7 HOW IT WORKS */}
-      <section id="how-it-works" className="py-32 bg-epicWhite px-6 overflow-hidden scroll-mt-24">
+      {/* 2.7 HOW IT WORKS (FIXED SPACING) */}
+      <section id="how-it-works" className="py-20 md:py-32 bg-epicWhite px-6 overflow-hidden scroll-mt-24">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-24"><h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter text-epicDark leading-none">{t.howTitle} <br/><span className="text-epicRed italic">{t.howTitleEnd}</span></h2></div>
-          <div className="space-y-32">
+          <div className="text-center mb-12 md:mb-24">
+            <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter text-epicDark leading-none">
+              {t.howTitle} <br/><span className="text-epicRed italic">{t.howTitleEnd}</span>
+            </h2>
+          </div>
+          <div className="space-y-16 md:space-y-32"> {/* Уменьшил отступы на мобилке */}
             {t.howSteps.map((step, idx) => (
-              <motion.div key={idx} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} className={`flex flex-col ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 lg:gap-24`}>
+              <motion.div 
+                key={idx} 
+                initial={{ opacity: 0, y: 30 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                viewport={{ once: true, margin: "-50px" }} 
+                className={`flex flex-col ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-6 lg:gap-24`}
+              >
                 <div className="w-full lg:w-1/2 relative group">
-                  <div className="absolute -inset-4 bg-epicPink rounded-[50px] rotate-2 transition-transform -z-10 opacity-50"></div>
-                  <div className="aspect-[4/3] w-full rounded-[40px] overflow-hidden shadow-2xl border border-white/50 bg-epicDark/5">
-                    <img src={`/gallery/process-${idx + 1}.webp`} alt={step.title} className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110" onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1537519646099-335112f03225?q=80&w=800'; }} />
+                  <div className="absolute -inset-2 md:-inset-4 bg-epicPink rounded-[30px] md:rounded-[50px] rotate-2 transition-transform -z-10 opacity-50"></div>
+                  <div className="aspect-[4/3] w-full rounded-[30px] md:rounded-[40px] overflow-hidden shadow-xl border border-white/50 bg-epicDark/5">
+                    <img 
+                      src={`/gallery/process-${idx + 1}.webp`} 
+                      alt={step.title} 
+                      className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110" 
+                      onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1537519646099-335112f03225?q=80&w=800'; }} 
+                    />
                   </div>
                 </div>
-                <div className="w-full lg:w-1/2 space-y-6 text-center lg:text-left">
-                  <div className="inline-block bg-epicPink text-epicRed px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">{step.time}</div>
-                  <h3 className="text-3xl md:text-5xl font-black uppercase text-epicDark leading-tight">{step.title}</h3>
-                  <p className="text-epicDark/60 text-lg md:text-xl leading-relaxed">{step.desc}</p>
+                <div className="w-full lg:w-1/2 space-y-3 md:space-y-6 text-center lg:text-left">
+                  <div className="inline-block bg-epicPink text-epicRed px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">
+                    {step.time}
+                  </div>
+                  <h3 className="text-2xl md:text-5xl font-black uppercase text-epicDark leading-tight">
+                    {step.title}
+                  </h3>
+                  <p className="text-epicDark/60 text-base md:text-xl leading-relaxed max-w-md mx-auto lg:mx-0">
+                    {step.desc}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -217,20 +238,42 @@ export default function EpicSurfLanding() {
         </div>
       </section>
 
-      {/* 3. SERVICES */}
-      <section id="lessons" className="py-24 px-6 max-w-7xl mx-auto scroll-mt-24">
-        <h2 className="text-4xl md:text-6xl font-black text-center mb-16 uppercase tracking-tighter text-epicDark">{t.sectionTitle} <span className="text-epicRed italic">{t.sectionTitleRide}</span></h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+      {/* 3. SERVICES (FIXED MOBILE SWIPE) */}
+      <section id="lessons" className="py-24 px-6 max-w-7xl mx-auto scroll-mt-24 overflow-hidden">
+        <h2 className="text-4xl md:text-6xl font-black text-center mb-12 md:mb-16 uppercase tracking-tighter text-epicDark">
+          {t.sectionTitle} <span className="text-epicRed italic">{t.sectionTitleRide}</span>
+        </h2>
+        
+        {/* Container for swipe: flex on mobile, grid on desktop */}
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-6 px-6 md:mx-0 md:px-0">
           {t.cards.map((item, i) => (
-            <motion.div key={i} whileHover={{ y: -10 }} className="bg-epicPink rounded-[40px] overflow-hidden shadow-lg flex flex-col border border-white/50 group">
-              <div className="h-44 overflow-hidden"><img src={`/gallery/lesson-${i + 1}.webp`} alt={item.title} className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-500" onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=600'; }} /></div>
+            <motion.div 
+              key={i} 
+              whileHover={{ y: -10 }} 
+              className="min-w-[85vw] md:min-w-0 snap-center bg-epicPink rounded-[40px] overflow-hidden shadow-lg flex flex-col border border-white/50 group"
+            >
+              <div className="h-44 overflow-hidden">
+                <img 
+                  src={`/gallery/lesson-${i + 1}.webp`} 
+                  alt={item.title} 
+                  className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-500" 
+                  onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=600'; }} 
+                />
+              </div>
               <div className="p-8 flex flex-col flex-1">
-                <div className="mb-6 text-epicRed">{i === 1 ? <Award size={40} /> : i === 2 ? <Star size={40} /> : <Waves size={40} />}</div>
+                <div className="mb-4 text-epicRed">
+                  {i === 1 ? <Award size={32} /> : i === 2 ? <Star size={32} /> : <Waves size={32} />}
+                </div>
                 <div className="text-[10px] text-epicRed font-bold mb-2 uppercase tracking-widest">{item.badge}</div>
-                <h3 className="text-2xl font-bold mb-3 uppercase text-epicDark">{item.title}</h3>
-                <p className="text-epicDark/70 mb-8 text-sm flex-1">{item.desc}</p>
+                <h3 className="text-xl md:text-2xl font-bold mb-3 uppercase text-epicDark">{item.title}</h3>
+                <p className="text-epicDark/70 mb-6 text-sm flex-1">{item.desc}</p>
                 <div className="text-2xl font-black mb-8 text-epicDark">{item.price}</div>
-                <button onClick={() => setBookingUrl(i === 0 ? links.group : links.personal)} className="w-full bg-epicDark text-white py-4 rounded-2xl font-bold uppercase text-xs hover:bg-epicRed transition-all">{t.btnBook}</button>
+                <button 
+                  onClick={() => setBookingUrl(i === 0 ? links.group : links.personal)} 
+                  className="w-full bg-epicDark text-white py-4 rounded-2xl font-bold uppercase text-xs hover:bg-epicRed transition-all active:scale-95"
+                >
+                  {t.btnBook}
+                </button>
               </div>
             </motion.div>
           ))}
@@ -337,12 +380,16 @@ export default function EpicSurfLanding() {
         </div>
       </section>
 
-      {/* 7. GALLERY MARQUEE (MOVED TO BOTTOM) */}
+      {/* 7. GALLERY (FIXED SPEED) */}
       <section className="py-24 bg-epicDark overflow-hidden flex flex-col gap-6">
-        <div className="flex w-[200%] animate-marquee gap-4">
+        <div className="flex w-[200%] animate-marquee gap-4" style={{ animationDuration: '25s' }}> {/* Было 60s по умолчанию в CSS, теперь 25s */}
           {[...Array(20)].map((_, i) => (
-            <div key={i} className="w-[300px] h-[400px] md:w-[450px] md:h-[550px] flex-shrink-0 rounded-[32px] overflow-hidden">
-              <img src={`/gallery/${(i % 20) + 1}.webp`} alt="Surf" className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700" />
+            <div key={i} className="w-[260px] h-[350px] md:w-[450px] md:h-[550px] flex-shrink-0 rounded-[24px] md:rounded-[32px] overflow-hidden">
+              <img 
+                src={`/gallery/${(i % 20) + 1}.webp`} 
+                alt="Surf" 
+                className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700" 
+              />
             </div>
           ))}
         </div>
