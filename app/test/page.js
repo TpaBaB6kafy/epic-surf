@@ -133,7 +133,7 @@ export default function EpicSurfLanding() {
     telegram: "https://t.me/danangsurf",
     zalo: "https://zalo.me/84383880164",
     googleMaps: "https://www.google.com/maps/place/EPIC+Surf+School+Da+Nang/@16.0464674,108.2504812,17z",
-    instagram: "https://www.instagram.com/epicsurfvn/",
+    instagram: "https://www.instagram.com/epicsurfvn?igsh=eHdzMTZhanY2M2Zx",
     facebook: "https://www.facebook.com/epicsurfdanang/",
     youtube: "https://youtube.com/@epicsurf",
     threads: "https://threads.net/@epicsurf_danang"
