@@ -133,8 +133,8 @@ export default function EpicSurfLanding() {
     telegram: "https://t.me/danangsurf",
     zalo: "https://zalo.me/84383880164",
     googleMaps: "https://www.google.com/maps/place/EPIC+Surf+School+Da+Nang/@16.0464674,108.2504812,17z",
-    instagram: "https://instagram.com/epicsurf_danang",
-    facebook: "https://facebook.com/epicsurf.vn",
+    instagram: "https://www.instagram.com/epicsurfvn?igsh=eHdzMTZhanY2M2Zx",
+    facebook: "https://www.facebook.com/epicsurfdanang/",
     youtube: "https://youtube.com/@epicsurf",
     threads: "https://threads.net/@epicsurf_danang"
   };
@@ -380,18 +380,79 @@ export default function EpicSurfLanding() {
         </div>
       </section>
 
-      {/* 7. GALLERY (FIXED SPEED) */}
-      <section className="py-24 bg-epicDark overflow-hidden flex flex-col gap-6">
-        <div className="flex w-[200%] animate-marquee gap-4" style={{ animationDuration: '25s' }}> {/* Было 60s по умолчанию в CSS, теперь 25s */}
-          {[...Array(20)].map((_, i) => (
-            <div key={i} className="w-[260px] h-[350px] md:w-[450px] md:h-[550px] flex-shrink-0 rounded-[24px] md:rounded-[32px] overflow-hidden">
-              <img 
-                src={`/gallery/${(i % 20) + 1}.webp`} 
-                alt="Surf" 
-                className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700" 
-              />
+      {/* 7. DARK EPIC GALLERY (FIXED DESKTOP GRID) */}
+      <section id="gallery" className="py-24 bg-epicDark px-6 scroll-mt-24 border-t border-white/5 overflow-visible">
+        <div className="max-w-7xl mx-auto">
+          
+          {/* Header Block */}
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
+            <div className="space-y-4">
+              <div className="inline-block bg-white/5 text-epicRed px-4 py-1 rounded-full font-black text-[10px] uppercase tracking-widest border border-white/10">
+                Community & Vibe
+              </div>
+              <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter text-white leading-none">
+                Epic <br/><span className="text-epicRed italic">Moments</span>
+              </h2>
             </div>
-          ))}
+            <a 
+              href={links.instagram} 
+              target="_blank" 
+              className="group flex items-center gap-3 bg-white text-epicDark px-8 py-4 rounded-2xl font-black uppercase text-[10px] hover:bg-epicRed hover:text-white transition-all duration-500 shadow-xl"
+            >
+              <span>Follow our surf life</span>
+              <InstagramIcon />
+            </a>
+          </div>
+
+          {/* Gallery Layout */}
+          {/* Mobile: Horizontal Swipe | Desktop: Masonry Grid */}
+          <div className="relative overflow-visible">
+            {/* Desktop Masonry (Hidden on Mobile) */}
+            <div className="hidden md:block columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 overflow-visible">
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
+                <motion.div 
+                  key={`desktop-${num}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  whileHover={{ 
+                    scale: 1.05, 
+                    rotate: num % 2 === 0 ? 1 : -1,
+                    zIndex: 50 
+                  }}
+                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                  className="relative break-inside-avoid group cursor-pointer mb-6"
+                >
+                  <div className="absolute inset-0 bg-epicRed/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[40px] -z-10"></div>
+                  <img 
+                    src={`/gallery/${num}.webp`} 
+                    alt="Surf Life" 
+                    className="rounded-[30px] md:rounded-[40px] w-full h-auto object-cover shadow-2xl border border-white/10 grayscale-[0.3] group-hover:grayscale-0 transition-all duration-500"
+                    onError={(e) => { e.target.src = `https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=800&sig=${num}`; }}
+                  />
+                  <div className="absolute bottom-6 left-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                      <div className="bg-black/60 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 inline-block">
+                          <p className="text-[10px] font-black uppercase text-white tracking-widest">Da Nang Vibe</p>
+                      </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Mobile Swipe (Hidden on Desktop) */}
+            <div className="flex md:hidden overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-6 px-6 gap-4">
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+                <div key={`mobile-${num}`} className="w-[80vw] flex-shrink-0 snap-center">
+                   <img 
+                    src={`/gallery/${num}.webp`} 
+                    alt="Surf Life" 
+                    className="rounded-[30px] w-full h-[400px] object-cover shadow-xl border border-white/10"
+                    onError={(e) => { e.target.src = `https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=800&sig=${num}`; }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
