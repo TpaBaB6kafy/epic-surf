@@ -1,15 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-epicDark: #2E2E2E;    /* Фон и темные блоки */
-  --color-epicRed: #FE746A;     /* Основной акцент (Кнопки) */
-  --color-epicCoral: #FE746A;   /* Вспомогательный акцент */
-  --color-epicPink: #AAFFC7;    /* Фон карточек (Мятный) */
-  --color-epicWhite: #F6F6F6;   /* Основной фон сайта */
+  --color-epicDark: #2B2D42;   /* Фон и темные блоки */
+  --color-epicRed: #EF233C;    /* Основной акцентный (кнопки) */
+  --color-epicCoral: #8D99AE;  /* Вспомогательный */
+  --color-epicPink: #EDF2F4;   /* Фон карточек */
+  --color-epicWhite: #FFFFFF;  /* Основной фон сайта */
   
   --animate-marquee: marquee 80s linear infinite;
-  @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 }
