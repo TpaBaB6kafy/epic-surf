@@ -1,12 +1,14 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
-  Waves, MapPin, Award, Star, Phone, MessageCircle, 
-  X, Globe, ShieldCheck, Users, Wind, Thermometer, ArrowUp
+  Waves, MapPin, Target, Award, Star, Phone, MessageCircle, 
+  X, Globe, ShieldCheck, Users, Wind, Thermometer, ArrowUp, 
+  Shirt, Camera, Sun, Smile, CheckCircle2, ChevronLeft, ChevronRight
 } from "lucide-react";
 
 export default function EpicSurfLanding() {
+  const [mapActive, setMapActive] = useState(false);
   const [lang, setLang] = useState('ru'); 
   const [bookingUrl, setBookingUrl] = useState(null);
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -35,9 +37,23 @@ export default function EpicSurfLanding() {
 
   const translations = {
     ru: {
+      includedTitle: "В стоимость включено",
+      includedItems: [
+        { icon: <CustomSurfIcon />, label: "Серф", desc: "Доска под твой уровень" },
+        { icon: <Shirt size={32} />, label: "Экип", desc: "Лайкра твоего размера" },
+        { icon: <Sun size={32} />, label: "Защита", desc: "Профессиональный цинк" },
+        { icon: <Camera size={32} />, label: "Контент", desc: "Фото и видео с урока" },
+        { icon: <Smile size={32} />, label: "Вайб", desc: "Кокос и обучение с душой" }
+      ],
+      whyItems: [
+        { icon: <ShieldCheck size={40} />, title: "ISA Сертификация", desc: "Наши инструкторы — профи с международными дипломами." },
+        { icon: <Users size={40} />, title: "Твой вайб", desc: "Мы не просто школа, мы — комьюнити. Кокосы и лучший чилл." },
+        { icon: <Award size={40} />, title: "Премиум стафф", desc: "Только свежее оборудование. Регулярно обновляем доски." },
+        { icon: <Target size={40} />, title: "Личный прогресс", desc: "Тренер контролирует каждое движение и твой темп." }
+      ],
       navLessons: "Уроки", navRentals: "Аренда", navHow: "Процесс", navForecast: "Прогноз", navLocation: "Карта", btnBook: "Записаться",
       heroTitle: "Поймай свою", heroTitleEpic: "Epic", heroTitleEnd: "волну в Дананге",
-      heroSub: "Лучшая серф-школа на пляже Микхе. Профессиональное обучение, топовое оборудование и лучшее комьюнити.",
+      heroSub: "Лучшая серф-школа на пляже Микхе. Профессиональное обучение и топовое оборудование и лучшее комьюнити.",
       sectionTitle: "Выбери свой", sectionTitleRide: "Формат",
       rentalBadge: "Gear up", rentalTitle: "Аренда", rentalTitleSurf: "Досок",
       rentalDesc: "Мы предоставляем премиальные софт-топы, лонгборды и шортборды. Поможем подобрать доску под текущие условия.",
@@ -45,18 +61,14 @@ export default function EpicSurfLanding() {
       reviewsTitle: "Лучшие вайбы в Дананге", reviewsLink: "Читать все отзывы на Google Maps",
       locationTitle: "Найди наш", locationTitleSpot: "Спот",
       locationAddress: "Пляж Микхе, Дананг", locationLandmark: "Ищите красный флаг EPIC SURF на песке напротив TMS Hotel",
-      btnOpenMaps: "Открыть в Картах", footerNav: "Навигация", footerMaps: "Карты", modalTitle: "Запись",
-      featureLycra: "Лайкры и цинк", featureSizes: "Все размеры", featureWetsuits: "Гидро-\nкостюмы", featureDelivery: "Привозим на спот",
+      modalTitle: "Запись", featureLycra: "Лайкры и цинк", featureSizes: "Все размеры", featureWetsuits: "Гидрокостюмы", featureDelivery: "Привозим на спот",
       boardTypes: ["Софтборды", "Лонгборды", "Малибу", "Шортборды"],
-      whyISA: "ISA Сертификация", whyISADesc: "Наши инструкторы имеют международные сертификаты ISA. Безопасность — наш приоритет.",
-      whyVibe: "Твой вайб", whyVibeDesc: "Мы не просто школа, мы — комьюнити. Бесплатные фото, кокосы и лучший чилл на пляже.",
-      whyGear: "Премиум стафф", whyGearDesc: "Только свежее оборудование. Регулярно обновляем доски и лайкры для твоего комфорта.",
       howTitle: "Как проходят", howTitleEnd: "уроки",
       howSteps: [
-        { title: "Встреча и экипировка", desc: "Знакомимся с тренером, подбираем доску и выдаем свежую лайкру с цинком.", time: "15 мин" },
-        { title: "Теория на берегу", desc: "Разминка, техника гребли и правильного вставания на доску (pop-up). Безопасность.", time: "20 мин" },
-        { title: "Практика в океане", desc: "Идем в воду! Тренер всегда рядом: помогает ловить волны и корректирует движения.", time: "75 мин" },
-        { title: "Разбор и контент", desc: "Отдыхаем с кокосом, разбираем ошибки и скидываем ваши фото и видео.", time: "10 мин" }
+        { title: "Встреча и экип", desc: "Знакомимся, подбираем доску и выдаем свежую лайкру с цинком.", time: "15 мин" },
+        { title: "Теория", desc: "Разминка и техника на песке. Безопасность.", time: "20 мин" },
+        { title: "Практика", desc: "Идем в воду! Тренер всегда рядом.", time: "75 мин" },
+        { title: "Разбор", desc: "Отдыхаем с кокосом, разбираем ошибки и скидываем фото/видео.", time: "10 мин" }
       ],
       forecastTitle: "Условия на", forecastTitleSpot: "Сегодня", forecastPeriod: "Период", forecastWind: "Ветер", forecastDir: "Направление", forecastWater: "Вода",
       forecastStatusGood: "Идеально для обучения", forecastStatusHigh: "Только для опытных",
@@ -73,53 +85,63 @@ export default function EpicSurfLanding() {
         { title: "Line-up / Pro", badge: "Для опытных", desc: "Выход на лайнап с гидом. Поиск лучших пиков.", price: "2,400,000 VND" }
       ],
       reviewsList: [
-        { name: "Evgenia", text: "Отличные уроки! Пошла с друзьями просто попробовать и ребята влюбили меня в серф! Очень понятные объяснения, много практики и фото/видео после урока. 🔥", date: "Неделю назад" },
-        { name: "Дмитрий Харламов", text: "Отличная команда! На второй день уже тренировали повороты. Паша — очень крутой инструктор с чувством юмора! И фотосессия бонусом. 👍", date: "2 недели назад" },
-        { name: "Peter Thanh", text: "Despite of the bad weather the instructor was very friendly and teach very well. I can only recommend this surf school! 👌", date: "Месяц назад" }
+        { name: "Evgenia", text: "Отличные уроки! Ребята влюбили меня в серф! Очень понятные объяснения, много практики. 🔥", date: "Неделю назад" },
+        { name: "Дмитрий Харламов", text: "Отличная команда! Паша — очень крутой инструктор с чувством юмора! 👍", date: "2 недели назад" },
+        { name: "Peter Thanh", text: "Despite of the bad weather the instructor was very friendly and teach very well. 👌", date: "Месяц назад" }
       ]
     },
     en: {
+      includedTitle: "What's Included",
+      includedItems: [
+        { icon: <CustomSurfIcon />, label: "Surfboard", desc: "Board for your level" },
+        { icon: <Shirt size={32} />, label: "Gear", desc: "Fresh rashguard" },
+        { icon: <Sun size={32} />, label: "Sun Block", desc: "Zinc protection" },
+        { icon: <Camera size={32} />, label: "Media", desc: "Photos & videos" },
+        { icon: <Smile size={32} />, label: "The Vibe", desc: "Coconut & good mood" }
+      ],
+      whyItems: [
+        { icon: <ShieldCheck size={40} />, title: "ISA Certified", desc: "Our instructors are ISA professionals. Safety is our #1 priority." },
+        { icon: <Users size={40} />, title: "The Surf Vibe", desc: "More than a school — we are a community. Free photos, coconuts and chill." },
+        { icon: <Award size={40} />, title: "Premium Gear", desc: "Top-tier equipment only. We regularly update our boards." },
+        { icon: <Target size={40} />, title: "Personal Focus", desc: "Your coach tracks every move and adjusts to your pace." }
+      ],
       navLessons: "Lessons", navRentals: "Rentals", navHow: "Process", navForecast: "Forecast", navLocation: "Map", btnBook: "Book Now",
       heroTitle: "Catch Your", heroTitleEpic: "Epic", heroTitleEnd: "Wave in Da Nang",
-      heroSub: "Best surf school on My Khe Beach. Expert coaching, top-tier gear, and the best surf community in Vietnam.",
+      heroSub: "Best surf school on My Khe Beach. Expert coaching, top-tier gear, and the best community.",
       sectionTitle: "Choose Your", sectionTitleRide: "Ride",
       rentalBadge: "Professional Gear", rentalTitle: "Surf Board", rentalTitleSurf: "Rentals",
-      rentalDesc: "We provide premium soft-tops, longboards, and performance shortboards. Expert advice included.",
+      rentalDesc: "We provide premium soft-tops, longboards, and performance shortboards.",
       rentalPrice: "from 250,000 VND", rentalUnit: "2 hour / Session", rentalBtn: "Rent Now",
       reviewsTitle: "The best surf vibes", reviewsLink: "Read more on Google Maps",
       locationTitle: "Find the", locationTitleSpot: "Spot",
       locationAddress: "My Khe Beach, Da Nang", locationLandmark: "Look for the Red EPIC SURF flag opposite TMS Hotel",
-      btnOpenMaps: "Open in Google Maps", footerNav: "Navigation", footerMaps: "Maps", modalTitle: "Booking",
-      featureLycra: "Rashguards & Zinc", featureSizes: "All Sizes", featureWetsuits: "Wetsuits", featureDelivery: "Spot Delivery",
+      modalTitle: "Booking", featureLycra: "Rashguards & Zinc", featureSizes: "All Sizes", featureWetsuits: "Wetsuits", featureDelivery: "Spot Delivery",
       boardTypes: ["Softboards", "Longboards", "Malibus", "Shortboards"],
-      whyISA: "ISA Certified", whyISADesc: "Our instructors are ISA certified professionals. Safety is our #1 priority.",
-      whyVibe: "The Surf Vibe", whyVibeDesc: "More than a school — we are a community. Free photos, coconuts, and beach chill.",
-      whyGear: "Premium Gear", whyGearDesc: "Top-tier equipment only. We regularly update our boards for your comfort.",
       howTitle: "How it", howTitleEnd: "works",
       howSteps: [
-        { title: "Meet & Gear Up", desc: "Meet your coach, pick the right board, and get a fresh rashguard and zinc.", time: "15 min" },
-        { title: "Beach Theory", desc: "Warm-up, paddling technique, and pop-up practice. Safety briefing.", time: "20 min" },
-        { title: "Ocean Practice", desc: "Time to surf! Your coach stays close to help you catch waves and fix balance.", time: "75 min" },
-        { title: "Feedback & Media", desc: "Chill with a coconut, review progress, and get your epic photos and videos.", time: "10 min" }
+        { title: "Meet & Gear Up", desc: "Meet your coach and get a fresh rashguard and zinc.", time: "15 min" },
+        { title: "Beach Theory", desc: "Warm-up, paddling technique, and safety briefing.", time: "20 min" },
+        { title: "Ocean Practice", desc: "Time to surf! Your coach stays close to catch waves.", time: "75 min" },
+        { title: "Feedback", desc: "Chill with a coconut and get your photos/videos.", time: "10 min" }
       ],
       forecastTitle: "Current", forecastTitleSpot: "Forecast", forecastPeriod: "Period", forecastWind: "Wind", forecastDir: "Direction", forecastWater: "Water",
       forecastStatusGood: "Perfect for beginners", forecastStatusHigh: "Advanced surfers only",
       faqTitle: "FAQ", faqTitleEnd: "",
       faqItems: [
-        { q: "Do I need to be a strong swimmer?", a: "Basic skills are enough. Lessons are held in safe depths with the instructor by your side." },
-        { q: "What should I bring?", a: "Swimwear, towel, and sunscreen. We provide rashguards and zinc." },
-        { q: "When is the best time to surf?", a: "Depends on tides. Text us, and we'll check tomorrow's forecast for you." }
+        { q: "Do I need to be a strong swimmer?", a: "Basic skills are enough. Lessons are held in safe depths." },
+        { q: "What should I bring?", a: "Swimwear, towel, and sunscreen. We provide the rest." },
+        { q: "When is the best time?", a: "Depends on tides. Text us for tomorrow's forecast." }
       ],
       cards: [
-        { title: "Group Lesson", badge: "Most Popular", desc: "Perfect for beginners. Max 4 people per instructor.", price: "900,000 VND" },
-        { title: "Split Lesson", badge: "Best Value", desc: "For 2 people. More coach attention. Price for both.", price: "2,500,000 VND" },
+        { title: "Group Lesson", badge: "Most Popular", desc: "Perfect for beginners. Max 4 people.", price: "900,000 VND" },
+        { title: "Split Lesson", badge: "Best Value", desc: "For 2 people. More coach attention.", price: "2,500,000 VND" },
         { title: "Private Lesson", badge: "Premium", desc: "1-on-1 coaching for maximum progress.", price: "1,800,000 VND" },
-        { title: "Line-up / Pro", badge: "Advanced", desc: "Guiding to the best peaks for experienced surfers.", price: "2,400,000 VND" }
+        { title: "Line-up / Pro", badge: "Advanced", desc: "Guiding to the best peaks.", price: "2,400,000 VND" }
       ],
       reviewsList: [
-        { name: "Evgenia", text: "Great lessons! Went with friends to try it out and the team made us fall in love with surfing! Very clear technique explanations and awesome photos. 🔥", date: "1 week ago" },
-        { name: "Dmitry Kharlamov", text: "Excellent team! By the second day, we were already practicing turns. Pasha is a very cool instructor! Plus, you get a bonus photoshoot. 👍", date: "2 weeks ago" },
-        { name: "Peter Thanh", text: "Despite of the bad weather the instructor was very friendly and teach very well. I can only recommend this surf school! 👌", date: "1 month ago" }
+        { name: "Evgenia", text: "Great lessons! The team made us fall in love with surfing! 🔥", date: "1 week ago" },
+        { name: "Dmitry Kharlamov", text: "Excellent team! Pasha is a very cool instructor! 👍", date: "2 weeks ago" },
+        { name: "Peter Thanh", text: "Despite of the bad weather the instructor was friendly. 👌", date: "1 month ago" }
       ]
     }
   };
@@ -152,11 +174,10 @@ export default function EpicSurfLanding() {
             <a href="#lessons" className="text-[10px] font-black uppercase tracking-[0.2em] hover:text-epicRed transition-colors">{t.navLessons}</a>
             <a href="#how-it-works" className="text-[10px] font-black uppercase tracking-[0.2em] hover:text-epicRed transition-colors">{t.navHow}</a>
             <a href="#forecast" className="text-[10px] font-black uppercase tracking-[0.2em] hover:text-epicRed transition-colors">{t.navForecast}</a>
-            <a href="#location" className="text-[10px] font-black uppercase tracking-[0.2em] hover:text-epicRed transition-colors">{t.navLocation}</a>
           </nav>
           <div className="flex items-center gap-2 md:gap-6">
-            <button onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')} className="flex items-center gap-2 font-bold text-[10px] uppercase bg-epicPink px-3 py-2 rounded-full hover:bg-epicRed hover:text-white transition-all text-epicDark">
-              <Globe size={14} /> <span className="hidden sm:inline">{lang === 'ru' ? 'EN' : 'RU'}</span>
+            <button onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')} className="bg-epicPink p-2 rounded-full hover:bg-epicRed hover:text-white transition-all">
+              <Globe size={18} />
             </button>
             <button onClick={() => setBookingUrl(links.group)} className="bg-epicRed text-white px-4 md:px-6 py-2 rounded-full font-bold uppercase text-[10px] shadow-lg active:scale-95 transition-all">{t.btnBook}</button>
           </div>
@@ -176,61 +197,19 @@ export default function EpicSurfLanding() {
         </div>
       </section>
 
-      {/* 2.5 WHY EPIC */}
-      <section className="py-20 bg-epicWhite px-6 border-b border-epicPink/30">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 text-center">
-            {[
-              { icon: <ShieldCheck size={40} />, title: t.whyISA, desc: t.whyISADesc },
-              { icon: <Users size={40} />, title: t.whyVibe, desc: t.whyVibeDesc },
-              { icon: <Award size={40} />, title: t.whyGear, desc: t.whyGearDesc }
-            ].map((item, idx) => (
-              <div key={idx} className="space-y-4">
-                <div className="w-20 h-20 bg-epicPink rounded-[30px] mx-auto flex items-center justify-center text-epicRed shadow-sm">{item.icon}</div>
-                <h3 className="text-xl font-black uppercase text-epicDark">{item.title}</h3>
-                <p className="text-epicDark/60 text-sm max-w-[280px] mx-auto">{item.desc}</p>
-              </div>
-            ))}
-        </div>
-      </section>
+      {/* WAVE TOP */}
+      <WaveDivider color="#FFFFFF" flip={true} /> 
 
-      {/* 2.7 HOW IT WORKS (FIXED SPACING) */}
-      <section id="how-it-works" className="py-20 md:py-32 bg-epicWhite px-6 overflow-hidden scroll-mt-24">
+      {/* 2.5 WHY EPIC (4 ICONS, 2x2 MOBILE) */}
+      <section className="py-16 md:py-24 bg-epicWhite px-6 border-b border-epicPink/30">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 md:mb-24">
-            <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter text-epicDark leading-none">
-              {t.howTitle} <br/><span className="text-epicRed italic">{t.howTitleEnd}</span>
-            </h2>
-          </div>
-          <div className="space-y-16 md:space-y-32"> {/* Уменьшил отступы на мобилке */}
-            {t.howSteps.map((step, idx) => (
-              <motion.div 
-                key={idx} 
-                initial={{ opacity: 0, y: 30 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                viewport={{ once: true, margin: "-50px" }} 
-                className={`flex flex-col ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-6 lg:gap-24`}
-              >
-                <div className="w-full lg:w-1/2 relative group">
-                  <div className="absolute -inset-2 md:-inset-4 bg-epicPink rounded-[30px] md:rounded-[50px] rotate-2 transition-transform -z-10 opacity-50"></div>
-                  <div className="aspect-[4/3] w-full rounded-[30px] md:rounded-[40px] overflow-hidden shadow-xl border border-white/50 bg-epicDark/5">
-                    <img 
-                      src={`/gallery/process-${idx + 1}.webp`} 
-                      alt={step.title} 
-                      className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110" 
-                      onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1537519646099-335112f03225?q=80&w=800'; }} 
-                    />
-                  </div>
-                </div>
-                <div className="w-full lg:w-1/2 space-y-3 md:space-y-6 text-center lg:text-left">
-                  <div className="inline-block bg-epicPink text-epicRed px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">
-                    {step.time}
-                  </div>
-                  <h3 className="text-2xl md:text-5xl font-black uppercase text-epicDark leading-tight">
-                    {step.title}
-                  </h3>
-                  <p className="text-epicDark/60 text-base md:text-xl leading-relaxed max-w-md mx-auto lg:mx-0">
-                    {step.desc}
-                  </p>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 md:gap-12 text-center">
+            {t.whyItems.map((item, idx) => (
+              <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="space-y-4">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-epicPink rounded-[24px] md:rounded-[30px] mx-auto flex items-center justify-center text-epicRed shadow-sm border border-white/50">{item.icon}</div>
+                <div className="space-y-2">
+                  <h3 className="text-sm md:text-xl font-black uppercase text-epicDark leading-tight">{item.title}</h3>
+                  <p className="text-epicDark/60 text-[11px] md:text-sm max-w-[160px] md:max-w-[280px] mx-auto leading-relaxed">{item.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -238,82 +217,102 @@ export default function EpicSurfLanding() {
         </div>
       </section>
 
-      {/* 3. SERVICES (FIXED MOBILE SWIPE) */}
+      {/* 2.7 HOW IT WORKS */}
+      <section id="how-it-works" className="py-20 md:py-32 bg-epicWhite px-6 overflow-hidden scroll-mt-24 text-center">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter text-epicDark mb-24">{t.howTitle} <span className="text-epicRed italic">{t.howTitleEnd}</span></h2>
+          <div className="space-y-16 md:space-y-32">
+            {t.howSteps.map((step, idx) => (
+              <motion.div key={idx} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} className={`flex flex-col ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-8 lg:gap-24`}>
+                <div className="w-full lg:w-1/2 relative group">
+                  <div className="absolute -inset-2 md:-inset-4 bg-epicPink rounded-[30px] md:rounded-[50px] rotate-2 -z-10 opacity-50"></div>
+                  <img src={`/gallery/process-${idx + 1}.webp`} alt={step.title} className="aspect-video w-full rounded-[30px] md:rounded-[40px] object-cover shadow-xl" onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1537519646099-335112f03225?q=80&w=800'; }} />
+                </div>
+                <div className="w-full lg:w-1/2 space-y-4 md:space-y-6 lg:text-left">
+                  <div className="inline-block bg-epicPink text-epicRed px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">{step.time}</div>
+                  <h3 className="text-3xl md:text-5xl font-black uppercase text-epicDark">{step.title}</h3>
+                  <p className="text-epicDark/60 text-lg md:text-xl leading-relaxed">{step.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. LESSONS SERVICES */}
       <section id="lessons" className="py-24 px-6 max-w-7xl mx-auto scroll-mt-24 overflow-hidden">
-        <h2 className="text-4xl md:text-6xl font-black text-center mb-12 md:mb-16 uppercase tracking-tighter text-epicDark">
-          {t.sectionTitle} <span className="text-epicRed italic">{t.sectionTitleRide}</span>
-        </h2>
-        
-        {/* Container for swipe: flex on mobile, grid on desktop */}
+        <h2 className="text-4xl md:text-6xl font-black text-center mb-12 md:mb-16 uppercase tracking-tighter text-epicDark">{t.sectionTitle} <span className="text-epicRed italic">{t.sectionTitleRide}</span></h2>
         <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-6 px-6 md:mx-0 md:px-0">
           {t.cards.map((item, i) => (
-            <motion.div 
-              key={i} 
-              whileHover={{ y: -10 }} 
-              className="min-w-[85vw] md:min-w-0 snap-center bg-epicPink rounded-[40px] overflow-hidden shadow-lg flex flex-col border border-white/50 group"
-            >
-              <div className="h-44 overflow-hidden">
-                <img 
-                  src={`/gallery/lesson-${i + 1}.webp`} 
-                  alt={item.title} 
-                  className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-500" 
-                  onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=600'; }} 
-                />
-              </div>
+            <motion.div key={i} whileHover={{ y: -10 }} className="min-w-[85vw] md:min-w-0 snap-center bg-epicPink rounded-[40px] overflow-hidden shadow-lg flex flex-col border border-white/50">
+              <img src={`/gallery/lesson-${i + 1}.webp`} alt={item.title} className="h-48 overflow-hidden object-cover w-full" onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=600'; }} />
               <div className="p-8 flex flex-col flex-1">
-                <div className="mb-4 text-epicRed">
-                  {i === 1 ? <Award size={32} /> : i === 2 ? <Star size={32} /> : <Waves size={32} />}
-                </div>
+                <div className="mb-4 text-epicRed">{i === 1 ? <Award size={32} /> : i === 2 ? <Star size={32} /> : <Waves size={32} />}</div>
                 <div className="text-[10px] text-epicRed font-bold mb-2 uppercase tracking-widest">{item.badge}</div>
                 <h3 className="text-xl md:text-2xl font-bold mb-3 uppercase text-epicDark">{item.title}</h3>
                 <p className="text-epicDark/70 mb-6 text-sm flex-1">{item.desc}</p>
                 <div className="text-2xl font-black mb-8 text-epicDark">{item.price}</div>
-                <button 
-                  onClick={() => setBookingUrl(i === 0 ? links.group : links.personal)} 
-                  className="w-full bg-epicDark text-white py-4 rounded-2xl font-bold uppercase text-xs hover:bg-epicRed transition-all active:scale-95"
-                >
-                  {t.btnBook}
-                </button>
+                <button onClick={() => setBookingUrl(links.group)} className="w-full bg-epicDark text-white py-5 rounded-[20px] font-black uppercase text-xs hover:bg-epicRed transition-all shadow-lg active:scale-95">{t.btnBook}</button>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* RENTALS */}
-        <div id="rentals" className="bg-epicDark text-white rounded-[40px] overflow-hidden shadow-2xl mt-12 border border-white/5 scroll-mt-24">
-          <div className="flex flex-col lg:flex-row items-stretch">
-            <div className="lg:w-1/2 relative bg-[#1a1a1a] min-h-[400px]">
-              <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide h-full">
-                {[1, 2, 3, 4].map((num, idx) => (
-                  <div key={num} className="min-w-full h-full snap-center relative">
-                    <img src={`/gallery/board-${num}.webp`} alt={t.boardTypes[idx]} className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700" onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1537519646099-335112f03225?q=80&w=800'; }} />
-                    <div className="absolute bottom-6 left-6 bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-black uppercase">{t.boardTypes[idx]}</div>
-                  </div>
-                ))}
+        {/* 2.8 WHAT'S INCLUDED */}
+        <div className="my-20 md:my-32 p-8 md:p-12 bg-epicPink/40 rounded-[60px] border border-white/50 relative overflow-hidden text-center">
+          <Smile size={200} className="absolute -right-20 -bottom-20 text-epicRed/5 pointer-events-none rotate-12" />
+          <h3 className="text-3xl md:text-5xl font-black uppercase mb-12 tracking-tighter text-epicDark">{t.includedTitle}</h3>
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6 relative z-10">
+            {t.includedItems.map((item, idx) => (
+              <div key={idx} className={`group bg-white p-6 md:p-8 rounded-[40px] shadow-sm border border-epicPink transition-all hover:shadow-xl flex flex-col items-center ${idx === 4 ? 'col-span-2 lg:col-span-1' : ''}`}>
+                <div className="w-16 h-16 bg-epicPink/50 rounded-2xl flex items-center justify-center text-epicRed mb-5 group-hover:scale-110 transition-transform">
+                  <div className="w-8 h-8 flex items-center justify-center">{item.icon}</div>
+                </div>
+                <div className="font-black uppercase text-sm md:text-base text-epicDark mb-1">{item.label}</div>
+                <div className="text-[10px] md:text-[11px] font-bold text-epicDark/40 uppercase leading-tight tracking-widest">{item.desc}</div>
               </div>
-            </div>
-            <div className="lg:w-1/2 p-8 md:p-16 flex flex-col justify-between">
-              <div>
-                <div className="text-epicRed font-bold mb-4 uppercase tracking-[0.3em] text-xs">{t.rentalBadge}</div>
-                <h3 className="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tighter">{t.rentalTitle} <span className="text-epicRed italic">{t.rentalTitleSurf}</span></h3>
-                <p className="text-white/60 text-lg mb-10">{t.rentalDesc}</p>
-                <div className="grid grid-cols-2 gap-x-2 gap-y-6 mb-12">
-                  {[
-                    { k: 'featureLycra', d: "M12 3V4.5M17 13C17 11.6739 16.4732 10.4021 15.5355 9.46447C14.5979 8.52678 13.3261 8 12 8C10.6739 8 9.40215 8.52678 8.46447 9.46447C7.52678 10.4021 7 11.6739 7 13M5.988 6.99L4.928 5.929M22 13H20.5M3.5 13H2M19.07 5.929L18.01 6.989M6.5 16V19C6.5 19.943 6.5 20.414 6.793 20.707C7.086 21 7.557 21 8.5 21C9.443 21 9.914 21 10.207 20.707C10.5 20.414 10.5 19.943 10.5 19V16" },
-                    { k: 'featureSizes', d: "M5.678 20.5C4.936 18.536 4.5 15.966 4.5 13.185C4.5 10.23 4.992 7.52 5.816 5.521C6.226 4.523 6.736 3.666 7.338 3.047C7.944 2.425 8.691 2 9.548 2C10.407 2 11.154 2.425 11.759 3.047C12.362 3.666 12.871 4.523 13.282 5.521C13.3847 5.77033 13.482 6.03 13.574 6.3C13.6867 6.13867 13.8 5.983 13.914 5.833C14.553 4.998 15.248 4.318 15.974 3.887C16.702 3.453 17.517 3.239 18.33 3.457C19.144 3.675 19.743 4.267 20.157 5.007C20.569 5.744 20.832 6.68 20.967 7.723C21.238 9.813 21.017 12.486 20.273 15.265C19.746 17.232 19.017 19.025 18.18 20.5H20C20.1989 20.5 20.3897 20.579 20.5303 20.7197C20.671 20.8603 20.75 21.0511 20.75 21.25C20.75 21.4489 20.671 21.6397 20.5303 21.7803C20.3897 21.921 20.1989 22 20 22H4C3.80109 22 3.61032 21.921 3.46967 21.7803C3.32902 21.6397 3.25 21.4489 3.25 21.25C3.25 21.0511 3.32902 20.8603 3.46967 20.7197C3.61032 20.579 3.80109 20.5 4 20.5H5.678" },
-                    { k: 'featureWetsuits', d: "M2.5 22.5006V21.5006H3C3.53333 21.5006 4.04667 21.4173 4.54 21.2506C5.03333 21.0839 5.52 20.8533 6 20.5586C6.48 20.8533 6.96667 21.0829 7.46 21.2476C7.95333 21.4123 8.46667 21.4946 9 21.4946C9.53333 21.4946 10.051 21.4123 10.553 21.2476C11.055 21.0829 11.5373 20.8529 12 20.5576" },
-                    { k: 'featureDelivery', d: "M21 20.9992C18.801 19.7722 15.584 18.9992 12 18.9992C8.416 18.9992 5.199 19.7722 3 20.9992M9.5 6.44917C7.833 6.11417 5 6.44917 3.5 9.48217" }
-                  ].map((feat) => (
-                    <div key={feat.k} className="flex items-center gap-3 group/feat">
-                      <div className="p-3 bg-white/5 rounded-2xl group-hover/feat:bg-epicRed transition-all"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" className="text-epicRed group-hover/feat:text-white transition-colors"><path d={feat.d} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg></div>
-                      <span className="text-[10px] font-black uppercase text-white/80 leading-tight whitespace-pre-line">{t[feat.k]}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. RENTALS (FULL-WIDTH DARK) */}
+      <section id="rentals" className="bg-epicDark text-white py-24 mt-20 relative overflow-hidden scroll-mt-24">
+        <div className="absolute right-0 top-10 md:right-12 md:top-24 w-64 h-64 md:w-[500px] md:h-[500px] text-white/5 pointer-events-none -rotate-12 z-0">
+          <SizesIcon />
+        </div>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-20">
+            <div className="lg:w-1/2 flex items-center justify-center relative group">
+              <div className="relative w-full aspect-[4/3] lg:aspect-square overflow-hidden rounded-[60px] border border-white/10 shadow-2xl bg-[#1a1c2c]">
+                <div id="board-slider" className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide h-full scroll-smooth" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
+                  {[1, 2, 3, 4].map((num, idx) => (
+                    <div key={num} className="min-w-full h-full snap-center relative">
+                      <img src={`/gallery/board-${num}.webp`} alt={t.boardTypes[idx]} className="w-full h-full object-cover opacity-90" onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1537519646099-335112f03225?q=80&w=800'; }} />
+                      <div className="absolute bottom-10 left-10"><div className="bg-black/50 backdrop-blur-md border border-white/10 text-white px-6 py-2 rounded-[20px] text-[10px] font-black uppercase tracking-widest">{t.boardTypes[idx]}</div></div>
                     </div>
                   ))}
                 </div>
+                <button onClick={() => { document.getElementById('board-slider').scrollBy({ left: -400, behavior: 'smooth' }); }} className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 backdrop-blur-md rounded-full items-center justify-center border border-white/10 hover:bg-epicRed transition-all hidden md:flex opacity-0 group-hover:opacity-100"><ChevronLeft size={28} /></button>
+                <button onClick={() => { document.getElementById('board-slider').scrollBy({ left: 400, behavior: 'smooth' }); }} className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 backdrop-blur-md rounded-full items-center justify-center border border-white/10 hover:bg-epicRed transition-all hidden md:flex opacity-0 group-hover:opacity-100"><ChevronRight size={28} /></button>
               </div>
-              <div className="flex flex-col md:flex-row items-center justify-between gap-8 border-t border-white/5 pt-8">
-                <div className="text-3xl font-black tracking-tighter">{t.rentalPrice} <br/><span className="text-xs opacity-40 uppercase tracking-widest">{t.rentalUnit}</span></div>
-                <button onClick={() => setBookingUrl(links.rental)} className="w-full md:w-auto px-12 py-5 bg-epicRed text-white rounded-2xl font-black uppercase text-xs hover:bg-white hover:text-epicRed transition-all shadow-xl">{t.rentalBtn}</button>
+            </div>
+            <div className="lg:w-1/2 flex flex-col justify-center">
+              <div className="mb-12"><div className="flex items-center gap-3 mb-6"><div className="h-px w-10 bg-epicRed"></div><span className="text-[10px] font-black uppercase tracking-[0.3em] text-epicRed">{t.rentalBadge}</span></div>
+                <h2 className="text-5xl md:text-8xl font-black mb-8 uppercase tracking-tighter leading-none text-white">{t.rentalTitle} <br/><span className="text-epicRed italic">{t.rentalTitleSurf}</span></h2>
+                <p className="text-white/50 text-lg md:text-xl max-w-lg leading-relaxed">{t.rentalDesc}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-4 md:gap-6 mb-12">
+                {[{ k: 'featureLycra', svg: <LycraIcon /> }, { k: 'featureSizes', svg: <SizesIcon /> }, { k: 'featureWetsuits', svg: <WetsuitIcon /> }, { k: 'featureDelivery', svg: <DeliveryIcon /> }].map((feat) => (
+                  <div key={feat.k} className="flex items-center gap-4 p-6 rounded-[32px] bg-white/5 border border-white/5 hover:border-epicRed/30 transition-all group backdrop-blur-sm">
+                    <div className="w-10 h-10 flex-shrink-0 text-epicRed group-hover:scale-110 transition-transform">{feat.svg}</div>
+                    <span className="text-[11px] font-black uppercase text-white/70 leading-tight tracking-wider">{t[feat.k]}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-8 pt-10 border-t border-white/10">
+                <div className="text-center sm:text-left"><div className="text-4xl md:text-5xl font-black text-white">{t.rentalPrice}</div><div className="text-[10px] opacity-30 uppercase tracking-[0.2em] font-bold mt-2">{t.rentalUnit}</div></div>
+                <button onClick={() => setBookingUrl(links.rental)} className="w-full sm:w-auto px-12 py-6 bg-epicRed text-white rounded-[20px] font-black uppercase text-sm hover:bg-white hover:text-epicRed transition-all shadow-xl active:scale-95">{t.rentalBtn}</button>
               </div>
             </div>
           </div>
@@ -322,43 +321,111 @@ export default function EpicSurfLanding() {
 
       {/* 4. FORECAST */}
       <section id="forecast" className="py-24 bg-epicWhite px-6 scroll-mt-24">
-        <div className="max-w-7xl mx-auto">
-          <div className="bg-epicDark rounded-[40px] overflow-hidden shadow-2xl border border-white/5 flex flex-col lg:flex-row min-h-[500px]">
-            <div className="lg:w-2/5 p-8 md:p-12 flex flex-col justify-between relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/10">
-              <Waves size={300} className="absolute -right-20 -top-20 text-white/5 pointer-events-none" />
-              <div className="relative z-10 space-y-10 text-white text-center md:text-left">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-center md:justify-start gap-3"><span className="w-2 h-2 bg-[#00FF41] rounded-full animate-pulse shadow-[0_0_10px_#00FF41]"></span><span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40">{t.forecastTitle} {t.forecastTitleSpot}</span></div>
-                  <div className="flex items-baseline justify-center md:justify-start gap-3"><span className="text-7xl font-black tracking-tighter">{forecast?.height || "0.8"}</span><span className="text-2xl font-bold text-epicRed italic">m</span></div>
-                  <div className="inline-block bg-epicRed px-4 py-1 rounded-full font-black text-[10px] uppercase">{(forecast?.height || 0.8) < 1.2 ? t.forecastStatusGood : t.forecastStatusHigh}</div>
+        <div className="max-w-7xl mx-auto bg-epicDark rounded-[60px] overflow-hidden shadow-2xl border border-white/5 flex flex-col lg:flex-row min-h-[500px]">
+          <div className="lg:w-2/5 p-8 md:p-12 flex flex-col justify-between relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/10 text-white">
+            <Waves size={300} className="absolute -right-20 -top-20 text-white/5 pointer-events-none" />
+            <div className="relative z-10 space-y-10">
+              <div className="space-y-4">
+                <div className="flex items-center gap-3"><span className="w-2 h-2 bg-[#00FF41] rounded-full animate-pulse shadow-[0_0_10px_#00FF41]"></span><span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40">{t.forecastTitle} {t.forecastTitleSpot}</span></div>
+                <div className="flex items-baseline gap-3"><span className="text-7xl font-black tracking-tighter">{forecast?.height || "0.8"}</span><span className="text-2xl font-bold text-epicRed italic">m</span></div>
+                <div className="inline-block bg-epicRed px-4 py-1 rounded-full font-black text-[10px] uppercase">{(forecast?.height || 0.8) < 1.2 ? t.forecastStatusGood : t.forecastStatusHigh}</div>
+              </div>
+              {/* Сетка параметров: теперь все 4 на месте */}
+                <div className="grid grid-cols-2 gap-x-4 gap-y-8 text-left border-t border-white/10 pt-8">
+                  {/* 1. Период */}
+                  <div className="space-y-1">
+                    <div className="text-[10px] opacity-30 font-bold uppercase tracking-widest flex items-center gap-2">
+                      <Waves size={12} /> {t.forecastPeriod}
+                    </div>
+                    <p className="text-2xl font-black">{forecast?.period || "7.5"}s</p>
+                  </div>
+
+                  {/* 2. Ветер */}
+                  <div className="space-y-1">
+                    <div className="text-[10px] opacity-30 font-bold uppercase tracking-widest flex items-center gap-2">
+                      <Wind size={12} /> {t.forecastWind}
+                    </div>
+                    <p className="text-2xl font-black">{Math.round(forecast?.windSpeed || 12)} km/h</p>
+                  </div>
+
+                  {/* 3. Направление (Стрелка) */}
+                  <div className="space-y-1">
+                    <div className="text-[10px] opacity-30 font-bold uppercase tracking-widest flex items-center gap-2">
+                      <Globe size={12} /> {t.forecastDir}
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div 
+                        className="w-6 h-6 bg-epicRed rounded-full flex items-center justify-center text-white transition-transform duration-1000 shadow-lg shadow-epicRed/20" 
+                        style={{ transform: `rotate(${forecast?.windDir || 225}deg)` }}
+                      >
+                        <ArrowUp size={12} strokeWidth={4}/>
+                      </div>
+                      <span className="font-black text-xl uppercase">SW</span>
+                    </div>
+                  </div>
+
+                  {/* 4. Температура воды */}
+                  <div className="space-y-1">
+                    <div className="text-[10px] opacity-30 font-bold uppercase tracking-widest flex items-center gap-2">
+                      <Thermometer size={12} /> {t.forecastWater}
+                    </div>
+                    <p className="text-2xl font-black">26°C</p>
+                  </div>
                 </div>
-                <div className="grid grid-cols-2 gap-8">
-                  <div className="space-y-1"><div className="text-[10px] opacity-30 font-bold uppercase"><Waves size={14} /> {t.forecastPeriod}</div><p className="text-2xl font-black">{forecast?.period || "7.5"}s</p></div>
-                  <div className="space-y-1"><div className="text-[10px] opacity-30 font-bold uppercase"><Wind size={14} /> {t.forecastWind}</div><p className="text-2xl font-black">{Math.round(forecast?.windSpeed || 12)} km/h</p></div>
-                  <div className="space-y-1"><div className="text-[10px] opacity-30 font-bold uppercase"><Globe size={14} /> {t.forecastDir}</div><div className="flex items-center justify-center md:justify-start gap-2"><div className="w-6 h-6 flex items-center justify-center bg-epicRed rounded-full" style={{ transform: `rotate(${forecast?.windDir || 225}deg)` }}><ArrowUp size={14} /></div><span className="text-xl font-black">SW</span></div></div>
-                  <div className="space-y-1"><div className="text-[10px] opacity-30 font-bold uppercase"><Thermometer size={14} /> {t.forecastWater}</div><p className="text-2xl font-black">26°C</p></div>
+            </div>
+          </div>
+          {/* Правая панель: Windy (Чистая карта + защита от застревания) */}
+          <div className="lg:w-3/5 h-[400px] lg:h-auto bg-white relative">
+            <iframe 
+              src="https://embed.windy.com/embed2.html?lat=16.061&lon=108.247&zoom=11&overlay=waves&product=ecmwf&metricWind=km%2Fh" 
+              className={`w-full h-full border-none transition-opacity duration-500 ${mapActive ? 'opacity-100' : 'opacity-80'}`} 
+              title="Windy Forecast"
+            ></iframe>
+
+            {/* ЗАЩИТНЫЙ СЛОЙ ДЛЯ МОБИЛОК (Чтобы скролл не блокировался) */}
+            {!mapActive && (
+              <div 
+                onClick={() => setMapActive(true)}
+                className="absolute inset-0 z-20 bg-epicDark/20 backdrop-blur-[1px] flex items-center justify-center lg:hidden cursor-pointer"
+              >
+                <div className="bg-white/90 text-epicDark px-6 py-3 rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-2xl flex items-center gap-2">
+                  <Globe size={14} className="animate-spin" />
+                  {lang === 'ru' ? 'Нажми для активации карты' : 'Tap to activate map'}
                 </div>
               </div>
-            </div>
-            <div className="lg:w-3/5 h-[350px] lg:h-auto bg-black"><iframe src="https://embed.windy.com/embed2.html?lat=16.061&lon=108.247&detailLat=16.059&detailLon=108.274&width=650&height=450&zoom=11&level=surface&overlay=waves&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1" className="w-full h-full border-none opacity-70 grayscale invert contrast-125 hover:grayscale-0 hover:invert-0 hover:opacity-100 transition-all duration-1000"></iframe></div>
+            )}
+
+            {/* Кнопка ВЫКЛЮЧЕНИЯ карты на мобилке */}
+            {mapActive && (
+              <button 
+                onClick={() => setMapActive(false)}
+                className="absolute top-4 right-4 z-30 bg-epicRed text-white p-2 rounded-full lg:hidden shadow-xl"
+              >
+                <X size={20} />
+              </button>
+            )}
           </div>
         </div>
       </section>
 
       {/* 5. REVIEWS */}
-      <section id="reviews" className="py-24 bg-epicPink border-y border-white/50 scroll-mt-24 text-center text-epicDark">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col items-center mb-16"><div className="flex gap-1 mb-2">{[...Array(5)].map((_, i) => <Star key={i} size={20} className="text-epicRed fill-epicRed" />)}</div><div className="text-[10px] font-black uppercase tracking-widest">Excellent 5/5 on Google Maps</div></div>
+      <section id="reviews" className="py-24 bg-epicPink border-y border-white/50 scroll-mt-24 text-center text-epicDark px-6">
+        <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-7xl font-black mb-20 uppercase tracking-tighter leading-none">{t.reviewsTitle}</h2>
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {t.reviewsList.map((rev, i) => (
               <motion.div key={i} whileHover={{ y: -5 }} className="bg-white p-10 rounded-[40px] shadow-xl text-left flex flex-col justify-between border border-white">
-                <div><div className="flex gap-1 mb-6">{[...Array(5)].map((_, j) => <Star key={j} size={14} className="text-epicRed fill-epicRed" />)}</div><p className="font-medium italic leading-relaxed text-lg mb-8">"{rev.text}"</p></div>
-                <div className="flex items-center gap-4 border-t border-epicPink pt-6"><div className="w-12 h-12 bg-epicDark text-white rounded-full flex items-center justify-center font-black">{rev.name.charAt(0)}</div><div><div className="text-sm font-black uppercase tracking-widest">{rev.name}</div><div className="text-[10px] uppercase opacity-40 font-bold">{rev.date}</div></div></div>
+                <p className="font-medium italic leading-relaxed text-lg mb-8">"{rev.text}"</p>
+                <div className="flex items-center gap-4 border-t border-epicPink pt-6">
+                  <div className="w-14 h-14 bg-epicDark text-white rounded-full flex items-center justify-center font-black overflow-hidden border-2 border-white shadow-sm">
+                    {rev.img ? <img src={rev.img} className="w-full h-full object-cover" alt={rev.name} /> : rev.name.charAt(0)}
+                  </div>
+                  <div><div className="text-sm font-black uppercase tracking-widest">{rev.name}</div><div className="text-[10px] uppercase opacity-40 font-bold">{rev.date}</div></div>
+                </div>
               </motion.div>
             ))}
           </div>
-          <a href="https://www.google.com/maps/place/EPIC+Surf+School+Da+Nang/@16.0464674,108.2504812,17z/data=!4m8!3m7!1s0x314217f20b1fa357:0xa323fdd182ae974!8m2!3d16.0464674!4d108.2504812!9m1!1b1!16s%2Fg%2F11vlwxw7nd" target="_blank" className="inline-flex items-center gap-3 text-epicRed font-black uppercase text-xs tracking-widest">{t.reviewsLink} <Globe size={14} /></a>
+          <a href={links.googleMaps} target="_blank" className="inline-flex items-center gap-3 text-epicRed font-black uppercase text-xs tracking-widest">{t.reviewsLink} <Globe size={14} /></a>
         </div>
       </section>
 
@@ -380,75 +447,32 @@ export default function EpicSurfLanding() {
         </div>
       </section>
 
-      {/* 7. DARK EPIC GALLERY (FIXED DESKTOP GRID) */}
+      {/* 7. DARK EPIC GALLERY (RESTORED SWIPE + MASONRY) */}
       <section id="gallery" className="py-24 bg-epicDark px-6 scroll-mt-24 border-t border-white/5 overflow-visible">
         <div className="max-w-7xl mx-auto">
-          
-          {/* Header Block */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
-            <div className="space-y-4">
-              <div className="inline-block bg-white/5 text-epicRed px-4 py-1 rounded-full font-black text-[10px] uppercase tracking-widest border border-white/10">
-                Community & Vibe
-              </div>
-              <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter text-white leading-none">
-                Epic <br/><span className="text-epicRed italic">Moments</span>
-              </h2>
+            <div className="space-y-4 text-white">
+              <div className="inline-block bg-white/5 text-epicRed px-4 py-1 rounded-full font-black text-[10px] uppercase tracking-widest border border-white/10">Community & Vibe</div>
+              <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none">Epic <br/><span className="text-epicRed italic">Moments</span></h2>
             </div>
-            <a 
-              href={links.instagram} 
-              target="_blank" 
-              className="group flex items-center gap-3 bg-white text-epicDark px-8 py-4 rounded-2xl font-black uppercase text-[10px] hover:bg-epicRed hover:text-white transition-all duration-500 shadow-xl"
-            >
-              <span>Follow our surf life</span>
-              <InstagramIcon />
-            </a>
+            <a href={links.instagram} target="_blank" className="group flex items-center gap-3 bg-white text-epicDark px-8 py-4 rounded-[20px] font-black uppercase text-[10px] hover:bg-epicRed hover:text-white transition-all shadow-xl"><span>Follow our surf life</span><InstagramIcon /></a>
           </div>
-
-          {/* Gallery Layout */}
-          {/* Mobile: Horizontal Swipe | Desktop: Masonry Grid */}
+          
           <div className="relative overflow-visible">
-            {/* Desktop Masonry (Hidden on Mobile) */}
+            {/* Desktop Masonry */}
             <div className="hidden md:block columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 overflow-visible">
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
-                <motion.div 
-                  key={`desktop-${num}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  whileHover={{ 
-                    scale: 1.05, 
-                    rotate: num % 2 === 0 ? 1 : -1,
-                    zIndex: 50 
-                  }}
-                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                  className="relative break-inside-avoid group cursor-pointer mb-6"
-                >
+                <motion.div key={`desktop-${num}`} whileHover={{ scale: 1.05, zIndex: 50 }} className="relative break-inside-avoid group cursor-pointer mb-6">
                   <div className="absolute inset-0 bg-epicRed/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[40px] -z-10"></div>
-                  <img 
-                    src={`/gallery/${num}.webp`} 
-                    alt="Surf Life" 
-                    className="rounded-[30px] md:rounded-[40px] w-full h-auto object-cover shadow-2xl border border-white/10 grayscale-[0.3] group-hover:grayscale-0 transition-all duration-500"
-                    onError={(e) => { e.target.src = `https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=800&sig=${num}`; }}
-                  />
-                  <div className="absolute bottom-6 left-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                      <div className="bg-black/60 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 inline-block">
-                          <p className="text-[10px] font-black uppercase text-white tracking-widest">Da Nang Vibe</p>
-                      </div>
-                  </div>
+                  <img src={`/gallery/${num}.webp`} alt="Surf" className="rounded-[30px] md:rounded-[40px] w-full h-auto object-cover shadow-2xl border border-white/10 grayscale-[0.3] group-hover:grayscale-0 transition-all duration-500" onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=800'; }} />
                 </motion.div>
               ))}
             </div>
-
-            {/* Mobile Swipe (Hidden on Desktop) */}
-            <div className="flex md:hidden overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-6 px-6 gap-4">
+            {/* Mobile Swipe */}
+            <div className="flex md:hidden overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-6 px-6 gap-4 pb-4">
               {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-                <div key={`mobile-${num}`} className="w-[80vw] flex-shrink-0 snap-center">
-                   <img 
-                    src={`/gallery/${num}.webp`} 
-                    alt="Surf Life" 
-                    className="rounded-[30px] w-full h-[400px] object-cover shadow-xl border border-white/10"
-                    onError={(e) => { e.target.src = `https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=800&sig=${num}`; }}
-                  />
+                <div key={`mobile-${num}`} className="w-[85vw] flex-shrink-0 snap-center">
+                   <img src={`/gallery/${num}.webp`} alt="Surf" className="rounded-[40px] w-full h-[450px] object-cover shadow-xl border border-white/10" />
                 </div>
               ))}
             </div>
@@ -456,62 +480,41 @@ export default function EpicSurfLanding() {
         </div>
       </section>
 
+      {/* WAVE BOTTOM */}
+      <WaveDivider color="#2B2D42" />
+
       {/* 8. FOOTER */}
-      <footer id="location" className="bg-epicDark text-white pt-24 pb-12 px-6 border-t border-white/5 scroll-mt-24">
+      <footer id="location" className="bg-epicDark text-white pt-24 pb-12 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-16 mb-20 text-center md:text-left">
             <div className="lg:col-span-5 space-y-12">
-              <div>
-                <div className="text-4xl font-black tracking-tighter uppercase mb-6 italic">EPIC <span className="text-epicRed">SURF</span></div>
-                <p className="text-white/50 text-xl leading-relaxed max-w-sm mx-auto md:mx-0">{t.heroSub}</p>
-              </div>
-
-              {/* SOCIAL LINKS (FIXED) */}
+              <div><div className="text-4xl font-black uppercase italic mb-6">EPIC <span className="text-epicRed">SURF</span></div><p className="text-white/50 text-xl leading-relaxed max-w-sm mx-auto md:mx-0">{t.heroSub}</p></div>
               <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                <a href={links.instagram} target="_blank" className="p-4 bg-white/5 rounded-full hover:bg-epicRed hover:scale-110 transition-all text-white">
-                  <InstagramIcon />
-                </a>
-                <a href={links.facebook} target="_blank" className="p-4 bg-white/5 rounded-full hover:bg-epicRed hover:scale-110 transition-all text-white">
-                  <FacebookIcon />
-                </a>
-                <a href={links.youtube} target="_blank" className="p-4 bg-white/5 rounded-full hover:bg-epicRed hover:scale-110 transition-all text-white">
-                  <YoutubeIcon />
-                </a>
-                <a href={links.threads} target="_blank" className="p-4 bg-white/5 rounded-full hover:bg-epicRed hover:scale-110 transition-all text-white">
-                  <ThreadsIcon />
-                </a>
-                <a href="tel:+84383880164" className="p-4 bg-white/5 rounded-full hover:bg-epicRed hover:scale-110 transition-all text-white">
-                  <Phone size={20} />
-                </a>
+                <a href={links.instagram} target="_blank" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all"><InstagramIcon /></a>
+                <a href={links.facebook} target="_blank" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all"><FacebookIcon /></a>
+                <a href={links.youtube} target="_blank" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all"><YoutubeIcon /></a>
+                <a href={links.threads} target="_blank" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all"><ThreadsIcon /></a>
               </div>
-
-              <div className="pt-8 border-t border-white/5 font-black uppercase text-[10px] tracking-widest text-white/50">
-                <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
-                  <MapPin size={16} className="text-epicRed" /> {t.locationAddress}
-                </div>
-                <p className="text-white/80 font-medium normal-case tracking-normal italic text-sm">{t.locationLandmark}</p>
+              <div className="pt-8 border-t border-white/5 font-black uppercase text-[10px] tracking-widest text-white/50 flex items-center justify-center md:justify-start gap-3 mb-2">
+                <MapPin size={16} className="text-epicRed" /> {t.locationAddress}
               </div>
             </div>
-            
-            <div className="lg:col-span-7 h-[450px] rounded-[40px] overflow-hidden border border-white/10 shadow-2xl relative">
+            <div className="lg:col-span-7 h-[450px] rounded-[60px] overflow-hidden border border-white/10 shadow-2xl relative">
               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1024.2523782017452!2d108.25027605520296!3d16.046658364986484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217f20b1fa357%3A0xa323fdd182ae974!2sEPIC%20Surf%20School%20Da%20Nang!5e1!3m2!1sru!2s!4v1777015710238!5m2!1sru!2s" className="w-full h-full border-none lg:grayscale lg:invert lg:contrast-125 lg:opacity-60 lg:hover:grayscale-0 lg:hover:invert-0 transition-all duration-1000" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
-          <div className="flex justify-between items-center pt-12 border-t border-white/5 text-[10px] font-bold uppercase tracking-[0.4em] text-white/20">
-            <div>© 2026 Epic Surf School</div>
-            <div>Ride Every Day</div>
-          </div>
+          <div className="pt-12 border-t border-white/5 text-[10px] font-bold uppercase tracking-[0.4em] text-white/20 text-center md:text-left">© 2026 Epic Surf School — Ride Every Day</div>
         </div>
       </footer>
 
-      {/* MESSENGERS */}
+      {/* MESSENGERS FAB */}
       <div className="fixed bottom-6 right-6 z-[60] flex flex-col-reverse items-end gap-4">
         <button onClick={() => setIsChatOpen(!isChatOpen)} className={`w-16 h-16 flex items-center justify-center rounded-full shadow-2xl transition-all duration-300 active:scale-90 ${isChatOpen ? 'bg-epicDark rotate-[135deg]' : 'bg-epicRed rotate-0'}`}>{isChatOpen ? <X size={32} color="white" /> : <MessageCircle size={32} color="white" />}</button>
         <AnimatePresence>{isChatOpen && (
           <motion.div initial={{ opacity: 0, scale: 0.5, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.5, y: 20 }} className="flex flex-col gap-4 mb-2">
-            <a href={links.whatsapp} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#25D366] text-white rounded-full active:scale-95"><MessageCircle size={28} /></a>
-            <a href={links.telegram} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#0088cc] text-white rounded-full active:scale-95"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></a>
-            <a href={links.zalo} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#0068ff] text-white rounded-full text-lg font-black italic">Z</a>
+            <a href={links.whatsapp} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#25D366] text-white rounded-full active:scale-95 shadow-xl"><MessageCircle size={28} /></a>
+            <a href={links.telegram} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#0088cc] text-white rounded-full active:scale-95 shadow-xl"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></a>
+            <a href={links.zalo} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#0068ff] text-white rounded-full text-lg font-black italic shadow-xl">Z</a>
           </motion.div>
         )}</AnimatePresence>
         {isChatOpen && <div onClick={() => setIsChatOpen(false)} className="fixed inset-0 z-[-1] bg-black/5 backdrop-blur-[2px]" />}
@@ -520,8 +523,8 @@ export default function EpicSurfLanding() {
       {/* MODAL */}
       <AnimatePresence>{bookingUrl && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 md:p-6">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setBookingUrl(null)} className="absolute inset-0 bg-epicDark/90 backdrop-blur-md cursor-pointer" />
-          <motion.div initial={{ opacity: 0, scale: 0.9, y: 40 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 40 }} className="relative w-full max-w-5xl h-[85vh] bg-epicWhite rounded-[40px] overflow-hidden z-10 flex flex-col shadow-2xl">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setBookingUrl(null)} className="absolute inset-0 bg-epicDark/95 backdrop-blur-md cursor-pointer" />
+          <motion.div initial={{ opacity: 0, scale: 0.9, y: 40 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 40 }} className="relative w-full max-w-5xl h-[85vh] bg-epicWhite rounded-[60px] overflow-hidden z-10 flex flex-col shadow-2xl border border-white/20">
             <div className="flex justify-between items-center p-6 border-b border-epicPink bg-epicWhite text-epicDark font-black uppercase text-[10px]"><span>{t.modalTitle}</span><button onClick={() => setBookingUrl(null)} className="p-2 bg-epicPink rounded-full text-epicDark"><X size={18} /></button></div>
             <div className="flex-1 bg-white relative"><iframe src={bookingUrl} className="w-full h-full border-none" title="Booking" /></div>
           </motion.div>
@@ -532,7 +535,61 @@ export default function EpicSurfLanding() {
   );
 }
 
-// ICONS
+// --- ВСПОМОГАТЕЛЬНЫЕ КОМПОНЕНТЫ И ИКОНКИ ---
+
+function WaveDivider({ flip = false, color = "#FFFFFF" }) {
+  return (
+    <div className={`relative w-full overflow-hidden leading-[0] z-20 ${flip ? 'rotate-180 -mt-1' : '-mb-1'}`}>
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-[60px] md:h-[100px]">
+        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5,73.84-4.36,147.54,16.88,218.2,35.26,69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113,-1.11,1200,0H0Z" fill={color} opacity="0.25"></path>
+        <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5V0H0Z" fill={color} opacity="0.5"></path>
+        <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0H0Z" fill={color}></path>
+      </svg>
+    </div>
+  );
+}
+
+function CustomSurfIcon() {
+  return (
+    <svg width="100%" height="100%" viewBox="-2 -2 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10.0529 6.50719C13.3329 3.22719 18.3609 1.84219 20.9389 2.01419C21.3019 2.03919 21.4829 2.05119 21.7159 2.28419C21.9489 2.51619 21.9609 2.69819 21.9859 3.06119C22.1579 5.63919 20.7739 10.6672 17.4929 13.9472C14.4459 16.9942 9.81491 19.8992 6.80991 21.6482C6.45691 21.8542 6.27991 21.9572 6.13291 21.9852C5.92706 22.0235 5.7143 21.9871 5.53285 21.8827C5.3514 21.7782 5.21314 21.6124 5.14291 21.4152C5.09291 21.2742 5.09291 21.0652 5.09291 20.6492C5.09291 20.2522 5.09291 20.0542 5.04991 19.8912C4.99046 19.6651 4.87201 19.4588 4.70667 19.2934C4.54134 19.1281 4.33505 19.0096 4.10891 18.9502C3.94591 18.9072 3.74791 18.9072 3.35091 18.9072C2.93391 18.9072 2.72591 18.9072 2.58391 18.8572C2.38685 18.7868 2.22132 18.6484 2.11704 18.467C2.01276 18.2856 1.97655 18.0729 2.01491 17.8672C2.04291 17.7192 2.14491 17.5432 2.35091 17.1892C4.10091 14.1852 7.00491 9.55419 10.0529 6.50719Z" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M21 8C17.41 14.134 10.398 8.453 5.5 12.5M7 17L8 16" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function SizesIcon() {
+  return (
+    <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5.678 20.5C4.936 18.536 4.5 15.966 4.5 13.185C4.5 10.23 4.992 7.52 5.816 5.521C6.226 4.523 6.736 3.666 7.338 3.047C7.944 2.425 8.691 2 9.548 2C10.407 2 11.154 2.425 11.759 3.047C12.362 3.666 12.871 4.523 13.282 5.521C13.3847 5.77033 13.482 6.03 13.574 6.3C13.6867 6.13867 13.8 5.983 13.914 5.833C14.553 4.998 15.248 4.318 15.974 3.887C16.702 3.453 17.517 3.239 18.33 3.457C19.144 3.675 19.743 4.267 20.157 5.007C20.569 5.744 20.832 6.68 20.967 7.723C21.238 9.813 21.017 12.486 20.273 15.265C19.746 17.232 19.017 19.025 18.18 20.5H20C20.1989 20.5 20.3897 20.579 20.5303 20.7197C20.671 20.8603 20.75 21.0511 20.75 21.25C20.75 21.4489 20.671 21.6397 20.5303 21.7803C20.3897 21.921 20.1989 22 20 22H4C3.80109 22 3.61032 21.921 3.46967 21.7803C3.32902 21.6397 3.25 21.4489 3.25 21.25C3.25 21.0511 3.32902 20.8603 3.46967 20.7197C3.61032 20.579 3.80109 20.5 4 20.5H5.678ZM7.203 6.092C6.47 7.869 6 10.377 6 13.185C6 16.119 6.513 18.718 7.297 20.5H10.085C9.761 18.372 9.971 15.595 10.744 12.712C11.204 10.993 11.818 9.41 12.522 8.056C12.3616 7.38681 12.152 6.73037 11.895 6.092C11.528 5.202 11.11 4.53 10.685 4.093C10.262 3.659 9.878 3.5 9.549 3.5C9.219 3.5 8.836 3.659 8.413 4.093C7.987 4.53 7.569 5.201 7.203 6.092ZM16.427 20.5C17.036 19.5432 17.551 18.5299 17.965 17.474L15.529 15.248C15.4404 15.1667 15.3335 15.108 15.2175 15.0766C15.1014 15.0453 14.9795 15.0423 14.862 15.068L11.639 15.778C11.377 17.588 11.379 19.222 11.605 20.5H16.427ZM13.222 10.091L15.622 9.563C15.9741 9.4855 16.3396 9.49374 16.6879 9.58702C17.0361 9.6803 17.3568 9.85589 17.623 10.099L19.437 11.757C19.614 10.322 19.622 9.011 19.48 7.917C19.36 6.988 19.136 6.255 18.848 5.74C18.561 5.228 18.245 4.987 17.942 4.906C17.64 4.826 17.245 4.876 16.741 5.176C16.234 5.477 15.674 6.001 15.106 6.744C14.436 7.621 13.786 8.761 13.222 10.091ZM12.592 11.766C12.3296 12.5579 12.1086 13.363 11.93 14.178L14.539 13.604C14.8912 13.5263 15.257 13.5345 15.6054 13.6278C15.9538 13.7211 16.2747 13.8967 16.541 14.14L18.513 15.942C18.7659 15.1469 18.9772 14.3391 19.146 13.522L16.611 11.206C16.5222 11.1251 16.4153 11.0667 16.2992 11.0357C16.1831 11.0047 16.0613 11.0021 15.944 11.028L12.592 11.766Z" fill="currentColor" />
+    </svg>
+  );
+}
+
+function LycraIcon() {
+  return (
+    <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 3V4.5M17 13C17 11.6739 16.4732 10.4021 15.5355 9.46447C14.5979 8.52678 13.3261 8 12 8C10.6739 8 9.40215 8.52678 8.46447 9.46447C7.52678 10.4021 7 11.6739 7 13M5.988 6.99L4.928 5.929M22 13H20.5M3.5 13H2M19.07 5.929L18.01 6.989M6.5 16V19C6.5 19.943 6.5 20.414 6.793 20.707C7.086 21 7.557 21 8.5 21C9.443 21 9.914 21 10.207 20.707C10.5 20.414 10.5 19.943 10.5 19V16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function WetsuitIcon() {
+  return (
+    <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2.5 22.5006V21.5006H3C3.53333 21.5006 4.04667 21.4173 4.54 21.2506C5.03333 21.0839 5.52 20.8533 6 20.5586C6.48 20.8533 6.96667 21.0829 7.46 21.2476C7.95333 21.4123 8.46667 21.4946 9 21.4946C9.53333 21.4946 10.051 21.4123 10.553 21.2476C11.055 21.0829 11.5373 20.8529 12 20.5576" fill="currentColor"/>
+    </svg>
+  );
+}
+
+function DeliveryIcon() {
+  return (
+    <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M21 20.9992C18.801 19.7722 15.584 18.9992 12 18.9992C8.416 18.9992 5.199 19.7722 3 20.9992M9.5 6.44917C7.833 6.11417 5 6.44917 3.5 9.48217" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
 function InstagramIcon() { return (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>); }
 function FacebookIcon() { return (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>); }
 function YoutubeIcon() { return (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>); }
