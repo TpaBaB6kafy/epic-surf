@@ -38,6 +38,14 @@ export default function EpicSurfLanding() {
 
   const translations = {
     ru: {
+      includedTitle: "В стоимость включено",
+      includedItems: [
+        { label: "Серф", desc: "Доска под твой уровень" },
+        { label: "Экип", desc: "Лайкра твоего размера" },
+        { label: "Защита", desc: "Профессиональный цинк" },
+        { label: "Контент", desc: "Фото и видео с урока" },
+        { label: "Вайб", desc: "Кокос и обучение с душой" }
+      ],
       rentalModalTitle: "Забронировать аренду",
       rentalModalSub: "Выберите удобный мессенджер. Мы ответим вам в течение 5 минут.",
       msgRental: "Привет! Хочу забронировать аренду доски в Epic Surf.",
@@ -95,6 +103,14 @@ export default function EpicSurfLanding() {
       ]
     },
     en: {
+      includedTitle: "What's Included",
+      includedItems: [
+        { label: "Surfboard", desc: "Board for your level" },
+        { label: "Gear", desc: "Fresh rashguard" },
+        { label: "Sun block", desc: "Professional Zinc" },
+        { label: "Media", desc: "Photos & videos" },
+        { label: "The Vibe", desc: "Coconut & good mood" }
+      ],
       rentalModalTitle: "Book your rental",
       rentalModalSub: "Choose your preferred messenger. We will reply within 5 minutes.",
       msgRental: "Hi! I want to book a surfboard rental at Epic Surf.",
@@ -265,19 +281,47 @@ export default function EpicSurfLanding() {
           ))}
         </div>
 
-        {/* 2.8 WHAT'S INCLUDED */}
-        <div className="my-20 md:my-32 p-8 md:p-12 bg-epicPink/40 rounded-[60px] border border-white/50 relative overflow-hidden text-center">
-          <Smile size={200} className="absolute -right-20 -bottom-20 text-epicRed/5 pointer-events-none rotate-12" />
-          <h3 className="text-3xl md:text-5xl font-black uppercase mb-12 tracking-tighter text-epicDark">{t.includedTitle}</h3>
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6 relative z-10">
+        {/* 2.8 WHAT'S INCLUDED — REAL STICKERS VERSION */}
+        <div className="my-20 md:my-32 p-8 md:p-20 bg-[#EDF2F4] rounded-[60px] border border-white/50 relative overflow-hidden">
+
+          <h3 className="relative z-10 text-4xl md:text-6xl font-black uppercase mb-16 md:mb-24 tracking-tighter text-[#2B2D42] text-center">
+            {t.includedTitle}
+          </h3>
+
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-y-12 gap-x-4 md:gap-8 relative z-10 justify-items-center">
             {t.includedItems.map((item, idx) => (
-              <div key={idx} className={`group bg-white p-6 md:p-8 rounded-[40px] shadow-sm border border-epicPink transition-all hover:shadow-xl flex flex-col items-center ${idx === 4 ? 'col-span-2 lg:col-span-1' : ''}`}>
-                <div className="w-16 h-16 bg-epicPink/50 rounded-2xl flex items-center justify-center text-epicRed mb-5 group-hover:scale-110 transition-transform">
-                  <div className="w-8 h-8 flex items-center justify-center">{item.icon}</div>
+              <motion.div
+                key={idx}
+                whileHover={{ y: -10, scale: 1.05 }}
+                // На мобилке 5-й элемент центрируем по сетке
+                className={`flex flex-col items-center group ${idx === 4 ? 'col-span-2 lg:col-span-1' : ''}`}
+              >
+                {/* КОНТЕЙНЕР ДЛЯ СТИКЕРА */}
+                <div className={`
+                  relative w-28 h-28 md:w-40 md:h-40 mb-4 
+                  transition-transform duration-500
+                  ${idx % 2 === 0 ? 'rotate-[-5deg]' : 'rotate-[5deg]'} 
+                  group-hover:rotate-0
+                `}>
+                  <img
+                    src={`/gallery/incl-${idx + 1}.webp`}
+                    alt={item.label}
+                    /* drop-shadow создаст тень по контуру твоего вырезанного стикера */
+                    className="w-full h-full object-contain filter drop-shadow-[0_10px_15px_rgba(0,0,0,0.2)]"
+                    onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=200'; }}
+                  />
                 </div>
-                <div className="font-black uppercase text-sm md:text-base text-epicDark mb-1">{item.label}</div>
-                <div className="text-[10px] md:text-[11px] font-bold text-epicDark/40 uppercase leading-tight tracking-widest">{item.desc}</div>
-              </div>
+
+                {/* ТЕКСТ ПОД СТИКЕРОМ */}
+                <div className="text-center space-y-1">
+                  <div className="font-black uppercase text-sm md:text-xl text-[#2B2D42] tracking-tight">
+                    {item.label}
+                  </div>
+                  <div className="text-[10px] md:text-xs font-bold text-[#8D99AE] uppercase leading-tight tracking-widest max-w-[140px]">
+                    {item.desc}
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -538,23 +582,23 @@ export default function EpicSurfLanding() {
           </motion.div>
         </div>
       )}</AnimatePresence>
-      
+
       {/* 9. RENTAL MODAL (АРЕНДА) — ВСТАВЛЕНО СЮДА */}
       <AnimatePresence>
         {showRentalOptions && (
           <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 md:p-6">
-            <motion.div 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
-              exit={{ opacity: 0 }} 
-              onClick={() => setShowRentalOptions(false)} 
-              className="absolute inset-0 bg-epicDark/95 backdrop-blur-md cursor-pointer" 
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowRentalOptions(false)}
+              className="absolute inset-0 bg-epicDark/95 backdrop-blur-md cursor-pointer"
             />
-            
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9, y: 20 }} 
-              animate={{ opacity: 1, scale: 1, y: 0 }} 
-              exit={{ opacity: 0, scale: 0.9, y: 20 }} 
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
               className="relative w-full max-w-sm bg-white rounded-[50px] p-10 shadow-2xl text-center border border-white/20"
             >
               <button onClick={() => setShowRentalOptions(false)} className="absolute top-8 right-8 text-epicDark/20 hover:text-epicRed transition-colors">
