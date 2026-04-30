@@ -1,15 +1,16 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Waves, MapPin, Target, Award, Star, Phone, MessageCircle, 
-  X, Globe, ShieldCheck, Users, Wind, Thermometer, ArrowUp, 
+import {
+  Waves, MapPin, Target, Award, Star, Phone, MessageCircle,
+  X, Globe, ShieldCheck, Users, Wind, Thermometer, ArrowUp,
   Shirt, Camera, Sun, Smile, CheckCircle2, ChevronLeft, ChevronRight
 } from "lucide-react";
 
 export default function EpicSurfLanding() {
+  const [showRentalOptions, setShowRentalOptions] = useState(false);
   const [mapActive, setMapActive] = useState(false);
-  const [lang, setLang] = useState('ru'); 
+  const [lang, setLang] = useState('ru');
   const [bookingUrl, setBookingUrl] = useState(null);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
@@ -37,6 +38,9 @@ export default function EpicSurfLanding() {
 
   const translations = {
     ru: {
+      rentalModalTitle: "Забронировать аренду",
+      rentalModalSub: "Выберите удобный мессенджер. Мы ответим вам в течение 5 минут.",
+      msgRental: "Привет! Хочу забронировать аренду доски в Epic Surf.",
       includedTitle: "В стоимость включено",
       includedItems: [
         { icon: <CustomSurfIcon />, label: "Серф", desc: "Доска под твой уровень" },
@@ -91,6 +95,9 @@ export default function EpicSurfLanding() {
       ]
     },
     en: {
+      rentalModalTitle: "Book your rental",
+      rentalModalSub: "Choose your preferred messenger. We will reply within 5 minutes.",
+      msgRental: "Hi! I want to book a surfboard rental at Epic Surf.",
       includedTitle: "What's Included",
       includedItems: [
         { icon: <CustomSurfIcon />, label: "Surfboard", desc: "Board for your level" },
@@ -163,7 +170,7 @@ export default function EpicSurfLanding() {
 
   return (
     <div className="min-h-screen bg-epicWhite font-sans text-epicDark overflow-x-hidden transition-colors duration-500 scroll-smooth">
-      
+
       {/* 1. HEADER */}
       <header className="fixed top-0 w-full bg-epicWhite/90 backdrop-blur-md z-50 border-b border-epicPink">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex justify-between items-center text-epicDark">
@@ -191,14 +198,14 @@ export default function EpicSurfLanding() {
         </video>
         <div className="relative z-10 text-center px-4 pt-20">
           <motion.h1 key={lang} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-5xl md:text-8xl font-black text-white uppercase tracking-tight mb-6 drop-shadow-2xl">
-            {t.heroTitle} <br/><span className="text-epicRed italic">{t.heroTitleEpic}</span> {t.heroTitleEnd}
+            {t.heroTitle} <br /><span className="text-epicRed italic">{t.heroTitleEpic}</span> {t.heroTitleEnd}
           </motion.h1>
           <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto font-medium">{t.heroSub}</p>
         </div>
       </section>
 
       {/* WAVE TOP */}
-      <WaveDivider color="#FFFFFF" flip={true} /> 
+      <WaveDivider color="#FFFFFF" flip={true} />
 
       {/* 2.5 WHY EPIC (4 ICONS, 2x2 MOBILE) */}
       <section className="py-16 md:py-24 bg-epicWhite px-6 border-b border-epicPink/30">
@@ -299,7 +306,7 @@ export default function EpicSurfLanding() {
             </div>
             <div className="lg:w-1/2 flex flex-col justify-center">
               <div className="mb-12"><div className="flex items-center gap-3 mb-6"><div className="h-px w-10 bg-epicRed"></div><span className="text-[10px] font-black uppercase tracking-[0.3em] text-epicRed">{t.rentalBadge}</span></div>
-                <h2 className="text-5xl md:text-8xl font-black mb-8 uppercase tracking-tighter leading-none text-white">{t.rentalTitle} <br/><span className="text-epicRed italic">{t.rentalTitleSurf}</span></h2>
+                <h2 className="text-5xl md:text-8xl font-black mb-8 uppercase tracking-tighter leading-none text-white">{t.rentalTitle} <br /><span className="text-epicRed italic">{t.rentalTitleSurf}</span></h2>
                 <p className="text-white/50 text-lg md:text-xl max-w-lg leading-relaxed">{t.rentalDesc}</p>
               </div>
               <div className="grid grid-cols-2 gap-4 md:gap-6 mb-12">
@@ -312,98 +319,99 @@ export default function EpicSurfLanding() {
               </div>
               <div className="flex flex-col sm:flex-row items-center justify-between gap-8 pt-10 border-t border-white/10">
                 <div className="text-center sm:text-left"><div className="text-4xl md:text-5xl font-black text-white">{t.rentalPrice}</div><div className="text-[10px] opacity-30 uppercase tracking-[0.2em] font-bold mt-2">{t.rentalUnit}</div></div>
-                <button onClick={() => setBookingUrl(links.rental)} className="w-full sm:w-auto px-12 py-6 bg-epicRed text-white rounded-[20px] font-black uppercase text-sm hover:bg-white hover:text-epicRed transition-all shadow-xl active:scale-95">{t.rentalBtn}</button>
+                <button onClick={() => setShowRentalOptions(true)} className="w-full sm:w-auto px-12 py-6 bg-epicRed text-white rounded-[20px] font-black uppercase text-sm hover:bg-white hover:text-epicRed transition-all shadow-xl active:scale-95">{t.rentalBtn}</button>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 4. FORECAST */}
-      <section id="forecast" className="py-24 bg-epicWhite px-6 scroll-mt-24">
-        <div className="max-w-7xl mx-auto bg-epicDark rounded-[60px] overflow-hidden shadow-2xl border border-white/5 flex flex-col lg:flex-row min-h-[500px]">
-          <div className="lg:w-2/5 p-8 md:p-12 flex flex-col justify-between relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/10 text-white">
-            <Waves size={300} className="absolute -right-20 -top-20 text-white/5 pointer-events-none" />
-            <div className="relative z-10 space-y-10">
-              <div className="space-y-4">
-                <div className="flex items-center gap-3"><span className="w-2 h-2 bg-[#00FF41] rounded-full animate-pulse shadow-[0_0_10px_#00FF41]"></span><span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40">{t.forecastTitle} {t.forecastTitleSpot}</span></div>
-                <div className="flex items-baseline gap-3"><span className="text-7xl font-black tracking-tighter">{forecast?.height || "0.8"}</span><span className="text-2xl font-bold text-epicRed italic">m</span></div>
-                <div className="inline-block bg-epicRed px-4 py-1 rounded-full font-black text-[10px] uppercase">{(forecast?.height || 0.8) < 1.2 ? t.forecastStatusGood : t.forecastStatusHigh}</div>
-              </div>
-              {/* Сетка параметров: теперь все 4 на месте */}
-                <div className="grid grid-cols-2 gap-x-4 gap-y-8 text-left border-t border-white/10 pt-8">
-                  {/* 1. Период */}
-                  <div className="space-y-1">
-                    <div className="text-[10px] opacity-30 font-bold uppercase tracking-widest flex items-center gap-2">
-                      <Waves size={12} /> {t.forecastPeriod}
-                    </div>
-                    <p className="text-2xl font-black">{forecast?.period || "7.5"}s</p>
+      {/* 4. FORECAST (SWELL REPORT) — ВОЗВРАТ ГАБАРИТОВ + ФИКС КОНТЕНТА */}
+      <section id="forecast" className="py-24 bg-epicWhite px-6 scroll-mt-24 border-t border-epicPink/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-epicDark rounded-[40px] overflow-hidden shadow-2xl border border-white/5 flex flex-col lg:flex-row min-h-[500px]">
+
+            {/* ЛЕВАЯ ПАНЕЛЬ: ПОКАЗАТЕЛИ (Высота 100%, отступы как были) */}
+            <div className="lg:w-2/5 p-8 md:p-12 flex flex-col justify-center relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/10 text-white">
+
+              <div className="relative z-10 space-y-10">
+                {/* 1. Главный показатель (Высота) — Крупно + Центровка */}
+                <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4">
+                  <div className="flex items-center gap-3">
+                    <span className="w-2 h-2 bg-[#00FF41] rounded-full animate-pulse shadow-[0_0_10px_#00FF41]"></span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-30">{t.forecastTitle} {t.forecastTitleSpot}</span>
                   </div>
 
-                  {/* 2. Ветер */}
-                  <div className="space-y-1">
-                    <div className="text-[10px] opacity-30 font-bold uppercase tracking-widest flex items-center gap-2">
-                      <Wind size={12} /> {t.forecastWind}
+                  <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-8xl lg:text-9xl font-black tracking-tighter leading-none">{forecast?.height || "0.86"}</span>
+                      <span className="text-3xl lg:text-5xl font-bold text-epicRed italic uppercase leading-none">m</span>
                     </div>
-                    <p className="text-2xl font-black">{Math.round(forecast?.windSpeed || 12)} km/h</p>
+                    <div className="hidden md:block pl-6 border-l border-white/20">
+                      <span className="text-sm font-black uppercase tracking-widest opacity-30">{t.forecastWaveHeight}</span>
+                    </div>
                   </div>
 
-                  {/* 3. Направление (Стрелка) */}
-                  <div className="space-y-1">
-                    <div className="text-[10px] opacity-30 font-bold uppercase tracking-widest flex items-center gap-2">
-                      <Globe size={12} /> {t.forecastDir}
-                    </div>
+                  <div className="bg-epicRed text-white px-5 py-2 rounded-full font-black text-[10px] lg:text-xs uppercase tracking-widest shadow-xl">
+                    {(forecast?.height || 0.8) < 1.2 ? t.forecastStatusGood : t.forecastStatusHigh}
+                  </div>
+                </div>
+
+                {/* 2. Сетка параметров 2x2 — Крупно + Центровка */}
+                <div className="grid grid-cols-2 gap-y-10 gap-x-6 border-t border-white/10 pt-8">
+                  <div className="flex flex-col items-center md:items-start space-y-1">
+                    <div className="text-[10px] lg:text-xs font-black uppercase opacity-30 flex items-center gap-2"><Waves className="w-4 h-4" /> {t.forecastPeriod}</div>
+                    <span className="font-black text-3xl lg:text-4xl">{forecast?.period || "4.95"}s</span>
+                  </div>
+
+                  <div className="flex flex-col items-center md:items-start space-y-1">
+                    <div className="text-[10px] lg:text-xs font-black uppercase opacity-30 flex items-center gap-2"><Wind className="w-4 h-4" /> {t.forecastWind}</div>
+                    <span className="font-black text-3xl lg:text-4xl">{Math.round(forecast?.windSpeed || 23)}<span className="text-xs lg:text-sm opacity-30 ml-1 uppercase">km/h</span></span>
+                  </div>
+
+                  <div className="flex flex-col items-center md:items-start space-y-1">
+                    <div className="text-[10px] lg:text-xs font-black uppercase opacity-30 flex items-center gap-2"><Globe className="w-4 h-4" /> {t.forecastDir}</div>
                     <div className="flex items-center gap-3">
-                      <div 
-                        className="w-6 h-6 bg-epicRed rounded-full flex items-center justify-center text-white transition-transform duration-1000 shadow-lg shadow-epicRed/20" 
-                        style={{ transform: `rotate(${forecast?.windDir || 225}deg)` }}
-                      >
-                        <ArrowUp size={12} strokeWidth={4}/>
-                      </div>
-                      <span className="font-black text-xl uppercase">SW</span>
+                      <div className="w-8 h-8 lg:w-10 lg:h-10 bg-epicRed rounded-full flex items-center justify-center text-white" style={{ transform: `rotate(${forecast?.windDir || 225}deg)` }}><ArrowUp className="w-4 h-4 lg:w-5 lg:h-5" strokeWidth={4} /></div>
+                      <span className="font-black text-2xl lg:text-3xl uppercase">SW</span>
                     </div>
                   </div>
 
-                  {/* 4. Температура воды */}
-                  <div className="space-y-1">
-                    <div className="text-[10px] opacity-30 font-bold uppercase tracking-widest flex items-center gap-2">
-                      <Thermometer size={12} /> {t.forecastWater}
-                    </div>
-                    <p className="text-2xl font-black">26°C</p>
+                  <div className="flex flex-col items-center md:items-start space-y-1">
+                    <div className="text-[10px] lg:text-xs font-black uppercase opacity-30 flex items-center gap-2"><Thermometer className="w-4 h-4" /> {t.forecastWater}</div>
+                    <span className="font-black text-3xl lg:text-4xl">26°C</span>
                   </div>
-                </div>
-            </div>
-          </div>
-          {/* Правая панель: Windy (Чистая карта + защита от застревания) */}
-          <div className="lg:w-3/5 h-[400px] lg:h-auto bg-white relative">
-            <iframe 
-              src="https://embed.windy.com/embed2.html?lat=16.061&lon=108.247&zoom=11&overlay=waves&product=ecmwf&metricWind=km%2Fh" 
-              className={`w-full h-full border-none transition-opacity duration-500 ${mapActive ? 'opacity-100' : 'opacity-80'}`} 
-              title="Windy Forecast"
-            ></iframe>
-
-            {/* ЗАЩИТНЫЙ СЛОЙ ДЛЯ МОБИЛОК (Чтобы скролл не блокировался) */}
-            {!mapActive && (
-              <div 
-                onClick={() => setMapActive(true)}
-                className="absolute inset-0 z-20 bg-epicDark/20 backdrop-blur-[1px] flex items-center justify-center lg:hidden cursor-pointer"
-              >
-                <div className="bg-white/90 text-epicDark px-6 py-3 rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-2xl flex items-center gap-2">
-                  <Globe size={14} className="animate-spin" />
-                  {lang === 'ru' ? 'Нажми для активации карты' : 'Tap to activate map'}
                 </div>
               </div>
-            )}
+            </div>
 
-            {/* Кнопка ВЫКЛЮЧЕНИЯ карты на мобилке */}
-            {mapActive && (
-              <button 
-                onClick={() => setMapActive(false)}
-                className="absolute top-4 right-4 z-30 bg-epicRed text-white p-2 rounded-full lg:hidden shadow-xl"
-              >
-                <X size={20} />
-              </button>
-            )}
+            {/* ПРАВАЯ ПАНЕЛЬ: КАРТА WINDY (Высота 400px как была) */}
+            <div className="lg:w-3/5 h-[400px] lg:h-auto bg-white relative">
+              <iframe
+                src="https://embed.windy.com/embed2.html?lat=16.061&lon=108.247&zoom=11&overlay=waves&product=ecmwf&metricWind=km%2Fh"
+                className={`w-full h-full border-none transition-opacity duration-500 ${mapActive ? 'opacity-100' : 'opacity-80'}`}
+                title="Windy Forecast"
+              ></iframe>
+
+              {/* Защита от застревания пальца */}
+              {!mapActive && (
+                <div
+                  onClick={() => setMapActive(true)}
+                  className="absolute inset-0 z-20 bg-epicDark/20 backdrop-blur-[1px] flex items-center justify-center lg:hidden cursor-pointer"
+                >
+                  <div className="bg-white/95 text-epicDark px-6 py-3 rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-2xl flex items-center gap-2">
+                    <Globe size={14} className="animate-spin" />
+                    {lang === 'ru' ? 'Активировать карту' : 'Activate map'}
+                  </div>
+                </div>
+              )}
+
+              {/* Кнопка выхода */}
+              {mapActive && (
+                <button onClick={() => setMapActive(false)} className="absolute top-4 right-4 z-30 bg-epicRed text-white p-2 rounded-full lg:hidden shadow-xl"><X size={20} /></button>
+              )}
+            </div>
+
           </div>
         </div>
       </section>
@@ -453,11 +461,11 @@ export default function EpicSurfLanding() {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
             <div className="space-y-4 text-white">
               <div className="inline-block bg-white/5 text-epicRed px-4 py-1 rounded-full font-black text-[10px] uppercase tracking-widest border border-white/10">Community & Vibe</div>
-              <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none">Epic <br/><span className="text-epicRed italic">Moments</span></h2>
+              <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none">Epic <br /><span className="text-epicRed italic">Moments</span></h2>
             </div>
             <a href={links.instagram} target="_blank" className="group flex items-center gap-3 bg-white text-epicDark px-8 py-4 rounded-[20px] font-black uppercase text-[10px] hover:bg-epicRed hover:text-white transition-all shadow-xl"><span>Follow our surf life</span><InstagramIcon /></a>
           </div>
-          
+
           <div className="relative overflow-visible">
             {/* Desktop Masonry */}
             <div className="hidden md:block columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 overflow-visible">
@@ -472,7 +480,7 @@ export default function EpicSurfLanding() {
             <div className="flex md:hidden overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-6 px-6 gap-4 pb-4">
               {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
                 <div key={`mobile-${num}`} className="w-[85vw] flex-shrink-0 snap-center">
-                   <img src={`/gallery/${num}.webp`} alt="Surf" className="rounded-[40px] w-full h-[450px] object-cover shadow-xl border border-white/10" />
+                  <img src={`/gallery/${num}.webp`} alt="Surf" className="rounded-[40px] w-full h-[450px] object-cover shadow-xl border border-white/10" />
                 </div>
               ))}
             </div>
@@ -513,23 +521,69 @@ export default function EpicSurfLanding() {
         <AnimatePresence>{isChatOpen && (
           <motion.div initial={{ opacity: 0, scale: 0.5, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.5, y: 20 }} className="flex flex-col gap-4 mb-2">
             <a href={links.whatsapp} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#25D366] text-white rounded-full active:scale-95 shadow-xl"><MessageCircle size={28} /></a>
-            <a href={links.telegram} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#0088cc] text-white rounded-full active:scale-95 shadow-xl"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></a>
+            <a href={links.telegram} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#0088cc] text-white rounded-full active:scale-95 shadow-xl"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg></a>
             <a href={links.zalo} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#0068ff] text-white rounded-full text-lg font-black italic shadow-xl">Z</a>
           </motion.div>
         )}</AnimatePresence>
         {isChatOpen && <div onClick={() => setIsChatOpen(false)} className="fixed inset-0 z-[-1] bg-black/5 backdrop-blur-[2px]" />}
       </div>
 
-      {/* MODAL */}
+      {/* 8. MODAL (УРОКИ) */}
       <AnimatePresence>{bookingUrl && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 md:p-6">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setBookingUrl(null)} className="absolute inset-0 bg-epicDark/95 backdrop-blur-md cursor-pointer" />
-          <motion.div initial={{ opacity: 0, scale: 0.9, y: 40 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 40 }} className="relative w-full max-w-5xl h-[85vh] bg-epicWhite rounded-[60px] overflow-hidden z-10 flex flex-col shadow-2xl border border-white/20">
+          <motion.div initial={{ opacity: 0, scale: 0.9, y: 40 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 40 }} className="relative w-full max-w-5xl h-[85vh] bg-epicWhite rounded-[40px] overflow-hidden z-10 flex flex-col shadow-2xl border border-white/20">
             <div className="flex justify-between items-center p-6 border-b border-epicPink bg-epicWhite text-epicDark font-black uppercase text-[10px]"><span>{t.modalTitle}</span><button onClick={() => setBookingUrl(null)} className="p-2 bg-epicPink rounded-full text-epicDark"><X size={18} /></button></div>
             <div className="flex-1 bg-white relative"><iframe src={bookingUrl} className="w-full h-full border-none" title="Booking" /></div>
           </motion.div>
         </div>
       )}</AnimatePresence>
+      
+      {/* 9. RENTAL MODAL (АРЕНДА) — ВСТАВЛЕНО СЮДА */}
+      <AnimatePresence>
+        {showRentalOptions && (
+          <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 md:p-6">
+            <motion.div 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              exit={{ opacity: 0 }} 
+              onClick={() => setShowRentalOptions(false)} 
+              className="absolute inset-0 bg-epicDark/95 backdrop-blur-md cursor-pointer" 
+            />
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, y: 20 }} 
+              animate={{ opacity: 1, scale: 1, y: 0 }} 
+              exit={{ opacity: 0, scale: 0.9, y: 20 }} 
+              className="relative w-full max-w-sm bg-white rounded-[50px] p-10 shadow-2xl text-center border border-white/20"
+            >
+              <button onClick={() => setShowRentalOptions(false)} className="absolute top-8 right-8 text-epicDark/20 hover:text-epicRed transition-colors">
+                <X size={24} />
+              </button>
+
+              <div className="mb-10 pt-4 text-epicDark">
+                <div className="w-20 h-20 bg-[#EDF2F4] rounded-[30px] flex items-center justify-center text-epicRed mx-auto mb-6 shadow-sm">
+                  <MessageCircle size={40} />
+                </div>
+                <h3 className="text-3xl font-black uppercase tracking-tighter mb-3">{t.rentalModalTitle}</h3>
+                <p className="opacity-60 text-sm leading-relaxed">{t.rentalModalSub}</p>
+              </div>
+
+              <div className="flex flex-col gap-4">
+                <a href={`${links.whatsapp}?text=${encodeURIComponent(t.msgRental)}`} target="_blank" rel="noreferrer" className="flex items-center justify-between bg-[#25D366] text-white px-8 py-5 rounded-2xl font-black uppercase text-[11px] tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-lg">
+                  WhatsApp <MessageCircle size={20} />
+                </a>
+                <a href={links.telegram} target="_blank" rel="noreferrer" className="flex items-center justify-between bg-[#0088cc] text-white px-8 py-5 rounded-2xl font-black uppercase text-[11px] tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-lg">
+                  Telegram <ArrowUp size={20} className="rotate-45" />
+                </a>
+                <a href={links.zalo} target="_blank" rel="noreferrer" className="flex items-center justify-between bg-[#0068ff] text-white px-8 py-5 rounded-2xl font-black uppercase text-[11px] tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-lg">
+                  Zalo <span className="text-lg font-black italic tracking-tighter">Z</span>
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
     </div>
   );
@@ -569,7 +623,7 @@ function SizesIcon() {
 function LycraIcon() {
   return (
     <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 3V4.5M17 13C17 11.6739 16.4732 10.4021 15.5355 9.46447C14.5979 8.52678 13.3261 8 12 8C10.6739 8 9.40215 8.52678 8.46447 9.46447C7.52678 10.4021 7 11.6739 7 13M5.988 6.99L4.928 5.929M22 13H20.5M3.5 13H2M19.07 5.929L18.01 6.989M6.5 16V19C6.5 19.943 6.5 20.414 6.793 20.707C7.086 21 7.557 21 8.5 21C9.443 21 9.914 21 10.207 20.707C10.5 20.414 10.5 19.943 10.5 19V16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M12 3V4.5M17 13C17 11.6739 16.4732 10.4021 15.5355 9.46447C14.5979 8.52678 13.3261 8 12 8C10.6739 8 9.40215 8.52678 8.46447 9.46447C7.52678 10.4021 7 11.6739 7 13M5.988 6.99L4.928 5.929M22 13H20.5M3.5 13H2M19.07 5.929L18.01 6.989M6.5 16V19C6.5 19.943 6.5 20.414 6.793 20.707C7.086 21 7.557 21 8.5 21C9.443 21 9.914 21 10.207 20.707C10.5 20.414 10.5 19.943 10.5 19V16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -577,7 +631,7 @@ function LycraIcon() {
 function WetsuitIcon() {
   return (
     <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M2.5 22.5006V21.5006H3C3.53333 21.5006 4.04667 21.4173 4.54 21.2506C5.03333 21.0839 5.52 20.8533 6 20.5586C6.48 20.8533 6.96667 21.0829 7.46 21.2476C7.95333 21.4123 8.46667 21.4946 9 21.4946C9.53333 21.4946 10.051 21.4123 10.553 21.2476C11.055 21.0829 11.5373 20.8529 12 20.5576" fill="currentColor"/>
+      <path d="M2.5 22.5006V21.5006H3C3.53333 21.5006 4.04667 21.4173 4.54 21.2506C5.03333 21.0839 5.52 20.8533 6 20.5586C6.48 20.8533 6.96667 21.0829 7.46 21.2476C7.95333 21.4123 8.46667 21.4946 9 21.4946C9.53333 21.4946 10.051 21.4123 10.553 21.2476C11.055 21.0829 11.5373 20.8529 12 20.5576" fill="currentColor" />
     </svg>
   );
 }
@@ -585,12 +639,12 @@ function WetsuitIcon() {
 function DeliveryIcon() {
   return (
     <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M21 20.9992C18.801 19.7722 15.584 18.9992 12 18.9992C8.416 18.9992 5.199 19.7722 3 20.9992M9.5 6.44917C7.833 6.11417 5 6.44917 3.5 9.48217" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M21 20.9992C18.801 19.7722 15.584 18.9992 12 18.9992C8.416 18.9992 5.199 19.7722 3 20.9992M9.5 6.44917C7.833 6.11417 5 6.44917 3.5 9.48217" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
 
-function InstagramIcon() { return (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>); }
-function FacebookIcon() { return (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>); }
-function YoutubeIcon() { return (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>); }
+function InstagramIcon() { return (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" /></svg>); }
+function FacebookIcon() { return (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>); }
+function YoutubeIcon() { return (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" /><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" /></svg>); }
 function ThreadsIcon() { return (<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19.25 20.25C17.25 21.75 14.5 22.5 12 22.5C6.75 22.5 2.5 18.25 2.5 13C2.5 7.75 6.75 3.5 12 3.5C14.5 3.5 16.75 4.5 18.25 6C19.75 7.5 20.5 9.75 20.5 12.25C20.5 14.75 19.5 16.5 18 17.5C16.5 18.5 14.5 18.5 13 17.5C12.5 17.15 12.15 16.75 11.85 16.25C11.15 16.85 10.25 17.25 9.25 17.25C7.25 17.25 5.75 15.75 5.75 13.5C5.75 11.25 7.25 9.75 9.25 9.75C10.25 9.75 11.15 10.15 11.85 10.75C12.15 10.25 12.5 9.75 13 9.75C15 9.75 16.5 11.25 16.5 13.5C16.5 15.75 15 17.25 13 17.25C12.75 17.25 12.5 17.25 12.25 17.15C12.5 17.75 13 18.25 13.5 18.5" /></svg>); }
