@@ -190,9 +190,15 @@ export default function EpicSurfLanding() {
       {/* 1. HEADER */}
       <header className="fixed top-0 w-full bg-epicWhite/90 backdrop-blur-md z-50 border-b border-epicPink">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex justify-between items-center text-epicDark">
-          <div className="text-xl md:text-2xl font-black tracking-tighter uppercase flex-shrink-0">
-            EPIC <span className="text-epicRed italic">SURF</span>
-          </div>
+          {/* LOGO С КАРТИНКОЙ */}
+          <a href="/" className="flex-shrink-0 transition-transform active:scale-95">
+            <img
+              src="/logo.png"  /* Если формат png, замени расширение здесь */
+              alt="Epic Surf School Da Nang Logo"
+              className="h-10 md:h-12 w-auto object-contain"
+            /* h-10 (40px) для мобилок и h-12 (48px) для десктопа — это оптимальный размер */
+            />
+          </a>
           <nav className="hidden lg:flex items-center gap-8">
             <a href="#lessons" className="text-[10px] font-black uppercase tracking-[0.2em] hover:text-epicRed transition-colors">{t.navLessons}</a>
             <a href="#how-it-works" className="text-[10px] font-black uppercase tracking-[0.2em] hover:text-epicRed transition-colors">{t.navHow}</a>
@@ -207,16 +213,75 @@ export default function EpicSurfLanding() {
         </div>
       </header>
 
-      {/* 2. HERO */}
+      {/* 2. HERO SECTION — CLEAN FLOAT ANIMATION */}
       <section className="relative h-screen flex items-center justify-center bg-epicDark overflow-hidden">
+        {/* Видео-фон */}
         <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-40">
           <source src="/hero-surf.mp4" type="video/mp4" />
         </video>
-        <div className="relative z-10 text-center px-4 pt-20">
-          <motion.h1 key={lang} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-5xl md:text-8xl font-black text-white uppercase tracking-tight mb-6 drop-shadow-2xl">
-            {t.heroTitle} <br /><span className="text-epicRed italic">{t.heroTitleEpic}</span> {t.heroTitleEnd}
+
+        <div className="relative z-10 text-center px-4 pt-20 flex flex-col items-center">
+
+          <motion.h1
+            initial="hidden"
+            animate="visible"
+            variants={{
+              visible: { transition: { staggerChildren: 0.2 } }
+            }}
+            className="text-[10vw] sm:text-5xl md:text-8xl font-black text-white uppercase tracking-tighter mb-8 leading-[1.1] drop-shadow-2xl text-center flex flex-col items-center"
+          >
+            {/* Строка 1: ПОЙМАЙ СВОЮ */}
+            <motion.span
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+              className="block"
+            >
+              {t.heroTitle}
+            </motion.span>
+
+            {/* Строка 2: EPIC + ВОЛНУ (Железно в один ряд) */}
+            <motion.div
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+              className="flex items-center justify-center whitespace-nowrap gap-x-3 md:gap-x-5"
+            >
+              {/* ЛОГОТИП С ЭФФЕКТОМ ПОПЛАВКА */}
+              <motion.img
+                src="/gallery/epic-text.webp"
+                alt="Epic"
+                className="h-[1.1em] md:h-[1.4em] w-auto object-contain drop-shadow-xl"
+                /* Постоянная анимация покачивания */
+                animate={{
+                  y: [0, -10, 0],
+                  rotate: [-3, -1, -3]
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                /* Легкое увеличение при наведении без подсветки */
+                whileHover={{ scale: 1.05 }}
+              />
+              <span className="inline-block">{lang === 'ru' ? 'волну' : 'wave'}</span>
+            </motion.div>
+
+            {/* Строка 3: В ДАНАНГЕ */}
+            <motion.span
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+              className="block"
+            >
+              {lang === 'ru' ? 'в Дананге' : 'in Da Nang'}
+            </motion.span>
           </motion.h1>
-          <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto font-medium">{t.heroSub}</p>
+
+          {/* Подзаголовок */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 1 }}
+            className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto font-medium"
+          >
+            {t.heroSub}
+          </motion.p>
         </div>
       </section>
 

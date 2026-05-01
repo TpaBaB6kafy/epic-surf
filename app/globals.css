@@ -1,18 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  /* Фирменная палитра */
-  --color-epicDark: #2B2D42;   /* Темные блоки и футер */
-  --color-epicRed: #EF233C;    /* Кнопки и акценты */
-  --color-epicPink: #EDF2F4;   /* Фон карточек и светлых блоков */
-  --color-epicWhite: #FFFFFF;  /* Основной фон */
-  
-  /* Анимация (если решим вернуть бегущую строку) */
-  --animate-marquee: marquee 40s linear infinite;
+  /* ТЕМА: EPIC SUNSET (Под твой новый логотип) */
+  --color-epicDark: #1A1C20;
+  /* Глубокий графит (для контраста) */
+  --color-epicRed: #FB6D2C;
+  /* Твой Оранжевый (Кнопки и Лого) */
+  --color-epicCoral: #FDD831;
+  /* Твой Желтый (Иконки и акценты) */
+  --color-epicPink: #FDF7ED;
+  /* Теплый песочный (Фон карточек) */
+  --color-epicWhite: #FFFFFF;
+  /* Чистый белый (Фон сайта) */
+
+  --animate-marquee: marquee 80s linear infinite;
 
   @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
   }
 }
 
@@ -21,6 +31,7 @@
   &::-webkit-scrollbar {
     display: none !important;
   }
+
   -ms-overflow-style: none !important;
   scrollbar-width: none !important;
 }
