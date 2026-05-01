@@ -17,32 +17,5 @@
   scrollbar-width: none !important;
 }
 
-/* --- НАШИ НОВЫЕ "РВАНЫЕ" КЛАССЫ --- */
-
-/* Для больших карточек и секций (легкий срез углов и кривизна сторон) */
-@utility paper-edge {
-  clip-path: polygon(1% 0%, 98% 1%, 100% 98%, 99% 100%, 0% 99%, 1% 2%);
-}
-
-/* Альтернативный срез для разнообразия (чтобы не все карточки были одинаковыми) */
-@utility paper-edge-alt {
-  clip-path: polygon(0% 1%, 100% 0%, 99% 99%, 1% 100%);
-}
-
-/* Для длинных кнопок и плашек (вместо rounded-full) */
-@utility paper-btn {
-  clip-path: polygon(3% 0%, 98% 2%, 100% 98%, 2% 100%);
-}
-
-/* Для круглых кнопок и аватарок (вместо rounded-full делаем небрежный октагон) */
-@utility paper-circle {
-  clip-path: polygon(15% 2%, 85% 0%, 98% 15%, 100% 85%, 85% 98%, 15% 100%, 0% 85%, 2% 15%);
-}
-
-/* Фильтр для фото (подключаем SVG, который добавим в page.js) */
-@utility torn-photo {
-  filter: url(#torn-edge);
-}
-
 html { scroll-behavior: smooth; }
 body { @apply antialiased text-epicDark bg-epicWhite font-sans; }

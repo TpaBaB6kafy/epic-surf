@@ -8,17 +8,16 @@ import {
 } from "lucide-react";
 
 export default function EpicSurfLanding() {
-  const[isMenuOpen, setIsMenuOpen] = useState(false);
-  const[showRentalOptions, setShowRentalOptions] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showRentalOptions, setShowRentalOptions] = useState(false);
   const [mapActive, setMapActive] = useState(false);
-  const[lang, setLang] = useState('ru');
+  const [lang, setLang] = useState('ru');
   const [bookingUrl, setBookingUrl] = useState(null);
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const[openFaq, setOpenFaq] = useState(null);
+  const [openFaq, setOpenFaq] = useState(null);
   const [forecast, setForecast] = useState(null);
 
-  const boardSliderRef = useRef(null);
-
+  // FETCH LIVE DATA
   useEffect(() => {
     async function getForecast() {
       try {
@@ -36,25 +35,34 @@ export default function EpicSurfLanding() {
       } catch (e) { console.error(e); }
     }
     getForecast();
-  },[]);
+  }, []);
 
   const translations = {
     ru: {
       howTitle: "Как проходят",
       howTitleEnd: "уроки",
       howIntro: "Мы разработали систему обучения, которая позволяет 90% новичков встать на доску уже на первом занятии. Ваш прогресс и безопасность — наш главный приоритет.",
+
+      includedTitle: "В стоимость включено",
+      includedItems: [
+        { label: "Серф", desc: "Доска под твой уровень" },
+        { label: "Экип", desc: "Лайкра твоего размера" },
+        { label: "Защита", desc: "Профессиональный цинк" },
+        { label: "Контент", desc: "Фото и видео с урока" },
+        { label: "Вайб", desc: "Кокос и обучение с душой" }
+      ],
       rentalModalTitle: "Забронировать аренду",
       rentalModalSub: "Выберите удобный мессенджер. Мы ответим вам в течение 5 минут.",
       msgRental: "Привет! Хочу забронировать аренду доски в Epic Surf.",
       includedTitle: "В стоимость включено",
-      includedItems:[
+      includedItems: [
         { icon: <CustomSurfIcon />, label: "Серф", desc: "Доска под твой уровень" },
         { icon: <Shirt size={32} />, label: "Экип", desc: "Лайкра твоего размера" },
         { icon: <Sun size={32} />, label: "Защита", desc: "Профессиональный цинк" },
         { icon: <Camera size={32} />, label: "Контент", desc: "Фото и видео с урока" },
         { icon: <Smile size={32} />, label: "Вайб", desc: "Кокос и обучение с душой" }
       ],
-      whyItems:[
+      whyItems: [
         { icon: <ShieldCheck size={40} />, title: "ISA Сертификация", desc: "Наши инструкторы — профи с международными дипломами." },
         { icon: <Users size={40} />, title: "Твой вайб", desc: "Мы не просто школа, мы — комьюнити. Кокосы и лучший чилл." },
         { icon: <Award size={40} />, title: "Премиум стафф", desc: "Только свежее оборудование. Регулярно обновляем доски." },
@@ -71,28 +79,45 @@ export default function EpicSurfLanding() {
       locationTitle: "Найди наш", locationTitleSpot: "Спот",
       locationAddress: "Пляж Микхе, Дананг", locationLandmark: "Ищите красный флаг EPIC SURF на песке напротив TMS Hotel",
       modalTitle: "Запись", featureLycra: "Лайкры и цинк", featureSizes: "Все размеры", featureWetsuits: "Гидрокостюмы", featureDelivery: "Привозим на спот",
-      boardTypes:["Софтборды", "Лонгборды", "Малибу", "Шортборды"],
-      howSteps:[
-        { title: "Встреча и экип", time: "15 мин", descA: "Знакомимся с вашим тренером, подбираем софтборд по росту и весу. Выдаем чистую лайкру и наносим профи-цинк.", descB: "Берем доски и отправляемся на берег к месту тренировки. Начинаем плавное погружение в атмосферу океана." },
-        { title: "Теория и база", time: "20 мин", descA: "Проводим суставную разминку на песке. Разбираем правила безопасности, этикет в воде и механику волн.", descB: "Отрабатываем технику гребли и вставания на доску (pop-up). Тренер корректирует движения до автоматизма." },
-        { title: "Практика в воде", time: "75 мин", descA: "Идем в океан! Инструктор помогает преодолеть прибой и контролирует каждое ваше движение в воде.", descB: "Ловим первые волны! Тренер подталкивает и дает советы в моменте. Вы чувствуете драйв и реальное скольжение." },
-        { title: "Разбор и чилл", time: "10 мин", descA: "Возвращаемся на базу. Отдыхаем в тени с холодным кокосом и делимся первыми впечатлениями от каталки.", descB: "Проводим видео-разбор ваших ошибок. Скидываем весь отснятый фото и видео контент вам в мессенджер." }
+      boardTypes: ["Софтборды", "Лонгборды", "Малибу", "Шортборды"],
+      howTitle: "Как проходят", howTitleEnd: "уроки",
+      howSteps: [
+        {
+          title: "Встреча",
+          time: "15 мин",
+          desc: "Знакомство, подготовка и подбор серфборда под ваш уровень."
+        },
+        {
+          title: "Подготовка на берегу",
+          time: "20 мин",
+          desc: "Основы сёрфинга и правила безопасности. Отработка базовых упражнений: тейк-офф (вставание на доску), повороты, генерация скорости."
+        },
+        {
+          title: "Практика в воде",
+          time: "75 мин",
+          desc: "Ловим волны под контролем инструктора, корректируем ошибки и наслаждаемся сёрфингом."
+        },
+        {
+          title: "Рекомендации",
+          time: "10 мин",
+          desc: "Разбор урока и домашнее задание для дальнейшего прогресса."
+        }
       ],
       forecastTitle: "Условия на", forecastTitleSpot: "Сегодня", forecastPeriod: "Период", forecastWind: "Ветер", forecastDir: "Направление", forecastWater: "Вода",
-      forecastStatusGood: "Идеально для обучения", forecastStatusHigh: "Только для опытных", forecastWaveHeight: "Высота волны",
+      forecastStatusGood: "Идеально для обучения", forecastStatusHigh: "Только для опытных",
       faqTitle: "Вопросы и", faqTitleEnd: "Ответы",
-      faqItems:[
+      faqItems: [
         { q: "Нужно ли уметь плавать?", a: "Желательно уметь держаться на воде. Уроки проходят на безопасной глубине, а инструктор всегда рядом." },
         { q: "Что брать с собой?", a: "Купальник/плавки, полотенце, солнцезащитный крем. Лайкру и цинк мы дадим." },
         { q: "В какое время лучше приходить?", a: "Зависит от приливов. Напишите нам — мы подскажем лучшее время на завтра." }
       ],
-      cards:[
+      cards: [
         { title: "Групповой урок", badge: "Популярно", desc: "Идеально для новичков. До 4-х человек на инструктора.", price: "900,000 VND" },
         { title: "Сплит урок", badge: "Выгодно", desc: "Для 2-х человек. Больше внимания тренера. Цена за двоих.", price: "2,500,000 VND" },
         { title: "Приватный урок", badge: "Премиум", desc: "Индивидуальная тренировка для быстрого прогресса.", price: "1,800,000 VND" },
         { title: "Line-up / Pro", badge: "Для опытных", desc: "Выход на лайнап с гидом. Поиск лучших пиков.", price: "2,400,000 VND" }
       ],
-      reviewsList:[
+      reviewsList: [
         { name: "Evgenia", text: "Отличные уроки! Ребята влюбили меня в серф! Очень понятные объяснения, много практики. 🔥", date: "Неделю назад" },
         { name: "Дмитрий Харламов", text: "Отличная команда! Паша — очень крутой инструктор с чувством юмора! 👍", date: "2 недели назад" },
         { name: "Peter Thanh", text: "Despite of the bad weather the instructor was very friendly and teach very well. 👌", date: "Месяц назад" }
@@ -102,18 +127,27 @@ export default function EpicSurfLanding() {
       howTitle: "How it",
       howTitleEnd: "works",
       howIntro: "We have developed a teaching system that allows 90% of beginners to stand up on a board during their very first lesson. Your safety and progress are our priority.",
+
+      includedTitle: "What's Included",
+      includedItems: [
+        { label: "Surfboard", desc: "Board for your level" },
+        { label: "Gear", desc: "Fresh rashguard" },
+        { label: "Sun block", desc: "Professional Zinc" },
+        { label: "Media", desc: "Photos & videos" },
+        { label: "The Vibe", desc: "Coconut & good mood" }
+      ],
       rentalModalTitle: "Book your rental",
       rentalModalSub: "Choose your preferred messenger. We will reply within 5 minutes.",
       msgRental: "Hi! I want to book a surfboard rental at Epic Surf.",
       includedTitle: "What's Included",
-      includedItems:[
+      includedItems: [
         { icon: <CustomSurfIcon />, label: "Surfboard", desc: "Board for your level" },
         { icon: <Shirt size={32} />, label: "Gear", desc: "Fresh rashguard" },
         { icon: <Sun size={32} />, label: "Sun Block", desc: "Zinc protection" },
         { icon: <Camera size={32} />, label: "Media", desc: "Photos & videos" },
         { icon: <Smile size={32} />, label: "The Vibe", desc: "Coconut & good mood" }
       ],
-      whyItems:[
+      whyItems: [
         { icon: <ShieldCheck size={40} />, title: "ISA Certified", desc: "Our instructors are ISA professionals. Safety is our #1 priority." },
         { icon: <Users size={40} />, title: "The Surf Vibe", desc: "More than a school — we are a community. Free photos, coconuts and chill." },
         { icon: <Award size={40} />, title: "Premium Gear", desc: "Top-tier equipment only. We regularly update our boards." },
@@ -130,28 +164,45 @@ export default function EpicSurfLanding() {
       locationTitle: "Find the", locationTitleSpot: "Spot",
       locationAddress: "My Khe Beach, Da Nang", locationLandmark: "Look for the Red EPIC SURF flag opposite TMS Hotel",
       modalTitle: "Booking", featureLycra: "Rashguards & Zinc", featureSizes: "All Sizes", featureWetsuits: "Wetsuits", featureDelivery: "Spot Delivery",
-      boardTypes:["Softboards", "Longboards", "Malibus", "Shortboards"],
-      howSteps:[
-        { title: "Meet & Gear Up", time: "15 min", descA: "Meet your coach and pick the perfect board for your level. Get a fresh rashguard and professional sun zinc.", descB: "Grab the boards and head to the beach. Start soaking in the ocean vibes as we walk to our training spot." },
-        { title: "Beach Theory", time: "20 min", descA: "Joint mobility warm-up on the sand. We cover ocean safety rules, wave etiquette, and water basics.", descB: "Practice paddling and the pop-up technique. Your coach will fix your stance until it's muscle memory." },
-        { title: "Ocean Practice", time: "75 min", descA: "Time to surf! Your coach helps you get past the break and ensures your safety at all times in the water.", descB: "Catch your first waves! The coach gives you a push and real-time tips. Feel the speed and pure joy of surfing." },
-        { title: "Review & Chill", time: "10 min", descA: "Head back to the base. Relax in the shade with a fresh coconut and share your first surfing stories.", descB: "Watch your session's video review. We'll send all high-res photos and videos directly to your phone." }
+      boardTypes: ["Softboards", "Longboards", "Malibus", "Shortboards"],
+      howTitle: "How it", howTitleEnd: "works",
+      howSteps: [
+        {
+          title: "Meet & Gear Up",
+          time: "15 min",
+          desc: "Meet your coach, gear up, and get the perfect surfboard for your level."
+        },
+        {
+          title: "Beach Theory",
+          time: "20 min",
+          desc: "Surfing basics and ocean safety. Practicing core movements: pop-up, turning, and speed generation."
+        },
+        {
+          title: "Ocean Practice",
+          time: "75 min",
+          desc: "Catching waves under your instructor's guidance, fixing mistakes, and enjoying the ride."
+        },
+        {
+          title: "Review & Tips",
+          time: "10 min",
+          desc: "Session review and personalized homework for your continuous progress."
+        }
       ],
       forecastTitle: "Current", forecastTitleSpot: "Forecast", forecastPeriod: "Period", forecastWind: "Wind", forecastDir: "Direction", forecastWater: "Water",
-      forecastStatusGood: "Perfect for beginners", forecastStatusHigh: "Advanced surfers only", forecastWaveHeight: "Wave Height",
+      forecastStatusGood: "Perfect for beginners", forecastStatusHigh: "Advanced surfers only",
       faqTitle: "FAQ", faqTitleEnd: "",
-      faqItems:[
+      faqItems: [
         { q: "Do I need to be a strong swimmer?", a: "Basic skills are enough. Lessons are held in safe depths." },
         { q: "What should I bring?", a: "Swimwear, towel, and sunscreen. We provide the rest." },
         { q: "When is the best time?", a: "Depends on tides. Text us for tomorrow's forecast." }
       ],
-      cards:[
+      cards: [
         { title: "Group Lesson", badge: "Most Popular", desc: "Perfect for beginners. Max 4 people.", price: "900,000 VND" },
         { title: "Split Lesson", badge: "Best Value", desc: "For 2 people. More coach attention.", price: "2,500,000 VND" },
         { title: "Private Lesson", badge: "Premium", desc: "1-on-1 coaching for maximum progress.", price: "1,800,000 VND" },
         { title: "Line-up / Pro", badge: "Advanced", desc: "Guiding to the best peaks.", price: "2,400,000 VND" }
       ],
-      reviewsList:[
+      reviewsList: [
         { name: "Evgenia", text: "Great lessons! The team made us fall in love with surfing! 🔥", date: "1 week ago" },
         { name: "Dmitry Kharlamov", text: "Excellent team! Pasha is a very cool instructor! 👍", date: "2 weeks ago" },
         { name: "Peter Thanh", text: "Despite of the bad weather the instructor was friendly. 👌", date: "1 month ago" }
@@ -177,25 +228,18 @@ export default function EpicSurfLanding() {
   return (
     <div className="min-h-screen bg-epicWhite font-sans text-epicDark overflow-x-hidden transition-colors duration-500 scroll-smooth">
 
-      {/* НЕВИДИМЫЙ SVG ФИЛЬТР ДЛЯ ЭФФЕКТА РВАНОЙ БУМАГИ НА ФОТО */}
-      <svg className="hidden absolute pointer-events-none">
-        <defs>
-          <filter id="torn-edge" x="-20%" y="-20%" width="140%" height="140%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G" />
-          </filter>
-        </defs>
-      </svg>
+      {/* 1. HEADER + MOBILE MENU */}
+      <header className="fixed top-0 left-0 w-full z-[100] bg-white shadow-md">
 
-      {/* 1. HEADER */}
-      <header className="fixed top-0 left-0 w-full z-[100]">
-        <div className="bg-white relative z-20 h-16 md:h-20 flex items-center">
+        <div className="h-16 md:h-20 flex items-center">
           <div className="max-w-7xl mx-auto px-4 md:px-6 w-full flex items-center justify-between gap-2">
-            
+
+            {/* LOGO */}
             <a href="/" className="flex-shrink-0 transition-transform active:scale-95 z-[110]">
               <img src="/logo.png" alt="Logo" className="h-9 md:h-12 w-auto object-contain" />
             </a>
 
+            {/* DESKTOP NAV (Скрыта на мобилках) */}
             <nav className="hidden lg:flex items-center gap-8">
               <a href="#lessons" className="text-[10px] font-black uppercase tracking-widest text-epicDark hover:text-epicRed transition-colors">{t.navLessons}</a>
               <a href="#how-it-works" className="text-[10px] font-black uppercase tracking-widest text-epicDark hover:text-epicRed transition-colors">{t.navHow}</a>
@@ -203,24 +247,28 @@ export default function EpicSurfLanding() {
               <a href="#location" className="text-[10px] font-black uppercase tracking-widest text-epicDark hover:text-epicRed transition-colors">{t.navLocation}</a>
             </nav>
 
+            {/* ACTIONS */}
             <div className="flex items-center gap-2 md:gap-4 z-[110]">
-              <button 
-                onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')} 
-                className="w-9 h-9 flex items-center justify-center bg-epicDark text-white paper-circle font-bold text-[10px] uppercase shadow-md"
+              {/* Переключатель языка (компактный) */}
+              <button
+                onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')}
+                className="w-9 h-9 flex items-center justify-center bg-epicDark text-white rounded-full font-bold text-[10px] uppercase shadow-md"
               >
                 {lang === 'ru' ? 'EN' : 'RU'}
               </button>
-              
-              <button 
-                onClick={() => setBookingUrl(links.group)} 
-                className="bg-epicRed text-white px-4 md:px-8 h-9 md:h-10 paper-btn font-black uppercase text-[10px] tracking-widest shadow-lg shadow-epicRed/20 active:scale-95 transition-all"
+
+              {/* Кнопка записи (чуть меньше на мобилке) */}
+              <button
+                onClick={() => setBookingUrl(links.group)}
+                className="bg-epicRed text-white px-4 md:px-8 h-9 md:h-10 rounded-full font-black uppercase text-[10px] tracking-widest shadow-lg shadow-epicRed/20 active:scale-95 transition-all"
               >
                 {t.btnBook}
               </button>
 
-              <button 
+              {/* БУРГЕР-МЕНЮ (Только для мобилок) */}
+              <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="lg:hidden w-9 h-9 flex items-center justify-center bg-epicPink paper-circle text-epicDark transition-all"
+                className="lg:hidden w-9 h-9 flex items-center justify-center bg-epicPink rounded-full text-epicDark transition-all"
               >
                 {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
@@ -228,30 +276,25 @@ export default function EpicSurfLanding() {
           </div>
         </div>
 
-        <div className="absolute top-[calc(100%-2px)] left-0 w-full overflow-hidden leading-[0] z-10 pointer-events-none">
-          <svg className="relative block w-full h-[25px] md:h-[40px]" viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,0 L1200,0 L1200,30 L1050,90 L850,20 L650,110 L400,15 L220,85 L80,10 L0,55 Z" fill="white"></path>
-          </svg>
-        </div>
-
+        {/* ВЫПАДАЮЩЕЕ МОБИЛЬНОЕ МЕНЮ */}
         <AnimatePresence>
           {isMenuOpen && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="absolute top-16 left-0 w-full bg-white shadow-2xl border-t border-epicPink lg:hidden z-0 overflow-hidden"
+              className="absolute top-full left-0 w-full bg-white shadow-2xl border-t border-epicPink lg:hidden z-0 overflow-hidden"
             >
-              <div className="flex flex-col p-6 gap-4 bg-white relative z-10">
+              <div className="flex flex-col p-6 gap-4 pb-8 relative z-10">
                 {[
                   { href: "#lessons", label: t.navLessons },
                   { href: "#how-it-works", label: t.navHow },
                   { href: "#forecast", label: t.navForecast },
                   { href: "#location", label: t.navLocation }
                 ].map((item) => (
-                  <a 
+                  <a
                     key={item.href}
-                    href={item.href} 
+                    href={item.href}
                     onClick={() => setIsMenuOpen(false)}
                     className="text-2xl font-black uppercase tracking-tighter text-epicDark hover:text-epicRed py-2 border-b border-epicPink/50"
                   >
@@ -259,28 +302,33 @@ export default function EpicSurfLanding() {
                   </a>
                 ))}
               </div>
-              <div className="h-10 w-full overflow-hidden leading-[0]">
-                 <svg className="block w-full h-full" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0 L1200,0 L1200,30 L1050,90 L850,20 L650,110 L400,15 L220,85 L80,10 L0,55 Z" fill="white"></path></svg>
-              </div>
             </motion.div>
           )}
         </AnimatePresence>
       </header>
 
-      {/* 2. HERO SECTION */}
+      {/* 2. HERO SECTION — RETRO DOT STYLE */}
       <section className="relative h-screen flex items-center justify-center bg-epicDark overflow-hidden">
+
+        {/* 🎬 ВИДЕО-ФОН */}
         <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale-[0.5]">
           <source src="/hero-surf.mp4" type="video/mp4" />
         </video>
 
+        {/* 🏁 РЕТРО-ФИЛЬТР (КРУПНАЯ ТОЧКА) */}
         <div
           className="absolute inset-0 z-[1] pointer-events-none opacity-40"
-          style={{ backgroundImage: `radial-gradient(circle, #000 1.5px, transparent 1.5px)`, backgroundSize: '6px 6px' }}
+          style={{
+            backgroundImage: `radial-gradient(circle, #000 1.5px, transparent 1.5px)`,
+            backgroundSize: '6px 6px' /* Размер сетки: чем больше цифра, тем крупнее точки */
+          }}
         ></div>
 
+        {/* ЛЕГКИЙ ГРАДИЕНТ ДЛЯ ЧИТАЕМОСТИ ТЕКСТА */}
         <div className="absolute inset-0 z-[2] bg-gradient-to-b from-epicDark/40 via-transparent to-epicDark/60 pointer-events-none"></div>
 
         <div className="relative z-10 text-center px-4 pt-20 flex flex-col items-center">
+
           <motion.h1
             initial="hidden" animate="visible"
             variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
@@ -298,7 +346,7 @@ export default function EpicSurfLanding() {
                 src="/gallery/epic-text.webp"
                 alt="Epic"
                 className="h-[1.1em] md:h-[1.4em] w-auto object-contain drop-shadow-xl translate-y-[12%]"
-                animate={{ x:[0, 5, -5, 0], y:[0, -12, 5, 0], rotate:[-2, 1, -3, -2] }}
+                animate={{ x: [0, 5, -5, 0], y: [0, -12, 5, 0], rotate: [-2, 1, -3, -2] }}
                 transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
                 whileHover={{ scale: 1.1, rotate: 0 }}
               />
@@ -319,13 +367,13 @@ export default function EpicSurfLanding() {
       {/* WAVE TOP */}
       <WaveDivider color="#FFFFFF" flip={true} />
 
-      {/* 2.5 WHY EPIC */}
+      {/* 2.5 WHY EPIC (4 ICONS, 2x2 MOBILE) */}
       <section className="py-16 md:py-24 bg-epicWhite px-6 border-b border-epicPink/30">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 md:gap-12 text-center">
             {t.whyItems.map((item, idx) => (
               <motion.div key={idx} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="space-y-4">
-                <div className="w-16 h-16 md:w-20 md:h-20 bg-epicPink paper-circle mx-auto flex items-center justify-center text-epicRed shadow-sm border border-white/50">{item.icon}</div>
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-epicPink rounded-[24px] md:rounded-[30px] mx-auto flex items-center justify-center text-epicRed shadow-sm border border-white/50">{item.icon}</div>
                 <div className="space-y-2">
                   <h3 className="text-sm md:text-xl font-black uppercase text-epicDark leading-tight">{item.title}</h3>
                   <p className="text-epicDark/60 text-[11px] md:text-sm max-w-[160px] md:max-w-[280px] mx-auto leading-relaxed">{item.desc}</p>
@@ -340,10 +388,13 @@ export default function EpicSurfLanding() {
       <section id="how-it-works" className="relative py-32 overflow-hidden scroll-mt-24" style={{
         background: 'radial-gradient(circle at 50% 50%, #FFFFFF 0%, #F8F9FA 50%, #EDF2F4 100%)'
       }}>
+
+        {/* ФОНОВЫЙ ДЕКОР */}
         <div className="absolute top-20 right-[-5%] text-[15vw] font-black text-epicRed/[0.02] uppercase pointer-events-none select-none italic">Ocean</div>
         <div className="absolute bottom-20 left-[-5%] text-[15vw] font-black text-epicCoral/[0.04] uppercase pointer-events-none select-none italic">Vibe</div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
+
           <div className="max-w-3xl mx-auto text-center mb-24 space-y-6">
             <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter text-epicDark leading-none">
               {t.howTitle} <span className="text-epicRed italic">{t.howTitleEnd}</span>
@@ -359,28 +410,30 @@ export default function EpicSurfLanding() {
                 key={idx}
                 className={`flex flex-col ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 lg:gap-24`}
               >
+                {/* ФОТО (Стиль Полароид) */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   className="w-full lg:w-1/2 relative group"
                 >
-                  <div className="absolute -inset-2 bg-epicRed/5 paper-edge rotate-1 group-hover:rotate-0 transition-transform duration-700"></div>
-                  <div className="bg-white p-4 md:p-6 paper-edge-alt shadow-2xl border border-epicPink relative z-10 transition-transform duration-500 group-hover:scale-[1.02]">
-                    <div className="aspect-[4/3] w-full paper-edge overflow-hidden bg-gray-100">
+                  <div className="absolute -inset-2 bg-epicRed/5 rounded-[45px] rotate-1 group-hover:rotate-0 transition-transform duration-700"></div>
+                  <div className="bg-white p-4 md:p-6 rounded-[40px] shadow-2xl border border-epicPink relative z-10 transition-transform duration-500 group-hover:scale-[1.02]">
+                    <div className="aspect-[4/3] w-full rounded-[24px] overflow-hidden bg-gray-100">
                       <img
                         src={`/gallery/process-${idx + 1}.webp`}
                         alt={step.title}
-                        className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 torn-photo"
+                        className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
                         onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1537519646099-335112f03225?q=80&w=800'; }}
                       />
                     </div>
                   </div>
                 </motion.div>
 
+                {/* ТЕКСТОВЫЙ БЛОК */}
                 <div className="w-full lg:w-1/2 space-y-8">
                   <div className="flex flex-col items-center lg:items-start space-y-4">
-                    <div className="inline-block bg-epicRed text-white px-4 py-1 paper-btn text-[10px] font-black uppercase tracking-widest shadow-md">
+                    <div className="inline-block bg-epicRed text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-md">
                       {step.time}
                     </div>
                     <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tight text-epicDark leading-[0.9] text-center lg:text-left">
@@ -388,29 +441,16 @@ export default function EpicSurfLanding() {
                     </h3>
                   </div>
 
-                  <div className="grid gap-4">
+                  <div className="w-full">
+                    {/* ЕДИНСТВЕННАЯ ПЛАШКА С ОПИСАНИЕМ */}
                     <motion.div
                       initial={{ opacity: 0, x: idx % 2 === 0 ? 20 : -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      className="p-6 md:p-8 bg-white/60 backdrop-blur-md paper-edge border border-white shadow-sm flex gap-5 items-start group hover:bg-white transition-colors"
+                      className="p-6 md:p-8 bg-white/60 backdrop-blur-md rounded-[32px] border border-white shadow-sm hover:bg-white transition-colors"
                     >
-                      <span className="text-2xl font-black text-epicRed/20 group-hover:text-epicRed transition-colors">1.</span>
-                      <p className="text-epicDark/70 text-base md:text-lg leading-relaxed font-medium">
-                        {step.descA}
-                      </p>
-                    </motion.div>
-
-                    <motion.div
-                      initial={{ opacity: 0, x: idx % 2 === 0 ? 20 : -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.2 }}
-                      className="p-6 md:p-8 bg-white/60 backdrop-blur-md paper-edge border border-white shadow-sm flex gap-5 items-start group hover:bg-white transition-colors"
-                    >
-                      <span className="text-2xl font-black text-epicRed/20 group-hover:text-epicRed transition-colors">2.</span>
-                      <p className="text-epicDark/70 text-base md:text-lg leading-relaxed font-medium">
-                        {step.descB}
+                      <p className="text-epicDark/80 text-lg md:text-xl leading-relaxed font-medium">
+                        {step.desc}
                       </p>
                     </motion.div>
                   </div>
@@ -418,6 +458,7 @@ export default function EpicSurfLanding() {
               </div>
             ))}
           </div>
+
         </div>
       </section>
 
@@ -426,62 +467,91 @@ export default function EpicSurfLanding() {
         <h2 className="text-4xl md:text-6xl font-black text-center mb-12 md:mb-16 uppercase tracking-tighter text-epicDark">{t.sectionTitle} <span className="text-epicRed italic">{t.sectionTitleRide}</span></h2>
         <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-6 px-6 md:mx-0 md:px-0">
           {t.cards.map((item, i) => (
-            <motion.div key={i} whileHover={{ y: -10 }} className="min-w-[85vw] md:min-w-0 snap-center bg-epicPink paper-edge overflow-hidden shadow-lg flex flex-col border border-white/50">
-              <img src={`/gallery/lesson-${i + 1}.webp`} alt={item.title} className="h-48 overflow-hidden object-cover w-full torn-photo" onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=600'; }} />
+            <motion.div key={i} whileHover={{ y: -10 }} className="min-w-[85vw] md:min-w-0 snap-center bg-epicPink rounded-[40px] overflow-hidden shadow-lg flex flex-col border border-white/50">
+              <img src={`/gallery/lesson-${i + 1}.webp`} alt={item.title} className="h-48 overflow-hidden object-cover w-full" onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=600'; }} />
               <div className="p-8 flex flex-col flex-1">
                 <div className="mb-4 text-epicRed">{i === 1 ? <Award size={32} /> : i === 2 ? <Star size={32} /> : <Waves size={32} />}</div>
                 <div className="text-[10px] text-epicRed font-bold mb-2 uppercase tracking-widest">{item.badge}</div>
                 <h3 className="text-xl md:text-2xl font-bold mb-3 uppercase text-epicDark">{item.title}</h3>
                 <p className="text-epicDark/70 mb-6 text-sm flex-1">{item.desc}</p>
                 <div className="text-2xl font-black mb-8 text-epicDark">{item.price}</div>
-                <button onClick={() => setBookingUrl(links.group)} className="w-full bg-epicDark text-white py-5 paper-btn font-black uppercase text-xs hover:bg-epicRed transition-all shadow-lg active:scale-95">{t.btnBook}</button>
+                <button onClick={() => setBookingUrl(links.group)} className="w-full bg-epicDark text-white py-5 rounded-[20px] font-black uppercase text-xs hover:bg-epicRed transition-all shadow-lg active:scale-95">{t.btnBook}</button>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* WHAT'S INCLUDED */}
-        <div className="my-20 md:my-32 py-16 md:py-24 bg-epicPink/50 paper-edge-alt border border-white relative overflow-hidden">
-          <h3 className="relative z-10 text-3xl md:text-7xl font-black uppercase mb-16 md:mb-24 tracking-tighter text-epicDark text-center">
+        {/* WHAT'S INCLUDED (BENTO BOX) */}
+        <div className="mt-32 mb-16">
+          <h3 className="text-4xl md:text-6xl font-black uppercase mb-12 tracking-tight text-epicDark text-center">
             {t.includedTitle}
           </h3>
 
-          <div className="flex lg:grid lg:grid-cols-5 gap-6 md:gap-8 overflow-x-auto lg:overflow-visible px-6 md:px-12 scrollbar-hide snap-x snap-mandatory relative z-10">
-            {t.includedItems.map((item, idx) => (
-              <motion.div
-                key={idx}
-                whileHover={{ y: -12, scale: 1.05 }}
-                className="min-w-[160px] md:min-w-0 flex-1 snap-center flex flex-col items-center group"
-              >
-                <div className={`relative mb-8 transition-all duration-500 ${idx % 2 === 0 ? 'rotate-[-4deg]' : 'rotate-[4deg]'} group-hover:rotate-0 ${idx === 0 ? 'w-32 h-32 md:w-48 md:h-48' : 'w-24 h-24 md:w-36 md:h-36'}`}>
-                  <div className="absolute inset-4 bg-black/20 blur-2xl paper-circle translate-y-4 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 md:gap-6 md:auto-rows-[250px]">
+            {t.includedItems.map((item, idx) => {
+              const titleSize = "text-3xl md:text-2xl font-black uppercase leading-none mb-2";
+              const descSize = "text-xs md:text-sm font-bold uppercase tracking-widest leading-tight";
+
+              const styles = [
+                { // 0: Серф 
+                  card: "md:col-span-1 md:row-span-2 bg-[#F8F9FA] justify-end min-h-[300px]",
+                  img: "absolute -top-2 -right-18 w-[60%] md:w-[120%] object-contain -rotate-12 group-hover:rotate-0",
+                  textWrap: "max-w-[50%] md:max-w-[80%] relative z-10 mt-auto",
+                  title: "text-epicDark", desc: "text-epicDark/40"
+                },
+                { // 1: Экип
+                  card: "md:col-span-2 md:row-span-1 bg-epicPink justify-center min-h-[220px]",
+                  img: "absolute top-47 -translate-y-1/2 right-1 w-[45%] md:w-[50%] object-contain rotate-6 group-hover:rotate-0",
+                  textWrap: "max-w-[50%] relative z-10",
+                  title: "text-epicDark", desc: "text-epicDark/40"
+                },
+                { // 2: Защита
+                  card: "md:col-span-1 md:row-span-1 bg-[#FFF9E6] justify-start min-h-[200px]",
+                  img: "absolute top-20 right-1 w-[40%] md:w-[80%] object-contain rotate-12 group-hover:rotate-0",
+                  textWrap: "max-w-[50%] relative z-10 -mt-4",
+                  title: "text-epicDark", desc: "text-epicDark/40"
+                },
+                { // 3: Контент
+                  card: "md:col-span-1 md:row-span-1 bg-[#E6F4FF] justify-start min-h-[200px]",
+                  img: "absolute top-14 right-2 w-[45%] md:w-[80%] object-contain rotate-10 group-hover:rotate-0",
+                  textWrap: "max-w-[50%] relative z-10 -mt-5",
+                  title: "text-epicDark", desc: "text-epicDark/40"
+                },
+                { // 4: Вайб
+                  card: "md:col-span-2 md:row-span-1 bg-epicDark justify-center min-h-[220px]",
+                  img: "absolute top-29 -translate-y-1/2 right-4 w-[45%] md:w-[33%] object-contain rotate-9 group-hover:rotate-0",
+                  textWrap: "max-w-[50%] relative z-10",
+                  title: "text-white", desc: "text-white/50"
+                }
+              ][idx];
+
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className={`rounded-[40px] p-8 relative overflow-hidden group shadow-sm border border-gray-100 flex flex-col transition-all duration-300 ${styles.card}`}
+                >
                   <img
                     src={`/gallery/incl-${idx + 1}.webp`}
                     alt={item.label}
-                    className="w-full h-full object-contain filter drop-shadow-[0_10px_15px_rgba(0,0,0,0.15)]"
+                    className={`!max-w-none drop-shadow-xl transition-all duration-500 z-0 ${styles.img}`}
                     onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=200'; }}
                   />
-                </div>
-
-                <div className="text-center space-y-2">
-                  <div className="inline-block px-3 py-1 bg-white paper-btn shadow-sm border border-epicPink text-[10px] md:text-xs font-black uppercase text-epicRed mb-1">
-                    {item.label}
+                  <div className={styles.textWrap}>
+                    <h4 className={`${styles.title} ${titleSize}`}>{item.label}</h4>
+                    <p className={`${styles.desc} ${descSize}`}>{item.desc}</p>
                   </div>
-                  <p className="text-[10px] md:text-sm font-bold text-epicDark/40 uppercase leading-tight tracking-widest max-w-[130px] mx-auto">
-                    {item.desc}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="flex lg:hidden justify-center gap-2 mt-12 opacity-20">
-            {[...Array(5)].map((_, i) => <div key={i} className="w-1.5 h-1.5 paper-circle bg-epicDark"></div>)}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* 4. RENTALS */}
+      {/* 4. RENTALS (FULL-WIDTH DARK) */}
       <section id="rentals" className="bg-epicDark text-white py-24 mt-20 relative overflow-hidden scroll-mt-24">
         <div className="absolute right-0 top-10 md:right-12 md:top-24 w-64 h-64 md:w-[500px] md:h-[500px] text-white/5 pointer-events-none -rotate-12 z-0">
           <SizesIcon />
@@ -489,19 +559,17 @@ export default function EpicSurfLanding() {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-20">
             <div className="lg:w-1/2 flex items-center justify-center relative group">
-              <div className="relative w-full aspect-[4/3] lg:aspect-square overflow-hidden paper-edge border border-white/10 shadow-2xl bg-[#1a1c2c]">
-                
-                <div ref={boardSliderRef} className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide h-full scroll-smooth">
+              <div className="relative w-full aspect-[4/3] lg:aspect-square overflow-hidden rounded-[60px] border border-white/10 shadow-2xl bg-[#1a1c2c]">
+                <div id="board-slider" className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide h-full scroll-smooth" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
                   {[1, 2, 3, 4].map((num, idx) => (
                     <div key={num} className="min-w-full h-full snap-center relative">
-                      <img src={`/gallery/board-${num}.webp`} alt={t.boardTypes[idx]} className="w-full h-full object-cover opacity-90 torn-photo" onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1537519646099-335112f03225?q=80&w=800'; }} />
-                      <div className="absolute bottom-10 left-10"><div className="bg-black/50 backdrop-blur-md border border-white/10 text-white px-6 py-2 paper-btn text-[10px] font-black uppercase tracking-widest">{t.boardTypes[idx]}</div></div>
+                      <img src={`/gallery/board-${num}.webp`} alt={t.boardTypes[idx]} className="w-full h-full object-cover opacity-90" onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1537519646099-335112f03225?q=80&w=800'; }} />
+                      <div className="absolute bottom-10 left-10"><div className="bg-black/50 backdrop-blur-md border border-white/10 text-white px-6 py-2 rounded-[20px] text-[10px] font-black uppercase tracking-widest">{t.boardTypes[idx]}</div></div>
                     </div>
                   ))}
                 </div>
-                <button onClick={() => { boardSliderRef.current?.scrollBy({ left: -400, behavior: 'smooth' }); }} className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 backdrop-blur-md paper-circle flex items-center justify-center border border-white/10 hover:bg-epicRed transition-all hidden md:flex opacity-0 group-hover:opacity-100"><ChevronLeft size={28} /></button>
-                <button onClick={() => { boardSliderRef.current?.scrollBy({ left: 400, behavior: 'smooth' }); }} className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 backdrop-blur-md paper-circle flex items-center justify-center border border-white/10 hover:bg-epicRed transition-all hidden md:flex opacity-0 group-hover:opacity-100"><ChevronRight size={28} /></button>
-              
+                <button onClick={() => { document.getElementById('board-slider').scrollBy({ left: -400, behavior: 'smooth' }); }} className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 backdrop-blur-md rounded-full items-center justify-center border border-white/10 hover:bg-epicRed transition-all hidden md:flex opacity-0 group-hover:opacity-100"><ChevronLeft size={28} /></button>
+                <button onClick={() => { document.getElementById('board-slider').scrollBy({ left: 400, behavior: 'smooth' }); }} className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 backdrop-blur-md rounded-full items-center justify-center border border-white/10 hover:bg-epicRed transition-all hidden md:flex opacity-0 group-hover:opacity-100"><ChevronRight size={28} /></button>
               </div>
             </div>
             <div className="lg:w-1/2 flex flex-col justify-center">
@@ -511,7 +579,7 @@ export default function EpicSurfLanding() {
               </div>
               <div className="grid grid-cols-2 gap-4 md:gap-6 mb-12">
                 {[{ k: 'featureLycra', svg: <LycraIcon /> }, { k: 'featureSizes', svg: <SizesIcon /> }, { k: 'featureWetsuits', svg: <WetsuitIcon /> }, { k: 'featureDelivery', svg: <DeliveryIcon /> }].map((feat) => (
-                  <div key={feat.k} className="flex items-center gap-4 p-6 paper-edge bg-white/5 border border-white/5 hover:border-epicRed/30 transition-all group backdrop-blur-sm">
+                  <div key={feat.k} className="flex items-center gap-4 p-6 rounded-[32px] bg-white/5 border border-white/5 hover:border-epicRed/30 transition-all group backdrop-blur-sm">
                     <div className="w-10 h-10 flex-shrink-0 text-epicRed group-hover:scale-110 transition-transform">{feat.svg}</div>
                     <span className="text-[11px] font-black uppercase text-white/70 leading-tight tracking-wider">{t[feat.k]}</span>
                   </div>
@@ -519,23 +587,26 @@ export default function EpicSurfLanding() {
               </div>
               <div className="flex flex-col sm:flex-row items-center justify-between gap-8 pt-10 border-t border-white/10">
                 <div className="text-center sm:text-left"><div className="text-4xl md:text-5xl font-black text-white">{t.rentalPrice}</div><div className="text-[10px] opacity-30 uppercase tracking-[0.2em] font-bold mt-2">{t.rentalUnit}</div></div>
-                <button onClick={() => setShowRentalOptions(true)} className="w-full sm:w-auto px-12 py-6 bg-epicRed text-white paper-btn font-black uppercase text-sm hover:bg-white hover:text-epicRed transition-all shadow-xl active:scale-95">{t.rentalBtn}</button>
+                <button onClick={() => setShowRentalOptions(true)} className="w-full sm:w-auto px-12 py-6 bg-epicRed text-white rounded-[20px] font-black uppercase text-sm hover:bg-white hover:text-epicRed transition-all shadow-xl active:scale-95">{t.rentalBtn}</button>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 4. FORECAST */}
+      {/* 4. FORECAST (SWELL REPORT) — ВОЗВРАТ ГАБАРИТОВ + ФИКС КОНТЕНТА */}
       <section id="forecast" className="py-24 bg-epicWhite px-6 scroll-mt-24 border-t border-epicPink/30">
         <div className="max-w-7xl mx-auto">
-          <div className="bg-epicDark paper-edge overflow-hidden shadow-2xl border border-white/5 flex flex-col lg:flex-row min-h-[500px]">
+          <div className="bg-epicDark rounded-[40px] overflow-hidden shadow-2xl border border-white/5 flex flex-col lg:flex-row min-h-[500px]">
 
+            {/* ЛЕВАЯ ПАНЕЛЬ: ПОКАЗАТЕЛИ (Высота 100%, отступы как были) */}
             <div className="lg:w-2/5 p-8 md:p-12 flex flex-col justify-center relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/10 text-white">
+
               <div className="relative z-10 space-y-10">
+                {/* 1. Главный показатель (Высота) — Крупно + Центровка */}
                 <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4">
                   <div className="flex items-center gap-3">
-                    <span className="w-2 h-2 bg-[#00FF41] paper-circle animate-pulse shadow-[0_0_10px_#00FF41]"></span>
+                    <span className="w-2 h-2 bg-[#00FF41] rounded-full animate-pulse shadow-[0_0_10px_#00FF41]"></span>
                     <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-30">{t.forecastTitle} {t.forecastTitleSpot}</span>
                   </div>
 
@@ -549,11 +620,12 @@ export default function EpicSurfLanding() {
                     </div>
                   </div>
 
-                  <div className="bg-epicRed text-white px-5 py-2 paper-btn font-black text-[10px] lg:text-xs uppercase tracking-widest shadow-xl">
+                  <div className="bg-epicRed text-white px-5 py-2 rounded-full font-black text-[10px] lg:text-xs uppercase tracking-widest shadow-xl">
                     {(forecast?.height || 0.8) < 1.2 ? t.forecastStatusGood : t.forecastStatusHigh}
                   </div>
                 </div>
 
+                {/* 2. Сетка параметров 2x2 — Крупно + Центровка */}
                 <div className="grid grid-cols-2 gap-y-10 gap-x-6 border-t border-white/10 pt-8">
                   <div className="flex flex-col items-center md:items-start space-y-1">
                     <div className="text-[10px] lg:text-xs font-black uppercase opacity-30 flex items-center gap-2"><Waves className="w-4 h-4" /> {t.forecastPeriod}</div>
@@ -568,7 +640,7 @@ export default function EpicSurfLanding() {
                   <div className="flex flex-col items-center md:items-start space-y-1">
                     <div className="text-[10px] lg:text-xs font-black uppercase opacity-30 flex items-center gap-2"><Globe className="w-4 h-4" /> {t.forecastDir}</div>
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 lg:w-10 lg:h-10 bg-epicRed paper-circle flex items-center justify-center text-white" style={{ transform: `rotate(${forecast?.windDir || 225}deg)` }}><ArrowUp className="w-4 h-4 lg:w-5 lg:h-5" strokeWidth={4} /></div>
+                      <div className="w-8 h-8 lg:w-10 lg:h-10 bg-epicRed rounded-full flex items-center justify-center text-white" style={{ transform: `rotate(${forecast?.windDir || 225}deg)` }}><ArrowUp className="w-4 h-4 lg:w-5 lg:h-5" strokeWidth={4} /></div>
                       <span className="font-black text-2xl lg:text-3xl uppercase">SW</span>
                     </div>
                   </div>
@@ -581,6 +653,7 @@ export default function EpicSurfLanding() {
               </div>
             </div>
 
+            {/* ПРАВАЯ ПАНЕЛЬ: КАРТА WINDY (Высота 400px как была) */}
             <div className="lg:w-3/5 h-[400px] lg:h-auto bg-white relative">
               <iframe
                 src="https://embed.windy.com/embed2.html?lat=16.061&lon=108.247&zoom=11&overlay=waves&product=ecmwf&metricWind=km%2Fh"
@@ -588,22 +661,25 @@ export default function EpicSurfLanding() {
                 title="Windy Forecast"
               ></iframe>
 
+              {/* Защита от застревания пальца */}
               {!mapActive && (
                 <div
                   onClick={() => setMapActive(true)}
                   className="absolute inset-0 z-20 bg-epicDark/20 backdrop-blur-[1px] flex items-center justify-center lg:hidden cursor-pointer"
                 >
-                  <div className="bg-white/95 text-epicDark px-6 py-3 paper-btn font-black uppercase text-[10px] tracking-widest shadow-2xl flex items-center gap-2">
+                  <div className="bg-white/95 text-epicDark px-6 py-3 rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-2xl flex items-center gap-2">
                     <Globe size={14} className="animate-spin" />
                     {lang === 'ru' ? 'Активировать карту' : 'Activate map'}
                   </div>
                 </div>
               )}
 
+              {/* Кнопка выхода */}
               {mapActive && (
-                <button onClick={() => setMapActive(false)} className="absolute top-4 right-4 z-30 bg-epicRed text-white p-2 paper-circle lg:hidden shadow-xl"><X size={20} /></button>
+                <button onClick={() => setMapActive(false)} className="absolute top-4 right-4 z-30 bg-epicRed text-white p-2 rounded-full lg:hidden shadow-xl"><X size={20} /></button>
               )}
             </div>
+
           </div>
         </div>
       </section>
@@ -614,18 +690,18 @@ export default function EpicSurfLanding() {
           <h2 className="text-4xl md:text-7xl font-black mb-20 uppercase tracking-tighter leading-none">{t.reviewsTitle}</h2>
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {t.reviewsList.map((rev, i) => (
-              <motion.div key={i} whileHover={{ y: -5 }} className="bg-white p-10 paper-edge shadow-xl text-left flex flex-col justify-between border border-white">
+              <motion.div key={i} whileHover={{ y: -5 }} className="bg-white p-10 rounded-[40px] shadow-xl text-left flex flex-col justify-between border border-white">
                 <p className="font-medium italic leading-relaxed text-lg mb-8">"{rev.text}"</p>
                 <div className="flex items-center gap-4 border-t border-epicPink pt-6">
-                  <div className="w-14 h-14 bg-epicDark text-white paper-circle flex items-center justify-center font-black overflow-hidden border-2 border-white shadow-sm">
-                    {rev.img ? <img src={rev.img} className="w-full h-full object-cover torn-photo" alt={rev.name} /> : rev.name.charAt(0)}
+                  <div className="w-14 h-14 bg-epicDark text-white rounded-full flex items-center justify-center font-black overflow-hidden border-2 border-white shadow-sm">
+                    {rev.img ? <img src={rev.img} className="w-full h-full object-cover" alt={rev.name} /> : rev.name.charAt(0)}
                   </div>
                   <div><div className="text-sm font-black uppercase tracking-widest">{rev.name}</div><div className="text-[10px] uppercase opacity-40 font-bold">{rev.date}</div></div>
                 </div>
               </motion.div>
             ))}
           </div>
-          <a href={links.googleMaps} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 text-epicRed font-black uppercase text-xs tracking-widest">{t.reviewsLink} <Globe size={14} /></a>
+          <a href={links.googleMaps} target="_blank" className="inline-flex items-center gap-3 text-epicRed font-black uppercase text-xs tracking-widest">{t.reviewsLink} <Globe size={14} /></a>
         </div>
       </section>
 
@@ -647,30 +723,32 @@ export default function EpicSurfLanding() {
         </div>
       </section>
 
-      {/* 7. GALLERY */}
+      {/* 7. DARK EPIC GALLERY (RESTORED SWIPE + MASONRY) */}
       <section id="gallery" className="py-24 bg-epicDark px-6 scroll-mt-24 border-t border-white/5 overflow-visible">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
             <div className="space-y-4 text-white">
-              <div className="inline-block bg-white/5 text-epicRed px-4 py-1 paper-btn font-black text-[10px] uppercase tracking-widest border border-white/10">Community & Vibe</div>
+              <div className="inline-block bg-white/5 text-epicRed px-4 py-1 rounded-full font-black text-[10px] uppercase tracking-widest border border-white/10">Community & Vibe</div>
               <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none">Epic <br /><span className="text-epicRed italic">Moments</span></h2>
             </div>
-            <a href={links.instagram} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 bg-white text-epicDark px-8 py-4 paper-btn font-black uppercase text-[10px] hover:bg-epicRed hover:text-white transition-all shadow-xl"><span>Follow our surf life</span><InstagramIcon /></a>
+            <a href={links.instagram} target="_blank" className="group flex items-center gap-3 bg-white text-epicDark px-8 py-4 rounded-[20px] font-black uppercase text-[10px] hover:bg-epicRed hover:text-white transition-all shadow-xl"><span>Follow our surf life</span><InstagramIcon /></a>
           </div>
 
           <div className="relative overflow-visible">
+            {/* Desktop Masonry */}
             <div className="hidden md:block columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 overflow-visible">
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
                 <motion.div key={`desktop-${num}`} whileHover={{ scale: 1.05, zIndex: 50 }} className="relative break-inside-avoid group cursor-pointer mb-6">
-                  <div className="absolute inset-0 bg-epicRed/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 paper-edge -z-10"></div>
-                  <img src={`/gallery/${num}.webp`} alt="Surf" className="paper-edge w-full h-auto object-cover shadow-2xl border border-white/10 grayscale-[0.3] group-hover:grayscale-0 transition-all duration-500 torn-photo" onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=800'; }} />
+                  <div className="absolute inset-0 bg-epicRed/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[40px] -z-10"></div>
+                  <img src={`/gallery/${num}.webp`} alt="Surf" className="rounded-[30px] md:rounded-[40px] w-full h-auto object-cover shadow-2xl border border-white/10 grayscale-[0.3] group-hover:grayscale-0 transition-all duration-500" onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=800'; }} />
                 </motion.div>
               ))}
             </div>
+            {/* Mobile Swipe */}
             <div className="flex md:hidden overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-6 px-6 gap-4 pb-4">
               {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
                 <div key={`mobile-${num}`} className="w-[85vw] flex-shrink-0 snap-center">
-                  <img src={`/gallery/${num}.webp`} alt="Surf" className="paper-edge w-full h-[450px] object-cover shadow-xl border border-white/10 torn-photo" onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=800'; }} />
+                  <img src={`/gallery/${num}.webp`} alt="Surf" className="rounded-[40px] w-full h-[450px] object-cover shadow-xl border border-white/10" />
                 </div>
               ))}
             </div>
@@ -688,17 +766,17 @@ export default function EpicSurfLanding() {
             <div className="lg:col-span-5 space-y-12">
               <div><div className="text-4xl font-black uppercase italic mb-6">EPIC <span className="text-epicRed">SURF</span></div><p className="text-white/50 text-xl leading-relaxed max-w-sm mx-auto md:mx-0">{t.heroSub}</p></div>
               <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                <a href={links.instagram} target="_blank" rel="noopener noreferrer" className="p-4 bg-white/5 paper-circle hover:bg-epicRed transition-all"><InstagramIcon /></a>
-                <a href={links.facebook} target="_blank" rel="noopener noreferrer" className="p-4 bg-white/5 paper-circle hover:bg-epicRed transition-all"><FacebookIcon /></a>
-                <a href={links.youtube} target="_blank" rel="noopener noreferrer" className="p-4 bg-white/5 paper-circle hover:bg-epicRed transition-all"><YoutubeIcon /></a>
-                <a href={links.threads} target="_blank" rel="noopener noreferrer" className="p-4 bg-white/5 paper-circle hover:bg-epicRed transition-all"><ThreadsIcon /></a>
+                <a href={links.instagram} target="_blank" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all"><InstagramIcon /></a>
+                <a href={links.facebook} target="_blank" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all"><FacebookIcon /></a>
+                <a href={links.youtube} target="_blank" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all"><YoutubeIcon /></a>
+                <a href={links.threads} target="_blank" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all"><ThreadsIcon /></a>
               </div>
               <div className="pt-8 border-t border-white/5 font-black uppercase text-[10px] tracking-widest text-white/50 flex items-center justify-center md:justify-start gap-3 mb-2">
                 <MapPin size={16} className="text-epicRed" /> {t.locationAddress}
               </div>
             </div>
-            <div className="lg:col-span-7 h-[450px] paper-edge overflow-hidden border border-white/10 shadow-2xl relative">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1024.2523782017452!2d108.25027605520296!3d16.046658364986484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217f20b1fa357%3A0xa323fdd182ae974!2sEPIC%20Surf%20School%20Da%20Nang!5e1!3m2!1sru!2s!4v1777015710238!5m2!1sru!2s" className="w-full h-full border-none lg:grayscale lg:invert lg:contrast-125 lg:opacity-60 lg:hover:grayscale-0 lg:hover:invert-0 transition-all duration-1000" allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+            <div className="lg:col-span-7 h-[450px] rounded-[60px] overflow-hidden border border-white/10 shadow-2xl relative">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1024.2523782017452!2d108.25027605520296!3d16.046658364986484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217f20b1fa357%3A0xa323fdd182ae974!2sEPIC%20Surf%20School%20Da%20Nang!5e1!3m2!1sru!2s!4v1777015710238!5m2!1sru!2s" className="w-full h-full border-none lg:grayscale lg:invert lg:contrast-125 lg:opacity-60 lg:hover:grayscale-0 lg:hover:invert-0 transition-all duration-1000" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
           <div className="pt-12 border-t border-white/5 text-[10px] font-bold uppercase tracking-[0.4em] text-white/20 text-center md:text-left">© 2026 Epic Surf School — Ride Every Day</div>
@@ -707,12 +785,12 @@ export default function EpicSurfLanding() {
 
       {/* MESSENGERS FAB */}
       <div className="fixed bottom-6 right-6 z-[60] flex flex-col-reverse items-end gap-4">
-        <button onClick={() => setIsChatOpen(!isChatOpen)} className={`w-16 h-16 flex items-center justify-center paper-circle shadow-2xl transition-all duration-300 active:scale-90 ${isChatOpen ? 'bg-epicDark rotate-[135deg]' : 'bg-epicRed rotate-0'}`}>{isChatOpen ? <X size={32} color="white" /> : <MessageCircle size={32} color="white" />}</button>
+        <button onClick={() => setIsChatOpen(!isChatOpen)} className={`w-16 h-16 flex items-center justify-center rounded-full shadow-2xl transition-all duration-300 active:scale-90 ${isChatOpen ? 'bg-epicDark rotate-[135deg]' : 'bg-epicRed rotate-0'}`}>{isChatOpen ? <X size={32} color="white" /> : <MessageCircle size={32} color="white" />}</button>
         <AnimatePresence>{isChatOpen && (
           <motion.div initial={{ opacity: 0, scale: 0.5, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.5, y: 20 }} className="flex flex-col gap-4 mb-2">
-            <a href={links.whatsapp} target="_blank" rel="noopener noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#25D366] text-white paper-circle active:scale-95 shadow-xl"><MessageCircle size={28} /></a>
-            <a href={links.telegram} target="_blank" rel="noopener noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#0088cc] text-white paper-circle active:scale-95 shadow-xl"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg></a>
-            <a href={links.zalo} target="_blank" rel="noopener noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#0068ff] text-white paper-circle text-lg font-black italic shadow-xl">Z</a>
+            <a href={links.whatsapp} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#25D366] text-white rounded-full active:scale-95 shadow-xl"><MessageCircle size={28} /></a>
+            <a href={links.telegram} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#0088cc] text-white rounded-full active:scale-95 shadow-xl"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg></a>
+            <a href={links.zalo} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#0068ff] text-white rounded-full text-lg font-black italic shadow-xl">Z</a>
           </motion.div>
         )}</AnimatePresence>
         {isChatOpen && <div onClick={() => setIsChatOpen(false)} className="fixed inset-0 z-[-1] bg-black/5 backdrop-blur-[2px]" />}
@@ -722,14 +800,14 @@ export default function EpicSurfLanding() {
       <AnimatePresence>{bookingUrl && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 md:p-6">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setBookingUrl(null)} className="absolute inset-0 bg-epicDark/95 backdrop-blur-md cursor-pointer" />
-          <motion.div initial={{ opacity: 0, scale: 0.9, y: 40 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 40 }} className="relative w-full max-w-5xl h-[85vh] bg-epicWhite paper-edge overflow-hidden z-10 flex flex-col shadow-2xl border border-white/20">
-            <div className="flex justify-between items-center p-6 border-b border-epicPink bg-epicWhite text-epicDark font-black uppercase text-[10px]"><span>{t.modalTitle}</span><button onClick={() => setBookingUrl(null)} className="p-2 bg-epicPink paper-circle text-epicDark"><X size={18} /></button></div>
+          <motion.div initial={{ opacity: 0, scale: 0.9, y: 40 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 40 }} className="relative w-full max-w-5xl h-[85vh] bg-epicWhite rounded-[40px] overflow-hidden z-10 flex flex-col shadow-2xl border border-white/20">
+            <div className="flex justify-between items-center p-6 border-b border-epicPink bg-epicWhite text-epicDark font-black uppercase text-[10px]"><span>{t.modalTitle}</span><button onClick={() => setBookingUrl(null)} className="p-2 bg-epicPink rounded-full text-epicDark"><X size={18} /></button></div>
             <div className="flex-1 bg-white relative"><iframe src={bookingUrl} className="w-full h-full border-none" title="Booking" /></div>
           </motion.div>
         </div>
       )}</AnimatePresence>
 
-      {/* 9. RENTAL MODAL (АРЕНДА) */}
+      {/* 9. RENTAL MODAL (АРЕНДА) — ВСТАВЛЕНО СЮДА */}
       <AnimatePresence>
         {showRentalOptions && (
           <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 md:p-6">
@@ -745,14 +823,14 @@ export default function EpicSurfLanding() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-sm bg-white paper-edge p-10 shadow-2xl text-center border border-white/20"
+              className="relative w-full max-w-sm bg-white rounded-[50px] p-10 shadow-2xl text-center border border-white/20"
             >
               <button onClick={() => setShowRentalOptions(false)} className="absolute top-8 right-8 text-epicDark/20 hover:text-epicRed transition-colors">
                 <X size={24} />
               </button>
 
               <div className="mb-10 pt-4 text-epicDark">
-                <div className="w-20 h-20 bg-[#EDF2F4] paper-circle flex items-center justify-center text-epicRed mx-auto mb-6 shadow-sm">
+                <div className="w-20 h-20 bg-[#EDF2F4] rounded-[30px] flex items-center justify-center text-epicRed mx-auto mb-6 shadow-sm">
                   <MessageCircle size={40} />
                 </div>
                 <h3 className="text-3xl font-black uppercase tracking-tighter mb-3">{t.rentalModalTitle}</h3>
@@ -760,13 +838,13 @@ export default function EpicSurfLanding() {
               </div>
 
               <div className="flex flex-col gap-4">
-                <a href={`${links.whatsapp}?text=${encodeURIComponent(t.msgRental)}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between bg-[#25D366] text-white px-8 py-5 paper-btn font-black uppercase text-[11px] tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-lg">
+                <a href={`${links.whatsapp}?text=${encodeURIComponent(t.msgRental)}`} target="_blank" rel="noreferrer" className="flex items-center justify-between bg-[#25D366] text-white px-8 py-5 rounded-2xl font-black uppercase text-[11px] tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-lg">
                   WhatsApp <MessageCircle size={20} />
                 </a>
-                <a href={links.telegram} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between bg-[#0088cc] text-white px-8 py-5 paper-btn font-black uppercase text-[11px] tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-lg">
+                <a href={links.telegram} target="_blank" rel="noreferrer" className="flex items-center justify-between bg-[#0088cc] text-white px-8 py-5 rounded-2xl font-black uppercase text-[11px] tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-lg">
                   Telegram <ArrowUp size={20} className="rotate-45" />
                 </a>
-                <a href={links.zalo} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between bg-[#0068ff] text-white px-8 py-5 paper-btn font-black uppercase text-[11px] tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-lg">
+                <a href={links.zalo} target="_blank" rel="noreferrer" className="flex items-center justify-between bg-[#0068ff] text-white px-8 py-5 rounded-2xl font-black uppercase text-[11px] tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-lg">
                   Zalo <span className="text-lg font-black italic tracking-tighter">Z</span>
                 </a>
               </div>
@@ -779,7 +857,7 @@ export default function EpicSurfLanding() {
   );
 }
 
-// ...ВСПОМОГАТЕЛЬНЫЕ КОМПОНЕНТЫ И ИКОНКИ НИЖЕ (ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ)...
+// --- ВСПОМОГАТЕЛЬНЫЕ КОМПОНЕНТЫ И ИКОНКИ ---
 
 function WaveDivider({ flip = false, color = "#FFFFFF" }) {
   return (
