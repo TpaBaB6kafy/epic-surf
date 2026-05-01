@@ -222,53 +222,45 @@ export default function EpicSurfLanding() {
 
         <div className="relative z-10 text-center px-4 pt-20 flex flex-col items-center">
 
+          {/* 2. HERO SECTION — TIGHTER & CLEANER */}
           <motion.h1
             initial="hidden"
             animate="visible"
-            variants={{
-              visible: { transition: { staggerChildren: 0.2 } }
-            }}
-            className="text-[10vw] sm:text-5xl md:text-8xl font-black text-white uppercase tracking-tighter mb-8 leading-[1.1] drop-shadow-2xl text-center flex flex-col items-center"
+            variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+            /* font-extrabold вместо font-black, leading-0.9 вместо 1.2 */
+            className="text-[10vw] sm:text-5xl md:text-8xl font-extrabold text-white uppercase tracking-tight mb-8 leading-[0.9] drop-shadow-2xl text-center flex flex-col items-center"
           >
-            {/* Строка 1: ПОЙМАЙ СВОЮ */}
-            <motion.span
-              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-              className="block"
-            >
+            {/* Строка 1 */}
+            <motion.span variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }} className="block">
               {t.heroTitle}
             </motion.span>
 
-            {/* Строка 2: EPIC + ВОЛНУ (Железно в один ряд) */}
+            {/* Строка 2: EPIC + ВОЛНУ (py-1 чтобы не было дырок) */}
             <motion.div
-              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-              className="flex items-center justify-center whitespace-nowrap gap-x-3 md:gap-x-5"
+              variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}
+              className="flex items-center justify-center whitespace-nowrap gap-x-2 md:gap-x-4 py-1"
             >
-              {/* ЛОГОТИП С ЭФФЕКТОМ ПОПЛАВКА */}
               <motion.img
                 src="/gallery/epic-text.webp"
                 alt="Epic"
-                className="h-[1.1em] md:h-[1.4em] w-auto object-contain drop-shadow-xl"
-                /* Постоянная анимация покачивания */
+                /* h-[1.1em] на мобилке, md:h-[1.3em] на десктопе. Опустили на 12% */
+                className="h-[1.1em] md:h-[1.3em] w-auto object-contain drop-shadow-xl translate-y-[12%]"
                 animate={{
-                  y: [0, -10, 0],
-                  rotate: [-3, -1, -3]
+                  y: [0, -15, 0],
+                  rotate: [-2, 0, -2]
                 }}
                 transition={{
                   duration: 4,
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                /* Легкое увеличение при наведении без подсветки */
                 whileHover={{ scale: 1.05 }}
               />
               <span className="inline-block">{lang === 'ru' ? 'волну' : 'wave'}</span>
             </motion.div>
 
-            {/* Строка 3: В ДАНАНГЕ */}
-            <motion.span
-              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-              className="block"
-            >
+            {/* Строка 3 */}
+            <motion.span variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }} className="block">
               {lang === 'ru' ? 'в Дананге' : 'in Da Nang'}
             </motion.span>
           </motion.h1>
