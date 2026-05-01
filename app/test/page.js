@@ -38,6 +38,10 @@ export default function EpicSurfLanding() {
 
   const translations = {
     ru: {
+      howTitle: "Как проходят",
+      howTitleEnd: "уроки",
+      howIntro: "Мы разработали систему обучения, которая позволяет 90% новичков встать на доску уже на первом занятии. Ваш прогресс и безопасность — наш главный приоритет.",
+
       includedTitle: "В стоимость включено",
       includedItems: [
         { label: "Серф", desc: "Доска под твой уровень" },
@@ -77,10 +81,30 @@ export default function EpicSurfLanding() {
       boardTypes: ["Софтборды", "Лонгборды", "Малибу", "Шортборды"],
       howTitle: "Как проходят", howTitleEnd: "уроки",
       howSteps: [
-        { title: "Встреча и экип", desc: "Знакомимся, подбираем доску и выдаем свежую лайкру с цинком.", time: "15 мин" },
-        { title: "Теория", desc: "Разминка и техника на песке. Безопасность.", time: "20 мин" },
-        { title: "Практика", desc: "Идем в воду! Тренер всегда рядом.", time: "75 мин" },
-        { title: "Разбор", desc: "Отдыхаем с кокосом, разбираем ошибки и скидываем фото/видео.", time: "10 мин" }
+        {
+          title: "Встреча и экип",
+          time: "15 мин",
+          descA: "Знакомимся с вашим тренером, подбираем софтборд по росту и весу. Выдаем чистую лайкру и наносим профи-цинк.",
+          descB: "Берем доски и отправляемся на берег к месту тренировки. Начинаем плавное погружение в атмосферу океана."
+        },
+        {
+          title: "Теория и база",
+          time: "20 мин",
+          descA: "Проводим суставную разминку на песке. Разбираем правила безопасности, этикет в воде и механику волн.",
+          descB: "Отрабатываем технику гребли и вставания на доску (pop-up). Тренер корректирует движения до автоматизма."
+        },
+        {
+          title: "Практика в воде",
+          time: "75 мин",
+          descA: "Идем в океан! Инструктор помогает преодолеть прибой и контролирует каждое ваше движение в воде.",
+          descB: "Ловим первые волны! Тренер подталкивает и дает советы в моменте. Вы чувствуете драйв и реальное скольжение."
+        },
+        {
+          title: "Разбор и чилл",
+          time: "10 мин",
+          descA: "Возвращаемся на базу. Отдыхаем в тени с холодным кокосом и делимся первыми впечатлениями от каталки.",
+          descB: "Проводим видео-разбор ваших ошибок. Скидываем весь отснятый фото и видео контент вам в мессенджер."
+        }
       ],
       forecastTitle: "Условия на", forecastTitleSpot: "Сегодня", forecastPeriod: "Период", forecastWind: "Ветер", forecastDir: "Направление", forecastWater: "Вода",
       forecastStatusGood: "Идеально для обучения", forecastStatusHigh: "Только для опытных",
@@ -103,6 +127,10 @@ export default function EpicSurfLanding() {
       ]
     },
     en: {
+      howTitle: "How it",
+      howTitleEnd: "works",
+      howIntro: "We have developed a teaching system that allows 90% of beginners to stand up on a board during their very first lesson. Your safety and progress are our priority.",
+
       includedTitle: "What's Included",
       includedItems: [
         { label: "Surfboard", desc: "Board for your level" },
@@ -142,10 +170,30 @@ export default function EpicSurfLanding() {
       boardTypes: ["Softboards", "Longboards", "Malibus", "Shortboards"],
       howTitle: "How it", howTitleEnd: "works",
       howSteps: [
-        { title: "Meet & Gear Up", desc: "Meet your coach and get a fresh rashguard and zinc.", time: "15 min" },
-        { title: "Beach Theory", desc: "Warm-up, paddling technique, and safety briefing.", time: "20 min" },
-        { title: "Ocean Practice", desc: "Time to surf! Your coach stays close to catch waves.", time: "75 min" },
-        { title: "Feedback", desc: "Chill with a coconut and get your photos/videos.", time: "10 min" }
+        {
+          title: "Meet & Gear Up",
+          time: "15 min",
+          descA: "Meet your coach and pick the perfect board for your level. Get a fresh rashguard and professional sun zinc.",
+          descB: "Grab the boards and head to the beach. Start soaking in the ocean vibes as we walk to our training spot."
+        },
+        {
+          title: "Beach Theory",
+          time: "20 min",
+          descA: "Joint mobility warm-up on the sand. We cover ocean safety rules, wave etiquette, and water basics.",
+          descB: "Practice paddling and the pop-up technique. Your coach will fix your stance until it's muscle memory."
+        },
+        {
+          title: "Ocean Practice",
+          time: "75 min",
+          descA: "Time to surf! Your coach helps you get past the break and ensures your safety at all times in the water.",
+          descB: "Catch your first waves! The coach gives you a push and real-time tips. Feel the speed and pure joy of surfing."
+        },
+        {
+          title: "Review & Chill",
+          time: "10 min",
+          descA: "Head back to the base. Relax in the shade with a fresh coconut and share your first surfing stories.",
+          descB: "Watch your session's video review. We'll send all high-res photos and videos directly to your phone."
+        }
       ],
       forecastTitle: "Current", forecastTitleSpot: "Forecast", forecastPeriod: "Period", forecastWind: "Wind", forecastDir: "Direction", forecastWater: "Water",
       forecastStatusGood: "Perfect for beginners", forecastStatusHigh: "Advanced surfers only",
@@ -222,45 +270,42 @@ export default function EpicSurfLanding() {
 
         <div className="relative z-10 text-center px-4 pt-20 flex flex-col items-center">
 
-          {/* 2. HERO SECTION — TIGHTER & CLEANER */}
+          {/* 2. HERO SECTION — OCEAN FLOAT ANIMATION */}
           <motion.h1
             initial="hidden"
             animate="visible"
-            variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-            /* font-extrabold вместо font-black, leading-0.9 вместо 1.2 */
+            variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
             className="text-[10vw] sm:text-5xl md:text-8xl font-extrabold text-white uppercase tracking-tight mb-8 leading-[0.9] drop-shadow-2xl text-center flex flex-col items-center"
           >
-            {/* Строка 1 */}
-            <motion.span variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }} className="block">
+            <motion.span variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}>
               {t.heroTitle}
             </motion.span>
 
-            {/* Строка 2: EPIC + ВОЛНУ (py-1 чтобы не было дырок) */}
             <motion.div
-              variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}
-              className="flex items-center justify-center whitespace-nowrap gap-x-2 md:gap-x-4 py-1"
+              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
+              className="flex items-center justify-center whitespace-nowrap gap-x-3 md:gap-x-5 py-2"
             >
               <motion.img
                 src="/gallery/epic-text.webp"
                 alt="Epic"
-                /* h-[1.1em] на мобилке, md:h-[1.3em] на десктопе. Опустили на 12% */
                 className="h-[1.1em] md:h-[1.3em] w-auto object-contain drop-shadow-xl translate-y-[12%]"
+                /* ТРАЕКТОРИЯ "БЕСКОНЕЧНОСТЬ" */
                 animate={{
-                  y: [0, -15, 0],
-                  rotate: [-2, 0, -2]
+                  x: [0, 5, -5, 0],
+                  y: [0, -12, 5, 0],
+                  rotate: [-2, 1, -3, -2]
                 }}
                 transition={{
-                  duration: 4,
+                  duration: 8,
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.1, rotate: 0 }}
               />
               <span className="inline-block">{lang === 'ru' ? 'волну' : 'wave'}</span>
             </motion.div>
 
-            {/* Строка 3 */}
-            <motion.span variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }} className="block">
+            <motion.span variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}>
               {lang === 'ru' ? 'в Дананге' : 'in Da Nang'}
             </motion.span>
           </motion.h1>
@@ -297,25 +342,96 @@ export default function EpicSurfLanding() {
         </div>
       </section>
 
-      {/* 2.7 HOW IT WORKS */}
-      <section id="how-it-works" className="py-20 md:py-32 bg-epicWhite px-6 overflow-hidden scroll-mt-24 text-center">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter text-epicDark mb-24">{t.howTitle} <span className="text-epicRed italic">{t.howTitleEnd}</span></h2>
-          <div className="space-y-16 md:space-y-32">
+      {/* 2.7 HOW IT WORKS — TWO-CARD STORYTELLER */}
+      <section id="how-it-works" className="relative py-32 overflow-hidden scroll-mt-24" style={{
+        background: 'radial-gradient(circle at 50% 50%, #FFFFFF 0%, #F8F9FA 50%, #EDF2F4 100%)'
+      }}>
+
+        {/* ФОНОВЫЙ ДЕКОР */}
+        <div className="absolute top-20 right-[-5%] text-[15vw] font-black text-epicRed/[0.02] uppercase pointer-events-none select-none italic">Ocean</div>
+        <div className="absolute bottom-20 left-[-5%] text-[15vw] font-black text-epicCoral/[0.04] uppercase pointer-events-none select-none italic">Vibe</div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+
+          <div className="max-w-3xl mx-auto text-center mb-24 space-y-6">
+            <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter text-epicDark leading-none">
+              {t.howTitle} <span className="text-epicRed italic">{t.howTitleEnd}</span>
+            </h2>
+            <p className="text-epicDark/40 text-lg md:text-xl font-medium leading-relaxed max-w-2xl mx-auto">
+              {t.howIntro}
+            </p>
+          </div>
+
+          <div className="space-y-32 md:space-y-48">
             {t.howSteps.map((step, idx) => (
-              <motion.div key={idx} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} className={`flex flex-col ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-8 lg:gap-24`}>
-                <div className="w-full lg:w-1/2 relative group">
-                  <div className="absolute -inset-2 md:-inset-4 bg-epicPink rounded-[30px] md:rounded-[50px] rotate-2 -z-10 opacity-50"></div>
-                  <img src={`/gallery/process-${idx + 1}.webp`} alt={step.title} className="aspect-video w-full rounded-[30px] md:rounded-[40px] object-cover shadow-xl" onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1537519646099-335112f03225?q=80&w=800'; }} />
+              <div
+                key={idx}
+                className={`flex flex-col ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 lg:gap-24`}
+              >
+                {/* ФОТО (Стиль Полароид) */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  className="w-full lg:w-1/2 relative group"
+                >
+                  <div className="absolute -inset-2 bg-epicRed/5 rounded-[45px] rotate-1 group-hover:rotate-0 transition-transform duration-700"></div>
+                  <div className="bg-white p-4 md:p-6 rounded-[40px] shadow-2xl border border-epicPink relative z-10 transition-transform duration-500 group-hover:scale-[1.02]">
+                    <div className="aspect-[4/3] w-full rounded-[24px] overflow-hidden bg-gray-100">
+                      <img
+                        src={`/gallery/process-${idx + 1}.webp`}
+                        alt={step.title}
+                        className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
+                        onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1537519646099-335112f03225?q=80&w=800'; }}
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* ТЕКСТОВЫЙ БЛОК: ДВЕ ПЛАШКИ */}
+                <div className="w-full lg:w-1/2 space-y-8">
+                  <div className="flex flex-col items-center lg:items-start space-y-4">
+                    <div className="inline-block bg-epicRed text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-md">
+                      {step.time}
+                    </div>
+                    <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tight text-epicDark leading-[0.9] text-center lg:text-left">
+                      {step.title}
+                    </h3>
+                  </div>
+
+                  <div className="grid gap-4">
+                    {/* ПЛАШКА 1 */}
+                    <motion.div
+                      initial={{ opacity: 0, x: idx % 2 === 0 ? 20 : -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      className="p-6 md:p-8 bg-white/60 backdrop-blur-md rounded-[32px] border border-white shadow-sm flex gap-5 items-start group hover:bg-white transition-colors"
+                    >
+                      <span className="text-2xl font-black text-epicRed/20 group-hover:text-epicRed transition-colors">1.</span>
+                      <p className="text-epicDark/70 text-base md:text-lg leading-relaxed font-medium">
+                        {step.descA}
+                      </p>
+                    </motion.div>
+
+                    {/* ПЛАШКА 2 */}
+                    <motion.div
+                      initial={{ opacity: 0, x: idx % 2 === 0 ? 20 : -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.2 }}
+                      className="p-6 md:p-8 bg-white/60 backdrop-blur-md rounded-[32px] border border-white shadow-sm flex gap-5 items-start group hover:bg-white transition-colors"
+                    >
+                      <span className="text-2xl font-black text-epicRed/20 group-hover:text-epicRed transition-colors">2.</span>
+                      <p className="text-epicDark/70 text-base md:text-lg leading-relaxed font-medium">
+                        {step.descB}
+                      </p>
+                    </motion.div>
+                  </div>
                 </div>
-                <div className="w-full lg:w-1/2 space-y-4 md:space-y-6 lg:text-left">
-                  <div className="inline-block bg-epicPink text-epicRed px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">{step.time}</div>
-                  <h3 className="text-3xl md:text-5xl font-black uppercase text-epicDark">{step.title}</h3>
-                  <p className="text-epicDark/60 text-lg md:text-xl leading-relaxed">{step.desc}</p>
-                </div>
-              </motion.div>
+              </div>
             ))}
           </div>
+
         </div>
       </section>
 
