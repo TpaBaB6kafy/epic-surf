@@ -1,20 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  --color-epicDark: #1A1C20;
-  --color-epicRed: #FB6D2C;
-  --color-epicCoral: #FDD831;
-  --color-epicPink: #FDF7ED;
+ --color-epicDark: #2B2D42;
+  --color-epicRed: #EF233C;
+  --color-epicCoral: #8D99AE;
+  --color-epicPink: #EDF2F4;
   --color-epicWhite: #FFFFFF;
   
   --animate-marquee: marquee 60s linear infinite;
   @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 }
 
-@utility scrollbar-hide {
-  &::-webkit-scrollbar { display: none !important; }
-  -ms-overflow-style: none !important;
-  scrollbar-width: none !important;
+/* Стандартный способ скрыть скролл, сохраняя работоспособность */
+.scrollbar-hide::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none !important;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
 }
 
 html { scroll-behavior: smooth; }
