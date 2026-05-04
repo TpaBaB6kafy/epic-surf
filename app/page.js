@@ -637,7 +637,7 @@ export default function EpicSurfLanding() {
                   <h3 className="text-xl md:text-2xl font-bold mb-3 text-epicDark leading-snug break-words hyphens-auto">{item.title}</h3>
                   <p className="text-epicDark/70 mb-6 text-sm flex-1">{item.desc}</p>
                   <div className="text-2xl font-black mb-8 text-epicDark">{item.price}</div>
-                  <button onClick={() => setBookingUrl(links.group)} className="w-full bg-epicDark text-white py-5 rounded-[20px] font-black uppercase text-xs tracking-wide shadow-lg transition-all duration-300 group-hover:bg-epicRed hover:bg-epicRed hover:shadow-xl hover:shadow-epicRed/25 hover:-translate-y-0.5 active:translate-y-0 active:scale-95">{t.btnBook}</button>
+                  <button onClick={() => setBookingUrl(links.group)} className="w-full bg-epicDark text-white py-5 rounded-[20px] font-black uppercase text-xs tracking-wide shadow-lg transition-all duration-300 group-hover:bg-epicRed hover:bg-epicRed hover:-translate-y-0.5 active:translate-y-0 active:scale-95">{t.btnBook}</button>
                 </div>
               </motion.div>
             ))}
@@ -661,33 +661,33 @@ export default function EpicSurfLanding() {
               const styles = [
                 { // 0: Серф 
                   card: "col-span-2 md:col-span-1 md:row-span-2 md:col-start-1 bg-[#EDF2F4] justify-end min-h-[270px] md:min-h-[520px]",
-                  img: "absolute -top-10 -right-1 w-[36%] md:top-2 md:-right-8 md:w-[78%] object-contain -rotate-8",
-                  text: "absolute left-8 bottom-8 md:left-8 md:bottom-8 max-w-[60%] md:max-w-[72%] z-10",
+                  img: "absolute top-16 right-1 w-[55%] md:top-26 md:right-2 md:w-[105%] object-contain rotate-8",
+                  text: "absolute left-8 bottom-46 md:left-8 md:bottom-100 max-w-[60%] md:max-w-[62%] z-10",
                   titleClass: "whitespace-normal break-words hyphens-auto",
                   descClass: "whitespace-normal break-words hyphens-auto",
                   title: "text-epicDark", desc: "text-epicDark/40"
                 },
                 { // 1: Экип + защита
                   card: "col-span-2 md:col-span-2 md:row-span-1 md:col-start-2 bg-[#EDF2F4] justify-center min-h-[240px] md:min-h-[250px]",
-                  img: "absolute -bottom-14 right-0 w-[54%] md:-bottom-28 md:right-4 md:w-[42%] object-contain rotate-3 md:rotate-5",
-                  secondaryImg: "absolute -bottom-8 right-[42%] w-[32%] md:bottom-3 md:right-[42%] md:w-[19%] object-contain -rotate-6",
-                  text: "absolute left-8 top-8 md:left-8 md:top-10 max-w-[56%] md:max-w-[50%] z-10 text-left md:text-center",
+                  img: "absolute -bottom-18 -right-2 w-[50%] md:-bottom-28 md:right-88 md:w-[42%] object-contain rotate-3 md:rotate-5",
+                  secondaryImg: "absolute -bottom-8 right-[42%] w-[28%] -md:bottom-6 md:right-[-10%] md:w-[38%] object-contain -rotate-6",
+                  text: "absolute left-8 top-4 md:left-42 md:top-6 max-w-[56%] md:max-w-[45%] z-10 text-left md:text-center",
                   titleClass: "whitespace-normal break-words hyphens-auto",
                   descClass: "whitespace-normal break-words hyphens-auto",
                   title: "text-epicDark", desc: "text-epicDark/40"
                 },
                 { // 2: Контент
                   card: "col-span-2 md:col-span-2 md:row-span-1 md:col-start-2 bg-[#EDF2F4] justify-center min-h-[240px] md:min-h-[250px]",
-                  img: "absolute -bottom-8 -right-12 w-[68%] md:-bottom-10 md:right-0 md:w-[44%] object-contain rotate-4 md:rotate-3",
-                  text: "absolute left-8 top-8 md:left-8 md:top-20 max-w-[54%] md:max-w-[52%] z-10",
+                  img: "absolute -bottom-0 -right-12 w-[68%] md:bottom-0 -md:right-2 md:w-[58%] object-contain rotate-0 md:rotate-0",
+                  text: "absolute left-8 top-4 md:left-8 md:top-6 max-w-[54%] md:max-w-[50%] z-10",
                   titleClass: "whitespace-normal break-words hyphens-auto",
                   descClass: "whitespace-normal break-words hyphens-auto",
                   title: "text-epicDark", desc: "text-epicDark/40"
                 },
                 { // 3: Вайб
                   card: "col-span-2 md:col-span-1 md:row-span-2 md:col-start-4 md:row-start-1 bg-[#EDF2F4] justify-end min-h-[180px] md:min-h-[520px]",
-                  img: "absolute -bottom-16 -right-8 w-[54%] md:-bottom-8 md:-right-14 md:w-[126%] object-contain rotate-6 md:rotate-8",
-                  text: "absolute left-8 bottom-8 md:left-8 md:bottom-10 max-w-[56%] md:max-w-[82%] z-10",
+                  img: "absolute -bottom-12 -right-1 w-[44%] md:-bottom-6 md:-right-8 md:w-[110%] object-contain rotate-6 md:rotate-8",
+                  text: "absolute left-8 bottom-27 md:left-8 md:bottom-105 max-w-[56%] md:max-w-[82%] z-10",
                   titleClass: "whitespace-normal break-words hyphens-auto",
                   descClass: "whitespace-normal break-words hyphens-auto",
                   title: "text-epicDark", desc: "text-epicDark/40"
@@ -976,7 +976,7 @@ export default function EpicSurfLanding() {
               <div className="inline-block bg-white/5 text-epicRed px-4 py-1 rounded-full font-bold text-[11px] tracking-wide border border-white/10">Community & Vibe</div>
               <h2 className="text-5xl md:text-8xl font-black tracking-normal leading-[0.98] break-words">Epic <br /><span className="text-epicRed">Moments</span></h2>
             </div>
-            <a href={links.instagram} target="_blank" className="group flex items-center gap-3 bg-white text-epicDark px-8 py-4 rounded-[20px] font-bold text-sm tracking-wide hover:bg-epicRed hover:text-white transition-all shadow-xl"><span>Follow our surf life</span><InstagramIcon /></a>
+            <a href={links.instagram} target="_blank" className="group flex items-center gap-3 bg-white text-epicDark px-8 py-4 rounded-[20px] font-bold text-sm tracking-wide hover:bg-epicRed hover:text-white transition-all shadow-xl"><span>{lang === 'ru' ? 'Следить за нашей серф-жизнью' : 'Follow our surf life'}</span><InstagramIcon /></a>
           </div>
 
           <div className="flex flex-wrap gap-3 mb-10">
@@ -1038,7 +1038,7 @@ export default function EpicSurfLanding() {
                 <a href={links.facebook} target="_blank" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all"><FacebookIcon /></a>
                 <a href={links.youtube} target="_blank" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all"><YoutubeIcon /></a>
                 <a href={links.threads} target="_blank" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all"><ThreadsIcon /></a>
-                <a href={links.telegram} target="_blank" rel="noreferrer" className="inline-flex h-12 items-center gap-2 rounded-full bg-white/5 px-5 text-[11px] font-bold tracking-wide leading-snug text-white hover:bg-epicRed transition-all" aria-label="Epic Surf School Telegram direct chat" title="Telegram direct chat"><Send size={16} /> Telegram</a>
+                <a href={links.telegram} target="_blank" rel="noreferrer" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all" aria-label="Epic Surf School Telegram direct chat" title="Telegram direct chat"><Send size={20} /></a>
                 <a href={links.telegramChannel} target="_blank" rel="noreferrer" className="inline-flex h-12 items-center gap-2 rounded-full bg-white/5 px-5 text-[11px] font-bold tracking-wide leading-snug text-white hover:bg-epicRed transition-all" aria-label="Epic Surf School official Telegram channel" title="Epic Surf School official Telegram channel"><Send size={16} /> TG Channel</a>
               </div>
               <div className="pt-8 border-t border-white/5 font-bold text-[11px] tracking-wide text-white/55 flex items-center justify-center md:justify-start gap-3 mb-2 leading-snug">
@@ -1058,9 +1058,15 @@ export default function EpicSurfLanding() {
         <button onClick={() => setIsChatOpen(!isChatOpen)} className={`w-16 h-16 flex items-center justify-center rounded-full shadow-2xl transition-all duration-300 active:scale-90 ${isChatOpen ? 'bg-epicDark rotate-[135deg]' : 'bg-epicRed rotate-0'}`}>{isChatOpen ? <X size={32} color="white" /> : <MessageCircle size={32} color="white" />}</button>
         <AnimatePresence>{isChatOpen && (
           <motion.div initial={{ opacity: 0, scale: 0.5, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.5, y: 20 }} className="flex flex-col gap-4 mb-2">
-            <a href={links.whatsapp} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#25D366] text-white rounded-full active:scale-95 shadow-xl"><MessageCircle size={28} /></a>
-            <a href={links.telegram} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#0088cc] text-white rounded-full active:scale-95 shadow-xl"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg></a>
-            <a href={links.zalo} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center bg-[#0068ff] text-white rounded-full text-lg font-black shadow-xl">Z</a>
+            <a href={links.whatsapp} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center rounded-full active:scale-95 shadow-xl overflow-hidden" aria-label="WhatsApp chat">
+              <ChatWhatsAppIcon className="w-full h-full" />
+            </a>
+            <a href={links.telegram} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center rounded-full active:scale-95 shadow-xl overflow-hidden" aria-label="Telegram chat">
+              <ChatTelegramIcon className="w-full h-full" />
+            </a>
+            <a href={links.zalo} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center rounded-full active:scale-95 shadow-xl overflow-hidden" aria-label="Zalo chat">
+              <ChatZaloIcon className="w-full h-full" />
+            </a>
           </motion.div>
         )}</AnimatePresence>
         {isChatOpen && <div onClick={() => setIsChatOpen(false)} className="fixed inset-0 z-[-1] bg-black/5 backdrop-blur-[2px]" />}
@@ -1180,6 +1186,58 @@ function DeliveryIcon() {
     <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M21 20.9992C18.801 19.7722 15.584 18.9992 12 18.9992C8.416 18.9992 5.199 19.7722 3 20.9992M9.5 6.44917C7.833 6.11417 5 6.44917 3.5 9.48217M9.5 6.44917C12 5.94717 15 7.47117 15 11.4972M9.5 6.44917C8.5 4.43317 6.5 2.94017 3 4.95217M9.5 6.45017C10.5 6.95417 11.5 8.47717 11.5 11.9992M9.5 6.49917C8.5 8.33217 6.5 13.4992 6.5 19.4992" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M19 7C20.1046 7 21 6.10457 21 5C21 3.89543 20.1046 3 19 3C17.8954 3 17 3.89543 17 5C17 6.10457 17.8954 7 19 7Z" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
+function ChatTelegramIcon({ className = "" }) {
+  return (
+    <svg className={className} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g clipPath="url(#chatTelegramClip)">
+        <path d="M8.00201 0H7.99801C3.58701 0 1.04969e-05 3.588 1.04969e-05 8C-0.0027286 9.68501 0.530659 11.3272 1.52301 12.689L0.526011 15.661L3.60101 14.678C4.90538 15.5434 6.43669 16.0034 8.00201 16C12.413 16 16 12.411 16 8C16 3.589 12.413 0 8.00201 0Z" fill="url(#chatTelegramGradient)" />
+        <path d="M3.62693 7.9082C5.95943 6.8922 7.51443 6.22237 8.29193 5.8987C10.5144 4.97458 10.9757 4.81408 11.2769 4.80864C11.3432 4.80758 11.4907 4.82395 11.5869 4.90177C11.6669 4.96739 11.6894 5.05614 11.7007 5.11845C11.7107 5.1807 11.7244 5.32258 11.7132 5.43333C11.5932 6.69833 11.0719 9.76808 10.8069 11.185C10.6957 11.7845 10.4744 11.9855 10.2607 12.0051C9.79568 12.0478 9.44318 11.6981 8.99318 11.4032C8.28943 10.9416 7.89193 10.6543 7.20818 10.204C6.41818 9.68345 6.93068 9.39733 7.38068 8.92983C7.49818 8.80745 9.54568 6.94558 9.58443 6.7767C9.58943 6.75558 9.59443 6.67683 9.54693 6.63533C9.50068 6.5937 9.43193 6.60795 9.38193 6.6192C9.31068 6.6352 8.18693 7.3787 6.00693 8.84958C5.68818 9.06883 5.39943 9.1757 5.13943 9.17008C4.85443 9.16395 4.30443 9.00858 3.89568 8.87583C3.39568 8.71295 2.99693 8.62683 3.03193 8.3502C3.04943 8.2062 3.24818 8.05883 3.62693 7.9082Z" fill="white" />
+      </g>
+      <defs>
+        <linearGradient id="chatTelegramGradient" x1="8" y1="0" x2="8" y2="16" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#2AABEE" />
+          <stop offset="1" stopColor="#229FDA" />
+        </linearGradient>
+        <clipPath id="chatTelegramClip">
+          <rect width="16" height="16" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+}
+
+function ChatWhatsAppIcon({ className = "" }) {
+  return (
+    <svg className={className} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g clipPath="url(#chatWhatsAppClip)">
+        <path d="M8.00201 0H7.99801C3.58701 0 1.04969e-05 3.588 1.04969e-05 8C-0.0027286 9.68501 0.530659 11.3272 1.52301 12.689L0.526011 15.661L3.60101 14.678C4.90538 15.5434 6.43669 16.0034 8.00201 16C12.413 16 16 12.411 16 8C16 3.589 12.413 0 8.00201 0Z" fill="#4CAF50" />
+        <path d="M12.6571 11.2982C12.4641 11.8432 11.6981 12.2952 11.0871 12.4272C10.6691 12.5162 10.1231 12.5872 8.28505 11.8252C5.93405 10.8512 4.42005 8.46216 4.30205 8.30716C4.18905 8.15216 3.35205 7.04216 3.35205 5.89416C3.35205 4.74616 3.93505 4.18716 4.17005 3.94716C4.36305 3.75016 4.68205 3.66016 4.98805 3.66016C5.08705 3.66016 5.17605 3.66516 5.25605 3.66916C5.49105 3.67916 5.60905 3.69316 5.76405 4.06416C5.95705 4.52916 6.42705 5.67716 6.48305 5.79516C6.54005 5.91316 6.59705 6.07316 6.51705 6.22816C6.44205 6.38816 6.37605 6.45916 6.25805 6.59516C6.14005 6.73116 6.02805 6.83516 5.91005 6.98116C5.80205 7.10816 5.68005 7.24416 5.81605 7.47916C5.95205 7.70916 6.42205 8.47616 7.11405 9.09216C8.00705 9.88716 8.73105 10.1412 8.99005 10.2492C9.18305 10.3292 9.41305 10.3102 9.55405 10.1602C9.73305 9.96716 9.95405 9.64716 10.1791 9.33216C10.3391 9.10616 10.5411 9.07816 10.7531 9.15816C10.9691 9.23316 12.1121 9.79816 12.3471 9.91516C12.5821 10.0332 12.7371 10.0892 12.7941 10.1882C12.8501 10.2872 12.8501 10.7522 12.6571 11.2982Z" fill="#FAFAFA" />
+      </g>
+      <defs>
+        <clipPath id="chatWhatsAppClip">
+          <rect width="16" height="16" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+}
+
+function ChatZaloIcon({ className = "" }) {
+  return (
+    <svg className={className} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g clipPath="url(#chatZaloClip)">
+        <path d="M8.00201 0H7.99801C3.58701 0 1.04969e-05 3.588 1.04969e-05 8C-0.0027286 9.68501 0.530659 11.3272 1.52301 12.689L0.526011 15.661L3.60101 14.678C4.90538 15.5434 6.43669 16.0034 8.00201 16C12.413 16 16 12.411 16 8C16 3.589 12.413 0 8.00201 0Z" fill="#0068FF" />
+        <path d="M8.245 7.17927V6.9657H8.91835V9.96865H8.53315C8.45701 9.96869 8.38395 9.94008 8.32995 9.88908C8.27595 9.83809 8.24541 9.76885 8.245 9.69651C7.96399 9.89197 7.62437 9.99739 7.2761 9.99701C6.3692 9.99701 5.6339 9.29888 5.6339 8.43787C5.6339 7.5769 6.3692 6.87878 7.2761 6.87878C7.62437 6.8784 7.96399 6.98382 8.245 7.17927ZM5.4594 6V6.09738C5.4594 6.27898 5.4339 6.42723 5.30965 6.60113L5.29465 6.61742C5.26755 6.64664 5.2039 6.71528 5.1736 6.75247L3.012 9.33004H5.4594V9.69495C5.45938 9.7309 5.45191 9.7665 5.4374 9.79971C5.4229 9.83293 5.40166 9.8631 5.37488 9.88851C5.34811 9.91392 5.31632 9.93407 5.28135 9.94781C5.24638 9.96156 5.2089 9.96862 5.17105 9.9686H2V9.79655C2 9.58584 2.0551 9.49188 2.12475 9.39393L4.4291 6.68421H2.0961V6H5.4594ZM9.73505 9.96865C9.67141 9.96862 9.61038 9.94461 9.56536 9.90188C9.52033 9.85915 9.49499 9.8012 9.4949 9.74074V6H10.2157V9.96865H9.73505ZM12.3467 6.85997C13.26 6.85997 14 7.56332 14 8.4296C14 9.2966 13.2599 10 12.3467 10C11.4335 10 10.6934 9.2966 10.6934 8.4296C10.6934 7.56332 11.4335 6.85997 12.3467 6.85997ZM7.2761 9.35522C7.80985 9.35522 8.2423 8.94457 8.2423 8.43787C8.2423 7.93198 7.8098 7.52133 7.2761 7.52133C6.7424 7.52133 6.3099 7.93193 6.3099 8.43787C6.3099 8.94457 6.7424 9.35522 7.2761 9.35522ZM12.3467 9.35365C12.8835 9.35365 13.3192 8.94005 13.3192 8.4296C13.3192 7.91991 12.8835 7.50637 12.3467 7.50637C11.809 7.50637 11.3742 7.91991 11.3742 8.4296C11.3742 8.94005 11.809 9.35365 12.3467 9.35365Z" fill="white" />
+      </g>
+      <defs>
+        <clipPath id="chatZaloClip">
+          <rect width="16" height="16" fill="white" />
+        </clipPath>
+      </defs>
     </svg>
   );
 }
