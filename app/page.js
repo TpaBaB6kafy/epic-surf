@@ -617,7 +617,7 @@ export default function EpicSurfLanding() {
           onPointerCancel={stopLessonsDrag}
           onPointerLeave={stopLessonsDrag}
           onClickCapture={handleLessonsClickCapture}
-          className="w-full -mx-6 px-6 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none touch-auto snap-x snap-mandatory md:snap-none scroll-px-6"
+          className="relative left-1/2 w-screen -translate-x-1/2 px-6 md:left-auto md:w-full md:-mx-6 md:translate-x-0 md:px-6 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none touch-auto snap-x snap-mandatory md:snap-none scroll-px-6"
         >
           <div className="flex gap-4 sm:gap-6 md:gap-8 pb-8 w-max">
             {t.cards.map((item, i) => (
