@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { RentalCaravanIcon, RentalSurfboardIcon, RentalTshirtIcon, RentalUvIcon } from "./Icons";
 
 export default function Rentals({ t, setRentalModalOpen }) {
   const [activeBoard, setActiveBoard] = useState(0);
@@ -65,7 +66,7 @@ export default function Rentals({ t, setRentalModalOpen }) {
                 <p className="text-white/55 text-base md:text-lg max-w-lg leading-relaxed">{t.rentalDesc}</p>
               </div>
               <div className="grid grid-cols-2 gap-4 md:gap-6 mb-12">
-                {[{ k: 'featureLycra', svg: <LycraIcon /> }, { k: 'featureSizes', svg: <SizesIcon /> }, { k: 'featureWetsuits', svg: <WetsuitIcon /> }, { k: 'featureDelivery', svg: <DeliveryIcon /> }].map((feat) => (
+                {[{ k: 'featureLycra', svg: <RentalUvIcon className="h-full w-full" /> }, { k: 'featureSizes', svg: <RentalSurfboardIcon className="h-full w-full" /> }, { k: 'featureWetsuits', svg: <RentalTshirtIcon className="h-full w-full" /> }, { k: 'featureDelivery', svg: <RentalCaravanIcon className="h-full w-full" /> }].map((feat) => (
                   <div key={feat.k} className="flex items-center gap-3 md:gap-4 p-4 md:p-6 rounded-[28px] md:rounded-[32px] bg-white/5 border border-white/5 hover:border-epicRed/30 transition-all group backdrop-blur-sm min-w-0">
                     <div className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0 text-epicRed group-hover:scale-110 transition-transform">{feat.svg}</div>
                     <span className="min-w-0 text-[10px] md:text-[11px] font-bold text-white/75 leading-snug tracking-normal break-words hyphens-auto">{t[feat.k]}</span>
@@ -83,61 +84,5 @@ export default function Rentals({ t, setRentalModalOpen }) {
 
 
     </>
-  );
-}
-
-function SizesIcon() {
-  return (
-    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" aria-hidden="true">
-      <path d="M10 38H38" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M16 38V17C16 10.925 19.582 6 24 6C28.418 6 32 10.925 32 17V38" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M16 27C20 24 28 24 32 27" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M20 14C22 12 26 12 28 14" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function LycraIcon() {
-  return (
-    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" aria-hidden="true">
-      <path d="M14 28C14 22 18 18 24 18C30 18 34 22 34 28" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M24 8V4" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M12 12L9 9" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M36 12L39 9" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M9 24H5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M43 24H39" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M18 31V38" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M24 31V42" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M30 31V38" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M17 31H31" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M20 28C20 25.791 21.791 24 24 24C26.209 24 28 25.791 28 28" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function WetsuitIcon() {
-  return (
-    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" aria-hidden="true">
-      <path d="M10 38C15 41 25 41 34 38" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M13 34C18 35 25 35 30 33" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M18 8C21 12 26 17 34 18" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M16 15L10 27" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M27 18C23 24 22 29 25 34" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M34 18L41 25" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <circle cx="18" cy="8" r="2" fill="currentColor" />
-    </svg>
-  );
-}
-
-function DeliveryIcon() {
-  return (
-    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" aria-hidden="true">
-      <path d="M8 36C13 31 21 29 30 31" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M26 16C31 20 36 27 38 35" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M16 14C20 12 25 12 30 15" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M15 15C18 20 18 26 16 32" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M8 36H40" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <circle cx="38" cy="14" r="3" stroke="currentColor" strokeWidth="3" />
-    </svg>
   );
 }

@@ -3,10 +3,17 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Award, Star, Target, Waves, Wind } from "lucide-react";
+import { LessonGroupIcon, LessonIndividualIcon, LessonSkateboardIcon, LessonSplitIcon, LessonWavesIcon } from "./Icons";
 
 export default function Lessons({ t, links, openBookingModal }) {
   const lessonsScrollRef = useRef(null);
+  const lessonIcons = [
+    <LessonGroupIcon key="group" className="h-8 w-8" />,
+    <LessonSplitIcon key="split" className="h-8 w-8" />,
+    <LessonIndividualIcon key="individual" className="h-8 w-8" />,
+    <LessonSkateboardIcon key="skateboard" className="h-8 w-8" />,
+    <LessonWavesIcon key="waves" className="h-8 w-8" />
+  ];
   const lessonsDragRef = useRef({
     isDragging: false,
     startX: 0,
@@ -105,10 +112,7 @@ export default function Lessons({ t, links, openBookingModal }) {
               </div>
               <div className="p-8 flex flex-col flex-1">
                 <div className="mb-4 text-epicRed">
-                  {i === 0 ? <Waves size={32} /> :
-                    i === 1 ? <Award size={32} /> :
-                      i === 2 ? <Star size={32} /> :
-                        i === 3 ? <Wind size={32} /> : <Target size={32} />}
+                  {lessonIcons[i] || lessonIcons[0]}
                 </div>
                 <div className="text-[11px] text-epicRed font-bold mb-2 tracking-wide leading-snug">{item.badge}</div>
                 <h3 className="text-xl md:text-2xl font-bold mb-3 text-epicDark leading-snug break-words hyphens-auto">{item.title}</h3>

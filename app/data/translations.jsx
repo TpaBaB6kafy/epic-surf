@@ -1,5 +1,5 @@
-import { Target, Award, ShieldCheck, Users, Shirt, Camera, Smile } from "lucide-react";
-import { CustomSurfIcon } from "../components/Icons";
+import { ShieldCheck, Users, Shirt, Camera, Smile } from "lucide-react";
+import { CustomSurfIcon, WhyMapIcon, WhyRocketIcon } from "../components/Icons";
 
 export const translations = {
     ru: {
@@ -27,8 +27,8 @@ export const translations = {
       whyItems: [
         { icon: <ShieldCheck size={40} />, title: "Сертифицированные инструкторы", desc: "Методичное обучение для уверенного и быстрого прогресса." },
         { icon: <Users size={40} />, title: "Персональный подход", desc: "Внимание к каждому ученику и обучение с учётом уровня твоей подготовки." },
-        { icon: <Award size={40} />, title: "Идеальные условия", desc: "Подбираем локации в зависимости от условий в море и уровня твоего катания." },
-        { icon: <Target size={40} />, title: "Уверенный старт", desc: "Ты поймаешь свою волну уже на первом уроке." }
+        { icon: <WhyRocketIcon size={40} />, title: "Идеальные условия", desc: "Подбираем локации в зависимости от условий в море и уровня твоего катания." },
+        { icon: <WhyMapIcon size={40} />, title: "Уверенный старт", desc: "Ты поймаешь свою волну уже на первом уроке." }
       ],
       navLessons: "Уроки", navRentals: "Аренда", navHow: "Процесс", navForecast: "Прогноз", navEvents: "Эвенты", navLocation: "Карта", btnBook: "Записаться",
       heroTitle: "Поймай свою", heroTitleEpic: "Epic", heroTitleEnd: "волну в Дананге",
@@ -120,8 +120,8 @@ export const translations = {
       whyItems: [
         { icon: <ShieldCheck size={40} />, title: "Certified Instructors", desc: "Structured coaching for fast, confident progress." },
         { icon: <Users size={40} />, title: "Personal Focus", desc: "Attention to every student, with coaching adapted to your current level." },
-        { icon: <Award size={40} />, title: "Perfect Conditions", desc: "We choose spots based on ocean conditions and your riding level." },
-        { icon: <Target size={40} />, title: "Confident Start", desc: "You will catch your first wave during your first lesson." }
+        { icon: <WhyRocketIcon size={40} />, title: "Perfect Conditions", desc: "We choose spots based on ocean conditions and your riding level." },
+        { icon: <WhyMapIcon size={40} />, title: "Confident Start", desc: "You will catch your first wave during your first lesson." }
       ],
       navLessons: "Lessons", navRentals: "Rentals", navHow: "Process", navForecast: "Forecast", navEvents: "Events", navLocation: "Map", btnBook: "Book Now",
       heroTitle: "Catch Your", heroTitleEpic: "Epic", heroTitleEnd: "Wave in Da Nang",

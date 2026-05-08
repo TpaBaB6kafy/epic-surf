@@ -10,9 +10,11 @@ export default function Header({
   links,
   isMenuOpen,
   setIsMenuOpen,
-  setLang,
   openBookingModal
 }) {
+  const homeHref = lang === "ru" ? "/ru" : "/";
+  const languageHref = lang === "ru" ? "/" : "/ru";
+  const languageLabel = lang === "ru" ? "EN" : "RU";
   const navItems = [
     { href: "#lessons", label: t.navLessons },
     { href: "#how-it-works", label: t.navHow },
@@ -25,7 +27,7 @@ export default function Header({
     <header className="fixed top-0 left-0 w-full z-[100] bg-white shadow-md">
       <div className="h-16 md:h-20 flex items-center">
         <div className="max-w-7xl mx-auto px-4 md:px-6 w-full flex items-center justify-between gap-2">
-          <Link href="/" className="flex-shrink-0 transition-transform active:scale-95 z-[110] font-black text-2xl uppercase flex items-center">
+          <Link href={homeHref} className="flex-shrink-0 transition-transform active:scale-95 z-[110] font-black text-2xl uppercase flex items-center">
             <span className="text-[#1A1C20]" style={{ letterSpacing: "-0.02em" }}>EPIC</span>
             <span className="text-[#EF233C]" style={{ letterSpacing: "0.05em" }}>SURF</span>
           </Link>
@@ -39,12 +41,12 @@ export default function Header({
           </nav>
 
           <div className="flex items-center gap-2 md:gap-4 z-[110]">
-            <button
-              onClick={() => setLang(lang === "ru" ? "en" : "ru")}
+            <Link
+              href={languageHref}
               className="w-9 h-9 flex items-center justify-center bg-epicDark text-white rounded-full font-bold text-[10px] uppercase shadow-md"
             >
-              {lang === "ru" ? "EN" : "RU"}
-            </button>
+              {languageLabel}
+            </Link>
 
             <button
               onClick={() => openBookingModal(links.group)}

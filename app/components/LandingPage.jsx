@@ -34,13 +34,13 @@ import {
   YoutubeIcon,
   ThreadsIcon
 } from "./Icons";
-export default function EpicSurfLanding() {
+export default function EpicSurfLanding({ locale = "en" }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isRentalModalOpen, setRentalModalOpen] = useState(false);
-  const [lang, setLang] = useState('ru');
   const [bookingModalUrl, setBookingModalUrl] = useState(null);
   const [activeGalleryKey, setActiveGalleryKey] = useState("all");
 
+  const lang = locale === "ru" ? "ru" : "en";
   const t = translations[lang];
   const eventGalleryGroups = getEventGalleryGroups(lang);
   const activeGalleryGroup = eventGalleryGroups.find((group) => group.key === activeGalleryKey) || eventGalleryGroups[0];
@@ -63,7 +63,6 @@ export default function EpicSurfLanding() {
         links={links}
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
-        setLang={setLang}
         openBookingModal={setBookingModalUrl}
       />
 

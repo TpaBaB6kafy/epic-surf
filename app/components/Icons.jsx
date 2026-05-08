@@ -14,6 +14,75 @@ export function WaveDivider({ flip = false, color = "#FFFFFF" }) {
   );
 }
 
+function MaskIcon({ src, size, className = "" }) {
+  const dimension = typeof size === "number" ? `${size}px` : size;
+  const sizeStyle = dimension ? { width: dimension, height: dimension } : {};
+
+  return (
+    <span
+      aria-hidden="true"
+      className={`inline-block shrink-0 bg-current ${className}`}
+      style={{
+        ...sizeStyle,
+        WebkitMask: `url(${src}) center / contain no-repeat`,
+        mask: `url(${src}) center / contain no-repeat`
+      }}
+    />
+  );
+}
+
+export function WhySurfingSharpIcon(props) {
+  return <MaskIcon src="/icons/new/surfing-sharp.svg" {...props} />;
+}
+
+export function WhyWavesIcon(props) {
+  return <MaskIcon src="/icons/new/waves.svg" {...props} />;
+}
+
+export function WhyMapIcon(props) {
+  return <MaskIcon src="/icons/new/map.svg" {...props} />;
+}
+
+export function WhyRocketIcon(props) {
+  return <MaskIcon src="/icons/new/rocket.svg" {...props} />;
+}
+
+export function RentalUvIcon(props) {
+  return <MaskIcon src="/icons/new/uv.svg" {...props} />;
+}
+
+export function RentalTshirtIcon(props) {
+  return <MaskIcon src="/icons/new/tshirt.svg" {...props} />;
+}
+
+export function RentalSurfboardIcon(props) {
+  return <MaskIcon src="/icons/new/surfboard.svg" {...props} />;
+}
+
+export function RentalCaravanIcon(props) {
+  return <MaskIcon src="/icons/new/caravan.svg" {...props} />;
+}
+
+export function LessonGroupIcon(props) {
+  return <MaskIcon src="/icons/new/group.svg" {...props} />;
+}
+
+export function LessonSplitIcon(props) {
+  return <MaskIcon src="/icons/new/split.svg" {...props} />;
+}
+
+export function LessonIndividualIcon(props) {
+  return <MaskIcon src="/icons/new/individual.svg" {...props} />;
+}
+
+export function LessonWavesIcon(props) {
+  return <MaskIcon src="/icons/new/waves-2.svg" {...props} />;
+}
+
+export function LessonSkateboardIcon(props) {
+  return <MaskIcon src="/icons/new/skateboard.svg" {...props} />;
+}
+
 export function CustomSurfIcon() {
   return (
     <svg width="100%" height="100%" viewBox="-2 -2 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
