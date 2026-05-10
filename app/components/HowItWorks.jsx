@@ -41,7 +41,7 @@ export default function HowItWorks({ t }) {
 
               <div className="w-full lg:w-1/2">
                 <div className="flex flex-col items-center lg:items-start space-y-6">
-                  <div className="bg-epicRed text-white px-4 py-1 rounded-full text-[11px] font-bold tracking-wide leading-snug shadow-md">
+                  <div className="bg-epicMint text-epicDark px-4 py-1 rounded-full text-[11px] font-bold tracking-wide leading-snug shadow-md">
                     {step.time}
                   </div>
                   <h3 className="text-3xl md:text-5xl font-black tracking-normal text-epicDark leading-tight text-center lg:text-left break-words hyphens-auto">

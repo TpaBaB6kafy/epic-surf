@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
 @theme {
- --color-epicDark: #2B2D42;
-  --color-epicRed: #EF233C;
+ --color-epicDark: #2E2E2E;
+  --color-epicRed: #FE746A;
   --color-epicCoral: #8D99AE;
   --color-epicPink: #EDF2F4;
-  --color-epicWhite: #FFFFFF;
+  --color-epicWhite: #F6F6F6;
+  --color-epicMint: #AAFFC7;
   
   --animate-marquee: marquee 60s linear infinite;
   @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }

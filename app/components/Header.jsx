@@ -29,7 +29,7 @@ export default function Header({
         <div className="max-w-7xl mx-auto px-4 md:px-6 w-full flex items-center justify-between gap-2">
           <Link href={homeHref} className="flex-shrink-0 transition-transform active:scale-95 z-[110] font-black text-2xl uppercase flex items-center">
             <span className="text-[#1A1C20]" style={{ letterSpacing: "-0.02em" }}>EPIC</span>
-            <span className="text-[#EF233C]" style={{ letterSpacing: "0.05em" }}>SURF</span>
+            <span className="text-[#FE746A]" style={{ letterSpacing: "0.05em" }}>SURF</span>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-6">
