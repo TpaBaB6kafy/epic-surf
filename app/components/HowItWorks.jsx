@@ -1,9 +1,21 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
 export default function HowItWorks({ t }) {
+  const [expandedSteps, setExpandedSteps] = useState({});
+  const hiddenText =
+    "Тут будет какой-то текст, когда товарищи серферы его сформулируют.";
+
+  const toggleStep = (idx) => {
+    setExpandedSteps((current) => ({
+      ...current,
+      [idx]: !current[idx],
+    }));
+  };
+
   return (
     <section id="how-it-works" className="py-32 bg-epicWhite scroll-mt-24">
       <div className="max-w-7xl mx-auto px-6">
@@ -48,7 +60,18 @@ export default function HowItWorks({ t }) {
                     {step.title}
                   </h3>
                   <p className="text-epicDark/70 text-base md:text-lg leading-relaxed font-medium text-center lg:text-left max-w-lg">
-                    {step.desc}
+                    {step.desc}{" "}
+                    <button
+                      type="button"
+                      aria-expanded={Boolean(expandedSteps[idx])}
+                      onClick={() => toggleStep(idx)}
+                      className="inline-flex h-7 min-w-7 items-center justify-center rounded-full bg-epicMint px-2 align-baseline text-sm font-black leading-none text-epicDark shadow-sm transition hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-epicRed/60"
+                    >
+                      ...
+                    </button>
+                    {expandedSteps[idx] && (
+                      <span className="block pt-3">{hiddenText}</span>
+                    )}
                   </p>
                 </div>
               </div>

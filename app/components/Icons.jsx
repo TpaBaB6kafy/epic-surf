@@ -47,6 +47,14 @@ export function WhyRocketIcon(props) {
   return <MaskIcon src="/icons/new/rocket.svg" {...props} />;
 }
 
+export function WhyBeachIcon(props) {
+  return <MaskIcon src="/icons/new/beach-v2.svg" {...props} />;
+}
+
+export function WhyMapV2Icon(props) {
+  return <MaskIcon src="/icons/new/map-v2.svg" {...props} />;
+}
+
 export function RentalUvIcon(props) {
   return <MaskIcon src="/icons/new/uv.svg" {...props} />;
 }

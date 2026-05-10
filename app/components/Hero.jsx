@@ -27,7 +27,7 @@ export default function Hero({ t, lang }) {
             variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
             className="flex flex-wrap items-center justify-center gap-x-3 md:gap-x-5 py-2 text-[#FE746A]"
           >
-            <span className="font-black">Epic</span>
+            <span className="font-black">EPIC</span>
             <span className="text-white font-extrabold">{lang === "ru" ? "волну" : "wave"}</span>
           </motion.div>
 

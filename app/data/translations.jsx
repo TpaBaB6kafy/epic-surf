@@ -1,5 +1,5 @@
 import { ShieldCheck, Users, Shirt, Camera, Smile } from "lucide-react";
-import { CustomSurfIcon, WhyMapIcon, WhyRocketIcon } from "../components/Icons";
+import { CustomSurfIcon, WhyBeachIcon, WhyMapV2Icon } from "../components/Icons";
 
 export const translations = {
     ru: {
@@ -27,8 +27,8 @@ export const translations = {
       whyItems: [
         { icon: <ShieldCheck size={40} />, title: "Сертифицированные инструкторы", desc: "Методичное обучение для уверенного и быстрого прогресса." },
         { icon: <Users size={40} />, title: "Персональный подход", desc: "Внимание к каждому ученику и обучение с учётом уровня твоей подготовки." },
-        { icon: <WhyRocketIcon size={40} />, title: "Идеальные условия", desc: "Подбираем локации в зависимости от условий в море и уровня твоего катания." },
-        { icon: <WhyMapIcon size={40} />, title: "Уверенный старт", desc: "Ты поймаешь свою волну уже на первом уроке." }
+        { icon: <WhyBeachIcon size={40} />, title: "Идеальные условия", desc: "Подбираем локации в зависимости от условий в море и уровня твоего катания." },
+        { icon: <WhyMapV2Icon size={40} />, title: "Уверенный старт", desc: "Ты поймаешь свою волну уже на первом уроке." }
       ],
       navLessons: "Уроки", navRentals: "Аренда", navHow: "Процесс", navForecast: "Прогноз", navEvents: "Эвенты", navLocation: "Карта", btnBook: "Записаться",
       heroTitle: "Поймай свою", heroTitleEpic: "Epic", heroTitleEnd: "волну в Дананге",
@@ -38,6 +38,8 @@ export const translations = {
       rentalDesc: "Мы предоставляем премиальные софт-топы, лонгборды и шортборды. Поможем подобрать доску под текущие условия.",
       rentalPrice: "от 250,000 VND", rentalUnit: "Сессия / 2 часа", rentalBtn: "Арендовать",
       reviewsTitle: "Лучшие вайбы в Дананге", reviewsLink: "Читать все отзывы на Google Maps",
+      galleryBadge: "Комьюнити и вайб",
+      galleryInstagram: "Следи за нами в Instagram",
       eventsTitle: "Наши эвенты",
       eventsIntro: "Активности Epic Surf School: фестивали, дни рождения школы, совместные катания и встречи нашего серф-комьюнити.",
       eventsItems: [
@@ -120,8 +122,8 @@ export const translations = {
       whyItems: [
         { icon: <ShieldCheck size={40} />, title: "Certified Instructors", desc: "Structured coaching for fast, confident progress." },
         { icon: <Users size={40} />, title: "Personal Focus", desc: "Attention to every student, with coaching adapted to your current level." },
-        { icon: <WhyRocketIcon size={40} />, title: "Perfect Conditions", desc: "We choose spots based on ocean conditions and your riding level." },
-        { icon: <WhyMapIcon size={40} />, title: "Confident Start", desc: "You will catch your first wave during your first lesson." }
+        { icon: <WhyBeachIcon size={40} />, title: "Perfect Conditions", desc: "We choose spots based on ocean conditions and your riding level." },
+        { icon: <WhyMapV2Icon size={40} />, title: "Confident Start", desc: "You will catch your first wave during your first lesson." }
       ],
       navLessons: "Lessons", navRentals: "Rentals", navHow: "Process", navForecast: "Forecast", navEvents: "Events", navLocation: "Map", btnBook: "Book Now",
       heroTitle: "Catch Your", heroTitleEpic: "Epic", heroTitleEnd: "Wave in Da Nang",
@@ -131,6 +133,8 @@ export const translations = {
       rentalDesc: "We provide premium soft-tops, longboards, and performance shortboards.",
       rentalPrice: "from 250,000 VND", rentalUnit: "2 hour / Session", rentalBtn: "Rent Now",
       reviewsTitle: "The best surf vibes", reviewsLink: "Read more on Google Maps",
+      galleryBadge: "Community & Vibe",
+      galleryInstagram: "Follow us on Instagram",
       eventsTitle: "Our Events",
       eventsIntro: "Epic Surf School activities: festivals, school birthdays, community rides, beach meetups, and surf sessions with our crew.",
       eventsItems: [

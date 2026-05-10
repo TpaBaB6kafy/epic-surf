@@ -118,7 +118,7 @@ export default function Lessons({ t, links, openBookingModal }) {
                 <h3 className="text-xl md:text-2xl font-bold mb-3 text-epicDark leading-snug break-words hyphens-auto">{item.title}</h3>
                 <p className="text-epicDark/70 mb-6 text-sm flex-1">{item.desc}</p>
                 <div className="text-2xl font-black mb-8 text-epicDark">{item.price}</div>
-                <button onClick={() => openBookingModal(links.group)} className="w-full bg-epicDark text-white py-5 rounded-[20px] font-black uppercase text-xs tracking-wide shadow-lg transition-all duration-300 group-hover:bg-epicRed hover:bg-epicRed hover:-translate-y-0.5 active:translate-y-0 active:scale-95">{t.btnBook}</button>
+                <button onClick={() => openBookingModal(links.group)} className="w-full bg-epicDark text-white py-5 rounded-[20px] font-black uppercase text-xs tracking-wide shadow-lg transition-all duration-300 group-hover:bg-epicRed group-active:bg-epicRed hover:bg-epicRed hover:-translate-y-0.5 active:bg-epicRed active:translate-y-0 active:scale-95">{t.btnBook}</button>
               </div>
             </motion.div>
           ))}

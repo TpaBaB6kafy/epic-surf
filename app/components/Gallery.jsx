@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function Gallery({
   links,
-  lang,
+  t,
   eventGalleryGroups,
   activeGalleryKey,
   setActiveGalleryKey,
@@ -23,7 +23,7 @@ export default function Gallery({
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
           <div className="space-y-4 text-white">
             <div className="inline-block bg-white/5 text-epicRed px-4 py-1 rounded-full font-bold text-[11px] tracking-wide border border-white/10">
-              Community & Vibe
+              {t.galleryBadge}
             </div>
             <h2 className="text-5xl md:text-8xl font-black tracking-normal leading-[0.98] break-words">
               Epic <br />
@@ -36,7 +36,7 @@ export default function Gallery({
             rel="noopener noreferrer"
             className="group flex items-center gap-3 bg-white text-epicDark px-8 py-4 rounded-[20px] font-bold text-sm tracking-wide hover:bg-epicRed hover:text-white transition-all shadow-xl"
           >
-            <span>{lang === "ru" ? "Следить за нашей серф-жизнью" : "Follow our surf life"}</span>
+            <span>{t.galleryInstagram}</span>
             <InstagramIcon />
           </a>
         </div>

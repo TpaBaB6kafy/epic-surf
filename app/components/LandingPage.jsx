@@ -25,7 +25,6 @@ import {
   galleryPhotoSrc
 } from "../data/gallery";
 import {
-  WaveDivider,
   ChatTelegramIcon,
   ChatWhatsAppIcon,
   ChatZaloIcon,
@@ -68,9 +67,6 @@ export default function EpicSurfLanding({ locale = "en" }) {
 
       <Hero t={t} lang={lang} />
 
-      {/* WAVE TOP */}
-      <WaveDivider color="#FFFFFF" flip={true} />
-
       <WhyEpic items={t.whyItems} />
       <HowItWorks t={t} />
 
@@ -103,7 +99,7 @@ export default function EpicSurfLanding({ locale = "en" }) {
 
       <Gallery
         links={links}
-        lang={lang}
+        t={t}
         eventGalleryGroups={eventGalleryGroups}
         activeGalleryKey={activeGalleryKey}
         setActiveGalleryKey={setActiveGalleryKey}
