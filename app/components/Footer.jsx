@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { MapPin, Send } from "lucide-react";
 
 export default function Footer({ t, links, InstagramIcon, FacebookIcon, YoutubeIcon, ThreadsIcon }) {
@@ -9,9 +10,13 @@ export default function Footer({ t, links, InstagramIcon, FacebookIcon, YoutubeI
         <div className="grid lg:grid-cols-12 gap-16 mb-20 text-center md:text-left">
           <div className="lg:col-span-5 space-y-12">
             <div>
-              <div className="text-4xl font-black uppercase tracking-normal mb-6">
-                EPIC <span className="text-epicRed">SURF</span>
-              </div>
+              <Image
+                src="/epic-logo-v-ksu-v4.png"
+                alt="EPIC SURF"
+                width={132}
+                height={32}
+                className="h-8 w-auto mb-6"
+              />
               <p className="text-white/55 text-base md:text-lg leading-relaxed max-w-sm mx-auto md:mx-0">{t.heroSub}</p>
             </div>
             <div className="flex flex-wrap gap-4 justify-center md:justify-start">

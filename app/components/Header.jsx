@@ -30,12 +30,12 @@ export default function Header({
         <div className="max-w-7xl mx-auto px-4 md:px-6 w-full flex items-center justify-between gap-2">
           <Link href={homeHref} className="flex-shrink-0 transition-transform active:scale-95 z-[110] flex items-center">
             <Image
-              src="/epic-logo-v1.svg"
+              src="/epic-logo-v-ksu-v4.png"
               alt="EPIC SURF"
               width={132}
               height={32}
               priority
-              className="h-7 md:h-8 w-auto"
+              className="h-9 md:h-10 w-auto"
             />
           </Link>
 
