@@ -25,7 +25,7 @@ export default function Hero({ t }) {
             className="w-[78vw] max-w-[720px]"
           >
             <Image
-              src="/epic-logo-v-ksu-v5-big.png"
+              src="/epic-logo-v-ksu-v6-big.png"
               alt="EPIC"
               width={1024}
               height={768}

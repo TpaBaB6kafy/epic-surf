@@ -35,7 +35,7 @@ html { scroll-behavior: smooth; }
 body { @apply antialiased text-epicDark bg-epicWhite font-sans; }
 
 .hero-subtitle {
-  color: #000 !important;
+  color: #F6F6F6 !important;
   font-family: "Chester Sans", Arial, sans-serif !important;
   font-weight: 300 !important;
   line-height: 1.35 !important;
