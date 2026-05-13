@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 export default function Events({ t, openEventGallery }) {
-  return (      <section id="events" className="py-24 bg-epicWhite px-6 scroll-mt-24 border-t border-epicPink/30">
+  return (      <section id="events" className="py-24 bg-epicWhite px-6 scroll-mt-24 border-t border-epicDark/10">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-14">
             <div className="max-w-3xl">
@@ -40,17 +40,17 @@ export default function Events({ t, openEventGallery }) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.08 }}
-                  className="bg-white rounded-[32px] overflow-hidden border border-epicPink shadow-sm"
+                  className="bg-epicDark text-epicWhite rounded-[32px] overflow-hidden border border-white/20 shadow-sm"
                 >
                   <div className="grid lg:grid-cols-[180px_1fr] h-full">
-                    <div className="relative h-52 sm:h-44 lg:h-full min-h-[180px] bg-epicPink">
+                    <div className="relative h-52 sm:h-44 lg:h-full min-h-[180px] bg-epicDark">
                       <Image src={event.image} alt={event.title} fill sizes="(min-width: 1024px) 180px, 100vw" className={event.imageClass} />
                     </div>
                     <div className="p-6 flex flex-col justify-center min-w-0">
                       <div className="text-epicRed text-[10px] font-bold tracking-wide leading-snug mb-3">{event.type}</div>
-                      <h3 className="text-xl md:text-2xl font-black leading-tight tracking-normal text-epicDark mb-3 break-words">{event.title}</h3>
-                      <p className="text-epicDark/55 text-sm font-medium leading-relaxed break-words">{event.desc}</p>
-                      <button onClick={() => openEventGallery(event.galleryKey)} className="mt-5 self-start rounded-full bg-epicDark px-5 py-3 text-[10px] font-bold tracking-wide leading-snug text-white transition-all hover:bg-epicRed active:scale-95">{event.buttonLabel}</button>
+                      <h3 className="text-xl md:text-2xl font-black leading-tight tracking-normal text-epicWhite mb-3 break-words">{event.title}</h3>
+                      <p className="text-epicWhite/70 text-sm font-medium leading-relaxed break-words">{event.desc}</p>
+                      <button onClick={() => openEventGallery(event.galleryKey)} className="mt-5 self-start rounded-full bg-epicWhite px-5 py-3 text-[10px] font-bold tracking-wide leading-snug text-epicDark transition-all hover:bg-epicRed hover:text-epicWhite active:scale-95">{event.buttonLabel}</button>
                     </div>
                   </div>
                 </motion.article>

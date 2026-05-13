@@ -32,7 +32,7 @@ export default function Forecast({ t, lang }) {
   return (
     <>
       {/* 4. FORECAST (SWELL REPORT) — ВОЗВРАТ ГАБАРИТОВ + ФИКС КОНТЕНТА */}
-      <section id="forecast" className="py-24 bg-epicWhite px-6 scroll-mt-24 border-t border-epicPink/30">
+      <section id="forecast" className="py-24 bg-epicWhite px-6 scroll-mt-24 border-t border-epicDark/10">
         <div className="max-w-7xl mx-auto">
           <div className="bg-epicDark rounded-[40px] overflow-hidden shadow-2xl border border-white/5 flex flex-col lg:flex-row min-h-[500px]">
 

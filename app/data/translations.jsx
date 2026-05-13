@@ -1,5 +1,5 @@
-import { ShieldCheck, Users, Shirt, Camera, Smile } from "lucide-react";
-import { CustomSurfIcon, WhyBeachIcon, WhyMapV2Icon } from "../components/Icons";
+import { ShieldCheck, Users } from "lucide-react";
+import { WhyBeachIcon, WhyMapV2Icon } from "../components/Icons";
 
 export const translations = {
     ru: {
@@ -8,21 +8,19 @@ export const translations = {
       howIntro: "Мы разработали систему обучения, которая позволяет 90% новичков встать на доску уже на первом занятии. Ваш прогресс и безопасность — наш главный приоритет.",
 
     
-      includedItems: [
-        { label: "Серф", desc: "Доски разного размера под твой вес и габариты, включая доски для детей." },
-        { label: "Экип + защита", desc: "Лайкра твоего размера и профессиональный цинк для защиты от солнца." },
-        { label: "Контент", desc: "Качественные фото и видео с урока, с вашими лучшими проездами." },
-        { label: "Вайб", desc: "Кокос и обучение с душой" }
-      ],
       rentalModalTitle: "Забронировать аренду",
       rentalModalSub: "Выберите удобный мессенджер. Мы ответим вам в течение 5 минут.",
       msgRental: "Привет! Хочу забронировать аренду доски в Epic Surf.",
-      includedTitle: "В стоимость включено",
+      includedLabel: "Всё включено",
+      includedTitle: "Просто приходи на пляж",
+      includedSubtitle: "Мы подготовим всё необходимое для урока: доску, лайкру, защиту от солнца и фото/видео.",
+      includedAccentTitle: "Нет снаряжения?\nНе проблема.",
+      includedAccentDesc: "Всё, что нужно для первого занятия, уже входит в стоимость.",
       includedItems: [
-        { icon: <CustomSurfIcon />, label: "Серф", desc: "Доски разного размера под твой вес и габариты, включая доски для детей." },
-        { icon: <Shirt size={32} />, label: "Экип + защита", desc: "Лайкра твоего размера и профессиональный цинк для защиты от солнца." },
-        { icon: <Camera size={32} />, label: "Контент", desc: "Качественные фото и видео с урока, с вашими лучшими проездами." },
-        { icon: <Smile size={32} />, label: "Вайб", desc: "Кокос и обучение с душой" }
+        { icon: "board", label: "Доска", desc: "Подберём softboard под твой уровень, рост и вес." },
+        { icon: "rashguard", label: "Лайкра", desc: "Чистая лайкра для защиты от солнца и натирания." },
+        { icon: "zinc", label: "Zinc SPF", desc: "Плотная защита лица от тропического солнца." },
+        { icon: "camera", label: "Фото / видео", desc: "Снимаем лучшие моменты твоего урока." }
       ],
       whyItems: [
         { icon: <ShieldCheck size={40} />, title: "Сертифицированные инструкторы", desc: "Методичное обучение для уверенного и быстрого прогресса." },
@@ -33,7 +31,7 @@ export const translations = {
       navLessons: "Уроки", navRentals: "Аренда", navHow: "Процесс", navForecast: "Прогноз", navEvents: "Эвенты", navLocation: "Карта", btnBook: "Записаться",
       heroTitle: "Поймай свою", heroTitleEpic: "Epic", heroTitleEnd: "волну в Дананге",
       heroSub: "ШКОЛА СЕРФИНГА В ДАНАНГЕ - МЕСТО, ГДЕ ЖИВУТ СЕРФИНГОМ",
-      sectionTitle: "Выбери свой", sectionTitleRide: "Формат",
+      sectionTitle: "Выбери свой", sectionTitleRide: "формат",
       rentalBadge: "Gear up", rentalTitle: "Аренда", rentalTitleSurf: "Досок",
       rentalDesc: "Мы предоставляем премиальные софт-топы, лонгборды и шортборды. Поможем подобрать доску под текущие условия.",
       rentalPrice: "от 250,000 VND", rentalUnit: "Сессия / 2 часа", rentalBtn: "Арендовать",
@@ -103,21 +101,19 @@ export const translations = {
       howIntro: "We have developed a teaching system that allows 90% of beginners to stand up on a board during their very first lesson. Your safety and progress are our priority.",
 
       
-      includedItems: [
-        { label: "Surfboard", desc: "Boards in different sizes for your weight and build, including boards for kids." },
-        { label: "Gear + protection", desc: "A rashguard in your size and professional zinc for sun protection." },
-        { label: "Media", desc: "Quality photos and videos from the lesson, including your best rides." },
-        { label: "The Vibe", desc: "Coconut & good mood" }
-      ],
       rentalModalTitle: "Book your rental",
       rentalModalSub: "Choose your preferred messenger. We will reply within 5 minutes.",
       msgRental: "Hi! I want to book a surfboard rental at Epic Surf.",
-      includedTitle: "What's Included",
+      includedLabel: "Included",
+      includedTitle: "Just come to the beach",
+      includedSubtitle: "We prepare the essentials for your lesson: board, rashguard, sun protection and photos/videos.",
+      includedAccentTitle: "No gear?\nNo problem.",
+      includedAccentDesc: "Everything you need for the first session is already included.",
       includedItems: [
-        { icon: <CustomSurfIcon />, label: "Surfboard", desc: "Boards in different sizes for your weight and build, including boards for kids." },
-        { icon: <Shirt size={32} />, label: "Gear + protection", desc: "A rashguard in your size and professional zinc for sun protection." },
-        { icon: <Camera size={32} />, label: "Media", desc: "Quality photos and videos from the lesson, including your best rides." },
-        { icon: <Smile size={32} />, label: "The Vibe", desc: "Coconut & good mood" }
+        { icon: "board", label: "Board", desc: "Softboard matched to your level, height and weight." },
+        { icon: "rashguard", label: "Rashguard", desc: "Clean lycra for sun and rash protection." },
+        { icon: "zinc", label: "Zinc SPF", desc: "Strong face protection for tropical sun." },
+        { icon: "camera", label: "Photos / videos", desc: "We capture the best moments of your lesson." }
       ],
       whyItems: [
         { icon: <ShieldCheck size={40} />, title: "Certified Instructors", desc: "Structured coaching for fast, confident progress." },

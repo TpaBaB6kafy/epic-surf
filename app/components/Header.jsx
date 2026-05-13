@@ -64,7 +64,7 @@ export default function Header({
 
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden w-9 h-9 flex items-center justify-center bg-epicPink rounded-full text-epicDark transition-all"
+              className="lg:hidden w-9 h-9 flex items-center justify-center bg-epicMint rounded-full text-epicDark transition-all"
             >
               {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -78,7 +78,7 @@ export default function Header({
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 w-full bg-white shadow-2xl border-t border-epicPink lg:hidden z-0 overflow-hidden"
+            className="absolute top-full left-0 w-full bg-white shadow-2xl border-t border-epicDark/10 lg:hidden z-0 overflow-hidden"
           >
             <div className="flex flex-col p-6 gap-4 pb-8 relative z-10">
               {navItems.map((item) => (
@@ -86,7 +86,7 @@ export default function Header({
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-2xl font-bold tracking-normal leading-snug break-words text-epicDark hover:text-epicRed py-2 border-b border-epicPink/50"
+                  className="text-2xl font-bold tracking-normal leading-snug break-words text-epicDark hover:text-epicRed py-2 border-b border-epicDark/10"
                 >
                   {item.label}
                 </a>

@@ -81,7 +81,7 @@ export default function Lessons({ t, links, openBookingModal }) {
   return (
     <section id="lessons" className="py-24 px-6 max-w-7xl mx-auto scroll-mt-24">
       <h2 className="text-4xl md:text-6xl font-black text-center mb-12 md:mb-16 tracking-normal leading-tight text-epicDark break-words">
-        {t.sectionTitle} <span className="text-epicRed">{t.sectionTitleRide}</span>
+        {t.sectionTitle} <span className="text-epicDark">{t.sectionTitleRide}</span>
       </h2>
 
       <div
@@ -99,7 +99,7 @@ export default function Lessons({ t, links, openBookingModal }) {
           {t.cards.map((item, i) => (
             <motion.div
               key={i}
-              className="w-[76vw] max-w-[300px] sm:w-[300px] flex-shrink-0 snap-start bg-epicPink rounded-[40px] overflow-hidden shadow-lg flex flex-col border border-white/50 group"
+              className="w-[76vw] max-w-[300px] sm:w-[300px] flex-shrink-0 snap-start bg-epicDark rounded-[40px] overflow-hidden shadow-lg flex flex-col border border-white/20 text-epicWhite group"
             >
               <div className="relative h-48 w-full">
                 <Image
@@ -111,14 +111,14 @@ export default function Lessons({ t, links, openBookingModal }) {
                 />
               </div>
               <div className="p-8 flex flex-col flex-1">
-                <div className="mb-4 text-epicRed">
+                <div className="mb-4 text-epicMint">
                   {lessonIcons[i] || lessonIcons[0]}
                 </div>
                 <div className="text-[11px] text-epicRed font-bold mb-2 tracking-wide leading-snug">{item.badge}</div>
-                <h3 className="text-xl md:text-2xl font-bold mb-3 text-epicDark leading-snug break-words hyphens-auto">{item.title}</h3>
-                <p className="text-epicDark/70 mb-6 text-sm flex-1">{item.desc}</p>
-                <div className="text-2xl font-black mb-8 text-epicDark">{item.price}</div>
-                <button onClick={() => openBookingModal(links.group)} className="w-full bg-epicDark text-white py-5 rounded-[20px] font-black uppercase text-xs tracking-wide shadow-lg transition-all duration-300 group-hover:bg-epicRed group-active:bg-epicRed hover:bg-epicRed hover:-translate-y-0.5 active:bg-epicRed active:translate-y-0 active:scale-95">{t.btnBook}</button>
+                <h3 className="text-xl md:text-2xl font-bold mb-3 text-epicWhite leading-snug break-words hyphens-auto">{item.title}</h3>
+                <p className="text-epicWhite/75 mb-6 text-sm flex-1">{item.desc}</p>
+                <div className="text-2xl font-black mb-8 text-epicWhite">{item.price}</div>
+                <button onClick={() => openBookingModal(links.group)} className="w-full bg-epicMint text-epicDark py-5 rounded-[20px] font-black uppercase text-xs tracking-wide shadow-lg transition-all duration-300 group-hover:bg-epicRed group-hover:text-epicWhite group-active:bg-epicRed hover:bg-epicRed hover:text-epicWhite hover:-translate-y-0.5 active:bg-epicRed active:translate-y-0 active:scale-95">{t.btnBook}</button>
               </div>
             </motion.div>
           ))}

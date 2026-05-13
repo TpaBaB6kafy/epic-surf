@@ -5,7 +5,7 @@ import Hero from "./Hero";
 import WhyEpic from "./WhyEpic";
 import HowItWorks from "./HowItWorks";
 import Lessons from "./Lessons";
-import Included from "./Included";
+import IncludedBento from "./IncludedBento";
 import Rentals from "./Rentals";
 import Forecast from "./Forecast";
 import Reviews from "./Reviews";
@@ -17,7 +17,6 @@ import MessengerFab from "./MessengerFab";
 import BookingModal from "./BookingModal";
 import RentalModal from "./RentalModal";
 import { translations } from "../data/translations";
-import { includedImages } from "../data/included";
 import { links } from "../data/links";
 import {
   getEventGalleryGroups,
@@ -76,7 +75,14 @@ export default function EpicSurfLanding({ locale = "en" }) {
         openBookingModal={setBookingModalUrl}
       />
 
-      <Included title={t.includedTitle} items={t.includedItems} includedImages={includedImages} />
+      <IncludedBento
+        label={t.includedLabel}
+        title={t.includedTitle}
+        description={t.includedSubtitle}
+        accentTitle={t.includedAccentTitle}
+        accentDesc={t.includedAccentDesc}
+        items={t.includedItems}
+      />
       <Rentals
         t={t}
         setRentalModalOpen={setRentalModalOpen}

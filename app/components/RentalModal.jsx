@@ -29,7 +29,7 @@ export default function RentalModal({ isRentalModalOpen, setRentalModalOpen, t, 
               </button>
 
               <div className="mb-10 pt-4 text-epicDark">
-                <div className="w-20 h-20 bg-[#EDF2F4] rounded-[30px] flex items-center justify-center text-epicRed mx-auto mb-6 shadow-sm">
+                <div className="w-20 h-20 bg-epicMint rounded-[30px] flex items-center justify-center text-epicRed mx-auto mb-6 shadow-sm">
                   <MessageCircle size={40} />
                 </div>
                 <h3 className="text-3xl font-black tracking-normal leading-tight break-words mb-3">{t.rentalModalTitle}</h3>

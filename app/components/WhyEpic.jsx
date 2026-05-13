@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function WhyEpic({ items }) {
   return (
-    <section className="py-24 bg-epicWhite px-6 border-b border-epicPink/30">
+    <section className="py-24 bg-epicWhite px-6 border-b border-epicDark/10">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 md:gap-12 text-center">
           {items.map((item, idx) => (
@@ -15,7 +15,7 @@ export default function WhyEpic({ items }) {
               viewport={{ once: true }}
               className="flex flex-col items-center"
             >
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-epicPink rounded-[24px] md:rounded-[30px] flex items-center justify-center text-epicRed shadow-sm border border-white/50 mb-6">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-epicMint rounded-[24px] md:rounded-[30px] flex items-center justify-center text-epicRed shadow-sm border border-white/50 mb-6">
                 {item.icon}
               </div>
               <div className="space-y-2">
