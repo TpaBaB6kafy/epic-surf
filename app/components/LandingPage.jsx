@@ -116,6 +116,7 @@ export default function EpicSurfLanding({ locale = "en" }) {
       />
       <Footer
         t={t}
+        lang={lang}
         links={links}
         InstagramIcon={InstagramIcon}
         FacebookIcon={FacebookIcon}

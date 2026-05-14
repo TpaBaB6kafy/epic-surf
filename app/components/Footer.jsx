@@ -1,9 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { MapPin, Send } from "lucide-react";
+import Link from "next/link";
+import { Handshake, MapPin, Send } from "lucide-react";
 
-export default function Footer({ t, links, InstagramIcon, FacebookIcon, YoutubeIcon, ThreadsIcon }) {
+export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookIcon, YoutubeIcon, ThreadsIcon }) {
+  const partnersHref = lang === "ru" ? "/ru/partners" : "/partners";
+  const partnersLabel = lang === "ru" ? "Для партнёров" : "Partners";
+
   return (
     <footer id="location" className="bg-epicDark text-white pt-24 pb-12 px-6 border-t border-white/5">
       <div className="max-w-7xl mx-auto">
@@ -39,8 +43,14 @@ export default function Footer({ t, links, InstagramIcon, FacebookIcon, YoutubeI
                 <Send size={16} /> TG Channel
               </a>
             </div>
-            <div className="pt-8 border-t border-white/5 font-bold text-[11px] tracking-wide text-white/55 flex items-center justify-center md:justify-start gap-3 mb-2 leading-snug">
-              <MapPin size={16} className="text-epicRed" /> {t.locationAddress}
+            <div className="pt-8 border-t border-white/5 flex flex-col items-center md:items-start gap-3">
+              <Link href={partnersHref} className="flex items-center justify-center md:justify-start gap-3 text-sm font-bold leading-snug text-white/70 transition-colors hover:text-epicRed">
+                <Handshake size={16} className="shrink-0 text-epicRed" />
+                {partnersLabel}
+              </Link>
+              <div className="flex items-center justify-center md:justify-start gap-3 text-sm font-bold leading-snug text-white/70">
+                <MapPin size={16} className="shrink-0 text-epicRed" /> {t.locationAddress}
+              </div>
             </div>
           </div>
           <div className="lg:col-span-7 h-[450px] rounded-[60px] overflow-hidden border border-white/10 shadow-2xl relative">
@@ -55,7 +65,7 @@ export default function Footer({ t, links, InstagramIcon, FacebookIcon, YoutubeI
           </div>
         </div>
         <div className="pt-12 border-t border-white/5 text-[11px] font-bold tracking-wide text-white/25 text-center md:text-left">
-          © 2026 Epic Surf School - Ride Every Day
+          <div>© 2026 Epic Surf School - Ride Every Day</div>
         </div>
       </div>
     </footer>

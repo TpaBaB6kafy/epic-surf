@@ -1,4 +1,4 @@
-import { languageAlternates, localizedUrl } from "./data/siteConfig";
+import { absoluteUrl, languageAlternates, localizedUrl } from "./data/siteConfig";
 
 export default function sitemap() {
   const alternates = {
@@ -19,6 +19,32 @@ export default function sitemap() {
       changeFrequency: "weekly",
       priority: 0.9,
       alternates,
+    },
+    {
+      url: absoluteUrl("/partners"),
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+      alternates: {
+        languages: {
+          en: absoluteUrl("/partners"),
+          ru: absoluteUrl("/ru/partners"),
+          "x-default": absoluteUrl("/partners"),
+        },
+      },
+    },
+    {
+      url: absoluteUrl("/ru/partners"),
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+      alternates: {
+        languages: {
+          en: absoluteUrl("/partners"),
+          ru: absoluteUrl("/ru/partners"),
+          "x-default": absoluteUrl("/partners"),
+        },
+      },
     },
   ];
 }

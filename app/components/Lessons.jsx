@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { LessonGroupIcon, LessonIndividualIcon, LessonSkateboardIcon, LessonSplitIcon, LessonWavesIcon } from "./Icons";
+import { handleHorizontalWheelScroll } from "./horizontalScroll";
 
 export default function Lessons({ t, links, openBookingModal }) {
   const lessonsScrollRef = useRef(null);
@@ -22,19 +23,7 @@ export default function Lessons({ t, links, openBookingModal }) {
   });
 
   const handleLessonsWheel = (event) => {
-    const scroller = lessonsScrollRef.current;
-    if (!scroller || scroller.scrollWidth <= scroller.clientWidth) return;
-
-    const maxScrollLeft = scroller.scrollWidth - scroller.clientWidth;
-    const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
-    const canScroll =
-      (delta < 0 && scroller.scrollLeft > 0) ||
-      (delta > 0 && scroller.scrollLeft < maxScrollLeft - 1);
-
-    if (!delta || !canScroll) return;
-
-    event.preventDefault();
-    scroller.scrollBy({ left: delta, behavior: "smooth" });
+    handleHorizontalWheelScroll(event, lessonsScrollRef.current);
   };
 
   const handleLessonsPointerDown = (event) => {
@@ -93,7 +82,7 @@ export default function Lessons({ t, links, openBookingModal }) {
         onPointerCancel={stopLessonsDrag}
         onPointerLeave={stopLessonsDrag}
         onClickCapture={handleLessonsClickCapture}
-        className="relative left-1/2 w-screen -translate-x-1/2 px-6 md:left-auto md:w-full md:-mx-6 md:translate-x-0 md:px-6 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none touch-auto snap-x snap-mandatory md:snap-none scroll-px-6"
+        className="relative left-1/2 w-screen -translate-x-1/2 px-6 md:left-auto md:w-full md:-mx-6 md:translate-x-0 md:px-6 overflow-x-auto overscroll-x-contain scrollbar-hide cursor-grab active:cursor-grabbing select-none touch-auto snap-x snap-mandatory md:snap-none scroll-px-6"
       >
         <div className="flex gap-4 sm:gap-6 md:gap-8 pb-8 w-max">
           {t.cards.map((item, i) => (

@@ -54,12 +54,12 @@ export const translations = {
       howSteps: [
         {
           title: "Встреча",
-          time: "15 мин",
+          time: "10 мин",
           desc: "Знакомство, подготовка и подбор серфборда под ваш уровень."
         },
         {
           title: "Подготовка на берегу",
-          time: "20 мин",
+          time: "15 мин",
           desc: "Основы сёрфинга и правила безопасности. Отработка базовых упражнений: тейк-офф (вставание на доску), повороты, генерация скорости."
         },
         {
@@ -147,12 +147,12 @@ export const translations = {
       howSteps: [
         {
           title: "Meet & Gear Up",
-          time: "15 min",
+          time: "10 min",
           desc: "Meet your coach, gear up, and get the perfect surfboard for your level."
         },
         {
           title: "Beach Theory",
-          time: "20 min",
+          time: "15 min",
           desc: "Surfing basics and ocean safety. Practicing core movements: pop-up, turning, and speed generation."
         },
         {

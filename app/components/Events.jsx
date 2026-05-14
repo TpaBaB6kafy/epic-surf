@@ -6,10 +6,8 @@ export default function Events({ t, openEventGallery }) {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-14">
             <div className="max-w-3xl">
-              <div className="inline-block bg-epicRed/10 text-epicRed px-4 py-1 rounded-full font-bold text-[11px] tracking-wide border border-epicRed/10 mb-5">Community Calendar</div>
               <h2 className="text-4xl md:text-7xl font-black tracking-normal leading-tight text-epicDark break-words">{t.eventsTitle}</h2>
             </div>
-            <p className="max-w-xl text-base md:text-lg font-medium leading-relaxed text-epicDark/60 break-words">{t.eventsIntro}</p>
           </div>
 
           <div className="grid lg:grid-cols-12 gap-5 lg:gap-6 items-stretch">

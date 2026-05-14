@@ -1,7 +1,9 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { handleHorizontalWheelScroll } from "./horizontalScroll";
 
 export default function Gallery({
   links,
@@ -14,6 +16,7 @@ export default function Gallery({
   galleryPhotoSrc,
   InstagramIcon,
 }) {
+  const mobileGalleryScrollRef = useRef(null);
   const galleryAlt = (idx) =>
     `${activeGalleryGroup.label} photo ${idx + 1} - Epic Surf School Da Nang`;
 
@@ -22,9 +25,6 @@ export default function Gallery({
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
           <div className="space-y-4 text-white">
-            <div className="inline-block bg-white/5 text-epicRed px-4 py-1 rounded-full font-bold text-[11px] tracking-wide border border-white/10">
-              {t.galleryBadge}
-            </div>
             <h2 className="text-5xl md:text-8xl font-black tracking-normal leading-[0.98] break-words">
               Epic <br />
               <span className="text-epicRed">Moments</span>
@@ -87,7 +87,11 @@ export default function Gallery({
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-epicDark to-transparent"></div>
           </div>
 
-          <div className="flex md:hidden overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-6 px-6 gap-4 pb-4">
+          <div
+            ref={mobileGalleryScrollRef}
+            onWheel={(event) => handleHorizontalWheelScroll(event, mobileGalleryScrollRef.current)}
+            className="flex md:hidden overflow-x-auto overscroll-x-contain snap-x snap-mandatory scrollbar-hide -mx-6 px-6 gap-4 pb-4"
+          >
             {activeGalleryGroup.photos.map((photo, idx) => (
               <div
                 key={`${activeGalleryGroup.key}-mobile-${photo}`}
