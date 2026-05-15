@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Handshake, MapPin, Send } from "lucide-react";
 
 export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookIcon, YoutubeIcon, ThreadsIcon }) {
@@ -44,10 +43,10 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
               </a>
             </div>
             <div className="pt-8 border-t border-white/5 flex flex-col items-center md:items-start gap-3">
-              <Link href={partnersHref} className="flex items-center justify-center md:justify-start gap-3 text-sm font-bold leading-snug text-white/70 transition-colors hover:text-epicRed">
+              <a href={partnersHref} className="flex items-center justify-center md:justify-start gap-3 text-sm font-bold leading-snug text-white/70 transition-colors hover:text-epicRed">
                 <Handshake size={16} className="shrink-0 text-epicRed" />
                 {partnersLabel}
-              </Link>
+              </a>
               <div className="flex items-center justify-center md:justify-start gap-3 text-sm font-bold leading-snug text-white/70">
                 <MapPin size={16} className="shrink-0 text-epicRed" /> {t.locationAddress}
               </div>

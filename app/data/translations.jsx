@@ -12,7 +12,7 @@ export const translations = {
       rentalModalSub: "Выберите удобный мессенджер. Мы ответим вам в течение 5 минут.",
       msgRental: "Привет! Хочу забронировать аренду доски в Epic Surf.",
       includedLabel: "Всё включено",
-      includedTitle: "Просто приходи на пляж",
+      includedTitle: "Всё включено",
       includedSubtitle: "Мы подготовим всё необходимое для урока: доску, лайкру, защиту от солнца и фото/видео.",
       includedAccentTitle: "Нет снаряжения?\nНе проблема.",
       includedAccentDesc: "Всё, что нужно для первого занятия, уже входит в стоимость.",
@@ -34,6 +34,8 @@ export const translations = {
       sectionTitle: "Выбери свой", sectionTitleRide: "формат",
       rentalBadge: "Gear up", rentalTitle: "Аренда", rentalTitleSurf: "Досок",
       rentalDesc: "Мы предоставляем премиальные софт-топы, лонгборды и шортборды. Поможем подобрать доску под текущие условия.",
+      rentalDescPrimary: "У нас можно арендовать мягкие доски для новичков, лонгборды и жёсткие доски для уверенного катания.",
+      rentalDescSecondary: "Поможем подобрать доску, привезём к месту катания и дадим всё необходимое для комфортной сессии.",
       rentalPrice: "от 250,000 VND", rentalUnit: "Сессия / 2 часа", rentalBtn: "Арендовать",
       reviewsTitle: "Лучшие вайбы в Дананге", reviewsLink: "Читать все отзывы на Google Maps",
       galleryBadge: "Комьюнити и вайб",
@@ -49,6 +51,11 @@ export const translations = {
       locationTitle: "Найди наш", locationTitleSpot: "Спот",
       locationAddress: "Пляж Микхе, Дананг", locationLandmark: "Ищите красный флаг EPIC SURF на песке напротив TMS Hotel",
       modalTitle: "Запись", featureLycra: "Лайкры и цинк", featureSizes: "Все размеры", featureWetsuits: "Гидрокостюмы", featureDelivery: "Привозим на спот",
+      featureWetsuitsDesktop: "Гидро-\nкостюмы",
+      featureDeliveryDesc: "Доставим доску туда, где удобно кататься.",
+      featureSizesDesc: "Подберём доску под уровень и условия.",
+      featureLycraDesc: "Дадим базовую защиту от солнца.",
+      featureWetsuitsDesc: "Есть варианты для прохладных дней.",
       boardTypes: ["Софтборды", "Лонгборды", "Малибу", "Шортборды"],
       howTitle: "Как проходят", howTitleEnd: "уроки",
       howSteps: [
@@ -83,11 +90,11 @@ export const translations = {
         { q: "Сколько нужно заниматься, чтобы встать на доску?", a: "Большинство уезжает уже на первом занятии, все в ваших руках." }
       ],
       cards: [
-        { title: "Групповой урок", badge: "Популярно", desc: "Групповой урок - Подходит для тех, кто хочет учиться в лёгкой, живой атмосфере единомышленников", price: "900,000 VND" },
-        { title: "Сплит урок", badge: "Выгодно", desc: "Сплит - идеально подходит для пар, друзей или детей - максимум внимания и практики в комфортной атмосфере. На уроке вы вдвоём и инструктор.", price: "2,500,000 VND" },
-        { title: "Приватный урок", badge: "Премиум", desc: "Индивидуальный урок - формат один на один с инструктором, который даёт максимальный результат и быстрый прогресс уже за одно занятие.", price: "1,800,000 VND" },
-        { title: "Серф-скейт", badge: "Для базы", desc: "Сёрф-скейт - идеальный тренажер для отработки маневров на суше", price: "600,000 VND" },
-        { title: "Line-up / Pro", badge: "Для опытных", desc: "Лайн-апа - урок для продолжающих сёрферов: зелёные волны, проезд по стенке", price: "2,400,000 VND" }
+        { title: "Групповой урок", badge: "Популярно", desc: "Идеально для новичков. До 4-х человек на инструктора.", price: "900,000 VND" },
+        { title: "Сплит урок", badge: "Выгодно", desc: "Для 2-х человек. Больше внимания тренера. Цена за двоих.", price: "2,500,000 VND" },
+        { title: "Приватный урок", badge: "Премиум", desc: "Индивидуальная тренировка для быстрого прогресса.", price: "1,800,000 VND" },
+        { title: "Серф-скейт", badge: "Для базы", desc: "Отработка баланса, поворотов и техники на суше.", price: "600,000 VND" },
+        { title: "Line-up / Pro", badge: "Для опытных", desc: "Выход на лайнап с гидом. Поиск лучших пиков.", price: "2,400,000 VND" }
       ],
       reviewsList: [
         { name: "Evgenia", text: "Отличные уроки! Ребята влюбили меня в серф! Очень понятные объяснения, много практики. 🔥", date: "Неделю назад" },
@@ -105,7 +112,7 @@ export const translations = {
       rentalModalSub: "Choose your preferred messenger. We will reply within 5 minutes.",
       msgRental: "Hi! I want to book a surfboard rental at Epic Surf.",
       includedLabel: "Included",
-      includedTitle: "Just come to the beach",
+      includedTitle: "Everything included",
       includedSubtitle: "We prepare the essentials for your lesson: board, rashguard, sun protection and photos/videos.",
       includedAccentTitle: "No gear?\nNo problem.",
       includedAccentDesc: "Everything you need for the first session is already included.",
@@ -127,6 +134,8 @@ export const translations = {
       sectionTitle: "Choose Your", sectionTitleRide: "Ride",
       rentalBadge: "Professional Gear", rentalTitle: "Surf Board", rentalTitleSurf: "Rentals",
       rentalDesc: "We provide premium soft-tops, longboards, and performance shortboards.",
+      rentalDescPrimary: "You can rent soft boards for beginners, longboards, and hard boards for confident riding.",
+      rentalDescSecondary: "We will help choose the right board, bring it to your surf spot, and provide everything you need for a comfortable session.",
       rentalPrice: "from 250,000 VND", rentalUnit: "2 hour / Session", rentalBtn: "Rent Now",
       reviewsTitle: "The best surf vibes", reviewsLink: "Read more on Google Maps",
       galleryBadge: "Community & Vibe",
@@ -142,6 +151,11 @@ export const translations = {
       locationTitle: "Find the", locationTitleSpot: "Spot",
       locationAddress: "My Khe Beach, Da Nang", locationLandmark: "Look for the Red EPIC SURF flag opposite TMS Hotel",
       modalTitle: "Booking", featureLycra: "Rashguards & Zinc", featureSizes: "All Sizes", featureWetsuits: "Wetsuits", featureDelivery: "Spot Delivery",
+      featureWetsuitsDesktop: "Wet-\nsuits",
+      featureDeliveryDesc: "We will bring the board to the spot where it is convenient to surf.",
+      featureSizesDesc: "We will match the board to your level and the conditions.",
+      featureLycraDesc: "We will provide basic sun protection.",
+      featureWetsuitsDesc: "Options available for cooler days.",
       boardTypes: ["Softboards", "Longboards", "Malibus", "Shortboards"],
       howTitle: "How it", howTitleEnd: "works",
       howSteps: [
@@ -176,11 +190,11 @@ export const translations = {
         { q: "How long does it take to stand up on the board?", a: "Most students get riding during the first lesson, but it is in your hands." }
       ],
       cards: [
-        { title: "Group Lesson", badge: "Most Popular", desc: "Perfect for beginners. Max 4 people.", price: "900,000 VND" },
-        { title: "Split Lesson", badge: "Best Value", desc: "For 2 people. More coach attention.", price: "2,500,000 VND" },
-        { title: "Private Lesson", badge: "Premium", desc: "1-on-1 coaching for maximum progress.", price: "1,800,000 VND" },
-        { title: "Surf-skate", badge: "Fundamentals", desc: "Master turns on land to speed up your progress in the water.", price: "600,000 VND" },
-        { title: "Line-up / Pro", badge: "Advanced", desc: "Guiding to the best peaks.", price: "2,400,000 VND" }
+        { title: "Group Lesson", badge: "Most Popular", desc: "Perfect for beginners. Up to 4 people per instructor.", price: "900,000 VND" },
+        { title: "Split Lesson", badge: "Best Value", desc: "For 2 people. More coach attention. Price for two.", price: "2,500,000 VND" },
+        { title: "Private Lesson", badge: "Premium", desc: "Individual coaching for faster progress.", price: "1,800,000 VND" },
+        { title: "Surf-skate", badge: "Fundamentals", desc: "Practice balance, turns and surf technique on land.", price: "600,000 VND" },
+        { title: "Line-up / Pro", badge: "Advanced", desc: "Guided line-up session and the best peak search.", price: "2,400,000 VND" }
       ],
       reviewsList: [
         { name: "Evgenia", text: "Great lessons! The team made us fall in love with surfing! 🔥", date: "1 week ago" },

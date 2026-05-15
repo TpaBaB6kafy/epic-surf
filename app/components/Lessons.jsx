@@ -8,12 +8,13 @@ import { handleHorizontalWheelScroll } from "./horizontalScroll";
 
 export default function Lessons({ t, links, openBookingModal }) {
   const lessonsScrollRef = useRef(null);
+  const interactiveSelector = "button, a, input, select, textarea, [role='button']";
   const lessonIcons = [
-    <LessonGroupIcon key="group" className="h-8 w-8" />,
-    <LessonSplitIcon key="split" className="h-8 w-8" />,
-    <LessonIndividualIcon key="individual" className="h-8 w-8" />,
-    <LessonSkateboardIcon key="skateboard" className="h-8 w-8" />,
-    <LessonWavesIcon key="waves" className="h-8 w-8" />
+    <LessonGroupIcon key="group" className="h-12 w-12" />,
+    <LessonSplitIcon key="split" className="h-12 w-12" />,
+    <LessonIndividualIcon key="individual" className="h-12 w-12" />,
+    <LessonSkateboardIcon key="skateboard" className="h-12 w-12" />,
+    <LessonWavesIcon key="waves" className="h-12 w-12" />
   ];
   const lessonsDragRef = useRef({
     isDragging: false,
@@ -28,6 +29,7 @@ export default function Lessons({ t, links, openBookingModal }) {
 
   const handleLessonsPointerDown = (event) => {
     if (event.pointerType !== "mouse" || event.button !== 0) return;
+    if (event.target.closest(interactiveSelector)) return;
 
     const scroller = lessonsScrollRef.current;
     if (!scroller || scroller.scrollWidth <= scroller.clientWidth) return;
@@ -62,9 +64,11 @@ export default function Lessons({ t, links, openBookingModal }) {
   const handleLessonsClickCapture = (event) => {
     if (!lessonsDragRef.current.moved) return;
 
+    lessonsDragRef.current.moved = false;
+    if (event.target.closest(interactiveSelector)) return;
+
     event.preventDefault();
     event.stopPropagation();
-    lessonsDragRef.current.moved = false;
   };
 
   return (
@@ -99,15 +103,17 @@ export default function Lessons({ t, links, openBookingModal }) {
                   className="object-cover"
                 />
               </div>
-              <div className="p-8 flex flex-col flex-1">
-                <div className="mb-4 text-epicMint">
+              <div className="px-8 pb-8 pt-9 flex flex-col flex-1 text-center items-center">
+                <div className="mb-3 text-epicGray">
                   {lessonIcons[i] || lessonIcons[0]}
                 </div>
-                <div className="text-[11px] text-epicRed font-bold mb-2 tracking-wide leading-snug">{item.badge}</div>
-                <h3 className="text-xl md:text-2xl font-bold mb-3 text-epicWhite leading-snug break-words hyphens-auto">{item.title}</h3>
-                <p className="text-epicWhite/75 mb-6 text-sm flex-1">{item.desc}</p>
-                <div className="text-2xl font-black mb-8 text-epicWhite">{item.price}</div>
-                <button onClick={() => openBookingModal(links.group)} className="w-full bg-epicMint text-epicDark py-5 rounded-[20px] font-black uppercase text-xs tracking-wide shadow-lg transition-all duration-300 group-hover:bg-epicRed group-hover:text-epicWhite group-active:bg-epicRed hover:bg-epicRed hover:text-epicWhite hover:-translate-y-0.5 active:bg-epicRed active:translate-y-0 active:scale-95">{t.btnBook}</button>
+                <div className="text-[12px] text-epicRed font-extrabold mb-5 leading-snug">{item.badge}</div>
+                <h3 className="text-2xl font-extrabold mb-7 text-epicWhite leading-tight break-words hyphens-auto">{item.title}</h3>
+                <p className="text-epicWhite/80 mb-12 text-sm leading-7 font-medium max-w-[220px] flex-1">
+                  {item.desc}
+                </p>
+                <div className="text-[28px] font-normal mb-8 text-epicWhite leading-none tracking-normal">{item.price}</div>
+                <button onClick={() => openBookingModal(links.group)} className="w-full bg-epicRed text-epicWhite py-5 rounded-[18px] font-extrabold uppercase text-sm tracking-wide shadow-lg transition-all duration-300 hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-95">{t.btnBook}</button>
               </div>
             </motion.div>
           ))}

@@ -23,7 +23,7 @@ export default function HowItWorks({ t }) {
           <h2 className="text-4xl md:text-7xl font-black tracking-normal text-epicDark leading-[0.98] break-words">
             {t.howTitle} <span className="text-epicRed">{t.howTitleEnd}</span>
           </h2>
-          <p className="text-epicDark/50 text-base md:text-lg font-medium leading-relaxed max-w-2xl mx-auto">
+          <p className="font-subtitle text-epicDark/50 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
             {t.howIntro}
           </p>
         </div>

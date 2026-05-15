@@ -1,14 +1,10 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Roboto_Flex } from "next/font/google";
 import { buildStructuredData } from "../data/siteConfig";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const robotoFlex = Roboto_Flex({
+  variable: "--font-roboto-flex",
+  subsets: ["latin", "cyrillic"],
+  weight: ["100", "400"],
 });
 
 export default function RootLayoutShell({ children, locale }) {
@@ -17,8 +13,12 @@ export default function RootLayoutShell({ children, locale }) {
   return (
     <html
       lang={locale}
-      className={`${geistSans.variable} ${geistMono.variable} scroll-smooth antialiased`}
+      className={`${robotoFlex.variable} scroll-smooth antialiased`}
     >
+      <head>
+        <link rel="preconnect" href="https://n1304231.alteg.io" />
+        <link rel="dns-prefetch" href="https://n1304231.alteg.io" />
+      </head>
       <body className="min-h-screen">
         <script
           type="application/ld+json"

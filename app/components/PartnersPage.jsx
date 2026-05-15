@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
@@ -61,7 +60,7 @@ function SectionHeading({ title, subtitle, centered = true }) {
         {title}
       </h2>
       {subtitle && (
-        <p className="text-base font-medium leading-relaxed text-epicDark/60 md:text-lg">
+        <p className="font-subtitle text-base leading-relaxed text-epicDark/60 md:text-lg">
           {subtitle}
         </p>
       )}
@@ -117,13 +116,12 @@ export default function PartnersPage({ locale = "en" }) {
   return (
     <div
       className="min-h-screen overflow-x-clip bg-epicWhite font-sans text-epicDark"
-      style={{ fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif' }}
     >
       <main>
         <section className="relative overflow-hidden px-5 pb-20 pt-6 md:px-6 md:pb-28">
           <DotPattern />
           <div className="relative z-10 mx-auto flex max-w-7xl items-center justify-between gap-4">
-            <Link href={content.homeHref} className="inline-flex items-center rounded-full bg-white px-5 py-3 shadow-sm transition active:scale-95">
+            <a href={content.homeHref} className="inline-flex items-center rounded-full bg-white px-5 py-3 shadow-sm transition active:scale-95">
               <Image
                 src="/epic-logo-v-ksu-v4.png"
                 alt="EPIC SURF"
@@ -132,13 +130,13 @@ export default function PartnersPage({ locale = "en" }) {
                 priority
                 className="h-8 w-auto"
               />
-            </Link>
-            <Link
+            </a>
+            <a
               href={content.languageHref}
               className="flex h-11 w-11 items-center justify-center rounded-full bg-epicDark text-[11px] font-black uppercase leading-none text-white shadow-md"
             >
               {content.languageLabel}
-            </Link>
+            </a>
           </div>
 
           <div className="relative z-10 mx-auto grid max-w-7xl gap-10 pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:pt-24">
@@ -157,7 +155,7 @@ export default function PartnersPage({ locale = "en" }) {
                 <h1 className="max-w-5xl text-5xl font-black leading-[0.9] tracking-normal text-epicDark md:text-7xl lg:text-8xl">
                   {content.title}
                 </h1>
-                <p className="max-w-2xl text-base font-medium leading-relaxed text-epicDark/70 md:text-xl">
+                <p className="font-subtitle max-w-2xl text-base leading-relaxed text-epicDark/70 md:text-xl">
                   {content.subtitle}
                 </p>
               </div>
@@ -250,7 +248,7 @@ export default function PartnersPage({ locale = "en" }) {
               <h2 className="text-4xl font-black leading-[0.98] tracking-normal text-white md:text-6xl">
                 {content.sections.process.title}
               </h2>
-              <p className="mt-5 text-base font-medium leading-relaxed text-white/60 md:text-lg">
+              <p className="font-subtitle mt-5 text-base leading-relaxed text-white/60 md:text-lg">
                 {content.sections.process.subtitle}
               </p>
             </div>
@@ -327,7 +325,7 @@ export default function PartnersPage({ locale = "en" }) {
               <h2 className="text-4xl font-black leading-[0.98] tracking-normal md:text-6xl">
                 {content.sections.finalCta.title}
               </h2>
-              <p className="mx-auto max-w-2xl text-base font-medium leading-relaxed text-white/80 md:text-lg">
+              <p className="font-subtitle mx-auto max-w-2xl text-base leading-relaxed text-white/80 md:text-lg">
                 {content.sections.finalCta.text}
               </p>
               <a

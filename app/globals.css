@@ -1,18 +1,11 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "Chester Sans";
-  src: url("/fonts/ChesterSans-Light.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
 @theme {
  --color-epicDark: #2E2E2E;
   --color-epicRed: #FE746A;
   --color-epicWhite: #F6F6F6;
   --color-epicMint: #AAFFC7;
+  --color-epicGray: #585858;
   
   --animate-marquee: marquee 60s linear infinite;
   @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -30,11 +23,42 @@
 }
 
 html { scroll-behavior: smooth; }
-body { @apply antialiased text-epicDark bg-epicWhite font-sans; }
+body {
+  @apply antialiased text-epicDark bg-epicWhite;
+  font-family: var(--font-roboto-flex), Arial, sans-serif;
+  font-weight: 400;
+}
 
-.hero-subtitle {
-  color: #F6F6F6 !important;
-  font-family: "Chester Sans", Arial, sans-serif !important;
-  font-weight: 300 !important;
-  line-height: 1.35 !important;
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Arial Black", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: 900;
+  }
+
+  button {
+    font-family: var(--font-roboto-flex), Arial, sans-serif;
+    font-weight: 400 !important;
+  }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: "Arial Black", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: 900;
+  }
+
+  .font-subtitle {
+    font-family: var(--font-roboto-flex), Arial, sans-serif;
+    font-weight: 100;
+  }
+
+  .font-body {
+    font-family: var(--font-roboto-flex), Arial, sans-serif;
+    font-weight: 400;
+  }
 }

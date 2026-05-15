@@ -43,8 +43,8 @@ export default function Forecast({ t, lang }) {
                 {/* 1. Главный показатель (Высота) — Крупно + Центровка */}
                 <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4">
                   <div className="flex items-center gap-3">
-                    <span className="w-2 h-2 bg-[#00FF41] rounded-full animate-pulse shadow-[0_0_10px_#00FF41]"></span>
-                    <span className="text-[11px] font-bold tracking-wide opacity-35 leading-snug">{t.forecastTitle} {t.forecastTitleSpot}</span>
+                    <span className="w-2.5 h-2.5 bg-epicMint rounded-full animate-pulse shadow-[0_0_14px_rgba(170,255,199,0.9)]"></span>
+                    <span className="text-[11px] font-bold tracking-wide text-epicWhite/55 leading-snug">{t.forecastTitle} {t.forecastTitleSpot}</span>
                   </div>
 
                   <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
@@ -53,38 +53,58 @@ export default function Forecast({ t, lang }) {
                       <span className="text-3xl lg:text-5xl font-bold text-epicRed leading-[0.95]">m</span>
                     </div>
                     <div className="hidden md:block pl-6 border-l border-white/20">
-                      <span className="text-sm font-bold tracking-wide opacity-35">{t.forecastWaveHeight}</span>
+                      <span className="text-sm font-bold tracking-wide text-epicWhite/55">{t.forecastWaveHeight}</span>
                     </div>
                   </div>
 
-                  <div className="bg-epicRed text-white px-5 py-2 rounded-full font-bold text-[11px] lg:text-xs tracking-wide shadow-xl leading-snug">
+                  <div className="rounded-full border border-epicMint/20 bg-epicMint px-5 py-2.5 text-epicDark font-black text-[11px] lg:text-xs tracking-wide shadow-xl shadow-epicMint/10 leading-snug">
                     {(forecast?.height || 0.8) < 1.2 ? t.forecastStatusGood : t.forecastStatusHigh}
                   </div>
                 </div>
 
                 {/* 2. Сетка параметров 2x2 — Крупно + Центровка */}
-                <div className="grid grid-cols-2 gap-y-10 gap-x-6 border-t border-white/10 pt-8">
-                  <div className="flex flex-col items-center md:items-start space-y-1">
-                    <div className="text-[11px] lg:text-xs font-bold opacity-35 flex items-center gap-2 leading-snug"><Waves className="w-4 h-4" /> {t.forecastPeriod}</div>
-                    <span className="font-black text-3xl lg:text-4xl">{forecast?.period || "4.95"}s</span>
-                  </div>
-
-                  <div className="flex flex-col items-center md:items-start space-y-1">
-                    <div className="text-[11px] lg:text-xs font-bold opacity-35 flex items-center gap-2 leading-snug"><Wind className="w-4 h-4" /> {t.forecastWind}</div>
-                    <span className="font-black text-3xl lg:text-4xl">{Math.round(forecast?.windSpeed || 23)}<span className="text-xs lg:text-sm opacity-35 ml-1">km/h</span></span>
-                  </div>
-
-                  <div className="flex flex-col items-center md:items-start space-y-1">
-                    <div className="text-[11px] lg:text-xs font-bold opacity-35 flex items-center gap-2 leading-snug"><Globe className="w-4 h-4" /> {t.forecastDir}</div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 lg:w-10 lg:h-10 bg-epicRed rounded-full flex items-center justify-center text-white" style={{ transform: `rotate(${forecast?.windDir || 225}deg)` }}><ArrowUp className="w-4 h-4 lg:w-5 lg:h-5" strokeWidth={4} /></div>
-                      <span className="font-black text-2xl lg:text-3xl">SW</span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-white/10 pt-8">
+                  <div className="flex min-h-[116px] items-center gap-4 rounded-[26px] border border-epicWhite/10 bg-epicWhite/5 px-5 py-4">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-epicMint text-epicDark">
+                      <Waves className="w-6 h-6" strokeWidth={2.5} />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-[11px] lg:text-xs font-bold text-epicWhite/55 leading-snug">{t.forecastPeriod}</div>
+                      <span className="mt-1 block font-black text-3xl lg:text-4xl leading-none">{forecast?.period || "4.95"}s</span>
                     </div>
                   </div>
 
-                  <div className="flex flex-col items-center md:items-start space-y-1">
-                    <div className="text-[11px] lg:text-xs font-bold opacity-35 flex items-center gap-2 leading-snug"><Thermometer className="w-4 h-4" /> {t.forecastWater}</div>
-                    <span className="font-black text-3xl lg:text-4xl">26°C</span>
+                  <div className="flex min-h-[116px] items-center gap-4 rounded-[26px] border border-epicWhite/10 bg-epicWhite/5 px-5 py-4">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-epicMint text-epicDark">
+                      <Wind className="w-6 h-6" strokeWidth={2.5} />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-[11px] lg:text-xs font-bold text-epicWhite/55 leading-snug">{t.forecastWind}</div>
+                      <span className="mt-1 block font-black text-3xl lg:text-4xl leading-none">{Math.round(forecast?.windSpeed || 23)}<span className="text-xs lg:text-sm text-epicWhite/50 ml-1">km/h</span></span>
+                    </div>
+                  </div>
+
+                  <div className="flex min-h-[116px] items-center gap-4 rounded-[26px] border border-epicWhite/10 bg-epicWhite/5 px-5 py-4">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-epicRed text-white">
+                      <Globe className="w-6 h-6" strokeWidth={2.5} />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-[11px] lg:text-xs font-bold text-epicWhite/55 leading-snug">{t.forecastDir}</div>
+                      <div className="mt-1 flex items-center gap-3">
+                        <div className="w-8 h-8 lg:w-9 lg:h-9 bg-epicWhite/10 rounded-full flex items-center justify-center text-epicRed" style={{ transform: `rotate(${forecast?.windDir || 225}deg)` }}><ArrowUp className="w-4 h-4 lg:w-5 lg:h-5" strokeWidth={4} /></div>
+                        <span className="font-black text-2xl lg:text-3xl leading-none">SW</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex min-h-[116px] items-center gap-4 rounded-[26px] border border-epicWhite/10 bg-epicWhite/5 px-5 py-4">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-epicMint text-epicDark">
+                      <Thermometer className="w-6 h-6" strokeWidth={2.5} />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-[11px] lg:text-xs font-bold text-epicWhite/55 leading-snug">{t.forecastWater}</div>
+                      <span className="mt-1 block font-black text-3xl lg:text-4xl leading-none">26°C</span>
+                    </div>
                   </div>
                 </div>
               </div>

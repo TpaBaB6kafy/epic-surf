@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { X } from "lucide-react";
+import { Plus } from "lucide-react";
 
 export default function FAQ({ title, titleEnd, items }) {
   const [openFaq, setOpenFaq] = useState(null);
@@ -16,7 +16,7 @@ export default function FAQ({ title, titleEnd, items }) {
             <div key={idx} className="border-b border-epicDark/10 pb-4">
               <button onClick={() => setOpenFaq(openFaq === idx ? null : idx)} className="w-full flex justify-between items-center py-6 text-left group">
                 <span className="font-bold text-lg md:text-2xl text-epicDark group-hover:text-epicRed transition-colors leading-snug break-words">{item.q}</span>
-                <div className={`transition-transform duration-300 ${openFaq === idx ? 'rotate-45' : ''}`}><X size={24} className="text-epicRed" /></div>
+                <div className={`transition-transform duration-300 ${openFaq === idx ? 'rotate-45' : ''}`}><Plus size={24} className="text-epicRed" /></div>
               </button>
               <AnimatePresence>{openFaq === idx && <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden"><p className="pb-6 text-epicDark/60 text-lg leading-relaxed">{item.a}</p></motion.div>}</AnimatePresence>
             </div>

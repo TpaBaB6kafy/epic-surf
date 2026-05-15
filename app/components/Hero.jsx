@@ -35,7 +35,7 @@ export default function Hero({ t }) {
           </motion.div>
         </motion.div>
 
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 1 }} className="hero-subtitle text-3xl md:text-5xl max-w-5xl mx-auto uppercase">
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 1 }} className="font-subtitle text-3xl md:text-5xl max-w-5xl mx-auto uppercase text-epicWhite leading-[1.35]">
           {t.heroSub}
         </motion.p>
       </div>

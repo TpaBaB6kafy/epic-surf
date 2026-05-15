@@ -8,6 +8,13 @@ import { RentalCaravanIcon, RentalSurfboardIcon, RentalTshirtIcon, RentalUvIcon 
 export default function Rentals({ t, setRentalModalOpen }) {
   const [activeBoard, setActiveBoard] = useState(0);
   const boardSliderRef = useRef(null);
+  const boards = [1, 2, 3, 4];
+  const featureItems = [
+    { k: "featureDelivery", desc: "featureDeliveryDesc", svg: <RentalCaravanIcon className="h-full w-full" /> },
+    { k: "featureSizes", desc: "featureSizesDesc", svg: <RentalSurfboardIcon className="h-full w-full" /> },
+    { k: "featureLycra", desc: "featureLycraDesc", svg: <RentalUvIcon className="h-full w-full" /> },
+    { k: "featureWetsuits", desktopK: "featureWetsuitsDesktop", desc: "featureWetsuitsDesc", svg: <RentalTshirtIcon className="h-full w-full" /> }
+  ];
 
   const scrollBoardSlider = (direction) => {
     const slider = boardSliderRef.current;
@@ -31,58 +38,113 @@ export default function Rentals({ t, setRentalModalOpen }) {
   };
 
   return (
-    <>
-      {/* 4. RENTALS (FULL-WIDTH DARK) */}
-      <section id="rentals" className="bg-epicDark text-white py-24 mt-20 relative overflow-hidden scroll-mt-24">
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-20">
-            <div className="lg:w-1/2 flex items-center justify-center relative group">
-              <div className="relative w-full aspect-[4/3] min-h-[300px] sm:min-h-[380px] lg:aspect-auto lg:min-h-[620px] xl:min-h-[680px] overflow-hidden rounded-[36px] md:rounded-[60px] border border-white/10 shadow-2xl shadow-black/20 bg-[#1a1c2c]">
-                <div ref={boardSliderRef} id="board-slider" onScroll={updateActiveBoard} className="absolute inset-0 flex overflow-x-auto snap-x snap-mandatory scrollbar-hide scroll-smooth" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
-                  {[1, 2, 3, 4].map((num, idx) => (
-                    <div key={num} className="min-w-full h-full snap-center relative">
-                      <Image src={`/gallery/board-${num}.webp`} alt={t.boardTypes[idx]} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover opacity-90" />
-                      <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8"><div className="bg-black/55 backdrop-blur-md border border-white/10 text-white px-4 md:px-5 py-2 rounded-full text-[11px] font-bold tracking-wide leading-snug shadow-xl">{t.boardTypes[idx]}</div></div>
-                    </div>
-                  ))}
+    <section id="rentals" className="mt-20 scroll-mt-24 overflow-hidden bg-epicDark py-6 text-epicWhite md:py-14 lg:py-[59px]">
+      <div className="mx-auto grid w-[342px] grid-cols-1 items-start lg:w-[1216px] lg:grid-cols-[600px_504px] lg:grid-rows-[auto_auto_auto_auto] lg:gap-x-28">
+        <div className="mb-[34px] lg:col-start-2 lg:row-start-1 lg:mb-[44px]">
+          <div className="mb-[34px] flex h-10 w-[164px] items-center justify-center rounded-xl bg-epicMint text-[13px] font-black uppercase leading-none tracking-[0.1em] text-epicDark lg:mb-[42px]">
+            BOARD RENTAL
+          </div>
+          <h2 className="text-[54px] font-black uppercase leading-[0.95] tracking-normal text-epicWhite lg:text-[86px] lg:leading-[0.92]">
+            {t.rentalTitle}
+            <span className="block text-epicRed">{t.rentalTitleSurf}</span>
+          </h2>
+        </div>
+
+        <div className="mb-[36px] lg:col-start-1 lg:row-start-1 lg:row-end-5 lg:mb-0 lg:mt-8">
+          <div className="relative h-[390px] w-[342px] overflow-hidden rounded-[34px] bg-epicWhite/8 shadow-2xl shadow-black/20 md:h-[640px] md:w-[600px] lg:h-[760px] lg:rounded-[60px]">
+            <div
+              ref={boardSliderRef}
+              id="board-slider"
+              onScroll={updateActiveBoard}
+              className="absolute inset-0 flex overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide"
+              style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
+            >
+              {boards.map((num, idx) => (
+                <div key={num} className="relative h-full min-w-full snap-center">
+                  <Image
+                    src={`/gallery/board-${num}.webp`}
+                    alt={t.boardTypes[idx]}
+                    fill
+                    sizes="(min-width: 1280px) 600px, (min-width: 768px) 600px, 342px"
+                    className="object-cover"
+                    priority={idx === 0}
+                  />
                 </div>
-                <button onClick={() => scrollBoardSlider(-1)} className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-white/12 backdrop-blur-md rounded-full flex items-center justify-center border border-white/15 hover:bg-epicRed transition-all opacity-90 hover:opacity-100 shadow-xl"><ChevronLeft className="w-5 h-5 md:w-7 md:h-7" /></button>
-                <button onClick={() => scrollBoardSlider(1)} className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-white/12 backdrop-blur-md rounded-full flex items-center justify-center border border-white/15 hover:bg-epicRed transition-all opacity-90 hover:opacity-100 shadow-xl"><ChevronRight className="w-5 h-5 md:w-7 md:h-7" /></button>
-                <div className="absolute bottom-6 right-6 md:bottom-8 md:right-8 flex items-center gap-2 rounded-full bg-black/35 backdrop-blur-md border border-white/10 px-3 py-2">
-                  {[0, 1, 2, 3].map((idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => scrollToBoard(idx)}
-                      aria-label={`${t.boardTypes[idx]}`}
-                      className={`h-2 rounded-full transition-all ${activeBoard === idx ? 'w-7 bg-epicRed' : 'w-2 bg-white/45 hover:bg-white/80'}`}
-                    />
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
-            <div className="lg:w-1/2 flex flex-col justify-center">
-              <div className="mb-12">
-                <h2 className="text-5xl md:text-8xl font-black mb-8 tracking-normal leading-[0.98] text-white break-words">{t.rentalTitle} <br /><span className="text-epicRed">{t.rentalTitleSurf}</span></h2>
-                <p className="text-white/55 text-base md:text-lg max-w-lg leading-relaxed">{t.rentalDesc}</p>
-              </div>
-              <div className="grid grid-cols-2 gap-4 md:gap-6 mb-12">
-                {[{ k: 'featureLycra', svg: <RentalUvIcon className="h-full w-full" /> }, { k: 'featureSizes', svg: <RentalSurfboardIcon className="h-full w-full" /> }, { k: 'featureWetsuits', svg: <RentalTshirtIcon className="h-full w-full" /> }, { k: 'featureDelivery', svg: <RentalCaravanIcon className="h-full w-full" /> }].map((feat) => (
-                  <div key={feat.k} className="flex items-center gap-3 md:gap-4 p-4 md:p-6 rounded-[28px] md:rounded-[32px] bg-white/5 border border-white/5 hover:border-epicRed/30 transition-all group backdrop-blur-sm min-w-0">
-                    <div className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0 text-epicRed group-hover:scale-110 transition-transform">{feat.svg}</div>
-                    <span className="min-w-0 text-[10px] md:text-[11px] font-bold text-white/75 leading-snug tracking-normal break-words hyphens-auto">{t[feat.k]}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-8 pt-10 border-t border-white/10">
-                <div className="text-center sm:text-left"><div className="text-4xl md:text-5xl font-black text-white leading-tight">{t.rentalPrice}</div><div className="text-[11px] opacity-35 tracking-wide font-bold mt-2">{t.rentalUnit}</div></div>
-                <button onClick={() => setRentalModalOpen(true)} className="w-full sm:w-auto px-12 py-6 bg-epicRed text-white rounded-[20px] font-black uppercase text-sm tracking-wide hover:bg-white hover:text-epicRed transition-all shadow-xl active:scale-95">{t.rentalBtn}</button>
-              </div>
+
+            <div className="absolute bottom-[22px] left-9 hidden w-[282px] rounded-[24px] border border-epicWhite/12 bg-epicDark/82 px-6 py-4 shadow-xl backdrop-blur-md lg:block">
+              <p className="text-sm font-black leading-none tracking-[0.12em] text-epicMint">EPIC SURF RENTAL</p>
+              <p className="mt-2 text-sm font-medium leading-[1.1] text-epicWhite/75">Boards, rashguards & local advice</p>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => scrollBoardSlider(-1)}
+              aria-label="Previous board"
+              className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-epicWhite/15 bg-epicDark/45 text-epicWhite shadow-xl backdrop-blur-md transition-all hover:bg-epicRed active:scale-95 md:left-5 md:h-12 md:w-12"
+            >
+              <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollBoardSlider(1)}
+              aria-label="Next board"
+              className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-epicWhite/15 bg-epicDark/45 text-epicWhite shadow-xl backdrop-blur-md transition-all hover:bg-epicRed active:scale-95 md:right-5 md:h-12 md:w-12"
+            >
+              <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
+            </button>
+
+            <div className="absolute bottom-4 right-4 flex items-center gap-2 rounded-full border border-epicWhite/10 bg-epicDark/45 px-3 py-2 backdrop-blur-md md:bottom-6 md:right-6 lg:bottom-8 lg:right-8">
+              {boards.map((_, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => scrollToBoard(idx)}
+                  aria-label={t.boardTypes[idx]}
+                  className={`h-2 rounded-full transition-all ${activeBoard === idx ? "w-7 bg-epicRed" : "w-2 bg-epicWhite/50 hover:bg-epicWhite"}`}
+                />
+              ))}
             </div>
           </div>
         </div>
-      </section>
 
+        <div className="mb-[40px] text-[17px] font-medium leading-[1.35] text-epicWhite/88 lg:col-start-2 lg:row-start-2 lg:mb-[66px] lg:text-xl lg:leading-[1.28]">
+          <p className="flex items-center gap-4">
+            <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-epicMint" />
+            <span>{t.rentalDescPrimary || t.rentalDesc}</span>
+          </p>
+        </div>
 
-    </>
+        <div className="mb-4 grid gap-4 lg:col-start-2 lg:row-start-3 lg:mb-[70px] lg:grid-cols-2 lg:gap-x-[66px] lg:gap-y-[22px]">
+          {featureItems.map((feat) => (
+            <div key={feat.k} className="group flex h-[104px] w-[342px] items-center gap-5 rounded-[26px] border border-epicWhite/10 bg-epicWhite/5 px-5 transition-colors hover:border-epicRed/30 lg:h-[100px] lg:w-[204px] lg:gap-4 lg:px-3">
+              <div className="flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-full bg-epicRed p-3 text-epicDark transition-transform group-hover:scale-105 lg:h-[64px] lg:w-[64px]">
+                {feat.svg}
+              </div>
+              <div className="min-w-0">
+                <p className="text-lg font-black leading-[1.05] text-epicWhite lg:hidden">{t[feat.k]}</p>
+                <p className="hidden whitespace-pre-line break-words text-base font-semibold leading-tight text-epicWhite lg:block">{t[feat.desktopK] || t[feat.k]}</p>
+                <p className="mt-2 text-[13px] font-medium leading-[1.25] text-epicWhite/65 lg:hidden">{t[feat.desc]}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="box-border min-h-[142px] w-[342px] rounded-[26px] border border-epicWhite/10 bg-epicWhite/5 px-6 pt-[22px] pb-6 lg:col-start-2 lg:row-start-4 lg:flex lg:min-h-[102px] lg:w-[490px] lg:items-center lg:justify-between lg:gap-4 lg:px-5 lg:py-0">
+          <div>
+            <p className="whitespace-nowrap text-[28px] font-normal leading-none text-epicWhite lg:text-[34px]">{t.rentalPrice}</p>
+            <p className="mt-2 text-[15px] font-bold leading-none text-epicWhite/80 lg:text-xl lg:font-semibold">{t.rentalUnit}</p>
+          </div>
+          <button
+            type="button"
+            onClick={() => setRentalModalOpen(true)}
+            className="mx-auto mt-[21px] flex h-14 w-full items-center justify-center rounded-[18px] bg-epicRed px-7 text-center text-sm font-black uppercase leading-none text-epicWhite shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:brightness-105 active:translate-y-0 active:scale-95 lg:mx-0 lg:mt-0 lg:h-[72px] lg:w-[141px] lg:min-w-[141px] lg:shrink-0 lg:px-0 lg:text-base lg:font-semibold"
+          >
+            {t.rentalBtn}
+          </button>
+        </div>
+      </div>
+    </section>
   );
 }

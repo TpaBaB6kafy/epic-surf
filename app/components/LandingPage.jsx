@@ -52,7 +52,6 @@ export default function EpicSurfLanding({ locale = "en" }) {
   return (
     <div
       className="min-h-screen bg-epicWhite font-sans text-epicDark overflow-x-clip transition-colors duration-500 scroll-smooth"
-      style={{ fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif' }}
     >
 
       <Header

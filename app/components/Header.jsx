@@ -16,12 +16,15 @@ export default function Header({
   const homeHref = lang === "ru" ? "/ru" : "/";
   const languageHref = lang === "ru" ? "/" : "/ru";
   const languageLabel = lang === "ru" ? "EN" : "RU";
+  const partnersHref = lang === "ru" ? "/ru/partners" : "/partners";
+  const partnersLabel = lang === "ru" ? "Для партнеров" : "Partners";
   const navItems = [
     { href: "#lessons", label: t.navLessons },
     { href: "#how-it-works", label: t.navHow },
     { href: "#forecast", label: t.navForecast },
     { href: "#events", label: t.navEvents },
-    { href: "#location", label: t.navLocation }
+    { href: "#location", label: t.navLocation },
+    { href: partnersHref, label: partnersLabel }
   ];
 
   return (
