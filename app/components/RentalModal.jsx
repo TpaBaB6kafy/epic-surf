@@ -2,8 +2,25 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUp, MessageCircle, X } from "lucide-react";
+import { buildTelegramUrl, buildWhatsAppUrl, trackEvent } from "../utils/tracking";
 
 export default function RentalModal({ isRentalModalOpen, setRentalModalOpen, t, links }) {
+  const language = t.btnBook === "Book Now" ? "en" : "ru";
+  const message = language === "ru"
+    ? "Привет! Хочу арендовать доску для серфинга."
+    : "Hi! I want to rent a surfboard.";
+  const handleMessengerClick = (event, eventName, label, hrefBuilder) => {
+    if (hrefBuilder) {
+      event.currentTarget.href = hrefBuilder();
+    }
+    trackEvent(eventName, {
+      language,
+      service_type: "board_rental",
+      cta_location: "rental_modal",
+      cta_label: label,
+    });
+  };
+
   return (
     <>
       {/* Rental modal */}
@@ -37,13 +54,13 @@ export default function RentalModal({ isRentalModalOpen, setRentalModalOpen, t, 
               </div>
 
               <div className="flex flex-col gap-4">
-                <a href={`${links.whatsapp}?text=${encodeURIComponent(t.msgRental)}`} target="_blank" rel="noreferrer" className="flex items-center justify-between bg-[#25D366] text-white px-8 py-5 rounded-2xl font-bold uppercase text-[11px] tracking-wide leading-snug hover:scale-[1.02] active:scale-95 transition-all shadow-lg">
+                <a href={links.whatsapp} onClick={(event) => handleMessengerClick(event, "whatsapp_click", "whatsapp", () => buildWhatsAppUrl(links.whatsapp, message, { language }))} target="_blank" rel="noreferrer" className="flex items-center justify-between bg-[#25D366] text-white px-8 py-5 rounded-2xl font-bold uppercase text-[11px] tracking-wide leading-snug hover:scale-[1.02] active:scale-95 transition-all shadow-lg">
                   WhatsApp <MessageCircle size={20} />
                 </a>
-                <a href={links.telegram} target="_blank" rel="noreferrer" className="flex items-center justify-between bg-[#0088cc] text-white px-8 py-5 rounded-2xl font-bold uppercase text-[11px] tracking-wide leading-snug hover:scale-[1.02] active:scale-95 transition-all shadow-lg">
+                <a href={links.telegram} onClick={(event) => handleMessengerClick(event, "telegram_click", "telegram", () => buildTelegramUrl(links.telegram, message, { language }))} target="_blank" rel="noreferrer" className="flex items-center justify-between bg-[#0088cc] text-white px-8 py-5 rounded-2xl font-bold uppercase text-[11px] tracking-wide leading-snug hover:scale-[1.02] active:scale-95 transition-all shadow-lg">
                   Telegram <ArrowUp size={20} className="rotate-45" />
                 </a>
-                <a href={links.zalo} target="_blank" rel="noreferrer" className="flex items-center justify-between bg-[#0068ff] text-white px-8 py-5 rounded-2xl font-bold uppercase text-[11px] tracking-wide leading-snug hover:scale-[1.02] active:scale-95 transition-all shadow-lg">
+                <a href={links.zalo} onClick={(event) => handleMessengerClick(event, "zalo_click", "zalo")} target="_blank" rel="noreferrer" className="flex items-center justify-between bg-[#0068ff] text-white px-8 py-5 rounded-2xl font-bold uppercase text-[11px] tracking-wide leading-snug hover:scale-[1.02] active:scale-95 transition-all shadow-lg">
                   Zalo <span className="text-lg font-black">Z</span>
                 </a>
               </div>

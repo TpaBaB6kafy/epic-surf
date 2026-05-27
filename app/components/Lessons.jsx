@@ -113,7 +113,10 @@ export default function Lessons({ t, links, openBookingModal }) {
                   {item.desc}
                 </p>
                 <div className="text-[28px] font-normal mb-8 text-epicWhite leading-none tracking-normal">{item.price}</div>
-                <button onClick={() => openBookingModal(links.group)} className="w-full bg-epicRed text-epicWhite py-5 rounded-[18px] font-extrabold uppercase text-sm tracking-wide shadow-lg transition-all duration-300 hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-95">{t.btnBook}</button>
+                <button onClick={() => openBookingModal(links.group, {
+                  ctaLocation: "lessons_section",
+                  ctaLabel: item.title,
+                })} className="w-full bg-epicRed text-epicWhite py-5 rounded-[18px] font-extrabold uppercase text-sm tracking-wide shadow-lg transition-all duration-300 hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-95">{t.btnBook}</button>
               </div>
             </motion.div>
           ))}

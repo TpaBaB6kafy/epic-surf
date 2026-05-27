@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
@@ -32,6 +33,12 @@ import {
 import { partnersContent } from "../data/partners";
 import { translations } from "../data/translations";
 import { links } from "../data/links";
+import {
+  buildTelegramUrl,
+  buildWhatsAppUrl,
+  storeAttributionFromUrl,
+  trackEvent,
+} from "../utils/tracking";
 
 const audienceIcons = [Hotel, Building2, Plane, Coffee, Camera, Users];
 const formatIcons = [QrCode, Sparkles, Waves];
@@ -40,11 +47,6 @@ const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0 },
 };
-
-function partnerWhatsappUrl(message) {
-  const separator = links.whatsapp.includes("?") ? "&" : "?";
-  return `${links.whatsapp}${separator}text=${encodeURIComponent(message)}`;
-}
 
 function SectionHeading({ title, subtitle, centered = true }) {
   return (
@@ -111,7 +113,26 @@ export default function PartnersPage({ locale = "en" }) {
   const lang = locale === "ru" ? "ru" : "en";
   const content = partnersContent[lang];
   const t = translations[lang];
-  const whatsappUrl = partnerWhatsappUrl(content.partnerMessage);
+  const partnerMessage = lang === "ru"
+    ? "Привет! Хочу обсудить партнёрство с Epic Surf School."
+    : "Hi Epic Surf School! I want to discuss a partnership.";
+
+  useEffect(() => {
+    storeAttributionFromUrl({ includePartner: true });
+    trackEvent("page_view", { language: lang });
+  }, [lang]);
+
+  const handlePartnerClick = (event, eventName, label, hrefBuilder) => {
+    if (hrefBuilder) {
+      event.currentTarget.href = hrefBuilder();
+    }
+    trackEvent(eventName, {
+      language: lang,
+      service_type: "partnership",
+      cta_location: "partners_page",
+      cta_label: label,
+    });
+  };
 
   return (
     <div
@@ -161,7 +182,8 @@ export default function PartnersPage({ locale = "en" }) {
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <a
-                  href={whatsappUrl}
+                  href={links.whatsapp}
+                  onClick={(event) => handlePartnerClick(event, "partner_cta_click", "get_partner_code", () => buildWhatsAppUrl(links.whatsapp, partnerMessage, { language: lang, includePartnerCode: true }))}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-epicRed px-7 py-4 text-[11px] font-black uppercase leading-snug tracking-wide text-white shadow-xl shadow-epicRed/20 transition hover:-translate-y-0.5 active:scale-95"
@@ -171,6 +193,7 @@ export default function PartnersPage({ locale = "en" }) {
                 </a>
                 <a
                   href={links.telegram}
+                  onClick={(event) => handlePartnerClick(event, "telegram_click", "message_us", () => buildTelegramUrl(links.telegram, partnerMessage, { language: lang, includePartnerCode: true }))}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-white px-7 py-4 text-[11px] font-black uppercase leading-snug tracking-wide text-epicDark shadow-sm ring-1 ring-epicDark/10 transition hover:-translate-y-0.5 hover:text-epicRed active:scale-95"
@@ -310,6 +333,34 @@ export default function PartnersPage({ locale = "en" }) {
           </div>
         </section>
 
+        <section className="px-5 pb-20 md:px-6 md:pb-28">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.55 }}
+            className="mx-auto grid max-w-7xl gap-6 rounded-[34px] bg-white p-7 shadow-sm ring-1 ring-epicDark/5 md:p-10 lg:grid-cols-[1fr_0.8fr]"
+          >
+            <div>
+              <h2 className="text-3xl font-black leading-tight text-epicDark md:text-5xl">
+                {content.sections.tracking.title}
+              </h2>
+              <p className="mt-5 text-base font-medium leading-relaxed text-epicDark/65 md:text-lg">
+                {content.sections.tracking.text}
+              </p>
+            </div>
+            <div className="rounded-[26px] bg-epicMint p-6 text-epicDark">
+              <p className="text-[11px] font-black uppercase leading-snug tracking-wide text-epicDark/60">
+                {content.sections.tracking.exampleLabel}
+              </p>
+              <p className="mt-4 break-all text-lg font-black leading-tight md:text-2xl">
+                surfdanang.com/?partner=hotel_abc
+              </p>
+            </div>
+          </motion.div>
+        </section>
+
         <section className="px-5 pb-24 md:px-6 md:pb-32">
           <motion.div
             variants={fadeUp}
@@ -329,7 +380,8 @@ export default function PartnersPage({ locale = "en" }) {
                 {content.sections.finalCta.text}
               </p>
               <a
-                href={whatsappUrl}
+                href={links.whatsapp}
+                onClick={(event) => handlePartnerClick(event, "partner_cta_click", "discuss_partnership", () => buildWhatsAppUrl(links.whatsapp, partnerMessage, { language: lang, includePartnerCode: true }))}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[11px] font-black uppercase leading-snug tracking-wide text-epicDark shadow-xl transition hover:-translate-y-0.5 active:scale-95"
@@ -357,6 +409,7 @@ export default function PartnersPage({ locale = "en" }) {
 
       <MessengerFab
         links={links}
+        lang={lang}
         ChatWhatsAppIcon={ChatWhatsAppIcon}
         ChatTelegramIcon={ChatTelegramIcon}
         ChatZaloIcon={ChatZaloIcon}

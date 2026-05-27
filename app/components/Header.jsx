@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { trackEvent } from "../utils/tracking";
 
 export default function Header({
   t,
@@ -53,13 +54,21 @@ export default function Header({
           <div className="flex items-center gap-2 md:gap-4 z-[110]">
             <Link
               href={languageHref}
+              onClick={() => trackEvent("language_switch", {
+                language: lang,
+                cta_location: "header",
+                cta_label: languageLabel.toLowerCase(),
+              })}
               className="w-9 h-9 flex items-center justify-center bg-epicDark text-white rounded-full font-bold text-[10px] uppercase shadow-md"
             >
               {languageLabel}
             </Link>
 
             <button
-              onClick={() => openBookingModal(links.group)}
+              onClick={() => openBookingModal(links.group, {
+                ctaLocation: "header",
+                ctaLabel: "book_now",
+              })}
               className="bg-epicRed text-white px-4 md:px-8 h-9 md:h-10 rounded-full font-bold uppercase text-[11px] tracking-wide leading-snug shadow-lg shadow-epicRed/20 active:scale-95 transition-all"
             >
               {t.btnBook}

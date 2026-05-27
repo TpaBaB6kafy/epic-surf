@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./Header";
 import Hero from "./Hero";
 import WhyEpic from "./WhyEpic";
@@ -32,6 +32,7 @@ import {
   YoutubeIcon,
   ThreadsIcon
 } from "./Icons";
+import { storeAttributionFromUrl, trackEvent } from "../utils/tracking";
 export default function EpicSurfLanding({ locale = "en" }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isRentalModalOpen, setRentalModalOpen] = useState(false);
@@ -44,9 +45,29 @@ export default function EpicSurfLanding({ locale = "en" }) {
   const activeGalleryGroup = eventGalleryGroups.find((group) => group.key === activeGalleryKey) || eventGalleryGroups[0];
   const openEventGallery = (galleryKey) => {
     setActiveGalleryKey(galleryKey);
+    trackEvent("gallery_open", {
+      language: lang,
+      cta_location: "events_section",
+      cta_label: galleryKey,
+    });
     requestAnimationFrame(() => {
       document.getElementById("gallery")?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
+  };
+
+  useEffect(() => {
+    storeAttributionFromUrl();
+    trackEvent("page_view", { language: lang });
+  }, [lang]);
+
+  const openBookingModal = (url, options = {}) => {
+    trackEvent(options.event || "booking_cta_click", {
+      language: lang,
+      service_type: options.serviceType || "surf_lesson",
+      cta_location: options.ctaLocation || "unknown",
+      cta_label: options.ctaLabel || "book_now",
+    });
+    setBookingModalUrl(url);
   };
 
   return (
@@ -60,7 +81,7 @@ export default function EpicSurfLanding({ locale = "en" }) {
         links={links}
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
-        openBookingModal={setBookingModalUrl}
+        openBookingModal={openBookingModal}
       />
 
       <Hero t={t} lang={lang} />
@@ -71,7 +92,7 @@ export default function EpicSurfLanding({ locale = "en" }) {
       <Lessons
         t={t}
         links={links}
-        openBookingModal={setBookingModalUrl}
+        openBookingModal={openBookingModal}
       />
 
       <IncludedBento
@@ -84,6 +105,7 @@ export default function EpicSurfLanding({ locale = "en" }) {
       />
       <Rentals
         t={t}
+        lang={lang}
         setRentalModalOpen={setRentalModalOpen}
       />
 
@@ -125,6 +147,7 @@ export default function EpicSurfLanding({ locale = "en" }) {
 
       <MessengerFab
         links={links}
+        lang={lang}
         ChatWhatsAppIcon={ChatWhatsAppIcon}
         ChatTelegramIcon={ChatTelegramIcon}
         ChatZaloIcon={ChatZaloIcon}

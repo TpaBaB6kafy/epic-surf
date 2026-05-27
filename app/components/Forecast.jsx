@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ArrowUp, Globe, Thermometer, Waves, Wind, X } from "lucide-react";
+import { trackEvent } from "../utils/tracking";
 
 export default function Forecast({ t, lang }) {
   const [forecast, setForecast] = useState(null);
@@ -121,7 +122,14 @@ export default function Forecast({ t, lang }) {
               {/* Защита от застревания пальца */}
               {!mapActive && (
                 <div
-                  onClick={() => setMapActive(true)}
+                  onClick={() => {
+                    trackEvent("map_activate", {
+                      language: lang,
+                      cta_location: "forecast_section",
+                      cta_label: "activate_map",
+                    });
+                    setMapActive(true);
+                  }}
                   className="absolute inset-0 z-20 bg-epicDark/20 backdrop-blur-[1px] flex items-center justify-center lg:hidden cursor-pointer"
                 >
                   <div className="bg-white/95 text-epicDark px-6 py-3 rounded-2xl font-bold text-[11px] tracking-wide shadow-2xl flex items-center gap-2 leading-snug">

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Handshake, MapPin, Send } from "lucide-react";
+import { trackEvent } from "../utils/tracking";
 
 export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookIcon, YoutubeIcon, ThreadsIcon }) {
   const partnersHref = lang === "ru" ? "/ru/partners" : "/partners";
@@ -35,10 +36,10 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
               <a href={links.threads} target="_blank" rel="noopener noreferrer" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all" aria-label="Epic Surf School Threads">
                 <ThreadsIcon />
               </a>
-              <a href={links.telegram} target="_blank" rel="noopener noreferrer" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all" aria-label="Epic Surf School Telegram direct chat" title="Telegram direct chat">
+              <a href={links.telegram} onClick={() => trackEvent("telegram_click", { language: lang, service_type: "general_question", cta_location: "footer", cta_label: "telegram" })} target="_blank" rel="noopener noreferrer" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all" aria-label="Epic Surf School Telegram direct chat" title="Telegram direct chat">
                 <Send size={20} />
               </a>
-              <a href={links.telegramChannel} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center gap-2 rounded-full bg-white/5 px-5 text-[11px] font-bold tracking-wide leading-snug text-white hover:bg-epicRed transition-all" aria-label="Epic Surf School official Telegram channel" title="Epic Surf School official Telegram channel">
+              <a href={links.telegramChannel} onClick={() => trackEvent("telegram_click", { language: lang, service_type: "general_question", cta_location: "footer", cta_label: "telegram_channel" })} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center gap-2 rounded-full bg-white/5 px-5 text-[11px] font-bold tracking-wide leading-snug text-white hover:bg-epicRed transition-all" aria-label="Epic Surf School official Telegram channel" title="Epic Surf School official Telegram channel">
                 <Send size={16} /> TG Channel
               </a>
             </div>

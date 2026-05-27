@@ -1,7 +1,7 @@
 import { links } from "./links";
 
 const configuredSiteUrl =
-  process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || "https://epic-surf.vercel.app";
+  process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || "https://www.surfdanang.com";
 
 export const siteConfig = {
   name: "Epic Surf School Da Nang",

@@ -4,8 +4,9 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { RentalCaravanIcon, RentalSurfboardIcon, RentalTshirtIcon, RentalUvIcon } from "./Icons";
+import { trackEvent } from "../utils/tracking";
 
-export default function Rentals({ t, setRentalModalOpen }) {
+export default function Rentals({ t, lang, setRentalModalOpen }) {
   const [activeBoard, setActiveBoard] = useState(0);
   const boardSliderRef = useRef(null);
   const boards = [1, 2, 3, 4];
@@ -138,7 +139,15 @@ export default function Rentals({ t, setRentalModalOpen }) {
           </div>
           <button
             type="button"
-            onClick={() => setRentalModalOpen(true)}
+            onClick={() => {
+              trackEvent("rental_cta_click", {
+                language: lang,
+                service_type: "board_rental",
+                cta_location: "rental_section",
+                cta_label: "rent_now",
+              });
+              setRentalModalOpen(true);
+            }}
             className="mx-auto mt-[21px] flex h-14 w-full items-center justify-center rounded-[18px] bg-epicRed px-7 text-center text-sm font-black uppercase leading-none text-epicWhite shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:brightness-105 active:translate-y-0 active:scale-95 lg:mx-0 lg:mt-0 lg:h-[72px] lg:w-[141px] lg:min-w-[141px] lg:shrink-0 lg:px-0 lg:text-base lg:font-semibold"
           >
             {t.rentalBtn}

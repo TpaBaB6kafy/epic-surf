@@ -7,8 +7,8 @@ export const partnersContent = {
     title: "Partner with Epic Surf School in Da Nang",
     subtitle:
       "Send your guests to surf at My Khe Beach - we take care of the lesson, equipment, safety and communication. You get commission, partner bonuses or a custom collaboration format.",
-    primaryCta: "Become a Partner",
-    secondaryCta: "Message us",
+    primaryCta: "Get Partner Code",
+    secondaryCta: "Discuss Partnership",
     partnerMessage:
       "Hi Epic Surf School! I'm interested in becoming a partner. My business is: ___",
     sections: {
@@ -68,6 +68,11 @@ export const partnersContent = {
           { title: "Experience Partner", bestFor: "Best for travel agencies, retreat organizers and group programs.", text: "Add surfing to your itinerary. We can help with group lessons, timing, equipment and beach experience." },
         ],
       },
+      tracking: {
+        title: "How we track referrals",
+        text: "Each partner gets a personal link, QR code, or promo code. When a guest opens the link or messages us, the partner code is saved with the lead. This helps us understand where the guest came from and track confirmed bookings.",
+        exampleLabel: "Partner link example:",
+      },
       finalCta: {
         title: "Want to become an Epic Surf partner?",
         text: "Tell us about your business and we'll suggest the best partnership format: referral commission, promo code, group package or content collaboration.",
@@ -84,8 +89,8 @@ export const partnersContent = {
     title: "Станьте партнёром Epic Surf School в Дананге",
     subtitle:
       "Отправляйте гостей на сёрфинг у пляжа Микхе - мы берём на себя урок, экипировку, безопасность и коммуникацию. Вы получаете комиссию, партнёрские бонусы или индивидуальный формат сотрудничества.",
-    primaryCta: "Стать партнёром",
-    secondaryCta: "Написать нам",
+    primaryCta: "Получить партнёрский код",
+    secondaryCta: "Обсудить партнёрство",
     partnerMessage:
       "Привет! Хочу обсудить партнёрство с Epic Surf School. Мой бизнес: ___",
     sections: {
@@ -144,6 +149,11 @@ export const partnersContent = {
           { title: "Content Partner", bestFor: "Подходит для блогеров, фотографов, creators и локальных медиа.", text: "Вы приходите на урок, создаёте контент, делитесь опытом и зарабатываете через личный промокод или отдельный формат сотрудничества." },
           { title: "Experience Partner", bestFor: "Подходит для турагентств, организаторов ретритов и групповых программ.", text: "Добавьте сёрфинг в маршрут. Мы поможем с групповой программой, таймингом, оборудованием и пляжным опытом." },
         ],
+      },
+      tracking: {
+        title: "Как мы отслеживаем заявки",
+        text: "Для каждого партнёра мы создаём персональную ссылку, QR-код или промокод. Когда гость переходит по ссылке или пишет нам в мессенджер, код партнёра сохраняется в заявке. Так мы понимаем, откуда пришёл клиент, и можем учитывать подтверждённые бронирования.",
+        exampleLabel: "Пример партнёрской ссылки:",
       },
       finalCta: {
         title: "Хотите стать партнёром Epic Surf?",
