@@ -9,6 +9,10 @@ const ATTRIBUTION_PARAMS = [
   "utm_content",
 ];
 
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
+const UMAMI_SCRIPT_URL = process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL;
+const UMAMI_WEBSITE_ID = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
+
 function isBrowser() {
   return typeof window !== "undefined";
 }
@@ -98,11 +102,19 @@ export function getTrackingContext(extra = {}) {
 export function trackEvent(event, payload = {}) {
   if (!isBrowser() || !event) return;
 
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event,
-    ...getTrackingContext(payload),
-  });
+  const eventPayload = getTrackingContext(payload);
+
+  if (GTM_ID) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event,
+      ...eventPayload,
+    });
+  }
+
+  if (UMAMI_SCRIPT_URL && UMAMI_WEBSITE_ID && typeof window.umami?.track === "function") {
+    window.umami.track(event, eventPayload);
+  }
 }
 
 export function buildWhatsAppUrl(baseUrl, message, options = {}) {

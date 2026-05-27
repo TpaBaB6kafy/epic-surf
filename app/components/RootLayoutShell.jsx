@@ -21,6 +21,9 @@ const robotoFlex = localFont({
 export default function RootLayoutShell({ children, locale }) {
   const structuredData = buildStructuredData(locale);
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
+  const umamiScriptUrl = process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL;
+  const umamiWebsiteId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
+  const analyticsEnvMarker = `${gtmId ? "gtm:on" : "gtm:off"};${umamiScriptUrl && umamiWebsiteId ? "umami:on" : "umami:off"}`;
 
   return (
     <html
@@ -30,6 +33,14 @@ export default function RootLayoutShell({ children, locale }) {
       <head>
         <link rel="preconnect" href="https://n1304231.alteg.io" />
         <link rel="dns-prefetch" href="https://n1304231.alteg.io" />
+        <meta name="analytics-env" content={analyticsEnvMarker} />
+        {umamiScriptUrl && umamiWebsiteId && (
+          <script
+            defer
+            src={umamiScriptUrl}
+            data-website-id={umamiWebsiteId}
+          />
+        )}
       </head>
       <body className="min-h-screen">
         {gtmId && (

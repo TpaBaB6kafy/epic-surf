@@ -18,7 +18,16 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Production env
 
-Set `NEXT_PUBLIC_GTM_ID` in Vercel to enable Google Tag Manager. Leave it empty for local development or previews where analytics should not load.
+Set `NEXT_PUBLIC_GTM_ID` in Vercel to enable Google Tag Manager. Leave it empty for local development or previews where GTM should not load.
+
+Set both Umami variables to enable Umami Cloud or an external Umami script:
+
+```bash
+NEXT_PUBLIC_UMAMI_SCRIPT_URL=https://cloud.umami.is/script.js
+NEXT_PUBLIC_UMAMI_WEBSITE_ID=b5edd093-75f9-45bf-bbc5-b2cfbc494743
+```
+
+Set `NEXT_PUBLIC_GTM_ID` together with the two Umami variables to send events to both systems. If any analytics env is missing, the site still runs and `trackEvent()` skips that provider safely.
 
 Optional canonical override:
 
