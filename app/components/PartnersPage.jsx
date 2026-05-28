@@ -99,32 +99,21 @@ function HeroTitle({ content, lang }) {
   );
 }
 
-function ChecklistPanel({ title, items, tone }) {
-  const isMint = tone === "mint";
-
+function BenefitsColumn({ title, items }) {
   return (
-    <motion.article
-      variants={fadeUp}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-70px" }}
-      transition={{ duration: 0.5 }}
-      className={`rounded-[28px] p-6 shadow-sm md:p-8 ${
-        isMint ? "bg-epicMint text-epicDark" : "bg-white text-epicDark ring-1 ring-epicDark/5"
-      }`}
-    >
-      <h2 className="text-2xl font-black leading-tight md:text-4xl">{title}</h2>
-      <div className="mt-6 grid gap-2.5">
+    <div>
+      <h2 className="text-2xl font-black leading-tight text-epicDark md:text-4xl">{title}</h2>
+      <div className="mt-5 divide-y divide-epicDark/10">
         {items.map((item) => (
-          <div key={item} className="flex gap-3 rounded-2xl bg-white/70 px-4 py-3 text-sm font-bold leading-snug shadow-sm">
-            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-epicRed text-white">
-              <Check size={13} />
+          <div key={item} className="flex gap-3 py-3 text-sm font-bold leading-snug text-epicDark md:text-base">
+            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-epicMint text-epicRed">
+              <Check size={12} strokeWidth={3} />
             </span>
             <span>{item}</span>
           </div>
         ))}
       </div>
-    </motion.article>
+    </div>
   );
 }
 
@@ -384,36 +373,38 @@ export default function PartnersPage({ locale = "en" }) {
         </section>
 
         <section className="px-5 py-14 md:px-6 md:py-24">
-          <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-2">
-            <ChecklistPanel title={content.sections.partnerGets.title} items={content.sections.partnerGets.items} tone="light" />
-            <ChecklistPanel title={content.sections.recommend.title} items={content.sections.recommend.items} tone="mint" />
-          </div>
-        </section>
-
-        <section className="px-5 pb-14 md:px-6 md:pb-24">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
+            viewport={{ once: true, margin: "-70px" }}
             transition={{ duration: 0.55 }}
-            className="mx-auto grid max-w-7xl gap-5 rounded-[26px] bg-white p-6 shadow-sm ring-1 ring-epicDark/5 md:p-8 lg:grid-cols-[1fr_0.7fr] lg:items-center"
+            className="mx-auto max-w-7xl overflow-hidden rounded-[28px] bg-white shadow-sm ring-1 ring-epicDark/5"
           >
-            <div>
-              <h2 className="text-2xl font-black leading-tight text-epicDark md:text-4xl">
-                {content.sections.tracking.title}
-              </h2>
-              <p className="mt-4 text-sm font-medium leading-relaxed text-epicDark/65 md:text-base">
-                {content.sections.tracking.text}
-              </p>
+            <div className="grid gap-8 p-6 md:p-8 lg:grid-cols-2 lg:gap-10 lg:p-10">
+              <BenefitsColumn title={content.sections.partnerGets.title} items={content.sections.partnerGets.items} />
+              <div className="border-t border-epicDark/10 pt-8 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+                <BenefitsColumn title={content.sections.recommend.title} items={content.sections.recommend.items} />
+              </div>
             </div>
-            <div className="rounded-[22px] bg-epicMint p-5 text-epicDark">
-              <p className="text-[11px] font-black uppercase leading-snug tracking-wide text-epicDark/60">
-                {content.sections.tracking.exampleLabel}
-              </p>
-              <p className="mt-3 break-all text-base font-black leading-tight md:text-xl">
-                surfdanang.com/?partner=hotel_abc
-              </p>
+
+            <div className="border-t border-epicDark/10 bg-epicWhite/70 p-6 md:p-8 lg:grid lg:grid-cols-[1fr_0.72fr] lg:items-center lg:gap-8 lg:px-10">
+              <div>
+                <p className="text-[11px] font-black uppercase leading-snug tracking-wide text-epicRed">
+                  {content.sections.tracking.title}
+                </p>
+                <p className="mt-2 text-sm font-medium leading-relaxed text-epicDark/65 md:text-base">
+                  {content.sections.tracking.text}
+                </p>
+              </div>
+              <div className="mt-5 rounded-[18px] bg-epicMint px-4 py-4 text-epicDark lg:mt-0">
+                <p className="text-[10px] font-black uppercase leading-snug tracking-wide text-epicDark/60">
+                  {content.sections.tracking.exampleLabel}
+                </p>
+                <p className="mt-2 break-all text-sm font-black leading-tight md:text-lg">
+                  surfdanang.com/?partner=hotel_abc
+                </p>
+              </div>
             </div>
           </motion.div>
         </section>
