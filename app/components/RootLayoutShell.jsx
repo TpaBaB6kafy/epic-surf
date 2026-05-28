@@ -1,22 +1,5 @@
-import localFont from "next/font/local";
 import Script from "next/script";
 import { buildStructuredData } from "../data/siteConfig";
-
-const robotoFlex = localFont({
-  variable: "--font-roboto-flex",
-  src: [
-    {
-      path: "../../public/fonts/ChesterSans-Light.ttf",
-      weight: "100",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/ChesterSans-Bold.ttf",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-});
 
 export default function RootLayoutShell({ children, locale }) {
   const structuredData = buildStructuredData(locale);
@@ -28,7 +11,7 @@ export default function RootLayoutShell({ children, locale }) {
   return (
     <html
       lang={locale}
-      className={`${robotoFlex.variable} scroll-smooth antialiased`}
+      className="scroll-smooth antialiased"
     >
       <head>
         <link rel="preconnect" href="https://n1304231.alteg.io" />

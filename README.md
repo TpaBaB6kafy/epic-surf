@@ -37,9 +37,16 @@ NEXT_PUBLIC_SITE_URL=https://www.surfdanang.com
 
 The default canonical domain is already `https://www.surfdanang.com`.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+You can start editing the page by modifying files in `app/`. The page auto-updates as you edit the files.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Typography
+
+The project uses two font roles:
+
+- Headings: `"Arial Black", Arial, "Helvetica Neue", Helvetica, sans-serif`
+- Body/UI: `ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`
+
+Local font loading through `next/font/local` is not currently used.
 
 ## Learn More
 
