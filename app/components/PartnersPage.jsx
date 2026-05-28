@@ -128,6 +128,39 @@ function ChecklistPanel({ title, items, tone }) {
   );
 }
 
+function WaveDivider() {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-x-0 top-0 h-8 overflow-hidden text-epicMint opacity-45 md:h-12"
+    >
+      <svg
+        viewBox="0 0 1440 64"
+        preserveAspectRatio="none"
+        className="h-full w-full"
+        fill="none"
+      >
+        <path
+          d="M0 30 C180 54 360 6 540 30 S900 54 1080 30 S1260 6 1440 30"
+          stroke="currentColor"
+          strokeWidth="3"
+          strokeLinecap="round"
+          vectorEffect="non-scaling-stroke"
+        />
+        <path
+          d="M0 42 C220 18 380 50 590 34 S960 18 1150 34 S1340 50 1440 38"
+          className="text-epicRed"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          vectorEffect="non-scaling-stroke"
+          opacity="0.28"
+        />
+      </svg>
+    </div>
+  );
+}
+
 export default function PartnersPage({ locale = "en" }) {
   const lang = locale === "ru" ? "ru" : "en";
   const content = partnersContent[lang];
@@ -317,8 +350,9 @@ export default function PartnersPage({ locale = "en" }) {
           </div>
         </section>
 
-        <section className="bg-epicDark px-5 py-14 text-white md:px-6 md:py-24">
-          <div className="mx-auto max-w-7xl">
+        <section className="relative overflow-hidden bg-epicDark px-5 py-14 text-white md:px-6 md:py-24">
+          <WaveDivider />
+          <div className="relative mx-auto max-w-7xl">
             <div className="mx-auto max-w-3xl text-center">
               <h2 className="text-3xl font-black leading-tight tracking-normal text-white md:text-5xl">
                 {content.sections.process.title}
