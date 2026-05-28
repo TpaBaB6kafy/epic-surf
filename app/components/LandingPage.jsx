@@ -56,7 +56,7 @@ export default function EpicSurfLanding({ locale = "en" }) {
   };
 
   useEffect(() => {
-    storeAttributionFromUrl();
+    storeAttributionFromUrl({ includePartner: true });
     trackEvent("page_view", { language: lang });
   }, [lang]);
 

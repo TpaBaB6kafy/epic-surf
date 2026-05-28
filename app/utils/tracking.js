@@ -8,6 +8,14 @@ const ATTRIBUTION_PARAMS = [
   "utm_campaign",
   "utm_content",
 ];
+const PARTNER_LEAD_EVENTS = new Set([
+  "booking_cta_click",
+  "whatsapp_click",
+  "telegram_click",
+  "zalo_click",
+  "rental_cta_click",
+  "partner_cta_click",
+]);
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 const UMAMI_SCRIPT_URL = process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL;
@@ -78,17 +86,18 @@ export function buildMessageWithPartnerCode(message, language = "en") {
   const partner = getPartnerCode();
   if (!partner) return message;
 
-  const label = language === "ru" ? "Код партнёра" : "Partner code";
+  const label = language === "ru" ? "\u041a\u043e\u0434 \u043f\u0430\u0440\u0442\u043d\u0451\u0440\u0430" : "Partner code";
   return `${message} ${label}: ${partner}`;
 }
 
-export function getTrackingContext(extra = {}) {
+export function getTrackingContext(extra = {}, event = "") {
   const attribution = getStoredAttribution();
   const pagePath = isBrowser() ? window.location.pathname : "";
   const isPartnerContext = extra.service_type === "partnership" || pagePath.includes("/partners");
+  const isPartnerLeadEvent = PARTNER_LEAD_EVENTS.has(event);
   const scopedAttribution = { ...attribution };
 
-  if (!isPartnerContext) {
+  if (!isPartnerContext && !isPartnerLeadEvent) {
     delete scopedAttribution.partner;
   }
 
@@ -102,7 +111,7 @@ export function getTrackingContext(extra = {}) {
 export function trackEvent(event, payload = {}) {
   if (!isBrowser() || !event) return;
 
-  const eventPayload = getTrackingContext(payload);
+  const eventPayload = getTrackingContext(payload, event);
 
   if (GTM_ID) {
     window.dataLayer = window.dataLayer || [];
@@ -118,15 +127,31 @@ export function trackEvent(event, payload = {}) {
 }
 
 export function buildWhatsAppUrl(baseUrl, message, options = {}) {
-  const { language = "en", includePartnerCode = false } = options;
+  const { language = "en", includePartnerCode = true } = options;
   const separator = baseUrl.includes("?") ? "&" : "?";
   const text = includePartnerCode ? buildMessageWithPartnerCode(message, language) : message;
   return `${baseUrl}${separator}text=${encodeURIComponent(text)}`;
 }
 
 export function buildTelegramUrl(baseUrl, message, options = {}) {
-  const { language = "en", includePartnerCode = false } = options;
+  const { language = "en", includePartnerCode = true } = options;
   const text = includePartnerCode ? buildMessageWithPartnerCode(message, language) : message;
   const encodedMessage = encodeURIComponent(text);
   return `${baseUrl}${baseUrl.includes("?") ? "&" : "?"}text=${encodedMessage}`;
+}
+
+export function buildZaloUrl(baseUrl, message, options = {}) {
+  const { language = "en", includePartnerCode = true } = options;
+  const text = includePartnerCode ? buildMessageWithPartnerCode(message, language) : message;
+  const encodedMessage = encodeURIComponent(text);
+  return `${baseUrl}${baseUrl.includes("?") ? "&" : "?"}text=${encodedMessage}`;
+}
+
+export function getHrefWithCurrentQuery(path) {
+  if (!isBrowser()) return path;
+
+  const currentQuery = window.location.search;
+  if (!currentQuery || path.includes("?") || path.startsWith("#")) return path;
+
+  return `${path}${currentQuery}`;
 }

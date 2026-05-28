@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MessageCircle, X } from "lucide-react";
-import { buildTelegramUrl, buildWhatsAppUrl, trackEvent } from "../utils/tracking";
+import { buildTelegramUrl, buildWhatsAppUrl, buildZaloUrl, trackEvent } from "../utils/tracking";
 
 export default function MessengerFab({ links, lang = "en", ChatWhatsAppIcon, ChatTelegramIcon, ChatZaloIcon }) {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -35,7 +35,7 @@ export default function MessengerFab({ links, lang = "en", ChatWhatsAppIcon, Cha
             <a href={links.telegram} onClick={(event) => handleMessengerClick(event, "telegram_click", "telegram", () => buildTelegramUrl(links.telegram, message, { language: lang }))} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center rounded-full active:scale-95 shadow-xl overflow-hidden" aria-label="Telegram chat">
               <ChatTelegramIcon className="w-full h-full" />
             </a>
-            <a href={links.zalo} onClick={(event) => handleMessengerClick(event, "zalo_click", "zalo")} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center rounded-full active:scale-95 shadow-xl overflow-hidden" aria-label="Zalo chat">
+            <a href={links.zalo} onClick={(event) => handleMessengerClick(event, "zalo_click", "zalo", () => buildZaloUrl(links.zalo, message, { language: lang }))} target="_blank" rel="noreferrer" className="w-14 h-14 flex items-center justify-center rounded-full active:scale-95 shadow-xl overflow-hidden" aria-label="Zalo chat">
               <ChatZaloIcon className="w-full h-full" />
             </a>
           </motion.div>

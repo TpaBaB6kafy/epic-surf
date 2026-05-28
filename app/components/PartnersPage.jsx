@@ -36,6 +36,7 @@ import { links } from "../data/links";
 import {
   buildTelegramUrl,
   buildWhatsAppUrl,
+  getHrefWithCurrentQuery,
   storeAttributionFromUrl,
   trackEvent,
 } from "../utils/tracking";
@@ -172,6 +173,10 @@ export default function PartnersPage({ locale = "en" }) {
             </a>
             <a
               href={content.languageHref}
+              onClick={(event) => {
+                event.preventDefault();
+                window.location.assign(getHrefWithCurrentQuery(content.languageHref));
+              }}
               className="flex h-11 w-11 items-center justify-center rounded-full bg-epicDark text-[11px] font-black uppercase leading-none text-white shadow-md"
             >
               {content.languageLabel}

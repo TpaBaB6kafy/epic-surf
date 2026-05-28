@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { trackEvent } from "../utils/tracking";
+import { getHrefWithCurrentQuery, trackEvent } from "../utils/tracking";
 
 export default function Header({
   t,
@@ -15,7 +15,7 @@ export default function Header({
   openBookingModal
 }) {
   const homeHref = lang === "ru" ? "/ru" : "/";
-  const languageHref = lang === "ru" ? "/" : "/ru";
+  const baseLanguageHref = lang === "ru" ? "/" : "/ru";
   const languageLabel = lang === "ru" ? "EN" : "RU";
   const partnersHref = lang === "ru" ? "/ru/partners" : "/partners";
   const partnersLabel = lang === "ru" ? "Для партнеров" : "Partners";
@@ -53,12 +53,17 @@ export default function Header({
 
           <div className="flex items-center gap-2 md:gap-4 z-[110]">
             <Link
-              href={languageHref}
-              onClick={() => trackEvent("language_switch", {
-                language: lang,
-                cta_location: "header",
-                cta_label: languageLabel.toLowerCase(),
-              })}
+              href={baseLanguageHref}
+              onClick={(event) => {
+                event.preventDefault();
+                const nextHref = getHrefWithCurrentQuery(baseLanguageHref);
+                trackEvent("language_switch", {
+                  language: lang,
+                  cta_location: "header",
+                  cta_label: languageLabel.toLowerCase(),
+                });
+                window.location.assign(nextHref);
+              }}
               className="w-9 h-9 flex items-center justify-center bg-epicDark text-white rounded-full font-bold text-[10px] uppercase shadow-md"
             >
               {languageLabel}
