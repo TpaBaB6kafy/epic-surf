@@ -5,17 +5,30 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { LessonGroupIcon, LessonIndividualIcon, LessonSkateboardIcon, LessonSplitIcon, LessonWavesIcon } from "./Icons";
 import { handleHorizontalWheelScroll } from "./horizontalScroll";
+import { buildWhatsAppUrl, trackEvent } from "../utils/tracking";
 
-export default function Lessons({ t, links, openBookingModal }) {
+const bookingLessonIds = new Set(["group", "private", "split"]);
+const lessonMessages = {
+  ru: {
+    surf_skate: "Здравствуйте! Хочу записаться на surf-skate урок. Подскажите, пожалуйста, доступное время и детали.",
+    lineup_pro: "Здравствуйте! Хочу записаться на Line-up / Pro урок. У меня уже есть опыт серфинга. Подскажите, пожалуйста, доступное время и детали.",
+  },
+  en: {
+    surf_skate: "Hi! I'd like to book a surf-skate lesson. Could you please send me the available times and details?",
+    lineup_pro: "Hi! I'd like to book a Line-up / Pro lesson. I already have surfing experience. Could you please send me the available times and details?",
+  },
+};
+
+export default function Lessons({ t, lang = "en", links, openBookingModal }) {
   const lessonsScrollRef = useRef(null);
   const interactiveSelector = "button, a, input, select, textarea, [role='button']";
-  const lessonIcons = [
-    <LessonGroupIcon key="group" className="h-12 w-12" />,
-    <LessonSplitIcon key="split" className="h-12 w-12" />,
-    <LessonIndividualIcon key="individual" className="h-12 w-12" />,
-    <LessonSkateboardIcon key="skateboard" className="h-12 w-12" />,
-    <LessonWavesIcon key="waves" className="h-12 w-12" />
-  ];
+  const lessonIcons = {
+    group: <LessonGroupIcon className="h-12 w-12" />,
+    split: <LessonSplitIcon className="h-12 w-12" />,
+    private: <LessonIndividualIcon className="h-12 w-12" />,
+    surf_skate: <LessonSkateboardIcon className="h-12 w-12" />,
+    lineup_pro: <LessonWavesIcon className="h-12 w-12" />,
+  };
   const lessonsDragRef = useRef({
     isDragging: false,
     startX: 0,
@@ -71,6 +84,35 @@ export default function Lessons({ t, links, openBookingModal }) {
     event.stopPropagation();
   };
 
+  const getLessonPayload = (item) => ({
+    language: lang,
+    service_type: item.id,
+    cta_location: "lessons",
+    cta_label: item.title,
+    lesson_id: item.id,
+  });
+
+  const getBookingUrl = (item) => links.booking?.[lang]?.[item.id];
+
+  const handleBookingClick = (item) => {
+    const bookingUrl = getBookingUrl(item);
+    if (!bookingUrl) return;
+
+    openBookingModal(bookingUrl, {
+      serviceType: item.id,
+      ctaLocation: "lessons",
+      ctaLabel: item.title,
+      lessonId: item.id,
+    });
+  };
+
+  const handleMessengerClick = (event, item) => {
+    const message = lessonMessages[lang]?.[item.id] || lessonMessages.en[item.id] || item.title;
+
+    trackEvent("whatsapp_click", getLessonPayload(item));
+    event.currentTarget.href = buildWhatsAppUrl(links.whatsapp, message, { language: lang });
+  };
+
   return (
     <section id="lessons" className="py-24 px-6 max-w-7xl mx-auto scroll-mt-24">
       <h2 className="text-4xl md:text-6xl font-black text-center mb-12 md:mb-16 tracking-normal leading-tight text-epicDark break-words">
@@ -91,7 +133,7 @@ export default function Lessons({ t, links, openBookingModal }) {
         <div className="flex gap-4 sm:gap-6 md:gap-8 pb-8 w-max">
           {t.cards.map((item, i) => (
             <motion.div
-              key={i}
+              key={item.id}
               className="w-[76vw] max-w-[300px] sm:w-[300px] flex-shrink-0 snap-start bg-epicDark rounded-[40px] overflow-hidden shadow-lg flex flex-col border border-white/20 text-epicWhite group"
             >
               <div className="relative h-48 w-full">
@@ -105,7 +147,7 @@ export default function Lessons({ t, links, openBookingModal }) {
               </div>
               <div className="px-8 pb-8 pt-9 flex flex-col flex-1 text-center items-center">
                 <div className="mb-3 text-epicGray">
-                  {lessonIcons[i] || lessonIcons[0]}
+                  {lessonIcons[item.id] || lessonIcons.group}
                 </div>
                 <div className="text-[12px] text-epicRed font-extrabold mb-5 leading-snug">{item.badge}</div>
                 <h3 className="text-2xl font-extrabold mb-7 text-epicWhite leading-tight break-words hyphens-auto">{item.title}</h3>
@@ -113,10 +155,11 @@ export default function Lessons({ t, links, openBookingModal }) {
                   {item.desc}
                 </p>
                 <div className="text-[28px] font-normal mb-8 text-epicWhite leading-none tracking-normal">{item.price}</div>
-                <button onClick={() => openBookingModal(links.group, {
-                  ctaLocation: "lessons_section",
-                  ctaLabel: item.title,
-                })} className="w-full bg-epicRed text-epicWhite py-5 rounded-[18px] font-extrabold uppercase text-sm tracking-wide shadow-lg transition-all duration-300 hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-95">{t.btnBook}</button>
+                {bookingLessonIds.has(item.id) ? (
+                  <button onClick={() => handleBookingClick(item)} className="w-full bg-epicRed text-epicWhite py-5 rounded-[18px] font-extrabold uppercase text-sm tracking-wide shadow-lg transition-all duration-300 hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-95">{t.btnBook}</button>
+                ) : (
+                  <a href={links.whatsapp} onClick={(event) => handleMessengerClick(event, item)} target="_blank" rel="noreferrer" className="w-full bg-epicRed text-epicWhite py-5 rounded-[18px] font-extrabold uppercase text-sm tracking-wide shadow-lg transition-all duration-300 hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-95">{t.btnBook}</a>
+                )}
               </div>
             </motion.div>
           ))}

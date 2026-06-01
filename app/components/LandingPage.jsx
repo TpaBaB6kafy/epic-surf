@@ -66,6 +66,7 @@ export default function EpicSurfLanding({ locale = "en" }) {
       service_type: options.serviceType || "surf_lesson",
       cta_location: options.ctaLocation || "unknown",
       cta_label: options.ctaLabel || "book_now",
+      ...(options.lessonId ? { lesson_id: options.lessonId } : {}),
     });
     setBookingModalUrl(url);
   };
@@ -91,6 +92,7 @@ export default function EpicSurfLanding({ locale = "en" }) {
 
       <Lessons
         t={t}
+        lang={lang}
         links={links}
         openBookingModal={openBookingModal}
       />
