@@ -3,9 +3,16 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-export default function Hero({ t }) {
+export default function Hero({ lang = "en" }) {
+  const heroTitle = lang === "ru"
+    ? "Поймай свою EPIC волну в Дананге"
+    : "Catch your EPIC wave in Da Nang";
+  const heroSubtitle = lang === "ru"
+    ? "ШКОЛА СЕРФИНГА В ДА НАНГЕ - МЕСТО, ГДЕ ЖИВУТ СЕРФИНГОМ"
+    : "SURF SCHOOL IN DA NANG — A PLACE BUILT AROUND SURFING";
+
   return (
-    <section className="relative h-screen flex items-center justify-center bg-epicDark overflow-hidden">
+    <section className="relative isolate h-screen bg-epicDark overflow-hidden">
       <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-60">
         <source src="/hero-surf.mp4" type="video/mp4" />
       </video>
@@ -13,31 +20,33 @@ export default function Hero({ t }) {
       <div className="absolute inset-0 z-[1] bg-epicDark/40"></div>
       <div className="absolute inset-0 z-[2] bg-gradient-to-b from-epicDark/50 via-transparent to-epicDark/70 pointer-events-none"></div>
 
-      <div className="relative z-10 text-center px-4 pt-20 flex flex-col items-center">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
-          className="mb-2 md:mb-3 flex justify-center"
-        >
-          <motion.div
-            variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-            className="w-[78vw] max-w-[720px]"
-          >
-            <Image
-              src="/epic-logo-v-ksu-v6-big.png"
-              alt="EPIC"
-              width={1024}
-              height={768}
-              priority
-              className="h-auto w-full"
-            />
-          </motion.div>
-        </motion.div>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.96, y: 24 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+        className="pointer-events-none absolute inset-x-0 top-[25vh] z-[5] mx-auto flex w-full justify-center px-4 mix-blend-difference opacity-65 sm:top-[24vh] md:top-[20vh]"
+        aria-hidden="true"
+      >
+        <Image
+          src="/brand/epic-logo.svg"
+          alt=""
+          width={998}
+          height={446}
+          priority
+          className="h-auto max-h-[34vh] w-[72vw] max-w-[300px] object-contain text-white sm:w-[min(64vw,560px)] sm:max-w-none md:w-[min(58vw,760px)] md:max-h-[42vh]"
+        />
+      </motion.div>
 
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 1 }} className="font-subtitle text-3xl md:text-5xl max-w-5xl mx-auto uppercase text-epicWhite leading-[1.35]">
-          {t.heroSub}
-        </motion.p>
+      <div className="absolute inset-x-0 top-[calc(25vh+185px)] z-10 flex flex-col items-center px-4 text-center sm:top-[calc(24vh+285px)] md:top-[calc(20vh+436px)]">
+        <h1 className="sr-only">{heroTitle}</h1>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8, duration: 1 }}
+          className="font-subtitle text-2xl sm:text-3xl md:text-5xl max-w-5xl mx-auto uppercase text-epicWhite leading-[1.3]"
+        >
+          {heroSubtitle}
+        </motion.div>
       </div>
     </section>
   );
