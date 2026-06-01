@@ -24,7 +24,7 @@ export default function Hero({ lang = "en" }) {
         initial={{ opacity: 0, scale: 0.96, y: 24 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-        className="pointer-events-none absolute inset-x-0 top-[25vh] z-[5] mx-auto flex w-full justify-center px-4 mix-blend-difference opacity-65 sm:top-[24vh] md:top-[20vh]"
+        className="pointer-events-none absolute inset-x-0 top-[25vh] z-[5] mx-auto flex w-full flex-col items-center gap-6 px-4 mix-blend-difference opacity-65 sm:top-[24vh] md:top-[20vh] md:gap-10"
         aria-hidden="true"
       >
         <Image
@@ -33,11 +33,19 @@ export default function Hero({ lang = "en" }) {
           width={998}
           height={446}
           priority
-          className="h-auto max-h-[34vh] w-[72vw] max-w-[300px] object-contain text-white sm:w-[min(64vw,560px)] sm:max-w-none md:w-[min(58vw,760px)] md:max-h-[42vh]"
+          className="h-auto max-h-[32vh] w-[66vw] max-w-[280px] object-contain text-white sm:w-[min(58vw,500px)] sm:max-w-none md:w-[min(50vw,660px)] md:max-h-[38vh]"
+        />
+        <Image
+          src="/brand/surf-school-hero-logo.svg"
+          alt=""
+          width={1115}
+          height={155}
+          priority
+          className="h-auto w-[52vw] max-w-[220px] object-contain text-white sm:w-[min(42vw,340px)] sm:max-w-none md:w-[min(40vw,420px)]"
         />
       </motion.div>
 
-      <div className="absolute inset-x-0 top-[calc(25vh+185px)] z-10 flex flex-col items-center px-4 text-center sm:top-[calc(24vh+285px)] md:top-[calc(20vh+436px)]">
+      <div className="absolute inset-x-0 top-[calc(25vh+215px)] z-10 flex flex-col items-center px-4 text-center sm:top-[calc(24vh+360px)] md:top-[calc(20vh+500px)]">
         <h1 className="sr-only">{heroTitle}</h1>
         <motion.div
           initial={{ opacity: 0 }}
