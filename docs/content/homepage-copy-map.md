@@ -33,13 +33,13 @@ Do not edit partner page copy here.
 | Why Epic | `translations.whyItems[3].desc` | Ты поймаешь свою волну уже на первом уроке. |  | You will catch your first wave during your first lesson. |  | Feature card |
 | Process / how it works | `translations.howTitle` | Как проходят |  | How it |  | Section title |
 | Process / how it works | `translations.howTitleEnd` | уроки |  | works |  | Section title accent |
-| Process / how it works | `translations.howIntro` | Мы разработали систему обучения, которая позволяет 90% новичков встать на доску уже на первом занятии. Ваш прогресс и безопасность — наш главный приоритет. |  | We have developed a teaching system that allows 90% of beginners to stand up on a board during their very first lesson. Your safety and progress are our priority. |  | Section subtitle |
+| Process / how it works | `translations.howIntro` | Мы проводим обучение серфингу во Вьетнаме по надежной методике. С нами вы сможете уверенно встать на доску, поймать первую волну и кайфануть от океана на первом же уроке. Ваш прогресс и безопасность - наш главный приоритет. |  | We teach surf lessons in Vietnam using a proven and reliable method. At our surf school in Da Nang, you’ll learn to stand up confidently, catch your first wave, and enjoy the ocean from your very first lesson. Your progress and safety are our top priorities. |  | Section subtitle |
 | Process / how it works | `translations.howSteps[0].title` | Встреча |  | Meet & Gear Up |  | Step card |
 | Process / how it works | `translations.howSteps[0].time` | 10 мин |  | 10 min |  | Step badge |
-| Process / how it works | `translations.howSteps[0].desc` | Знакомство, подготовка и подбор серфборда под ваш уровень. |  | Meet your coach, gear up, and get the perfect surfboard for your level. |  | Step description |
+| Process / how it works | `translations.howSteps[0].desc` | Знакомство, подготовка и подбор серфборда. |  | We meet, get to know you, prepare for the lesson, and choose the right surfboard. |  | Step description |
 | Process / how it works | `translations.howSteps[1].title` | Подготовка на берегу |  | Beach Theory |  | Step card |
 | Process / how it works | `translations.howSteps[1].time` | 15 мин |  | 15 min |  | Step badge |
-| Process / how it works | `translations.howSteps[1].desc` | Основы сёрфинга и правила безопасности. Отработка базовых упражнений: тейк-офф (вставание на доску), повороты, генерация скорости. |  | Surfing basics and ocean safety. Practicing core movements: pop-up, turning, and speed generation. |  | Step description |
+| Process / how it works | `translations.howSteps[1].desc` | Основы сёрфинга и правила безопасности. Отработка базовых упражнений: тейк-офф, повороты, генерация скорости. |  | We cover the basics of surfing and ocean safety, then practice key movements on the beach: take-off, turns, and speed generation. |  | Step description |
 | Process / how it works | `translations.howSteps[2].title` | Практика в воде |  | Ocean Practice |  | Step card |
 | Process / how it works | `translations.howSteps[2].time` | 75 мин |  | 75 min |  | Step badge |
 | Process / how it works | `translations.howSteps[2].desc` | Ловим волны под контролем инструктора, корректируем ошибки и наслаждаемся сёрфингом. |  | Catching waves under your instructor's guidance, fixing mistakes, and enjoying the ride. |  | Step description |
@@ -51,23 +51,23 @@ Do not edit partner page copy here.
 | Lessons | `translations.sectionTitleRide` | формат |  | Ride |  | Section title accent |
 | Lessons | `translations.cards[0].title` | Групповой урок |  | Group Lesson |  | Lesson card |
 | Lessons | `translations.cards[0].badge` | Популярно |  | Most Popular |  | Lesson card badge |
-| Lessons | `translations.cards[0].desc` | Идеально для новичков. До 4-х человек на инструктора. |  | Perfect for beginners. Up to 4 people per instructor. |  | Lesson card description |
+| Lessons | `translations.cards[0].desc` | Подходит для тех, кто хочет учиться в лёгкой, живой атмосфере единомышленников. |  | Perfect for those who want to learn in a relaxed, lively atmosphere with like-minded people. |  | Lesson card description |
 | Lessons | `translations.cards[0].price` | 900,000 VND |  | 900,000 VND |  | Lesson card price |
 | Lessons | `translations.cards[1].title` | Сплит урок |  | Split Lesson |  | Lesson card |
 | Lessons | `translations.cards[1].badge` | Выгодно |  | Best Value |  | Lesson card badge |
-| Lessons | `translations.cards[1].desc` | Для 2-х человек. Больше внимания тренера. Цена за двоих. |  | For 2 people. More coach attention. Price for two. |  | Lesson card description |
+| Lessons | `translations.cards[1].desc` | Идеально подходит для пар, друзей или детей - максимум внимания и практики в комфортной атмосфере. На уроке вы вдвоём и инструктор. |  | Perfect for couples, friends, or kids — with maximum attention and practice in a comfortable atmosphere. Just two students and one instructor. |  | Lesson card description |
 | Lessons | `translations.cards[1].price` | 2,500,000 VND |  | 2,500,000 VND |  | Lesson card price |
 | Lessons | `translations.cards[2].title` | Приватный урок |  | Private Lesson |  | Lesson card |
 | Lessons | `translations.cards[2].badge` | Премиум |  | Premium |  | Lesson card badge |
-| Lessons | `translations.cards[2].desc` | Индивидуальная тренировка для быстрого прогресса. |  | Individual coaching for faster progress. |  | Lesson card description |
+| Lessons | `translations.cards[2].desc` | Формат один на один с инструктором, который даёт максимальный результат и быстрый прогресс уже за одно занятие. |  | One-on-one format with an instructor for maximum results and fast progress in just one lesson. |  | Lesson card description |
 | Lessons | `translations.cards[2].price` | 1,800,000 VND |  | 1,800,000 VND |  | Lesson card price |
 | Lessons | `translations.cards[3].title` | Серф-скейт |  | Surf-skate |  | Lesson card |
 | Lessons | `translations.cards[3].badge` | Для базы |  | Fundamentals |  | Lesson card badge |
-| Lessons | `translations.cards[3].desc` | Отработка баланса, поворотов и техники на суше. |  | Practice balance, turns and surf technique on land. |  | Lesson card description |
+| Lessons | `translations.cards[3].desc` | Идеальный тренажер для отработки маневров на суше. |  | The perfect land-based training tool for practicing surf maneuvers. |  | Lesson card description |
 | Lessons | `translations.cards[3].price` | 600,000 VND |  | 600,000 VND |  | Lesson card price |
 | Lessons | `translations.cards[4].title` | Line-up / Pro |  | Line-up / Pro |  | Lesson card |
 | Lessons | `translations.cards[4].badge` | Для опытных |  | Advanced |  | Lesson card badge |
-| Lessons | `translations.cards[4].desc` | Выход на лайнап с гидом. Поиск лучших пиков. |  | Guided line-up session and the best peak search. |  | Lesson card description |
+| Lessons | `translations.cards[4].desc` | Урок для продолжающих сёрферов: зелёные волны, проезд по стенке. |  | A lesson for intermediate surfers: green waves, trimming, and riding down the line. |  | Lesson card description |
 | Lessons | `translations.cards[4].price` | 2,400,000 VND |  | 2,400,000 VND |  | Lesson card price |
 | Lessons / messenger CTA | `Lessons.jsx lessonMessages.ru.surf_skate` / `lessonMessages.en.surf_skate` | Здравствуйте! Хочу записаться на surf-skate урок. Подскажите, пожалуйста, доступное время и детали. |  | Hi! I'd like to book a surf-skate lesson. Could you please send me the available times and details? |  | Hardcoded WhatsApp prefill for non-booking lesson |
 | Lessons / messenger CTA | `Lessons.jsx lessonMessages.ru.lineup_pro` / `lessonMessages.en.lineup_pro` | Здравствуйте! Хочу записаться на Line-up / Pro урок. У меня уже есть опыт серфинга. Подскажите, пожалуйста, доступное время и детали. |  | Hi! I'd like to book a Line-up / Pro lesson. I already have surfing experience. Could you please send me the available times and details? |  | Hardcoded WhatsApp prefill for non-booking lesson |
@@ -216,4 +216,3 @@ Do not edit partner page copy here.
 | SEO / metadata | `seoLocales.ru.faqItems[2].answer` / `seoLocales.en.faqItems[2].answer` | Да. Мы сдаем софтборды, лонгборды, малибу и шортборды для разных условий. |  | Yes. We rent soft-tops, longboards, malibu boards and shortboards for different conditions. |  | Structured data FAQ |
 | SEO / structured data | `buildStructuredData knowsAbout[]` | Surf lessons; Surfboard rental; Beginner surfing; My Khe Beach; Da Nang surfing |  | Surf lessons; Surfboard rental; Beginner surfing; My Khe Beach; Da Nang surfing |  | Hardcoded structured data; same in RU/EN |
 | SEO / structured data | `buildStructuredData Service name/serviceType` | Surf lessons in Da Nang; Surf lessons; Surfboard rentals in Da Nang; Surfboard rental |  | Surf lessons in Da Nang; Surf lessons; Surfboard rentals in Da Nang; Surfboard rental |  | Hardcoded structured data; same in RU/EN |
-
