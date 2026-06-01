@@ -110,7 +110,10 @@ export default function Lessons({ t, lang = "en", links, openBookingModal }) {
     const message = lessonMessages[lang]?.[item.id] || lessonMessages.en[item.id] || item.title;
 
     trackEvent("whatsapp_click", getLessonPayload(item));
-    event.currentTarget.href = buildWhatsAppUrl(links.whatsapp, message, { language: lang });
+    event.currentTarget.href = buildWhatsAppUrl(links.whatsapp, message, {
+      language: lang,
+      includePartnerCode: false,
+    });
   };
 
   return (
