@@ -15,7 +15,7 @@ export default function WhyEpic({ items }) {
               viewport={{ once: true }}
               className="flex flex-col items-center"
             >
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-epicGrey rounded-[24px] md:rounded-[30px] flex items-center justify-center text-epicRed shadow-sm border border-white/50 mb-6">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-epicGrey rounded-[24px] md:rounded-[30px] flex items-center justify-center text-[#2E2E2E] shadow-sm border border-white/50 mb-6">
                 {item.icon}
               </div>
               <div className="space-y-2">

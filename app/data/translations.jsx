@@ -90,11 +90,11 @@ export const translations = {
         { q: "Сколько нужно заниматься, чтобы встать на доску?", a: "Большинство уезжает уже на первом занятии, все в ваших руках." }
       ],
       cards: [
-        { id: "group", title: "Групповой урок", badge: "Популярно", desc: "Подходит для тех, кто хочет учиться в лёгкой, живой атмосфере единомышленников.", price: "900,000 VND" },
-        { id: "split", title: "Сплит урок", badge: "Выгодно", desc: "Идеально подходит для пар, друзей или детей - максимум внимания и практики в комфортной атмосфере. На уроке вы вдвоём и инструктор.", price: "2,500,000 VND" },
-        { id: "private", title: "Приватный урок", badge: "Премиум", desc: "Формат один на один с инструктором, который даёт максимальный результат и быстрый прогресс уже за одно занятие.", price: "1,800,000 VND" },
-        { id: "surf_skate", title: "Серф-скейт", badge: "Для базы", desc: "Идеальный тренажер для отработки маневров на суше.", price: "600,000 VND" },
-        { id: "lineup_pro", title: "Line-up / Pro", badge: "Для опытных", desc: "Урок для продолжающих сёрферов: зелёные волны, проезд по стенке.", price: "2,400,000 VND" }
+        { id: "group", title: "Групповой урок", badge: "Популярно", desc: "Подходит для тех, кто хочет учиться в лёгкой, живой атмосфере единомышленников.", price: "900.000 VND" },
+        { id: "split", title: "Сплит урок", badge: "Выгодно", desc: "Идеально подходит для пар, друзей или детей - максимум внимания и практики в комфортной атмосфере. На уроке вы вдвоём и инструктор.", price: "2.500.000 VND" },
+        { id: "private", title: "Приватный урок", badge: "Премиум", desc: "Формат один на один с инструктором, который даёт максимальный результат и быстрый прогресс уже за одно занятие.", price: "1.800.000 VND" },
+        { id: "surf_skate", title: "Серф-скейт", badge: "Для базы", desc: "Идеальный тренажер для отработки маневров на суше.", price: "600.000 VND" },
+        { id: "lineup_pro", title: "Line-up / Pro", badge: "Для опытных", desc: "Урок для продолжающих сёрферов: зелёные волны, проезд по стенке.", price: "2.400.000 VND" }
       ],
       reviewsList: [
         { name: "Evgenia", text: "Отличные уроки! Ребята влюбили меня в серф! Очень понятные объяснения, много практики. 🔥", date: "Неделю назад" },
@@ -190,11 +190,11 @@ export const translations = {
         { q: "How long does it take to stand up on the board?", a: "Most students get riding during the first lesson, but it is in your hands." }
       ],
       cards: [
-        { id: "group", title: "Group Lesson", badge: "Most Popular", desc: "Perfect for those who want to learn in a relaxed, lively atmosphere with like-minded people.", price: "900,000 VND" },
-        { id: "split", title: "Split Lesson", badge: "Best Value", desc: "Perfect for couples, friends, or kids — with maximum attention and practice in a comfortable atmosphere. Just two students and one instructor.", price: "2,500,000 VND" },
-        { id: "private", title: "Private Lesson", badge: "Premium", desc: "One-on-one format with an instructor for maximum results and fast progress in just one lesson.", price: "1,800,000 VND" },
-        { id: "surf_skate", title: "Surf-skate", badge: "Fundamentals", desc: "The perfect land-based training tool for practicing surf maneuvers.", price: "600,000 VND" },
-        { id: "lineup_pro", title: "Line-up / Pro", badge: "Advanced", desc: "A lesson for intermediate surfers: green waves, trimming, and riding down the line.", price: "2,400,000 VND" }
+        { id: "group", title: "Group Lesson", badge: "Most Popular", desc: "Perfect for those who want to learn in a relaxed, lively atmosphere with like-minded people.", price: "900.000 VND" },
+        { id: "split", title: "Split Lesson", badge: "Best Value", desc: "Perfect for couples, friends, or kids — with maximum attention and practice in a comfortable atmosphere. Just two students and one instructor.", price: "2.500.000 VND" },
+        { id: "private", title: "Private Lesson", badge: "Premium", desc: "One-on-one format with an instructor for maximum results and fast progress in just one lesson.", price: "1.800.000 VND" },
+        { id: "surf_skate", title: "Surf-skate", badge: "Fundamentals", desc: "The perfect land-based training tool for practicing surf maneuvers.", price: "600.000 VND" },
+        { id: "lineup_pro", title: "Line-up / Pro", badge: "Advanced", desc: "A lesson for intermediate surfers: green waves, trimming, and riding down the line.", price: "2.400.000 VND" }
       ],
       reviewsList: [
         { name: "Evgenia", text: "Great lessons! The team made us fall in love with surfing! 🔥", date: "1 week ago" },
