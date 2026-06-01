@@ -1,64 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Epic Surf School Da Nang
 
-## Getting Started
+Website for Epic Surf School Da Nang. It sells surf lessons and board rentals, routes visitors to booking and messengers, supports EN/RU pages, and tracks partner referrals.
 
-First, run the development server:
+## Stack
+
+- Next.js App Router
+- React
+- Tailwind CSS v4
+
+## Routes
+
+- `/` - English homepage
+- `/ru` - Russian homepage
+- `/partners` - English partner page
+- `/ru/partners` - Russian partner page
+
+## Local Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-## Production env
+## Scripts
 
-Set `NEXT_PUBLIC_GTM_ID` in Vercel to enable Google Tag Manager. Leave it empty for local development or previews where GTM should not load.
+- `npm run dev` - start local dev server
+- `npm run build` - production build
+- `npm run start` - start production server
+- `npm run lint` - run ESLint
 
-Set both Umami variables to enable Umami Cloud or an external Umami script:
+## Project Docs
 
-```bash
-NEXT_PUBLIC_UMAMI_SCRIPT_URL=https://cloud.umami.is/script.js
-NEXT_PUBLIC_UMAMI_WEBSITE_ID=b5edd093-75f9-45bf-bbc5-b2cfbc494743
-```
+- Project context docs: `docs/project-context/`
+- Start with: `docs/project-context/MASTER-CONTEXT.md`
 
-Set `NEXT_PUBLIC_GTM_ID` together with the two Umami variables to send events to both systems. If any analytics env is missing, the site still runs and `trackEvent()` skips that provider safely.
+## Env Variables
 
-Optional canonical override:
+- `NEXT_PUBLIC_GTM_ID` - enables Google Tag Manager
+- `NEXT_PUBLIC_UMAMI_SCRIPT_URL` - Umami script URL
+- `NEXT_PUBLIC_UMAMI_WEBSITE_ID` - Umami website ID
+- `NEXT_PUBLIC_SITE_URL` - optional canonical site URL override
+- `SITE_URL` - optional canonical site URL override
 
-```bash
-NEXT_PUBLIC_SITE_URL=https://www.surfdanang.com
-```
+Default canonical domain in code: `https://www.surfdanang.com`.
 
-The default canonical domain is already `https://www.surfdanang.com`.
+## SEO
 
-You can start editing the page by modifying files in `app/`. The page auto-updates as you edit the files.
+SEO metadata, canonical URLs, language alternates, and structured data live in `app/data/siteConfig.js`. Sitemap and robots are in `app/sitemap.js` and `app/robots.js`.
 
-## Typography
+Do not break public routes, language alternates, canonical behavior, sitemap, or structured data without a migration plan.
 
-The project uses two font roles:
+## Partner System
 
-- Headings: `"Arial Black", Arial, "Helvetica Neue", Helvetica, sans-serif`
-- Body/UI: `ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`
+Partner links use `partner`, `utm_source`, `utm_medium`, `utm_campaign`, and `utm_content`. Attribution is stored client-side in `localStorage` under `epic_surf_attribution`.
 
-Local font loading through `next/font/local` is not currently used.
+Partner attribution is included only for partner context or lead events. Messenger messages append the partner code when available.
 
-## Learn More
+## Analytics
 
-To learn more about Next.js, take a look at the following resources:
+Tracking lives in `app/utils/tracking.js`. `trackEvent()` sends events to GTM `dataLayer` and Umami when env vars are configured.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Known tracked events include `page_view`, `booking_cta_click`, `gallery_open`, `map_activate`, `language_switch`, messenger clicks, `rental_cta_click`, and `partner_cta_click`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Needs Confirmation
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- DNS and apex/www redirect setup
+- Vercel project/domain settings
+- Partner QR code workflow
+- Alteg/YClients partner or UTM passthrough support
