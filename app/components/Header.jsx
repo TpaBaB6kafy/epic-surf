@@ -28,7 +28,7 @@ export default function Header({
     { href: sectionHref("how-it-works"), label: t.navHow },
     { href: sectionHref("forecast"), label: t.navForecast },
     { href: sectionHref("events"), label: t.navEvents },
-    { href: "#location", label: t.navLocation },
+    { href: sectionHref("location"), label: t.navLocation },
     { href: partnersHref, label: partnersLabel }
   ];
 

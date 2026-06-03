@@ -32,7 +32,7 @@ export const seoPages = {
     title: "Surf Lessons in Da Nang",
     eyebrow: "Epic Surf School",
     intro:
-      "Learn to surf in Da Nang with patient coaching, beginner-friendly boards, and lessons near My Khe Beach. We keep the session practical: clear beach instruction, water time, safety support, and local advice for the day.",
+      "Learn to surf in Da Nang near My Khe Beach with beginner-friendly coaching, board and rashguard included, practical beach instruction, and guided water practice. Book online or message Epic Surf School to choose the right lesson format.",
     heroImage: "/gallery/lesson-1.webp",
     primaryCta: "Book a surf lesson",
     secondaryCta: "Ask on WhatsApp",
@@ -42,46 +42,66 @@ export const seoPages = {
       {
         title: "Who the lessons are for",
         body:
-          "Lessons are designed for first-time surfers, beginners who want better basics, families, couples, and travelers who want a guided surf session instead of guessing the conditions alone.",
+          "Surf lessons are designed for first-time surfers, beginners who want stronger basics, families, couples, and travelers who want a guided session instead of trying to read the beach alone.",
         items: [
-          "First surf lesson with a soft board and close guidance.",
-          "Group lessons for a social, easy-going session.",
-          "Private or split lessons when you want more instructor attention.",
+          "First surf lesson with a softboard matched to your level, height, and weight.",
+          "Group lessons for beginners who want a relaxed, social session.",
+          "Private or split lessons when you want more instructor attention and feedback.",
         ],
       },
       {
         title: "Lesson formats",
         body:
-          "Epic offers group, split, private, surf-skate, and line-up/pro formats. The best option depends on your level, confidence in the water, and the day's conditions.",
+          "Current lesson options include group, split, private, surf-skate, and line-up/pro formats. Group, split, and private lessons can be booked through the online booking flow; surf-skate and line-up/pro requests go through messenger.",
         cards: [
-          { title: "Group Lesson", text: "A friendly format for beginners and travelers who want to learn with others." },
-          { title: "Private Lesson", text: "One-on-one coaching for faster feedback and a calmer pace." },
-          { title: "Split Lesson", text: "A focused lesson for two students with one instructor." },
+          { title: "Group Lesson", text: "Most popular for beginners and travelers who want to learn in a relaxed group. Current site price: 900.000 VND." },
+          { title: "Private Lesson", text: "One-on-one coaching with more direct feedback and a pace built around you. Current site price: 1.800.000 VND." },
+          { title: "Split Lesson", text: "A lesson for two students with one instructor, good for couples, friends, or kids. Current site price: 2.500.000 VND." },
         ],
       },
       {
         title: "How a lesson works",
         body:
-          "We start with the beach basics: board control, position, pop-up movement, ocean safety, and how to read the small waves. Then the instructor helps you practice in the water and adjust after each ride.",
+          "The standard lesson flow on the site is 10 minutes to meet and gear up, 15 minutes of beach theory, 75 minutes of ocean practice, and 10 minutes of review and tips. You learn board position, take-off movement, ocean safety, and how to adjust after each ride.",
+        cards: [
+          { title: "Meet & Gear Up", text: "Meet the team, prepare for the lesson, and choose the right surfboard." },
+          { title: "Beach Theory", text: "Cover surfing basics, ocean safety, take-off, turns, and speed generation on the sand." },
+          { title: "Ocean Practice", text: "Catch waves with instructor guidance, fix mistakes, and build confidence in the water." },
+          { title: "Review & Tips", text: "Finish with a session review and personalized tips for your next surf." },
+        ],
       },
       {
         title: "What is included",
         items: [
-          "Surfboard matched to your level and size.",
-          "Rashguard and basic sun protection support.",
+          "Surfboard matched to your level, height, and weight.",
+          "Clean rashguard for sun and rash protection.",
+          "Zinc SPF for strong tropical sun protection.",
           "Instructor guidance before and during the water session.",
+          "Beach safety briefing and water practice.",
+          "Photos / videos of the best moments of your lesson.",
           "Local advice about timing, waves, and next steps.",
+        ],
+      },
+      {
+        title: "How to book",
+        body:
+          "Choose the lesson format that fits your level, book online or message Epic Surf School, confirm the meeting point and timing, then come ready for a beach and water session.",
+        items: [
+          "Use the booking button for group, private, or split lessons.",
+          "Message us for surf-skate, line-up/pro lessons, same-day questions, or help choosing a format.",
+          "Confirm the exact meeting point and timing before the session.",
+          "Bring swimwear, a towel, and sunscreen.",
         ],
       },
       {
         title: "Safety first",
         body:
-          "Beginner lessons use conditions that are appropriate for learning. You should have basic swimming confidence, listen to the instructor, and avoid surfing alone when the sea looks too strong for your level.",
+          "Beginner lessons use conditions selected for learning and instructor support. You should have basic swimming confidence, follow the instructor's guidance, keep distance from other water users, and avoid surfing alone when the sea looks too strong for your level.",
       },
       {
         title: "Why Epic Surf School",
         body:
-          "Epic Surf School is built around My Khe Beach, local surf knowledge, practical coaching, and a community atmosphere. The goal is not just to stand up once, but to understand what you are doing and enjoy the water safely.",
+          "Epic Surf School is built around My Khe Beach, practical coaching, local surf knowledge, and a community atmosphere. The goal is not just to stand up once, but to understand what you are doing, build confidence, and enjoy the water safely.",
       },
     ],
     faq: [
@@ -91,21 +111,37 @@ export const seoPages = {
       },
       {
         question: "Which lesson should I choose?",
-        answer: "Group lessons are good for most beginners. Private or split lessons are better when you want more direct feedback.",
+        answer: "Group lessons are good for most beginners. Private lessons are better when you want one-on-one feedback, and split lessons work well for two students who want focused coaching together.",
       },
       {
         question: "Are boards included?",
         answer: "Yes. The lesson includes a board selected for your size, level, and the day's conditions.",
       },
+      {
+        question: "How long is a surf lesson?",
+        answer: "The site lesson flow is 10 minutes to meet and gear up, 15 minutes of beach theory, 75 minutes of ocean practice, and 10 minutes of review and tips.",
+      },
+      {
+        question: "Where do we meet?",
+        answer: "Epic Surf School is on My Khe Beach in Da Nang. The exact meeting point is confirmed after booking or by messenger because beach setup can vary by day.",
+      },
+      {
+        question: "What should I bring?",
+        answer: "Bring swimwear, a towel, and sunscreen. The lesson includes a board, rashguard, and sun protection support.",
+      },
+      {
+        question: "Can I book on the same day?",
+        answer: "Same-day booking depends on availability and conditions. Message Epic Surf School to check the current schedule.",
+      },
     ],
-    related: ["/surfing-danang", "/my-khe-beach-surfing", "/surf-guide"],
+    related: ["/surfing-danang", "/my-khe-beach-surfing", "/surfboard-rental-danang", "/surf-guide"],
   },
   "surfing-danang": {
     path: "/surfing-danang",
     title: "Surfing in Da Nang",
     eyebrow: "Da Nang surf guide",
     intro:
-      "Yes, you can surf in Da Nang. My Khe Beach is the main reference point for many visitors, with approachable beach-break conditions on suitable days and easy access to lessons or board rental.",
+      "Yes, Da Nang has surfable beach-break days. My Khe Beach is the easiest surf reference point for many visitors: beginners can start with a lesson, while experienced surfers can ask Epic about board rental and current conditions.",
     heroImage: "/gallery/events/danang-open-2025/danang-open-2025-3.webp",
     primaryCta: "Book a lesson",
     secondaryCta: "Rent a board",
@@ -114,51 +150,76 @@ export const seoPages = {
     secondaryAction: "rental",
     sections: [
       {
-        title: "Can you surf in Da Nang?",
+        title: "Quick answer: can you surf in Da Nang?",
         body:
-          "Da Nang has surfable days, especially around My Khe Beach. Conditions change with swell, wind, and tide, so the right plan depends on the day and your level.",
+          "Yes, you can surf in Da Nang on suitable days, especially around My Khe Beach. Conditions change with swell, wind, tide, and your ability, so beginners should book with an instructor and independent surfers should check local advice before renting.",
       },
       {
         title: "Where to surf",
         body:
-          "My Khe Beach is the easiest starting point for most visitors because it is central, sandy, and close to Epic Surf School. If you are new to the area, ask for current advice before paddling out.",
+          "My Khe Beach is the most practical starting point for many visitors because it is central, sandy, and connected to Epic Surf School's lesson and rental flow. The exact meeting point or pickup point should be confirmed after booking or by messenger.",
       },
       {
         title: "Who the conditions suit",
         items: [
-          "Beginners on small, clean days with instructor support.",
-          "Improving surfers who want more time reading beach-break waves.",
-          "Independent riders who know their limits and want board rental.",
+          "First-timers should book a beginner surf lesson instead of renting alone.",
+          "Beginners can learn on small suitable days with instructor support and the right board.",
+          "Improving surfers can use Da Nang beach-break sessions to practice timing, positioning, and reading waves.",
+          "Experienced independent surfers can ask about rental after checking current conditions.",
         ],
       },
       {
-        title: "When to go",
+        title: "When to surf in Da Nang",
         body:
-          "Surf timing depends on the forecast, wind, tide, and your ability. Instead of relying on a fixed rule, message the school for local guidance before booking or renting.",
+          "Surf timing changes by swell, wind, tide, and your ability. The site includes a current forecast section, but the safest next step is to check the forecast and message Epic before booking a lesson or renting a board.",
       },
       {
         title: "Lessons or rental",
         body:
-          "Choose a lesson if you are new, unsure about safety, or still learning the basics. Choose rental if you can paddle, control the board, and make safe decisions in changing beach conditions.",
+          "Choose a surf lesson if it is your first time, you are not confident controlling a board, or you are unsure about waves and currents. Choose surfboard rental if you can paddle, control and stop the board, avoid collisions, and judge whether the conditions are suitable for your level.",
+        cards: [
+          { title: "Choose a lesson", text: "Best for first-timers, beginners, and anyone who wants instructor support before surfing independently." },
+          { title: "Choose rental", text: "Best for experienced surfers who can control the board safely and check conditions before going out." },
+        ],
       },
       {
         title: "Safety notes",
         body:
-          "Check the sea before entering, keep distance from swimmers and other surfers, and avoid conditions that feel beyond your level. When in doubt, take a lesson or ask local instructors first.",
+          "Check the sea before entering, keep distance from swimmers and other surfers, use a board that fits your level, and do not go out if conditions feel too strong. When in doubt, ask local instructors before paddling out.",
       },
     ],
     faq: [
       {
+        question: "Can you surf in Da Nang?",
+        answer: "Yes. Da Nang has surfable beach-break days, especially around My Khe Beach, but conditions change with swell, wind, tide, and your ability.",
+      },
+      {
         question: "Is Da Nang good for beginners?",
-        answer: "It can be beginner-friendly on suitable days, especially with an instructor and the right board.",
+        answer: "Da Nang can be beginner-friendly on suitable days, especially with an instructor, the right board, and conditions chosen for learning.",
       },
       {
-        question: "Where should I start?",
-        answer: "My Khe Beach is the most practical starting point for many visitors staying in Da Nang.",
+        question: "Where is the best place to start?",
+        answer: "My Khe Beach is the most practical starting point for many visitors because it is central, sandy, and connected to lessons and board rental.",
       },
       {
-        question: "Can I rent instead of taking a lesson?",
-        answer: "Yes, if you already have enough surf experience to handle the board and conditions safely.",
+        question: "When is the best time to surf in Da Nang?",
+        answer: "There is no fixed rule on this page. Surf timing depends on swell, wind, tide, and your level, so check the current forecast and message Epic for local advice.",
+      },
+      {
+        question: "Do I need a lesson?",
+        answer: "Book a lesson if it is your first time, you are not confident controlling a board, or you are unsure about waves, currents, and safety.",
+      },
+      {
+        question: "Can I rent a surfboard in Da Nang?",
+        answer: "Yes, if you already have enough surf experience to paddle, control and stop the board, avoid collisions, and judge conditions safely.",
+      },
+      {
+        question: "Is My Khe Beach good for surfing?",
+        answer: "My Khe Beach is a practical surf reference point for visitors in Da Nang. It is a sandy beach-break area, so conditions can change by day.",
+      },
+      {
+        question: "How do I check conditions?",
+        answer: "Use the current forecast on the site and message Epic Surf School before booking or renting, especially if you are new to Da Nang conditions.",
       },
     ],
     related: ["/surf-lessons-danang", "/surfboard-rental-danang", "/my-khe-beach-surfing", "/surf-guide"],
@@ -168,55 +229,91 @@ export const seoPages = {
     title: "Surfboard Rental in Da Nang",
     eyebrow: "Board rental",
     intro:
-      "Rent a surfboard in Da Nang with Epic Surf School. We help you choose a board for your level and the day's conditions, then keep booking simple through WhatsApp, Telegram, or Zalo.",
+      "Rent a surfboard in Da Nang near My Khe Beach from 250,000 VND / 2 hours. Epic Surf School helps you choose a board for your level and the day's conditions, then keeps booking simple through WhatsApp, Telegram, or Zalo.",
     heroImage: "/gallery/board-1.webp",
     primaryCta: "Rent a board",
     secondaryCta: "Ask about conditions",
     primaryAction: "rental",
     sections: [
       {
+        title: "Rental price",
+        body:
+          "Current site pricing starts from 250,000 VND for a two-hour session. Message Epic Surf School to confirm current availability, board choice, pickup point, and conditions before you go.",
+      },
+      {
         title: "Who rental is for",
         body:
-          "Rental is best for surfers who already know how to paddle, control the board, avoid collisions, and judge whether the conditions are suitable for their level.",
+          "Surfboard rental is for people who can paddle, control the board, stop, avoid collisions, and make safe decisions in changing beach conditions. If you have never surfed before, start with a surf lesson instead.",
+        items: [
+          "Rent if you can paddle, turn, stop, and keep distance from swimmers and other surfers.",
+          "Ask the team first if the sea looks too strong or the conditions are unclear.",
+          "Book a lesson instead if you are a first-timer or cannot confidently control the board.",
+        ],
       },
       {
         title: "Board options",
         body:
-          "The current rental range includes softboards for easier learning, longboards, malibus, and shortboards for more confident riders.",
+          "The current rental range listed on the site includes softboards, longboards, malibus, and shortboards. Availability depends on the day, so message Epic Surf School to confirm the best board for your level and the conditions.",
         cards: [
-          { title: "Softboards", text: "A forgiving choice for newer surfers and smaller waves." },
-          { title: "Longboards and malibus", text: "Stable options for relaxed rides and easier wave catching." },
-          { title: "Shortboards", text: "For experienced surfers when conditions and ability match." },
+          { title: "Softboards", text: "A forgiving option for newer surfers, easier waves, and more stable practice." },
+          { title: "Longboards and malibus", text: "Stable boards for relaxed rides, smoother paddling, and easier wave catching." },
+          { title: "Shortboards", text: "For experienced surfers only, when the conditions and your ability match." },
         ],
       },
       {
-        title: "Rental price",
+        title: "How rental works",
         body:
-          "Current site pricing starts from 250,000 VND for a two-hour session. Message the team to confirm the best board and current availability before you go.",
+          "Rental booking is handled through messenger so the team can confirm your level, timing, board choice, pickup point, and the current beach conditions.",
+        items: [
+          "Message Epic Surf School on WhatsApp, Telegram, or Zalo.",
+          "Share your surf level and preferred rental time.",
+          "Confirm the board, pickup point, and conditions.",
+          "Pick up the board and surf safely.",
+        ],
       },
       {
         title: "Pickup and location",
         body:
-          "Epic Surf School is connected to the My Khe Beach surf area. Exact pickup details should be confirmed by messenger when you book.",
+          "Epic Surf School is connected to the My Khe Beach surf area in Da Nang. The exact pickup point should be confirmed by messenger when you book because beach setup and conditions can vary by day.",
       },
       {
         title: "When to take a lesson instead",
         body:
-          "If you have never surfed, cannot confidently control a board, or are unsure about the sea conditions, a lesson is safer and more useful than rental.",
+          "Never surfed before? Start with a surf lesson instead. A lesson is safer and more useful if you cannot confidently control a board, are unsure about the sea conditions, or want instructor support before renting independently.",
       },
     ],
     faq: [
       {
+        question: "How much is surfboard rental in Da Nang?",
+        answer: "Current site pricing starts from 250,000 VND for a two-hour session. Message Epic Surf School to confirm current availability and board choice.",
+      },
+      {
+        question: "What boards can I rent?",
+        answer: "The site lists softboards, longboards, malibus, and shortboards. Availability depends on the day and should be confirmed by messenger.",
+      },
+      {
         question: "Can beginners rent a board?",
-        answer: "Beginners can rent only when the conditions and their ability are suitable. First-timers should book a lesson.",
+        answer: "Beginners can rent only when their ability and the conditions are suitable. First-timers should book a lesson instead of renting alone.",
       },
       {
-        question: "What boards are available?",
-        answer: "The site lists softboards, longboards, malibus, and shortboards. Availability should be confirmed by messenger.",
+        question: "Where do I pick up the board?",
+        answer: "Epic Surf School is connected to the My Khe Beach surf area. Confirm the exact pickup point by messenger when you book.",
       },
       {
-        question: "How do I book rental?",
-        answer: "Use WhatsApp, Telegram, or Zalo so the team can confirm timing, board choice, and pickup details.",
+        question: "Do I need to book in advance?",
+        answer: "Booking in advance is recommended so the team can confirm timing, board choice, pickup details, and conditions. Same-day rental depends on availability.",
+      },
+      {
+        question: "What if conditions are not suitable?",
+        answer: "Ask Epic Surf School before renting. If the sea is too strong or unclear for your level, it is better to wait, choose another time, or take a lesson.",
+      },
+      {
+        question: "Should I rent or take a lesson?",
+        answer: "Rent if you can paddle, control the board, stop, and avoid collisions. Take a lesson if you are new, inconsistent, or unsure about safety.",
+      },
+      {
+        question: "Can I ask about waves before renting?",
+        answer: "Yes. Use WhatsApp, Telegram, or Zalo so the team can advise on board choice, timing, and current beach conditions.",
       },
     ],
     related: ["/surf-lessons-danang", "/surfing-danang", "/my-khe-beach-surfing", "/surf-guide"],
@@ -226,7 +323,7 @@ export const seoPages = {
     title: "My Khe Beach Surfing",
     eyebrow: "Local beach guide",
     intro:
-      "My Khe Beach is the main surf reference point for many Da Nang visitors. It is central, sandy, and convenient for beginner lessons, board rental, and quick local condition checks.",
+      "My Khe Beach is the main beach surf reference point for many Da Nang visitors. It is central, sandy, and convenient for surf lessons, board rental, and local condition checks with Epic Surf School. The exact meeting point is confirmed after booking or by messenger.",
     heroImage: "/gallery/20.webp",
     primaryCta: "Book at My Khe",
     secondaryCta: "Ask on WhatsApp",
@@ -234,48 +331,73 @@ export const seoPages = {
     bookingLabel: "my_khe_page",
     sections: [
       {
-        title: "Why My Khe works for surfing",
+        title: "Can you surf at My Khe Beach?",
         body:
-          "My Khe Beach gives visitors easy beach access and room to learn when conditions are suitable. Like any beach break, it changes, so local timing matters.",
+          "Yes - on suitable days, My Khe Beach can work for surf lessons, beginner practice, and board rental. Conditions change, so Epic confirms timing, board choice, and meeting point after booking or by messenger.",
       },
       {
-        title: "For beginners",
+        title: "Why My Khe works for visitors",
         body:
-          "Beginners should start with an instructor, a softboard, and conditions chosen for learning. That gives you more water time and less guesswork.",
+          "My Khe Beach is a central beach area with sandy access, which makes it practical for tourists staying nearby. It is easy to combine the same beach area with a lesson, board rental, or a quick local conditions check when the surf fits your level.",
+      },
+      {
+        title: "Who My Khe Beach suits",
+        body:
+          "First-timers should start with an instructor. Beginners can practice when conditions are small and suitable. Improving surfers can use My Khe to get more time reading beach-break waves, while experienced independent surfers can ask about rental and current conditions.",
       },
       {
         title: "Finding Epic Surf School",
         body:
-          "Epic Surf School operates around the My Khe Beach surf area. For the exact meeting point on the day, use the booking flow or message the team directly.",
+          "Epic Surf School operates near the My Khe Beach surf area in Da Nang. The current site location copy points visitors to the red EPIC SURF flag opposite TMS Hotel, but because beach setup and conditions can change, the exact meeting point is confirmed after booking or by messenger. Visitors can use Google Maps or message the team before the lesson.",
       },
       {
         title: "Lessons at My Khe Beach",
         body:
-          "Lessons focus on safety, board handling, pop-up basics, and wave practice near the beach when the conditions fit the student's level.",
+          "Surf lessons at My Khe Beach are beginner-friendly and include board and rashguard. The session combines beach instruction with water practice, and the lesson time is chosen around conditions and the student's level. For full lesson details, use the Surf Lessons page linked below.",
       },
       {
         title: "Board rental near My Khe",
         body:
-          "Independent surfers can rent boards and ask for local advice before going out. If you are unsure about the conditions, book a lesson instead.",
+          "Board rental near My Khe is for surfers who can paddle, control the board, stop, and avoid collisions. Epic rents softboards, longboards, malibus, and shortboards from 250,000 VND / 2 hours, but availability depends on the day. Confirm the board, pickup point, and conditions by messenger before renting.",
       },
       {
-        title: "Weather and conditions",
+        title: "Conditions and forecast",
         body:
-          "Wind, tide, and swell can change the session quickly. Check the forecast and ask for local guidance before choosing a time.",
+          "My Khe is a beach break, so conditions can change with swell, wind, and tide. Check the forecast and ask Epic for local guidance before choosing a time. Beginners should not choose conditions alone if they are unsure.",
       },
     ],
     faq: [
       {
-        question: "Is My Khe Beach suitable for first lessons?",
-        answer: "It can be suitable on the right day. Epic chooses lesson timing based on conditions and student level.",
+        question: "Is My Khe Beach good for surfing?",
+        answer: "Yes, on suitable days. My Khe Beach is a central sandy beach area in Da Nang and a practical surf reference point for visitors, but conditions change with swell, wind, and tide.",
       },
       {
-        question: "Can I rent a board near My Khe Beach?",
-        answer: "Yes. Epic offers board rental connected to the My Khe Beach surf area.",
+        question: "Is My Khe Beach good for beginners?",
+        answer: "It can be good for beginners when conditions fit their level. First-timers should book a lesson so an instructor can choose the timing, board, and practice area.",
       },
       {
-        question: "Where exactly should I meet the instructor?",
-        answer: "Confirm the meeting point through booking or messenger because beach setup can vary by day.",
+        question: "Can I take a surf lesson at My Khe Beach?",
+        answer: "Yes. Epic Surf School offers beginner-friendly lessons around the My Khe Beach surf area with beach instruction, water practice, board, and rashguard included.",
+      },
+      {
+        question: "Can I rent a surfboard near My Khe Beach?",
+        answer: "Yes. Epic offers surfboard rental near My Khe Beach from 250,000 VND / 2 hours. Rental is for surfers who can paddle, control the board, stop, and avoid collisions.",
+      },
+      {
+        question: "Where do I meet the instructor?",
+        answer: "The exact meeting point is confirmed after booking or by messenger because beach setup and conditions can change. The current site location copy also points visitors to the red EPIC SURF flag opposite TMS Hotel.",
+      },
+      {
+        question: "What time should I surf at My Khe Beach?",
+        answer: "Surf timing depends on swell, wind, tide, and your ability. Check the forecast and message Epic before choosing a lesson or rental time.",
+      },
+      {
+        question: "Should I book a lesson or rent a board?",
+        answer: "Book a lesson if it is your first time, if you are not confident controlling a board, or if you are unsure about conditions. Rent only if you can surf independently and avoid collisions.",
+      },
+      {
+        question: "How do I check the conditions?",
+        answer: "Use the forecast as a first check, then message Epic on WhatsApp, Telegram, or Zalo for local guidance before booking or renting.",
       },
     ],
     related: ["/surf-lessons-danang", "/surfboard-rental-danang", "/surfing-danang", "/surf-guide"],
@@ -285,7 +407,7 @@ export const seoPages = {
     title: "Epic Surf Guide",
     eyebrow: "Beginner surf tips",
     intro:
-      "A practical Da Nang surf hub from Epic Surf School: where to start, how to stay safer, what to know before renting, and how beginners can make their first sessions smoother.",
+      "A practical beginner surf guide from Epic Surf School Da Nang: how to start safely, pop-up basics, surf etiquette, when to book a lesson instead of renting, and what to know around My Khe Beach.",
     heroImage: "/gallery/process-2.webp",
     primaryCta: "Book a lesson",
     secondaryCta: "Ask a question",
@@ -294,59 +416,90 @@ export const seoPages = {
     hubCards: [
       {
         title: "Surf Lessons in Da Nang",
-        text: "Lesson formats, what is included, safety, and booking.",
+        text: "Beginner lesson formats, what is included, booking steps, and safety notes before your first session.",
         href: "/surf-lessons-danang",
       },
       {
         title: "Surfing in Da Nang",
-        text: "Where to surf, who conditions suit, and when to ask for local advice.",
+        text: "Can you surf in Da Nang, where to start near My Khe Beach, and how to check local conditions.",
         href: "/surfing-danang",
       },
       {
         title: "Surfboard Rental",
-        text: "Board types, rental fit, safety, and when a lesson is better.",
+        text: "Board options, rental eligibility, price context, and when beginners should choose a lesson instead.",
         href: "/surfboard-rental-danang",
       },
       {
         title: "My Khe Beach Surfing",
-        text: "Local notes for the beach area most visitors ask about.",
+        text: "Local My Khe Beach notes for lessons, rental, meeting point confirmation, and condition checks.",
         href: "/my-khe-beach-surfing",
       },
     ],
     sections: [
       {
+        title: "Before your first surf lesson",
+        body:
+          "A little preparation makes the first session easier. Keep it simple and let the instructor know what you have tried before, even if the answer is nothing.",
+        items: [
+          "Bring swimwear, a towel, sunscreen, and water.",
+          "Tell the instructor your surf level and swimming confidence.",
+          "Listen to the safety briefing before entering the water.",
+          "Do not surf alone as a first-timer.",
+          "Ask about conditions if you are unsure.",
+        ],
+      },
+      {
         title: "Beginner surf guide",
         body:
-          "Start with a softboard, learn on manageable waves, and focus on position before speed. A good first goal is simple: understand where to lie on the board, how to paddle straight, and how to stand up safely.",
+          "Start with a stable board, suitable conditions, and a goal you can control. The first priority is not a big wave; it is learning where to lie on the board, how to paddle straight, and how to finish a ride without losing control.",
         items: [
-          "Keep your chest lifted and eyes forward when paddling.",
-          "Practice the pop-up movement on sand before entering the water.",
-          "Aim for controlled rides, not the biggest wave.",
+          "Keep your body centered so the board does not nose-dive or stall.",
+          "Paddle straight with your chest lifted and eyes forward.",
+          "Stay low after standing up instead of locking your knees.",
+          "Choose controlled rides over bigger waves.",
         ],
       },
       {
         title: "How to pop up on a surfboard",
         body:
-          "The pop-up should be quick but not rushed. Push through your hands, bring your feet under your body, stay low, and look where you want to go. If your feet land wrong, reset and try again instead of forcing the ride.",
+          "Keep the pop-up simple. Place your hands under your chest or ribs, not too far forward. Push up, bring your front foot under your body, stay low, and look where you want to go. If your feet land wrong, reset instead of forcing the ride.",
+      },
+      {
+        title: "Common beginner mistakes",
+        items: [
+          "Looking down instead of looking where you want to go.",
+          "Standing too tall and losing balance.",
+          "Putting hands too far forward before the pop-up.",
+          "Choosing waves or conditions that are too strong.",
+          "Letting go of the board without checking who is nearby.",
+          "Trying to rent before you can control, stop, and avoid collisions.",
+        ],
       },
       {
         title: "Surf safety for beginners",
+        body:
+          "Surf safety starts with judgment. Beginners should use suitable conditions, keep distance, control the board, and stop if the sea feels too strong.",
         items: [
           "Do not surf alone when you are new.",
           "Keep distance from swimmers, other surfers, and hard objects.",
-          "Hold onto your board unless it puts someone else at risk.",
-          "If the ocean feels too strong, stop and ask for guidance.",
+          "Use a board and conditions that match your level.",
+          "Control the board before trying to catch more waves.",
+          "If conditions feel too strong, stop and ask local instructors.",
         ],
       },
       {
         title: "Surf etiquette",
         body:
-          "Respect the person closest to the breaking part of the wave, do not drop in, paddle around the riding zone when possible, and communicate clearly. Good etiquette keeps the session calmer for everyone.",
+          "Surf etiquette keeps the session calmer for everyone. Do not drop in on another surfer. Respect the surfer closest to the breaking part of the wave. Paddle around the riding zone when possible, communicate clearly, keep calm, and give people space.",
       },
       {
         title: "Lessons or rental?",
         body:
-          "Book a lesson if you are new, inconsistent, or unsure about the conditions. Rent a board when you can safely paddle, turn, stop, and choose suitable waves without close supervision.",
+          "Choose based on control, not confidence alone. Book a lesson if it is your first time, if you are not confident paddling, stopping, or turning, if you are unsure about conditions, or if you want faster feedback. Choose rental only if you can paddle, control and stop the board, avoid collisions, and judge whether conditions fit your level.",
+        cards: [
+          { title: "Choose a lesson", text: "Best for first-timers, unsure beginners, and surfers who want instructor feedback before going independent." },
+          { title: "Choose rental", text: "Best for independent surfers who can control the board safely and check conditions before paddling out." },
+        ],
       },
     ],
     faq: [
@@ -356,11 +509,31 @@ export const seoPages = {
       },
       {
         question: "Can I learn from this guide alone?",
-        answer: "The guide helps, but first-timers should still take a lesson for safety and faster feedback.",
+        answer: "This guide helps you understand the basics, but first-timers should still take a lesson for safety guidance, board control, and faster feedback.",
+      },
+      {
+        question: "Do I need a surf lesson?",
+        answer: "Book a lesson if it is your first time, if you cannot confidently paddle, stop, and turn, or if you are unsure about the conditions.",
+      },
+      {
+        question: "What should I bring to my first surf lesson?",
+        answer: "Bring swimwear, a towel, sunscreen, and water. Tell the instructor your level before the session starts.",
       },
       {
         question: "Is surf etiquette important for beginners?",
-        answer: "Yes. Even simple rules help beginners avoid dangerous or frustrating situations in the water.",
+        answer: "Yes. Simple rules like not dropping in, keeping distance, and communicating clearly help avoid dangerous or frustrating situations.",
+      },
+      {
+        question: "When should I rent instead of taking a lesson?",
+        answer: "Rent when you can paddle, control and stop the board, avoid collisions, and judge conditions. If you are not there yet, book a lesson.",
+      },
+      {
+        question: "Is My Khe Beach good for beginner surfers?",
+        answer: "It can be suitable on the right day. My Khe Beach is a practical starting point for many visitors, but conditions still need to fit the surfer's level.",
+      },
+      {
+        question: "How do I check conditions in Da Nang?",
+        answer: "Use the current forecast as a first check, then message Epic Surf School for local guidance before booking a lesson or renting a board.",
       },
     ],
     related: ["/surf-lessons-danang", "/surfing-danang", "/surfboard-rental-danang", "/my-khe-beach-surfing"],
