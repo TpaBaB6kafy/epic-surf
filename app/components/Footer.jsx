@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Handshake, MapPin, Send } from "lucide-react";
+import { seoPageLinks } from "../data/seoPages";
 import { trackEvent } from "../utils/tracking";
 
 export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookIcon, YoutubeIcon, ThreadsIcon }) {
@@ -52,12 +54,42 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
                 <MapPin size={16} className="shrink-0 text-epicRed" /> {t.locationAddress}
               </div>
             </div>
+            {lang === "en" && (
+              <div className="pt-8 border-t border-white/5">
+                <p className="mb-4 text-[11px] font-black uppercase tracking-wide text-white/35">Surf Info</p>
+                <div className="flex flex-wrap gap-x-5 gap-y-3 justify-center md:justify-start">
+                  {seoPageLinks.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="text-sm font-bold leading-snug text-white/60 transition-colors hover:text-epicRed"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
           <div className="lg:col-span-7 h-[450px] rounded-[60px] overflow-hidden border border-white/10 shadow-2xl relative">
+            <div className="absolute inset-5 z-20 flex items-center justify-center rounded-[32px] border border-white/10 bg-epicDark/70 px-5 py-4 text-center text-white shadow-xl backdrop-blur-md md:inset-auto md:left-8 md:bottom-8 md:w-[320px]">
+              <div>
+                <MapPin size={20} className="mx-auto mb-2 text-epicRed md:mx-0" />
+                <p className="text-base font-black leading-tight text-white">{t.locationAddress}</p>
+                <a
+                  href={links.googleMaps}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex rounded-full bg-epicRed px-4 py-2 text-[10px] font-black uppercase tracking-wide text-white transition-all hover:brightness-105"
+                >
+                  Open Google Maps
+                </a>
+              </div>
+            </div>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1024.2523782017452!2d108.25027605520296!3d16.046658364986484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217f20b1fa357%3A0xa323fdd182ae974!2sEPIC%20Surf%20School%20Da%20Nang!5e1!3m2!1sru!2s!4v1777015710238!5m2!1sru!2s"
               title="Epic Surf School Da Nang location map"
-              className="w-full h-full border-none lg:grayscale lg:invert lg:contrast-125 lg:opacity-60 lg:hover:grayscale-0 lg:hover:invert-0 transition-all duration-1000"
+              className="relative z-10 w-full h-full border-none lg:grayscale lg:invert lg:contrast-125 lg:opacity-60 lg:hover:grayscale-0 lg:hover:invert-0 transition-all duration-1000"
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

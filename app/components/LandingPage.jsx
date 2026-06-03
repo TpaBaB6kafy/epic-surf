@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import Header from "./Header";
 import Hero from "./Hero";
 import WhyEpic from "./WhyEpic";
@@ -33,6 +34,8 @@ import {
   ThreadsIcon
 } from "./Icons";
 import { storeAttributionFromUrl, trackEvent } from "../utils/tracking";
+import { seoPageLinks } from "../data/seoPages";
+
 export default function EpicSurfLanding({ locale = "en" }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isRentalModalOpen, setRentalModalOpen] = useState(false);
@@ -86,6 +89,34 @@ export default function EpicSurfLanding({ locale = "en" }) {
       />
 
       <Hero t={t} lang={lang} />
+
+      {lang === "en" && (
+        <section className="mx-auto max-w-7xl px-6 pt-12">
+          <div className="rounded-[28px] border border-epicDark/10 bg-white px-5 py-5 shadow-sm md:px-7">
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <div>
+                <p className="text-[11px] font-black uppercase tracking-wide text-epicRed">
+                  Explore surfing in Da Nang
+                </p>
+                <p className="mt-1 text-sm font-bold leading-6 text-epicDark/65">
+                  Guides for lessons, rental, My Khe Beach, and beginner surf basics.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {seoPageLinks.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="rounded-full border border-epicDark/10 px-4 py-2 text-[11px] font-black uppercase leading-none tracking-wide text-epicDark transition-colors hover:border-epicRed hover:text-epicRed"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       <WhyEpic items={t.whyItems} />
       <HowItWorks t={t} />

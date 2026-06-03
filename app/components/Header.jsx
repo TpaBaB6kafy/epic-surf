@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { getHrefWithCurrentQuery, trackEvent } from "../utils/tracking";
@@ -14,16 +15,19 @@ export default function Header({
   setIsMenuOpen,
   openBookingModal
 }) {
+  const pathname = usePathname();
   const homeHref = lang === "ru" ? "/ru" : "/";
+  const isHomePage = pathname === homeHref;
+  const sectionHref = (fragment) => (isHomePage ? `#${fragment}` : `${homeHref === "/" ? "/" : homeHref}#${fragment}`);
   const baseLanguageHref = lang === "ru" ? "/" : "/ru";
   const languageLabel = lang === "ru" ? "EN" : "RU";
   const partnersHref = lang === "ru" ? "/ru/partners" : "/partners";
   const partnersLabel = lang === "ru" ? "Для партнеров" : "Partners";
   const navItems = [
-    { href: "#lessons", label: t.navLessons },
-    { href: "#how-it-works", label: t.navHow },
-    { href: "#forecast", label: t.navForecast },
-    { href: "#events", label: t.navEvents },
+    { href: sectionHref("lessons"), label: t.navLessons },
+    { href: sectionHref("how-it-works"), label: t.navHow },
+    { href: sectionHref("forecast"), label: t.navForecast },
+    { href: sectionHref("events"), label: t.navEvents },
     { href: "#location", label: t.navLocation },
     { href: partnersHref, label: partnersLabel }
   ];

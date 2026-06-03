@@ -1,11 +1,12 @@
 import { absoluteUrl, languageAlternates, localizedUrl } from "./data/siteConfig";
+import { seoPageLinks } from "./data/seoPages";
 
 export default function sitemap() {
   const alternates = {
     languages: languageAlternates(),
   };
 
-  return [
+  const pages = [
     {
       url: localizedUrl("en"),
       lastModified: new Date(),
@@ -47,4 +48,15 @@ export default function sitemap() {
       },
     },
   ];
+
+  seoPageLinks.forEach((page) => {
+    pages.push({
+      url: absoluteUrl(page.href),
+      lastModified: new Date(),
+      changeFrequency: page.href === "/surf-guide" ? "monthly" : "weekly",
+      priority: page.href === "/surf-guide" ? 0.75 : 0.8,
+    });
+  });
+
+  return pages;
 }
