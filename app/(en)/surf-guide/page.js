@@ -10,7 +10,7 @@ export const metadata = {
     absolute: "Epic Surf Guide | Beginner Surf Tips & Da Nang Surf Info",
   },
   description:
-    "Beginner-friendly surf tips from Epic Surf School Da Nang. Learn about surf lessons, safety, etiquette, pop-up basics, and surfing at My Khe Beach.",
+    "Beginner surf tips from Epic Surf School Da Nang. Learn pop-up basics, surf safety, etiquette, what to bring, and when to choose lessons or board rental.",
   alternates: {
     canonical: "/surf-guide",
   },
@@ -21,7 +21,7 @@ export const metadata = {
     siteName: siteConfig.name,
     title: "Epic Surf Guide | Beginner Surf Tips & Da Nang Surf Info",
     description:
-      "Beginner-friendly surf tips from Epic Surf School Da Nang. Learn about surf lessons, safety, etiquette, pop-up basics, and surfing at My Khe Beach.",
+      "Beginner surf tips from Epic Surf School Da Nang. Learn pop-up basics, surf safety, etiquette, what to bring, and when to choose lessons or board rental.",
     images: [{ url: siteConfig.ogImage, width: 1200, height: 630 }],
   },
 };

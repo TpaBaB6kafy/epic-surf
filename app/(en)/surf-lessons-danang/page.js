@@ -10,7 +10,7 @@ export const metadata = {
     absolute: "Surf Lessons in Da Nang | Epic Surf School My Khe Beach",
   },
   description:
-    "Learn to surf in Da Nang with Epic Surf School. Beginner-friendly surf lessons, local instructors, board and gear included, and lessons near My Khe Beach.",
+    "Learn to surf in Da Nang near My Khe Beach. Beginner-friendly group, private and split surf lessons with board, rashguard, instructor support and easy online booking.",
   alternates: {
     canonical: "/surf-lessons-danang",
   },
@@ -21,7 +21,7 @@ export const metadata = {
     siteName: siteConfig.name,
     title: "Surf Lessons in Da Nang | Epic Surf School My Khe Beach",
     description:
-      "Learn to surf in Da Nang with Epic Surf School. Beginner-friendly surf lessons, local instructors, board and gear included, and lessons near My Khe Beach.",
+      "Learn to surf in Da Nang near My Khe Beach. Beginner-friendly group, private and split surf lessons with board, rashguard, instructor support and easy online booking.",
     images: [{ url: siteConfig.ogImage, width: 1200, height: 630 }],
   },
 };

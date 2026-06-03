@@ -13,7 +13,7 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
   return (
     <footer id="location" className="bg-epicDark text-white pt-24 pb-12 px-6 border-t border-white/5">
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-12 gap-16 mb-20 text-center md:text-left">
+        <div className="mb-14 grid gap-12 text-center md:text-left lg:grid-cols-12 lg:items-start lg:gap-16">
           <div className="lg:col-span-5 space-y-12">
             <div>
               <Image
@@ -54,25 +54,9 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
                 <MapPin size={16} className="shrink-0 text-epicRed" /> {t.locationAddress}
               </div>
             </div>
-            {lang === "en" && (
-              <div className="pt-8 border-t border-white/5">
-                <p className="mb-4 text-[11px] font-black uppercase tracking-wide text-white/35">Surf Info</p>
-                <div className="flex flex-wrap gap-x-5 gap-y-3 justify-center md:justify-start">
-                  {seoPageLinks.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="text-sm font-bold leading-snug text-white/60 transition-colors hover:text-epicRed"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
-          <div className="lg:col-span-7 h-[450px] rounded-[60px] overflow-hidden border border-white/10 shadow-2xl relative">
-            <div className="absolute inset-5 z-20 flex items-center justify-center rounded-[32px] border border-white/10 bg-epicDark/70 px-5 py-4 text-center text-white shadow-xl backdrop-blur-md md:inset-auto md:left-8 md:bottom-8 md:w-[320px]">
+          <div className="relative h-[300px] overflow-hidden rounded-[44px] border border-white/10 shadow-2xl md:h-[380px] lg:col-span-7 lg:h-[440px] lg:rounded-[56px]">
+            <div className="absolute inset-x-4 bottom-4 z-20 flex items-center justify-center rounded-[24px] border border-white/10 bg-epicDark/70 px-4 py-3 text-center text-white shadow-xl backdrop-blur-md md:inset-auto md:left-7 md:bottom-7 md:w-[300px] md:px-5 md:py-4">
               <div>
                 <MapPin size={20} className="mx-auto mb-2 text-epicRed md:mx-0" />
                 <p className="text-base font-black leading-tight text-white">{t.locationAddress}</p>
@@ -96,6 +80,22 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
             ></iframe>
           </div>
         </div>
+        {lang === "en" && (
+          <div className="mb-12 border-t border-white/5 pt-8 text-center md:text-left">
+            <p className="mb-4 text-[11px] font-black uppercase tracking-wide text-white/35">Surf Info</p>
+            <div className="flex flex-wrap justify-center gap-x-5 gap-y-3 md:justify-start">
+              {seoPageLinks.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="text-sm font-bold leading-snug text-white/60 transition-colors hover:text-epicRed"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
         <div className="pt-12 border-t border-white/5 text-[11px] font-bold tracking-wide text-white/25 text-center md:text-left">
           <div>© 2026 Epic Surf School - Ride Every Day</div>
         </div>

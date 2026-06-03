@@ -10,7 +10,7 @@ export const metadata = {
     absolute: "Surfboard Rental in Da Nang | Epic Surf School",
   },
   description:
-    "Rent a surfboard in Da Nang with Epic Surf School. Board rental near My Khe Beach, easy messenger booking, and beginner-friendly safety guidance.",
+    "Rent a surfboard in Da Nang near My Khe Beach. Softboards, longboards, malibus and shortboards from 250,000 VND / 2 hours. Message Epic Surf School to confirm availability.",
   alternates: {
     canonical: "/surfboard-rental-danang",
   },
@@ -21,7 +21,7 @@ export const metadata = {
     siteName: siteConfig.name,
     title: "Surfboard Rental in Da Nang | Epic Surf School",
     description:
-      "Rent a surfboard in Da Nang with Epic Surf School. Board rental near My Khe Beach, easy messenger booking, and beginner-friendly safety guidance.",
+      "Rent a surfboard in Da Nang near My Khe Beach. Softboards, longboards, malibus and shortboards from 250,000 VND / 2 hours. Message Epic Surf School to confirm availability.",
     images: [{ url: siteConfig.ogImage, width: 1200, height: 630 }],
   },
 };

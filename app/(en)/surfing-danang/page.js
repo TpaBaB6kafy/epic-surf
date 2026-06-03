@@ -7,10 +7,10 @@ const page = getSeoPage("surfing-danang");
 export const metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
   title: {
-    absolute: "Surfing in Da Nang: Lessons, Season & My Khe Beach Guide",
+    absolute: "Surfing in Da Nang: My Khe Beach, Lessons & Board Rental",
   },
   description:
-    "Planning to surf in Da Nang? Learn where to surf, when to go, what beginners should know, and how to book surf lessons or board rental with Epic Surf School.",
+    "Learn about surfing in Da Nang: where to start near My Khe Beach, when to ask for local conditions, and how to choose between surf lessons and board rental.",
   alternates: {
     canonical: "/surfing-danang",
   },
@@ -19,9 +19,9 @@ export const metadata = {
     locale: "en_US",
     url: "/surfing-danang",
     siteName: siteConfig.name,
-    title: "Surfing in Da Nang: Lessons, Season & My Khe Beach Guide",
+    title: "Surfing in Da Nang: My Khe Beach, Lessons & Board Rental",
     description:
-      "Planning to surf in Da Nang? Learn where to surf, when to go, what beginners should know, and how to book surf lessons or board rental with Epic Surf School.",
+      "Learn about surfing in Da Nang: where to start near My Khe Beach, when to ask for local conditions, and how to choose between surf lessons and board rental.",
     images: [{ url: siteConfig.ogImage, width: 1200, height: 630 }],
   },
 };
