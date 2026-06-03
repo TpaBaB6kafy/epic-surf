@@ -1,15 +1,25 @@
 import PartnersPage from "../../components/PartnersPage";
-import { siteConfig } from "../../data/siteConfig";
+import PageJsonLd from "../../components/PageJsonLd";
+import {
+  buildWebPageStructuredData,
+  openGraphImages,
+  siteConfig,
+  twitterMetadata,
+} from "../../data/siteConfig";
+
+const title = "Partners | Epic Surf School Da Nang";
+const description =
+  "Partner with Epic Surf School in Da Nang. Surf lessons for hotel guests, villas, travel agencies, creators, retreats and local businesses near My Khe Beach.";
+const path = "/partners";
 
 export const metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
   title: {
-    absolute: "Partners | Epic Surf School Da Nang",
+    absolute: title,
   },
-  description:
-    "Partner with Epic Surf School in Da Nang. Surf lessons for hotel guests, villas, travel agencies, creators, retreats and local businesses near My Khe Beach.",
+  description,
   alternates: {
-    canonical: "/partners",
+    canonical: path,
     languages: {
       en: "/partners",
       ru: "/ru/partners",
@@ -19,15 +29,20 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "/partners",
+    url: path,
     siteName: siteConfig.name,
-    title: "Partners | Epic Surf School Da Nang",
-    description:
-      "Partner with Epic Surf School in Da Nang. Surf lessons for hotel guests, villas, travel agencies, creators, retreats and local businesses near My Khe Beach.",
-    images: [{ url: siteConfig.ogImage, width: 1200, height: 630 }],
+    title,
+    description,
+    images: openGraphImages(title),
   },
+  twitter: twitterMetadata(title, description),
 };
 
 export default function Page() {
-  return <PartnersPage locale="en" />;
+  return (
+    <>
+      <PageJsonLd data={buildWebPageStructuredData({ path, title, description, locale: "en" })} />
+      <PartnersPage locale="en" />
+    </>
+  );
 }

@@ -1,31 +1,45 @@
 import SeoPage from "../../components/SeoPage";
 import { getSeoPage } from "../../data/seoPages";
-import { siteConfig } from "../../data/siteConfig";
+import PageJsonLd from "../../components/PageJsonLd";
+import {
+  buildWebPageStructuredData,
+  openGraphImages,
+  siteConfig,
+  twitterMetadata,
+} from "../../data/siteConfig";
 
 const page = getSeoPage("surfing-danang");
+const title = "Surfing in Da Nang: My Khe Beach, Lessons & Board Rental";
+const description =
+  "Learn about surfing in Da Nang: where to start near My Khe Beach, when to ask for local conditions, and how to choose between surf lessons and board rental.";
+const path = "/surfing-danang";
 
 export const metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
   title: {
-    absolute: "Surfing in Da Nang: My Khe Beach, Lessons & Board Rental",
+    absolute: title,
   },
-  description:
-    "Learn about surfing in Da Nang: where to start near My Khe Beach, when to ask for local conditions, and how to choose between surf lessons and board rental.",
+  description,
   alternates: {
-    canonical: "/surfing-danang",
+    canonical: path,
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "/surfing-danang",
+    url: path,
     siteName: siteConfig.name,
-    title: "Surfing in Da Nang: My Khe Beach, Lessons & Board Rental",
-    description:
-      "Learn about surfing in Da Nang: where to start near My Khe Beach, when to ask for local conditions, and how to choose between surf lessons and board rental.",
-    images: [{ url: siteConfig.ogImage, width: 1200, height: 630 }],
+    title,
+    description,
+    images: openGraphImages(title),
   },
+  twitter: twitterMetadata(title, description),
 };
 
 export default function Page() {
-  return <SeoPage page={page} />;
+  return (
+    <>
+      <PageJsonLd data={buildWebPageStructuredData({ path, title, description, locale: "en" })} />
+      <SeoPage page={page} />
+    </>
+  );
 }

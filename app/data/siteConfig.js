@@ -31,6 +31,28 @@ export const siteConfig = {
   ogImage: "/gallery/events/danang-open-2025/danang-open-2025-3.webp",
 };
 
+const defaultOgImageAlt = "Da Nang Surfing Open 2025 by Epic Surf School";
+
+export function openGraphImages(alt = defaultOgImageAlt) {
+  return [
+    {
+      url: siteConfig.ogImage,
+      width: 1200,
+      height: 630,
+      alt,
+    },
+  ];
+}
+
+export function twitterMetadata(title, description) {
+  return {
+    card: "summary_large_image",
+    title,
+    description,
+    images: [siteConfig.ogImage],
+  };
+}
+
 export const seoLocales = {
   en: {
     htmlLang: "en",
@@ -152,27 +174,49 @@ export function buildMetadata(locale = siteConfig.defaultLocale) {
       siteName: siteConfig.name,
       title: seo.title,
       description: seo.description,
-      images: [
-        {
-          url: siteConfig.ogImage,
-          width: 1200,
-          height: 630,
-          alt: "Da Nang Surfing Open 2025 by Epic Surf School",
-        },
-      ],
+      images: openGraphImages(),
     },
-    twitter: {
-      card: "summary_large_image",
-      title: seo.title,
-      description: seo.description,
-      images: [siteConfig.ogImage],
-    },
+    twitter: twitterMetadata(seo.title, seo.description),
     icons: {
-      icon: "/favicon.ico",
+      icon: [
+        { url: "/favicon.ico", sizes: "any" },
+        { url: "/icon.png", type: "image/png", sizes: "512x512" },
+      ],
+      apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
+      shortcut: "/favicon.ico",
     },
     formatDetection: {
       telephone: false,
     },
+  };
+}
+
+export function buildWebPageStructuredData({
+  path = "/",
+  title,
+  description,
+  locale = siteConfig.defaultLocale,
+}) {
+  const pageUrl = absoluteUrl(path);
+  const imageUrl = absoluteUrl(siteConfig.ogImage);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${pageUrl.replace(/\/$/, "")}#webpage`,
+    url: pageUrl,
+    name: title,
+    description,
+    isPartOf: { "@id": absoluteUrl("/#website") },
+    about: { "@id": absoluteUrl("/#business") },
+    inLanguage: seoLocales[locale]?.htmlLang || locale,
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: imageUrl,
+      width: 1200,
+      height: 630,
+    },
+    image: imageUrl,
   };
 }
 

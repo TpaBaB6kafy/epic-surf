@@ -1,5 +1,13 @@
 import PartnersPage from "../../../components/PartnersPage";
-import { siteConfig } from "../../../data/siteConfig";
+import PageJsonLd from "../../../components/PageJsonLd";
+import {
+  buildWebPageStructuredData,
+  openGraphImages,
+  siteConfig,
+  twitterMetadata,
+} from "../../../data/siteConfig";
+
+const path = "/ru/partners";
 
 export const metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
@@ -28,6 +36,21 @@ export const metadata = {
   },
 };
 
+metadata.openGraph.images = openGraphImages(metadata.openGraph.title);
+metadata.twitter = twitterMetadata(metadata.title.absolute, metadata.description);
+
 export default function Page() {
-  return <PartnersPage locale="ru" />;
+  return (
+    <>
+      <PageJsonLd
+        data={buildWebPageStructuredData({
+          path,
+          title: metadata.title.absolute,
+          description: metadata.description,
+          locale: "ru",
+        })}
+      />
+      <PartnersPage locale="ru" />
+    </>
+  );
 }
