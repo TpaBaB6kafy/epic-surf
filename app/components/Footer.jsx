@@ -6,9 +6,21 @@ import { Handshake, MapPin, Send } from "lucide-react";
 import { seoPageLinks } from "../data/seoPages";
 import { trackEvent } from "../utils/tracking";
 
-export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookIcon, YoutubeIcon, ThreadsIcon }) {
+export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookIcon }) {
   const partnersHref = lang === "ru" ? "/ru/partners" : "/partners";
-  const partnersLabel = lang === "ru" ? "Для партнёров" : "Partners";
+  const partnersLabel = lang === "ru" ? "Партнёрам" : "For Partners";
+  const footerSocialLinks = [
+    { href: links.instagram, label: "Instagram", platform: "instagram", icon: <InstagramIcon /> },
+    { href: links.facebook, label: "Facebook", platform: "facebook", icon: <FacebookIcon /> },
+    { href: links.telegram, label: "Telegram chat", platform: "telegram_chat", icon: <Send size={20} /> },
+    {
+      href: links.telegramChannel,
+      label: "TG Channel",
+      platform: "telegram_channel",
+      icon: <Send size={16} />,
+      className: "inline-flex h-12 items-center gap-2 rounded-full bg-white/5 px-5 text-[11px] font-bold tracking-wide leading-snug text-white hover:bg-epicRed transition-all",
+    },
+  ];
 
   return (
     <footer id="location" className="bg-epicDark text-white pt-24 pb-12 px-6 border-t border-white/5">
@@ -26,27 +38,30 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
               <p className="text-white/55 text-base md:text-lg leading-relaxed max-w-sm mx-auto md:mx-0">{t.heroSub}</p>
             </div>
             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-              <a href={links.instagram} target="_blank" rel="noopener noreferrer" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all" aria-label="Epic Surf School Instagram">
-                <InstagramIcon />
-              </a>
-              <a href={links.facebook} target="_blank" rel="noopener noreferrer" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all" aria-label="Epic Surf School Facebook">
-                <FacebookIcon />
-              </a>
-              <a href={links.youtube} target="_blank" rel="noopener noreferrer" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all" aria-label="Epic Surf School YouTube">
-                <YoutubeIcon />
-              </a>
-              <a href={links.threads} target="_blank" rel="noopener noreferrer" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all" aria-label="Epic Surf School Threads">
-                <ThreadsIcon />
-              </a>
-              <a href={links.telegram} onClick={() => trackEvent("telegram_click", { language: lang, service_type: "general_question", cta_location: "footer", cta_label: "telegram" })} target="_blank" rel="noopener noreferrer" className="p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all" aria-label="Epic Surf School Telegram direct chat" title="Telegram direct chat">
-                <Send size={20} />
-              </a>
-              <a href={links.telegramChannel} onClick={() => trackEvent("telegram_click", { language: lang, service_type: "general_question", cta_location: "footer", cta_label: "telegram_channel" })} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center gap-2 rounded-full bg-white/5 px-5 text-[11px] font-bold tracking-wide leading-snug text-white hover:bg-epicRed transition-all" aria-label="Epic Surf School official Telegram channel" title="Epic Surf School official Telegram channel">
-                <Send size={16} /> TG Channel
-              </a>
+              {footerSocialLinks.map((item) => (
+                <a
+                  key={item.platform}
+                  href={item.href}
+                  onClick={() => trackEvent("social_click", { platform: item.platform, location: "footer", language: lang })}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={item.className || "p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all"}
+                  aria-label={`Epic Surf School ${item.label}`}
+                  title={`Epic Surf School ${item.label}`}
+                >
+                  {item.icon}
+                  {item.platform === "telegram_channel" && " TG Channel"}
+                </a>
+              ))}
             </div>
             <div className="pt-8 border-t border-white/5 flex flex-col items-center md:items-start gap-3">
-              <a href={partnersHref} className="flex items-center justify-center md:justify-start gap-3 text-sm font-bold leading-snug text-white/70 transition-colors hover:text-epicRed">
+              <a
+                href={partnersHref}
+                onClick={() => trackEvent("partner_cta_click", { language: lang, service_type: "partnership", cta_location: "footer", cta_label: "for_partners" })}
+                className="flex items-center justify-center md:justify-start gap-3 text-sm font-bold leading-snug text-white/70 transition-colors hover:text-epicRed"
+                aria-label={`Epic Surf School ${partnersLabel}`}
+                title={`Epic Surf School ${partnersLabel}`}
+              >
                 <Handshake size={16} className="shrink-0 text-epicRed" />
                 {partnersLabel}
               </a>
@@ -62,9 +77,12 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
                 <p className="text-base font-black leading-tight text-white">{t.locationAddress}</p>
                 <a
                   href={links.googleMaps}
+                  onClick={() => trackEvent("map_activate", { language: lang, cta_location: "footer", cta_label: "google_maps" })}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-3 inline-flex rounded-full bg-epicRed px-4 py-2 text-[10px] font-black uppercase tracking-wide text-white transition-all hover:brightness-105"
+                  aria-label="Epic Surf School Google Maps"
+                  title="Epic Surf School Google Maps"
                 >
                   Open Google Maps
                 </a>
@@ -89,6 +107,8 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
                   key={item.href}
                   href={item.href}
                   className="text-sm font-bold leading-snug text-white/60 transition-colors hover:text-epicRed"
+                  aria-label={`Surf Info: ${item.label}`}
+                  title={`Surf Info: ${item.label}`}
                 >
                   {item.label}
                 </Link>
