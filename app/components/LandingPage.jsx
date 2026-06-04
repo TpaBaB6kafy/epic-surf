@@ -28,9 +28,7 @@ import {
   ChatWhatsAppIcon,
   ChatZaloIcon,
   InstagramIcon,
-  FacebookIcon,
-  YoutubeIcon,
-  ThreadsIcon
+  FacebookIcon
 } from "./Icons";
 import { storeAttributionFromUrl, trackEvent } from "../utils/tracking";
 
@@ -89,7 +87,7 @@ export default function EpicSurfLanding({ locale = "en" }) {
       <Hero t={t} lang={lang} />
 
       <WhyEpic items={t.whyItems} />
-      <HowItWorks t={t} />
+      <HowItWorks t={t} lang={lang} />
 
       <Lessons
         t={t}
@@ -144,8 +142,6 @@ export default function EpicSurfLanding({ locale = "en" }) {
         links={links}
         InstagramIcon={InstagramIcon}
         FacebookIcon={FacebookIcon}
-        YoutubeIcon={YoutubeIcon}
-        ThreadsIcon={ThreadsIcon}
       />
 
       <MessengerFab

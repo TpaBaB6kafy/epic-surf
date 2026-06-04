@@ -4,10 +4,12 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-export default function HowItWorks({ t }) {
+export default function HowItWorks({ t, lang = "en" }) {
   const [expandedSteps, setExpandedSteps] = useState({});
-  const hiddenText =
-    "Тут будет какой-то текст, когда товарищи серферы его сформулируют.";
+  const isRu = lang === "ru";
+  const buttonLabels = isRu
+    ? { more: "Ещё", less: "Скрыть", show: "Показать подробнее", hide: "Скрыть подробности" }
+    : { more: "More", less: "Less", show: "Show more", hide: "Show less" };
 
   const toggleStep = (idx) => {
     setExpandedSteps((current) => ({
@@ -29,7 +31,10 @@ export default function HowItWorks({ t }) {
         </div>
 
         <div className="space-y-32">
-          {t.howSteps.map((step, idx) => (
+          {t.howSteps.map((step, idx) => {
+            const isExpanded = Boolean(expandedSteps[idx]);
+            const detailsId = `how-step-${idx + 1}-details`;
+            return (
             <div
               key={idx}
               className={`flex flex-col ${idx % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} items-center gap-12 lg:gap-24`}
@@ -63,20 +68,26 @@ export default function HowItWorks({ t }) {
                     {step.desc}{" "}
                     <button
                       type="button"
-                      aria-expanded={Boolean(expandedSteps[idx])}
+                      aria-expanded={isExpanded}
+                      aria-controls={detailsId}
+                      aria-label={`${isExpanded ? buttonLabels.hide : buttonLabels.show} ${isRu ? "о шаге" : "about"} ${step.title}`}
                       onClick={() => toggleStep(idx)}
-                      className="inline-flex h-7 min-w-7 items-center justify-center rounded-full bg-epicMint px-2 align-baseline text-sm font-black leading-none text-epicDark shadow-sm transition hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-epicRed/60"
+                      className="inline-flex h-7 min-w-7 items-center justify-center rounded-full bg-epicMint px-2.5 align-baseline text-[11px] font-black leading-none text-epicDark shadow-sm transition hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-epicRed/60"
                     >
-                      ...
+                      {isExpanded ? buttonLabels.less : buttonLabels.more}
                     </button>
-                    {expandedSteps[idx] && (
-                      <span className="block pt-3">{hiddenText}</span>
-                    )}
+                    <span
+                      id={detailsId}
+                      className={`block overflow-hidden transition-all duration-300 ${isExpanded ? "max-h-96 pt-3 opacity-100" : "max-h-0 opacity-0"}`}
+                    >
+                      {step.details}
+                    </span>
                   </p>
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

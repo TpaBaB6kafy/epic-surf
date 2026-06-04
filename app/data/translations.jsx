@@ -60,24 +60,28 @@ export const translations = {
       howTitle: "Как проходят", howTitleEnd: "уроки",
       howSteps: [
         {
-          title: "Встреча",
+          title: "Встреча и подбор доски",
           time: "10 мин",
-          desc: "Знакомство, подготовка и подбор серфборда."
+          desc: "Встречаемся, знакомимся, готовимся к уроку и подбираем доску под ваш уровень и условия.",
+          details: "Перед выходом в воду инструктор уточняет ваш опыт, уверенность в плавании и смотрит текущие условия на пляже Микхе. Мы подбираем удобную доску для обучения и объясняем, как будет проходить занятие. Так урок начинается спокойно, понятно и безопасно."
         },
         {
-          title: "Подготовка на берегу",
+          title: "Теория на берегу",
           time: "15 мин",
-          desc: "Основы сёрфинга и правила безопасности. Отработка базовых упражнений: тейк-офф, повороты, генерация скорости."
+          desc: "Разбираем основы серфинга и безопасность в океане, затем отрабатываем ключевые движения на песке: take-off, повороты и набор скорости.",
+          details: "Береговая часть короткая и практичная: как лежать на доске, как грести, как вставать и как контролировать направление. Также объясняем базовые правила безопасности: где ждать волну, как держать дистанцию и как не мешать другим людям в воде. После этого вы заходите в океан уже с понятным планом."
         },
         {
           title: "Практика в воде",
           time: "75 мин",
-          desc: "Ловим волны под контролем инструктора, корректируем ошибки и наслаждаемся сёрфингом."
+          desc: "Инструктор находится рядом, помогает ловить волны и даёт короткие подсказки после каждой попытки.",
+          details: "Основная часть урока проходит в воде: вы пробуете ловить подходящие волны, вставать на доску и постепенно исправлять ошибки. Инструктор помогает с выбором волны, положением на доске, таймингом и стойкой. Наша цель — не просто «поставить на доску», а чтобы вы поняли, что именно получается."
         },
         {
-          title: "Рекомендации",
+          title: "Разбор и рекомендации",
           time: "10 мин",
-          desc: "Разбор урока и домашнее задание для дальнейшего прогресса."
+          desc: "После занятия разбираем прогресс и даём простые рекомендации для следующего урока или самостоятельной практики.",
+          details: "В конце инструктор объясняет, что уже стало лучше и над чем стоит поработать дальше: гребля, take-off, стойка, повороты или выбор волны. Если вы хотите продолжить серфить в Дананге, мы подскажем следующий подходящий формат: групповой урок, приват, surf-skate или аренда доски, когда уровень уже позволяет."
         }
       ],
       forecastTitle: "Условия на", forecastTitleSpot: "Сегодня", forecastPeriod: "Период", forecastWind: "Ветер", forecastDir: "Направление", forecastWater: "Вода",
@@ -162,22 +166,26 @@ export const translations = {
         {
           title: "Meet & Gear Up",
           time: "10 min",
-          desc: "We meet, get to know you, prepare for the lesson, and choose the right surfboard."
+          desc: "We meet, get to know you, prepare for the lesson, and choose the right surfboard.",
+          details: "Before entering the water, we check your level, swimming confidence, and the day’s surf conditions at My Khe Beach. Your instructor helps you choose a beginner-friendly board and explains what to expect during the session. This keeps the lesson calm, safe, and easy to follow from the start."
         },
         {
           title: "Beach Theory",
           time: "15 min",
-          desc: "We cover the basics of surfing and ocean safety, then practice key movements on the beach: take-off, turns, and speed generation."
+          desc: "We cover the basics of surfing and ocean safety, then practice key movements on the beach: take-off, turns, and speed generation.",
+          details: "The beach part is simple and practical: how to lie on the board, paddle straight, pop up, and control your direction. We also explain basic surf safety, where to wait, and how to avoid other surfers or swimmers. You enter the water with a clear plan, not just random instructions."
         },
         {
           title: "Ocean Practice",
           time: "75 min",
-          desc: "Catching waves under your instructor's guidance, fixing mistakes, and enjoying the ride."
+          desc: "Your instructor stays with you in the water, helps you catch waves, and gives quick feedback after each attempt.",
+          details: "Most of the lesson is focused on real practice in the ocean. We help you choose suitable waves, correct your position on the board, and adjust your pop-up step by step. The goal is not only to stand up once, but to understand what worked and feel more confident in the water."
         },
         {
           title: "Review & Tips",
           time: "10 min",
-          desc: "Session review and personalized homework for your continuous progress."
+          desc: "After the session, we review your progress and give simple tips for your next surf lesson or rental session.",
+          details: "At the end, your instructor explains what improved and what to focus on next: paddling, timing, stance, turning, or wave choice. If you want to continue surfing in Da Nang, we can recommend the best next format — group lesson, private coaching, surf-skate, or board rental when your level is ready."
         }
       ],
       forecastTitle: "Current", forecastTitleSpot: "Forecast", forecastPeriod: "Period", forecastWind: "Wind", forecastDir: "Direction", forecastWater: "Water",
