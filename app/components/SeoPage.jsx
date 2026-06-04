@@ -15,8 +15,6 @@ import {
   ChatZaloIcon,
   FacebookIcon,
   InstagramIcon,
-  ThreadsIcon,
-  YoutubeIcon,
 } from "./Icons";
 import { links } from "../data/links";
 import { seoPageLinks } from "../data/seoPages";
@@ -318,8 +316,6 @@ export default function SeoPage({ page }) {
         links={links}
         InstagramIcon={InstagramIcon}
         FacebookIcon={FacebookIcon}
-        YoutubeIcon={YoutubeIcon}
-        ThreadsIcon={ThreadsIcon}
       />
 
       <MessengerFab

@@ -23,8 +23,6 @@ export const siteConfig = {
   socialLinks: [
     links.instagram,
     links.facebook,
-    links.youtube,
-    links.threads,
     links.telegram,
     links.telegramChannel,
   ],

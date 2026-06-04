@@ -27,8 +27,6 @@ import {
   ChatZaloIcon,
   FacebookIcon,
   InstagramIcon,
-  ThreadsIcon,
-  YoutubeIcon,
 } from "./Icons";
 import { partnersContent } from "../data/partners";
 import { translations } from "../data/translations";
@@ -451,8 +449,6 @@ export default function PartnersPage({ locale = "en" }) {
         links={links}
         InstagramIcon={InstagramIcon}
         FacebookIcon={FacebookIcon}
-        YoutubeIcon={YoutubeIcon}
-        ThreadsIcon={ThreadsIcon}
       />
 
       <MessengerFab
