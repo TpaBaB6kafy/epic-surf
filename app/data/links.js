@@ -18,7 +18,7 @@ export const links = {
   telegram: "https://t.me/danangsurf",
   telegramChannel: "https://t.me/surfdanang",
   zalo: "https://zalo.me/84383880164",
-  googleMaps: "https://www.google.com/maps/place/EPIC+Surf+School+Da+Nang/@16.0464674,108.2504812,17z",
+  googleMaps: "https://www.google.com/maps/place/EPIC+Surf+School+Da+Nang/@16.0464674,108.2504812,1360m/data=!3m1!1e3!4m6!3m5!1s0x314217f20b1fa357:0xa323fdd182ae974!8m2!3d16.0464674!4d108.2504812!16s%2Fg%2F11vlwxw7nd?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D",
   instagram: "https://www.instagram.com/epicsurfvn?igsh=eHdzMTZhanY2M2Zx",
   facebook: "https://www.facebook.com/epicsurfdanang/",
   youtube: "https://youtube.com/@epicsurf",
