@@ -24,7 +24,7 @@ export default function Hero({ lang = "en" }) {
         initial={{ opacity: 0, scale: 0.96, y: 24 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-        className="pointer-events-none absolute inset-x-0 top-[25vh] z-[5] mx-auto flex w-full flex-col items-center gap-6 px-4 mix-blend-difference opacity-65 sm:top-[24vh] md:top-[20vh] md:gap-10"
+        className="pointer-events-none absolute inset-x-0 top-[36vh] z-[5] mx-auto flex w-full flex-col items-center gap-6 px-4 mix-blend-difference opacity-65 sm:top-[34vh] md:top-[28vh] md:gap-10"
         aria-hidden="true"
       >
         <Image
@@ -45,7 +45,7 @@ export default function Hero({ lang = "en" }) {
         />
       </motion.div>
 
-      <div className="absolute inset-x-0 top-[calc(25vh+215px)] z-10 flex flex-col items-center px-4 text-center sm:top-[calc(24vh+360px)] md:top-[calc(20vh+500px)]">
+      <div className="absolute inset-x-0 top-[calc(36vh+215px)] z-10 flex flex-col items-center px-4 text-center sm:top-[calc(34vh+360px)] md:top-[calc(28vh+500px)]">
         <h1 className="sr-only">{heroTitle}</h1>
         <motion.div
           initial={{ opacity: 0 }}
