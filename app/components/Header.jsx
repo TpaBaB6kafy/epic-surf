@@ -23,6 +23,7 @@ export default function Header({
   const languageLabel = lang === "ru" ? "EN" : "RU";
   const partnersHref = lang === "ru" ? "/ru/partners" : "/partners";
   const partnersLabel = lang === "ru" ? "Для партнеров" : "Partners";
+  const headerBookingUrl = links.headerBooking?.[lang] || links.group;
   const navItems = [
     { href: sectionHref("lessons"), label: t.navLessons },
     { href: sectionHref("how-it-works"), label: t.navHow },
@@ -74,7 +75,7 @@ export default function Header({
             </Link>
 
             <button
-              onClick={() => openBookingModal(links.group, {
+              onClick={() => openBookingModal(headerBookingUrl, {
                 ctaLocation: "header",
                 ctaLabel: "book_now",
               })}
