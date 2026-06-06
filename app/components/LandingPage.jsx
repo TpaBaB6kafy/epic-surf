@@ -35,6 +35,7 @@ import { storeAttributionFromUrl, trackEvent } from "../utils/tracking";
 export default function EpicSurfLanding({ locale = "en" }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isRentalModalOpen, setRentalModalOpen] = useState(false);
+  const [selectedRentalBoard, setSelectedRentalBoard] = useState(null);
   const [bookingModalUrl, setBookingModalUrl] = useState(null);
   const [activeGalleryKey, setActiveGalleryKey] = useState("all");
 
@@ -68,6 +69,18 @@ export default function EpicSurfLanding({ locale = "en" }) {
       ...(options.lessonId ? { lesson_id: options.lessonId } : {}),
     });
     setBookingModalUrl(url);
+  };
+
+  const openRentalModal = (board = null) => {
+    setSelectedRentalBoard(board);
+    setRentalModalOpen(true);
+  };
+
+  const setRentalModalOpenSafely = (isOpen) => {
+    setRentalModalOpen(isOpen);
+    if (!isOpen) {
+      setSelectedRentalBoard(null);
+    }
   };
 
   return (
@@ -107,7 +120,8 @@ export default function EpicSurfLanding({ locale = "en" }) {
       <Rentals
         t={t}
         lang={lang}
-        setRentalModalOpen={setRentalModalOpen}
+        setRentalModalOpen={setRentalModalOpenSafely}
+        onSelectRentalBoard={openRentalModal}
       />
 
       <Forecast
@@ -156,9 +170,10 @@ export default function EpicSurfLanding({ locale = "en" }) {
 
       <RentalModal
         isRentalModalOpen={isRentalModalOpen}
-        setRentalModalOpen={setRentalModalOpen}
+        setRentalModalOpen={setRentalModalOpenSafely}
         t={t}
         links={links}
+        selectedBoard={selectedRentalBoard}
       />
     </div>
   );

@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import MessengerFab from "./MessengerFab";
 import BookingModal from "./BookingModal";
 import RentalModal from "./RentalModal";
+import RentalBoardShowroom from "./RentalBoardShowroom";
 import {
   ChatTelegramIcon,
   ChatWhatsAppIcon,
@@ -17,6 +18,7 @@ import {
   InstagramIcon,
 } from "./Icons";
 import { links } from "../data/links";
+import { getBoardTrackingPayload, rentalBoards } from "../data/rentalBoards";
 import { seoPageLinks } from "../data/seoPages";
 import { translations } from "../data/translations";
 import {
@@ -35,9 +37,11 @@ export default function SeoPage({ page }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [bookingModalUrl, setBookingModalUrl] = useState(null);
   const [isRentalModalOpen, setRentalModalOpen] = useState(false);
+  const [selectedRentalBoard, setSelectedRentalBoard] = useState(null);
   const t = translations.en;
   const bookingUrl = links.booking?.en?.[page.bookingService || "group"] || links.booking?.en?.group;
   const message = `Hi! I have a question about ${page.title} at Epic Surf School.`;
+  const isRentalPage = page.path === "/surfboard-rental-danang";
 
   useEffect(() => {
     storeAttributionFromUrl({ includePartner: true });
@@ -54,15 +58,32 @@ export default function SeoPage({ page }) {
     setBookingModalUrl(url);
   };
 
+  const setRentalModalOpenSafely = (isOpen) => {
+    setRentalModalOpen(isOpen);
+    if (!isOpen) {
+      setSelectedRentalBoard(null);
+    }
+  };
+
+  const openRentalModal = (board = null) => {
+    setSelectedRentalBoard(board);
+    setRentalModalOpen(true);
+  };
+
+  const trackRentalCta = (ctaLocation, ctaLabel, board = null) => {
+    trackEvent("rental_cta_click", {
+      language: "en",
+      service_type: "board_rental",
+      cta_location: ctaLocation,
+      cta_label: ctaLabel,
+      ...getBoardTrackingPayload(board),
+    });
+  };
+
   const handlePrimaryCta = () => {
     if (page.primaryAction === "rental") {
-      trackEvent("rental_cta_click", {
-        language: "en",
-        service_type: "board_rental",
-        cta_location: "seo_page_hero",
-        cta_label: page.path,
-      });
-      setRentalModalOpen(true);
+      trackRentalCta("seo_page_hero", page.path);
+      openRentalModal();
       return;
     }
 
@@ -75,13 +96,8 @@ export default function SeoPage({ page }) {
 
   const handleSecondaryCta = () => {
     if (page.secondaryAction === "rental") {
-      trackEvent("rental_cta_click", {
-        language: "en",
-        service_type: "board_rental",
-        cta_location: "seo_page_hero",
-        cta_label: page.path,
-      });
-      setRentalModalOpen(true);
+      trackRentalCta("seo_page_hero", page.path);
+      openRentalModal();
       return;
     }
 
@@ -104,6 +120,11 @@ export default function SeoPage({ page }) {
     });
   };
 
+  const handleBoardRentalClick = (board, ctaLocation = "rental_catalog") => {
+    trackRentalCta(ctaLocation, board.id, board);
+    openRentalModal(board);
+  };
+
   return (
     <div className="min-h-screen bg-epicWhite font-sans text-epicDark overflow-x-clip">
       <Header
@@ -116,8 +137,11 @@ export default function SeoPage({ page }) {
       />
 
       <main className="pt-16 md:pt-20">
-        <section className="relative overflow-hidden bg-epicDark text-epicWhite">
-          <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:py-24 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+        <section
+          data-rental-hero-flow={isRentalPage ? "true" : undefined}
+          className="relative overflow-hidden bg-epicDark text-epicWhite"
+        >
+          <div className={`mx-auto grid max-w-7xl gap-7 px-6 ${isRentalPage ? "pb-6 pt-12 md:gap-10 md:pb-10 md:pt-20" : "py-16 md:py-24"} lg:grid-cols-[1.02fr_0.98fr] lg:items-center`}>
             <div className="max-w-3xl">
               <p className="mb-5 inline-flex rounded-full bg-epicMint px-4 py-2 text-[11px] font-black uppercase tracking-wide text-epicDark">
                 {page.eyebrow}
@@ -128,6 +152,11 @@ export default function SeoPage({ page }) {
               <p className="mt-7 max-w-2xl text-lg font-medium leading-8 text-white/75 md:text-xl">
                 {page.intro}
               </p>
+              {isRentalPage && (
+                <p className="mt-5 inline-flex rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[12px] font-black uppercase tracking-wide text-epicMint">
+                  12 boards available - from 250,000 VND / 2 hours
+                </p>
+              )}
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <button
                   type="button"
@@ -146,7 +175,7 @@ export default function SeoPage({ page }) {
                 </button>
               </div>
             </div>
-            <div className="relative h-[360px] overflow-hidden rounded-[34px] border border-white/10 bg-white/5 shadow-2xl md:h-[520px] lg:rounded-[56px]">
+            <div className="relative h-[220px] overflow-hidden rounded-[26px] border border-white/10 bg-white/5 shadow-2xl md:h-[500px] lg:rounded-[42px]">
               <Image
                 src={page.heroImage}
                 alt={page.title}
@@ -157,6 +186,13 @@ export default function SeoPage({ page }) {
               />
             </div>
           </div>
+
+          {isRentalPage && (
+            <RentalBoardShowroom
+              boards={rentalBoards}
+              onChooseBoard={(board) => handleBoardRentalClick(board, "rental_showroom")}
+            />
+          )}
         </section>
 
         {page.hubCards && (
@@ -181,34 +217,41 @@ export default function SeoPage({ page }) {
           </section>
         )}
 
-        <section className="mx-auto max-w-5xl px-6 py-16 md:py-24">
-          <div className="space-y-14">
+        <section
+          data-rental-info-sections={isRentalPage ? "true" : undefined}
+          data-mobile-compact={isRentalPage ? "true" : undefined}
+          className={`mx-auto max-w-5xl px-6 ${isRentalPage ? "py-10 md:py-24" : "py-16 md:py-24"}`}
+        >
+          <div className={isRentalPage ? "space-y-8 md:space-y-14" : "space-y-14"}>
             {page.sections.map((section) => (
-              <article key={section.title} className="border-b border-epicDark/10 pb-12 last:border-b-0 last:pb-0">
-                <h2 className="text-3xl font-black uppercase leading-tight tracking-normal md:text-5xl">
+              <article
+                key={section.title}
+                className={`border-b border-epicDark/10 last:border-b-0 last:pb-0 ${isRentalPage ? "pb-8 md:pb-12" : "pb-12"}`}
+              >
+                <h2 className={`${isRentalPage ? "text-2xl md:text-5xl" : "text-3xl md:text-5xl"} font-black uppercase leading-tight tracking-normal`}>
                   {section.title}
                 </h2>
                 {section.body && (
-                  <p className="mt-5 text-lg font-medium leading-8 text-epicDark/72">
+                  <p className={`${isRentalPage ? "mt-3 text-sm leading-6 md:mt-5 md:text-lg md:leading-8" : "mt-5 text-lg leading-8"} font-medium text-epicDark/72`}>
                     {section.body}
                   </p>
                 )}
                 {section.items && (
-                  <ul className="mt-6 grid gap-3">
+                  <ul className={`${isRentalPage ? "mt-4 gap-2 md:mt-6 md:gap-3" : "mt-6 gap-3"} grid`}>
                     {section.items.map((item) => (
-                      <li key={item} className="flex gap-3 text-base font-bold leading-7 text-epicDark/75">
-                        <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-epicRed" />
+                      <li key={item} className={`${isRentalPage ? "text-sm leading-6 md:text-base md:leading-7" : "text-base leading-7"} flex gap-3 font-bold text-epicDark/75`}>
+                        <span className={`${isRentalPage ? "mt-2 h-2 w-2 md:h-2.5 md:w-2.5" : "mt-2 h-2.5 w-2.5"} shrink-0 rounded-full bg-epicRed`} />
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
                 )}
                 {section.cards && (
-                  <div className="mt-7 grid gap-4 md:grid-cols-3">
+                  <div className={`${isRentalPage ? "mt-5 gap-3 md:mt-7 md:gap-4" : "mt-7 gap-4"} grid md:grid-cols-3`}>
                     {section.cards.map((card) => (
-                      <div key={card.title} className="rounded-[26px] bg-epicDark p-6 text-epicWhite">
-                        <h3 className="text-xl font-black leading-tight tracking-normal">{card.title}</h3>
-                        <p className="mt-3 text-sm font-medium leading-6 text-white/70">{card.text}</p>
+                      <div key={card.title} className={`${isRentalPage ? "rounded-[18px] p-4 md:rounded-[26px] md:p-6" : "rounded-[26px] p-6"} bg-epicDark text-epicWhite`}>
+                        <h3 className={`${isRentalPage ? "text-base md:text-xl" : "text-xl"} font-black leading-tight tracking-normal`}>{card.title}</h3>
+                        <p className={`${isRentalPage ? "mt-2 text-xs leading-5 md:mt-3 md:text-sm md:leading-6" : "mt-3 text-sm leading-6"} font-medium text-white/70`}>{card.text}</p>
                       </div>
                     ))}
                   </div>
@@ -329,9 +372,10 @@ export default function SeoPage({ page }) {
       <BookingModal bookingModalUrl={bookingModalUrl} setBookingModalUrl={setBookingModalUrl} title={t.modalTitle} />
       <RentalModal
         isRentalModalOpen={isRentalModalOpen}
-        setRentalModalOpen={setRentalModalOpen}
+        setRentalModalOpen={setRentalModalOpenSafely}
         t={t}
         links={links}
+        selectedBoard={selectedRentalBoard}
       />
     </div>
   );
