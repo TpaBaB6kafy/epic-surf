@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 
@@ -17,6 +18,30 @@ export default function BookingModal({ bookingModalUrl, setBookingModalUrl, titl
 
 function BookingModalFrame({ bookingModalUrl, setBookingModalUrl, title }) {
   const [isLoading, setIsLoading] = useState(true);
+  const [hasTimedOut, setHasTimedOut] = useState(false);
+  const pathname = usePathname();
+  const isRussian = pathname ? pathname.startsWith("/ru") : title !== "Booking";
+  const loadingText = isRussian ? "Загружаем форму записи..." : "Loading booking form...";
+  const timeoutText = isRussian
+    ? "Загрузка занимает больше времени? Откройте запись в новой вкладке."
+    : "Taking longer than usual? Open booking in a new tab.";
+
+  useEffect(() => {
+    if (!isLoading) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setHasTimedOut(true);
+    }, 7000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [bookingModalUrl, isLoading]);
+
+  const handleIframeLoad = () => {
+    setIsLoading(false);
+    setHasTimedOut(false);
+  };
 
   return (
     <div className="fixed inset-0 z-[1000] flex items-center justify-center p-2 md:p-6">
@@ -33,14 +58,18 @@ function BookingModalFrame({ bookingModalUrl, setBookingModalUrl, title }) {
         </div>
         <div className="flex-1 bg-white relative">
           {isLoading && (
-            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-white text-epicDark">
+            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-white px-6 text-center text-epicDark">
               <div className="h-10 w-10 rounded-full border-4 border-epicDark/10 border-t-epicRed animate-spin" />
+              <p className="text-sm font-bold leading-snug text-epicDark">{loadingText}</p>
+              {hasTimedOut && (
+                <p className="max-w-sm text-sm font-medium leading-relaxed text-epicDark/70">{timeoutText}</p>
+              )}
               <a href={bookingModalUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-epicRed underline underline-offset-4">
                 Open booking in new tab
               </a>
             </div>
           )}
-          <iframe src={bookingModalUrl} onLoad={() => setIsLoading(false)} className="w-full h-full border-none" title="Booking" />
+          <iframe src={bookingModalUrl} onLoad={handleIframeLoad} className="w-full h-full border-none" title="Booking" />
         </div>
       </motion.div>
     </div>

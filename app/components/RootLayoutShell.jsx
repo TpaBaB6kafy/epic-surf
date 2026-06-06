@@ -16,6 +16,10 @@ export default function RootLayoutShell({ children, locale }) {
       <head>
         <link rel="preconnect" href="https://n1304231.alteg.io" />
         <link rel="dns-prefetch" href="https://n1304231.alteg.io" />
+        <link rel="preconnect" href="https://n1435323.alteg.io" />
+        <link rel="dns-prefetch" href="//n1435323.alteg.io" />
+        <link rel="preconnect" href="https://n1435324.alteg.io" />
+        <link rel="dns-prefetch" href="//n1435324.alteg.io" />
         <meta name="analytics-env" content={analyticsEnvMarker} />
         {umamiScriptUrl && umamiWebsiteId && (
           <script
