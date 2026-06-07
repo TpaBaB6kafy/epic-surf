@@ -7,6 +7,15 @@ export const boardTypeLabels = {
   shortboard: "Shortboard",
 };
 
+const boardTypeLabelsRu = {
+  softboard: "СОФТБОРД",
+  longboard: "ЛОНГБОРД",
+  malibu: "MALIBU",
+  funboard: "FUNBOARD",
+  fish: "FISH",
+  shortboard: "SHORTBOARD",
+};
+
 export const boardLevelLabels = {
   beginner: "Beginner",
   improver: "Improver",
@@ -14,8 +23,19 @@ export const boardLevelLabels = {
   advanced: "Advanced",
 };
 
+const boardLevelLabelsRu = {
+  beginner: "начинающий",
+  improver: "прогрессирующий",
+  intermediate: "средний уровень",
+  advanced: "продвинутый",
+};
+
 function boardImage(number) {
   return `/rentals/boards/board-${String(number).padStart(2, "0")}.png`;
+}
+
+function boardBackImage(number) {
+  return `/rentals/boards/board-${String(number).padStart(2, "0")}-back.png?v=2`;
 }
 
 export const rentalBoards = [
@@ -28,7 +48,14 @@ export const rentalBoards = [
     price: { amount: 250000, currency: "VND", unit: "2 hours" },
     bestFor: ["Small waves", "Stable practice", "First independent sessions"],
     description: "Stable soft-top board for relaxed practice and easier paddling.",
+    localized: {
+      ru: {
+        bestFor: ["Небольшие волны", "Стабильная практика", "Первые самостоятельные сессии"],
+        description: "Стабильный soft-top для спокойной практики и более лёгкой гребли.",
+      },
+    },
     image: boardImage(1),
+    backImage: boardBackImage(1),
     images: [boardImage(1)],
     available: true,
     recommended: true,
@@ -45,7 +72,14 @@ export const rentalBoards = [
     price: { amount: 250000, currency: "VND", unit: "2 hours" },
     bestFor: ["Extra stability", "Newer surfers", "Easy whitewater practice"],
     description: "A larger softboard for maximum forgiveness and float.",
+    localized: {
+      ru: {
+        bestFor: ["Больше стабильности", "Для начинающих серферов", "Практика в пене"],
+        description: "Более крупный софтборд с максимальной плавучестью и прощающей формой.",
+      },
+    },
     image: boardImage(2),
+    backImage: boardBackImage(2),
     images: [boardImage(2)],
     available: true,
     recommended: true,
@@ -62,7 +96,14 @@ export const rentalBoards = [
     price: { amount: 300000, currency: "VND", unit: "2 hours" },
     bestFor: ["Small clean waves", "Relaxed trim", "Early wave entry"],
     description: "Classic longboard feel for smooth paddling and easy wave catching.",
+    localized: {
+      ru: {
+        bestFor: ["Небольшие чистые волны", "Спокойное скольжение", "Ранний вход в волну"],
+        description: "Классическое ощущение лонгборда: плавная гребля и легче ловить волну.",
+      },
+    },
     image: boardImage(3),
+    backImage: boardBackImage(3),
     images: [boardImage(3)],
     available: true,
     recommended: true,
@@ -79,7 +120,14 @@ export const rentalBoards = [
     price: { amount: 300000, currency: "VND", unit: "2 hours" },
     bestFor: ["Progression sessions", "Turning practice", "Mixed beach-break days"],
     description: "A balanced shape for moving from softboards toward smaller boards.",
+    localized: {
+      ru: {
+        bestFor: ["Сессии для прогресса", "Практика поворотов", "Разные условия beach break"],
+        description: "Сбалансированная форма для перехода от софтбордов к более коротким доскам.",
+      },
+    },
     image: boardImage(4),
+    backImage: boardBackImage(4),
     images: [boardImage(4)],
     available: true,
     recommended: true,
@@ -96,6 +144,12 @@ export const rentalBoards = [
     price: { amount: 300000, currency: "VND", unit: "2 hours" },
     bestFor: ["Easy turns", "Beach breaks", "Improving surfers"],
     description: "A responsive but still forgiving option for confident paddlers.",
+    localized: {
+      ru: {
+        bestFor: ["Лёгкие повороты", "Beach break", "Для прогрессирующих серферов"],
+        description: "Отзывчивая, но всё ещё forgiving доска для уверенной гребли.",
+      },
+    },
     image: boardImage(5),
     images: [boardImage(5)],
     available: true,
@@ -113,6 +167,12 @@ export const rentalBoards = [
     price: { amount: 350000, currency: "VND", unit: "2 hours" },
     bestFor: ["Fast small waves", "Down-the-line speed", "Experienced surfers"],
     description: "A lively fish for surfers who already read waves and control speed.",
+    localized: {
+      ru: {
+        bestFor: ["Быстрые небольшие волны", "Скорость вдоль волны", "Опытные серферы"],
+        description: "Живой fish для серферов, которые уже читают волну и контролируют скорость.",
+      },
+    },
     image: boardImage(6),
     images: [boardImage(6)],
     available: true,
@@ -130,6 +190,12 @@ export const rentalBoards = [
     price: { amount: 350000, currency: "VND", unit: "2 hours" },
     bestFor: ["Fast paddling", "Smaller surf", "Confident turns"],
     description: "A slightly fuller fish for speed without going too small.",
+    localized: {
+      ru: {
+        bestFor: ["Быстрая гребля", "Небольшие волны", "Уверенные повороты"],
+        description: "Чуть более объёмный fish для скорости без слишком короткой доски.",
+      },
+    },
     image: boardImage(7),
     images: [boardImage(7)],
     available: true,
@@ -147,6 +213,12 @@ export const rentalBoards = [
     price: { amount: 350000, currency: "VND", unit: "2 hours" },
     bestFor: ["Steeper waves", "Performance turns", "Advanced surfers"],
     description: "Performance shortboard for experienced surfers in suitable conditions.",
+    localized: {
+      ru: {
+        bestFor: ["Более резкие волны", "Performance-повороты", "Продвинутые серферы"],
+        description: "Performance shortboard для опытных серферов в подходящих условиях.",
+      },
+    },
     image: boardImage(8),
     images: [boardImage(8)],
     available: true,
@@ -164,6 +236,12 @@ export const rentalBoards = [
     price: { amount: 350000, currency: "VND", unit: "2 hours" },
     bestFor: ["Extra paddle power", "Open faces", "Experienced surfers"],
     description: "A shortboard with a touch more length for stronger paddling.",
+    localized: {
+      ru: {
+        bestFor: ["Больше мощности в гребле", "Открытая стенка волны", "Опытные серферы"],
+        description: "Shortboard с немного большей длиной для более сильной гребли.",
+      },
+    },
     image: boardImage(9),
     images: [boardImage(9)],
     available: true,
@@ -181,6 +259,12 @@ export const rentalBoards = [
     price: { amount: 300000, currency: "VND", unit: "2 hours" },
     bestFor: ["Tiny waves", "Nose-riding practice", "Smooth cruising"],
     description: "A high-volume longboard for relaxed sessions when the surf is small.",
+    localized: {
+      ru: {
+        bestFor: ["Совсем маленькие волны", "Практика nose-riding", "Плавное катание"],
+        description: "Объёмный лонгборд для расслабленных сессий, когда волны небольшие.",
+      },
+    },
     image: boardImage(10),
     images: [boardImage(10)],
     available: true,
@@ -198,6 +282,12 @@ export const rentalBoards = [
     price: { amount: 300000, currency: "VND", unit: "2 hours" },
     bestFor: ["Beach-break practice", "Earlier takeoffs", "Progression from softboards"],
     description: "Compact Malibu shape with enough float for smooth progression sessions.",
+    localized: {
+      ru: {
+        bestFor: ["Практика на beach break", "Более ранний takeoff", "Прогресс после софтборда"],
+        description: "Компактная Malibu-форма с достаточной плавучестью для плавного прогресса.",
+      },
+    },
     image: boardImage(11),
     images: [boardImage(11)],
     available: true,
@@ -215,6 +305,12 @@ export const rentalBoards = [
     price: { amount: 350000, currency: "VND", unit: "2 hours" },
     bestFor: ["More paddle power", "Bigger clean days", "Confident surfers"],
     description: "A longer performance board for surfers who want control and extra drive.",
+    localized: {
+      ru: {
+        bestFor: ["Больше мощности в гребле", "Чистые дни с волнами побольше", "Уверенные серферы"],
+        description: "Более длинная performance-доска для контроля и дополнительного drive.",
+      },
+    },
     image: boardImage(12),
     images: [boardImage(12)],
     available: true,
@@ -225,8 +321,42 @@ export const rentalBoards = [
   },
 ];
 
-export function formatBoardPrice(price) {
-  return `from ${price.amount.toLocaleString("en-US")} ${price.currency} / ${price.unit}`;
+function normalizedLanguage(lang = "en") {
+  return lang === "ru" ? "ru" : "en";
+}
+
+export function getBoardTypeLabel(type, lang = "en") {
+  return normalizedLanguage(lang) === "ru"
+    ? boardTypeLabelsRu[type] || boardTypeLabels[type] || type
+    : boardTypeLabels[type] || type;
+}
+
+export function getBoardLevelLabel(level, lang = "en") {
+  return normalizedLanguage(lang) === "ru"
+    ? boardLevelLabelsRu[level] || boardLevelLabels[level] || level
+    : boardLevelLabels[level] || level;
+}
+
+export function getLocalizedBoard(board, lang = "en") {
+  if (!board || normalizedLanguage(lang) !== "ru") return board;
+
+  const localized = board.localized?.ru || {};
+
+  return {
+    ...board,
+    displayName: localized.name || board.name,
+    description: localized.description || board.description,
+    bestFor: localized.bestFor || board.bestFor,
+  };
+}
+
+export function formatBoardPrice(price, lang = "en") {
+  const amount = price.amount.toLocaleString("en-US");
+  if (normalizedLanguage(lang) === "ru") {
+    return `от ${amount} ${price.currency} / 2 часа`;
+  }
+
+  return `from ${amount} ${price.currency} / ${price.unit}`;
 }
 
 export function getBoardTrackingPayload(board) {

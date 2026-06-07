@@ -7,14 +7,30 @@ import RentalBoardMiniShowroom from "./RentalBoardMiniShowroom";
 import { rentalBoards } from "../data/rentalBoards";
 import { trackEvent } from "../utils/tracking";
 
+const rentalPromoCopy = {
+  en: {
+    badge: "Board rental",
+    description: "Board rental in Da Nang with delivery or pickup in a convenient city spot. We help match the board to your level and the day's conditions.",
+    viewAll: "View all boards",
+    benefits: ["Spot delivery", "All sizes", "Rashguards & zinc", "Local advice"],
+  },
+  ru: {
+    badge: "Аренда досок",
+    description: "Аренда досок в Дананге от 250,000 VND / 2 часа. Привозим в удобную точку в пределах города и помогаем выбрать доску под уровень и условия.",
+    viewAll: "Выбрать доску",
+    benefits: ["Привозим по Данангу", "Все размеры", "Лайкры и цинк", "Поможем выбрать"],
+  },
+};
+
 export default function Rentals({ t, lang, setRentalModalOpen }) {
+  const copy = rentalPromoCopy[lang === "ru" ? "ru" : "en"];
+  const catalogHref = lang === "ru" ? "/ru/surfboard-rental-danang" : "/surfboard-rental-danang";
   const featureItems = [
-    { k: "featureDelivery", svg: <RentalCaravanIcon className="h-full w-full" /> },
-    { k: "featureSizes", svg: <RentalSurfboardIcon className="h-full w-full" /> },
-    { k: "featureLycra", svg: <RentalUvIcon className="h-full w-full" /> },
-    { k: "featureWetsuits", desktopK: "featureWetsuitsDesktop", svg: <RentalTshirtIcon className="h-full w-full" /> },
+    { label: copy.benefits[0], svg: <RentalCaravanIcon className="h-full w-full" /> },
+    { label: copy.benefits[1], svg: <RentalSurfboardIcon className="h-full w-full" /> },
+    { label: copy.benefits[2], svg: <RentalUvIcon className="h-full w-full" /> },
+    { label: copy.benefits[3], svg: <RentalTshirtIcon className="h-full w-full" /> },
   ];
-  const viewAllLabel = lang === "ru" ? "Выбрать из 12 досок" : "View all boards";
 
   const handleGenericRentalClick = () => {
     trackEvent("rental_cta_click", {
@@ -27,28 +43,28 @@ export default function Rentals({ t, lang, setRentalModalOpen }) {
   };
 
   return (
-    <section id="rentals" className="mt-20 scroll-mt-24 overflow-hidden bg-epicDark py-8 text-epicWhite md:py-12 lg:py-16">
-      <div className="mx-auto grid w-[342px] gap-8 md:w-[720px] lg:w-[1216px] lg:grid-cols-[520px_1fr] lg:items-center lg:gap-16">
-        <div className="order-2 h-[330px] md:h-[420px] lg:order-1 lg:h-[520px]">
-          <RentalBoardMiniShowroom boards={rentalBoards} />
+    <section id="rentals" className="mt-20 scroll-mt-24 overflow-hidden bg-epicDark py-14 text-epicWhite md:py-20 lg:py-24">
+      <div className="mx-auto grid w-[min(100%-32px,360px)] gap-9 md:w-[min(100%-48px,760px)] lg:w-[min(100%-64px,1160px)] lg:grid-cols-[minmax(300px,380px)_minmax(0,1fr)] lg:items-center lg:gap-16">
+        <div className="order-2 mx-auto h-[390px] w-full max-w-[340px] md:h-[470px] md:max-w-[380px] lg:order-1 lg:h-[560px]">
+          <RentalBoardMiniShowroom boards={rentalBoards} catalogHref={catalogHref} />
         </div>
 
         <div className="order-1 lg:order-2">
-          <div className="mb-5 flex h-10 w-[164px] items-center justify-center rounded-xl bg-epicMint text-[13px] font-black uppercase leading-none tracking-[0.1em] text-epicDark">
-            BOARD RENTAL
+          <div className="mb-5 inline-flex h-10 items-center justify-center rounded-xl bg-epicMint px-4 text-[12px] font-black uppercase leading-none tracking-wide text-epicDark">
+            {copy.badge}
           </div>
-          <h2 className="text-[50px] font-black uppercase leading-[0.95] tracking-normal text-epicWhite md:text-[68px] lg:text-[88px] lg:leading-[0.9]">
+          <h2 className="max-w-2xl text-[48px] font-black uppercase leading-[0.95] tracking-normal text-epicWhite md:text-[66px] lg:text-[82px] lg:leading-[0.9]">
             {t.rentalTitle}
             <span className="block text-epicRed">{t.rentalTitleSurf}</span>
           </h2>
 
-          <p className="mt-6 max-w-2xl text-[17px] font-medium leading-[1.45] text-epicWhite/82 md:text-xl">
-            {t.rentalDescPrimary || t.rentalDesc}
+          <p className="mt-6 max-w-xl text-[16px] font-medium leading-7 text-epicWhite/78 md:text-lg md:leading-8">
+            {copy.description}
           </p>
 
-          <div className="mt-6 rounded-[26px] border border-epicWhite/10 bg-epicWhite/5 p-5 md:flex md:items-center md:justify-between md:gap-6">
+          <div className="mt-7 rounded-[24px] border border-epicWhite/10 bg-epicWhite/5 p-5 md:flex md:items-center md:justify-between md:gap-6">
             <div>
-              <p className="text-[30px] font-normal leading-none text-epicWhite md:text-[36px]">{t.rentalPrice}</p>
+              <p className="text-[30px] font-normal leading-none text-epicWhite md:text-[34px]">{t.rentalPrice}</p>
               <p className="mt-2 text-[15px] font-bold leading-none text-epicWhite/75">{t.rentalUnit}</p>
             </div>
             <div className="mt-5 grid gap-3 sm:grid-cols-2 md:mt-0 md:flex md:shrink-0">
@@ -60,22 +76,22 @@ export default function Rentals({ t, lang, setRentalModalOpen }) {
                 {t.rentalBtn}
               </button>
               <Link
-                href="/surfboard-rental-danang"
+                href={catalogHref}
                 className="flex h-14 items-center justify-center gap-2 rounded-[18px] border border-epicWhite/15 bg-epicWhite/5 px-6 text-center text-sm font-black uppercase leading-none text-epicWhite transition-all hover:border-epicMint hover:text-epicMint active:scale-95"
               >
-                {viewAllLabel}
+                {copy.viewAll}
                 <ArrowRight size={17} />
               </Link>
             </div>
           </div>
 
-          <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
+          <div className="mt-7 grid grid-cols-2 gap-3 md:grid-cols-4">
             {featureItems.map((feat) => (
-              <div key={feat.k} className="flex min-h-[78px] items-center gap-3 rounded-[20px] border border-epicWhite/10 bg-epicWhite/5 px-3 py-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-epicRed p-2 text-epicDark">
+              <div key={feat.label} className="flex min-h-[70px] items-center gap-3 rounded-[18px] border border-epicWhite/10 bg-epicWhite/5 px-3 py-3">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-epicRed p-2 text-epicDark">
                   {feat.svg}
                 </div>
-                <p className="text-[13px] font-black leading-tight text-epicWhite md:text-sm">{t[feat.desktopK] || t[feat.k]}</p>
+                <p className="text-[13px] font-black leading-tight text-epicWhite md:text-sm">{feat.label}</p>
               </div>
             ))}
           </div>

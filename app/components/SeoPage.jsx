@@ -33,24 +33,29 @@ function relatedPages(paths) {
   return seoPageLinks.filter((item) => paths?.includes(item.href));
 }
 
-export default function SeoPage({ page }) {
+export default function SeoPage({ page, locale = "en", languageHref }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [bookingModalUrl, setBookingModalUrl] = useState(null);
   const [isRentalModalOpen, setRentalModalOpen] = useState(false);
   const [selectedRentalBoard, setSelectedRentalBoard] = useState(null);
-  const t = translations.en;
-  const bookingUrl = links.booking?.en?.[page.bookingService || "group"] || links.booking?.en?.group;
-  const message = `Hi! I have a question about ${page.title} at Epic Surf School.`;
-  const isRentalPage = page.path === "/surfboard-rental-danang";
+  const lang = locale === "ru" ? "ru" : "en";
+  const t = translations[lang] || translations.en;
+  const bookingUrl = links.booking?.[lang]?.[page.bookingService || "group"] || links.booking?.[lang]?.group || links.booking?.en?.group;
+  const message = page.contactMessage || (lang === "ru"
+    ? `Привет! У меня вопрос про ${page.title} в Epic Surf School.`
+    : `Hi! I have a question about ${page.title} at Epic Surf School.`);
+  const isRentalPage = page.primaryAction === "rental" || page.path === "/surfboard-rental-danang" || page.path === "/ru/surfboard-rental-danang";
+  const rentalAvailabilityNote = page.rentalAvailabilityNote || "12 boards available - from 250,000 VND / 2 hours";
+  const relatedItems = relatedPages(page.related);
 
   useEffect(() => {
     storeAttributionFromUrl({ includePartner: true });
-    trackEvent("page_view", { language: "en", page_type: "seo_page", page_slug: page.path });
-  }, [page.path]);
+    trackEvent("page_view", { language: lang, page_type: "seo_page", page_slug: page.path });
+  }, [lang, page.path]);
 
   const openBookingModal = (url, options = {}) => {
     trackEvent(options.event || "booking_cta_click", {
-      language: "en",
+      language: lang,
       service_type: options.serviceType || "surf_lesson",
       cta_location: options.ctaLocation || "seo_page",
       cta_label: options.ctaLabel || page.bookingLabel || "book_now",
@@ -72,7 +77,7 @@ export default function SeoPage({ page }) {
 
   const trackRentalCta = (ctaLocation, ctaLabel, board = null) => {
     trackEvent("rental_cta_click", {
-      language: "en",
+      language: lang,
       service_type: "board_rental",
       cta_location: ctaLocation,
       cta_label: ctaLabel,
@@ -102,18 +107,18 @@ export default function SeoPage({ page }) {
     }
 
     trackEvent("whatsapp_click", {
-      language: "en",
+      language: lang,
       service_type: "general_question",
       cta_location: "seo_page_hero",
       cta_label: page.path,
     });
-    window.open(buildWhatsAppUrl(links.whatsapp, message, { language: "en" }), "_blank", "noopener,noreferrer");
+    window.open(buildWhatsAppUrl(links.whatsapp, message, { language: lang }), "_blank", "noopener,noreferrer");
   };
 
   const handleMessengerClick = (event, eventName, label, hrefBuilder) => {
     event.currentTarget.href = hrefBuilder();
     trackEvent(eventName, {
-      language: "en",
+      language: lang,
       service_type: page.primaryAction === "rental" ? "board_rental" : "surf_lesson",
       cta_location: "seo_page_contact",
       cta_label: label,
@@ -129,11 +134,12 @@ export default function SeoPage({ page }) {
     <div className="min-h-screen bg-epicWhite font-sans text-epicDark overflow-x-clip">
       <Header
         t={t}
-        lang="en"
+        lang={lang}
         links={links}
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
         openBookingModal={openBookingModal}
+        languageHref={languageHref}
       />
 
       <main className="pt-16 md:pt-20">
@@ -154,7 +160,7 @@ export default function SeoPage({ page }) {
               </p>
               {isRentalPage && (
                 <p className="mt-5 inline-flex rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[12px] font-black uppercase tracking-wide text-epicMint">
-                  12 boards available - from 250,000 VND / 2 hours
+                  {rentalAvailabilityNote}
                 </p>
               )}
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -190,6 +196,7 @@ export default function SeoPage({ page }) {
           {isRentalPage && (
             <RentalBoardShowroom
               boards={rentalBoards}
+              lang={lang}
               onChooseBoard={(board) => handleBoardRentalClick(board, "rental_showroom")}
             />
           )}
@@ -256,6 +263,14 @@ export default function SeoPage({ page }) {
                     ))}
                   </div>
                 )}
+                {section.cta && (
+                  <Link
+                    href={section.cta.href}
+                    className="mt-5 inline-flex h-11 items-center justify-center rounded-full border border-epicDark/12 bg-white px-5 text-xs font-black uppercase tracking-wide text-epicDark transition-all hover:border-epicRed hover:text-epicRed active:scale-95 md:mt-6"
+                  >
+                    {section.cta.label}
+                  </Link>
+                )}
               </article>
             ))}
           </div>
@@ -275,17 +290,18 @@ export default function SeoPage({ page }) {
           </div>
         </section>
 
+        {relatedItems.length > 0 && (
         <section className="mx-auto max-w-7xl px-6 py-16 md:py-24">
           <div className="rounded-[34px] bg-epicDark p-7 text-epicWhite md:p-10">
             <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
               <div>
-                <p className="text-[11px] font-black uppercase tracking-wide text-epicMint">Explore more</p>
+                <p className="text-[11px] font-black uppercase tracking-wide text-epicMint">{page.relatedEyebrow || "Explore more"}</p>
                 <h2 className="mt-3 text-3xl font-black uppercase leading-tight tracking-normal md:text-5xl">
-                  Surf info for Da Nang
+                  {page.relatedTitle || "Surf info for Da Nang"}
                 </h2>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
-                {relatedPages(page.related).map((item) => (
+                {relatedItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
@@ -304,13 +320,14 @@ export default function SeoPage({ page }) {
             </div>
           </div>
         </section>
+        )}
 
         <section className="bg-epicMint px-6 py-14 text-epicDark">
           <div className="mx-auto flex max-w-5xl flex-col gap-6 text-center md:flex-row md:items-center md:justify-between md:text-left">
             <div>
-              <p className="text-[11px] font-black uppercase tracking-wide">Ready to surf?</p>
+              <p className="text-[11px] font-black uppercase tracking-wide">{page.contactEyebrow || "Ready to surf?"}</p>
               <h2 className="mt-2 text-3xl font-black uppercase leading-tight tracking-normal md:text-5xl">
-                Book or message Epic
+                {page.contactTitle || "Book or message Epic"}
               </h2>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
@@ -323,7 +340,7 @@ export default function SeoPage({ page }) {
               </button>
               <a
                 href={links.whatsapp}
-                onClick={(event) => handleMessengerClick(event, "whatsapp_click", "whatsapp", () => buildWhatsAppUrl(links.whatsapp, message, { language: "en" }))}
+                onClick={(event) => handleMessengerClick(event, "whatsapp_click", "whatsapp", () => buildWhatsAppUrl(links.whatsapp, message, { language: lang }))}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex h-14 items-center justify-center rounded-full bg-epicDark px-7 text-sm font-black uppercase tracking-wide text-white transition-all hover:bg-epicRed active:scale-95"
@@ -332,7 +349,7 @@ export default function SeoPage({ page }) {
               </a>
               <a
                 href={links.telegram}
-                onClick={(event) => handleMessengerClick(event, "telegram_click", "telegram", () => buildTelegramUrl(links.telegram, message, { language: "en" }))}
+                onClick={(event) => handleMessengerClick(event, "telegram_click", "telegram", () => buildTelegramUrl(links.telegram, message, { language: lang }))}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex h-14 items-center justify-center rounded-full bg-epicDark px-7 text-sm font-black uppercase tracking-wide text-white transition-all hover:bg-epicRed active:scale-95"
@@ -341,7 +358,7 @@ export default function SeoPage({ page }) {
               </a>
               <a
                 href={links.zalo}
-                onClick={(event) => handleMessengerClick(event, "zalo_click", "zalo", () => buildZaloUrl(links.zalo, message, { language: "en" }))}
+                onClick={(event) => handleMessengerClick(event, "zalo_click", "zalo", () => buildZaloUrl(links.zalo, message, { language: lang }))}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex h-14 items-center justify-center rounded-full bg-epicDark px-7 text-sm font-black uppercase tracking-wide text-white transition-all hover:bg-epicRed active:scale-95"
@@ -355,7 +372,7 @@ export default function SeoPage({ page }) {
 
       <Footer
         t={t}
-        lang="en"
+        lang={lang}
         links={links}
         InstagramIcon={InstagramIcon}
         FacebookIcon={FacebookIcon}
@@ -363,7 +380,7 @@ export default function SeoPage({ page }) {
 
       <MessengerFab
         links={links}
-        lang="en"
+        lang={lang}
         ChatWhatsAppIcon={ChatWhatsAppIcon}
         ChatTelegramIcon={ChatTelegramIcon}
         ChatZaloIcon={ChatZaloIcon}

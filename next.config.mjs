@@ -23,6 +23,18 @@ const securityHeaders = [
 ];
 
 const nextConfig = {
+  images: {
+    localPatterns: [
+      {
+        pathname: "/**",
+        search: "",
+      },
+      {
+        pathname: "/rentals/boards/**",
+        search: "?v=2",
+      },
+    ],
+  },
   async headers() {
     return [
       {

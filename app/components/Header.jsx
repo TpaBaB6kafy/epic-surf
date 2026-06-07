@@ -13,13 +13,14 @@ export default function Header({
   links,
   isMenuOpen,
   setIsMenuOpen,
-  openBookingModal
+  openBookingModal,
+  languageHref
 }) {
   const pathname = usePathname();
   const homeHref = lang === "ru" ? "/ru" : "/";
   const isHomePage = pathname === homeHref;
   const sectionHref = (fragment) => (isHomePage ? `#${fragment}` : `${homeHref === "/" ? "/" : homeHref}#${fragment}`);
-  const baseLanguageHref = lang === "ru" ? "/" : "/ru";
+  const baseLanguageHref = languageHref || (lang === "ru" ? "/" : "/ru");
   const languageLabel = lang === "ru" ? "EN" : "RU";
   const partnersHref = lang === "ru" ? "/ru/partners" : "/partners";
   const partnersLabel = lang === "ru" ? "Для партнеров" : "Partners";

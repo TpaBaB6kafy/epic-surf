@@ -3,16 +3,25 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUp, MessageCircle, X } from "lucide-react";
 import { buildTelegramUrl, buildWhatsAppUrl, buildZaloUrl, trackEvent } from "../utils/tracking";
-import { getBoardTrackingPayload } from "../data/rentalBoards";
+import { getBoardLevelLabel, getBoardTrackingPayload } from "../data/rentalBoards";
 
 export default function RentalModal({ isRentalModalOpen, setRentalModalOpen, t, links, selectedBoard = null }) {
   const language = t.btnBook === "Book Now" ? "en" : "ru";
+  const selectedBoardName = selectedBoard?.displayName || selectedBoard?.name;
+  const selectedBoardLabel = language === "ru" ? "Выбранная доска" : "Selected board";
   const baseMessage = language === "ru"
     ? "Привет! Хочу арендовать доску для серфинга."
     : "Hi! I want to rent a surfboard.";
-  const selectedBoardMessage = selectedBoard ? ` I want to rent: ${selectedBoard.name}.` : "";
+  const selectedBoardMessage = selectedBoard
+    ? language === "ru"
+      ? ` Хочу арендовать: ${selectedBoardName}.`
+      : ` I want to rent: ${selectedBoardName}.`
+    : "";
   const message = `${baseMessage}${selectedBoardMessage}`;
   const boardPayload = getBoardTrackingPayload(selectedBoard);
+  const selectedBoardMeta = selectedBoard
+    ? `${selectedBoard.size} - ${selectedBoard.level.map((level) => getBoardLevelLabel(level, language)).join(", ")}`
+    : "";
   const handleMessengerClick = (event, eventName, label, hrefBuilder) => {
     if (hrefBuilder) {
       event.currentTarget.href = hrefBuilder();
@@ -58,9 +67,9 @@ export default function RentalModal({ isRentalModalOpen, setRentalModalOpen, t, 
                 <p className="opacity-60 text-sm leading-relaxed">{t.rentalModalSub}</p>
                 {selectedBoard && (
                   <div className="mt-5 rounded-[24px] border border-epicDark/10 bg-epicDark px-5 py-4 text-left text-epicWhite">
-                    <p className="text-[11px] font-black uppercase tracking-wide text-epicMint">Selected board</p>
-                    <p className="mt-2 text-base font-black leading-tight">Selected board: {selectedBoard.name}</p>
-                    <p className="mt-1 text-sm font-medium leading-snug text-epicWhite/65">{selectedBoard.size} - {selectedBoard.level.join(", ")}</p>
+                    <p className="text-[11px] font-black uppercase tracking-wide text-epicMint">{selectedBoardLabel}</p>
+                    <p className="mt-2 text-base font-black leading-tight">{selectedBoardLabel}: {selectedBoardName}</p>
+                    <p className="mt-1 text-sm font-medium leading-snug text-epicWhite/65">{selectedBoardMeta}</p>
                   </div>
                 )}
               </div>

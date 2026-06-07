@@ -1,6 +1,71 @@
 const { test, expect } = require("@playwright/test");
 
 test.describe("Rental board selection flow", () => {
+  test("renders the Russian rental SEO page with localized metadata and language switch", async ({ page }) => {
+    await page.goto("http://localhost:3000/ru/surfboard-rental-danang?partner=hotel_abc", { waitUntil: "domcontentloaded" });
+    await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
+
+    await expect(page).toHaveTitle(/Аренда досок для серфинга в Дананге \| Epic Surf School/);
+    await expect(page.getByRole("heading", { name: /аренда досок для серфинга в дананге/i })).toBeVisible();
+    await expect(page.getByText("Доставим доску в удобную точку в пределах Дананга", { exact: false })).toBeVisible();
+
+    const canonical = page.locator("link[rel='canonical']");
+    await expect(canonical).toHaveAttribute("href", "https://www.surfdanang.com/ru/surfboard-rental-danang");
+    await expect(page.locator("link[rel='alternate'][hreflang='en']")).toHaveAttribute("href", "https://www.surfdanang.com/surfboard-rental-danang");
+    await expect(page.locator("link[rel='alternate'][hreflang='ru']")).toHaveAttribute("href", "https://www.surfdanang.com/ru/surfboard-rental-danang");
+    await expect(page.locator("link[rel='alternate'][hreflang='x-default']")).toHaveAttribute("href", "https://www.surfdanang.com/surfboard-rental-danang");
+
+    await expect(page.getByRole("link", { name: "EN" })).toHaveAttribute("href", "/surfboard-rental-danang");
+
+    const showroom = page.locator("#rental-board-showroom");
+    await expect(showroom.getByText("ВИТРИНА ДОСОК")).toBeVisible();
+    await expect(showroom.getByRole("heading", { name: "ВЫБЕРИТЕ ДОСКУ" })).toBeVisible();
+    await expect(showroom.getByText("Выберите подходящую доску и напишите Epic Surf School", { exact: false })).toBeVisible();
+    await expect(showroom.getByText("СОФТБОРД")).toBeVisible();
+    await expect(showroom.getByText("РЕКОМЕНДУЕМ")).toBeVisible();
+    await expect(showroom.getByText("от 250,000 VND / 2 часа")).toBeVisible();
+    await expect(showroom.getByRole("button", { name: /выбрать softboard 8'0/i })).toBeVisible();
+    await expect(showroom.getByText("Stable soft-top board", { exact: false })).toHaveCount(0);
+  });
+
+  test("shows Russian delivery copy and lesson CTA on the rental page", async ({ page }) => {
+    await page.goto("http://localhost:3000/ru/surfboard-rental-danang", { waitUntil: "domcontentloaded" });
+    await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
+
+    const rentalInfo = page.locator("[data-rental-info-sections]");
+    await expect(rentalInfo.getByText("Согласуем доску, время и удобную точку доставки в пределах Дананга.")).toBeVisible();
+    await expect(page.getByText("Мы можем привезти доску в удобную точку в пределах Дананга", { exact: false })).toBeVisible();
+    await expect(rentalInfo.getByRole("link", { name: "Посмотреть уроки" })).toHaveAttribute("href", "/ru#lessons");
+  });
+
+  test("opens the Russian rental modal with a selected board and keeps partner code in messenger URLs", async ({ page }) => {
+    await page.goto("http://localhost:3000/ru/surfboard-rental-danang?partner=hotel_abc", { waitUntil: "domcontentloaded" });
+    await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
+
+    const showroom = page.locator("#rental-board-showroom");
+    await showroom.getByRole("button", { name: /выбрать softboard 8'0/i }).click();
+
+    await expect(page.getByText("Выбранная доска", { exact: true })).toBeVisible();
+    await expect(page.getByText("Выбранная доска: Softboard 8'0")).toBeVisible();
+
+    for (const messenger of [/whatsapp/i, /telegram/i, /zalo/i]) {
+      const link = page.getByRole("link", { name: messenger }).last();
+      await link.click();
+
+      const href = await link.getAttribute("href");
+      expect(decodeURIComponent(href)).toContain("Хочу арендовать: Softboard 8'0");
+      expect(decodeURIComponent(href)).toContain("Код партнёра: hotel_abc");
+    }
+  });
+
+  test("switches the English rental SEO page to the Russian rental SEO page", async ({ page }) => {
+    await page.goto("http://localhost:3000/surfboard-rental-danang?partner=hotel_abc", { waitUntil: "domcontentloaded" });
+    await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
+
+    await expect(page.locator("link[rel='alternate'][hreflang='ru']")).toHaveAttribute("href", "https://www.surfdanang.com/ru/surfboard-rental-danang");
+    await expect(page.getByRole("link", { name: "RU" })).toHaveAttribute("href", "/ru/surfboard-rental-danang");
+  });
+
   test("shows a compact homepage rental showcase with a clear catalog link", async ({ page }) => {
     await page.goto("http://localhost:3000/", { waitUntil: "domcontentloaded" });
     await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
@@ -8,14 +73,37 @@ test.describe("Rental board selection flow", () => {
     const rentals = page.locator("#rentals");
     const miniShowroom = rentals.locator("#rental-mini-showroom");
     await expect(rentals.getByRole("link", { name: /view all boards/i })).toHaveAttribute("href", "/surfboard-rental-danang");
+    await expect(rentals.getByText("Board rental in Da Nang with delivery or pickup in a convenient city spot.", { exact: false })).toBeVisible();
+    await expect(rentals.getByText("Local advice", { exact: true })).toBeVisible();
     await expect(miniShowroom).toBeVisible();
     await expect(miniShowroom.locator("[data-mini-board]")).toHaveCount(1);
+    await expect(miniShowroom.locator("[data-mini-board-back]")).toHaveCount(1);
+    await expect(miniShowroom.locator("[data-mini-board-front]")).toHaveCount(1);
+    await expect(miniShowroom).toHaveAttribute("data-mini-showroom-variant", "homepage-promo");
     await expect(miniShowroom.getByRole("link", { name: /open full rental board catalog/i })).toHaveAttribute("href", "/surfboard-rental-danang");
     await expect(rentals.locator("[data-board-card]")).toHaveCount(0);
     await expect(rentals.getByText("Softboards", { exact: true })).toHaveCount(0);
     await expect(rentals.getByText("Longboards", { exact: true })).toHaveCount(0);
     await expect(rentals.getByText("Malibus", { exact: true })).toHaveCount(0);
     await expect(rentals.getByText("Shortboards", { exact: true })).toHaveCount(0);
+  });
+
+  test("shows the Russian homepage rental promo with compact benefits and catalog link", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("http://localhost:3000/ru", { waitUntil: "domcontentloaded" });
+    await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
+
+    const rentals = page.locator("#rentals");
+    await expect(rentals.getByText("Аренда досок в Дананге", { exact: false })).toBeVisible();
+    await expect(rentals.getByText("Привозим по Данангу", { exact: true })).toBeVisible();
+    await expect(rentals.getByText("Поможем выбрать", { exact: true })).toBeVisible();
+    await expect(rentals.getByRole("link", { name: /выбрать доску/i })).toHaveAttribute("href", "/ru/surfboard-rental-danang");
+    await expect(rentals.locator("#rental-mini-showroom")).toHaveAttribute("data-mini-showroom-variant", "homepage-promo");
+    await expect(rentals.locator("[data-mini-board-back]")).toHaveCount(1);
+    await expect(rentals.locator("[data-mini-board-front]")).toHaveCount(1);
+
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+    expect(overflow).toBeLessThanOrEqual(1);
   });
 
   test("opens the rental modal from the SEO showroom with a selected board and keeps partner code in messenger URLs", async ({ page }) => {
@@ -31,12 +119,31 @@ test.describe("Rental board selection flow", () => {
 
     await expect(page.getByText("Selected board: Softboard 8'0")).toBeVisible();
 
-    const whatsapp = page.getByRole("link", { name: /whatsapp/i }).last();
-    await whatsapp.click();
+    for (const messenger of [/whatsapp/i, /telegram/i, /zalo/i]) {
+      const link = page.getByRole("link", { name: messenger }).last();
+      await link.click();
 
-    const href = await whatsapp.getAttribute("href");
-    expect(decodeURIComponent(href)).toContain("I want to rent: Softboard 8'0");
-    expect(decodeURIComponent(href)).toContain("Partner code: hotel_abc");
+      const href = await link.getAttribute("href");
+      expect(decodeURIComponent(href)).toContain("I want to rent: Softboard 8'0");
+      expect(decodeURIComponent(href)).toContain("Partner code: hotel_abc");
+    }
+  });
+
+  test("keeps the English rental showroom copy unchanged", async ({ page }) => {
+    await page.goto("http://localhost:3000/surfboard-rental-danang", { waitUntil: "domcontentloaded" });
+    await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
+
+    const showroom = page.locator("#rental-board-showroom");
+    await expect(showroom.getByText("Board showroom")).toBeVisible();
+    await expect(showroom.getByRole("heading", { name: "Choose your board" })).toBeVisible();
+    await expect(showroom.getByText("Browse the available shapes", { exact: false })).toBeVisible();
+    await expect(showroom.getByText("Softboard", { exact: true })).toBeVisible();
+    await expect(showroom.getByText("Recommended", { exact: true })).toBeVisible();
+    await expect(showroom.getByText("from 250,000 VND / 2 hours")).toBeVisible();
+    await expect(showroom.getByRole("button", { name: /choose softboard 8'0/i })).toBeVisible();
+    await expect(showroom.getByText("ВИТРИНА ДОСОК")).toHaveCount(0);
+    await expect(page.getByText("Доставим доску в удобную точку в пределах Дананга", { exact: false })).toHaveCount(0);
+    await expect(page.getByRole("link", { name: "Посмотреть уроки" })).toHaveCount(0);
   });
 
   test("shows a showroom carousel instead of a card grid on the SEO rental page", async ({ page }) => {
@@ -114,5 +221,14 @@ test.describe("Rental board selection flow", () => {
     await expect(rentalInfo).toHaveAttribute("data-mobile-compact", "true");
     await expect(rentalInfo.getByRole("heading", { name: /rental price/i })).toBeVisible();
     await expect(rentalInfo.getByRole("heading", { name: /when to take a lesson instead/i })).toBeVisible();
+  });
+
+  test("keeps the Russian rental page within the mobile viewport", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("http://localhost:3000/ru/surfboard-rental-danang", { waitUntil: "domcontentloaded" });
+    await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
+
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+    expect(overflow).toBeLessThanOrEqual(1);
   });
 });
