@@ -131,9 +131,9 @@ export const rentalBoards = [
     images: [boardImage(4)],
     available: true,
     recommended: true,
-    visualScale: 0.96,
+    visualScale: 1.06,
     visualOffsetX: -4,
-    visualOffsetY: 18,
+    visualOffsetY: 28,
   },
   {
     id: "board-05",

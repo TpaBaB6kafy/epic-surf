@@ -74,13 +74,18 @@ test.describe("Rental board selection flow", () => {
     const miniShowroom = rentals.locator("#rental-mini-showroom");
     await expect(rentals.getByRole("link", { name: /view all boards/i })).toHaveAttribute("href", "/surfboard-rental-danang");
     await expect(rentals.getByText("Board rental in Da Nang with delivery or pickup in a convenient city spot.", { exact: false })).toBeVisible();
-    await expect(rentals.getByText("Local advice", { exact: true })).toBeVisible();
+    await expect(rentals.getByText("Spot delivery", { exact: true })).toHaveCount(0);
+    await expect(rentals.getByText("All sizes", { exact: true })).toHaveCount(0);
+    await expect(rentals.getByText("Rashguards & zinc", { exact: true })).toHaveCount(0);
+    await expect(rentals.getByText("Local advice", { exact: true })).toHaveCount(0);
     await expect(miniShowroom).toBeVisible();
     await expect(miniShowroom.locator("[data-mini-board]")).toHaveCount(1);
     await expect(miniShowroom.locator("[data-mini-board-back]")).toHaveCount(1);
     await expect(miniShowroom.locator("[data-mini-board-front]")).toHaveCount(1);
     await expect(miniShowroom).toHaveAttribute("data-mini-showroom-variant", "homepage-promo");
-    await expect(miniShowroom.getByRole("link", { name: /open full rental board catalog/i })).toHaveAttribute("href", "/surfboard-rental-danang");
+    await expect(miniShowroom.getByText("Rental quiver")).toHaveCount(0);
+    await expect(miniShowroom.getByText("recommended boards", { exact: false })).toHaveCount(0);
+    await expect(miniShowroom.getByRole("link")).toHaveCount(0);
     await expect(rentals.locator("[data-board-card]")).toHaveCount(0);
     await expect(rentals.getByText("Softboards", { exact: true })).toHaveCount(0);
     await expect(rentals.getByText("Longboards", { exact: true })).toHaveCount(0);
@@ -95,12 +100,14 @@ test.describe("Rental board selection flow", () => {
 
     const rentals = page.locator("#rentals");
     await expect(rentals.getByText("Аренда досок в Дананге", { exact: false })).toBeVisible();
-    await expect(rentals.getByText("Привозим по Данангу", { exact: true })).toBeVisible();
-    await expect(rentals.getByText("Поможем выбрать", { exact: true })).toBeVisible();
+    await expect(rentals.getByText("Привозим по Данангу", { exact: true })).toHaveCount(0);
+    await expect(rentals.getByText("Все размеры", { exact: true })).toHaveCount(0);
+    await expect(rentals.getByText("Лайкры и цинк", { exact: true })).toHaveCount(0);
+    await expect(rentals.getByText("Поможем выбрать", { exact: true })).toHaveCount(0);
     await expect(rentals.getByRole("link", { name: /выбрать доску/i })).toHaveAttribute("href", "/ru/surfboard-rental-danang");
     await expect(rentals.locator("#rental-mini-showroom")).toHaveAttribute("data-mini-showroom-variant", "homepage-promo");
-    await expect(rentals.locator("[data-mini-board-back]")).toHaveCount(1);
-    await expect(rentals.locator("[data-mini-board-front]")).toHaveCount(1);
+    await expect(rentals.locator("[data-mini-board-back]")).toBeHidden();
+    await expect(rentals.locator("[data-mini-board-front]")).toBeVisible();
 
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     expect(overflow).toBeLessThanOrEqual(1);
@@ -207,6 +214,84 @@ test.describe("Rental board selection flow", () => {
     await page.mouse.up();
 
     await expect(showroom.getByText("Softboard 8'6")).toBeVisible();
+  });
+
+  test("navigates the showroom with horizontal trackpad wheel", async ({ page }) => {
+    await page.goto("http://localhost:3000/surfboard-rental-danang", { waitUntil: "domcontentloaded" });
+    await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
+
+    const showroom = page.locator("#rental-board-showroom");
+    await showroom.scrollIntoViewIfNeeded();
+    await expect(showroom.getByText("Softboard 8'0")).toBeVisible();
+
+    const stage = showroom.locator("[data-showroom-stage]");
+    const box = await stage.boundingBox();
+    expect(box).not.toBeNull();
+
+    await page.mouse.move(box.x + box.width * 0.45, box.y + box.height * 0.45);
+    await page.mouse.wheel(80, 0);
+
+    await expect(showroom.getByText("Softboard 8'6")).toBeVisible();
+  });
+
+  test("navigates the homepage mini-showroom with a mobile swipe", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("http://localhost:3000/", { waitUntil: "domcontentloaded" });
+    await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
+
+    const miniShowroom = page.locator("#rental-mini-showroom");
+    await miniShowroom.scrollIntoViewIfNeeded();
+    await expect(miniShowroom.getByText("Softboard 8'0")).toBeVisible();
+
+    const box = await miniShowroom.boundingBox();
+    expect(box).not.toBeNull();
+
+    await page.mouse.move(box.x + box.width * 0.82, box.y + box.height * 0.5);
+    await page.mouse.down();
+    await page.mouse.move(box.x + box.width * 0.18, box.y + box.height * 0.5, { steps: 8 });
+    await page.mouse.up();
+
+    await expect(miniShowroom.getByText("Softboard 8'6")).toBeVisible();
+  });
+
+  test("navigates the desktop homepage mini-showroom with left and right clicks", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.goto("http://localhost:3000/", { waitUntil: "domcontentloaded" });
+    await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
+
+    const miniShowroom = page.locator("#rental-mini-showroom");
+    await miniShowroom.scrollIntoViewIfNeeded();
+    await expect(miniShowroom.getByText("Softboard 8'0")).toBeVisible();
+
+    const box = await miniShowroom.boundingBox();
+    expect(box).not.toBeNull();
+
+    await page.mouse.click(box.x + box.width * 0.78, box.y + box.height * 0.48);
+    await expect(miniShowroom.getByText("Softboard 8'6")).toBeVisible();
+
+    await page.mouse.click(box.x + box.width * 0.22, box.y + box.height * 0.48);
+    await expect(miniShowroom.getByText("Softboard 8'0")).toBeVisible();
+
+    await miniShowroom.getByRole("button", { name: /preview longboard 9'0/i }).click();
+    await expect(miniShowroom.getByText("Longboard 9'0")).toBeVisible();
+  });
+
+  test("does not navigate from the homepage mini-showroom stage", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("http://localhost:3000/", { waitUntil: "domcontentloaded" });
+    await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
+
+    const miniShowroom = page.locator("#rental-mini-showroom");
+    await miniShowroom.scrollIntoViewIfNeeded();
+
+    const box = await miniShowroom.boundingBox();
+    expect(box).not.toBeNull();
+
+    await page.mouse.click(box.x + box.width * 0.5, box.y + box.height * 0.5);
+
+    await expect(page).toHaveURL("http://localhost:3000/");
+    await expect(page.locator("#rental-mini-showroom")).toBeVisible();
+    await expect(page.locator("#rentals").getByRole("link", { name: /view all boards/i })).toHaveAttribute("href", "/surfboard-rental-danang");
   });
 
   test("keeps the mobile rental page compact below the showroom", async ({ page }) => {

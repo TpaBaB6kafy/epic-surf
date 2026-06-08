@@ -46,7 +46,8 @@ function boardVisualStyle(board, scaleBoost = 1, offset = {}) {
 
 export default function RentalBoardShowroom({ boards, onChooseBoard, lang = "en" }) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const dragStartXRef = useRef(null);
+  const dragStateRef = useRef(null);
+  const wheelLockRef = useRef(false);
   const language = lang === "ru" ? "ru" : "en";
   const copy = showroomCopy[language];
   const activeBoardSource = boards[activeIndex] || boards[0];
@@ -67,30 +68,51 @@ export default function RentalBoardShowroom({ boards, onChooseBoard, lang = "en"
   const goPrevious = () => goToBoard(activeIndex - 1);
   const goNext = () => goToBoard(activeIndex + 1);
 
-  const startDrag = (clientX) => {
-    dragStartXRef.current = clientX;
+  const startDrag = (event) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    if (event.target.closest?.("button, a")) return;
+
+    dragStateRef.current = {
+      x: event.clientX,
+      y: event.clientY,
+    };
+    event.currentTarget.setPointerCapture?.(event.pointerId);
   };
 
-  const finishDrag = (clientX) => {
-    if (dragStartXRef.current === null) return;
+  const finishDrag = (event) => {
+    if (!dragStateRef.current) return;
 
-    const delta = clientX - dragStartXRef.current;
-    dragStartXRef.current = null;
+    const deltaX = event.clientX - dragStateRef.current.x;
+    const deltaY = event.clientY - dragStateRef.current.y;
+    dragStateRef.current = null;
+    event.currentTarget.releasePointerCapture?.(event.pointerId);
 
-    if (Math.abs(delta) < 40) return;
-    if (delta < 0) {
+    if (Math.abs(deltaX) < 48 || Math.abs(deltaX) < Math.abs(deltaY) * 1.1) return;
+    if (deltaX < 0) {
       goNext();
     } else {
       goPrevious();
     }
   };
 
-  const handlePointerDown = (event) => startDrag(event.clientX);
-  const handlePointerUp = (event) => finishDrag(event.clientX);
-  const handleMouseDown = (event) => startDrag(event.clientX);
-  const handleMouseUp = (event) => finishDrag(event.clientX);
-  const handleTouchStart = (event) => startDrag(event.touches[0]?.clientX || 0);
-  const handleTouchEnd = (event) => finishDrag(event.changedTouches[0]?.clientX || 0);
+  const cancelDrag = () => {
+    dragStateRef.current = null;
+  };
+
+  const handleWheel = (event) => {
+    if (wheelLockRef.current || Math.abs(event.deltaX) < 30 || Math.abs(event.deltaX) < Math.abs(event.deltaY)) return;
+
+    wheelLockRef.current = true;
+    if (event.deltaX > 0) {
+      goNext();
+    } else {
+      goPrevious();
+    }
+
+    window.setTimeout(() => {
+      wheelLockRef.current = false;
+    }, 420);
+  };
 
   if (!activeBoard) return null;
 
@@ -120,12 +142,10 @@ export default function RentalBoardShowroom({ boards, onChooseBoard, lang = "en"
           <div
             data-showroom-stage
             className="relative min-h-[280px] overflow-hidden rounded-[24px] bg-epicDark text-epicWhite md:min-h-[620px] lg:min-h-[650px] lg:rounded-[34px]"
-            onPointerDown={handlePointerDown}
-            onPointerUp={handlePointerUp}
-            onMouseDown={handleMouseDown}
-            onMouseUp={handleMouseUp}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
+            onPointerDown={startDrag}
+            onPointerUp={finishDrag}
+            onPointerCancel={cancelDrag}
+            onWheel={handleWheel}
           >
             <div className="absolute inset-x-8 bottom-8 h-12 rounded-full bg-epicWhite/6 blur-2xl md:inset-x-8 md:bottom-11 md:h-20" />
             <div className="absolute inset-x-16 bottom-12 h-8 rounded-full bg-epicDark/70 blur-xl shadow-2xl shadow-black/25 md:inset-x-14 md:bottom-[68px] md:h-10" />
@@ -181,7 +201,7 @@ export default function RentalBoardShowroom({ boards, onChooseBoard, lang = "en"
               type="button"
               onClick={goPrevious}
               aria-label={copy.previousAria}
-              className="absolute left-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-epicWhite/15 bg-epicDark/76 text-epicWhite transition-all hover:bg-epicRed active:scale-95 md:h-11 md:w-11"
+              className="absolute left-4 top-[46%] z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-epicWhite/15 bg-epicDark/76 text-epicWhite transition-all hover:bg-epicRed active:scale-95 md:left-5 md:top-[48%] md:h-11 md:w-11"
             >
               <ArrowLeft size={20} />
             </button>
@@ -189,7 +209,7 @@ export default function RentalBoardShowroom({ boards, onChooseBoard, lang = "en"
               type="button"
               onClick={goNext}
               aria-label={copy.nextAria}
-              className="absolute right-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-epicWhite/15 bg-epicDark/76 text-epicWhite transition-all hover:bg-epicRed active:scale-95 md:h-11 md:w-11 lg:right-28"
+              className="absolute right-4 top-[46%] z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-epicWhite/15 bg-epicDark/76 text-epicWhite transition-all hover:bg-epicRed active:scale-95 md:right-5 md:top-[48%] md:h-11 md:w-11"
             >
               <ArrowRight size={20} />
             </button>
