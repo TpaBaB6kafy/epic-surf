@@ -116,7 +116,7 @@ function compactPrice(price) {
 }
 
 function readableLevels(board) {
-  return board.level.map((level) => boardLevelLabels[level] || level).join(" / ");
+  return board.level.map((level) => boardLevelLabels[level] || level).join(", ");
 }
 
 function boardSpecs(board) {
@@ -124,7 +124,7 @@ function boardSpecs(board) {
     `Length: ${board.size}`,
     `Type: ${boardTypeLabels[board.type] || board.type}`,
     `Best for: ${readableLevels(board)} surfers`,
-    `Conditions: ${board.bestFor[0] || "Check with Epic team"}`,
+    `Conditions: ${board.waves || board.bestFor[0] || "Check with Epic team"}`,
     "Includes: Leash",
   ];
 }

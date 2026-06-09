@@ -51,9 +51,11 @@ test.describe("Rental design test page", () => {
     }
 
     const showroom = page.locator('[data-section="rental-board-showroom"]');
-    await expect(showroom.getByRole("heading", { name: /softboard 8'0/i })).toBeVisible();
-    await showroom.getByRole("button", { name: /show shortboard 6'2/i }).click();
-    await expect(showroom.getByRole("heading", { name: /shortboard 6'2/i })).toBeVisible();
+    await expect(showroom.getByRole("heading", { name: /softboard orange/i })).toBeVisible();
+    await expect(showroom.getByText(/Soft and stable beginner-friendly board/i)).toBeVisible();
+    await showroom.getByRole("button", { name: /show luke studer shortboard/i }).click();
+    await expect(showroom.getByRole("heading", { name: /luke studer shortboard/i })).toBeVisible();
+    await expect(showroom.getByText(/Built for speed, sharp turns/i)).toBeVisible();
     await expect(showroom.locator('img[src*="/rentals/boards/processed/board-09/main.webp"]')).toBeVisible();
     await expect(showroom.locator('img[src*="/rentals/boards/processed/board-09/nose.webp"]')).toBeVisible();
     await expect(showroom.locator('img[src*="/rentals/boards/processed/board-09/tail.webp"]')).toBeVisible();
