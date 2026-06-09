@@ -195,12 +195,12 @@ export default function RentalDesignTestPage() {
         <section data-section="rental-design-hero" className="relative overflow-hidden bg-[#101313] text-epicWhite">
           <div className="absolute inset-0">
             <Image
-              src="/gallery/events/danang-open-2025/danang-open-2025-3.webp"
+              src="/rentals/hero/rental-hero.webp"
               alt=""
               fill
               priority
               sizes="100vw"
-              className="object-cover opacity-30 grayscale"
+              className="translate-x-[12%] scale-125 object-cover object-center opacity-60"
             />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_24%,rgba(170,255,199,0.16),transparent_28%),linear-gradient(90deg,#101313_0%,rgba(16,19,19,0.95)_34%,rgba(16,19,19,0.66)_65%,#101313_100%)]" />
           </div>
