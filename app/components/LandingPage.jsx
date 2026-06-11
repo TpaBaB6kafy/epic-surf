@@ -7,6 +7,7 @@ import HowItWorks from "./HowItWorks";
 import Lessons from "./Lessons";
 import IncludedBento from "./IncludedBento";
 import Rentals from "./Rentals";
+import LiveCam from "./LiveCam";
 import Forecast from "./Forecast";
 import Reviews from "./Reviews";
 import FAQ from "./FAQ";
@@ -123,6 +124,8 @@ export default function EpicSurfLanding({ locale = "en" }) {
         setRentalModalOpen={setRentalModalOpenSafely}
         onSelectRentalBoard={openRentalModal}
       />
+
+      <LiveCam locale={lang} />
 
       <Forecast
         t={t}
