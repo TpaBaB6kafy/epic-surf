@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { ExternalLink, Heart, MessageCircle, Radio } from "lucide-react";
 import { liveCam } from "../data/liveCam";
 import { links } from "../data/links";
@@ -36,9 +37,27 @@ const liveCamCopy = {
   },
 };
 
+const getPreviewSize = () => {
+  if (typeof window === "undefined" || window.innerWidth < 768) {
+    return { width: 320, height: 240 };
+  }
+
+  return window.innerWidth < 1024
+    ? { width: 400, height: 300 }
+    : { width: 480, height: 360 };
+};
+
 export default function LiveCam({ locale = "en" }) {
   const language = locale === "ru" ? "ru" : "en";
   const copy = liveCamCopy[language];
+  const [previewSize, setPreviewSize] = useState({ width: 320, height: 240 });
+
+  useEffect(() => {
+    const updatePreviewSize = () => setPreviewSize(getPreviewSize());
+    updatePreviewSize();
+    window.addEventListener("resize", updatePreviewSize);
+    return () => window.removeEventListener("resize", updatePreviewSize);
+  }, []);
 
   const trackOutbound = (target) => {
     trackEvent("live_cam_outbound_click", {
@@ -124,17 +143,17 @@ export default function LiveCam({ locale = "en" }) {
               </div>
             </div>
 
-            <div className="mx-auto flex w-full max-w-[360px] flex-col justify-center rounded-[24px] border border-epicWhite/10 bg-epicWhite/5 p-3 shadow-xl md:max-w-[440px] md:rounded-[28px] md:p-5 lg:max-w-[540px] lg:self-stretch lg:p-6">
+            <div className="mx-auto flex w-full max-w-[360px] flex-col justify-center rounded-[24px] border border-epicWhite/10 bg-epicWhite/5 p-3 shadow-xl md:max-w-[442px] md:rounded-[28px] md:p-5 lg:max-w-[540px] lg:self-stretch lg:p-6">
               <div
                 data-live-cam-preview
                 className="mx-auto aspect-[4/3] w-full max-w-[320px] overflow-hidden rounded-[18px] bg-black shadow-2xl md:max-w-[400px] md:rounded-[20px] lg:max-w-[480px]"
               >
                 <iframe
                   src={liveCam.previewUrl}
-                  width="320"
-                  height="240"
+                  width={previewSize.width}
+                  height={previewSize.height}
                   loading="lazy"
-                  className="block h-full w-full border-0"
+                  className="block h-full w-full rounded-[18px] border-0 md:rounded-[20px]"
                   allow="autoplay; encrypted-media"
                   title={copy.iframeTitle}
                   onLoad={() => trackEvent("live_cam_preview_load", {

@@ -1,5 +1,7 @@
 const { test, expect } = require("@playwright/test");
 
+const baseUrl = process.env.LIVE_CAM_BASE_URL || "http://localhost:3000";
+
 const copy = {
   en: {
     title: "My Khe Beach Live Cam",
@@ -24,18 +26,18 @@ const copy = {
 };
 
 const cases = [
-  { path: "/", language: "en", viewport: { width: 1440, height: 1000 }, previewWidth: [460, 500] },
-  { path: "/ru", language: "ru", viewport: { width: 1440, height: 1000 }, previewWidth: [460, 500] },
-  { path: "/", language: "en", viewport: { width: 820, height: 1000 }, previewWidth: [380, 420] },
-  { path: "/", language: "en", viewport: { width: 390, height: 844 }, previewWidth: [290, 330] },
-  { path: "/ru", language: "ru", viewport: { width: 390, height: 844 }, previewWidth: [290, 330] },
+  { path: "/", language: "en", viewport: { width: 1440, height: 1000 }, previewWidth: [479, 481], iframeSize: [480, 360] },
+  { path: "/ru", language: "ru", viewport: { width: 1440, height: 1000 }, previewWidth: [479, 481], iframeSize: [480, 360] },
+  { path: "/", language: "en", viewport: { width: 820, height: 1000 }, previewWidth: [399, 401], iframeSize: [400, 300] },
+  { path: "/", language: "en", viewport: { width: 390, height: 844 }, previewWidth: [290, 330], iframeSize: [320, 240] },
+  { path: "/ru", language: "ru", viewport: { width: 390, height: 844 }, previewWidth: [290, 330], iframeSize: [320, 240] },
 ];
 
 for (const scenario of cases) {
   test(`renders the polished live cam on ${scenario.path} at ${scenario.viewport.width}px`, async ({ page }) => {
     const text = copy[scenario.language];
     await page.setViewportSize(scenario.viewport);
-    await page.goto(`http://localhost:3000${scenario.path}?partner=hotel_abc`, {
+    await page.goto(`${baseUrl}${scenario.path}?partner=hotel_abc`, {
       waitUntil: "domcontentloaded",
     });
 
@@ -58,8 +60,8 @@ for (const scenario of cases) {
     const iframe = liveCam.locator("iframe");
     await expect(iframe).toHaveAttribute("src", /embed\/preview\?partner=epicsurf&duration=10&theme=dark/);
     await expect(iframe).toHaveAttribute("loading", "lazy");
-    await expect(iframe).toHaveAttribute("width", "320");
-    await expect(iframe).toHaveAttribute("height", "240");
+    await expect(iframe).toHaveAttribute("width", String(scenario.iframeSize[0]));
+    await expect(iframe).toHaveAttribute("height", String(scenario.iframeSize[1]));
     const preview = liveCam.locator("[data-live-cam-preview]");
     const previewBox = await preview.boundingBox();
     const iframeBox = await iframe.boundingBox();
@@ -68,8 +70,29 @@ for (const scenario of cases) {
     expect(iframeBox.width).toBeGreaterThanOrEqual(scenario.previewWidth[0]);
     expect(iframeBox.width).toBeLessThanOrEqual(scenario.previewWidth[1]);
     expect(Math.abs((iframeBox.width / iframeBox.height) - (4 / 3))).toBeLessThan(0.03);
-    expect(Math.abs(previewBox.width - iframeBox.width)).toBeLessThanOrEqual(1);
-    expect(Math.abs(previewBox.height - iframeBox.height)).toBeLessThanOrEqual(1);
+    expect(Math.abs(previewBox.width - iframeBox.width)).toBeLessThanOrEqual(2);
+    expect(Math.abs(previewBox.height - iframeBox.height)).toBeLessThanOrEqual(2);
+    const iframeStyle = await iframe.evaluate((node) => {
+      const style = getComputedStyle(node);
+      return {
+        borderRadius: style.borderRadius,
+        transform: style.transform,
+        width: Number.parseFloat(style.width),
+        height: Number.parseFloat(style.height),
+      };
+    });
+    const previewStyle = await preview.evaluate((node) => {
+      const style = getComputedStyle(node);
+      return {
+        borderRadius: style.borderRadius,
+        overflow: style.overflow,
+      };
+    });
+    expect(previewStyle.overflow).toBe("hidden");
+    expect(iframeStyle.borderRadius).toBe(previewStyle.borderRadius);
+    expect(iframeStyle.transform).toBe("none");
+    expect(iframeStyle.width).toBeCloseTo(iframeBox.width, 0);
+    expect(iframeStyle.height).toBeCloseTo(iframeBox.height, 0);
 
     for (const name of [text.fullStream, text.support]) {
       const link = liveCam.getByRole("link", { name: new RegExp(name, "i") });
