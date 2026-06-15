@@ -8,6 +8,8 @@ const __filename = fileURLToPath(import.meta.url);
 
 export const SOURCE_DIR =
   process.env.RENTAL_BOARD_SOURCE_DIR || "C:\\Users\\TpaBa\\Desktop\\Epic_Sait\\FOTO\\Rental page";
+export const BACK_DETAIL_SOURCE_DIR =
+  process.env.RENTAL_BOARD_BACK_DETAIL_SOURCE_DIR || "C:\\Users\\TpaBa\\Desktop\\Epic_boards";
 export const OUTPUT_DIR =
   process.env.RENTAL_BOARD_OUTPUT_DIR || path.join("public", "rentals", "boards", "processed");
 export const BOARD_IDS = Array.from({ length: 12 }, (_, index) => index + 1);
@@ -18,6 +20,8 @@ export const preferredSourceByBoard = {
 
 export const preferredSourceByAsset = {
   "*": {
+    front: "front",
+    back: "back",
     fins: "back",
   },
   // Example:
@@ -27,6 +31,18 @@ export const preferredSourceByAsset = {
 };
 
 export const cropPresets = {
+  front: {
+    width: 1200,
+    height: 1800,
+    quality: 76,
+    fit: "inside",
+  },
+  back: {
+    width: 1200,
+    height: 1800,
+    quality: 76,
+    fit: "inside",
+  },
   main: {
     width: 960,
     height: 1440,
@@ -82,9 +98,47 @@ export const cropPresetsByBoard = {
   },
 };
 
-const OUTPUT_FILE_NAMES = ["main", "nose", "tail", "fins", "thumb"];
+export const backDetailCropPresets = {
+  "back-nose": {
+    width: 800,
+    height: 560,
+    quality: 78,
+    fit: "cover",
+    rotate: 90,
+    crop: { left: 0.425, top: 0.08, width: 0.15, height: 0.37 },
+  },
+  "back-middle": {
+    width: 800,
+    height: 560,
+    quality: 78,
+    fit: "cover",
+    rotate: 90,
+    crop: { left: 0.425, top: 0.3, width: 0.15, height: 0.37 },
+  },
+  "back-tail-fins": {
+    width: 800,
+    height: 560,
+    quality: 78,
+    fit: "cover",
+    rotate: 90,
+    crop: { left: 0.425, top: 0.55, width: 0.15, height: 0.37 },
+  },
+};
+
+export const backDetailCropPresetsByBoard = {
+  1: {
+    "back-nose": { crop: { left: 0.45 } },
+    "back-middle": { crop: { left: 0.45 } },
+    "back-tail-fins": { crop: { left: 0.45 } },
+  },
+};
+
+const OUTPUT_FILE_NAMES = ["front", "back", "main", "nose", "tail", "fins", "thumb"];
+const BACK_DETAIL_FILE_NAMES = ["back-nose", "back-middle", "back-tail-fins"];
 const SOURCE_PATTERN = /^Epic_(\d+)_(front|back)\.(jpe?g|png)$/i;
+const BACK_DETAIL_SOURCE_PATTERN = /^(\d+)\.(jpe?g|png|webp|tiff?|avif)$/i;
 const CONTACT_SHEET_FILE_NAME = "contact-sheet.webp";
+const BACK_DETAIL_CONTACT_SHEET_FILE_NAME = "back-details-contact-sheet.webp";
 
 function boardSlug(boardId) {
   return `board-${String(boardId).padStart(2, "0")}`;
@@ -128,8 +182,18 @@ export function buildOutputPaths(outputDir, slug) {
   );
 }
 
+export function buildBackDetailOutputPaths(outputDir, slug) {
+  return Object.fromEntries(
+    BACK_DETAIL_FILE_NAMES.map((name) => [name, path.join(outputDir, slug, `${name}.webp`)]),
+  );
+}
+
 export function buildContactSheetPath(outputDir) {
   return path.join(outputDir, CONTACT_SHEET_FILE_NAME);
+}
+
+export function buildBackDetailContactSheetPath(outputDir) {
+  return path.join(outputDir, BACK_DETAIL_CONTACT_SHEET_FILE_NAME);
 }
 
 export function chooseSourceSide(sources, boardId, preferredByBoard = {}) {
@@ -190,6 +254,25 @@ export function buildBoardJobs({ files, sourceDir, boardIds = BOARD_IDS }) {
   });
 }
 
+export function buildBackDetailJobs({ files, sourceDir, boardIds = BOARD_IDS }) {
+  const sourcesByBoard = new Map();
+
+  for (const file of files) {
+    const match = file.match(BACK_DETAIL_SOURCE_PATTERN);
+    if (!match) continue;
+
+    const id = Number(match[1]);
+    if (!sourcesByBoard.has(id)) sourcesByBoard.set(id, path.join(sourceDir, file));
+  }
+
+  return boardIds.map((id) => ({
+    id,
+    boardSlug: boardSlug(id),
+    source: sourcesByBoard.get(id) || null,
+    missing: !sourcesByBoard.has(id),
+  }));
+}
+
 function clamp(number, min, max) {
   return Math.min(Math.max(number, min), max);
 }
@@ -206,11 +289,23 @@ function cropToPixels(metadata, crop) {
 }
 
 async function renderAsset(sourcePath, outputPath, preset) {
-  const source = sharp(sourcePath, { failOn: "none" });
-  const metadata = await source.metadata();
-
   await fs.mkdir(path.dirname(outputPath), { recursive: true });
 
+  if (!preset.crop) {
+    await sharp(sourcePath, { failOn: "none" })
+      .rotate(preset.rotate || 0)
+      .resize(preset.width, preset.height, {
+        fit: preset.fit,
+        position: "center",
+        withoutEnlargement: true,
+      })
+      .webp({ quality: preset.quality, effort: 5 })
+      .toFile(outputPath);
+    return;
+  }
+
+  const source = sharp(sourcePath, { failOn: "none" });
+  const metadata = await source.metadata();
   const extracted = await sharp(sourcePath, { failOn: "none" })
     .extract(cropToPixels(metadata, preset.crop))
     .toBuffer();
@@ -265,6 +360,67 @@ async function createContactSheet({ outputDir, results }) {
   }
 
   const outputPath = buildContactSheetPath(outputDir);
+  await fs.mkdir(path.dirname(outputPath), { recursive: true });
+  await sharp({
+    create: {
+      width,
+      height,
+      channels: 4,
+      background: "#f6f6f6",
+    },
+  })
+    .composite(composites)
+    .webp({ quality: 82, effort: 5 })
+    .toFile(outputPath);
+
+  return outputPath;
+}
+
+async function createBackDetailContactSheet({ outputDir, results }) {
+  const processed = results.filter((result) => !result.skipped);
+  if (!processed.length) return null;
+
+  const cellWidth = 320;
+  const cellHeight = 224;
+  const labelHeight = 28;
+  const gap = 10;
+  const margin = 18;
+  const columns = BACK_DETAIL_FILE_NAMES.length;
+  const width = margin * 2 + columns * cellWidth + (columns - 1) * gap;
+  const rowHeight = labelHeight + cellHeight;
+  const height = margin * 2 + processed.length * rowHeight + (processed.length - 1) * gap;
+  const composites = [];
+
+  for (let row = 0; row < processed.length; row += 1) {
+    const result = processed[row];
+    const outputPaths = buildBackDetailOutputPaths(outputDir, result.boardSlug);
+    const top = margin + row * (rowHeight + gap);
+    const label = await sharp({
+      create: {
+        width: cellWidth,
+        height: labelHeight,
+        channels: 4,
+        background: row % 2 === 0 ? "#2E2E2E" : "#585858",
+      },
+    })
+      .webp({ quality: 82 })
+      .toBuffer();
+
+    composites.push({ input: label, left: margin, top });
+
+    for (let column = 0; column < BACK_DETAIL_FILE_NAMES.length; column += 1) {
+      const assetName = BACK_DETAIL_FILE_NAMES[column];
+      const left = margin + column * (cellWidth + gap);
+      const image = await sharp(outputPaths[assetName])
+        .resize(cellWidth, cellHeight, { fit: "cover", position: "center" })
+        .webp({ quality: 76 })
+        .toBuffer();
+
+      composites.push({ input: image, left, top: top + labelHeight });
+    }
+  }
+
+  const outputPath = buildBackDetailContactSheetPath(outputDir);
   await fs.mkdir(path.dirname(outputPath), { recursive: true });
   await sharp({
     create: {
@@ -350,6 +506,39 @@ export async function processRentalBoardImages({
   return results;
 }
 
+export async function processBackDetailImages({
+  sourceDir = BACK_DETAIL_SOURCE_DIR,
+  outputDir = OUTPUT_DIR,
+  boardIds = BOARD_IDS,
+  cropPresets: presets = backDetailCropPresets,
+  cropPresetsByBoard: presetOverrides = backDetailCropPresetsByBoard,
+} = {}) {
+  const files = await fs.readdir(sourceDir);
+  const jobs = buildBackDetailJobs({ files, sourceDir, boardIds });
+  const results = [];
+
+  for (const job of jobs) {
+    if (!job.source) {
+      results.push({ ...job, skipped: true, reason: "new back source image not found", created: [] });
+      continue;
+    }
+
+    const boardPresets = mergeCropPresets(presets, presetOverrides, job.id);
+    const outputPaths = buildBackDetailOutputPaths(outputDir, job.boardSlug);
+    const created = [];
+
+    for (const assetName of BACK_DETAIL_FILE_NAMES) {
+      await renderAsset(job.source, outputPaths[assetName], boardPresets[assetName]);
+      created.push(outputPaths[assetName]);
+    }
+
+    results.push({ ...job, skipped: false, created });
+  }
+
+  results.contactSheet = await createBackDetailContactSheet({ outputDir, results });
+  return results;
+}
+
 function printSummary(results) {
   const processed = results.filter((result) => !result.skipped);
   const skipped = results.filter((result) => result.skipped);
@@ -375,9 +564,30 @@ function printSummary(results) {
   }
 }
 
+function printBackDetailSummary(results) {
+  const processed = results.filter((result) => !result.skipped);
+  const skipped = results.filter((result) => result.skipped);
+
+  console.log(`Processed new back detail boards: ${processed.length}`);
+  for (const result of processed) {
+    console.log(`- ${result.boardSlug}: ${result.source}`);
+    for (const file of result.created) console.log(`  ${file}`);
+  }
+
+  if (results.contactSheet) console.log(`Back detail contact sheet: ${results.contactSheet}`);
+
+  if (skipped.length) {
+    console.log("Skipped new back detail boards:");
+    for (const result of skipped) console.log(`- ${result.boardSlug}: ${result.reason}`);
+  }
+}
+
 if (process.argv[1] === __filename) {
-  processRentalBoardImages()
-    .then(printSummary)
+  Promise.all([processRentalBoardImages(), processBackDetailImages()])
+    .then(([results, backDetailResults]) => {
+      printSummary(results);
+      printBackDetailSummary(backDetailResults);
+    })
     .catch((error) => {
       console.error(error);
       process.exitCode = 1;

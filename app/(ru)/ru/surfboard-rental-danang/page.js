@@ -1,4 +1,4 @@
-import SeoPage from "../../../components/SeoPage";
+import RentalDesignTestPage from "../../../components/RentalDesignTestPage";
 import { getSeoPage } from "../../../data/seoPages";
 import PageJsonLd from "../../../components/PageJsonLd";
 import {
@@ -44,7 +44,7 @@ export default function Page() {
   return (
     <>
       <PageJsonLd data={buildWebPageStructuredData({ path, title, description, locale: "ru" })} />
-      <SeoPage page={page} locale="ru" languageHref="/surfboard-rental-danang" />
+      <RentalDesignTestPage locale="ru" pageContent={page} />
     </>
   );
 }

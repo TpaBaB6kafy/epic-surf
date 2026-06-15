@@ -34,9 +34,9 @@ export default function Rentals({ t, lang, setRentalModalOpen }) {
 
   return (
     <section id="rentals" className="mt-20 scroll-mt-24 overflow-hidden bg-epicDark py-14 text-epicWhite md:py-20 lg:py-24">
-      <div className="mx-auto grid w-[min(100%-32px,360px)] gap-9 md:w-[min(100%-48px,760px)] lg:w-[min(100%-64px,1160px)] lg:grid-cols-[minmax(300px,380px)_minmax(0,1fr)] lg:items-center lg:gap-16">
-        <div className="order-2 mx-auto h-[350px] w-full max-w-[340px] md:h-[470px] md:max-w-[380px] lg:order-1 lg:h-[560px]">
-          <RentalBoardMiniShowroom boards={rentalBoards} />
+      <div className="mx-auto grid w-[min(100%-32px,360px)] gap-9 md:w-[min(100%-48px,760px)] lg:w-[min(100%-64px,1160px)] lg:grid-cols-[minmax(380px,500px)_minmax(0,1fr)] lg:items-center lg:gap-16">
+        <div className="order-2 mx-auto h-[340px] w-full max-w-[360px] md:h-[420px] md:max-w-[500px] lg:order-1 lg:h-[460px]">
+          <RentalBoardMiniShowroom boards={rentalBoards} lang={lang} />
         </div>
 
         <div className="order-1 text-center lg:order-2 lg:text-left">

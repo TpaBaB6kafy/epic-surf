@@ -3,6 +3,9 @@ import path from "node:path";
 import test from "node:test";
 
 import {
+  buildBackDetailContactSheetPath,
+  buildBackDetailJobs,
+  buildBackDetailOutputPaths,
   buildBoardJobs,
   buildContactSheetPath,
   buildOutputPaths,
@@ -10,6 +13,43 @@ import {
   chooseSourceSide,
   mergeCropPresets,
 } from "../scripts/process-rental-board-images.mjs";
+
+test("buildBackDetailJobs maps numeric image names to board ids", () => {
+  const files = ["1.JPG", "2.jpeg", "03.PNG", "12.webp", "notes.txt", "Epic_1_back.JPG"];
+
+  const jobs = buildBackDetailJobs({ files, sourceDir: "C:\\new-source", boardIds: [1, 2, 3, 4, 12] });
+
+  assert.deepEqual(
+    jobs.map((job) => ({
+      id: job.id,
+      boardSlug: job.boardSlug,
+      source: job.source && path.basename(job.source),
+      missing: job.missing,
+    })),
+    [
+      { id: 1, boardSlug: "board-01", source: "1.JPG", missing: false },
+      { id: 2, boardSlug: "board-02", source: "2.jpeg", missing: false },
+      { id: 3, boardSlug: "board-03", source: "03.PNG", missing: false },
+      { id: 4, boardSlug: "board-04", source: null, missing: true },
+      { id: 12, boardSlug: "board-12", source: "12.webp", missing: false },
+    ],
+  );
+});
+
+test("buildBackDetailOutputPaths creates stable back detail file names", () => {
+  assert.deepEqual(buildBackDetailOutputPaths("public/rentals/boards/processed", "board-09"), {
+    "back-nose": path.join("public/rentals/boards/processed", "board-09", "back-nose.webp"),
+    "back-middle": path.join("public/rentals/boards/processed", "board-09", "back-middle.webp"),
+    "back-tail-fins": path.join("public/rentals/boards/processed", "board-09", "back-tail-fins.webp"),
+  });
+});
+
+test("buildBackDetailContactSheetPath creates a separate review asset", () => {
+  assert.equal(
+    buildBackDetailContactSheetPath("public/rentals/boards/processed"),
+    path.join("public/rentals/boards/processed", "back-details-contact-sheet.webp"),
+  );
+});
 
 test("buildBoardJobs pairs front and back files case-insensitively", () => {
   const files = [
@@ -86,6 +126,8 @@ test("chooseAssetSourceSide supports asset-level defaults and board overrides", 
 
 test("buildOutputPaths creates the expected processed asset file names", () => {
   assert.deepEqual(buildOutputPaths("public/rentals/boards/processed", "board-09"), {
+    front: path.join("public/rentals/boards/processed", "board-09", "front.webp"),
+    back: path.join("public/rentals/boards/processed", "board-09", "back.webp"),
     main: path.join("public/rentals/boards/processed", "board-09", "main.webp"),
     nose: path.join("public/rentals/boards/processed", "board-09", "nose.webp"),
     tail: path.join("public/rentals/boards/processed", "board-09", "tail.webp"),
