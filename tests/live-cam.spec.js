@@ -26,11 +26,12 @@ const copy = {
 };
 
 const cases = [
-  { path: "/", language: "en", viewport: { width: 1440, height: 1000 }, previewWidth: [479, 481], iframeSize: [480, 360] },
-  { path: "/ru", language: "ru", viewport: { width: 1440, height: 1000 }, previewWidth: [479, 481], iframeSize: [480, 360] },
-  { path: "/", language: "en", viewport: { width: 820, height: 1000 }, previewWidth: [399, 401], iframeSize: [400, 300] },
-  { path: "/", language: "en", viewport: { width: 390, height: 844 }, previewWidth: [290, 330], iframeSize: [320, 240] },
-  { path: "/ru", language: "ru", viewport: { width: 390, height: 844 }, previewWidth: [290, 330], iframeSize: [320, 240] },
+  { path: "/", language: "en", viewport: { width: 1440, height: 1000 }, previewWidth: [599, 601] },
+  { path: "/ru", language: "ru", viewport: { width: 1440, height: 1000 }, previewWidth: [599, 601] },
+  { path: "/", language: "en", viewport: { width: 820, height: 1000 }, previewWidth: [459, 461] },
+  { path: "/ru", language: "ru", viewport: { width: 820, height: 1000 }, previewWidth: [459, 461] },
+  { path: "/", language: "en", viewport: { width: 390, height: 844 }, previewWidth: [290, 321] },
+  { path: "/ru", language: "ru", viewport: { width: 390, height: 844 }, previewWidth: [290, 321] },
 ];
 
 for (const scenario of cases) {
@@ -60,16 +61,17 @@ for (const scenario of cases) {
     const iframe = liveCam.locator("iframe");
     await expect(iframe).toHaveAttribute("src", /embed\/preview\?partner=epicsurf&duration=10&theme=dark/);
     await expect(iframe).toHaveAttribute("loading", "lazy");
-    await expect(iframe).toHaveAttribute("width", String(scenario.iframeSize[0]));
-    await expect(iframe).toHaveAttribute("height", String(scenario.iframeSize[1]));
+    await expect(iframe).toHaveAttribute("width", "100%");
+    await expect(iframe).toHaveAttribute("height", "100%");
     const preview = liveCam.locator("[data-live-cam-preview]");
+    await expect(preview).not.toHaveClass(/aspect-\[4\/3\]/);
     const previewBox = await preview.boundingBox();
     const iframeBox = await iframe.boundingBox();
     expect(previewBox).not.toBeNull();
     expect(iframeBox).not.toBeNull();
     expect(iframeBox.width).toBeGreaterThanOrEqual(scenario.previewWidth[0]);
     expect(iframeBox.width).toBeLessThanOrEqual(scenario.previewWidth[1]);
-    expect(Math.abs((iframeBox.width / iframeBox.height) - (4 / 3))).toBeLessThan(0.03);
+    expect(Math.abs((iframeBox.width / iframeBox.height) - (16 / 9))).toBeLessThan(0.03);
     expect(Math.abs(previewBox.width - iframeBox.width)).toBeLessThanOrEqual(2);
     expect(Math.abs(previewBox.height - iframeBox.height)).toBeLessThanOrEqual(2);
     const iframeStyle = await iframe.evaluate((node) => {
@@ -89,7 +91,8 @@ for (const scenario of cases) {
       };
     });
     expect(previewStyle.overflow).toBe("hidden");
-    expect(iframeStyle.borderRadius).toBe(previewStyle.borderRadius);
+    expect(previewStyle.borderRadius).toBe(scenario.viewport.width < 768 ? "18px" : "20px");
+    expect(iframeStyle.borderRadius).toBe("0px");
     expect(iframeStyle.transform).toBe("none");
     expect(iframeStyle.width).toBeCloseTo(iframeBox.width, 0);
     expect(iframeStyle.height).toBeCloseTo(iframeBox.height, 0);
