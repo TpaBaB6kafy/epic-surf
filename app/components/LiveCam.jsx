@@ -10,28 +10,28 @@ const liveCamCopy = {
     eyebrow: "Da Nang Surf Cam",
     title: "My Khe Beach Live Cam",
     mobileTitle: "My Khe Live Cam",
-    subtext: "Check a short live preview from My Khe Beach before you book a lesson or rent a board.",
-    detail: "The full stream is operated by Da Nang Surf Cam. Open it to see current conditions, then message Epic if you are not sure whether today is good for your level.",
+    subtext: "Check the beach before you go.",
+    detail: "Watch a short preview from My Khe Beach, then open the full cam or message Epic to ask if today fits your level.",
     iframeTitle: "My Khe Beach live camera preview",
     poweredBy: "Powered by Da Nang Surf Cam",
-    attribution: "A free, community-supported live cam streaming My Khe Beach, Da Nang daily from 4AM to 4PM ICT.",
-    fullStream: "Watch Full Stream",
-    support: "Support the Project",
-    askEpic: "Ask Epic about today’s conditions",
+    attribution: "Community-supported My Khe Beach cam by Da Nang Surf Cam. Live/replay daily from 4AM to 4PM ICT.",
+    fullStream: "Open Full Cam",
+    support: "Support Cam",
+    askEpic: "Ask Epic about conditions",
     whatsappMessage: "Hi! I checked the My Khe live cam. Are the conditions good for my level today?",
   },
   ru: {
     eyebrow: "Da Nang Surf Cam",
-    title: "Лайв-камера пляжа Ми Кхе",
-    mobileTitle: "Лайв-камера пляжа Ми Кхе",
-    subtext: "Посмотрите короткое превью с пляжа Ми Кхе перед уроком или арендой доски.",
-    detail: "Полный стрим ведёт Da Nang Surf Cam. Откройте его, чтобы посмотреть текущие условия, а если не уверены, подходит ли день для вашего уровня, напишите Epic.",
+    title: "Лайв-камера Ми Кхе",
+    mobileTitle: "Лайв-камера Ми Кхе",
+    subtext: "Проверьте пляж перед сессией.",
+    detail: "Посмотрите короткое превью с Ми Кхе, откройте камеру или напишите Epic, чтобы понять, подходят ли условия для вашего уровня.",
     iframeTitle: "Превью лайв-камеры пляжа Ми Кхе",
     poweredBy: "Powered by Da Nang Surf Cam",
-    attribution: "Бесплатная community-камера с пляжа Ми Кхе в Дананге. Работает ежедневно с 4:00 до 16:00 ICT.",
-    fullStream: "Открыть полный стрим",
-    support: "Поддержать проект",
-    askEpic: "Спросить Epic про условия сегодня",
+    attribution: "Community-камера Ми Кхе от Da Nang Surf Cam. Live/replay ежедневно с 4:00 до 16:00 ICT.",
+    fullStream: "Открыть камеру",
+    support: "Поддержать камеру",
+    askEpic: "Спросить Epic про условия",
     whatsappMessage: "Привет! Я посмотрел лайв-камеру Ми Кхе. Подходят ли сегодня условия для моего уровня?",
   },
 };
@@ -73,7 +73,7 @@ export default function LiveCam({ locale = "en" }) {
           <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full border-[24px] border-epicRed/10 md:-right-16 md:-top-20 md:h-56 md:w-56 md:border-[34px] md:border-epicRed/15" />
           <div className="pointer-events-none absolute -bottom-28 left-1/3 h-52 w-52 rounded-full border-[30px] border-epicMint/10 md:h-60 md:w-60 md:border-[36px]" />
 
-          <div className="relative grid items-center gap-9 md:gap-11 lg:grid-cols-[minmax(0,0.95fr)_minmax(480px,1.05fr)] lg:gap-12">
+          <div className="relative grid items-center gap-9 md:gap-11 lg:grid-cols-[minmax(0,1fr)_minmax(520px,568px)] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_610px]">
             <div className="min-w-0">
               <div className="inline-flex items-center gap-2 rounded-full bg-epicMint px-4 py-2 text-[11px] font-black uppercase tracking-wide text-epicDark">
                 <Radio size={15} className="text-epicRed" />
@@ -83,14 +83,14 @@ export default function LiveCam({ locale = "en" }) {
                 <span className="sm:hidden">{copy.mobileTitle}</span>
                 <span className="hidden sm:inline">{copy.title}</span>
               </h2>
-              <p className="mt-5 max-w-2xl text-base font-medium leading-7 text-epicWhite/75 md:text-lg md:leading-8">
+              <p className="mt-4 max-w-2xl text-base font-medium leading-7 text-epicWhite/75 md:text-lg md:leading-8">
                 {copy.subtext}
               </p>
-              <p className="mt-4 max-w-2xl text-sm leading-6 text-epicWhite/55 md:text-base md:leading-7">
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-epicWhite/55 md:text-base md:leading-7">
                 {copy.detail}
               </p>
 
-              <div className="mt-7 grid gap-3 sm:grid-cols-2">
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 <a
                   href={liveCam.fullStreamUrl}
                   target="_blank"
@@ -124,15 +124,24 @@ export default function LiveCam({ locale = "en" }) {
               </div>
             </div>
 
+<<<<<<< Updated upstream
             <div className="mx-auto flex w-full max-w-[360px] flex-col justify-center rounded-[24px] border border-epicWhite/10 bg-epicWhite/5 p-3 shadow-xl md:max-w-[440px] md:rounded-[28px] md:p-5 lg:max-w-[540px] lg:self-stretch lg:p-6">
+=======
+            <div className="mx-auto flex w-full max-w-[360px] flex-col justify-center rounded-[24px] border border-epicWhite/10 bg-epicWhite/5 p-3 shadow-xl md:max-w-[462px] md:rounded-[28px] md:p-5 lg:max-w-[568px] lg:p-6 xl:max-w-[610px]">
+>>>>>>> Stashed changes
               <div
                 data-live-cam-preview
-                className="mx-auto aspect-[4/3] w-full max-w-[320px] overflow-hidden rounded-[18px] bg-black shadow-2xl md:max-w-[400px] md:rounded-[20px] lg:max-w-[480px]"
+                className="mx-auto aspect-video w-full max-w-[320px] overflow-hidden rounded-[18px] bg-black shadow-2xl md:max-w-[420px] md:rounded-[20px] lg:max-w-[520px] xl:max-w-[560px]"
               >
                 <iframe
                   src={liveCam.previewUrl}
+<<<<<<< Updated upstream
                   width="320"
                   height="240"
+=======
+                  width="100%"
+                  height="100%"
+>>>>>>> Stashed changes
                   loading="lazy"
                   className="block h-full w-full border-0"
                   allow="autoplay; encrypted-media"
