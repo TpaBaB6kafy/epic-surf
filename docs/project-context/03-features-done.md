@@ -9,7 +9,8 @@
 ## Core landing page
 
 - `app/components/LandingPage.jsx`
-- Composes header, hero, why, process, lessons, included items, rentals, forecast/location, reviews, FAQ, events, gallery, footer, messenger FAB, booking modal, rental modal.
+- Composes header, hero, why, process, lessons, included items, rentals, LiveCam, forecast/location, reviews, FAQ, events, gallery, footer, messenger FAB, booking modal, rental modal.
+- LiveCam is placed between Rentals and Forecast.
 
 ## Booking flow
 
@@ -27,8 +28,20 @@
 
 - `Rentals.jsx`
 - `RentalModal.jsx`
+- Redesigned rental pages are live at `/surfboard-rental-danang` and `/ru/surfboard-rental-danang`.
+- The homepage rental block uses `RentalBoardMiniShowroom.jsx` and links to the matching EN/RU rental page.
+- The production rental experience uses `RentalDesignTestPage.jsx`, `RentalBoardShowroom.jsx`, and `app/data/rentalBoards.js`.
+- Rental board images, detail crops, contact sheets, and desktop/mobile hero images were updated as part of the redesign.
 - Rental CTA tracked as `rental_cta_click`.
 - Messenger links are built with attribution-aware helpers.
+
+## My Khe LiveCam
+
+- `LiveCam.jsx` and `app/data/liveCam.js` are in `main`.
+- Provider: Da Nang Surf Cam / Ryan; partner ID: `epicsurf`.
+- The homepage embeds a short partner preview; the full stream remains on `danangsurfcam.com`.
+- The iframe fills a responsive 16:9 preview container across mobile, tablet, and desktop layouts.
+- Tracks preview load, provider outbound clicks, and the Epic WhatsApp conditions CTA.
 
 ## Forecast/location
 
@@ -67,6 +80,7 @@
 - Sitemap: `app/sitemap.js`
 - Robots: `app/robots.js`
 - Language alternates for EN/RU routes.
+- Reciprocal canonical/hreflang metadata and sitemap entries for the EN/RU rental pages.
 
 ## Security headers
 
@@ -75,4 +89,4 @@
 
 ## Last updated
 
-2026-05-29
+2026-06-15

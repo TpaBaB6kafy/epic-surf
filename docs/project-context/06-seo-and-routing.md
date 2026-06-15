@@ -6,11 +6,17 @@ English:
 
 - `/`
 - `/partners`
+- `/surf-lessons-danang`
+- `/surfing-danang`
+- `/surfboard-rental-danang`
+- `/my-khe-beach-surfing`
+- `/surf-guide`
 
 Russian:
 
 - `/ru`
 - `/ru/partners`
+- `/ru/surfboard-rental-danang`
 
 ## Why `/` is English
 
@@ -32,13 +38,23 @@ Russian:
 - `alternates.languages` maps EN/RU versions.
 - Sitemap includes both language versions.
 - Structured data is generated per locale.
+- The rental pages use reciprocal EN/RU language alternates and English as `x-default`.
 
 ## SEO files
 
 - `app/data/siteConfig.js`: metadata, alternates, structured data, canonical domain.
 - `app/sitemap.js`: sitemap entries.
 - `app/robots.js`: robots and sitemap URL.
+- `app/data/seoPages.js`: English SEO page links/content and Russian rental content.
 - Partner page metadata: route-level `page.js` files.
+- Rental metadata: `app/(en)/surfboard-rental-danang/page.js` and `app/(ru)/ru/surfboard-rental-danang/page.js`.
+
+## Rental canonical and hreflang
+
+- `/surfboard-rental-danang` is self-canonical and declares EN, RU, and English `x-default` alternates.
+- `/ru/surfboard-rental-danang` is self-canonical and declares reciprocal EN, RU, and English `x-default` alternates.
+- `app/sitemap.js` includes both rental URLs with the same reciprocal language mapping.
+- `Rentals.jsx` links the English homepage to the English rental page and the Russian homepage to the Russian rental page.
 
 ## Do not break
 
@@ -55,4 +71,4 @@ Russian:
 
 ## Last updated
 
-2026-05-29
+2026-06-15

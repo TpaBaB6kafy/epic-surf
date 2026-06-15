@@ -31,14 +31,23 @@
 - GTM/Umami integration is implemented.
 - Production event delivery should be checked with real env vars.
 - Confirm `dataLayer` and Umami payloads include expected attribution fields.
+- Confirm production delivery for `live_cam_preview_load`, `live_cam_outbound_click`, and `live_cam_cta_click`.
+
+## LiveCam external dependency
+
+- The homepage preview depends on `danangsurfcam.com` and can be affected by provider uptime, embed policy, or URL changes.
+- Epic hosts only the partner preview block; the full stream remains on the provider site.
+- An Epic-owned camera is not implemented and remains a future project.
+- The provider is Da Nang Surf Cam / Ryan and the configured partner ID is `epicsurf`.
+- The production build completed without a warning for `/epic-logo-v-ksu-v4.png` on 2026-06-15, so no active logo warning is recorded here.
 
 ## Technical debt
 
 - Large translation/content files mix copy and JSX icons.
 - Several components contain dense Tailwind class strings.
-- No automated tests are visible beyond installed Playwright dependency.
+- Automated Playwright coverage exists for homepage rental, rental flows, production rental pages, LiveCam, and other key interactions; broader production monitoring is still limited.
 - README still contains default create-next-app sections.
 
 ## Last updated
 
-2026-05-29
+2026-06-15

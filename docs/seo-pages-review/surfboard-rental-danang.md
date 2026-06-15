@@ -2,7 +2,8 @@
 
 ## 1. Page basics
 
-- Route: `/surfboard-rental-danang`
+- English route: `/surfboard-rental-danang`
+- Russian route: `/ru/surfboard-rental-danang`
 - Page purpose: Commercial landing page for surfboard rental in Da Nang.
 - Primary search intent: Rent a surfboard in Da Nang near My Khe Beach.
 - Primary keywords: surfboard rental Da Nang, rent surfboard Da Nang, surf board rental Da Nang
@@ -13,10 +14,13 @@
 ## 2. Current SEO metadata
 
 - Title: Surfboard Rental in Da Nang | Epic Surf School
-- Description: Rent a surfboard in Da Nang with Epic Surf School. Board rental near My Khe Beach, easy messenger booking, and beginner-friendly safety guidance.
+- Description: Rent a surfboard in Da Nang near My Khe Beach. Softboards, longboards, malibus and shortboards from 250,000 VND / 2 hours. Message Epic Surf School to confirm availability.
 - Canonical URL: `https://www.surfdanang.com/surfboard-rental-danang`
+- Russian canonical URL: `https://www.surfdanang.com/ru/surfboard-rental-danang`
+- Hreflang: reciprocal `en` and `ru` alternates, with the English route as `x-default`.
 - Open Graph title: Surfboard Rental in Da Nang | Epic Surf School
-- Open Graph description: Rent a surfboard in Da Nang with Epic Surf School. Board rental near My Khe Beach, easy messenger booking, and beginner-friendly safety guidance.
+- Open Graph URL and copy are locale-specific on the EN and RU pages.
+- Sitemap: both rental routes are included with reciprocal language alternates.
 
 ## 3. Current visible page content
 
@@ -102,6 +106,10 @@ Footer Surf Info links:
 
 ## 4. Current internal links
 
+- Homepage rental block:
+  - English `View all boards` links to `/surfboard-rental-danang`.
+  - Russian localized catalog CTA links to `/ru/surfboard-rental-danang`.
+
 - Anchor text: Surf Lessons
   - URL: `/surf-lessons-danang`
   - Location: related block
@@ -166,6 +174,7 @@ Footer Surf Info links:
 - Safety rules and eligibility for beginners renting boards.
 - Current surf conditions and seasonality.
 - Support for UTM/partner passthrough in rental or messenger flows.
+- Production verification of reciprocal hreflang output and indexing for both rental routes.
 
 ## 7. Notes for SEO review
 
@@ -175,3 +184,4 @@ Footer Surf Info links:
 - Internal links: Yes.
 - Related pages: Yes.
 - Metadata: Yes.
+- EN/RU canonical and hreflang: Yes in code and sitemap; production indexing still needs verification.

@@ -43,6 +43,16 @@
 - `zalo_click`
 - `rental_cta_click`
 - `partner_cta_click`
+- `live_cam_preview_load`
+- `live_cam_outbound_click`
+- `live_cam_cta_click`
+
+## LiveCam events
+
+- `live_cam_preview_load`: fired by the iframe `onLoad`; payload includes `language`, provider `danangsurfcam`, and location `homepage_live_cam`.
+- `live_cam_outbound_click`: fired for full-stream and donation links; payload also identifies target `full_stream` or `donate`.
+- `live_cam_cta_click`: fired for the WhatsApp conditions CTA with target `whatsapp_conditions`.
+- The same WhatsApp action also emits `whatsapp_click` with service type `conditions_check`; that companion event retains partner attribution under the current `PARTNER_LEAD_EVENTS` rules.
 
 ## Events that should retain partner attribution
 
@@ -62,4 +72,4 @@
 
 ## Last updated
 
-2026-05-29
+2026-06-15
