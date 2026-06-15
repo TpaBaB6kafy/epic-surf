@@ -10,28 +10,34 @@ const liveCamCopy = {
     eyebrow: "Da Nang Surf Cam",
     title: "My Khe Beach Live Cam",
     mobileTitle: "My Khe Live Cam",
-    subtext: "Check a short live preview from My Khe Beach before you book a lesson or rent a board.",
-    detail: "The full stream is operated by Da Nang Surf Cam. Open it to see current conditions, then message Epic if you are not sure whether today is good for your level.",
+    titleLines: ["My Khe Beach", "Live Cam"],
+    mobileTitleLines: ["My Khe Live Cam"],
+    subtext: "Check My Khe before you book a lesson or rent a board.",
+    detail: "The full stream is operated by Da Nang Surf Cam. Open it for the full beach view, or message Epic if you’re not sure today fits your level.",
     iframeTitle: "My Khe Beach live camera preview",
     poweredBy: "Powered by Da Nang Surf Cam",
     attribution: "A free, community-supported live cam streaming My Khe Beach, Da Nang daily from 4AM to 4PM ICT.",
-    fullStream: "Watch Full Stream",
-    support: "Support the Project",
+    fullStream: "Open full cam",
+    support: "Support the cam",
     askEpic: "Ask Epic about today’s conditions",
+    mobileAskEpic: "Ask Epic about conditions",
     whatsappMessage: "Hi! I checked the My Khe live cam. Are the conditions good for my level today?",
   },
   ru: {
     eyebrow: "Da Nang Surf Cam",
-    title: "Лайв-камера пляжа Ми Кхе",
-    mobileTitle: "Лайв-камера пляжа Ми Кхе",
-    subtext: "Посмотрите короткое превью с пляжа Ми Кхе перед уроком или арендой доски.",
-    detail: "Полный стрим ведёт Da Nang Surf Cam. Откройте его, чтобы посмотреть текущие условия, а если не уверены, подходит ли день для вашего уровня, напишите Epic.",
+    title: "Лайв-камера Ми Кхе",
+    mobileTitle: "Лайв-камера Ми Кхе",
+    titleLines: ["Лайв-камера", "Ми Кхе"],
+    mobileTitleLines: ["Лайв-камера", "Ми Кхе"],
+    subtext: "Проверьте Ми Кхе перед уроком или арендой доски.",
+    detail: "Полный стрим ведёт Da Nang Surf Cam. Откройте камеру для обзора пляжа или напишите Epic, если не уверены, подходят ли условия вашему уровню.",
     iframeTitle: "Превью лайв-камеры пляжа Ми Кхе",
     poweredBy: "Powered by Da Nang Surf Cam",
     attribution: "Бесплатная community-камера с пляжа Ми Кхе в Дананге. Работает ежедневно с 4:00 до 16:00 ICT.",
-    fullStream: "Открыть полный стрим",
-    support: "Поддержать проект",
-    askEpic: "Спросить Epic про условия сегодня",
+    fullStream: "Открыть камеру",
+    support: "Поддержать камеру",
+    askEpic: "Спросить Epic про условия",
+    mobileAskEpic: "Спросить про условия",
     whatsappMessage: "Привет! Я посмотрел лайв-камеру Ми Кхе. Подходят ли сегодня условия для моего уровня?",
   },
 };
@@ -79,9 +85,21 @@ export default function LiveCam({ locale = "en" }) {
                 <Radio size={15} className="text-epicRed" />
                 {copy.eyebrow}
               </div>
-              <h2 className="mt-5 max-w-3xl text-3xl font-black leading-[0.98] tracking-normal sm:text-4xl md:text-5xl lg:text-6xl lg:leading-[0.95]">
-                <span className="sm:hidden">{copy.mobileTitle}</span>
-                <span className="hidden sm:inline">{copy.title}</span>
+              <h2
+                aria-label={copy.mobileTitle}
+                className="mt-5 max-w-3xl text-3xl font-black leading-[0.98] tracking-normal sm:hidden"
+              >
+                {copy.mobileTitleLines.map((line) => (
+                  <span key={line} data-live-cam-title-line className="block">{line}</span>
+                ))}
+              </h2>
+              <h2
+                aria-label={copy.title}
+                className="mt-5 hidden max-w-3xl text-4xl font-black leading-[0.98] tracking-normal sm:block md:text-5xl lg:text-6xl lg:leading-[0.95]"
+              >
+                {copy.titleLines.map((line) => (
+                  <span key={line} data-live-cam-title-line className="block">{line}</span>
+                ))}
               </h2>
               <p className="mt-5 max-w-2xl text-base font-medium leading-7 text-epicWhite/75 md:text-lg md:leading-8">
                 {copy.subtext}
@@ -90,35 +108,16 @@ export default function LiveCam({ locale = "en" }) {
                 {copy.detail}
               </p>
 
-              <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                <a
-                  href={liveCam.fullStreamUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackOutbound("full_stream")}
-                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[16px] bg-epicRed px-5 py-2.5 text-center text-[12px] font-black uppercase leading-tight text-white shadow-lg transition hover:-translate-y-0.5 hover:brightness-105 active:scale-95 md:min-h-13 md:px-6 md:text-sm"
-                >
-                  {copy.fullStream}
-                  <ExternalLink size={17} />
-                </a>
-                <a
-                  href={liveCam.donateUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackOutbound("donate")}
-                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[16px] border border-epicWhite/15 bg-epicWhite/5 px-5 py-2.5 text-center text-[12px] font-black uppercase leading-tight text-epicWhite transition hover:border-epicMint hover:text-epicMint active:scale-95 md:min-h-13 md:px-6 md:text-sm"
-                >
-                  {copy.support}
-                  <Heart size={17} />
-                </a>
+              <div data-live-cam-primary-actions className="mt-7">
                 <a
                   href={links.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={handleWhatsAppClick}
-                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[16px] bg-epicMint px-5 py-2.5 text-center text-[12px] font-black uppercase leading-tight text-epicDark transition hover:-translate-y-0.5 hover:bg-white active:scale-95 sm:col-span-2 md:min-h-13 md:px-6 md:text-sm"
+                  className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-[16px] bg-epicRed px-5 py-2.5 text-center text-[12px] font-black uppercase leading-tight text-white shadow-lg transition hover:-translate-y-0.5 hover:brightness-105 active:scale-95 md:min-h-13 md:px-6 md:text-sm"
                 >
-                  {copy.askEpic}
+                  <span className="sm:hidden">{copy.mobileAskEpic}</span>
+                  <span className="hidden sm:inline">{copy.askEpic}</span>
                   <MessageCircle size={18} />
                 </a>
               </div>
@@ -145,17 +144,41 @@ export default function LiveCam({ locale = "en" }) {
                 />
               </div>
 
-              <div className="mt-3 flex items-center gap-3 px-1 pb-1 md:mt-4 md:gap-4 md:px-0 md:pb-0">
-                {/* The provider requires its remote logo; using img avoids changing Next image configuration. */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={liveCam.logoUrl}
-                  alt={liveCam.cameraName}
-                  className="h-10 w-10 shrink-0 rounded-xl bg-white object-contain p-1.5 md:h-12 md:w-12 md:rounded-2xl"
-                />
-                <div className="min-w-0">
-                  <p className="text-xs font-black text-epicWhite md:text-sm">{copy.poweredBy}</p>
-                  <p className="mt-0.5 text-[11px] leading-4 text-epicWhite/55 md:mt-1 md:text-xs md:leading-5">{copy.attribution}</p>
+              <div className="mt-3 px-1 pb-1 md:mt-4 md:px-0 md:pb-0">
+                <div className="flex items-center gap-3 md:gap-4">
+                  {/* The provider requires its remote logo; using img avoids changing Next image configuration. */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={liveCam.logoUrl}
+                    alt={liveCam.cameraName}
+                    className="h-10 w-10 shrink-0 rounded-xl bg-white object-contain p-1.5 md:h-12 md:w-12 md:rounded-2xl"
+                  />
+                  <div className="min-w-0">
+                    <p className="text-xs font-black text-epicWhite md:text-sm">{copy.poweredBy}</p>
+                    <p className="mt-0.5 text-[11px] leading-4 text-epicWhite/55 md:mt-1 md:text-xs md:leading-5">{copy.attribution}</p>
+                  </div>
+                </div>
+                <div data-live-cam-provider-links className="mt-3 flex flex-wrap gap-2">
+                  <a
+                    href={liveCam.fullStreamUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackOutbound("full_stream")}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-epicWhite/15 bg-epicWhite/5 px-3 py-1.5 text-[10px] font-black uppercase leading-none text-epicWhite transition hover:border-epicMint hover:text-epicMint"
+                  >
+                    {copy.fullStream}
+                    <ExternalLink size={13} />
+                  </a>
+                  <a
+                    href={liveCam.donateUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackOutbound("donate")}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-epicWhite/15 bg-epicWhite/5 px-3 py-1.5 text-[10px] font-black uppercase leading-none text-epicWhite transition hover:border-epicMint hover:text-epicMint"
+                  >
+                    {copy.support}
+                    <Heart size={13} />
+                  </a>
                 </div>
               </div>
             </div>

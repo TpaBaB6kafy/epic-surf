@@ -1,4 +1,6 @@
 const { test, expect } = require("@playwright/test");
+const { readFileSync } = require("node:fs");
+const path = require("node:path");
 
 const baseUrl = process.env.LIVE_CAM_BASE_URL || "http://localhost:3000";
 
@@ -6,21 +8,27 @@ const copy = {
   en: {
     title: "My Khe Beach Live Cam",
     mobileTitle: "My Khe Live Cam",
-    primary: "Check a short live preview from My Khe Beach before you book a lesson or rent a board.",
-    explanation: "The full stream is operated by Da Nang Surf Cam. Open it to see current conditions, then message Epic if you are not sure whether today is good for your level.",
-    fullStream: "Watch Full Stream",
-    support: "Support the Project",
+    titleLines: ["My Khe Beach", "Live Cam"],
+    primary: "Check My Khe before you book a lesson or rent a board.",
+    explanation: "The full stream is operated by Da Nang Surf Cam. Open it for the full beach view, or message Epic if you’re not sure today fits your level.",
+    fullStream: "Open full cam",
+    support: "Support the cam",
+    obsoletePrimary: "Watch Full Stream",
     askEpic: "Ask Epic about today’s conditions",
+    mobileAskEpic: "Ask Epic about conditions",
     message: "Hi! I checked the My Khe live cam. Are the conditions good for my level today?",
   },
   ru: {
-    title: "Лайв-камера пляжа Ми Кхе",
-    mobileTitle: "Лайв-камера пляжа Ми Кхе",
-    primary: "Посмотрите короткое превью с пляжа Ми Кхе перед уроком или арендой доски.",
-    explanation: "Полный стрим ведёт Da Nang Surf Cam. Откройте его, чтобы посмотреть текущие условия, а если не уверены, подходит ли день для вашего уровня, напишите Epic.",
-    fullStream: "Открыть полный стрим",
-    support: "Поддержать проект",
-    askEpic: "Спросить Epic про условия сегодня",
+    title: "Лайв-камера Ми Кхе",
+    mobileTitle: "Лайв-камера Ми Кхе",
+    titleLines: ["Лайв-камера", "Ми Кхе"],
+    primary: "Проверьте Ми Кхе перед уроком или арендой доски.",
+    explanation: "Полный стрим ведёт Da Nang Surf Cam. Откройте камеру для обзора пляжа или напишите Epic, если не уверены, подходят ли условия вашему уровню.",
+    fullStream: "Открыть камеру",
+    support: "Поддержать камеру",
+    obsoletePrimary: "Открыть полный стрим",
+    askEpic: "Спросить Epic про условия",
+    mobileAskEpic: "Спросить про условия",
     message: "Привет! Я посмотрел лайв-камеру Ми Кхе. Подходят ли сегодня условия для моего уровня?",
   },
 };
@@ -47,8 +55,24 @@ for (const scenario of cases) {
     const forecast = page.locator("#forecast");
     const expectedTitle = scenario.viewport.width < 640 ? text.mobileTitle : text.title;
     await expect(liveCam.getByRole("heading", { name: expectedTitle, exact: true })).toBeVisible();
+    const visibleHeading = liveCam.getByRole("heading", { name: expectedTitle, exact: true });
+    if (scenario.viewport.width >= 640 || scenario.language === "ru") {
+      const headingLines = visibleHeading.locator("[data-live-cam-title-line]");
+      await expect(headingLines).toHaveCount(2);
+      await expect(headingLines.nth(0)).toHaveText(text.titleLines[0]);
+      await expect(headingLines.nth(1)).toHaveText(text.titleLines[1]);
+    }
     await expect(liveCam.getByText(text.primary, { exact: true })).toBeVisible();
     await expect(liveCam.getByText(text.explanation, { exact: true })).toBeVisible();
+
+    const primaryActions = liveCam.locator("[data-live-cam-primary-actions]");
+    const expectedCta = scenario.viewport.width < 640 ? text.mobileAskEpic : text.askEpic;
+    const primaryCta = primaryActions.getByRole("link", { name: new RegExp(expectedCta, "i") });
+    await expect(primaryActions.getByRole("link")).toHaveCount(1);
+    await expect(primaryCta).toBeVisible();
+    await expect(primaryCta).toHaveClass(/bg-epicRed/);
+    await expect(primaryCta).toHaveClass(/text-white/);
+    await expect(liveCam.getByRole("link", { name: new RegExp(text.obsoletePrimary, "i") })).toHaveCount(0);
 
     const positions = await Promise.all([
       rentals.evaluate((node) => node.getBoundingClientRect().top + window.scrollY),
@@ -59,7 +83,7 @@ for (const scenario of cases) {
     expect(positions[1]).toBeLessThan(positions[2]);
 
     const iframe = liveCam.locator("iframe");
-    await expect(iframe).toHaveAttribute("src", /embed\/preview\?partner=epicsurf&duration=10&theme=dark/);
+    await expect(iframe).toHaveAttribute("src", /embed\/preview\?partner=epicsurf&duration=10&theme=dark&cta=Open%20Cam/);
     await expect(iframe).toHaveAttribute("loading", "lazy");
     await expect(iframe).toHaveAttribute("width", "100%");
     await expect(iframe).toHaveAttribute("height", "100%");
@@ -97,14 +121,17 @@ for (const scenario of cases) {
     expect(iframeStyle.width).toBeCloseTo(iframeBox.width, 0);
     expect(iframeStyle.height).toBeCloseTo(iframeBox.height, 0);
 
+    const providerLinks = liveCam.locator("[data-live-cam-provider-links]");
+    await expect(providerLinks).toBeVisible();
+    await expect(providerLinks.getByRole("link")).toHaveCount(2);
     for (const name of [text.fullStream, text.support]) {
-      const link = liveCam.getByRole("link", { name: new RegExp(name, "i") });
+      const link = providerLinks.getByRole("link", { name: new RegExp(name, "i") });
       await expect(link).toHaveAttribute("target", "_blank");
       await expect(link).toHaveAttribute("rel", "noopener noreferrer");
       await expect(link).toHaveAttribute("href", /utm_source=surfdanang&utm_medium=referral&utm_campaign=live_cam_block/);
     }
 
-    const askEpic = liveCam.getByRole("link", { name: new RegExp(text.askEpic, "i") });
+    const askEpic = primaryCta;
     await askEpic.evaluate((node) => {
       node.addEventListener("click", (event) => event.preventDefault(), { once: true });
       node.click();
@@ -117,3 +144,12 @@ for (const scenario of cases) {
     expect(overflow).toBeLessThanOrEqual(1);
   });
 }
+
+test("keeps LiveCam analytics handlers", () => {
+  const source = readFileSync(path.join(process.cwd(), "app/components/LiveCam.jsx"), "utf8");
+  expect(source).toContain('trackEvent("live_cam_cta_click"');
+  expect(source).toContain('trackEvent("whatsapp_click"');
+  expect(source).toContain('trackEvent("live_cam_outbound_click"');
+  expect(source).toContain('trackOutbound("full_stream")');
+  expect(source).toContain('trackOutbound("donate")');
+});
