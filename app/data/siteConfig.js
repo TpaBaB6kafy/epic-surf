@@ -26,17 +26,25 @@ export const siteConfig = {
     links.telegram,
     links.telegramChannel,
   ],
-  ogImage: "/gallery/events/danang-open-2025/danang-open-2025-3.webp",
+  ogImage: "/social/epic-surf-school-da-nang-og.jpg",
 };
 
-const defaultOgImageAlt = "Da Nang Surfing Open 2025 by Epic Surf School";
+const defaultOgImageAlt = "Epic Surf School Da Nang instructors and students at My Khe Beach";
+const defaultOgImage = {
+  width: 1200,
+  height: 630,
+  type: "image/jpeg",
+  alt: defaultOgImageAlt,
+};
 
 export function openGraphImages(alt = defaultOgImageAlt) {
   return [
     {
       url: siteConfig.ogImage,
-      width: 1200,
-      height: 630,
+      secureUrl: absoluteUrl(siteConfig.ogImage),
+      width: defaultOgImage.width,
+      height: defaultOgImage.height,
+      type: defaultOgImage.type,
       alt,
     },
   ];
@@ -47,7 +55,12 @@ export function twitterMetadata(title, description) {
     card: "summary_large_image",
     title,
     description,
-    images: [siteConfig.ogImage],
+    images: [
+      {
+        url: siteConfig.ogImage,
+        alt: defaultOgImage.alt,
+      },
+    ],
   };
 }
 
@@ -175,6 +188,15 @@ export function buildMetadata(locale = siteConfig.defaultLocale) {
       images: openGraphImages(),
     },
     twitter: twitterMetadata(seo.title, seo.description),
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+      },
+    },
     icons: {
       icon: [
         { url: "/favicon.ico", sizes: "any" },
@@ -211,8 +233,8 @@ export function buildWebPageStructuredData({
     primaryImageOfPage: {
       "@type": "ImageObject",
       url: imageUrl,
-      width: 1200,
-      height: 630,
+      width: defaultOgImage.width,
+      height: defaultOgImage.height,
     },
     image: imageUrl,
   };
@@ -284,7 +306,10 @@ export function buildStructuredData(locale = siteConfig.defaultLocale) {
         primaryImageOfPage: {
           "@type": "ImageObject",
           url: absoluteUrl(siteConfig.ogImage),
+          width: defaultOgImage.width,
+          height: defaultOgImage.height,
         },
+        image: absoluteUrl(siteConfig.ogImage),
       },
       {
         "@type": "Service",
