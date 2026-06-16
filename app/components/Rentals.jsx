@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import RentalBoardMiniShowroom from "./RentalBoardMiniShowroom";
-import { rentalBoards } from "../data/rentalBoards";
 import { trackEvent } from "../utils/tracking";
 
 const rentalPromoCopy = {
@@ -36,28 +35,25 @@ export default function Rentals({ t, lang, setRentalModalOpen }) {
     <section id="rentals" className="mt-20 scroll-mt-24 overflow-hidden bg-epicDark py-14 text-epicWhite md:py-20 lg:py-24">
       <div className="mx-auto grid w-[min(100%-32px,360px)] gap-9 md:w-[min(100%-48px,760px)] lg:w-[min(100%-64px,1160px)] lg:grid-cols-[minmax(380px,500px)_minmax(0,1fr)] lg:items-center lg:gap-16">
         <div className="order-2 mx-auto h-[340px] w-full max-w-[360px] md:h-[420px] md:max-w-[500px] lg:order-1 lg:h-[460px]">
-          <RentalBoardMiniShowroom boards={rentalBoards} lang={lang} />
+          <RentalBoardMiniShowroom />
         </div>
 
-        <div className="order-1 text-center lg:order-2 lg:text-left">
-          <div className="mx-auto mb-5 inline-flex h-10 items-center justify-center rounded-xl bg-epicMint px-4 text-[12px] font-black uppercase leading-none tracking-wide text-epicDark lg:mx-0">
-            {copy.badge}
-          </div>
+        <div className="order-1 mx-auto max-w-[640px] text-center lg:order-2 lg:mx-0 lg:text-left">
           <h2 className="mx-auto max-w-2xl text-[48px] font-black uppercase leading-[0.95] tracking-normal text-epicWhite md:text-[66px] lg:mx-0 lg:text-[82px] lg:leading-[0.9]">
             {t.rentalTitle}
             <span className="block text-epicRed">{t.rentalTitleSurf}</span>
           </h2>
 
-          <p className="mx-auto mt-6 max-w-xl text-[16px] font-medium leading-7 text-epicWhite/78 md:text-lg md:leading-8 lg:mx-0">
+          <p className="mx-auto mt-7 max-w-[560px] text-[16px] font-medium leading-8 text-epicWhite/82 md:mt-8 md:text-lg md:leading-9 lg:mx-0">
             {copy.description}
           </p>
 
-          <div className="mt-7 border-y border-epicWhite/10 py-5 md:flex md:items-center md:justify-between md:gap-6">
-            <div>
+          <div className="mt-9 border-y border-epicWhite/10 py-6 md:mt-10 md:flex md:items-center md:justify-between md:gap-8">
+            <div className="space-y-2">
               <p className="text-[30px] font-normal leading-none text-epicWhite md:text-[34px]">{t.rentalPrice}</p>
-              <p className="mt-2 text-[15px] font-bold leading-none text-epicWhite/75">{t.rentalUnit}</p>
+              <p className="text-[15px] font-bold leading-tight text-epicWhite/75">{t.rentalUnit}</p>
             </div>
-            <div className="mt-5 grid gap-3 sm:grid-cols-2 md:mt-0 md:flex md:shrink-0">
+            <div className="mt-6 grid gap-3 sm:grid-cols-2 md:mt-0 md:flex md:shrink-0">
               <button
                 type="button"
                 onClick={handleGenericRentalClick}

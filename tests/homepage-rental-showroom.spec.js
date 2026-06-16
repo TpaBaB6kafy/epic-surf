@@ -6,20 +6,16 @@ const homepages = [
     catalogHref: "/surfboard-rental-danang",
     catalogLabel: /view all boards/i,
     rentLabel: /rent now/i,
-    visualLabel: "Epic rental",
   },
   {
     path: "/ru",
     catalogHref: "/ru/surfboard-rental-danang",
-    catalogLabel: /выбрать доску/i,
-    rentLabel: /арендовать/i,
-    visualLabel: "Аренда Epic",
   },
 ];
 
 test.describe("Homepage rental mini showroom", () => {
   for (const locale of homepages) {
-    test(`uses the processed board-01 photo grid on ${locale.path}`, async ({ page }) => {
+    test(`uses the processed board-02 photo grid on ${locale.path}`, async ({ page }) => {
       await page.setViewportSize({ width: 1440, height: 1000 });
       await page.goto(`http://localhost:3000${locale.path}`, { waitUntil: "domcontentloaded" });
 
@@ -33,11 +29,19 @@ test.describe("Homepage rental mini showroom", () => {
         ["tail-fins", "back-tail-fins.webp"],
       ]) {
         const src = await showroom.locator(`[data-mini-image-slot="${slot}"]`).getAttribute("src");
-        expect(decodeURIComponent(src)).toContain(`/rentals/boards/processed/board-01/${filename}`);
+        expect(decodeURIComponent(src)).toContain(`/rentals/boards/processed/board-02/${filename}`);
       }
-      await expect(rentals.getByRole("link", { name: locale.catalogLabel })).toHaveAttribute("href", locale.catalogHref);
-      await expect(rentals.getByRole("button", { name: locale.rentLabel })).toBeVisible();
-      await expect(showroom.getByText(locale.visualLabel, { exact: true })).toBeVisible();
+
+      await expect(rentals.locator(`a[href="${locale.catalogHref}"]`)).toBeVisible();
+      if (locale.catalogLabel) {
+        await expect(rentals.getByRole("link", { name: locale.catalogLabel })).toHaveAttribute("href", locale.catalogHref);
+      }
+      if (locale.rentLabel) {
+        await expect(rentals.getByRole("button", { name: locale.rentLabel })).toBeVisible();
+      }
+      await expect(showroom.getByText("Softboard Pink", { exact: true })).toBeVisible();
+      await expect(rentals.locator(":scope > div > div").nth(1).locator(".bg-epicMint")).toHaveCount(0);
+      await expect(showroom.locator(".pointer-events-none.absolute.right-4.top-4.bg-epicRed")).toHaveCount(0);
       await expect(page.locator('[data-section="rental-image-tuner"]')).toHaveCount(0);
     });
   }

@@ -76,12 +76,28 @@ export default function LiveCam({ locale = "en" }) {
     <section id="live-cam" className="overflow-hidden border-t border-epicDark/10 bg-epicWhite px-4 py-16 md:px-6 md:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="relative overflow-hidden rounded-[32px] bg-epicDark px-5 py-8 text-epicWhite shadow-2xl md:rounded-[40px] md:px-10 md:py-12 lg:px-14 lg:py-14">
-          <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full border-[24px] border-epicRed/10 md:-right-16 md:-top-20 md:h-56 md:w-56 md:border-[34px] md:border-epicRed/15" />
-          <div className="pointer-events-none absolute -bottom-28 left-1/3 h-52 w-52 rounded-full border-[30px] border-epicMint/10 md:h-60 md:w-60 md:border-[36px]" />
+          <svg
+            data-live-cam-wave-decoration
+            aria-hidden="true"
+            viewBox="0 0 420 120"
+            className="pointer-events-none absolute -right-32 top-8 h-32 w-[520px] opacity-50 md:-right-24 md:top-8 md:h-36"
+          >
+            <path d="M8 70 C78 18 142 18 212 70 S346 122 416 70 S548 18 618 70" fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="3" />
+            <path d="M-36 100 C42 48 112 48 190 100 S340 152 418 100 S568 48 646 100" fill="none" stroke="rgba(46,213,166,0.28)" strokeWidth="3" />
+          </svg>
+          <svg
+            data-live-cam-wave-decoration
+            aria-hidden="true"
+            viewBox="0 0 520 140"
+            className="pointer-events-none absolute -bottom-12 -left-28 h-36 w-[620px] opacity-55 md:-bottom-14 md:-left-20 md:h-40"
+          >
+            <path d="M4 60 C88 6 164 6 248 60 S408 114 492 60 S652 6 736 60" fill="none" stroke="rgba(255,91,75,0.24)" strokeWidth="3" />
+            <path d="M-56 98 C34 44 116 44 206 98 S378 152 468 98 S640 44 730 98" fill="none" stroke="rgba(46,213,166,0.24)" strokeWidth="3" />
+          </svg>
 
           <div className="relative grid items-center gap-9 md:gap-11 lg:grid-cols-[minmax(0,0.95fr)_minmax(480px,1.05fr)] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_650px]">
-            <div className="min-w-0">
-              <div className="inline-flex items-center gap-2 rounded-full bg-epicMint px-4 py-2 text-[11px] font-black uppercase tracking-wide text-epicDark">
+            <div data-live-cam-copy className="flex min-w-0 flex-col items-center text-center lg:items-start lg:text-left">
+              <div data-live-cam-source-badge className="inline-flex items-center gap-2 self-center rounded-full bg-epicMint px-4 py-2 text-[11px] font-black uppercase tracking-wide text-epicDark lg:self-start">
                 <Radio size={15} className="text-epicRed" />
                 {copy.eyebrow}
               </div>
@@ -108,7 +124,7 @@ export default function LiveCam({ locale = "en" }) {
                 {copy.detail}
               </p>
 
-              <div data-live-cam-primary-actions className="mt-7">
+              <div data-live-cam-primary-actions className="mt-7 w-full max-w-[360px] sm:max-w-none">
                 <a
                   href={links.whatsapp}
                   target="_blank"
@@ -144,8 +160,8 @@ export default function LiveCam({ locale = "en" }) {
                 />
               </div>
 
-              <div className="mt-3 px-1 pb-1 md:mt-4 md:px-0 md:pb-0">
-                <div className="flex items-center gap-3 md:gap-4">
+              <div data-live-cam-attribution-footer className="mt-4 flex flex-col items-center gap-4 px-1 pb-1 text-center md:mt-5 md:px-0 md:pb-0 lg:flex-row lg:justify-between lg:gap-6 lg:text-left">
+                <div data-live-cam-provider-identity className="flex min-w-0 flex-1 flex-col items-center gap-3 md:gap-4 lg:flex-row lg:items-center">
                   {/* The provider requires its remote logo; using img avoids changing Next image configuration. */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -155,26 +171,28 @@ export default function LiveCam({ locale = "en" }) {
                   />
                   <div className="min-w-0">
                     <p className="text-xs font-black text-epicWhite md:text-sm">{copy.poweredBy}</p>
-                    <p className="mt-0.5 text-[11px] leading-4 text-epicWhite/55 md:mt-1 md:text-xs md:leading-5">{copy.attribution}</p>
+                    <p className="mx-auto mt-1 max-w-[420px] text-[11px] leading-5 text-epicWhite/60 md:text-xs md:leading-5 lg:mx-0 lg:max-w-[390px] xl:max-w-[430px]">{copy.attribution}</p>
                   </div>
                 </div>
-                <div data-live-cam-provider-links className="mt-3 flex flex-wrap gap-2">
+                <div data-live-cam-provider-links className="flex w-full flex-col justify-center gap-2.5 sm:max-w-[360px] lg:w-[180px] lg:shrink-0 lg:gap-2 lg:justify-center">
                   <a
+                    data-live-cam-provider-action="primary"
                     href={liveCam.fullStreamUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => trackOutbound("full_stream")}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-epicWhite/15 bg-epicWhite/5 px-3 py-1.5 text-[10px] font-black uppercase leading-none text-epicWhite transition hover:border-epicMint hover:text-epicMint"
+                    className="inline-flex min-h-[42px] w-full items-center justify-center gap-1.5 rounded-[14px] border border-epicMint/45 bg-epicMint/10 px-4 py-2 text-center text-[10px] font-black uppercase leading-tight text-epicMint transition hover:border-epicMint hover:bg-epicMint/15 active:scale-95 lg:px-5 lg:text-[11px]"
                   >
                     {copy.fullStream}
                     <ExternalLink size={13} />
                   </a>
                   <a
+                    data-live-cam-provider-action="secondary"
                     href={liveCam.donateUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => trackOutbound("donate")}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-epicWhite/15 bg-epicWhite/5 px-3 py-1.5 text-[10px] font-black uppercase leading-none text-epicWhite transition hover:border-epicMint hover:text-epicMint"
+                    className="inline-flex min-h-[42px] w-full items-center justify-center gap-1.5 rounded-[14px] border border-epicWhite/15 bg-epicWhite/[0.04] px-4 py-2 text-center text-[10px] font-black uppercase leading-tight text-epicWhite/88 transition hover:border-epicWhite/35 hover:text-epicWhite active:scale-95 lg:px-5 lg:text-[11px]"
                   >
                     {copy.support}
                     <Heart size={13} />

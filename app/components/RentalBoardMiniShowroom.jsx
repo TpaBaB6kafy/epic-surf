@@ -3,17 +3,16 @@
 import Image from "next/image";
 
 const showroomImages = [
-  { slot: "main", src: "/rentals/boards/processed/board-01/main.webp", alt: "Epic rental surfboard" },
-  { slot: "nose", src: "/rentals/boards/processed/board-01/back-nose.webp", alt: "Surfboard nose detail" },
-  { slot: "middle", src: "/rentals/boards/processed/board-01/back-middle.webp", alt: "Surfboard middle detail" },
-  { slot: "tail-fins", src: "/rentals/boards/processed/board-01/back-tail-fins.webp", alt: "Surfboard tail and fins detail" },
+  { slot: "main", src: "/rentals/boards/processed/board-02/main.webp", alt: "Softboard Pink rental surfboard" },
+  { slot: "nose", src: "/rentals/boards/processed/board-02/back-nose.webp", alt: "Softboard Pink nose detail" },
+  { slot: "middle", src: "/rentals/boards/processed/board-02/back-middle.webp", alt: "Softboard Pink middle detail" },
+  { slot: "tail-fins", src: "/rentals/boards/processed/board-02/back-tail-fins.webp", alt: "Softboard Pink tail and fins detail" },
 ];
 
-export default function RentalBoardMiniShowroom({ lang = "en" }) {
+const visualCopy = { eyebrow: "Softboard Pink", title: "7'0 - 9'0 softboard" };
+
+export default function RentalBoardMiniShowroom() {
   const [mainImage, ...detailImages] = showroomImages;
-  const visualCopy = lang === "ru"
-    ? { eyebrow: "Аренда Epic", title: "Для волн Май Кхе" }
-    : { eyebrow: "Epic rental", title: "Ready for My Khe" };
 
   return (
     <div
@@ -49,25 +48,23 @@ export default function RentalBoardMiniShowroom({ lang = "en" }) {
               : "";
 
           return (
-          <div
-            key={image.slot}
-            data-mini-cell={image.slot}
-            className={`relative min-h-0 overflow-hidden bg-epicDark ${outerRadius}`}
-          >
-            <Image
-              data-mini-image-slot={image.slot}
-              src={image.src}
-              alt={image.alt}
-              fill
-              sizes="(min-width: 1024px) 190px, (min-width: 768px) 180px, 36vw"
-              className="object-cover"
-            />
-          </div>
+            <div
+              key={image.slot}
+              data-mini-cell={image.slot}
+              className={`relative min-h-0 overflow-hidden bg-epicDark ${outerRadius}`}
+            >
+              <Image
+                data-mini-image-slot={image.slot}
+                src={image.src}
+                alt={image.alt}
+                fill
+                sizes="(min-width: 1024px) 190px, (min-width: 768px) 180px, 36vw"
+                className="object-cover"
+              />
+            </div>
           );
         })}
       </div>
-
-      <span className="pointer-events-none absolute right-4 top-4 h-2.5 w-2.5 rounded-full bg-epicRed shadow-[0_0_0_5px_rgba(255,255,255,0.08)]" />
     </div>
   );
 }
