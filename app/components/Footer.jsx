@@ -6,7 +6,8 @@ import { Handshake, MapPin, Send } from "lucide-react";
 import { seoPageLinks } from "../data/seoPages";
 import { trackEvent } from "../utils/tracking";
 
-export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookIcon }) {
+export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookIcon, variant = "default" }) {
+  const isRentalVariant = variant === "rental";
   const partnersHref = lang === "ru" ? "/ru/partners" : "/partners";
   const partnersLabel = lang === "ru" ? "Партнёрам" : "For Partners";
   const footerSocialLinks = [
@@ -21,6 +22,8 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
       className: "inline-flex h-12 items-center gap-2 rounded-full bg-white/5 px-5 text-[11px] font-bold tracking-wide leading-snug text-white hover:bg-epicRed transition-all",
     },
   ];
+  const defaultSocialLinkClass = "p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all";
+  const rentalSocialLinkClass = "inline-flex h-11 items-center justify-center gap-2 rounded-md border border-epicWhite/15 bg-epicDark px-4 text-[11px] font-black uppercase tracking-wide leading-snug text-epicWhite/75 transition-colors hover:border-epicMint hover:text-epicMint";
 
   return (
     <footer id="location" className="bg-epicDark text-white pt-24 pb-12 px-6 border-t border-white/5">
@@ -45,7 +48,7 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
                   onClick={() => trackEvent("social_click", { platform: item.platform, location: "footer", language: lang })}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={item.className || "p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all"}
+                  className={isRentalVariant ? rentalSocialLinkClass : item.className || defaultSocialLinkClass}
                   aria-label={`Epic Surf School ${item.label}`}
                   title={`Epic Surf School ${item.label}`}
                 >
@@ -70,8 +73,20 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
               </div>
             </div>
           </div>
-          <div className="relative h-[300px] overflow-hidden rounded-[44px] border border-white/10 shadow-2xl md:h-[380px] lg:col-span-7 lg:h-[440px] lg:rounded-[56px]">
-            <div className="absolute inset-x-4 bottom-4 z-20 flex items-center justify-center rounded-[24px] border border-white/10 bg-epicDark/70 px-4 py-3 text-center text-white shadow-xl backdrop-blur-md md:inset-auto md:left-7 md:bottom-7 md:w-[300px] md:px-5 md:py-4">
+          <div className={`relative h-[300px] overflow-hidden md:h-[380px] lg:col-span-7 lg:h-[440px] ${isRentalVariant ? "border-0 shadow-none" : "rounded-[44px] border border-white/10 shadow-2xl lg:rounded-[56px]"}`}>
+            {isRentalVariant && (
+              <Image
+                src="/rentals/page/rental-footer-map-frame.svg"
+                alt=""
+                aria-hidden="true"
+                fill
+                unoptimized
+                sizes="(min-width: 1024px) 700px, 100vw"
+                className="pointer-events-none absolute inset-0 z-30 select-none object-fill opacity-95"
+              />
+            )}
+            {!isRentalVariant && (
+            <div className="absolute inset-x-4 bottom-4 z-40 flex items-center justify-center rounded-[24px] border border-white/10 bg-epicDark/70 px-4 py-3 text-center text-white shadow-xl backdrop-blur-md md:inset-auto md:left-7 md:bottom-7 md:w-[300px] md:px-5 md:py-4">
               <div>
                 <MapPin size={20} className="mx-auto mb-2 text-epicRed md:mx-0" />
                 <p className="text-base font-black leading-tight text-white">{t.locationAddress}</p>
@@ -88,6 +103,21 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
                 </a>
               </div>
             </div>
+            )}
+            {isRentalVariant && (
+              <a
+                href={links.googleMaps}
+                onClick={() => trackEvent("map_activate", { language: lang, cta_location: "footer", cta_label: "google_maps" })}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-5 right-5 z-40 inline-flex h-10 items-center justify-center rounded-md border border-epicWhite/25 bg-epicDark/85 px-4 text-[10px] font-black uppercase tracking-wide text-epicWhite transition-colors hover:border-epicMint hover:text-epicMint"
+                aria-label="Epic Surf School Google Maps"
+                title="Epic Surf School Google Maps"
+                data-role="footer-map-link"
+              >
+                Open Google Maps
+              </a>
+            )}
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1024.2523782017452!2d108.25027605520296!3d16.046658364986484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217f20b1fa357%3A0xa323fdd182ae974!2sEPIC%20Surf%20School%20Da%20Nang!5e1!3m2!1sru!2s!4v1777015710238!5m2!1sru!2s"
               title="Epic Surf School Da Nang location map"
@@ -98,7 +128,7 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
             ></iframe>
           </div>
         </div>
-        {lang === "en" && (
+        {lang === "en" && !isRentalVariant && (
           <div className="mb-12 border-t border-white/5 pt-8 text-center md:text-left">
             <p className="mb-4 text-[11px] font-black uppercase tracking-wide text-white/35">Surf Info</p>
             <div className="flex flex-wrap justify-center gap-x-5 gap-y-3 md:justify-start">
