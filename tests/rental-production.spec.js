@@ -212,7 +212,8 @@ test.describe("Rental production page", () => {
     await expect(specs.getByText("Conditions", { exact: true })).toHaveCount(0);
     await expect(specs.getByText("Includes", { exact: true })).toHaveCount(0);
     await expect(specs.locator('[data-role="rental-spec-row"]')).toHaveCount(3);
-    await expect.poll(() => specs.locator('[data-role="rental-spec-row"]').first().evaluate((element) => getComputedStyle(element).borderTopWidth)).toBe("2px");
+    await expect.poll(() => specs.locator('[data-role="rental-spec-row"]').first().evaluate((element) => getComputedStyle(element).borderTopWidth)).toBe("0px");
+    await expect.poll(() => specs.locator('[data-role="rental-spec-row"]').first().evaluate((element) => getComputedStyle(element).borderBottomWidth)).toBe("2px");
 
     const strip = showroom.locator('[data-section="rental-board-strip"]');
     await expect(strip.getByText("Softboard Orange", { exact: true })).toHaveCount(0);

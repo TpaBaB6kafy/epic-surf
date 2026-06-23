@@ -624,7 +624,7 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
   return (
     <div className="min-h-screen overflow-x-clip bg-epicDark font-sans text-epicWhite">
       <main>
-        <section data-section="rental-design-hero" className="relative min-h-[54vh] overflow-hidden bg-epicDark md:min-h-[68vh] lg:min-h-[76vh]">
+        <section data-section="rental-design-hero" className="relative min-h-[54vh] overflow-hidden bg-epicDark shadow-2xl shadow-epicDark md:min-h-[68vh] lg:min-h-[76vh]">
           <h1 className="sr-only">{content.heroTitle}</h1>
           <Image
             src={rentalPageAssets.hero}
@@ -640,8 +640,9 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-b from-transparent to-epicDark md:h-52" />
         </section>
 
-        <section data-section="rental-board-showroom" className="relative bg-epicDark px-5 pb-10 text-epicWhite sm:px-8 lg:px-10">
-          <div className="mx-auto max-w-7xl">
+        <section data-section="rental-board-showroom" className="relative bg-epicDark px-5 pb-10 text-epicWhite shadow-inner shadow-epicDark sm:px-8 lg:px-10">
+          <div className="relative mx-auto max-w-7xl">
+            <div aria-hidden="true" className="pointer-events-none absolute -inset-x-4 top-8 hidden h-[720px] bg-epicGray/10 shadow-2xl shadow-epicDark/70 lg:block" />
             <div className="grid gap-2 lg:grid-cols-[0.9fr_0.68fr_1.22fr]">
               <div ref={showroomImageRef} className="lg:col-span-2">
                 <div
@@ -651,7 +652,7 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                     type="button"
                     onClick={() => setLightboxAsset(activeMobileAsset)}
                     aria-label={`Open ${activeBoard.displayName || activeBoard.name} ${activeMobileAsset} view`}
-                    className="group absolute inset-0 cursor-zoom-in"
+                    className="group absolute inset-0 cursor-zoom-in shadow-xl shadow-epicDark/60"
                   >
                     <Image
                       src={activeBoard.processedImages[activeMobileAsset]}
@@ -678,7 +679,7 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                       onClick={() => setActiveMobileAsset(key)}
                       aria-label={`Show ${activeBoard.displayName || activeBoard.name} ${key} image`}
                       aria-pressed={activeMobileAsset === key}
-                      className={`relative h-32 overflow-hidden rounded-xl border-2 bg-epicDark transition-colors sm:h-36 ${activeMobileAsset === key ? "border-epicRed" : "border-epicWhite/15"}`}
+                      className={`relative h-32 overflow-hidden rounded-xl border-2 bg-epicDark shadow-lg shadow-epicDark/45 transition-colors sm:h-36 ${activeMobileAsset === key ? "border-epicRed" : "border-epicWhite/15"}`}
                     >
                       <Image
                         src={activeBoard.processedImages[key]}
@@ -707,7 +708,7 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                       <div
                         key={asset}
                         data-gallery-frame={frame}
-                        className={`absolute overflow-hidden bg-epicDark ${slot.boxClass}`}
+                        className={`absolute overflow-hidden bg-epicDark shadow-2xl shadow-epicDark/70 transition-transform duration-300 ease-out [@media(hover:hover)]:hover:-translate-y-1 ${slot.boxClass}`}
                         style={{ clipPath: slot.clipPath }}
                       >
                         <DecorativeFrame
@@ -738,7 +739,9 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                 </div>
               </div>
 
-              <article className="flex min-h-[520px] flex-col items-center bg-epicDark px-7 py-9 text-center md:px-12 md:py-12 lg:justify-center lg:rounded-r-[28px] lg:py-14">
+              <article className="relative flex min-h-[520px] flex-col items-center rounded-none border border-epicGray/15 bg-epicGray/10 px-7 py-9 text-center shadow-2xl shadow-epicDark/70 md:px-12 md:py-12 lg:justify-center lg:py-14">
+                <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-epicDark/25" />
+                <div className="relative z-10 flex flex-col items-center">
                 <h2 className="max-w-[460px] font-heading text-4xl uppercase leading-[0.9] tracking-normal text-epicWhite md:text-6xl lg:text-[58px]">
                   {activeBoard.displayName || activeBoard.name}
                 </h2>
@@ -752,8 +755,8 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                 <p className="mt-7 max-w-[350px] text-[13px] font-bold leading-5 text-epicWhite/82 md:text-sm">{activeBoard.description}</p>
                 <dl data-section="rental-board-specs" className="mt-8 w-full max-w-[360px]">
                   {boardSpecs(activeBoard, lang, ui).map(([label, value]) => (
-                    <div key={label} data-role="rental-spec-row" className="grid grid-cols-[96px_1fr] gap-4 border-t-2 border-epicRed py-3 text-sm leading-5 last:border-b-2">
-                      <dt className="text-left font-bold text-epicWhite/78">{label}</dt>
+                    <div key={label} data-role="rental-spec-row" className="grid grid-cols-[104px_1fr] gap-4 border-b-2 border-epicRed py-3.5 text-base leading-5 md:text-lg">
+                      <dt className="text-left font-black text-epicWhite/82">{label}</dt>
                       <dd className="text-right font-black text-epicWhite">{value}</dd>
                     </div>
                   ))}
@@ -762,7 +765,7 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                   <button
                     type="button"
                     onClick={() => openRentalModal("rental_page_showroom")}
-                    className="inline-flex h-12 w-full items-center justify-center bg-epicRed px-8 text-center text-sm font-black uppercase leading-tight tracking-wide text-epicDark shadow-xl shadow-epicRed/20 transition-all hover:brightness-105 active:scale-95"
+                    className="inline-flex h-12 w-full items-center justify-center rounded-none bg-epicRed px-8 text-center text-sm font-black uppercase leading-tight tracking-wide text-epicDark shadow-none transition-all hover:brightness-95 active:scale-95"
                   >
                     {ui.rentCta}
                   </button>
@@ -774,11 +777,12 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                       "whatsapp_to_book",
                       () => buildWhatsAppUrl(links.whatsapp, rentalMessage(activeBoard, lang, content.contactMessage), { language: lang }),
                     )}
-                    className="!h-12 w-full gap-3 bg-epicWhite text-epicDark hover:bg-epicMint"
+                    className="!h-12 w-full gap-3 !rounded-none bg-epicWhite text-epicDark hover:bg-epicMint"
                   >
                     <ArrowRight size={19} />
                     WhatsApp
                   </ActionPill>
+                </div>
                 </div>
               </article>
             </div>
@@ -829,7 +833,7 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                         title={board.displayName || board.name}
                         aria-current={isActive ? "true" : undefined}
                         data-carousel-window="thumbnail"
-                        className="w-[88px] shrink-0 text-left text-epicWhite lg:w-[158px]"
+                        className="w-[88px] shrink-0 text-left text-epicWhite transition-transform duration-300 ease-out [@media(hover:hover)]:hover:-translate-y-0.5 lg:w-[158px]"
                       >
                         <span
                           data-carousel-frame={frame}
@@ -877,21 +881,21 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
           </div>
         </section>
 
-        <section className="bg-epicDark px-5 py-14 text-epicWhite sm:px-8 md:py-16 lg:px-10 lg:py-20">
+        <section className="relative bg-epicDark px-5 py-14 text-epicWhite shadow-inner shadow-epicDark sm:px-8 md:py-16 lg:px-10 lg:py-20">
           <div className="mx-auto max-w-7xl">
             <div data-section="rental-info-cards" className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {content.infoCards.map(({ icon: Icon, title, text }, index) => (
-                <article key={title} className="relative mx-auto aspect-[280/202] w-full max-w-[290px] overflow-visible px-7 pb-6 pt-12 text-center">
+                <article key={title} className="relative mx-auto aspect-[280/202] w-full max-w-[290px] overflow-visible px-7 pb-6 pt-12 text-center transition-transform duration-300 ease-out [@media(hover:hover)]:hover:-translate-y-1">
                   <DecorativeFrame
                     src={rentalPageAssets.infoFrames[index]}
                     imgClassName="object-fill opacity-0"
                   />
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 bg-epicWhite"
+                    className="pointer-events-none absolute inset-0 bg-epicWhite shadow-xl shadow-epicDark/35"
                     style={{ clipPath: infoCardClipPath }}
                   />
-                  <span data-role="info-icon-badge" className="absolute left-1/2 top-0 z-20 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-epicMint text-epicDark shadow-lg shadow-black/15">
+                  <span data-role="info-icon-badge" className="absolute left-1/2 top-0 z-20 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-epicMint text-epicDark shadow-xl shadow-epicDark/30">
                     <Icon className="h-5 w-5" strokeWidth={1.9} />
                   </span>
                   <div className="relative z-10">
@@ -902,7 +906,7 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
               ))}
             </div>
 
-            <section data-section="rental-faq" className="relative left-1/2 mt-16 w-screen -translate-x-1/2 bg-epicWhite px-5 py-12 text-epicDark shadow-xl shadow-black/10 md:mt-20 md:py-16">
+            <section data-section="rental-faq" className="relative left-1/2 mt-16 w-screen -translate-x-1/2 bg-epicWhite px-5 py-12 text-epicDark shadow-2xl shadow-epicDark/45 md:mt-20 md:py-16">
               <div className="mx-auto max-w-5xl">
                 <h2 className="font-heading text-3xl uppercase leading-none text-epicDark md:text-4xl">{ui.faqTitle}</h2>
                 <div className="mt-7 grid gap-x-16 md:grid-cols-2">
@@ -925,18 +929,19 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
               <h2 className="px-1 font-heading text-2xl uppercase leading-tight text-epicMint">{ui.relatedTitle}</h2>
               <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {content.relatedItems.map((item, index) => (
-                  <Link key={`${item.href}-${item.title}`} href={item.href} className="group relative aspect-[274/102] min-h-[104px] overflow-hidden px-5 py-5 transition-transform hover:-translate-y-0.5">
+                  <Link key={`${item.href}-${item.title}`} href={item.href} className="group relative aspect-[274/102] min-h-[104px] overflow-hidden px-5 py-5 shadow-lg shadow-epicDark/30 transition-transform duration-300 ease-out [@media(hover:hover)]:hover:-translate-y-0.5">
                     <DecorativeFrame
                       src={rentalPageAssets.surfInfoFrames[index]}
                       imgClassName="object-fill opacity-0"
                     />
                     <span
                       aria-hidden="true"
-                      className="pointer-events-none absolute inset-0 border border-epicWhite/45 transition-colors group-hover:border-epicMint"
+                      className="pointer-events-none absolute inset-0 border border-epicWhite/45 transition-colors duration-300 [@media(hover:hover)]:group-hover:border-epicMint"
                       style={{ clipPath: surfInfoCardClipPath }}
                     />
                     <span className="relative z-10 block">
                       <h3 className="text-sm font-black uppercase leading-tight text-epicWhite">{item.title}</h3>
+                      <span aria-hidden="true" className="mt-2 block h-px w-8 bg-epicMint/0 transition-colors duration-300 [@media(hover:hover)]:group-hover:bg-epicMint" />
                       <p className="mt-2 max-w-[220px] text-[11px] font-medium leading-4 text-epicWhite/62">{item.text}</p>
                     </span>
                   </Link>

@@ -23,7 +23,7 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
     },
   ];
   const defaultSocialLinkClass = "p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all";
-  const rentalSocialLinkClass = "inline-flex h-11 items-center justify-center gap-2 rounded-md border border-epicWhite/15 bg-epicDark px-4 text-[11px] font-black uppercase tracking-wide leading-snug text-epicWhite/75 transition-colors hover:border-epicMint hover:text-epicMint";
+  const rentalSocialLinkClass = "inline-flex h-11 items-center justify-center gap-2 rounded-md border border-epicWhite/15 bg-epicDark px-4 text-[11px] font-black uppercase tracking-wide leading-snug text-epicWhite/75 shadow-lg shadow-epicDark/35 transition-colors hover:border-epicMint hover:text-epicMint";
 
   return (
     <footer id="location" className="bg-epicDark text-white pt-24 pb-12 px-6 border-t border-white/5">
@@ -73,7 +73,7 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
               </div>
             </div>
           </div>
-          <div className={`relative h-[300px] overflow-hidden md:h-[380px] lg:col-span-7 lg:h-[440px] ${isRentalVariant ? "border-0 shadow-none" : "rounded-[44px] border border-white/10 shadow-2xl lg:rounded-[56px]"}`}>
+          <div className={`relative h-[300px] overflow-hidden md:h-[380px] lg:col-span-7 lg:h-[440px] ${isRentalVariant ? "border-0 shadow-2xl shadow-epicDark/70" : "rounded-[44px] border border-white/10 shadow-2xl lg:rounded-[56px]"}`}>
             {isRentalVariant && (
               <Image
                 src="/rentals/page/rental-footer-map-frame.svg"
@@ -110,7 +110,7 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
                 onClick={() => trackEvent("map_activate", { language: lang, cta_location: "footer", cta_label: "google_maps" })}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute bottom-5 right-5 z-40 inline-flex h-10 items-center justify-center rounded-md border border-epicWhite/25 bg-epicDark/85 px-4 text-[10px] font-black uppercase tracking-wide text-epicWhite transition-colors hover:border-epicMint hover:text-epicMint"
+                className="absolute bottom-5 right-5 z-40 inline-flex h-11 items-center justify-center rounded-md border border-epicWhite/25 bg-epicDark/85 px-5 text-[10px] font-black uppercase tracking-wide text-epicWhite shadow-lg shadow-epicDark/50 transition-colors hover:border-epicMint hover:text-epicMint"
                 aria-label="Epic Surf School Google Maps"
                 title="Epic Surf School Google Maps"
                 data-role="footer-map-link"
