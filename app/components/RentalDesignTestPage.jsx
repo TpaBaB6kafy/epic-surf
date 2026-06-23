@@ -142,7 +142,16 @@ const localeUi = {
 };
 
 const rentalPageAssets = {
-  hero: "/rentals/page/rental-hero-boards-bw.jpg",
+  hero: "/rentals/hero/rental-hero-color.jpg",
+  heroColorOverlays: [
+    "/rentals/hero/rental-hero-board-color-01.webp",
+    "/rentals/hero/rental-hero-board-color-02.webp",
+    "/rentals/hero/rental-hero-board-color-03.webp",
+    "/rentals/hero/rental-hero-board-color-04.webp",
+    "/rentals/hero/rental-hero-board-color-05.webp",
+    "/rentals/hero/rental-hero-board-color-06.webp",
+    "/rentals/hero/rental-hero-board-color-07.webp",
+  ],
   ctaBrush: "/rentals/page/rental-cta-mint-brush.svg",
   galleryFrames: {
     main: "/rentals/page/rental-gallery-frame-main.svg",
@@ -176,6 +185,16 @@ const rentalPageAssets = {
     "/rentals/page/rental-surf-info-frame-guide.svg",
   ],
 };
+
+const heroHotspots = [
+  { id: 1, left: "4%", top: "18%", width: "13%", height: "65%" },
+  { id: 2, left: "17%", top: "14%", width: "13%", height: "68%" },
+  { id: 3, left: "31%", top: "18%", width: "12%", height: "64%" },
+  { id: 4, left: "45%", top: "0%", width: "15%", height: "82%" },
+  { id: 5, left: "61%", top: "22%", width: "10%", height: "55%" },
+  { id: 6, left: "72%", top: "21%", width: "11%", height: "58%" },
+  { id: 7, left: "84%", top: "15%", width: "12%", height: "65%" },
+];
 
 function findSection(pageContent, title) {
   return pageContent?.sections?.find((section) => section.title === title);
@@ -421,6 +440,7 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
   )), [lang]);
   const initialBoard = boards.find((board) => board.recommended) || boards[0];
   const [activeBoardId, setActiveBoardId] = useState(initialBoard.id);
+  const [activeHeroBoard, setActiveHeroBoard] = useState(null);
   const [activeMobileAsset, setActiveMobileAsset] = useState("front");
   const [isRentalModalOpen, setRentalModalOpen] = useState(false);
   const [lightboxAsset, setLightboxAsset] = useState(null);
@@ -624,7 +644,13 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
   return (
     <div className="min-h-screen overflow-x-clip bg-epicDark font-sans text-epicWhite">
       <main>
-        <section data-section="rental-design-hero" className="relative min-h-[54vh] overflow-hidden bg-epicDark shadow-2xl shadow-epicDark md:min-h-[68vh] lg:min-h-[76vh]">
+        <section
+          data-section="rental-design-hero"
+          className="relative min-h-[54vh] overflow-hidden bg-epicDark shadow-2xl shadow-epicDark md:min-h-[68vh] lg:min-h-[76vh]"
+          onPointerLeave={(event) => {
+            if (event.pointerType === "mouse") setActiveHeroBoard(null);
+          }}
+        >
           <h1 className="sr-only">{content.heroTitle}</h1>
           <Image
             src={rentalPageAssets.hero}
@@ -633,11 +659,60 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
             priority
             unoptimized
             sizes="100vw"
-            data-role="rental-hero-image"
+            data-role="rental-hero-base"
             className="object-cover object-center grayscale"
           />
+          {rentalPageAssets.heroColorOverlays.map((src, index) => {
+            const boardId = index + 1;
+            const isActive = activeHeroBoard === boardId;
+            return (
+              <Image
+                key={src}
+                src={src}
+                alt=""
+                aria-hidden="true"
+                data-role="rental-hero-color-overlay"
+                data-hero-board-id={boardId}
+                draggable={false}
+                fill
+                unoptimized
+                sizes="100vw"
+                className={`pointer-events-none select-none object-cover object-center transition-opacity duration-300 motion-reduce:transition-none ${isActive ? "opacity-100" : "opacity-0"}`}
+              />
+            );
+          })}
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-epicDark/0 via-epicDark/10 to-epicDark" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-b from-transparent to-epicDark md:h-52" />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 z-10"
+            onPointerUp={(event) => {
+              if (event.pointerType === "mouse") return;
+              if (event.target === event.currentTarget) setActiveHeroBoard(null);
+            }}
+          >
+            {heroHotspots.map((hotspot) => (
+              <span
+                key={hotspot.id}
+                data-role="rental-hero-hotspot"
+                data-hero-board-id={hotspot.id}
+                className="absolute cursor-default bg-transparent"
+                style={{
+                  left: hotspot.left,
+                  top: hotspot.top,
+                  width: hotspot.width,
+                  height: hotspot.height,
+                }}
+                onPointerEnter={(event) => {
+                  if (event.pointerType === "mouse") setActiveHeroBoard(hotspot.id);
+                }}
+                onPointerUp={(event) => {
+                  if (event.pointerType === "mouse") return;
+                  setActiveHeroBoard((current) => (current === hotspot.id ? null : hotspot.id));
+                }}
+              />
+            ))}
+          </div>
         </section>
 
         <section data-section="rental-board-showroom" className="relative bg-epicDark px-5 pb-10 text-epicWhite shadow-inner shadow-epicDark sm:px-8 lg:px-10">

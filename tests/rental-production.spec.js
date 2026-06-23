@@ -50,14 +50,26 @@ test.describe("Rental production page", () => {
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://www.surfdanang.com/surfboard-rental-danang");
     await expect(page.locator('link[rel="alternate"][hreflang="ru"]')).toHaveAttribute("href", "https://www.surfdanang.com/ru/surfboard-rental-danang");
     const hero = page.locator('[data-section="rental-design-hero"]');
-    await expect(hero.locator('[data-role="rental-hero-image"][src*="/rentals/page/rental-hero-boards-bw.jpg"]')).toBeVisible();
-    await expect(hero.locator('[data-role="rental-hero-image"]')).toHaveClass(/grayscale/);
+    await expect(hero.locator('[data-role="rental-hero-base"][src*="/rentals/hero/rental-hero-color.jpg"]')).toBeVisible();
+    await expect(hero.locator('[data-role="rental-hero-base"]')).toHaveClass(/grayscale/);
+    await expect(hero.locator('[data-role="rental-hero-color-overlay"]')).toHaveCount(7);
+    await expect(hero.locator('[data-role="rental-hero-hotspot"]')).toHaveCount(7);
+    await expect(hero.locator('img[src*="/rentals/page/rental-hero-boards-bw.jpg"]')).toHaveCount(0);
     await expect(hero.locator("h1")).toHaveClass(/sr-only/);
     await expect(hero.locator('[data-hero-title-primary]')).toHaveCount(0);
     await expect(hero.locator('[data-hero-title-secondary]')).toHaveCount(0);
     await expect(hero.getByRole("button")).toHaveCount(0);
     await expect(hero.getByRole("link")).toHaveCount(0);
     await expect(hero.getByText(/Rent a surfboard/i)).toHaveCount(0);
+
+    const firstOverlay = hero.locator('[data-role="rental-hero-color-overlay"][data-hero-board-id="1"]');
+    const firstHotspot = hero.locator('[data-role="rental-hero-hotspot"][data-hero-board-id="1"]');
+    await expect.poll(() => firstOverlay.evaluate((element) => getComputedStyle(element).opacity)).toBe("0");
+    await firstHotspot.hover();
+    await expect.poll(() => firstOverlay.evaluate((element) => getComputedStyle(element).opacity)).toBe("1");
+    const heroBox = await hero.boundingBox();
+    await page.mouse.move(heroBox.x + 4, heroBox.y + heroBox.height + 24);
+    await expect.poll(() => firstOverlay.evaluate((element) => getComputedStyle(element).opacity)).toBe("0");
 
     for (const section of [
       "rental-design-hero",
@@ -154,7 +166,7 @@ test.describe("Rental production page", () => {
     await page.goto("http://localhost:3000/surfboard-rental-danang", { waitUntil: "domcontentloaded" });
 
     const hero = page.locator('[data-section="rental-design-hero"]');
-    const heroImage = hero.locator('[data-role="rental-hero-image"]');
+    const heroImage = hero.locator('[data-role="rental-hero-base"]');
     await expect(heroImage).toBeVisible();
     await expect(heroImage).toHaveClass(/grayscale/);
     expect((await hero.boundingBox()).height).toBeGreaterThanOrEqual(650);
@@ -178,6 +190,16 @@ test.describe("Rental production page", () => {
 
     await page.setViewportSize({ width: 390, height: 1200 });
     await expect(heroImage).toBeVisible();
+    const mobileOverlay = hero.locator('[data-role="rental-hero-color-overlay"][data-hero-board-id="2"]');
+    const mobileHotspot = hero.locator('[data-role="rental-hero-hotspot"][data-hero-board-id="2"]');
+    await mobileHotspot.evaluate((element) => {
+      element.dispatchEvent(new PointerEvent("pointerup", { bubbles: true, pointerType: "touch" }));
+    });
+    await expect.poll(() => mobileOverlay.evaluate((element) => getComputedStyle(element).opacity)).toBe("1");
+    await mobileHotspot.evaluate((element) => {
+      element.dispatchEvent(new PointerEvent("pointerup", { bubbles: true, pointerType: "touch" }));
+    });
+    await expect.poll(() => mobileOverlay.evaluate((element) => getComputedStyle(element).opacity)).toBe("0");
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow).toBeLessThanOrEqual(1);
 
@@ -227,14 +249,16 @@ test.describe("Rental production page", () => {
     await page.goto("http://localhost:3000/surfboard-rental-danang", { waitUntil: "domcontentloaded" });
 
     const hero = page.locator('[data-section="rental-design-hero"]');
-    await expect(hero.locator('img[src*="/rentals/page/rental-hero-boards-bw.jpg"]')).toBeVisible();
+    await expect(hero.locator('[data-role="rental-hero-base"][src*="/rentals/hero/rental-hero-color.jpg"]')).toBeVisible();
+    await expect(hero.locator('[data-role="rental-hero-color-overlay"][src*="/rentals/hero/rental-hero-board-color-01.webp"]')).toBeVisible();
+    await expect(hero.locator('img[src*="/rentals/page/rental-hero-boards-bw.jpg"]')).toHaveCount(0);
     await expect(hero.locator('img[src*="/rentals/hero/rental-hero-desktop.webp"]')).toHaveCount(0);
     await expect(hero.locator('img[src*="/rentals/hero/rental-hero-mobile.webp"]')).toHaveCount(0);
     await expect(hero.getByText("Quality boards", { exact: true })).toHaveCount(0);
     await expect(hero.getByText("Local knowledge", { exact: true })).toHaveCount(0);
 
     await page.setViewportSize({ width: 390, height: 844 });
-    await expect(hero.locator('img[src*="/rentals/page/rental-hero-boards-bw.jpg"]')).toBeVisible();
+    await expect(hero.locator('[data-role="rental-hero-base"][src*="/rentals/hero/rental-hero-color.jpg"]')).toBeVisible();
     await expect(hero.locator('img[src*="/rentals/hero/rental-hero-mobile.webp"]')).toHaveCount(0);
   });
 
@@ -386,7 +410,9 @@ test.describe("Rental production page", () => {
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://www.surfdanang.com/ru/surfboard-rental-danang");
     await expect(page.locator('link[rel="alternate"][hreflang="en"]')).toHaveAttribute("href", "https://www.surfdanang.com/surfboard-rental-danang");
     const hero = page.locator('[data-section="rental-design-hero"]');
-    await expect(hero.locator('[data-role="rental-hero-image"][src*="/rentals/page/rental-hero-boards-bw.jpg"]')).toBeVisible();
+    await expect(hero.locator('[data-role="rental-hero-base"][src*="/rentals/hero/rental-hero-color.jpg"]')).toBeVisible();
+    await expect(hero.locator('[data-role="rental-hero-color-overlay"]')).toHaveCount(7);
+    await expect(hero.locator('[data-role="rental-hero-hotspot"]')).toHaveCount(7);
     await expect(hero.locator("h1")).toHaveText("Аренда досок для серфинга в Дананге");
     await expect(hero.locator("h1")).toHaveClass(/sr-only/);
     await expect(hero.locator('[data-hero-title-primary]')).toHaveCount(0);
