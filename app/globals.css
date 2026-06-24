@@ -48,6 +48,30 @@ body {
 }
 
 @layer utilities {
+  @keyframes rentalMintWaveBreath {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    50% {
+      transform: translate3d(6px, -4px, 0) scale(1.015);
+    }
+  }
+
+  .rental-mint-wave-animated {
+    animation: rentalMintWaveBreath 5.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 12px rgba(170, 255, 199, 0.28));
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rental-mint-wave-animated {
+      animation: none;
+    }
+  }
+
   .font-heading {
     font-family: var(--font-heading);
     font-weight: 900;

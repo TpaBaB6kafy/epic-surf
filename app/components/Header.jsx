@@ -14,12 +14,19 @@ export default function Header({
   isMenuOpen,
   setIsMenuOpen,
   openBookingModal,
-  languageHref
+  languageHref,
+  sectionHrefBase
 }) {
   const pathname = usePathname();
   const homeHref = lang === "ru" ? "/ru" : "/";
   const isHomePage = pathname === homeHref;
-  const sectionHref = (fragment) => (isHomePage ? `#${fragment}` : `${homeHref === "/" ? "/" : homeHref}#${fragment}`);
+  const sectionHref = (fragment) => {
+    if (sectionHrefBase) {
+      return `${sectionHrefBase}#${fragment}`;
+    }
+
+    return isHomePage ? `#${fragment}` : `${homeHref === "/" ? "/" : homeHref}#${fragment}`;
+  };
   const baseLanguageHref = languageHref || (lang === "ru" ? "/" : "/ru");
   const languageLabel = lang === "ru" ? "EN" : "RU";
   const partnersHref = lang === "ru" ? "/ru/partners" : "/partners";
