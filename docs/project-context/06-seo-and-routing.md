@@ -18,6 +18,11 @@ Russian:
 - `/ru/partners`
 - `/ru/surfboard-rental-danang`
 
+Hidden Home V2 experiment:
+
+- `/home-v2`
+- `/ru/home-v2`
+
 ## Why `/` is English
 
 - `siteConfig.defaultLocale` is `en`.
@@ -49,6 +54,15 @@ Russian:
 - Partner page metadata: route-level `page.js` files.
 - Rental metadata: `app/(en)/surfboard-rental-danang/page.js` and `app/(ru)/ru/surfboard-rental-danang/page.js`.
 
+## Home V2 SEO rules
+
+- `/home-v2` and `/ru/home-v2` are test routes for the future homepage, not public SEO pages.
+- Both route files must keep `robots.index = false` and `robots.follow = false`.
+- Both route files must keep matching `googleBot.index = false` and `googleBot.follow = false`.
+- Do not add `/home-v2` or `/ru/home-v2` to `app/sitemap.js`.
+- Do not add Home V2 routes to public header/footer navigation or internal SEO link sets.
+- Direct preview links are allowed for review, but the routes must stay hidden from search engines until the experiment is approved.
+
 ## Rental canonical and hreflang
 
 - `/surfboard-rental-danang` is self-canonical and declares EN, RU, and English `x-default` alternates.
@@ -64,6 +78,8 @@ Russian:
 - Do not change canonical domain without confirming production DNS.
 - Do not rename route folders casually.
 - Do not remove `metadataBase`, sitemap, or structured data.
+- Do not allow Home V2 routes to be indexed while they are still an experiment.
+- Do not include `/home-v2` or `/ru/home-v2` in the sitemap.
 
 ## Current issue
 
@@ -71,4 +87,4 @@ Russian:
 
 ## Last updated
 
-2026-06-15
+2026-06-24

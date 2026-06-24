@@ -8,10 +8,21 @@ Epic Surf School Da Nang website: Next.js App Router, React, Tailwind CSS v4. Go
 
 - `/`: English homepage.
 - `/ru`: Russian homepage.
+- `/home-v2`: hidden English Home V2 design experiment route.
+- `/ru/home-v2`: hidden Russian Home V2 design experiment route.
 - `/partners`: English partner page.
 - `/ru/partners`: Russian partner page.
 - `/surfboard-rental-danang`: English surfboard rental page.
 - `/ru/surfboard-rental-danang`: Russian surfboard rental page.
+
+## Home V2 design experiment
+
+- Home V2 is a test version of the future homepage in branch `design/home-v2-poster-collage`.
+- Production homepages `/` and `/ru` must remain unchanged until V2 is approved.
+- Vercel Preview for the branch opens the deployment root `/`, which currently shows the old homepage.
+- To review V2 on preview, open `/home-v2` or `/ru/home-v2` manually on the preview domain.
+- The V2 routes are direct-link accessible only, must stay `noindex, nofollow`, and must not be added to `app/sitemap.js`.
+- Do not merge this branch into `main` or replace `/` and `/ru` until final approval.
 
 ## Key Files
 
@@ -96,4 +107,4 @@ Epic Surf School Da Nang website: Next.js App Router, React, Tailwind CSS v4. Go
 
 ## Last updated
 
-2026-06-15
+2026-06-24

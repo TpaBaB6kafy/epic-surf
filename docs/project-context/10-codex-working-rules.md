@@ -14,6 +14,16 @@
 - Do not introduce new architecture when existing components/data files are enough.
 - Do not create extra components for one-off markup unless it reduces real complexity.
 
+## Home V2 branch rules
+
+- Work on Home V2 only in branch `design/home-v2-poster-collage`.
+- Treat `/home-v2` and `/ru/home-v2` as hidden test routes for the future homepage.
+- Vercel Preview opens `/`, which still shows the old homepage; manually check `/home-v2` and `/ru/home-v2` on the preview domain.
+- Keep `/` and `/ru` unchanged until Home V2 is approved.
+- Do not merge `design/home-v2-poster-collage` into `main` until approval.
+- Keep Home V2 routes `noindex, nofollow`.
+- Never add `/home-v2` or `/ru/home-v2` to the sitemap while the experiment is active.
+
 ## Design
 
 - Reuse existing Tailwind theme tokens.
@@ -42,4 +52,4 @@
 
 ## Last updated
 
-2026-05-29
+2026-06-24

@@ -11,6 +11,18 @@
 - README points to Vercel as deployment platform.
 - Actual Vercel project settings: needs confirmation.
 
+## Home V2 Vercel Preview workflow
+
+- Active experiment branch: `design/home-v2-poster-collage`.
+- Vercel Preview for this branch opens the deployment root `/` by default.
+- The preview root `/` currently shows the old English homepage, not Home V2.
+- To review the experiment on a preview deployment, manually open:
+  - `{preview-domain}/home-v2`
+  - `{preview-domain}/ru/home-v2`
+- The Home V2 routes must remain direct-link accessible for review.
+- The Home V2 routes must remain `noindex, nofollow` and excluded from the sitemap during the preview workflow.
+- Do not merge the branch into `main` and do not replace `/` or `/ru` until Home V2 is approved.
+
 ## Domain
 
 - Default canonical domain: `https://www.surfdanang.com`
@@ -51,4 +63,4 @@ Repository confirms only `https://www.surfdanang.com` as the default canonical U
 
 ## Last updated
 
-2026-05-29
+2026-06-24
