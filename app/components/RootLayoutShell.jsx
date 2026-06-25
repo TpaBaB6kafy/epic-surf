@@ -1,4 +1,5 @@
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import { buildStructuredData } from "../data/siteConfig";
 
 export default function RootLayoutShell({ children, locale }) {
@@ -59,6 +60,7 @@ export default function RootLayoutShell({ children, locale }) {
           }}
         />
         {children}
+        <Analytics />
       </body>
     </html>
   );
