@@ -26,12 +26,16 @@ function MovingOceanPan({ grayscale = false, scrollProps = {}, panProps = {}, im
     <div
       {...scrollProps}
       className={`absolute inset-x-0 top-0 h-[136%] ${scrollProps.className || ""}`}
-      style={{
-        transform: "translate3d(0, calc(var(--hero-progress, 0) * 0%), 0)",
-        ...(scrollProps.style || {}),
-      }}
+      style={scrollProps.style}
     >
-      <div {...panProps} className={`home-v2-hero-ocean-pan absolute inset-0 ${panProps.className || ""}`}>
+      <div
+        {...panProps}
+        className={`home-v2-hero-ocean-pan absolute inset-0 ${panProps.className || ""}`}
+        style={{
+          transform: "translate3d(0, calc(var(--hero-progress, 0) * -26.5%), 0)",
+          ...(panProps.style || {}),
+        }}
+      >
         <Image
           {...imageProps}
           src={HERO_OCEAN_SRC}
@@ -63,6 +67,9 @@ export default function HomeV2Hero({ lang, whyItems = [] }) {
       frame = 0;
       const rect = section.getBoundingClientRect();
       const viewport = window.innerHeight || 1;
+      if (rect.bottom <= 0 || rect.top >= viewport) {
+        return;
+      }
       const travel = rect.height + viewport;
       const progress = Math.min(1, Math.max(0, (viewport - rect.top) / travel));
       section.style.setProperty("--hero-progress", progress.toFixed(4));
@@ -95,11 +102,6 @@ export default function HomeV2Hero({ lang, whyItems = [] }) {
       style={{ "--hero-progress": 0 }}
     >
       <style>{`
-        @keyframes homeV2HeroOceanPan {
-          from { transform: translate3d(0, 0, 0); }
-          to { transform: translate3d(0, -26.5%, 0); }
-        }
-
         .home-v2-hero-epic-mask,
         .home-v2-hero-surf-school-mask {
           -webkit-mask-repeat: no-repeat;
@@ -148,26 +150,21 @@ export default function HomeV2Hero({ lang, whyItems = [] }) {
           .home-v2-hero-epic-mask {
             -webkit-mask-size: min(54vw, 760px) auto;
             mask-size: min(54vw, 760px) auto;
-            -webkit-mask-position: center 33%;
-            mask-position: center 33%;
+            -webkit-mask-position: center 28%;
+            mask-position: center 28%;
           }
 
           .home-v2-hero-surf-school-mask {
             -webkit-mask-size: min(48vw, 640px) auto;
             mask-size: min(48vw, 640px) auto;
-            -webkit-mask-position: center 57%;
-            mask-position: center 57%;
+            -webkit-mask-position: center 52%;
+            mask-position: center 52%;
           }
-        }
-
-        .home-v2-hero-ocean-pan {
-          animation: homeV2HeroOceanPan 18s ease-in-out infinite alternate;
-          will-change: transform;
         }
 
         @media (prefers-reduced-motion: reduce) {
           .home-v2-hero-ocean-pan {
-            animation: none;
+            transform: none !important;
           }
         }
       `}</style>
@@ -202,8 +199,8 @@ export default function HomeV2Hero({ lang, whyItems = [] }) {
         <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-b from-transparent via-epicDark/68 to-epicDark" />
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-[calc(100svh-96px)] max-w-[1448px] flex-col justify-between gap-10 lg:min-h-[calc(110svh-112px)]">
-        <div className="flex flex-1 items-start justify-center pt-[34vh] sm:pt-[35vh] md:pt-[38vh] lg:pt-[42vh]">
+      <div data-home-v2-hero-grid className="relative z-10 mx-auto flex min-h-[calc(100svh-96px)] w-full max-w-7xl flex-col justify-between gap-10 lg:min-h-[calc(98svh-112px)]">
+        <div className="flex flex-1 items-start justify-center pt-[34vh] sm:pt-[35vh] md:pt-[38vh] lg:pt-[36vh]">
           <h1 className="sr-only">
             {title.join(" ")}
           </h1>
@@ -211,7 +208,7 @@ export default function HomeV2Hero({ lang, whyItems = [] }) {
 
         <div
           data-home-v2-hero-benefits
-          className="grid grid-cols-2 gap-x-3 gap-y-7 pb-3 pt-3 sm:gap-x-5 sm:gap-y-10 xl:grid-cols-4 xl:gap-x-7 xl:pt-0"
+          className="grid grid-cols-2 gap-x-3 gap-y-7 pb-3 pt-3 sm:gap-x-5 sm:gap-y-10 lg:pb-24 xl:grid-cols-4 xl:gap-x-7 xl:pt-0"
         >
           {whyItems.map((item, index) => {
             const paperAsset = benefitPaperAssets[index] || benefitPaperAssets[0];
@@ -221,7 +218,7 @@ export default function HomeV2Hero({ lang, whyItems = [] }) {
               <article
                 key={item.title}
                 data-home-v2-benefit-card
-                className={`relative mx-auto flex min-h-[168px] w-full max-w-[188px] flex-col items-center justify-center px-3 pb-5 pt-11 text-center text-epicDark sm:min-h-[220px] sm:max-w-[300px] sm:px-6 sm:pb-7 sm:pt-14 xl:min-h-[242px] xl:max-w-[330px] xl:px-7 xl:pb-8 ${index % 2 === 0 ? "xl:-rotate-1" : "xl:rotate-1"} ${index === 1 || index === 3 ? "xl:translate-y-3" : ""}`}
+                className={`relative mx-auto flex w-full max-w-[188px] flex-col items-center justify-center px-3 pb-5 pt-11 text-center text-epicDark sm:max-w-[300px] sm:px-6 sm:pb-8 sm:pt-16 xl:max-w-[252px] xl:px-6 xl:pb-10 xl:pt-16 ${index % 2 === 0 ? "xl:-rotate-1" : "xl:rotate-1"} ${index === 1 || index === 3 ? "xl:translate-y-3" : ""}`}
               >
                 <Image
                   data-why-epic-paper-asset={index}
@@ -239,12 +236,12 @@ export default function HomeV2Hero({ lang, whyItems = [] }) {
                   width={88}
                   height={88}
                   sizes="88px"
-                  className="absolute -top-8 left-1/2 z-10 h-16 w-16 -translate-x-1/2 object-contain sm:-top-10 sm:h-20 sm:w-20 md:-top-11 md:h-[88px] md:w-[88px]"
+                  className="absolute -top-8 left-1/2 z-10 h-16 w-16 -translate-x-1/2 object-contain sm:-top-10 sm:h-20 sm:w-20 md:-top-11 md:h-[88px] md:w-[88px] xl:-top-10 xl:h-20 xl:w-20"
                 />
-                <h3 className="relative z-10 mt-2 text-[16px] font-black leading-tight text-epicDark sm:text-[21px] md:text-[23px]">
+                <h3 className="relative z-10 mt-2 text-[16px] font-black leading-tight text-epicDark sm:text-[21px] md:text-[23px] xl:text-[20px]">
                   {item.title}
                 </h3>
-                <p className="relative z-10 mt-3 max-w-[220px] text-[11px] font-bold leading-5 text-epicGray sm:mt-4 sm:text-sm sm:leading-6">
+                <p className="relative z-10 mt-3 max-w-[250px] text-[11px] font-bold leading-5 text-epicGray sm:mt-4 sm:text-sm sm:leading-6 xl:max-w-[176px] xl:text-[12px] xl:leading-5">
                   {item.desc}
                 </p>
               </article>

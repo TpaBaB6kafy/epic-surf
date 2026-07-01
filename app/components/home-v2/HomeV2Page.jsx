@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Header from "../Header";
 import Footer from "../Footer";
 import MessengerFab from "../MessengerFab";
@@ -24,7 +25,6 @@ import HomeV2Hero from "./sections/HomeV2Hero";
 import {
   HomeV2Included,
   HomeV2Lessons,
-  HomeV2PhotoBreak,
   HomeV2Rentals
 } from "./sections/HomeV2LessonsRentals";
 import {
@@ -37,6 +37,7 @@ import {
 import { HomeV2Forecast, HomeV2LiveCam } from "./sections/HomeV2UtilitySections";
 
 export default function HomeV2Page({ locale = "en" }) {
+  const rootRef = useRef(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isRentalModalOpen, setRentalModalOpen] = useState(false);
   const [selectedRentalBoard, setSelectedRentalBoard] = useState(null);
@@ -53,6 +54,7 @@ export default function HomeV2Page({ locale = "en" }) {
   useEffect(() => {
     storeAttributionFromUrl({ includePartner: true });
     trackEvent("page_view", { language: lang, page_variant: "home_v2" });
+    rootRef.current?.setAttribute("data-home-v2-client-ready", "true");
   }, [lang]);
 
   const openEventGallery = (galleryKey) => {
@@ -93,7 +95,7 @@ export default function HomeV2Page({ locale = "en" }) {
   };
 
   return (
-    <div data-home-v2-root className="min-h-screen overflow-x-clip bg-epicWhite font-sans text-epicDark">
+    <div ref={rootRef} data-home-v2-root className="min-h-screen overflow-x-clip bg-epicWhite font-sans text-epicDark">
       <Header
         t={t}
         lang={lang}
@@ -105,20 +107,44 @@ export default function HomeV2Page({ locale = "en" }) {
         sectionHrefBase={sectionHrefBase}
       />
 
-      <HomeV2Hero t={t} lang={lang} links={links} openBookingModal={openBookingModal} whyItems={t.whyItems} />
-      <HomeV2HowItWorks t={t} lang={lang} />
-      <HomeV2Lessons t={t} lang={lang} links={links} openBookingModal={openBookingModal} />
-      <HomeV2Included t={t} />
-      <HomeV2Rentals
-        t={t}
-        lang={lang}
-        setRentalModalOpen={setRentalModalOpenSafely}
-        onSelectRentalBoard={openRentalModal}
-      />
-      <HomeV2LiveCam locale={lang} />
-      <HomeV2Forecast t={t} lang={lang} />
-      <HomeV2PhotoBreak />
-      <HomeV2Reviews t={t} googleMapsUrl={links.googleMaps} />
+      <main data-home-v2-main-flow className="relative">
+        <HomeV2Hero t={t} lang={lang} links={links} openBookingModal={openBookingModal} whyItems={t.whyItems} />
+        <HomeV2HowItWorks t={t} lang={lang} />
+        <HomeV2Lessons t={t} lang={lang} links={links} openBookingModal={openBookingModal} />
+        <HomeV2Included t={t} />
+        <section
+          data-home-v2-surf-stack
+          className="relative isolate overflow-hidden bg-epicDark py-14 text-epicWhite md:pb-4 md:pt-32"
+        >
+          <Image
+            data-home-v2-wave-layer
+            aria-hidden="true"
+            src="/design/home-v2/surf-stack/surf-stack-wave-contour.svg"
+            alt=""
+            width={2294}
+            height={3227}
+            sizes="(min-width: 1024px) 1980px, 1200px"
+            className="pointer-events-none absolute inset-y-0 left-1/2 z-0 h-full w-auto max-w-none -translate-x-1/2 opacity-[0.09] sm:opacity-[0.12] lg:opacity-[0.16]"
+          />
+          <div data-home-v2-surf-stack-content className="relative z-10 space-y-24 md:space-y-0">
+            <div data-home-v2-flow-stage="rental">
+              <HomeV2Rentals
+                t={t}
+                lang={lang}
+                setRentalModalOpen={setRentalModalOpenSafely}
+                onSelectRentalBoard={openRentalModal}
+              />
+            </div>
+            <div data-home-v2-flow-stage="livecam" className="md:pt-32 lg:pt-52">
+              <HomeV2LiveCam locale={lang} />
+            </div>
+            <div data-home-v2-flow-stage="forecast" className="md:pb-24 md:pt-32 lg:pb-36 lg:pt-52">
+              <HomeV2Forecast t={t} lang={lang} />
+            </div>
+          </div>
+        </section>
+        <HomeV2Reviews t={t} googleMapsUrl={links.googleMaps} />
+      </main>
       <HomeV2FAQ title={t.faqTitle} titleEnd={t.faqTitleEnd} items={t.faqItems} />
       <HomeV2Events t={t} openEventGallery={openEventGallery} />
       <HomeV2Gallery

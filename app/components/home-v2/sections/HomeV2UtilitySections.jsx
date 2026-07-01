@@ -1,32 +1,50 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowUp, ExternalLink, Globe, Heart, MessageCircle, Radio, Thermometer, Waves, Wind, X } from "lucide-react";
+import { ArrowUp, ExternalLink, Globe, Heart, MessageCircle, Thermometer, Waves, Wind, X } from "lucide-react";
 import { liveCam } from "../../../data/liveCam";
 import { links } from "../../../data/links";
 import { buildWhatsAppUrl, trackEvent } from "../../../utils/tracking";
-import { WaveStripe } from "../PosterPrimitives";
 
 const liveCamCopy = {
   en: {
-    eyebrow: "Da Nang Surf Cam",
+    eyebrow: "Live conditions",
     title: "My Khe Beach Live Cam",
     mobileTitle: "My Khe Live Cam",
     titleLines: ["My Khe Beach", "Live Cam"],
     mobileTitleLines: ["My Khe Live Cam"],
-    subtext: "Check My Khe before you book a lesson or rent a board.",
-    detail: "The full stream is operated by Da Nang Surf Cam. Open it for the full beach view, or message Epic if you're not sure today fits your level.",
+    subtext: "Check the beach before you book.",
+    detail: "Partner stream.",
+    helperNote: "Local intel makes all the difference.",
     iframeTitle: "My Khe Beach live camera preview",
-    poweredBy: "Powered by Da Nang Surf Cam",
+    poweredBy: "Live preview by Da Nang Surf Cam",
     attribution: "A free, community-supported live cam streaming My Khe Beach, Da Nang daily from 4AM to 4PM ICT.",
-    fullStream: "Open full cam",
+    fullStream: "Open full stream",
     support: "Support the cam",
-    askEpic: "Ask Epic about today's conditions",
-    mobileAskEpic: "Ask Epic about conditions",
+    askEpic: "Ask Epic about conditions",
+    mobileAskEpic: "Ask about conditions",
     whatsappMessage: "Hi! I checked the My Khe live cam. Are the conditions good for my level today?",
   },
   ru: {
-    eyebrow: "Da Nang Surf Cam",
+    eyebrow: "Условия сейчас",
+    title: "Лайв-камера Ми Кхе",
+    mobileTitle: "Лайв-камера Ми Кхе",
+    titleLines: ["Лайв-камера", "Ми Кхе"],
+    mobileTitleLines: ["Лайв-камера", "Ми Кхе"],
+    subtext: "Проверьте Ми Кхе перед уроком или арендой доски.",
+    detail: "Полный стрим ведёт Da Nang Surf Cam. Откройте камеру для обзора пляжа или напишите Epic, если не уверены, подходят ли условия вашему уровню.",
+    helperNote: "Местная информация помогает выбрать подходящее время.",
+    iframeTitle: "Превью лайв-камеры пляжа Ми Кхе",
+    poweredBy: "Трансляция от Da Nang Surf Cam",
+    attribution: "Бесплатная общественная камера с пляжа Ми Кхе в Дананге. Работает ежедневно с 4:00 до 16:00 ICT.",
+    fullStream: "Открыть камеру",
+    support: "Поддержать камеру",
+    askEpic: "Спросить Epic про условия",
+    mobileAskEpic: "Спросить про условия",
+    whatsappMessage: "Привет! Я посмотрел лайв-камеру Ми Кхе. Подходят ли сегодня условия для моего уровня?",
+  },
+  legacyRuMojibake: {
+    eyebrow: "Live conditions",
     title: "Р›Р°Р№РІ-РєР°РјРµСЂР° РњРё РљС…Рµ",
     mobileTitle: "Р›Р°Р№РІ-РєР°РјРµСЂР° РњРё РљС…Рµ",
     titleLines: ["Р›Р°Р№РІ-РєР°РјРµСЂР°", "РњРё РљС…Рµ"],
@@ -75,41 +93,96 @@ export function HomeV2LiveCam({ locale = "en" }) {
   };
 
   return (
-    <section id="live-cam" data-home-v2-live-cam className="relative isolate overflow-hidden bg-epicDark px-4 py-14 text-epicWhite scroll-mt-24 md:px-6 md:py-20">
-      <WaveStripe className="absolute -right-28 top-16 h-28 w-[560px] rotate-[-8deg] text-epicMint opacity-75" />
-      <div className="relative mx-auto grid max-w-[1448px] gap-8 lg:grid-cols-[minmax(0,0.38fr)_minmax(0,0.62fr)] lg:items-center">
-        <div className="relative z-10">
-          <div data-live-cam-source-badge className="inline-flex -rotate-2 items-center gap-2 bg-epicMint px-4 py-2 text-[11px] font-black uppercase leading-none text-epicDark shadow-[5px_5px_0_#FE746A]">
-            <Radio size={15} className="text-epicRed" />
-            {copy.eyebrow}
+    <section id="live-cam" data-home-v2-live-cam data-surf-stack-scene="livecam" className="relative isolate overflow-visible bg-transparent px-4 py-6 text-epicWhite scroll-mt-24 md:px-6 md:py-0">
+      <div data-livecam-visual-composition className="relative mx-auto hidden w-full max-w-7xl overflow-hidden md:block">
+      <div data-live-cam-artboard className="relative mx-auto min-h-[690px] w-full overflow-hidden px-6 pb-10 pt-4 lg:min-h-[760px] lg:px-10 lg:pb-14">
+        <h2 aria-label={copy.title} className="relative z-20 grid grid-cols-[minmax(300px,0.4fr)_minmax(0,0.6fr)] items-start gap-12 pt-16 text-[clamp(38px,4.2vw,64px)] font-black uppercase leading-none tracking-normal text-epicDark lg:gap-28 lg:pt-20">
+          <span data-live-cam-title-line className="inline-flex w-fit whitespace-nowrap bg-epicWhite px-5 py-3 shadow-[7px_7px_0_rgba(246,246,246,0.2)]">LIVE <span className="ml-3 text-epicRed">CAM</span></span>
+          <span data-live-cam-title-line className="inline-flex w-fit max-w-full whitespace-nowrap bg-epicWhite px-5 py-3 text-[clamp(36px,4vw,61px)] shadow-[7px_7px_0_rgba(246,246,246,0.2)]">MY KHE BEACH</span>
+        </h2>
+
+        <div className="relative z-20 mt-24 grid grid-cols-[minmax(0,0.74fr)_minmax(230px,0.26fr)] items-start gap-8 lg:mt-28 lg:gap-16">
+        <div className="relative bg-epicWhite p-4 shadow-none lg:ml-[4%]">
+        <span aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 z-40 h-[96px] w-[58px] -translate-x-1/2 -translate-y-[58%] rotate-[-1deg] bg-epicRed shadow-[0_14px_16px_rgba(0,0,0,0.18)] lg:h-[112px] lg:w-[68px]" />
+        <div data-live-cam-preview className="relative aspect-video w-full overflow-hidden bg-epicDark">
+          <iframe
+            src={liveCam.previewUrl}
+            width="100%"
+            height="100%"
+            loading="lazy"
+            className="block h-full w-full border-0 grayscale"
+            allow="autoplay; encrypted-media"
+            title={copy.iframeTitle}
+            onLoad={() => trackEvent("live_cam_preview_load", {
+              language,
+              provider: "danangsurfcam",
+              location: "homepage_live_cam",
+            })}
+          />
+          <div className="pointer-events-none absolute left-[3%] top-[5%] z-30 bg-epicMint px-3 py-2 text-[clamp(8px,0.9vw,12px)] font-black uppercase leading-none text-epicDark">
+            <span className="mr-2 inline-block h-2 w-2 rounded-full bg-epicDark align-middle" />
+            Live
           </div>
-          <h2 aria-label={copy.mobileTitle} className="mt-6 max-w-3xl text-[44px] font-black uppercase leading-[0.88] tracking-normal sm:hidden">
-            {copy.mobileTitleLines.map((line) => (
-              <span key={line} data-live-cam-title-line className="block">{line}</span>
-            ))}
-          </h2>
-          <h2 aria-label={copy.title} className="mt-6 hidden max-w-3xl text-[56px] font-black uppercase leading-[0.88] tracking-normal sm:block md:text-[82px] lg:text-[92px]">
-            {copy.titleLines.map((line) => (
-              <span key={line} data-live-cam-title-line className="block">{line}</span>
-            ))}
-          </h2>
-          <p className="mt-6 max-w-xl text-lg font-black leading-8 text-epicWhite/82">{copy.subtext}</p>
-          <p className="mt-4 max-w-xl text-sm font-bold leading-6 text-epicWhite/58 md:text-base md:leading-7">{copy.detail}</p>
+          <div className="pointer-events-none absolute right-[3%] top-[5%] z-30 hidden text-right text-[clamp(8px,0.9vw,12px)] font-black uppercase leading-5 tracking-normal text-epicWhite sm:block">
+            My Khe Beach, Da Nang
+          </div>
+        </div>
+
+        <div data-live-cam-attribution-footer className="flex items-center justify-between gap-3 bg-epicWhite px-3 pb-1 pt-3 text-epicDark lg:px-5 lg:pt-4">
+          <div data-live-cam-provider-identity className="flex min-w-0 items-center gap-3">
+            {/* The provider requires its remote logo; using img avoids changing Next image configuration. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={liveCam.logoUrl} alt={liveCam.cameraName} className="h-8 w-8 shrink-0 bg-epicWhite object-contain p-1 ring-2 ring-epicDark md:h-11 md:w-11" />
+            <div className="min-w-0">
+              <p className="text-[clamp(8px,1.05vw,14px)] font-black leading-tight text-epicDark">{copy.poweredBy}</p>
+              <p className="mt-1 hidden text-[clamp(7px,0.78vw,11px)] font-bold leading-4 text-epicGray lg:block">{copy.attribution}</p>
+            </div>
+          </div>
+          <div data-live-cam-provider-links className="hidden gap-2 sm:flex">
+            <a data-live-cam-provider-action="primary" href={liveCam.fullStreamUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackOutbound("full_stream")} className="inline-flex min-h-9 items-center justify-center gap-2 border-2 border-epicDark bg-epicWhite px-3 text-[clamp(7px,0.82vw,11px)] font-black uppercase text-epicDark transition hover:bg-epicMint active:scale-95">
+              {copy.fullStream}
+              <ExternalLink size={14} />
+            </a>
+            <a data-live-cam-provider-action="secondary" href={liveCam.donateUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackOutbound("donate")} className="inline-flex min-h-9 items-center justify-center gap-2 border-2 border-epicDark bg-epicDark px-3 text-[clamp(7px,0.82vw,11px)] font-black uppercase text-epicWhite transition hover:bg-epicGray active:scale-95">
+              {copy.support}
+              <Heart size={14} />
+            </a>
+          </div>
+        </div>
+        </div>
+
+        <div data-live-cam-primary-actions className="relative z-30 flex min-h-[520px] flex-col items-start pt-28 text-epicWhite">
+          <p className="max-w-[260px] text-[clamp(20px,1.75vw,27px)] font-black leading-[1.04] text-epicWhite">{copy.subtext}</p>
+          <p className="mt-7 max-w-[240px] text-[clamp(13px,1.05vw,16px)] font-black leading-snug text-epicWhite">{copy.detail}</p>
           <a
             href={links.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleWhatsAppClick}
-            className="mt-7 inline-flex min-h-14 w-full max-w-[360px] items-center justify-center gap-3 bg-epicRed px-6 text-center text-sm font-black uppercase leading-tight text-epicDark transition hover:brightness-105 active:scale-95"
+            className="relative mt-24 flex aspect-[275/191] w-full max-w-[220px] rotate-[-5deg] items-center justify-center bg-epicWhite px-10 pt-5 text-center text-[clamp(17px,1.4vw,24px)] font-black uppercase leading-[1.55] text-epicDark shadow-[8px_8px_0_rgba(246,246,246,0.18)] transition active:scale-95 lg:ml-2 lg:max-w-[250px]"
           >
-            <span className="sm:hidden">{copy.mobileAskEpic}</span>
-            <span className="hidden sm:inline">{copy.askEpic}</span>
-            <MessageCircle size={18} />
+            <span className="relative z-10 max-w-[11ch]">{copy.askEpic}</span>
+            <span data-live-cam-chat-icon className="absolute -top-8 left-1/2 z-20 flex h-16 w-16 -translate-x-1/2 items-center justify-center rounded-full bg-epicRed text-epicWhite">
+              <MessageCircle className="h-8 w-8" />
+            </span>
           </a>
         </div>
+        </div>
 
-        <div className="relative z-10 overflow-hidden bg-epicWhite p-4 text-epicDark shadow-[14px_14px_0_#AAFFC7] lg:-mr-8 lg:p-5">
-          <div data-live-cam-preview className="relative aspect-video overflow-hidden bg-epicDark">
+        <div className="hidden">
+          <a href={liveCam.fullStreamUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackOutbound("full_stream")} className="inline-flex min-h-12 w-full items-center justify-between bg-epicRed px-5 text-sm font-black uppercase leading-tight text-epicDark shadow-[6px_6px_0_#2E2E2E] transition active:scale-95">
+            {copy.fullStream}
+            <ArrowUp className="h-5 w-5 rotate-90" strokeWidth={3} />
+          </a>
+        </div>
+      </div>
+      </div>
+      <div data-live-cam-mobile-layout className="relative z-30 mx-auto max-w-md md:hidden">
+        <h2 className="text-[40px] font-black uppercase leading-[0.92] text-epicWhite">
+          LIVE <span className="text-epicRed">CAM</span><br />MY KHE BEACH
+        </h2>
+        <div className="relative mt-6 bg-epicWhite p-2 shadow-[8px_8px_0_#AAFFC7]">
+          <div data-live-cam-mobile-preview className="aspect-video overflow-hidden bg-epicDark">
             <iframe
               src={liveCam.previewUrl}
               width="100%"
@@ -117,40 +190,29 @@ export function HomeV2LiveCam({ locale = "en" }) {
               loading="lazy"
               className="block h-full w-full border-0 grayscale"
               allow="autoplay; encrypted-media"
-              title={copy.iframeTitle}
-              onLoad={() => trackEvent("live_cam_preview_load", {
-                language,
-                provider: "danangsurfcam",
-                location: "homepage_live_cam",
-              })}
+              title={`${copy.iframeTitle} mobile`}
             />
-            <div className="pointer-events-none absolute left-0 top-0 bg-epicRed px-4 py-2 text-[11px] font-black uppercase text-epicDark">
-              Live beach check
-            </div>
           </div>
-
-          <div data-live-cam-attribution-footer className="mt-4 grid gap-4 md:grid-cols-[minmax(0,1fr)_220px] md:items-center">
-            <div data-live-cam-provider-identity className="flex min-w-0 items-center gap-3">
-              {/* The provider requires its remote logo; using img avoids changing Next image configuration. */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={liveCam.logoUrl} alt={liveCam.cameraName} className="h-12 w-12 shrink-0 bg-epicWhite object-contain p-1.5 ring-2 ring-epicDark" />
-              <div className="min-w-0">
-                <p className="text-xs font-black uppercase text-epicDark">{copy.poweredBy}</p>
-                <p className="mt-1 text-[11px] font-bold leading-5 text-epicGray">{copy.attribution}</p>
-              </div>
-            </div>
-            <div data-live-cam-provider-links className="grid gap-2">
-              <a data-live-cam-provider-action="primary" href={liveCam.fullStreamUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackOutbound("full_stream")} className="inline-flex min-h-11 items-center justify-center gap-2 bg-epicMint px-4 text-[11px] font-black uppercase text-epicDark transition hover:brightness-105 active:scale-95">
-                {copy.fullStream}
-                <ExternalLink size={14} />
-              </a>
-              <a data-live-cam-provider-action="secondary" href={liveCam.donateUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackOutbound("donate")} className="inline-flex min-h-11 items-center justify-center gap-2 bg-epicDark px-4 text-[11px] font-black uppercase text-epicWhite transition hover:bg-epicGray active:scale-95">
-                {copy.support}
-                <Heart size={14} />
-              </a>
-            </div>
+          <div className="flex items-center gap-3 px-2 py-3 text-epicDark">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={liveCam.logoUrl} alt="" className="h-9 w-9 shrink-0 object-contain" />
+            <p className="text-xs font-black leading-tight">{copy.poweredBy}</p>
           </div>
         </div>
+        <div data-live-cam-mobile-note className="relative mt-8 bg-epicWhite px-6 pb-6 pt-9 text-epicDark shadow-[7px_7px_0_#585858]">
+          <span className="absolute -top-5 left-6 flex h-11 w-11 items-center justify-center rounded-full bg-epicRed text-epicWhite">
+            <MessageCircle className="h-5 w-5" />
+          </span>
+          <p className="text-base font-black leading-6">{copy.subtext}</p>
+          <p className="mt-2 text-sm font-bold text-epicGray">{copy.detail}</p>
+          <a href={links.whatsapp} target="_blank" rel="noopener noreferrer" onClick={handleWhatsAppClick} className="mt-5 inline-flex min-h-12 w-full items-center justify-center bg-epicRed px-5 text-center text-sm font-black uppercase text-epicDark active:scale-95">
+            {copy.mobileAskEpic}
+          </a>
+        </div>
+        <a href={liveCam.fullStreamUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackOutbound("full_stream")} className="mt-5 inline-flex min-h-12 w-full items-center justify-between bg-epicMint px-5 text-sm font-black uppercase text-epicDark shadow-[6px_6px_0_#585858] active:scale-95">
+          {copy.fullStream}
+          <ArrowUp className="h-5 w-5 rotate-90" strokeWidth={3} />
+        </a>
       </div>
     </section>
   );
@@ -190,43 +252,52 @@ export function HomeV2Forecast({ t, lang }) {
   ];
 
   return (
-    <section id="forecast" data-home-v2-forecast className="relative isolate overflow-hidden bg-epicDark px-4 py-14 text-epicWhite scroll-mt-24 md:px-6 md:py-20">
-      <div className="absolute -left-24 top-16 h-24 w-[48%] rotate-[-4deg] bg-epicMint" aria-hidden="true" />
-      <div className="relative mx-auto grid max-w-[1448px] gap-6 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:items-stretch">
-        <div className="relative z-10 bg-epicWhite p-6 text-epicDark shadow-[12px_12px_0_#FE746A] md:p-8">
-          <p className="text-[11px] font-black uppercase text-epicRed">{t.forecastTitle} {t.forecastTitleSpot}</p>
-          <div className="mt-6 flex items-end gap-3">
-            <span className="text-[92px] font-black leading-[0.85] tracking-normal md:text-[132px]">{forecast?.height || "0.86"}</span>
-            <span className="pb-2 text-5xl font-black leading-none text-epicRed">m</span>
+    <section id="forecast" data-home-v2-forecast data-surf-stack-scene="forecast" className="relative isolate overflow-visible bg-transparent px-4 pb-16 pt-12 text-epicWhite scroll-mt-24 md:px-6 md:py-0">
+      <div data-forecast-visual-composition className="relative mx-auto hidden w-full max-w-7xl overflow-hidden md:block">
+      <div data-forecast-artboard className="relative mx-auto w-full overflow-hidden px-0 pb-8 pt-4 lg:pb-12">
+        <h2 data-forecast-heading className="relative z-20 mx-auto w-fit bg-epicWhite px-9 py-3 text-[clamp(48px,5.8vw,82px)] font-black uppercase leading-none tracking-normal text-epicDark">
+          FORECAST
+        </h2>
+
+        <div className="relative z-20 mt-5 grid min-h-[560px] grid-cols-[minmax(0,0.37fr)_minmax(0,0.63fr)] items-stretch gap-3">
+        <div data-forecast-stats-panel className="flex min-h-0 flex-col bg-epicDark p-10 text-epicWhite ring-1 ring-epicGray lg:p-12">
+          <p className="flex items-center gap-4 text-[clamp(10px,1vw,14px)] font-black text-epicWhite/64">
+            <span aria-hidden="true" className="h-8 w-8 shrink-0 rounded-full bg-epicMint shadow-[0_0_14px_rgba(170,255,199,0.7)]" />
+            {t.forecastTitle} {t.forecastTitleSpot}
+          </p>
+          <div className="mt-8 flex items-end gap-3">
+            <span className="text-[clamp(78px,9.4vw,132px)] font-black leading-[0.82] tracking-normal">{forecast?.height || "0.86"}</span>
+            <span className="pb-1 text-[clamp(24px,3.8vw,48px)] font-black leading-none text-epicRed">m</span>
           </div>
-          <p className="mt-3 text-sm font-black uppercase text-epicGray">{t.forecastWaveHeight}</p>
-          <div className="mt-6 inline-flex bg-epicMint px-5 py-3 text-[11px] font-black uppercase text-epicDark">
+          <div className="mt-7 inline-flex w-fit rotate-[-4deg] bg-epicMint px-5 py-3 text-[clamp(9px,0.9vw,12px)] font-black text-epicDark">
             {(forecast?.height || 0.8) < 1.2 ? t.forecastStatusGood : t.forecastStatusHigh}
           </div>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+          <div className="mt-auto grid grid-cols-2 gap-4 pt-10">
             {stats.map((stat) => {
               const Icon = stat.icon;
               return (
-                <div key={stat.label} className="relative min-h-[116px] bg-epicDark p-4 text-epicWhite">
-                  <div className={`mb-4 inline-flex h-12 w-12 items-center justify-center ${stat.tone === "red" ? "bg-epicRed text-epicDark" : "bg-epicMint text-epicDark"}`}>
+                <div key={stat.label} className="relative flex min-h-[116px] items-center gap-4 bg-epicGray/35 p-4 text-epicWhite ring-1 ring-epicGray lg:p-5">
+                  <div className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${stat.tone === "red" ? "bg-epicRed text-epicWhite" : "bg-epicMint text-epicDark"}`}>
                     {stat.rotate ? (
-                      <ArrowUp className="h-5 w-5" strokeWidth={4} style={{ transform: `rotate(${stat.rotate}deg)` }} />
+                      <ArrowUp className="h-4 w-4 md:h-5 md:w-5" strokeWidth={4} style={{ transform: `rotate(${stat.rotate}deg)` }} />
                     ) : (
-                      <Icon className="h-5 w-5" strokeWidth={2.5} />
+                      <Icon className="h-4 w-4 md:h-5 md:w-5" strokeWidth={2.5} />
                     )}
                   </div>
-                  <p className="text-[11px] font-black uppercase text-epicWhite/58">{stat.label}</p>
-                  <p className="mt-1 text-3xl font-black leading-none">{stat.value}</p>
+                  <div className="min-w-0">
+                    <p className="text-[clamp(8px,0.75vw,11px)] font-black text-epicWhite/58">{stat.label}</p>
+                    <p className="mt-2 whitespace-nowrap text-[clamp(19px,2vw,29px)] font-black leading-none">{stat.value}</p>
+                  </div>
                 </div>
               );
             })}
           </div>
         </div>
 
-        <div className="relative min-h-[420px] overflow-hidden bg-epicWhite p-4 shadow-[12px_12px_0_#AAFFC7] lg:min-h-0">
+        <div data-forecast-map className="relative min-h-full overflow-hidden bg-epicWhite ring-1 ring-epicWhite">
           <iframe
             src="https://embed.windy.com/embed2.html?lat=16.061&lon=108.247&zoom=11&overlay=waves&product=ecmwf&metricWind=km%2Fh"
-            className={`h-full min-h-[390px] w-full border-0 grayscale transition-opacity duration-500 ${mapActive ? "opacity-100" : "opacity-80"}`}
+            className="h-full w-full border-0"
             title="Windy Forecast"
           />
           {!mapActive && (
@@ -250,6 +321,61 @@ export function HomeV2Forecast({ t, lang }) {
           {mapActive && (
             <button onClick={() => setMapActive(false)} className="absolute right-6 top-6 z-30 bg-epicRed p-2 text-epicDark lg:hidden">
               <X size={20} />
+            </button>
+          )}
+        </div>
+        </div>
+      </div>
+      </div>
+      <div data-forecast-mobile-layout className="relative z-20 mx-auto max-w-md md:hidden">
+        <h2 className="inline bg-epicWhite px-3 text-[40px] font-black uppercase leading-none text-epicDark shadow-[6px_6px_0_#585858]">FORECAST</h2>
+        <div className="mt-7 bg-epicDark p-5 ring-2 ring-epicWhite">
+          <p className="text-[10px] font-black uppercase text-epicWhite/64">{t.forecastTitle}</p>
+          <div className="mt-4 flex items-end gap-2">
+            <span className="text-7xl font-black leading-[0.85]">{forecast?.height || "0.86"}</span>
+            <span className="text-3xl font-black text-epicRed">m</span>
+          </div>
+          <div className="mt-5 inline-flex bg-epicMint px-4 py-2 text-[10px] font-black uppercase text-epicDark">
+            {(forecast?.height || 0.8) < 1.2 ? t.forecastStatusGood : t.forecastStatusHigh}
+          </div>
+          <div className="mt-6 grid grid-cols-2 gap-3">
+            {stats.map((stat) => {
+              const Icon = stat.icon;
+              return (
+                <div key={`mobile-${stat.label}`} className="bg-epicGray/35 p-4 ring-1 ring-epicGray">
+                  <div className={`flex h-10 w-10 items-center justify-center ${stat.tone === "red" ? "bg-epicRed" : "bg-epicMint"} text-epicDark`}>
+                    {stat.rotate ? <ArrowUp className="h-5 w-5" strokeWidth={4} style={{ transform: `rotate(${stat.rotate}deg)` }} /> : <Icon className="h-5 w-5" />}
+                  </div>
+                  <p className="mt-3 text-[10px] font-black uppercase text-epicWhite/58">{stat.label}</p>
+                  <p className="mt-1 text-xl font-black">{stat.value}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div className="relative mt-4 aspect-[4/3] overflow-hidden bg-epicWhite ring-2 ring-epicWhite">
+          <iframe
+            src="https://embed.windy.com/embed2.html?lat=16.061&lon=108.247&zoom=11&overlay=waves&product=ecmwf&metricWind=km%2Fh"
+            className={`h-full w-full border-0 transition-opacity duration-500 ${mapActive ? "opacity-100" : "opacity-90"}`}
+            title="Windy Forecast"
+          />
+          {!mapActive && (
+            <button
+              type="button"
+              onClick={() => {
+                trackEvent("map_activate", { language: lang, cta_location: "forecast_section", cta_label: "activate_map" });
+                setMapActive(true);
+              }}
+              className="absolute inset-4 z-20 flex items-center justify-center bg-epicDark/35"
+            >
+              <span className="bg-epicMint px-5 py-3 text-[11px] font-black uppercase text-epicDark shadow-[5px_5px_0_#FE746A]">
+                {lang === "ru" ? "Активировать карту" : "Activate map"}
+              </span>
+            </button>
+          )}
+          {mapActive && (
+            <button type="button" aria-label="Close forecast map" onClick={() => setMapActive(false)} className="absolute right-3 top-3 z-30 bg-epicRed p-2 text-epicDark">
+              <X size={18} />
             </button>
           )}
         </div>

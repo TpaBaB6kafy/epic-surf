@@ -20,18 +20,50 @@ const whyEpicIconAssets = [
 ];
 
 const howPaperAssets = [
-  "/design/home-v2/how-it-works/ASSET__how-card-paper-meet.svg",
-  "/design/home-v2/how-it-works/ASSET__how-card-paper-theory.svg",
-  "/design/home-v2/how-it-works/ASSET__how-card-paper-practice.svg",
-  "/design/home-v2/how-it-works/ASSET__how-card-paper-review.svg",
+  "/design/home-v2/how-it-works/how-card-frame-01.svg",
+  "/design/home-v2/how-it-works/how-card-frame-02.svg",
+  "/design/home-v2/how-it-works/how-card-frame-03.svg",
+  "/design/home-v2/how-it-works/how-card-frame-04.svg",
 ];
 
-const howNumberBgAssets = [
-  "/design/home-v2/how-it-works/ASSET__how-step-number-bg-meet.svg",
-  "/design/home-v2/how-it-works/ASSET__how-step-number-bg-theory.svg",
-  "/design/home-v2/how-it-works/ASSET__how-step-number-bg-practice.svg",
-  "/design/home-v2/how-it-works/ASSET__how-step-number-bg-review.svg",
+const howNumberBadgeAsset = "/design/home-v2/how-it-works/how-step-number-badge.svg";
+
+const reviewNoteLayout = [
+  {
+    tape: "bg-epicRed",
+    tapeClassName: "-top-3 right-8 -rotate-2",
+    className: "md:-rotate-1",
+  },
+  {
+    tape: "bg-epicMint",
+    tapeClassName: "-top-3 left-1/2 -translate-x-1/2 rotate-1",
+    className: "md:translate-y-3 md:rotate-1",
+  },
+  {
+    tape: "bg-epicRed",
+    tapeClassName: "-top-3 right-7 rotate-2",
+    className: "md:rotate-[-0.5deg]",
+  },
 ];
+
+function ReviewNoteCard({ review, index }) {
+  const layout = reviewNoteLayout[index] || reviewNoteLayout[0];
+
+  return (
+    <article
+      className={`relative flex min-h-[230px] w-full rotate-0 flex-col border-[3px] border-epicDark bg-epicWhite px-7 pb-7 pt-8 text-epicDark shadow-[8px_8px_0_#2E2E2E] sm:min-h-[240px] sm:px-8 md:min-h-[250px] ${layout.className}`}
+    >
+      <span className={`absolute z-20 h-7 w-24 border-2 border-epicDark shadow-[4px_4px_0_#2E2E2E] ${layout.tape} ${layout.tapeClassName}`} aria-hidden="true" />
+      <p className="relative z-10 flex-1 text-[18px] font-black leading-[1.42] text-epicDark md:text-[20px]">
+        {review.text}
+      </p>
+      <div className="relative z-10 mt-6 border-t-[3px] border-epicDark pt-4">
+        <p className="text-sm font-black uppercase leading-tight text-epicRed">{review.name}</p>
+        <p className="mt-1 text-[11px] font-bold uppercase leading-tight text-epicGray">{review.date}</p>
+      </div>
+    </article>
+  );
+}
 
 export function HomeV2Why({ items }) {
   return (
@@ -97,35 +129,68 @@ export function HomeV2Why({ items }) {
 }
 
 export function HomeV2HowItWorks({ t }) {
+  const howIntroItems = t.howIntro.match(/[^.!?]+[.!?]+/g) || [t.howIntro];
+  const isRu = t.howTitleEnd.toLowerCase() !== "works";
+  const howHeadingClassName = isRu
+    ? "max-w-xl text-[50px] font-black uppercase leading-[0.84] tracking-normal text-epicWhite sm:text-[60px] md:text-[64px] lg:text-[68px]"
+    : "max-w-3xl text-[56px] font-black uppercase leading-[0.86] tracking-normal text-epicWhite sm:text-[72px] md:text-[96px] lg:text-[96px]";
+  const howHeadingStartClassName = isRu
+    ? "block lg:whitespace-nowrap"
+    : "block";
+  const howHeadingEndClassName = isRu
+    ? "block lg:whitespace-nowrap text-[0.86em] text-epicRed"
+    : "block text-[0.88em] text-epicRed";
+  const howCardTitleClassName = isRu
+    ? "text-[27px] font-black leading-[0.98] text-epicDark md:text-[30px]"
+    : "text-[32px] font-black leading-[0.98] text-epicDark md:text-[36px]";
+  const ruHeadingWords = isRu ? t.howTitle.split(" ") : [];
+
   return (
     <section
       id="how-it-works"
       data-home-v2-how
       data-home-v2-how-it-works
       data-how-section
-      className="relative isolate overflow-hidden bg-epicDark px-4 py-14 text-epicWhite scroll-mt-24 md:px-6 md:py-20"
+      className="relative isolate overflow-hidden bg-epicDark px-4 py-14 text-epicWhite scroll-mt-24 md:px-6 md:py-16 lg:pb-44 lg:pt-52"
     >
-      <div className="relative mx-auto max-w-[1448px]">
-        <div className="mb-12 grid gap-7 lg:grid-cols-[minmax(0,0.48fr)_minmax(360px,0.52fr)] lg:items-start">
-          <h2 className="max-w-3xl text-[56px] font-black uppercase leading-[0.86] tracking-normal text-epicWhite sm:text-[72px] md:text-[112px] lg:text-[clamp(96px,8.2vw,132px)]">
-            <span className="block">{t.howTitle}</span>
-            <span className="block text-epicRed">{t.howTitleEnd}</span>
+      <div data-home-v2-how-grid className="relative mx-auto max-w-7xl">
+        <div className="mb-12 grid gap-7 lg:mb-20 lg:grid-cols-[minmax(0,0.5fr)_minmax(380px,0.5fr)] lg:items-start">
+          <h2 className={howHeadingClassName}>
+            {isRu ? (
+              <>
+                <span className="block text-[0.82em] leading-[0.82] lg:whitespace-nowrap">{ruHeadingWords[0]}</span>
+                <span className={howHeadingStartClassName}>{ruHeadingWords.slice(1).join(" ")}</span>
+                <span className={howHeadingEndClassName}>{t.howTitleEnd}</span>
+              </>
+            ) : (
+              <>
+                <span className={howHeadingStartClassName}>{t.howTitle}</span>
+                <span className={howHeadingEndClassName}>{t.howTitleEnd}</span>
+              </>
+            )}
           </h2>
-          <p className="max-w-2xl text-lg font-medium leading-8 text-epicWhite/82 md:text-2xl md:leading-10 lg:pt-2">
-            {t.howIntro}
-          </p>
+          <ul className="grid max-w-2xl gap-4 text-lg font-medium leading-8 text-epicWhite/82 md:text-2xl md:leading-10 lg:pt-3 lg:text-[22px] lg:leading-9">
+            {howIntroItems.map((introItem) => (
+              <li key={introItem} className="flex gap-6">
+                <span className="mt-[0.55em] h-2 w-2 shrink-0 rounded-full bg-epicRed" aria-hidden="true" />
+                <span>{introItem.trim()}</span>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="grid gap-x-5 gap-y-10 sm:grid-cols-2 xl:grid-cols-4">
         {t.howSteps.map((step, index) => {
           const paperAsset = howPaperAssets[index] || howPaperAssets[0];
-          const numberBgAsset = howNumberBgAssets[index] || howNumberBgAssets[0];
+          const badgePositionClassName = index % 2 === 1
+            ? "left-0 md:-left-1"
+            : "left-2 md:left-1";
 
           return (
             <article
               key={step.title}
               data-how-card
-              className={`group relative mx-auto flex min-h-[560px] w-full max-w-[370px] flex-col px-7 pb-8 pt-8 text-center text-epicDark ${index % 2 === 0 ? "xl:-rotate-1" : "xl:rotate-1"} ${index === 1 || index === 3 ? "xl:translate-y-2" : ""}`}
+              className={`group relative mx-auto flex min-h-[560px] w-full max-w-[370px] flex-col px-6 pb-8 pt-9 text-center text-epicDark drop-shadow-[8px_10px_0_rgba(0,0,0,0.16)] ${index % 2 === 0 ? "xl:-rotate-1" : "xl:rotate-1"}`}
             >
               <Image
                 data-how-paper-asset={index}
@@ -135,21 +200,22 @@ export function HomeV2HowItWorks({ t }) {
                 sizes="(min-width: 1280px) 25vw, (min-width: 640px) 46vw, 92vw"
                 className="pointer-events-none absolute inset-0 z-0 h-full w-full object-fill"
               />
-              <div className="absolute -top-2 left-2 z-20 h-[72px] w-[72px] md:-top-3 md:left-1 md:h-20 md:w-20">
+              <div className={`absolute -top-2 z-20 h-[72px] w-[72px] md:-top-3 md:h-20 md:w-20 ${badgePositionClassName}`}>
                 <Image
                   data-how-number-bg-asset={index}
-                  src={numberBgAsset}
+                  src={howNumberBadgeAsset}
                   alt=""
                   fill
                   sizes="112px"
-                  className="pointer-events-none absolute inset-0 h-full w-full object-fill"
+                  className={`pointer-events-none absolute inset-0 h-full w-full object-fill ${index % 2 === 1 ? "rotate-180" : ""}`}
                 />
                 <span className="relative z-10 flex h-full w-full items-center justify-center pb-1 text-[42px] font-black leading-none text-epicDark md:text-[52px]">
                   {index + 1}
                 </span>
               </div>
 
-              <div className="relative z-10 h-44 overflow-hidden bg-epicGray sm:h-48 xl:h-44">
+              <div className="relative z-10 aspect-[1.42] overflow-hidden bg-epicWhite p-1.5 sm:h-56 xl:h-52">
+                <div className="relative h-full w-full overflow-hidden bg-epicGray">
                 <Image
                   data-how-step-photo={index}
                   src={`/gallery/process-${index + 1}.webp`}
@@ -158,10 +224,11 @@ export function HomeV2HowItWorks({ t }) {
                   sizes="(min-width: 1280px) 22vw, (min-width: 640px) 44vw, 88vw"
                   className="object-cover grayscale contrast-110 transition duration-300 group-hover:grayscale-0 group-active:grayscale-0 group-focus-within:grayscale-0"
                 />
+                </div>
               </div>
 
-              <div className="relative z-10 flex flex-1 flex-col items-center px-2 pt-7">
-                <h3 className="text-[32px] font-black leading-[0.98] text-epicDark md:text-[36px]">
+              <div className="relative z-10 flex flex-1 flex-col items-center px-2 pt-6">
+                <h3 className={howCardTitleClassName}>
                   {step.title}
                 </h3>
                 <p className="mt-7 flex-1 text-base font-medium leading-7 text-epicGray">
@@ -179,22 +246,50 @@ export function HomeV2HowItWorks({ t }) {
 
 export function HomeV2Reviews({ t, googleMapsUrl }) {
   return (
-    <PosterSection id="reviews" eyebrow="Reviews" title={t.reviewsTitle}>
-      <div className="grid gap-5 md:grid-cols-3">
-        {t.reviewsList.map((review, index) => (
-          <article key={`${review.name}-${index}`} className={`border-4 border-epicDark bg-epicWhite p-6 shadow-[7px_7px_0_#2E2E2E] ${index === 1 ? "md:translate-y-8 rotate-1" : "-rotate-1"}`}>
-            <p className="text-base font-black leading-7 text-epicDark">{review.text}</p>
-            <div className="mt-6 border-t-4 border-epicDark pt-4">
-              <p className="text-sm font-black uppercase text-epicRed">{review.name}</p>
-              <p className="mt-1 text-[11px] font-bold uppercase text-epicGray">{review.date}</p>
-            </div>
-          </article>
-        ))}
+    <section id="reviews" className="relative overflow-hidden bg-epicWhite px-4 py-14 text-epicDark scroll-mt-24 md:px-6 md:py-20">
+      <div data-home-v2-reviews-grid className="relative mx-auto max-w-7xl">
+        <TornLabel>Reviews</TornLabel>
+        <h2 className="mt-5 max-w-4xl text-[48px] font-black uppercase leading-[0.9] tracking-normal text-epicDark sm:text-[64px] md:text-[88px] lg:text-[104px]">
+          {t.reviewsTitle}
+        </h2>
+
+        <div data-home-v2-reviews-trust-row className="mt-8 flex flex-wrap items-center gap-3 md:mt-9">
+          <span className="inline-flex -rotate-1 items-center border-2 border-epicDark bg-epicMint px-4 py-2 text-[11px] font-black uppercase leading-none text-epicDark shadow-[5px_5px_0_#2E2E2E]">
+            Google reviews
+          </span>
+          <span className="inline-flex rotate-1 items-center border-2 border-epicDark bg-epicWhite px-4 py-2 text-[11px] font-black uppercase leading-none text-epicDark shadow-[5px_5px_0_#FE746A]">
+            Real guest notes
+          </span>
+          <div className="hidden md:block">
+            <PosterLink
+              href={googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="min-h-10 bg-epicWhite px-4 py-2 text-[11px] shadow-[5px_5px_0_#2E2E2E]"
+            >
+              {t.reviewsLink}
+            </PosterLink>
+          </div>
+        </div>
+
+        <div className="mt-8 grid gap-6 md:mt-10 md:grid-cols-3 md:gap-5 lg:gap-7">
+          {t.reviewsList.map((review, index) => (
+            <ReviewNoteCard key={`${review.name}-${index}`} review={review} index={index} />
+          ))}
+        </div>
+
+        <div className="mt-8 md:hidden">
+          <PosterLink
+            href={googleMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="min-h-11 w-full max-w-[300px] bg-epicWhite px-5 py-3 text-[11px] shadow-[5px_5px_0_#2E2E2E] md:w-auto"
+          >
+            {t.reviewsLink}
+          </PosterLink>
+        </div>
       </div>
-      <PosterLink href={googleMapsUrl} target="_blank" rel="noopener noreferrer" className="mt-12">
-        {t.reviewsLink}
-      </PosterLink>
-    </PosterSection>
+    </section>
   );
 }
 
