@@ -1,5 +1,7 @@
 # Design System
 
+Этот документ описывает production design system сайта. Его tokens, брендовые ограничения, accessibility и функциональные контракты применяются ко всему проекту. Visual form, composition и presentation layer для `/home-v2` и `/ru/home-v2` определяет `docs/design-experiments/home-v2/style-system/README.md`.
+
 ## Tailwind v4 theme colors
 
 Defined in `app/globals.css`:

@@ -31,7 +31,7 @@
 
 - `LandingPage.jsx`: main page composition and modal state.
 - `home-v2/HomeV2Page.jsx`: Home V2 page composition, locale switch, modal state, gallery state, and messenger/rental wrappers.
-- `home-v2/PosterPrimitives.jsx`: shared poster/collage primitives for the experiment.
+- `home-v2/PosterPrimitives.jsx`: shared technical poster/collage primitives for the experiment; их visual variants и границы повторного использования определяет `docs/design-experiments/home-v2/style-system/README.md`.
 - `home-v2/sections/HomeV2Hero.jsx`: Home V2 hero and benefit cards.
 - `home-v2/sections/HomeV2ContentSections.jsx`: Home V2 how-it-works, reviews, FAQ, events, and gallery sections.
 - `home-v2/sections/HomeV2LessonsRentals.jsx`: Home V2 lessons, included, rentals, and photo break sections.

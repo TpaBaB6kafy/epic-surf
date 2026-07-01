@@ -17,6 +17,7 @@
 ## Home V2 branch rules
 
 - Work on Home V2 only in branch `design/home-v2-poster-collage`.
+- Перед визуальными изменениями Home V2 обязательно прочитать `docs/design-experiments/home-v2/workflow.md`, `docs/design-experiments/home-v2/brief.md` и `docs/design-experiments/home-v2/style-system/README.md`.
 - Treat `/home-v2` and `/ru/home-v2` as hidden test routes for the future homepage.
 - Vercel Preview opens `/`, which still shows the old homepage; manually check `/home-v2` and `/ru/home-v2` on the preview domain.
 - Keep `/` and `/ru` unchanged until Home V2 is approved.

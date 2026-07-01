@@ -8,6 +8,8 @@ Build hidden preview pages for a new Epic Surf School homepage visual shell:
 
 The production pages `/` and `/ru` must remain unchanged. The content order and business logic should mirror the current homepage, while the visual language should shift to surf-zine / editorial poster collage.
 
+Практический visual authority для реализации этого brief: `docs/design-experiments/home-v2/style-system/README.md`.
+
 ## Reference
 
 Reference path: `docs/design-experiments/home-v2/references/ref-01-surf-poster-collage.webp`

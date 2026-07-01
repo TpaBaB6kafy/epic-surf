@@ -9,6 +9,8 @@ description: Repo-scoped visual and functional guardrails for the hidden Epic Su
 
 Create and maintain the hidden experimental homepage routes `/home-v2` and `/ru/home-v2` for testing a new Epic Surf School visual direction without changing the production homepages `/` and `/ru`.
 
+Перед visual work прочитать `docs/design-experiments/home-v2/style-system/README.md`: это главный Home V2 visual authority.
+
 ## Visual Direction
 
 The style must feel like surf-zine, editorial poster collage, and surf poster culture: layered, energetic, handmade, photo-heavy, and slightly raw. It should be surfy and poster-like, but not chaotic.
@@ -73,3 +75,5 @@ Mobile width `390px` is mandatory. At this width:
 ## Taste Rules
 
 Prefer bold poster hierarchy, real Epic Surf imagery, black-and-white photo treatments, rough labels, and strong CTA contrast. Avoid generic SaaS landing-page styling, decorative gradient blobs or orbs, copied reference elements, and chaotic overlaps that hide content.
+
+Унифицировать tokens, behavior, качество и technical primitives, но не повторять один framed-title, hard-offset, border, tape, pin или sticker pattern во всех секциях. Каждая секция должна сохранять собственные silhouette, density, rhythm и осмысленный доминирующий poster-device.

@@ -4,6 +4,8 @@
 
 Home V2 is a hidden test version of the future Epic Surf School homepage. It lets the team review the new surf-zine / editorial poster-collage direction without changing the production homepages.
 
+Перед любыми Home V2 visual changes обязательно прочитать `docs/design-experiments/home-v2/style-system/README.md`. Этот документ является главным visual authority для формы, композиции и presentation layer экспериментальных routes.
+
 ## Branch
 
 - Active branch: `design/home-v2-poster-collage`.
