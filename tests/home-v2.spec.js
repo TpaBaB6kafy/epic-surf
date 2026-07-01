@@ -46,6 +46,12 @@ test.describe("Home V2 hidden preview pages", () => {
         await expect(page.locator("#rentals")).toBeVisible();
         await expect(page.locator("[data-home-v2-live-cam]")).toBeVisible();
         await expect(page.locator("[data-home-v2-forecast]")).toBeVisible();
+        const liveCamIframe = page.locator('[data-home-v2-live-cam] iframe[src*="danangsurfcam.com/embed/preview"]');
+        const windyIframe = page.locator('[data-home-v2-forecast] iframe[title="Windy Forecast"]');
+        await expect(liveCamIframe).toHaveCount(1);
+        await expect(liveCamIframe).toHaveAttribute("loading", "lazy");
+        await expect(windyIframe).toHaveCount(1);
+        await expect(windyIframe).toHaveAttribute("loading", "lazy");
         await expect(page.locator("[data-home-v2-booking-cta]").first()).toBeVisible();
         await expect(page.locator("[data-home-v2-rental-cta]:visible")).toHaveCount(1);
 
@@ -489,7 +495,7 @@ test.describe("Home V2 hidden preview pages", () => {
         const liveCamText = await liveCam.innerText();
         expect(liveCamText).not.toMatch(/Р[›°ёџњљµ]|С[ѓ‚Њ]/);
       }
-      await expect(liveCam.locator("[data-live-cam-preview] iframe")).toHaveAttribute("src", /danangsurfcam\.com\/embed\/preview/);
+      await expect(liveCam.locator('iframe[src*="danangsurfcam.com/embed/preview"]')).toHaveAttribute("src", /danangsurfcam\.com\/embed\/preview/);
       await expect(liveCam.locator('[data-live-cam-provider-action="primary"]')).toHaveAttribute("href", /danangsurfcam\.com/);
       await expect(liveCam.locator('[data-live-cam-provider-action="secondary"]')).toHaveAttribute("href", /danangsurfcam\.com\/donate/);
       await expect(liveCam.locator('[data-live-cam-mobile-layout]')).toBeVisible();

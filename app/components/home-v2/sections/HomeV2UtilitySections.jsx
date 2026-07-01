@@ -62,9 +62,67 @@ const liveCamCopy = {
   },
 };
 
+function useDesktopSlot() {
+  const [isDesktop, setIsDesktop] = useState(null);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    const updateViewport = () => setIsDesktop(mediaQuery.matches);
+
+    updateViewport();
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", updateViewport);
+    } else {
+      mediaQuery.addListener(updateViewport);
+    }
+
+    return () => {
+      if (mediaQuery.removeEventListener) {
+        mediaQuery.removeEventListener("change", updateViewport);
+      } else {
+        mediaQuery.removeListener(updateViewport);
+      }
+    };
+  }, []);
+
+  return isDesktop;
+}
+
+function LiveCamIframe({ copy, language }) {
+  return (
+    <iframe
+      src={liveCam.previewUrl}
+      width="100%"
+      height="100%"
+      loading="lazy"
+      className="block h-full w-full border-0 grayscale"
+      allow="autoplay; encrypted-media"
+      title={copy.iframeTitle}
+      onLoad={() => trackEvent("live_cam_preview_load", {
+        language,
+        provider: "danangsurfcam",
+        location: "homepage_live_cam",
+      })}
+    />
+  );
+}
+
+function WindyIframe({ mapActive }) {
+  return (
+    <iframe
+      src="https://embed.windy.com/embed2.html?lat=16.061&lon=108.247&zoom=11&overlay=waves&product=ecmwf&metricWind=km%2Fh"
+      loading="lazy"
+      className={`h-full w-full border-0 transition-opacity duration-500 ${mapActive ? "opacity-100" : "opacity-90 md:opacity-100"}`}
+      title="Windy Forecast"
+    />
+  );
+}
+
 export function HomeV2LiveCam({ locale = "en" }) {
   const language = locale === "ru" ? "ru" : "en";
   const copy = liveCamCopy[language];
+  const isDesktop = useDesktopSlot();
+  const liveCamIframe = <LiveCamIframe copy={copy} language={language} />;
 
   const trackOutbound = (target) => {
     trackEvent("live_cam_outbound_click", {
@@ -105,20 +163,7 @@ export function HomeV2LiveCam({ locale = "en" }) {
         <div className="relative bg-epicWhite p-4 shadow-none lg:ml-[4%]">
         <span aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 z-40 h-[96px] w-[58px] -translate-x-1/2 -translate-y-[58%] rotate-[-1deg] bg-epicRed shadow-[0_14px_16px_rgba(0,0,0,0.18)] lg:h-[112px] lg:w-[68px]" />
         <div data-live-cam-preview className="relative aspect-video w-full overflow-hidden bg-epicDark">
-          <iframe
-            src={liveCam.previewUrl}
-            width="100%"
-            height="100%"
-            loading="lazy"
-            className="block h-full w-full border-0 grayscale"
-            allow="autoplay; encrypted-media"
-            title={copy.iframeTitle}
-            onLoad={() => trackEvent("live_cam_preview_load", {
-              language,
-              provider: "danangsurfcam",
-              location: "homepage_live_cam",
-            })}
-          />
+          {isDesktop === true ? liveCamIframe : null}
           <div className="pointer-events-none absolute left-[3%] top-[5%] z-30 bg-epicMint px-3 py-2 text-[clamp(8px,0.9vw,12px)] font-black uppercase leading-none text-epicDark">
             <span className="mr-2 inline-block h-2 w-2 rounded-full bg-epicDark align-middle" />
             Live
@@ -183,15 +228,7 @@ export function HomeV2LiveCam({ locale = "en" }) {
         </h2>
         <div className="relative mt-6 bg-epicWhite p-2 shadow-[8px_8px_0_#AAFFC7]">
           <div data-live-cam-mobile-preview className="aspect-video overflow-hidden bg-epicDark">
-            <iframe
-              src={liveCam.previewUrl}
-              width="100%"
-              height="100%"
-              loading="lazy"
-              className="block h-full w-full border-0 grayscale"
-              allow="autoplay; encrypted-media"
-              title={`${copy.iframeTitle} mobile`}
-            />
+            {isDesktop === false ? liveCamIframe : null}
           </div>
           <div className="flex items-center gap-3 px-2 py-3 text-epicDark">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -221,6 +258,8 @@ export function HomeV2LiveCam({ locale = "en" }) {
 export function HomeV2Forecast({ t, lang }) {
   const [forecast, setForecast] = useState(null);
   const [mapActive, setMapActive] = useState(false);
+  const isDesktop = useDesktopSlot();
+  const windyIframe = <WindyIframe mapActive={mapActive} />;
 
   useEffect(() => {
     async function getForecast() {
@@ -295,11 +334,7 @@ export function HomeV2Forecast({ t, lang }) {
         </div>
 
         <div data-forecast-map className="relative min-h-full overflow-hidden bg-epicWhite ring-1 ring-epicWhite">
-          <iframe
-            src="https://embed.windy.com/embed2.html?lat=16.061&lon=108.247&zoom=11&overlay=waves&product=ecmwf&metricWind=km%2Fh"
-            className="h-full w-full border-0"
-            title="Windy Forecast"
-          />
+          {isDesktop === true ? windyIframe : null}
           {!mapActive && (
             <div
               onClick={() => {
@@ -354,11 +389,7 @@ export function HomeV2Forecast({ t, lang }) {
           </div>
         </div>
         <div className="relative mt-4 aspect-[4/3] overflow-hidden bg-epicWhite ring-2 ring-epicWhite">
-          <iframe
-            src="https://embed.windy.com/embed2.html?lat=16.061&lon=108.247&zoom=11&overlay=waves&product=ecmwf&metricWind=km%2Fh"
-            className={`h-full w-full border-0 transition-opacity duration-500 ${mapActive ? "opacity-100" : "opacity-90"}`}
-            title="Windy Forecast"
-          />
+          {isDesktop === false ? windyIframe : null}
           {!mapActive && (
             <button
               type="button"
