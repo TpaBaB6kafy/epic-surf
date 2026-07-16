@@ -15,22 +15,24 @@ const homepages = [
 
 test.describe("Homepage rental mini showroom", () => {
   for (const locale of homepages) {
-    test(`uses the processed board-02 photo grid on ${locale.path}`, async ({ page }) => {
+    test(`uses the three-angle board-02 editorial gallery on ${locale.path}`, async ({ page }) => {
       await page.setViewportSize({ width: 1440, height: 1000 });
       await page.goto(`http://localhost:3000${locale.path}`, { waitUntil: "domcontentloaded" });
 
       const rentals = page.locator("#rentals");
       const showroom = rentals.locator("#rental-mini-showroom");
-      await expect(showroom).toHaveAttribute("data-mini-showroom-variant", "homepage-photo-grid");
+      await expect(showroom).toHaveAttribute("data-mini-showroom-variant", "homepage-editorial-grid");
+      await expect(showroom).toHaveAttribute("data-board-id", "board-02");
       for (const [slot, filename] of [
-        ["main", "main.webp"],
-        ["nose", "back-nose.webp"],
-        ["middle", "back-middle.webp"],
-        ["tail-fins", "back-tail-fins.webp"],
+        ["front", "front.webp"],
+        ["back", "back.webp"],
+        ["fins", "fins.webp"],
       ]) {
         const src = await showroom.locator(`[data-mini-image-slot="${slot}"]`).getAttribute("src");
         expect(decodeURIComponent(src)).toContain(`/rentals/boards/processed/board-02/${filename}`);
       }
+      await expect(showroom.locator("[data-mini-image-slot]")).toHaveCount(3);
+      await expect(showroom.locator('[data-mini-image-slot="tail-fins"]')).toHaveCount(0);
 
       await expect(rentals.locator(`a[href="${locale.catalogHref}"]`)).toBeVisible();
       if (locale.catalogLabel) {
@@ -40,6 +42,8 @@ test.describe("Homepage rental mini showroom", () => {
         await expect(rentals.getByRole("button", { name: locale.rentLabel })).toBeVisible();
       }
       await expect(showroom.getByText("Softboard Pink", { exact: true })).toBeVisible();
+      await expect(showroom.getByText("7'0 / 8'0 / 8'5 / 8'6 / 9'0", { exact: true })).toBeVisible();
+      await expect(rentals.locator("[data-rental-price]")).toContainText(/250(?:,|\u00a0)000 VND/);
       await expect(rentals.locator(":scope > div > div").nth(1).locator(".bg-epicMint")).toHaveCount(0);
       await expect(showroom.locator(".pointer-events-none.absolute.right-4.top-4.bg-epicRed")).toHaveCount(0);
       await expect(page.locator('[data-section="rental-image-tuner"]')).toHaveCount(0);
@@ -56,7 +60,7 @@ test.describe("Homepage rental mini showroom", () => {
     expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
   });
 
-  test("rounds only the outside corners of the photo mosaic", async ({ page }) => {
+  test("uses strict gallery corners and a hard-offset frame", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto("http://localhost:3000/", { waitUntil: "domcontentloaded" });
 
@@ -65,24 +69,14 @@ test.describe("Homepage rental mini showroom", () => {
         const style = getComputedStyle(showroom.querySelector(`[data-mini-cell="${slot}"]`));
         return [style.borderTopLeftRadius, style.borderTopRightRadius, style.borderBottomRightRadius, style.borderBottomLeftRadius];
       };
-      return {
-        main: read("main"),
-        nose: read("nose"),
-        middle: read("middle"),
-        tail: read("tail-fins"),
-      };
+      const frame = getComputedStyle(showroom.children[0]);
+      return { front: read("front"), back: read("back"), fins: read("fins"), frameRadius: frame.borderTopLeftRadius, shadow: frame.boxShadow };
     });
 
-    expect(radii.main[0]).not.toBe("0px");
-    expect(radii.main[1]).toBe("0px");
-    expect(radii.main[2]).toBe("0px");
-    expect(radii.main[3]).not.toBe("0px");
-    expect(radii.nose.slice(0, 1)).toEqual(["0px"]);
-    expect(radii.nose[1]).not.toBe("0px");
-    expect(radii.nose.slice(2)).toEqual(["0px", "0px"]);
-    expect(radii.middle).toEqual(["0px", "0px", "0px", "0px"]);
-    expect(radii.tail.slice(0, 3)).toEqual(["0px", "0px", expect.not.stringMatching(/^0px$/)]);
-    expect(radii.tail[3]).toBe("0px");
+    expect(radii.frameRadius).not.toBe("0px");
+    expect(radii.back[0]).toBe("0px");
+    expect(radii.fins[2]).not.toBe("0px");
+    expect(radii.shadow).not.toBe("none");
   });
 
   test("keeps the existing rental modal and partner-aware messenger flow", async ({ page }) => {

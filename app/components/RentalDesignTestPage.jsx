@@ -5,14 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  BadgeDollarSign,
   ChevronLeft,
   ChevronRight,
-  GraduationCap,
-  MapPin,
-  Sparkles,
-  Users,
-  Waves,
   X,
   ZoomIn,
 } from "lucide-react";
@@ -20,6 +14,7 @@ import Footer from "./Footer";
 import RentalModal from "./RentalModal";
 import { FacebookIcon, InstagramIcon } from "./Icons";
 import { links } from "../data/links";
+import { liveCam } from "../data/liveCam";
 import {
   boardLevelLabels,
   boardTypeLabels,
@@ -47,32 +42,26 @@ const enNavItems = [
 
 const enInfoCards = [
   {
-    icon: BadgeDollarSign,
     title: "Rental price",
     text: "From 250,000 VND for a two-hour session. Message Epic Surf School to confirm availability and board choice.",
   },
   {
-    icon: Users,
     title: "Who rental is for",
     text: "Perfect for surfers who can paddle, catch green waves, avoid reefs, and want more freedom.",
   },
   {
-    icon: Sparkles,
     title: "Board options",
     text: "Softboards, longboards, funboards, shortboards. Availability depends on the day and conditions.",
   },
   {
-    icon: Waves,
     title: "How rental works",
     text: "Choose your board, show ID, pay the rental, get quick rules, and go surf. We are here if you need help.",
   },
   {
-    icon: MapPin,
     title: "Pickup & location",
     text: "Epic Surf School is connected to the My Khe Beach surf area. Pickup confirmed by message.",
   },
   {
-    icon: GraduationCap,
     title: "Take a lesson",
     text: "Not confident? Start with a lesson, learn the basics, and rent with support whenever you are ready.",
   },
@@ -117,6 +106,23 @@ const localeUi = {
     call: "Call",
     specs: ["Length", "Type", "Level", "Conditions", "Includes"],
     leash: "Leash",
+    backLong: "Back to Epic Surf",
+    backShort: "Epic Surf",
+    processTitle: "How rental works",
+    processSteps: [
+      ["Choose", "Pick a board that fits your level and the conditions."],
+      ["Confirm", "Message us to confirm availability, timing, and the pickup point."],
+      ["Pick up", "Bring ID, pay for the rental, and get the safety rules."],
+      ["Surf", "Collect the board and enjoy your session."],
+    ],
+    comparisonTitle: "Rent a board or take a lesson?",
+    rentCriteria: ["You can paddle and catch green waves.", "You can control the board and stop safely.", "You want freedom to choose your own session."],
+    rentHeading: "Rent a board",
+    lessonHeading: "Take a lesson",
+    lessonCta: "View surf lessons",
+    pickupTitle: "Pickup at My Khe",
+    conditionsCta: "Ask about conditions",
+    boardOptionsTitle: "Choose your board",
   },
   ru: {
     navItems: [
@@ -138,6 +144,23 @@ const localeUi = {
     call: "Позвонить",
     specs: ["Длина", "Тип", "Уровень", "Условия", "В комплекте"],
     leash: "Лиш",
+    backLong: "Назад в Epic Surf",
+    backShort: "Epic Surf",
+    processTitle: "Как работает аренда",
+    processSteps: [
+      ["Выберите", "Подберите доску под свой уровень и текущие условия."],
+      ["Подтвердите", "Напишите нам, чтобы уточнить наличие, время и точку получения."],
+      ["Получите", "Покажите ID, оплатите аренду и получите правила безопасности."],
+      ["Катайтесь", "Заберите доску и отправляйтесь на сессию."],
+    ],
+    comparisonTitle: "Арендовать доску или взять урок?",
+    rentCriteria: ["Вы уверенно гребёте и ловите зелёные волны.", "Вы контролируете доску и умеете безопасно остановиться.", "Вы хотите сами выбрать формат и время сессии."],
+    rentHeading: "Арендовать доску",
+    lessonHeading: "Взять урок",
+    lessonCta: "Смотреть уроки",
+    pickupTitle: "Забрать доску на My Khe",
+    conditionsCta: "Спросить об условиях",
+    boardOptionsTitle: "Выберите доску",
   },
 };
 
@@ -170,20 +193,13 @@ const rentalPageAssets = {
     left: "/rentals/page/rental-carousel-arrow-left.svg",
     right: "/rentals/page/rental-carousel-arrow-right.svg",
   },
-  infoFrames: [
-    "/rentals/page/rental-info-frame-price.svg",
-    "/rentals/page/rental-info-frame-who-for.svg",
-    "/rentals/page/rental-info-frame-board-option.svg",
-    "/rentals/page/rental-info-frame-how-works.svg",
-    "/rentals/page/rental-info-frame-pick-location.svg",
-    "/rentals/page/rental-info-frame-take-lesson.svg",
-  ],
-  surfInfoFrames: [
-    "/rentals/page/rental-surf-info-frame-lessons.svg",
-    "/rentals/page/rental-surf-info-frame-surfing.svg",
-    "/rentals/page/rental-surf-info-frame-my-khe.svg",
-    "/rentals/page/rental-surf-info-frame-guide.svg",
-  ],
+  redesign: {
+    process: "/design/rental-redesign/process",
+    comparison: "/design/rental-redesign/comparison",
+    mapBackground: "/design/rental-redesign/map/rental-map-background.svg",
+    mapMarker: "/design/rental-redesign/map/rental-map-epic-marker.svg",
+    pickup: "/design/rental-redesign/pickup/rental-pickup-my-khe-source.jpg",
+  },
 };
 
 const heroHotspots = [
@@ -226,12 +242,12 @@ function buildPageContent(locale, pageContent) {
     heroTitleSecondary: "для серфинга в Дананге",
     heroIntro: "Возьмите доску для серфинга рядом с пляжем Май Кхе. Поможем выбрать доску под ваш уровень, условия и формат катания. Наличие и бронь — через WhatsApp, Telegram или Zalo.",
     infoCards: [
-      { icon: BadgeDollarSign, title: price?.title, text: price?.body },
-      { icon: Users, title: audience?.title, text: audience?.body },
-      { icon: Sparkles, title: boards?.title, text: boards?.body },
-      { icon: Waves, title: process?.title, text: process?.body },
-      { icon: MapPin, title: "Получение доски", text: pageContent.rentalAvailabilityNote },
-      { icon: GraduationCap, title: lesson?.title, text: lesson?.body },
+      { title: price?.title, text: price?.body },
+      { title: audience?.title, text: audience?.body },
+      { title: boards?.title, text: boards?.body },
+      { title: process?.title, text: process?.body },
+      { title: "Получение доски", text: pageContent.rentalAvailabilityNote },
+      { title: lesson?.title, text: lesson?.body },
     ].filter(({ title, text }) => title && text),
     faqItems: (pageContent.faq || []).map(({ question, answer }) => [question, answer]),
     relatedItems: [
@@ -279,9 +295,6 @@ const carouselClipPaths = [
   "polygon(0% 0%, 99.69% 0%, 96.3% 96.99%, 52.16% 99.7%, 0% 96.99%)",
 ];
 
-const infoCardClipPath = "polygon(0% 2.82%, 29.46% 0%, 96.76% 2.82%, 100% 37.62%, 96.76% 100%, 42.88% 96.55%, 0% 100%)";
-const surfInfoCardClipPath = "polygon(2% 0%, 100% 0%, 99% 96%, 0% 100%)";
-
 const defaultImageAdjustment = {
   scale: 1,
   x: 0,
@@ -318,10 +331,6 @@ function boardWithAssets(board, index) {
       thumb: boardAssetPath(board, index, "thumb"),
     },
   };
-}
-
-function compactPrice(price) {
-  return price.amount.toLocaleString("en-US");
 }
 
 function referencePrice(price) {
@@ -384,8 +393,8 @@ function adjustmentStyle(adjustments, boardId, slot) {
   };
 }
 
-function imageFitClass() {
-  return "object-cover";
+function imageFitClass(slot) {
+  return slot === "fins" ? "object-cover object-bottom" : "object-cover";
 }
 
 function frameMaskStyle(src) {
@@ -417,17 +426,235 @@ function DecorativeFrame({ src, className = "", imgClassName = "" }) {
   );
 }
 
-function ActionPill({ href, children, onClick, className = "" }) {
+function EditorialAction({ href, children, onClick, className = "" }) {
   return (
     <a
       href={href}
       onClick={onClick}
       target={href?.startsWith("http") ? "_blank" : undefined}
       rel={href?.startsWith("http") ? "noreferrer" : undefined}
-      className={`inline-flex h-14 items-center justify-center rounded-lg px-8 text-center text-[11px] font-black uppercase leading-tight tracking-wide transition-all active:scale-95 ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center border-2 border-epicDark px-6 py-3 text-center text-[11px] font-black uppercase leading-tight tracking-wide transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-epicRed active:scale-[0.98] ${className}`}
     >
       {children}
     </a>
+  );
+}
+
+const productCardActionClass = "inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-lg border-2 border-epicDark px-6 py-3 text-center text-xs font-black uppercase leading-tight tracking-wide shadow-none transition-colors hover:brightness-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-epicRed active:scale-[0.98]";
+
+function RentalLiveCamPreview({ lang }) {
+  const frameRef = useRef(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const forcedFallback = new URLSearchParams(window.location.search).has("liveCamFallback");
+    if (forcedFallback) {
+      const fallbackTimer = window.setTimeout(() => setFailed(true), 0);
+      return () => window.clearTimeout(fallbackTimer);
+    }
+    const node = frameRef.current;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setShouldLoad(true); observer.disconnect(); }
+    }, { rootMargin: "500px 0px" });
+    if (node) observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  const openLabel = lang === "ru" ? "Открыть камеру" : "Open full camera";
+  const liveLabel = lang === "ru" ? "Сейчас на My Khe" : "Live / My Khe";
+  const trackLiveCam = () => trackEvent("live_cam_outbound_click", { language: lang, provider: "danangsurfcam", location: "rental_pickup", target: "full_stream" });
+
+  return (
+    <div ref={frameRef} data-role="rental-live-cam" data-live-cam-state={failed ? "fallback" : loaded ? "loaded" : "loading"} className="min-w-0">
+      <div data-role="rental-live-cam-media" className="relative aspect-video min-w-0 overflow-hidden border-2 border-epicDark bg-epicDark">
+        {!loaded && !failed ? <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(110deg,#2E2E2E_30%,#585858_50%,#2E2E2E_70%)] bg-[length:200%_100%] animate-pulse text-center motion-reduce:animate-none" aria-label="Loading live camera"><span className="text-xs font-black uppercase tracking-[0.18em] text-epicMint">My Khe Live Cam</span></div> : null}
+        {shouldLoad && !failed ? (
+          <iframe
+            src={liveCam.previewUrl}
+            title={lang === "ru" ? "Live-камера My Khe" : "My Khe live camera"}
+            loading="lazy"
+            allow="autoplay; fullscreen; picture-in-picture"
+            referrerPolicy="strict-origin-when-cross-origin"
+            onLoad={() => { setLoaded(true); trackEvent("live_cam_preview_load", { language: lang, provider: "danangsurfcam", location: "rental_pickup" }); }}
+            onError={() => setFailed(true)}
+            className={`absolute inset-0 h-full w-full border-0 ${loaded ? "opacity-100" : "opacity-0"}`}
+          />
+        ) : null}
+        {failed ? <div className="absolute inset-0 flex flex-col items-center justify-center bg-epicDark px-5 text-center"><span className="text-xs font-black uppercase tracking-[0.18em] text-epicMint">My Khe Live Cam</span><span className="mt-2 text-xs text-epicWhite/60">{liveCam.cameraName}</span></div> : null}
+      </div>
+      <div data-role="rental-live-cam-meta" className="mt-3 flex flex-col items-start gap-4 pl-[22px] text-epicDark md:flex-row md:items-center md:justify-between md:gap-3 md:pl-0">
+        <p className="flex min-h-11 items-center gap-2 text-xs font-black uppercase tracking-[0.12em]"><span className="h-2 w-2 shrink-0 rounded-full bg-epicRed" />{liveLabel}</p>
+        <a href={liveCam.fullStreamUrl} target="_blank" rel="noopener noreferrer" onClick={trackLiveCam} className="inline-flex min-h-11 items-center whitespace-nowrap border-2 border-epicDark px-4 text-[11px] font-black uppercase text-epicDark transition-colors hover:bg-epicDark hover:text-epicWhite focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-epicDark md:text-xs">{openLabel}<ArrowRight className="ml-2" size={15} /></a>
+      </div>
+    </div>
+  );
+}
+
+function RentalArtboardAsset({ src, role, className = "" }) {
+  return <Image src={src} alt="" aria-hidden="true" data-role={role} fill unoptimized sizes="(min-width: 768px) 1235px, 390px" className={`pointer-events-none absolute inset-0 h-full w-full ${className}`} />;
+}
+
+function RentalMaskLayer({ src, role, color }) {
+  return (
+    <span
+      aria-hidden="true"
+      data-role={role}
+      data-asset={src}
+      className="pointer-events-none absolute inset-0"
+      style={{
+        backgroundColor: color,
+        WebkitMaskImage: `url(${src})`,
+        maskImage: `url(${src})`,
+        WebkitMaskPosition: "center",
+        maskPosition: "center",
+        WebkitMaskRepeat: "no-repeat",
+        maskRepeat: "no-repeat",
+        WebkitMaskSize: "100% 100%",
+        maskSize: "100% 100%",
+      }}
+    />
+  );
+}
+
+const processDesktopCards = [
+  { left: 0, top: 207, width: 288, height: 184 },
+  { left: 313, top: 215, width: 288, height: 176 },
+  { left: 626, top: 215, width: 288, height: 176 },
+  { left: 940, top: 218, width: 288, height: 173 },
+];
+
+const processMobileCards = [
+  { left: 33, top: 342, width: 120, height: 120 },
+  { left: 242, top: 349, width: 120, height: 120 },
+  { left: 33, top: 499, width: 120, height: 120 },
+  { left: 242, top: 499, width: 120, height: 120 },
+];
+
+function ProcessArtboard({ ui, processText, lang, mobile = false }) {
+  const width = mobile ? 390 : 1235;
+  const height = mobile ? 685 : 391;
+  const cards = mobile ? processMobileCards : processDesktopCards;
+  const suffix = mobile ? "mobile" : "desktop";
+  const headingWords = ui.processTitle.split(" ");
+  const headingLines = [headingWords.slice(0, 2).join(" "), headingWords.slice(2).join(" ")];
+  const root = rentalPageAssets.redesign.process;
+
+  return (
+    <div
+      data-role="rental-process-artboard"
+      data-breakpoint={suffix}
+      data-canvas={`${width}x${height}`}
+      className={`relative [container-type:inline-size] ${mobile ? "aspect-[390/685] w-full max-w-[390px] md:hidden" : "hidden aspect-[1235/391] w-full max-w-[1235px] md:block"}`}
+    >
+      <RentalArtboardAsset src={`${root}/process-heading-main-plate-${suffix}.svg`} role="process-heading-main-plate" />
+      <RentalArtboardAsset src={`${root}/process-heading-accent-plate-${suffix}.svg`} role="process-heading-accent-plate" />
+      <RentalArtboardAsset src={`${root}/process-intro-note-plate-${suffix}.svg`} role="process-intro-note-plate" />
+      {cards.map((_, index) => (
+        <RentalMaskLayer
+          key={`process-mask-${index + 1}`}
+          src={`${root}/process-card-mask-${mobile ? "mobile-" : ""}${String(index + 1).padStart(2, "0")}.svg`}
+          role="process-card-mask"
+          color="#585858"
+        />
+      ))}
+      <h2 className="absolute inset-0 font-heading uppercase leading-none text-epicDark">
+        <span className="sr-only">{ui.processTitle}</span>
+        <span data-role="process-heading-primary" aria-hidden="true" className={mobile ? `absolute left-[8.7%] top-[5.2%] whitespace-nowrap ${lang === "ru" ? "text-[clamp(25px,7.9cqi,32px)]" : "text-[clamp(27px,8.6cqi,35px)]"}` : `absolute left-[1.9%] top-[1.2%] whitespace-nowrap ${lang === "ru" ? "text-[clamp(34px,3.4cqi,42px)]" : "text-[clamp(40px,4cqi,50px)]"}`}>{headingLines[0]}</span>
+        <span data-role="process-heading-accent" aria-hidden="true" className={mobile ? `absolute top-[12.2%] whitespace-nowrap text-epicRed ${lang === "ru" ? "left-[26%] text-[clamp(27px,8.6cqi,35px)]" : "left-[27%] text-[clamp(29px,9.4cqi,38px)]"}` : `absolute left-[2%] top-[17%] whitespace-nowrap text-epicRed ${lang === "ru" ? "text-[clamp(36px,3.55cqi,44px)]" : "text-[clamp(38px,3.7cqi,46px)]"}`}>{headingLines[1]}</span>
+      </h2>
+      <p data-role="process-intro-copy" className={`absolute text-center font-normal text-epicDark ${mobile ? `left-[17%] top-[24.2%] w-[66%] leading-[1.55] ${lang === "ru" ? "text-[clamp(14px,3.75cqi,15px)]" : "text-[clamp(15px,4.1cqi,17px)]"}` : `left-[62%] top-[4.2%] w-[31%] ${lang === "ru" ? "text-[clamp(14px,1.3cqi,16px)] leading-[1.35]" : "text-[clamp(16px,1.5cqi,19px)] leading-[1.55]"}`}`}>{processText}</p>
+      <ol className="absolute inset-0">
+        {ui.processSteps.map(([title, text], index) => {
+          const card = cards[index];
+          return (
+            <li
+              key={title}
+              data-role="process-card"
+              className="absolute flex flex-col items-center px-[1.3cqi] text-center text-epicWhite"
+              style={{ left: `${(card.left / width) * 100}%`, top: `${(card.top / height) * 100}%`, width: `${(card.width / width) * 100}%`, height: `${(card.height / height) * 100}%`, paddingTop: mobile ? "2.2cqi" : "1.8cqi" }}
+            >
+              <span data-role="process-card-number" className={mobile ? "font-heading text-[clamp(16px,4.6cqi,18px)] leading-none text-epicRed" : "font-heading text-[clamp(28px,2.75cqi,34px)] leading-none text-epicRed"}>{String(index + 1).padStart(2, "0")}</span>
+              <strong data-role="process-card-label" className={mobile ? "mt-[0.5cqi] text-[clamp(6px,1.8cqi,8px)] font-black uppercase leading-none" : `mt-[0.3cqi] font-black uppercase leading-none ${lang === "ru" ? "text-[clamp(10px,0.95cqi,12px)]" : "text-[clamp(11px,1.05cqi,13px)]"}`}>{title}</strong>
+              <span data-role="process-card-description" className={mobile ? `mt-[2.7cqi] block font-normal leading-[1.35] ${lang === "ru" ? "px-0 text-[clamp(9px,2.7cqi,11px)]" : "px-[1cqi] text-[clamp(10px,2.95cqi,12px)]"}` : `mt-[2.15cqi] block font-normal leading-[1.42] text-epicWhite/90 ${lang === "ru" ? "px-0 text-[clamp(12px,1.1cqi,14px)]" : "px-[0.3cqi] text-[clamp(14px,1.3cqi,16px)]"}`}>{text}</span>
+            </li>
+          );
+        })}
+      </ol>
+    </div>
+  );
+}
+
+function ComparisonArtboard({ ui, lessonText, lessonHref, lang, mobile = false }) {
+  const width = mobile ? 390 : 1235;
+  const height = mobile ? 828 : 461;
+  const suffix = mobile ? "mobile" : "desktop";
+  const root = rentalPageAssets.redesign.comparison;
+  const rentBounds = mobile ? { left: 42, top: 244, width: 305, height: 205 } : { left: 38, top: 235, width: 450, height: 196 };
+  const lessonBounds = mobile ? { left: 45, top: 603, width: 292, height: 170 } : { left: 775, top: 231, width: 422, height: 190 };
+  const boundsStyle = (bounds) => ({ left: `${(bounds.left / width) * 100}%`, top: `${(bounds.top / height) * 100}%`, width: `${(bounds.width / width) * 100}%`, height: `${(bounds.height / height) * 100}%` });
+  const headingClass = mobile
+    ? `left-[6%] top-[4.2%] h-[12.8%] w-[88%] ${lang === "ru" ? "text-[clamp(20px,6.2cqi,25px)]" : "text-[clamp(23px,7.2cqi,29px)]"}`
+    : `left-[5.6%] top-[15%] h-[13%] w-[87%] whitespace-nowrap ${lang === "ru" ? "text-[clamp(35px,3.35cqi,41px)]" : "text-[clamp(42px,4.1cqi,51px)]"}`;
+  const bulletClass = mobile ? "h-[2.6cqi] w-[2.6cqi]" : "h-[0.65cqi] w-[0.65cqi]";
+
+  return (
+    <div
+      data-role="rental-comparison-artboard"
+      data-breakpoint={suffix}
+      data-canvas={`${width}x${height}`}
+      className={`relative [container-type:inline-size] ${mobile ? "aspect-[390/828] w-full max-w-[390px] md:hidden" : "hidden aspect-[1235/461] w-full max-w-[1235px] md:block"}`}
+    >
+      <RentalArtboardAsset src={`${root}/comparison-heading-plate-${suffix}.svg`} role="comparison-heading-plate" />
+      <RentalMaskLayer src={`${root}/comparison-rent-card-plate-${suffix}.svg`} role="comparison-rent-card-plate" color="#585858" />
+      <RentalMaskLayer src={`${root}/comparison-lesson-card-plate-${suffix}.svg`} role="comparison-lesson-card-plate" color="#F6F6F6" />
+      <h2 data-role="comparison-heading" className={`absolute flex items-center justify-center px-[2cqi] text-center font-heading uppercase text-epicDark ${mobile ? (lang === "ru" ? "leading-[1.15]" : "leading-[1.42]") : "leading-[1.05]"} ${headingClass}`}>{ui.comparisonTitle}</h2>
+      <article data-role="rental-decision-zone" className={`absolute flex flex-col items-center text-center text-epicWhite ${mobile ? "" : "pt-[1.2cqi]"}`} style={boundsStyle(rentBounds)}>
+        <h3 data-role="comparison-rent-heading" className={mobile ? `font-heading uppercase leading-none text-epicMint ${lang === "ru" ? "text-[clamp(25px,7cqi,29px)]" : "text-[clamp(26px,7.7cqi,31px)]"}` : `font-heading uppercase leading-none text-epicMint ${lang === "ru" ? "text-[clamp(27px,2.45cqi,30px)]" : "text-[clamp(30px,2.9cqi,36px)]"}`}>{ui.rentHeading}</h3>
+        <ul data-role="comparison-criteria" className={mobile ? `mt-[4.6cqi] grid w-[86%] gap-[3.8cqi] font-normal leading-[1.35] ${lang === "ru" ? "text-[clamp(12px,3.55cqi,14px)]" : "text-[clamp(13px,4.1cqi,16px)]"}` : `mt-[2.3cqi] grid w-[90%] gap-[1.85cqi] text-left font-semibold leading-[1.35] ${lang === "ru" ? "text-[clamp(11px,0.95cqi,12px)]" : "text-[clamp(12px,1.05cqi,13px)]"}`}>
+          {ui.rentCriteria.map((criterion) => (
+            <li key={criterion} className={`flex min-w-0 items-center ${mobile ? "gap-[8cqi]" : "gap-[3.3cqi]"}`}>
+              <span className={`shrink-0 rounded-full bg-epicMint ${bulletClass}`} />
+              <span className="min-w-0">{criterion}</span>
+            </li>
+          ))}
+        </ul>
+      </article>
+      <Image src={`${root}/rental-comparison-vs.svg`} alt="versus" data-role="rental-comparison-vs" width={168} height={110} unoptimized className={mobile ? "absolute left-[28.5%] top-[57.7%] h-auto w-[43%]" : "absolute left-[43.2%] top-[55%] h-auto w-[13.6%]"} />
+      <article data-role="lesson-note" className={`absolute flex flex-col items-center text-center text-epicDark ${mobile ? "" : "pt-[2.7cqi]"}`} style={boundsStyle(lessonBounds)}>
+        <h3 data-role="comparison-lesson-heading" className={mobile ? `font-heading uppercase leading-none ${lang === "ru" ? "text-[clamp(24px,6.9cqi,28px)]" : "text-[clamp(25px,7.7cqi,31px)]"}` : `font-heading uppercase leading-none ${lang === "ru" ? "text-[clamp(28px,2.5cqi,31px)]" : "text-[clamp(29px,2.75cqi,34px)]"}`}>{ui.lessonHeading}</h3>
+        <p data-role="comparison-lesson-copy" className={mobile ? `mt-[4.5cqi] max-w-[92%] font-normal leading-[1.35] ${lang === "ru" ? "text-[clamp(12px,3.55cqi,14px)]" : "text-[clamp(13px,3.85cqi,15px)]"}` : `mt-[1.45cqi] max-w-[88%] font-normal leading-[1.45] text-epicDark/80 ${lang === "ru" ? "text-[clamp(12px,1cqi,13px)]" : "text-[clamp(13px,1.12cqi,14px)]"}`}>{lessonText}</p>
+        <Link data-role="comparison-lesson-cta" href={lessonHref} className={mobile ? `${lang === "ru" ? "mt-[4cqi]" : "mt-[5.7cqi]"} inline-flex min-h-9 items-center border-2 border-epicDark bg-epicRed px-5 py-2 text-[9px] font-black uppercase shadow-[4px_4px_0_0_#2E2E2E]` : `${lang === "ru" ? "mt-[1.8cqi]" : "mt-[3.4cqi]"} inline-flex min-h-10 items-center border-2 border-epicDark bg-epicRed px-6 py-2 text-[10px] font-black uppercase shadow-[4px_4px_0_0_#2E2E2E]`}>
+          {ui.lessonCta}<ArrowRight className="ml-2" size={14} />
+        </Link>
+      </article>
+    </div>
+  );
+}
+
+function RentalFaqItem({ question, answer, index, lang, isLastOdd }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const answerId = `rental-faq-${lang}-${index + 1}`;
+
+  return (
+    <article className={`border-b-2 border-epicDark/20 ${isLastOdd ? "md:col-span-2" : ""}`}>
+      <h3>
+        <button
+          type="button"
+          aria-expanded={isOpen}
+          aria-controls={answerId}
+          onClick={() => setIsOpen((current) => !current)}
+          className="grid min-h-16 w-full grid-cols-[1fr_24px] items-center gap-3 py-4 text-left text-sm font-black leading-snug text-epicDark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-epicRed"
+        >
+          <span>{question}</span>
+          <span aria-hidden="true" className="text-right text-2xl font-normal leading-none text-epicRed">{isOpen ? "−" : "+"}</span>
+        </button>
+      </h3>
+      <div id={answerId} hidden={!isOpen} className="pb-5 pr-6">
+        <p className="max-w-[560px] text-sm font-medium leading-6 text-epicDark/70">{answer}</p>
+      </div>
+    </article>
   );
 }
 
@@ -441,9 +668,60 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
   const initialBoard = boards.find((board) => board.recommended) || boards[0];
   const [activeBoardId, setActiveBoardId] = useState(initialBoard.id);
   const [activeHeroBoard, setActiveHeroBoard] = useState(null);
+  const [heroMasks, setHeroMasks] = useState(null);
+  const heroFrameRef = useRef(null);
+  const heroRafRef = useRef(null);
+  const debugCanvasRef = useRef(null);
   const [activeMobileAsset, setActiveMobileAsset] = useState("front");
   const [isRentalModalOpen, setRentalModalOpen] = useState(false);
   const [lightboxAsset, setLightboxAsset] = useState(null);
+  const debugHeroHotspots = typeof window !== "undefined" && new URLSearchParams(window.location.search).has("debugHeroHotspots");
+  useEffect(() => {
+    let cancelled = false;
+    Promise.all(rentalPageAssets.heroColorOverlays.map((src) => new Promise((resolve) => {
+      const image = new window.Image();
+      image.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = 1440;
+        canvas.height = 810;
+        const context = canvas.getContext("2d", { willReadFrequently: true });
+        context.drawImage(image, 0, 0, 1440, 810);
+        resolve(context.getImageData(0, 0, 1440, 810).data);
+      };
+      image.onerror = () => resolve(null);
+      image.src = src;
+    }))).then((masks) => { if (!cancelled) setHeroMasks(masks); });
+    return () => { cancelled = true; };
+  }, []);
+  useEffect(() => () => { if (heroRafRef.current) cancelAnimationFrame(heroRafRef.current); }, []);
+  useEffect(() => {
+    const canvas = debugCanvasRef.current;
+    if (!canvas || !heroMasks) return;
+    const context = canvas.getContext("2d");
+    const image = context.createImageData(1440, 810);
+    const colors = [[254,116,106],[170,255,199],[255,210,96],[117,194,255],[211,153,255],[255,170,96],[150,255,220]];
+    heroMasks.forEach((mask, boardIndex) => {
+      if (!mask) return;
+      const color = colors[boardIndex];
+      for (let i = 0; i < 1440 * 810; i += 1) {
+        const alpha = mask[i * 4 + 3];
+        if (alpha > 24) { image.data[i * 4] = color[0]; image.data[i * 4 + 1] = color[1]; image.data[i * 4 + 2] = color[2]; image.data[i * 4 + 3] = Math.min(150, alpha); }
+      }
+    });
+    context.putImageData(image, 0, 0);
+  }, [heroMasks, debugHeroHotspots]);
+  const pickHeroBoard = (event) => {
+    if (!heroMasks || !heroFrameRef.current) return;
+    const rect = heroFrameRef.current.getBoundingClientRect();
+    const scale = Math.max(rect.width / 1440, rect.height / 810);
+    const sourceX = Math.round((event.clientX - rect.left - (rect.width - 1440 * scale) / 2) / scale);
+    const sourceY = Math.round((event.clientY - rect.top - (rect.height - 810 * scale) / 2) / scale);
+    if (sourceX < 0 || sourceX >= 1440 || sourceY < 0 || sourceY >= 810) { setActiveHeroBoard(null); return; }
+    const pixel = sourceY * 1440 + sourceX;
+    let bestBoard = null; let bestAlpha = 24;
+    heroMasks.forEach((mask, index) => { const alpha = mask?.[pixel * 4 + 3] || 0; if (alpha > bestAlpha) { bestAlpha = alpha; bestBoard = index + 1; } });
+    setActiveHeroBoard(bestBoard);
+  };
   const [editMode, setEditMode] = useState(false);
   const [tunerSlot, setTunerSlot] = useState("front");
   const [imageAdjustments, setImageAdjustments] = useState({});
@@ -454,6 +732,8 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
   const activeBoard = boards.find((board) => board.id === activeBoardId) || initialBoard;
   const activeAdjustment = getImageAdjustment(imageAdjustments, activeBoard.id, tunerSlot);
   const t = translations[lang];
+  const [, , , rentalProcess, pickupDetails, lessonDetails] = content.infoCards;
+  const lessonHref = lang === "ru" ? "/ru#lessons" : "/surf-lessons-danang";
 
   useEffect(() => {
     storeAttributionFromUrl({ includePartner: true });
@@ -642,15 +922,16 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
   const resetAllImageAdjustments = () => setImageAdjustments({});
 
   return (
-    <div className="min-h-screen overflow-x-clip bg-epicDark font-sans text-epicWhite">
+    <div className="min-h-screen overflow-x-clip bg-epicDark font-sans text-epicWhite [--rental-content-max:1280px]">
       <main>
         <section
           data-section="rental-design-hero"
-          className="relative min-h-[54vh] overflow-hidden bg-epicDark shadow-2xl shadow-epicDark md:min-h-[68vh] lg:min-h-[76vh]"
+          className="bg-epicDark"
           onPointerLeave={(event) => {
             if (event.pointerType === "mouse") setActiveHeroBoard(null);
           }}
         >
+          <div data-role="rental-hero-media" className="relative mx-auto aspect-[16/9] min-h-[300px] w-[min(100%,var(--rental-content-max))] overflow-hidden bg-epicDark sm:min-h-[360px]">
           <h1 className="sr-only">{content.heroTitle}</h1>
           <Image
             src={rentalPageAssets.hero}
@@ -660,7 +941,7 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
             unoptimized
             sizes="100vw"
             data-role="rental-hero-base"
-            className="object-cover object-center grayscale"
+            className="z-0 object-cover object-center grayscale"
           />
           {rentalPageAssets.heroColorOverlays.map((src, index) => {
             const boardId = index + 1;
@@ -677,7 +958,7 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                 fill
                 unoptimized
                 sizes="100vw"
-                className={`pointer-events-none select-none object-cover object-center transition-opacity duration-300 motion-reduce:transition-none ${isActive ? "opacity-100" : "opacity-0"}`}
+                className={`pointer-events-none z-[1] select-none object-cover object-center transition-opacity duration-300 ease-out motion-reduce:transition-none ${isActive ? "opacity-100" : "opacity-0"}`}
               />
             );
           })}
@@ -685,41 +966,40 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-b from-transparent to-epicDark md:h-52" />
           <div
             aria-hidden="true"
-            className="absolute inset-0 z-10"
+            data-role="rental-hero-hotspot-layer"
+            data-hero-masks-ready={heroMasks ? "true" : "false"}
+            ref={heroFrameRef}
+            className="absolute inset-0 z-10 h-full w-full"
+            onPointerMove={(event) => {
+              if (event.pointerType === "touch") return;
+              if (heroRafRef.current) return;
+              heroRafRef.current = requestAnimationFrame(() => { heroRafRef.current = null; pickHeroBoard(event); });
+            }}
             onPointerUp={(event) => {
               if (event.pointerType === "mouse") return;
-              if (event.target === event.currentTarget) setActiveHeroBoard(null);
+              pickHeroBoard(event);
             }}
+            onPointerDown={(event) => { if (event.pointerType !== "mouse") pickHeroBoard(event); }}
+            onClick={pickHeroBoard}
           >
-            {heroHotspots.map((hotspot) => (
-              <span
-                key={hotspot.id}
-                data-role="rental-hero-hotspot"
-                data-hero-board-id={hotspot.id}
-                className="absolute cursor-default bg-transparent"
-                style={{
-                  left: hotspot.left,
-                  top: hotspot.top,
-                  width: hotspot.width,
-                  height: hotspot.height,
-                }}
-                onPointerEnter={(event) => {
-                  if (event.pointerType === "mouse") setActiveHeroBoard(hotspot.id);
-                }}
-                onPointerUp={(event) => {
-                  if (event.pointerType === "mouse") return;
-                  setActiveHeroBoard((current) => (current === hotspot.id ? null : hotspot.id));
-                }}
-              />
-            ))}
+            {debugHeroHotspots ? <canvas ref={debugCanvasRef} width="1440" height="810" className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center" /> : null}
+          </div>
+          <Link
+            href={lang === "ru" ? "/ru" : "/"}
+            data-role="rental-back-link"
+            className="absolute left-4 top-4 z-20 inline-flex min-h-12 items-center border-2 border-epicDark bg-epicWhite px-4 py-3 text-xs font-black uppercase leading-none text-epicDark shadow-[5px_5px_0_0_#AAFFC7] transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-epicMint md:left-8 md:top-8 md:px-5 md:text-sm"
+          >
+            <span aria-hidden="true" className="mr-2">←</span>
+            <span className="md:hidden">{ui.backShort}</span>
+            <span className="hidden md:inline">{ui.backLong}</span>
+          </Link>
           </div>
         </section>
 
-        <section data-section="rental-board-showroom" className="relative bg-epicDark px-5 pb-10 text-epicWhite shadow-inner shadow-epicDark sm:px-8 lg:px-10">
-          <div className="relative mx-auto max-w-7xl">
-            <div aria-hidden="true" className="pointer-events-none absolute -inset-x-4 top-8 hidden h-[720px] bg-epicGray/10 shadow-2xl shadow-epicDark/70 lg:block" />
-            <div className="grid gap-2 lg:grid-cols-[0.9fr_0.68fr_1.22fr]">
-              <div ref={showroomImageRef} className="lg:col-span-2">
+        <section data-section="rental-board-showroom" className="relative bg-epicDark px-5 pb-10 text-epicWhite sm:px-8 lg:px-10">
+          <div className="mx-auto max-w-[var(--rental-content-max)]">
+            <div className="grid gap-5 lg:grid-cols-[minmax(0,1.82fr)_minmax(310px,0.78fr)] lg:items-stretch lg:gap-8">
+              <div ref={showroomImageRef}>
                 <div
                   className="relative min-h-[430px] overflow-hidden bg-epicDark md:min-h-[640px] lg:hidden"
                 >
@@ -740,13 +1020,13 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                       style={adjustmentStyle(imageAdjustments, activeBoard.id, activeMobileAsset)}
                       className={`${imageFitClass(activeMobileAsset)} transition-transform duration-200`}
                     />
-                    <span className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-epicDark/55 text-epicWhite/80 opacity-70 backdrop-blur-sm">
+                    <span className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center border border-epicWhite/60 bg-epicDark/90 text-epicWhite/80">
                       <ZoomIn size={18} aria-hidden="true" />
                     </span>
                   </button>
                 </div>
 
-                <div className="grid grid-cols-3 gap-2.5 rounded-b-[20px] bg-epicDark pt-2 lg:hidden">
+                <div className="grid grid-cols-3 gap-2.5 bg-epicDark pt-2 lg:hidden">
                   {lightboxAssets.map(({ key, label }) => (
                     <button
                       key={key}
@@ -754,7 +1034,7 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                       onClick={() => setActiveMobileAsset(key)}
                       aria-label={`Show ${activeBoard.displayName || activeBoard.name} ${key} image`}
                       aria-pressed={activeMobileAsset === key}
-                      className={`relative h-32 overflow-hidden rounded-xl border-2 bg-epicDark shadow-lg shadow-epicDark/45 transition-colors sm:h-36 ${activeMobileAsset === key ? "border-epicRed" : "border-epicWhite/15"}`}
+                      className={`relative h-32 overflow-hidden border-2 bg-epicDark transition-colors sm:h-36 ${activeMobileAsset === key ? "border-epicRed shadow-[4px_4px_0_0_#FE746A]" : "border-epicWhite/35"}`}
                     >
                       <Image
                         src={activeBoard.processedImages[key]}
@@ -772,7 +1052,7 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                   ))}
                 </div>
 
-                <div className="relative hidden aspect-[723/761] w-full bg-epicDark lg:block">
+                <div data-role="rental-gallery" className="relative hidden aspect-[723/761] w-full bg-epicDark lg:block">
                   {[
                     ["front", "Front view", gallerySlots.front],
                     ["back", "Back view", gallerySlots.back],
@@ -814,37 +1094,39 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                 </div>
               </div>
 
-              <article className="relative flex min-h-[520px] flex-col items-center rounded-none border border-epicGray/15 bg-epicGray/10 px-7 py-9 text-center shadow-2xl shadow-epicDark/70 md:px-12 md:py-12 lg:justify-center lg:py-14">
-                <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-epicDark/25" />
-                <div className="relative z-10 flex flex-col items-center">
-                <h2 className="max-w-[460px] font-heading text-4xl uppercase leading-[0.9] tracking-normal text-epicWhite md:text-6xl lg:text-[58px]">
+              <article data-role="rental-product-card" className="flex min-h-[520px] min-w-0 flex-col border-2 border-epicWhite/45 bg-epicDark px-6 py-8 text-left shadow-[8px_8px_0_0_#585858] md:px-8 md:py-10 lg:h-full lg:min-h-0 lg:justify-center lg:py-9">
+                <div className="min-w-0 text-center">
+                <h2 className="mx-auto max-w-[460px] break-words font-heading text-4xl uppercase leading-[0.92] tracking-normal text-epicWhite md:text-[36px] lg:text-[36px]">
                   {activeBoard.displayName || activeBoard.name}
                 </h2>
-                <div className="mt-6">
-                  <p className="font-heading text-5xl leading-none text-epicMint lg:text-[54px]">
+                <div className="mt-5">
+                  <p className="font-heading text-4xl leading-none text-epicMint lg:text-[46px]">
                     {referencePrice(activeBoard.price)}
                     <span className="ml-2 align-baseline text-2xl text-epicMint">VND</span>
                   </p>
                   <p className="mt-1 text-sm font-black uppercase tracking-wide text-epicWhite">{lang === "ru" ? ui.priceUnit : activeBoard.price.unit}</p>
                 </div>
-                <p className="mt-7 max-w-[350px] text-[13px] font-bold leading-5 text-epicWhite/82 md:text-sm">{activeBoard.description}</p>
-                <dl data-section="rental-board-specs" className="mt-8 w-full max-w-[360px]">
+                </div>
+                <div className="min-w-0">
+                <p className="mt-7 max-w-[420px] text-[15px] font-semibold leading-7 text-epicWhite/82">{activeBoard.description}</p>
+                <dl data-section="rental-board-specs" className="mt-6 w-full min-w-0 max-w-[420px]">
                   {boardSpecs(activeBoard, lang, ui).map(([label, value]) => (
-                    <div key={label} data-role="rental-spec-row" className="grid grid-cols-[104px_1fr] gap-4 border-b-2 border-epicRed py-3.5 text-base leading-5 md:text-lg">
-                      <dt className="text-left font-black text-epicWhite/82">{label}</dt>
-                      <dd className="text-right font-black text-epicWhite">{value}</dd>
+                    <div key={label} data-role="rental-spec-row" className="grid min-w-0 grid-cols-[minmax(0,1fr)_minmax(88px,auto)] gap-4 border-t-2 border-epicRed py-3 text-sm leading-5 last:border-b-2">
+                      <dt className="min-w-0 text-left font-bold text-epicWhite/78">{label}</dt>
+                      <dd className="min-w-0 break-words text-right font-black text-epicWhite">{value}</dd>
                     </div>
                   ))}
                 </dl>
-                <div className="mt-10 flex w-full max-w-[240px] flex-col items-stretch gap-4">
+                </div>
+                <div data-role="rental-product-actions" className="mt-7 flex w-full min-w-0 max-w-[420px] flex-col items-stretch gap-3">
                   <button
                     type="button"
                     onClick={() => openRentalModal("rental_page_showroom")}
-                    className="inline-flex h-12 w-full items-center justify-center rounded-none bg-epicRed px-8 text-center text-sm font-black uppercase leading-tight tracking-wide text-epicDark shadow-none transition-all hover:brightness-95 active:scale-95"
+                    className={`${productCardActionClass} bg-epicRed text-epicDark`}
                   >
                     {ui.rentCta}
                   </button>
-                  <ActionPill
+                  <a
                     href={links.whatsapp}
                     onClick={(event) => handleMessengerClick(
                       event,
@@ -852,17 +1134,18 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                       "whatsapp_to_book",
                       () => buildWhatsAppUrl(links.whatsapp, rentalMessage(activeBoard, lang, content.contactMessage), { language: lang }),
                     )}
-                    className="!h-12 w-full gap-3 !rounded-none bg-epicWhite text-epicDark hover:bg-epicMint"
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`${productCardActionClass} bg-epicWhite text-epicDark hover:bg-epicMint`}
                   >
                     <ArrowRight size={19} />
                     WhatsApp
-                  </ActionPill>
-                </div>
+                  </a>
                 </div>
               </article>
             </div>
 
-            <div className="flex items-center justify-center gap-4 bg-epicDark px-2 py-8 md:px-8">
+            <div className="flex items-center justify-center gap-4 bg-epicDark px-2 pt-6 md:px-8 md:pt-8">
               <button
                 type="button"
                 onClick={() => scrollBoards(-1)}
@@ -908,12 +1191,12 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                         title={board.displayName || board.name}
                         aria-current={isActive ? "true" : undefined}
                         data-carousel-window="thumbnail"
-                        className="w-[88px] shrink-0 text-left text-epicWhite transition-transform duration-300 ease-out [@media(hover:hover)]:hover:-translate-y-0.5 lg:w-[158px]"
+                        className="w-[100px] shrink-0 text-left text-epicWhite lg:w-[176px]"
                       >
                         <span
                           data-carousel-frame={frame}
                           style={{ clipPath: carouselClipPaths[index % carouselClipPaths.length] }}
-                          className={`relative block h-[88px] overflow-hidden bg-epicDark grayscale transition-all lg:h-[164px] ${isActive ? "outline outline-[3px] outline-offset-2 outline-epicRed grayscale-0" : "opacity-75 hover:opacity-100"}`}
+                          className={`relative block h-[100px] overflow-hidden bg-epicDark grayscale transition-all lg:h-[176px] ${isActive ? "outline outline-[3px] outline-offset-2 outline-epicRed grayscale-0" : "opacity-75 hover:opacity-100"}`}
                         >
                           <DecorativeFrame
                             src={frame}
@@ -930,6 +1213,9 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                             style={adjustmentStyle(imageAdjustments, board.id, "thumb")}
                             className="object-cover"
                           />
+                          <span className={`absolute left-2 top-2 border px-2 py-1 text-[10px] font-black leading-none ${isActive ? "border-epicDark bg-epicRed text-epicDark" : "border-epicWhite/45 bg-epicDark/90 text-epicWhite"}`}>
+                            {String(index + 1).padStart(2, "0")}
+                          </span>
                         </span>
                       </button>
                     );
@@ -956,75 +1242,82 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
           </div>
         </section>
 
-        <section className="relative bg-epicDark px-5 py-14 text-epicWhite shadow-inner shadow-epicDark sm:px-8 md:py-16 lg:px-10 lg:py-20">
-          <div className="mx-auto max-w-7xl">
-            <div data-section="rental-info-cards" className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-              {content.infoCards.map(({ icon: Icon, title, text }, index) => (
-                <article key={title} className="relative mx-auto aspect-[280/202] w-full max-w-[290px] overflow-visible px-7 pb-6 pt-12 text-center transition-transform duration-300 ease-out [@media(hover:hover)]:hover:-translate-y-1">
-                  <DecorativeFrame
-                    src={rentalPageAssets.infoFrames[index]}
-                    imgClassName="object-fill opacity-0"
-                  />
-                  <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 bg-epicWhite shadow-xl shadow-epicDark/35"
-                    style={{ clipPath: infoCardClipPath }}
-                  />
-                  <span data-role="info-icon-badge" className="absolute left-1/2 top-0 z-20 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-epicMint text-epicDark shadow-xl shadow-epicDark/30">
-                    <Icon className="h-5 w-5" strokeWidth={1.9} />
-                  </span>
-                  <div className="relative z-10">
-                    <h3 className="text-[13px] font-black uppercase leading-tight tracking-normal text-epicDark">{title}</h3>
-                    <p className="mx-auto mt-3 max-w-[230px] text-[11px] font-semibold leading-5 text-epicDark/62">{text}</p>
-                  </div>
-                </article>
-              ))}
+        <section className="bg-epicDark px-5 pb-14 pt-12 text-epicWhite sm:px-8 md:pb-20 md:pt-16 lg:px-10">
+          <div className="mx-auto max-w-[var(--rental-content-max)]">
+            <div data-role="rental-redesign-map-field" className="relative">
+              <Image src={rentalPageAssets.redesign.mapBackground} alt="" aria-hidden="true" data-role="rental-map-background" data-opacity="0.29" width={1414} height={490} unoptimized className="pointer-events-none absolute left-1/2 top-[265px] hidden h-auto w-[114%] max-w-[1414px] -translate-x-1/2 opacity-[0.29] md:block" />
+              <Image src={rentalPageAssets.redesign.mapBackground} alt="" aria-hidden="true" data-role="rental-map-background-mobile" data-opacity="0.29" width={1414} height={490} unoptimized className="pointer-events-none absolute left-1/2 top-[210px] h-auto w-[2520px] max-w-none -translate-x-[43.5%] opacity-[0.29] md:hidden" />
+              <Image src={rentalPageAssets.redesign.mapMarker} alt="" aria-hidden="true" data-role="rental-map-epic-marker" data-opacity="1" width={32} height={17} unoptimized className="pointer-events-none absolute left-[48%] top-[348px] z-[1] h-auto w-10 opacity-100 md:left-[60.5%] md:top-[451px] md:w-10" />
+
+              <section data-section="rental-process" className="relative left-1/2 z-10 w-screen max-w-[390px] -translate-x-1/2 md:left-auto md:mx-auto md:w-auto md:max-w-[1235px] md:translate-x-0">
+                <ProcessArtboard ui={ui} processText={rentalProcess?.text} lang={lang} />
+                <ProcessArtboard ui={ui} processText={rentalProcess?.text} lang={lang} mobile />
+              </section>
+
+              <section data-section="rental-comparison" className="relative left-1/2 z-10 w-screen max-w-[390px] -translate-x-1/2 md:left-auto md:mx-auto md:mt-8 md:w-auto md:max-w-[1235px] md:translate-x-0">
+                <div data-role="rental-comparison-options">
+                  <ComparisonArtboard ui={ui} lessonText={lessonDetails?.text} lessonHref={lessonHref} lang={lang} />
+                  <ComparisonArtboard ui={ui} lessonText={lessonDetails?.text} lessonHref={lessonHref} lang={lang} mobile />
+                </div>
+              </section>
             </div>
 
-            <section data-section="rental-faq" className="relative left-1/2 mt-16 w-screen -translate-x-1/2 bg-epicWhite px-5 py-12 text-epicDark shadow-2xl shadow-epicDark/45 md:mt-20 md:py-16">
+            <section data-section="rental-pickup" className="relative left-1/2 mt-2 h-[828px] w-screen max-w-[1235px] -translate-x-1/2 overflow-hidden text-epicWhite shadow-[0_8px_0_0_#FE746A] md:mt-20 md:h-[461px]">
+              <Image data-role="rental-pickup-photo" src={rentalPageAssets.redesign.pickup} alt="" aria-hidden="true" fill sizes="(min-width: 768px) 1235px, 100vw" className="!top-[-6%] !h-[106%] object-cover object-[19%_center] md:!top-0 md:!h-full md:object-[center_24%]" />
+              <div data-role="rental-pickup-gradient" aria-hidden="true" className="absolute inset-0 z-[1] bg-[linear-gradient(180deg,rgba(46,46,46,0.62)_0%,rgba(46,46,46,0.52)_30%,rgba(46,46,46,0.16)_50%,rgba(46,46,46,0)_66%)] md:bg-[linear-gradient(90deg,rgba(46,46,46,0.76)_0%,rgba(46,46,46,0.64)_27%,rgba(46,46,46,0.24)_45%,rgba(46,46,46,0)_60%)]" />
+              <div className="relative z-10 grid h-[828px] content-start md:h-[461px] md:grid-cols-[0.92fr_1.08fr] md:content-normal md:items-stretch">
+                <div data-role="rental-pickup-copy" className="px-7 pb-6 pt-4 text-center md:px-10 md:pb-10 md:pt-9 md:text-left lg:px-14">
+                  <h2 data-role="rental-pickup-heading" className={`mx-auto max-w-[11ch] font-heading uppercase text-epicWhite md:mx-0 ${lang === "ru" ? "text-[30px] leading-[1.06] md:text-[36px]" : "text-[38px] leading-[1.1] md:text-[42px]"}`}>{ui.pickupTitle}</h2>
+                  <p data-role="rental-pickup-description" className={`mx-auto mt-7 font-normal text-epicWhite/95 md:mx-0 md:max-w-[19rem] ${lang === "ru" ? "max-w-[21rem] text-[15px] leading-[1.65] md:mt-8 md:text-[16px] md:leading-[1.6]" : "max-w-[260px] text-[16px] leading-7 md:mt-12 md:text-[18px] md:leading-7"}`}>{pickupDetails?.text}</p>
+                <div className="flex justify-start pl-[22px] md:block md:pl-0">
+                <EditorialAction
+                  href={links.whatsapp}
+                  onClick={(event) => handleMessengerClick(
+                    event,
+                    "whatsapp_click",
+                    "ask_about_conditions",
+                    () => buildWhatsAppUrl(links.whatsapp, rentalMessage(activeBoard, lang, content.contactMessage), { language: lang }),
+                  )}
+                    className="mt-10 bg-epicDark text-epicWhite shadow-[5px_5px_0_0_#F6F6F6] [padding-inline:8px] hover:bg-epicRed hover:text-epicDark md:mt-16 md:[padding-inline:24px]"
+                >
+                  {ui.conditionsCta}
+                </EditorialAction>
+                </div>
+                </div>
+                <div data-role="rental-pickup-live-cam" className="min-w-0 px-7 pb-10 pt-0 md:pb-8 md:pl-[132px] md:pr-12 md:pt-[34px]">
+                  <RentalLiveCamPreview lang={lang} />
+                </div>
+              </div>
+            </section>
+
+            <section data-section="rental-faq" className="relative left-1/2 mt-16 w-screen -translate-x-1/2 bg-epicWhite px-5 py-12 text-epicDark shadow-xl shadow-black/10 md:mt-20 md:py-16">
               <div className="mx-auto max-w-5xl">
-                <h2 className="font-heading text-3xl uppercase leading-none text-epicDark md:text-4xl">{ui.faqTitle}</h2>
+                <h2 className="font-heading text-5xl uppercase leading-none text-epicDark md:text-7xl">{ui.faqTitle}</h2>
                 <div className="mt-7 grid gap-x-16 md:grid-cols-2">
-                  {content.faqItems.map(([question, answer]) => (
-                    <details key={question} className="group border-b border-epicDark/10 py-4">
-                      <summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-xs font-black leading-snug text-epicDark">
-                        {question}
-                        <span className="text-lg font-normal text-epicRed transition-transform group-open:rotate-45">+</span>
-                      </summary>
-                      <p className="mt-3 max-w-[560px] text-sm font-medium leading-6 text-epicDark/65">
-                        {answer}
-                      </p>
-                    </details>
+                  {content.faqItems.map(([question, answer], index) => (
+                    <RentalFaqItem key={question} question={question} answer={answer} index={index} lang={lang} isLastOdd={content.faqItems.length % 2 === 1 && index === content.faqItems.length - 1} />
                   ))}
                 </div>
               </div>
             </section>
 
             <section data-section="rental-related" className="relative mt-16 overflow-hidden px-1 py-2 text-epicWhite md:mt-20 md:py-4">
-              <h2 className="px-1 font-heading text-2xl uppercase leading-tight text-epicMint">{ui.relatedTitle}</h2>
-              <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <h2 className="px-1 font-heading text-4xl uppercase leading-tight text-epicMint md:text-5xl">{ui.relatedTitle}</h2>
+              <div className="mt-7 border-t-2 border-epicWhite/45">
                 {content.relatedItems.map((item, index) => (
-                  <Link key={`${item.href}-${item.title}`} href={item.href} className="group relative aspect-[274/102] min-h-[104px] overflow-hidden px-5 py-5 shadow-lg shadow-epicDark/30 transition-transform duration-300 ease-out [@media(hover:hover)]:hover:-translate-y-0.5">
-                    <DecorativeFrame
-                      src={rentalPageAssets.surfInfoFrames[index]}
-                      imgClassName="object-fill opacity-0"
-                    />
-                    <span
-                      aria-hidden="true"
-                      className="pointer-events-none absolute inset-0 border border-epicWhite/45 transition-colors duration-300 [@media(hover:hover)]:group-hover:border-epicMint"
-                      style={{ clipPath: surfInfoCardClipPath }}
-                    />
-                    <span className="relative z-10 block">
-                      <h3 className="text-sm font-black uppercase leading-tight text-epicWhite">{item.title}</h3>
-                      <span aria-hidden="true" className="mt-2 block h-px w-8 bg-epicMint/0 transition-colors duration-300 [@media(hover:hover)]:group-hover:bg-epicMint" />
-                      <p className="mt-2 max-w-[220px] text-[11px] font-medium leading-4 text-epicWhite/62">{item.text}</p>
+                  <Link key={`${item.href}-${item.title}`} href={item.href} className="group grid min-h-[118px] grid-cols-[64px_1fr_28px] items-center gap-3 border-b-2 border-epicWhite/45 px-1 py-5 transition-colors hover:bg-epicWhite hover:px-4 hover:text-epicDark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-epicMint md:grid-cols-[90px_1fr_36px]">
+                    <span className="font-heading text-3xl text-epicRed md:text-4xl">{String(index + 1).padStart(2, "0")}</span>
+                    <span>
+                      <span className="block text-base font-black uppercase leading-tight md:text-xl">{item.title}</span>
+                      <span className="mt-2 block max-w-2xl text-sm font-medium leading-5 text-epicWhite/62 transition-colors group-hover:text-epicDark/65">{item.text}</span>
                     </span>
+                    <ArrowRight size={24} aria-hidden="true" />
                   </Link>
                 ))}
               </div>
             </section>
 
-            <section data-section="rental-final-cta" className="relative left-1/2 mt-16 w-screen -translate-x-1/2 overflow-hidden px-5 py-12 text-epicDark md:mt-20 md:py-16">
+            <section data-section="rental-final-cta" className="relative left-1/2 mt-16 w-screen -translate-x-1/2 overflow-hidden bg-epicMint px-5 py-12 text-epicDark md:mt-20 md:py-16">
               <DecorativeFrame
                 src={rentalPageAssets.ctaBrush}
                 imgClassName="object-cover"
@@ -1036,7 +1329,7 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                   ))}
                 </h2>
                 <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-                  <ActionPill
+                  <EditorialAction
                     href={links.whatsapp}
                     onClick={(event) => handleMessengerClick(
                       event,
@@ -1047,8 +1340,8 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                     className="bg-epicRed text-epicWhite"
                   >
                     WhatsApp
-                  </ActionPill>
-                  <ActionPill
+                  </EditorialAction>
+                  <EditorialAction
                     href={links.telegram}
                     onClick={(event) => handleMessengerClick(
                       event,
@@ -1059,8 +1352,8 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                     className="bg-epicDark text-epicWhite"
                   >
                     Telegram
-                  </ActionPill>
-                  <ActionPill
+                  </EditorialAction>
+                  <EditorialAction
                     href={links.zalo}
                     onClick={(event) => handleMessengerClick(
                       event,
@@ -1071,10 +1364,10 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                     className="bg-epicDark text-epicWhite"
                   >
                     Zalo
-                  </ActionPill>
-                  <ActionPill href="tel:+84905012198" className="bg-epicDark text-epicWhite">
+                  </EditorialAction>
+                  <EditorialAction href="tel:+84905012198" className="bg-epicDark text-epicWhite">
                     {ui.call}
-                  </ActionPill>
+                  </EditorialAction>
                 </div>
               </div>
             </section>
