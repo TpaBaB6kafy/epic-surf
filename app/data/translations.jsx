@@ -31,7 +31,7 @@ export const translations = {
       navLessons: "Уроки", navRentals: "Аренда", navHow: "Процесс", navForecast: "Прогноз", navEvents: "Эвенты", navLocation: "Карта", btnBook: "Записаться",
       heroTitle: "Поймай свою", heroTitleEpic: "Epic", heroTitleEnd: "волну в Дананге",
       heroSub: "ШКОЛА СЕРФИНГА В ДАНАНГЕ - МЕСТО, ГДЕ ЖИВУТ СЕРФИНГОМ",
-      sectionTitle: "Выбери свой", sectionTitleRide: "формат",
+      sectionTitle: "Выбери свой", sectionTitleRide: "урок",
       rentalBadge: "Gear up", rentalTitle: "Аренда", rentalTitleSurf: "Досок",
       rentalDesc: "Мы предоставляем премиальные софт-топы, лонгборды и шортборды. Поможем подобрать доску под текущие условия.",
       rentalDescPrimary: "У нас можно арендовать мягкие доски для новичков, лонгборды и жёсткие доски для уверенного катания.",
@@ -43,10 +43,10 @@ export const translations = {
       eventsTitle: "Наши эвенты",
       eventsIntro: "Активности Epic Surf School: фестивали, дни рождения школы, совместные катания и встречи нашего серф-комьюнити.",
       eventsItems: [
-        { title: "Da Nang Surfing Open 2025", type: "Фестиваль", desc: "Большой день на пляже: серф-контест, музыка, фото, друзья школы и много волн.", image: "/gallery/events/danang-open-2026.webp", galleryKey: "surf-fest", imageClass: "object-cover object-center", buttonLabel: "Смотреть фото" },
-        { title: "День рождения школы", type: "Community", desc: "Празднуем вместе с учениками, инструкторами и друзьями Epic Surf.", image: "/gallery/events/school-birthday.webp", galleryKey: "birthday", imageClass: "object-cover object-center", buttonLabel: "Смотреть фото" },
-        { title: "Sunset surf sessions", type: "Регулярно", desc: "Вечерние катания, мягкий свет, фото сессии и спокойный вайб после уроков.", image: "/gallery/events/sunset-surf.webp", galleryKey: "sunset", imageClass: "object-cover object-center", buttonLabel: "Смотреть фото" },
-        { title: "Community rides", type: "Meet-up", desc: "Совместные выезды и сессии для учеников, которые хотят больше практики.", image: "/gallery/events/community-rides.webp", galleryKey: "community", imageClass: "object-cover object-center", buttonLabel: "Смотреть фото" }
+        { title: "Da Nang Surfing Open 2025", type: "Фестиваль", desc: "Большой день на пляже: серф-контест, музыка, фото, друзья школы и много волн.", image: "/gallery/events/danang-open-2026.webp", galleryKey: "surf-fest", imageClass: "object-cover object-center", buttonLabel: "Фото" },
+        { title: "День рождения школы", type: "Community", desc: "Празднуем вместе с учениками, инструкторами и друзьями Epic Surf.", image: "/gallery/events/school-birthday.webp", galleryKey: "birthday", imageClass: "object-cover object-center", buttonLabel: "Фото" },
+        { title: "Sunset surf sessions", type: "Регулярно", desc: "Вечерние катания, мягкий свет, фото сессии и спокойный вайб после уроков.", image: "/gallery/events/sunset-surf.webp", galleryKey: "sunset", imageClass: "object-cover object-center", buttonLabel: "Фото" },
+        { title: "Community rides", type: "Meet-up", desc: "Совместные выезды и сессии для учеников, которые хотят больше практики.", image: "/gallery/events/community-rides.webp", galleryKey: "community", imageClass: "object-cover object-center", buttonLabel: "Фото" }
       ],
       locationTitle: "Найди наш", locationTitleSpot: "Спот",
       locationAddress: "Пляж Микхе, Дананг", locationLandmark: "Ищите красный флаг EPIC SURF на песке напротив TMS Hotel",
@@ -135,7 +135,7 @@ export const translations = {
       navLessons: "Lessons", navRentals: "Rentals", navHow: "Process", navForecast: "Forecast", navEvents: "Events", navLocation: "Map", btnBook: "Book Now",
       heroTitle: "Catch Your", heroTitleEpic: "Epic", heroTitleEnd: "Wave in Da Nang",
       heroSub: "Best surf school on My Khe Beach. Expert coaching, top-tier gear, and the best community.",
-      sectionTitle: "Choose Your", sectionTitleRide: "Ride",
+      sectionTitle: "Choose Your", sectionTitleRide: "Lesson",
       rentalBadge: "Professional Gear", rentalTitle: "Surf Board", rentalTitleSurf: "Rentals",
       rentalDesc: "We provide premium soft-tops, longboards, and performance shortboards.",
       rentalDescPrimary: "You can rent soft boards for beginners, longboards, and hard boards for confident riding.",

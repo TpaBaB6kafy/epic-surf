@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Header from "../Header";
-import Footer from "../Footer";
+import HomeV2Footer from "./HomeV2Footer";
 import MessengerFab from "../MessengerFab";
 import BookingModal from "../BookingModal";
 import RentalModal from "../RentalModal";
@@ -11,7 +11,6 @@ import {
   ChatTelegramIcon,
   ChatWhatsAppIcon,
   ChatZaloIcon,
-  FacebookIcon,
   InstagramIcon
 } from "../Icons";
 import { translations } from "../../data/translations";
@@ -34,7 +33,7 @@ import {
   HomeV2HowItWorks,
   HomeV2Reviews
 } from "./sections/HomeV2ContentSections";
-import { HomeV2Forecast, HomeV2LiveCam } from "./sections/HomeV2UtilitySections";
+import { HomeV2Conditions } from "./sections/HomeV2Conditions";
 
 export default function HomeV2Page({ locale = "en" }) {
   const rootRef = useRef(null);
@@ -95,7 +94,12 @@ export default function HomeV2Page({ locale = "en" }) {
   };
 
   return (
-    <div ref={rootRef} data-home-v2-root className="min-h-screen overflow-x-clip bg-epicWhite font-sans text-epicDark">
+    <div
+      ref={rootRef}
+      data-home-v2-root
+      className="relative min-h-screen overflow-x-clip bg-epicDark font-sans text-epicDark"
+      style={{ "--home-v2-deep-teal": "#395962" }}
+    >
       <Header
         t={t}
         lang={lang}
@@ -105,6 +109,7 @@ export default function HomeV2Page({ locale = "en" }) {
         openBookingModal={openBookingModal}
         languageHref={languageHref}
         sectionHrefBase={sectionHrefBase}
+        variant="homeV2"
       />
 
       <main data-home-v2-main-flow className="relative">
@@ -114,7 +119,7 @@ export default function HomeV2Page({ locale = "en" }) {
         <HomeV2Included t={t} />
         <section
           data-home-v2-surf-stack
-          className="relative isolate overflow-hidden bg-epicDark py-14 text-epicWhite md:pb-4 md:pt-32"
+          className="relative isolate overflow-hidden bg-epicDark pb-0 pt-6 text-epicWhite md:pb-0 md:pt-8"
         >
           <Image
             data-home-v2-wave-layer
@@ -126,7 +131,7 @@ export default function HomeV2Page({ locale = "en" }) {
             sizes="(min-width: 1024px) 1980px, 1200px"
             className="pointer-events-none absolute inset-y-0 left-1/2 z-0 h-full w-auto max-w-none -translate-x-1/2 opacity-[0.09] sm:opacity-[0.12] lg:opacity-[0.16]"
           />
-          <div data-home-v2-surf-stack-content className="relative z-10 space-y-24 md:space-y-0">
+          <div data-home-v2-surf-stack-content className="relative z-10 space-y-8 md:space-y-0">
             <div data-home-v2-flow-stage="rental">
               <HomeV2Rentals
                 t={t}
@@ -135,19 +140,17 @@ export default function HomeV2Page({ locale = "en" }) {
                 onSelectRentalBoard={openRentalModal}
               />
             </div>
-            <div data-home-v2-flow-stage="livecam" className="md:pt-32 lg:pt-52">
-              <HomeV2LiveCam locale={lang} />
-            </div>
-            <div data-home-v2-flow-stage="forecast" className="md:pb-24 md:pt-32 lg:pb-36 lg:pt-52">
-              <HomeV2Forecast t={t} lang={lang} />
+            <div data-home-v2-flow-stage="livecam-forecast">
+              <HomeV2Conditions t={t} locale={lang} />
             </div>
           </div>
         </section>
         <HomeV2Reviews t={t} googleMapsUrl={links.googleMaps} />
       </main>
-      <HomeV2FAQ title={t.faqTitle} titleEnd={t.faqTitleEnd} items={t.faqItems} />
+      <HomeV2FAQ lang={lang} title={t.faqTitle} titleEnd={t.faqTitleEnd} items={t.faqItems} />
       <HomeV2Events t={t} openEventGallery={openEventGallery} />
       <HomeV2Gallery
+        lang={lang}
         links={links}
         t={t}
         eventGalleryGroups={eventGalleryGroups}
@@ -157,12 +160,10 @@ export default function HomeV2Page({ locale = "en" }) {
         galleryPhotoSrc={galleryPhotoSrc}
         InstagramIcon={InstagramIcon}
       />
-      <Footer
+      <HomeV2Footer
         t={t}
         lang={lang}
         links={links}
-        InstagramIcon={InstagramIcon}
-        FacebookIcon={FacebookIcon}
       />
 
       <div data-home-v2-messenger>
@@ -172,6 +173,7 @@ export default function HomeV2Page({ locale = "en" }) {
           ChatWhatsAppIcon={ChatWhatsAppIcon}
           ChatTelegramIcon={ChatTelegramIcon}
           ChatZaloIcon={ChatZaloIcon}
+          variant="homeV2"
         />
       </div>
 

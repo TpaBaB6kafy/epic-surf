@@ -8,6 +8,7 @@ import { trackEvent } from "../utils/tracking";
 
 export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookIcon, variant = "default" }) {
   const isRentalVariant = variant === "rental";
+  const isHomeV2Variant = variant === "homeV2";
   const partnersHref = lang === "ru" ? "/ru/partners" : "/partners";
   const partnersLabel = lang === "ru" ? "Партнёрам" : "For Partners";
   const footerSocialLinks = [
@@ -24,23 +25,27 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
   ];
   const defaultSocialLinkClass = "p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all";
   const rentalSocialLinkClass = "inline-flex h-11 items-center justify-center gap-2 rounded-md border border-epicWhite/15 bg-epicDark px-4 text-[11px] font-black uppercase tracking-wide leading-snug text-epicWhite/75 transition-colors hover:border-epicMint hover:text-epicMint";
+  const homeV2SocialLinkClass = "inline-flex min-h-11 items-center justify-center gap-2 border border-epicWhite/30 bg-epicDark px-4 text-[11px] font-black uppercase tracking-wide leading-snug text-epicWhite/78 transition-colors hover:border-epicRed hover:text-epicRed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-epicRed";
+  const footerClassName = isHomeV2Variant
+    ? "border-t border-white/20 bg-epicDark px-4 pb-8 pt-12 text-white md:px-6 md:pt-16"
+    : "border-t border-white/5 bg-epicDark px-6 pb-12 pt-24 text-white";
 
   return (
-    <footer id="location" className="bg-epicDark text-white pt-24 pb-12 px-6 border-t border-white/5">
+    <footer id="location" data-home-v2-footer={isHomeV2Variant ? "true" : undefined} className={footerClassName}>
       <div className="max-w-7xl mx-auto">
-        <div className="mb-14 grid gap-12 text-center md:text-left lg:grid-cols-12 lg:items-start lg:gap-16">
-          <div className="lg:col-span-5 space-y-12">
+        <div className={`${isHomeV2Variant ? "mb-8 gap-8 lg:gap-10" : "mb-14 gap-12 lg:gap-16"} grid text-center md:text-left lg:grid-cols-12 lg:items-start`}>
+          <div className={`${isHomeV2Variant ? "space-y-6" : "space-y-12"} lg:col-span-5`}>
             <div>
               <Image
                 src="/epic-logo-v-ksu-v4.png"
                 alt="EPIC SURF"
                 width={132}
                 height={32}
-                className="h-8 w-auto mb-6"
+                className={`h-8 w-auto ${isHomeV2Variant ? "mb-4" : "mb-6"}`}
               />
               <p className="text-white/55 text-base md:text-lg leading-relaxed max-w-sm mx-auto md:mx-0">{t.heroSub}</p>
             </div>
-            <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+            <div data-home-v2-footer-socials={isHomeV2Variant ? "true" : undefined} className="flex flex-wrap gap-4 justify-center md:justify-start">
               {footerSocialLinks.map((item) => (
                 <a
                   key={item.platform}
@@ -48,7 +53,7 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
                   onClick={() => trackEvent("social_click", { platform: item.platform, location: "footer", language: lang })}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={isRentalVariant ? rentalSocialLinkClass : item.className || defaultSocialLinkClass}
+                  className={isHomeV2Variant ? homeV2SocialLinkClass : isRentalVariant ? rentalSocialLinkClass : item.className || defaultSocialLinkClass}
                   aria-label={`Epic Surf School ${item.label}`}
                   title={`Epic Surf School ${item.label}`}
                 >
@@ -57,7 +62,7 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
                 </a>
               ))}
             </div>
-            <div className="pt-8 border-t border-white/5 flex flex-col items-center md:items-start gap-3">
+            <div className={`${isHomeV2Variant ? "pt-4" : "pt-8"} flex flex-col items-center gap-3 border-t border-white/5 md:items-start`}>
               <a
                 href={partnersHref}
                 onClick={() => trackEvent("partner_cta_click", { language: lang, service_type: "partnership", cta_location: "footer", cta_label: "for_partners" })}
@@ -73,7 +78,11 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
               </div>
             </div>
           </div>
-          <div className={`relative h-[300px] overflow-hidden md:h-[380px] lg:col-span-7 lg:h-[440px] ${isRentalVariant ? "border-0 shadow-none" : "rounded-[44px] border border-white/10 shadow-2xl lg:rounded-[56px]"}`}>
+          <div
+            data-home-v2-footer-map={isHomeV2Variant ? "true" : undefined}
+            className={`relative overflow-hidden lg:col-span-7 ${isHomeV2Variant ? "h-[280px] border border-epicWhite/35 md:h-[360px]" : "h-[300px] md:h-[380px] lg:h-[440px]"} ${isRentalVariant ? "border-0 shadow-none" : isHomeV2Variant ? "" : "rounded-[44px] border border-white/10 shadow-2xl lg:rounded-[56px]"}`}
+            style={isHomeV2Variant ? { boxShadow: "6px 7px 0 var(--home-v2-deep-teal)" } : undefined}
+          >
             {isRentalVariant && (
               <Image
                 src="/rentals/page/rental-footer-map-frame.svg"
@@ -85,7 +94,7 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
                 className="pointer-events-none absolute inset-0 z-30 select-none object-fill opacity-95"
               />
             )}
-            {!isRentalVariant && (
+            {!isRentalVariant && !isHomeV2Variant && (
             <div className="absolute inset-x-4 bottom-4 z-40 flex items-center justify-center rounded-[24px] border border-white/10 bg-epicDark/70 px-4 py-3 text-center text-white shadow-xl backdrop-blur-md md:inset-auto md:left-7 md:bottom-7 md:w-[300px] md:px-5 md:py-4">
               <div>
                 <MapPin size={20} className="mx-auto mb-2 text-epicRed md:mx-0" />
@@ -103,6 +112,26 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
                 </a>
               </div>
             </div>
+            )}
+            {isHomeV2Variant && (
+              <div className="absolute inset-x-3 bottom-3 z-40 flex items-center justify-between gap-4 border border-epicWhite/30 bg-epicDark/90 px-4 py-3 text-white backdrop-blur-[2px] md:inset-x-auto md:bottom-5 md:left-5 md:w-[330px]">
+                <div className="min-w-0">
+                  <p className="text-sm font-black leading-tight text-white">{t.locationAddress}</p>
+                  <p className="mt-1 text-[9px] font-black uppercase tracking-[0.16em] text-epicRed">Epic Surf School</p>
+                </div>
+                <a
+                  href={links.googleMaps}
+                  onClick={() => trackEvent("map_activate", { language: lang, cta_location: "footer", cta_label: "google_maps" })}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-10 shrink-0 items-center justify-center border border-epicWhite/45 bg-epicRed px-3 text-[9px] font-black uppercase text-epicDark transition hover:bg-epicWhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-epicWhite"
+                  aria-label="Epic Surf School Google Maps"
+                  title="Epic Surf School Google Maps"
+                  data-role="footer-map-link"
+                >
+                  Open map
+                </a>
+              </div>
             )}
             {isRentalVariant && (
               <a
@@ -129,7 +158,7 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
           </div>
         </div>
         {lang === "en" && !isRentalVariant && (
-          <div className="mb-12 border-t border-white/5 pt-8 text-center md:text-left">
+          <div className={`${isHomeV2Variant ? "mb-8 pt-5" : "mb-12 pt-8"} border-t border-white/5 text-center md:text-left`}>
             <p className="mb-4 text-[11px] font-black uppercase tracking-wide text-white/35">Surf Info</p>
             <div className="flex flex-wrap justify-center gap-x-5 gap-y-3 md:justify-start">
               {seoPageLinks.map((item) => (
@@ -146,7 +175,7 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
             </div>
           </div>
         )}
-        <div className="pt-12 border-t border-white/5 text-[11px] font-bold tracking-wide text-white/25 text-center md:text-left">
+        <div className={`${isHomeV2Variant ? "pt-6" : "pt-12"} border-t border-white/5 text-center text-[11px] font-bold tracking-wide text-white/25 md:text-left`}>
           <div>© 2026 Epic Surf School - Ride Every Day</div>
         </div>
       </div>

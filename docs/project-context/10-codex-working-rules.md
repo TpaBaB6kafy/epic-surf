@@ -25,6 +25,19 @@
 - Keep Home V2 routes `noindex, nofollow`.
 - Never add `/home-v2` or `/ru/home-v2` to the sitemap while the experiment is active.
 
+## Home V2 responsive migration rules
+
+- Implement the responsive migration in reviewable checkpoints; do not migrate all sections in one pass.
+- Preserve `390px` as the exact approved Mobile EN geometry anchor. Other widths from `375px` through `639px` must use the same visual language in a fluid layout, not a fixed `390px` canvas.
+- Preserve `1440px` as the exact approved Desktop EN geometry anchor. Widths from `1200px` through `1439px` must use a fluid desktop-derived layout, not a fixed or scaled `1440px` canvas.
+- Apply semantic section-gap tokens primarily to adaptive ranges. Do not change approved joins or section heights at the exact `390px` and `1440px` anchors merely to adopt spacing tokens.
+- Keep Conditions stacked through `1199px`. Enable its two-column composition at `1200px` only when browser bounds confirm that both panels fit.
+- Extend the approved Mobile EN alternating-card language for How It Works through `899px`; use `2x2` at `900-1199px` and a fluid four-card composition at `1200-1439px`.
+- Let Reviews choose a three-card row only when readable card minimums fit; otherwise use `2+1` without introducing a separate presentation design.
+- Run the full `375-1440px` automated width sweep only after the main adaptive migration. During section checkpoints, test `390`, `904`, `1200`, `1440`, and the relevant breakpoint edges.
+- Do not delete `app/components/home-v2/sections/HomeV2UtilitySections.jsx` during the responsive migration. Any unused-code cleanup is a separate post-stabilization task.
+- After the Header/Hero checkpoint, stop for review before changing How It Works or later sections.
+
 ## Design
 
 - Reuse existing Tailwind theme tokens.

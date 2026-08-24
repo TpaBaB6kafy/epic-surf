@@ -1,0 +1,15 @@
+<svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Stat Surface">
+<rect width="40.1861" height="40.1861" rx="20.0931" fill="#FE746A"/>
+<g id="Stat Icon" clip-path="url(#clip0_451_351)">
+<path id="Vector" d="M20.0905 27.2702C24.0537 27.2702 27.2666 24.0574 27.2666 20.0941C27.2666 16.1309 24.0537 12.918 20.0905 12.918C16.1273 12.918 12.9144 16.1309 12.9144 20.0941C12.9144 24.0574 16.1273 27.2702 20.0905 27.2702Z" stroke="white" stroke-width="1.79402" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M17.2199 20.0941C17.2199 17.4223 18.2477 14.8528 20.0904 12.918C21.933 14.8528 22.9608 17.4223 22.9608 20.0941C22.9608 22.766 21.933 25.3354 20.0904 27.2702C18.2477 25.3354 17.2199 22.766 17.2199 20.0941Z" stroke="white" stroke-width="1.79402" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M12.9144 20.0934H27.2666" stroke="white" stroke-width="1.79402" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_451_351">
+<rect width="17.2226" height="17.2226" fill="white" transform="translate(11.4792 11.4826)"/>
+</clipPath>
+</defs>
+</svg>

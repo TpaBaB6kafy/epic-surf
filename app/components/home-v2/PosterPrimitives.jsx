@@ -1,5 +1,68 @@
 import Image from "next/image";
 
+const headingToneClasses = {
+  coral: "bg-epicRed text-epicDark",
+  paper: "bg-epicWhite text-epicDark",
+  teal: "text-epicWhite",
+};
+
+export function HomeV2SectionHeading({
+  eyebrow,
+  title,
+  lines,
+  lineTones = [],
+  detail,
+  variant = "label",
+  className = "",
+  titleClassName = "",
+}) {
+  const visualLines = lines?.length ? lines : [title];
+
+  if (variant === "strip") {
+    return (
+      <div
+        data-home-v2-section-heading="strip"
+        className={`border-y border-epicDark/25 bg-epicWhite/70 text-epicDark ${className}`}
+      >
+        <div className="mx-auto grid w-full max-w-7xl gap-2 px-4 py-3 md:grid-cols-[minmax(0,1fr)_minmax(280px,420px)] md:items-center md:gap-8 md:px-6 md:py-3.5">
+          <h2 className={`text-[40px] font-black uppercase leading-[0.88] tracking-tight sm:text-[52px] md:text-[60px] lg:text-[66px] ${titleClassName}`}>
+            {visualLines.map((line, index) => (
+              <span key={`${line}-${index}`} className={`block sm:inline ${lineTones[index] === "paper" ? "text-epicWhite" : "text-epicDark"}`}>
+                {line}{index < visualLines.length - 1 ? " " : ""}
+              </span>
+            ))}
+          </h2>
+          {detail ? <p className="max-w-[420px] text-[11px] font-semibold leading-[1.4] text-epicDark/78 md:ml-auto md:text-xs">{detail}</p> : null}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div data-home-v2-section-heading="label" className={`relative w-fit max-w-full pb-2 pr-2 ${className}`}>
+      <span className="absolute inset-0 bg-[var(--home-v2-deep-teal)]" aria-hidden="true" />
+      <div className="relative max-w-full">
+        {eyebrow ? <p className="mb-1 w-fit bg-epicDark px-2 py-1 text-[9px] font-black uppercase tracking-[0.18em] text-epicWhite md:text-[10px]">{eyebrow}</p> : null}
+        <h2 className={`max-w-[13ch] text-[40px] font-black uppercase leading-[0.86] tracking-tight sm:text-[52px] md:text-[60px] lg:text-[66px] ${titleClassName}`}>
+          {visualLines.map((line, index) => {
+            const tone = lineTones[index] || "coral";
+            return (
+              <span
+                key={`${line}-${index}`}
+                data-home-v2-heading-line
+                className={`block w-fit max-w-full px-3 py-1 md:px-4 ${headingToneClasses[tone] || headingToneClasses.coral}`}
+                style={tone === "teal" ? { backgroundColor: "var(--home-v2-deep-teal)" } : undefined}
+              >
+                {line}
+              </span>
+            );
+          })}
+        </h2>
+      </div>
+    </div>
+  );
+}
+
 export function PosterSection({ id, eyebrow, title, children, dark = false, className = "" }) {
   return (
     <section
@@ -26,11 +89,12 @@ export function PosterSection({ id, eyebrow, title, children, dark = false, clas
 }
 
 export function TornLabel({ children, tone = "red", className = "" }) {
-  const toneClass = tone === "mint" ? "bg-epicMint text-epicDark" : "bg-epicRed text-epicWhite";
+  const isTeal = tone === "teal";
 
   return (
     <span
-      className={`inline-flex -rotate-2 items-center border-2 border-epicDark px-4 py-2 text-[11px] font-black uppercase leading-none shadow-[5px_5px_0_#2E2E2E] ${toneClass} ${className}`}
+      className={`inline-flex items-center border-2 border-epicDark px-4 py-2 text-[11px] font-black uppercase leading-none shadow-[5px_5px_0_#2E2E2E] ${isTeal ? "text-epicWhite" : "bg-epicRed text-epicDark"} ${className}`}
+      style={isTeal ? { backgroundColor: "var(--home-v2-deep-teal)" } : undefined}
     >
       {children}
     </span>
@@ -52,7 +116,7 @@ export function PosterButton({ children, className = "", ...props }) {
 export function PosterLink({ children, className = "", ...props }) {
   return (
     <a
-      className={`inline-flex min-h-12 items-center justify-center border-2 border-epicDark bg-epicWhite px-6 py-3 text-center text-sm font-black uppercase leading-tight text-epicDark shadow-[6px_6px_0_#2E2E2E] transition hover:-translate-y-0.5 hover:bg-epicMint active:translate-y-0 active:scale-95 ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center border-2 border-epicDark bg-epicWhite px-6 py-3 text-center text-sm font-black uppercase leading-tight text-epicDark shadow-[6px_6px_0_#2E2E2E] transition hover:-translate-y-0.5 hover:bg-epicWhite/85 active:translate-y-0 active:scale-95 ${className}`}
       {...props}
     >
       {children}
