@@ -3,24 +3,22 @@ const { test, expect } = require("@playwright/test");
 const url = "http://localhost:3000/";
 
 test.describe("Main homepage controlled compression", () => {
-  test("keeps the mobile flow, carousel and accordion usable", async ({ page }) => {
+  test("keeps the mobile flow, lesson selector and accordion usable", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(url, { waitUntil: "domcontentloaded" });
 
     await expect(page.locator('[data-section="why-epic"] [data-why-card]')).toHaveCount(4);
     await expect(page.locator("#how-it-works [data-how-step]")).toHaveCount(4);
-    await expect(page.locator("#lessons [data-lesson-card]")).toHaveCount(5);
+    await expect(page.locator("#lessons [data-lesson-selector-item]")).toHaveCount(5);
     await expect(page.locator("#reviews [data-review-card]")).toHaveCount(3);
 
-    const carousel = page.locator("#lessons [data-lessons-carousel]");
-    await expect(carousel).toBeVisible();
-    expect(await carousel.evaluate((element) => element.scrollWidth > element.clientWidth)).toBe(true);
+    await expect(page.locator("#lessons [data-lessons-carousel]")).toHaveCount(0);
 
-    const firstCard = page.locator("#lessons [data-lesson-card]").first();
-    const firstCta = firstCard.locator("[data-lesson-cta]");
-    const [cardBox, ctaBox] = await Promise.all([firstCard.boundingBox(), firstCta.boundingBox()]);
-    expect(ctaBox.y).toBeGreaterThanOrEqual(cardBox.y);
-    expect(ctaBox.y + ctaBox.height).toBeLessThanOrEqual(cardBox.y + cardBox.height + 1);
+    const detail = page.locator("#lessons [data-lesson-detail]");
+    const detailCta = detail.locator("[data-lesson-cta]");
+    const [detailBox, ctaBox] = await Promise.all([detail.boundingBox(), detailCta.boundingBox()]);
+    expect(ctaBox.y).toBeGreaterThanOrEqual(detailBox.y);
+    expect(ctaBox.y + ctaBox.height).toBeLessThanOrEqual(detailBox.y + detailBox.height + 1);
 
     const faqQuestion = page.locator('[data-section="faq"] [data-faq-row]').first().getByRole("button");
     await faqQuestion.click();
