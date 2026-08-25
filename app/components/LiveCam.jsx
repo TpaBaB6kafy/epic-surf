@@ -1,6 +1,7 @@
 "use client";
 
 import { ExternalLink, Heart, MessageCircle, Radio } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { liveCam } from "../data/liveCam";
 import { links } from "../data/links";
 import { buildWhatsAppUrl, trackEvent } from "../utils/tracking";
@@ -45,6 +46,27 @@ const liveCamCopy = {
 export default function LiveCam({ locale = "en" }) {
   const language = locale === "ru" ? "ru" : "en";
   const copy = liveCamCopy[language];
+  const sectionRef = useRef(null);
+  const [hasLoadedPreview, setHasLoadedPreview] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section || hasLoadedPreview) return undefined;
+
+    if (!("IntersectionObserver" in window)) {
+      const fallbackTimer = window.setTimeout(() => setHasLoadedPreview(true), 0);
+      return () => window.clearTimeout(fallbackTimer);
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      setHasLoadedPreview(true);
+      observer.disconnect();
+    }, { root: null, rootMargin: "0px", threshold: 0.01 });
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [hasLoadedPreview]);
 
   const trackOutbound = (target) => {
     trackEvent("live_cam_outbound_click", {
@@ -73,7 +95,7 @@ export default function LiveCam({ locale = "en" }) {
   };
 
   return (
-    <section id="live-cam" className="overflow-hidden border-t border-epicDark/10 bg-epicWhite px-4 py-12 md:px-6 md:py-16 lg:py-24">
+    <section ref={sectionRef} id="live-cam" className="overflow-hidden border-t border-epicDark/10 bg-epicWhite px-4 py-12 md:px-6 md:py-16 lg:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="relative overflow-hidden rounded-[32px] bg-epicDark px-5 py-6 text-epicWhite shadow-2xl md:rounded-[40px] md:px-8 md:py-8 lg:px-14 lg:py-14">
           <svg
@@ -144,20 +166,22 @@ export default function LiveCam({ locale = "en" }) {
                 data-live-cam-preview
                 className="mx-auto aspect-video w-full max-w-[320px] overflow-hidden rounded-[18px] bg-black shadow-2xl md:max-w-[460px] md:rounded-[20px] lg:max-w-[600px]"
               >
-                <iframe
-                  src={liveCam.previewUrl}
-                  width="100%"
-                  height="100%"
-                  loading="lazy"
-                  className="block h-full w-full border-0"
-                  allow="autoplay; encrypted-media"
-                  title={copy.iframeTitle}
-                  onLoad={() => trackEvent("live_cam_preview_load", {
-                    language,
-                    provider: "danangsurfcam",
-                    location: "homepage_live_cam",
-                  })}
-                />
+                {hasLoadedPreview ? (
+                  <iframe
+                    src={liveCam.previewUrl}
+                    width="100%"
+                    height="100%"
+                    loading="lazy"
+                    className="block h-full w-full border-0"
+                    allow="autoplay; encrypted-media"
+                    title={copy.iframeTitle}
+                    onLoad={() => trackEvent("live_cam_preview_load", {
+                      language,
+                      provider: "danangsurfcam",
+                      location: "homepage_live_cam",
+                    })}
+                  />
+                ) : null}
               </div>
 
               <div data-live-cam-attribution-footer className="mt-3 flex flex-col items-center gap-3 px-1 pb-1 text-center md:mt-4 md:px-0 md:pb-0 lg:flex-row lg:justify-between lg:gap-6 lg:text-left">

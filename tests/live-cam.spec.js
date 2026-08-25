@@ -45,6 +45,12 @@ const cases = [
 for (const scenario of cases) {
   test(`renders the polished live cam on ${scenario.path} at ${scenario.viewport.width}px`, async ({ page }) => {
     const text = copy[scenario.language];
+    const previewRequests = [];
+    page.on("request", (request) => {
+      if (request.url().startsWith("https://danangsurfcam.com/embed/preview")) {
+        previewRequests.push(request.url());
+      }
+    });
     await page.setViewportSize(scenario.viewport);
     await page.goto(`${baseUrl}${scenario.path}?partner=hotel_abc`, {
       waitUntil: "domcontentloaded",
@@ -53,6 +59,8 @@ for (const scenario of cases) {
     const rentals = page.locator("#rentals");
     const liveCam = page.locator("#live-cam");
     const forecast = page.locator("#forecast");
+    await expect(liveCam.locator("iframe")).toHaveCount(0);
+    expect(previewRequests).toHaveLength(0);
     await expect(liveCam.locator("[data-live-cam-wave-decoration]")).toHaveCount(2);
     const expectedTitle = scenario.viewport.width < 640 ? text.mobileTitle : text.title;
     await expect(liveCam.getByRole("heading", { name: expectedTitle, exact: true })).toBeVisible();
@@ -108,11 +116,23 @@ for (const scenario of cases) {
     expect(positions[0]).toBeLessThan(positions[1]);
     expect(positions[1]).toBeLessThan(positions[2]);
 
+    await liveCam.scrollIntoViewIfNeeded();
     const iframe = liveCam.locator("iframe");
-    await expect(iframe).toHaveAttribute("src", /embed\/preview\?partner=epicsurf&duration=10&theme=dark&cta=Open%20Cam/);
+    await expect(iframe).toHaveCount(1);
+    await expect(iframe).toHaveAttribute("src", /embed\/preview\?partner=epicsurf&duration=30&theme=dark&cta=Open%20Cam/);
     await expect(iframe).toHaveAttribute("loading", "lazy");
     await expect(iframe).toHaveAttribute("width", "100%");
     await expect(iframe).toHaveAttribute("height", "100%");
+    await expect.poll(() => previewRequests.length).toBe(1);
+    await iframe.evaluate((node) => {
+      window.__liveCamPreviewIframe = node;
+    });
+
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect(iframe).toHaveCount(1);
+    await liveCam.scrollIntoViewIfNeeded();
+    expect(await iframe.evaluate((node) => window.__liveCamPreviewIframe === node)).toBe(true);
+    expect(previewRequests).toHaveLength(1);
     const preview = liveCam.locator("[data-live-cam-preview]");
     const previewCard = preview.locator("..");
     await expect(preview).not.toHaveClass(/aspect-\[4\/3\]/);
