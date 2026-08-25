@@ -8,12 +8,12 @@ export default function FAQ({ title, titleEnd, items }) {
   const [openFaq, setOpenFaq] = useState(null);
 
   return (
-    <section className="py-32 bg-epicWhite px-6">
+    <section data-section="faq" className="py-20 bg-epicWhite px-6 md:py-24 lg:py-32">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-4xl md:text-6xl font-black text-center mb-16 tracking-normal leading-tight break-words">{title} <span className="text-epicRed">{titleEnd}</span></h2>
+        <h2 className="text-4xl md:text-6xl font-black text-center mb-10 md:mb-12 lg:mb-16 tracking-normal leading-tight break-words">{title} <span className="text-epicRed">{titleEnd}</span></h2>
         <div className="space-y-4">
           {items.map((item, idx) => (
-            <div key={idx} className="border-b border-epicDark/10 pb-4">
+            <div key={idx} data-faq-row={idx + 1} className="border-b border-epicDark/10 pb-4">
               <button onClick={() => setOpenFaq(openFaq === idx ? null : idx)} className="w-full flex justify-between items-center py-6 text-left group">
                 <span className="font-bold text-lg md:text-2xl text-epicDark group-hover:text-epicRed transition-colors leading-snug break-words">{item.q}</span>
                 <div className={`transition-transform duration-300 ${openFaq === idx ? 'rotate-45' : ''}`}><Plus size={24} className="text-epicRed" /></div>

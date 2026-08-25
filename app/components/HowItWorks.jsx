@@ -19,9 +19,9 @@ export default function HowItWorks({ t, lang = "en" }) {
   };
 
   return (
-    <section id="how-it-works" className="py-32 bg-epicWhite scroll-mt-24">
+    <section id="how-it-works" className="py-20 md:py-24 lg:py-32 bg-epicWhite scroll-mt-24">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="max-w-3xl mx-auto text-center mb-24 space-y-6">
+        <div className="max-w-3xl mx-auto text-center mb-14 space-y-6 md:mb-16 lg:mb-24">
           <h2 className="text-4xl md:text-7xl font-black tracking-normal text-epicDark leading-[0.98] break-words">
             {t.howTitle} <span className="text-epicRed">{t.howTitleEnd}</span>
           </h2>
@@ -30,20 +30,21 @@ export default function HowItWorks({ t, lang = "en" }) {
           </p>
         </div>
 
-        <div className="space-y-32">
+        <div className="space-y-16 md:space-y-14 lg:space-y-32">
           {t.howSteps.map((step, idx) => {
             const isExpanded = Boolean(expandedSteps[idx]);
             const detailsId = `how-step-${idx + 1}-details`;
             return (
             <div
               key={idx}
-              className={`flex flex-col ${idx % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} items-center gap-12 lg:gap-24`}
+              data-how-step={idx + 1}
+              className={`flex flex-col ${idx % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"} items-center gap-8 sm:gap-8 md:gap-10 lg:gap-24`}
             >
               <motion.div
                 initial={{ opacity: 0, scale: 0.98 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="w-full lg:w-1/2"
+                className="w-full sm:w-1/2"
               >
                 <div className="aspect-[4/3] w-full rounded-[40px] overflow-hidden shadow-2xl bg-gray-100 relative">
                   <Image
@@ -56,7 +57,7 @@ export default function HowItWorks({ t, lang = "en" }) {
                 </div>
               </motion.div>
 
-              <div className="w-full lg:w-1/2">
+              <div className="w-full sm:w-1/2">
                 <div className="flex flex-col items-center lg:items-start space-y-6">
                   <div className="bg-epicRed text-epicWhite px-4 py-1 rounded-full text-[11px] font-bold tracking-wide leading-snug shadow-md">
                     {step.time}

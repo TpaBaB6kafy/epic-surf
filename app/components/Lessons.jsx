@@ -117,8 +117,8 @@ export default function Lessons({ t, lang = "en", links, openBookingModal }) {
   };
 
   return (
-    <section id="lessons" className="py-24 px-6 max-w-7xl mx-auto scroll-mt-24">
-      <h2 className="text-4xl md:text-6xl font-black text-center mb-12 md:mb-16 tracking-normal leading-tight text-epicDark break-words">
+    <section id="lessons" className="pt-16 pb-14 px-6 max-w-7xl mx-auto scroll-mt-24 md:py-24">
+      <h2 className="text-4xl md:text-6xl font-black text-center mb-10 md:mb-16 tracking-normal leading-tight text-epicDark break-words">
         {t.sectionTitle} <span className="text-epicDark">{t.sectionTitleRide}</span>
       </h2>
 
@@ -131,12 +131,14 @@ export default function Lessons({ t, lang = "en", links, openBookingModal }) {
         onPointerCancel={stopLessonsDrag}
         onPointerLeave={stopLessonsDrag}
         onClickCapture={handleLessonsClickCapture}
+        data-lessons-carousel
         className="relative left-1/2 w-screen -translate-x-1/2 px-6 md:left-auto md:w-full md:-mx-6 md:translate-x-0 md:px-6 overflow-x-auto overscroll-x-contain scrollbar-hide cursor-grab active:cursor-grabbing select-none touch-auto snap-x snap-mandatory md:snap-none scroll-px-6"
       >
-        <div className="flex gap-4 sm:gap-6 md:gap-8 pb-8 w-max">
+        <div className="flex gap-4 sm:gap-6 md:gap-8 pb-4 md:pb-8 w-max">
           {t.cards.map((item, i) => (
             <motion.div
               key={item.id}
+              data-lesson-card={item.id}
               className="w-[76vw] max-w-[300px] sm:w-[300px] flex-shrink-0 snap-start bg-epicDark rounded-[40px] overflow-hidden shadow-lg flex flex-col border border-white/20 text-epicWhite group"
             >
               <div className="relative h-48 w-full">
@@ -148,20 +150,20 @@ export default function Lessons({ t, lang = "en", links, openBookingModal }) {
                   className="object-cover"
                 />
               </div>
-              <div className="px-8 pb-8 pt-9 flex flex-col flex-1 text-center items-center">
+              <div className="px-6 pb-6 pt-7 md:px-8 md:pb-8 md:pt-9 flex flex-col flex-1 text-center items-center">
                 <div className="mb-3 text-epicGray">
                   {lessonIcons[item.id] || lessonIcons.group}
                 </div>
-                <div className="text-[12px] text-epicRed font-extrabold mb-5 leading-snug">{item.badge}</div>
-                <h3 className="text-2xl font-extrabold mb-7 text-epicWhite leading-tight break-words hyphens-auto">{item.title}</h3>
-                <p className="text-epicWhite/80 mb-12 text-sm leading-7 font-medium max-w-[220px] flex-1">
+                <div className="text-[12px] text-epicRed font-extrabold mb-4 md:mb-5 leading-snug">{item.badge}</div>
+                <h3 className="text-2xl font-extrabold mb-5 md:mb-7 text-epicWhite leading-tight break-words hyphens-auto">{item.title}</h3>
+                <p className="text-epicWhite/80 mb-8 md:mb-12 text-sm leading-6 md:leading-7 font-medium max-w-[240px] md:max-w-[220px] flex-1">
                   {item.desc}
                 </p>
-                <div className="text-[28px] font-normal mb-8 text-epicWhite leading-none tracking-normal">{item.price}</div>
+                <div data-lesson-price className="text-[28px] font-normal mb-5 md:mb-8 text-epicWhite leading-none tracking-normal">{item.price}</div>
                 {bookingLessonIds.has(item.id) ? (
-                  <button onClick={() => handleBookingClick(item)} className="w-full bg-epicRed text-epicWhite py-5 rounded-[18px] font-extrabold uppercase text-sm tracking-wide shadow-lg transition-all duration-300 hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-95">{t.btnBook}</button>
+                  <button data-lesson-cta onClick={() => handleBookingClick(item)} className="w-full bg-epicRed text-epicWhite py-4 md:py-5 rounded-[18px] font-extrabold uppercase text-sm tracking-wide shadow-lg transition-all duration-300 hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-95">{t.btnBook}</button>
                 ) : (
-                  <a href={links.whatsapp} onClick={(event) => handleMessengerClick(event, item)} target="_blank" rel="noreferrer" className="w-full bg-epicRed text-epicWhite py-5 rounded-[18px] font-extrabold uppercase text-sm tracking-wide shadow-lg transition-all duration-300 hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-95">{t.btnBook}</a>
+                  <a data-lesson-cta href={links.whatsapp} onClick={(event) => handleMessengerClick(event, item)} target="_blank" rel="noreferrer" className="w-full bg-epicRed text-epicWhite py-4 md:py-5 rounded-[18px] font-extrabold uppercase text-sm tracking-wide shadow-lg transition-all duration-300 hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 active:scale-95">{t.btnBook}</a>
                 )}
               </div>
             </motion.div>

@@ -73,9 +73,9 @@ export default function LiveCam({ locale = "en" }) {
   };
 
   return (
-    <section id="live-cam" className="overflow-hidden border-t border-epicDark/10 bg-epicWhite px-4 py-16 md:px-6 md:py-24">
+    <section id="live-cam" className="overflow-hidden border-t border-epicDark/10 bg-epicWhite px-4 py-12 md:px-6 md:py-16 lg:py-24">
       <div className="mx-auto max-w-7xl">
-        <div className="relative overflow-hidden rounded-[32px] bg-epicDark px-5 py-8 text-epicWhite shadow-2xl md:rounded-[40px] md:px-10 md:py-12 lg:px-14 lg:py-14">
+        <div className="relative overflow-hidden rounded-[32px] bg-epicDark px-5 py-6 text-epicWhite shadow-2xl md:rounded-[40px] md:px-8 md:py-8 lg:px-14 lg:py-14">
           <svg
             data-live-cam-wave-decoration
             aria-hidden="true"
@@ -95,7 +95,7 @@ export default function LiveCam({ locale = "en" }) {
             <path d="M-56 98 C34 44 116 44 206 98 S378 152 468 98 S640 44 730 98" fill="none" stroke="rgba(46,213,166,0.24)" strokeWidth="3" />
           </svg>
 
-          <div className="relative grid items-center gap-9 md:gap-11 lg:grid-cols-[minmax(0,0.95fr)_minmax(480px,1.05fr)] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_650px]">
+          <div className="relative grid items-center gap-7 md:grid-cols-[minmax(0,0.9fr)_minmax(300px,1.1fr)] md:gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(480px,1.05fr)] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_650px]">
             <div data-live-cam-copy className="flex min-w-0 flex-col items-center text-center lg:items-start lg:text-left">
               <div data-live-cam-source-badge className="inline-flex items-center gap-2 self-center rounded-full bg-epicMint px-4 py-2 text-[11px] font-black uppercase tracking-wide text-epicDark lg:self-start">
                 <Radio size={15} className="text-epicRed" />
@@ -124,7 +124,7 @@ export default function LiveCam({ locale = "en" }) {
                 {copy.detail}
               </p>
 
-              <div data-live-cam-primary-actions className="mt-7 w-full max-w-[360px] sm:max-w-none">
+              <div data-live-cam-primary-actions className="mt-5 w-full max-w-[360px] sm:max-w-none lg:mt-7">
                 <a
                   href={links.whatsapp}
                   target="_blank"
@@ -139,7 +139,7 @@ export default function LiveCam({ locale = "en" }) {
               </div>
             </div>
 
-            <div className="mx-auto flex w-full max-w-[360px] flex-col justify-center rounded-[24px] border border-epicWhite/10 bg-epicWhite/5 p-3 shadow-xl md:max-w-[502px] md:rounded-[28px] md:p-5 lg:max-w-[650px] lg:self-stretch lg:p-6">
+            <div className="mx-auto flex w-full max-w-[360px] flex-col justify-center rounded-[24px] border border-epicWhite/10 bg-epicWhite/5 p-3 shadow-xl md:max-w-[502px] md:rounded-[28px] md:p-4 lg:max-w-[650px] lg:self-stretch lg:p-6">
               <div
                 data-live-cam-preview
                 className="mx-auto aspect-video w-full max-w-[320px] overflow-hidden rounded-[18px] bg-black shadow-2xl md:max-w-[460px] md:rounded-[20px] lg:max-w-[600px]"
@@ -160,8 +160,8 @@ export default function LiveCam({ locale = "en" }) {
                 />
               </div>
 
-              <div data-live-cam-attribution-footer className="mt-4 flex flex-col items-center gap-4 px-1 pb-1 text-center md:mt-5 md:px-0 md:pb-0 lg:flex-row lg:justify-between lg:gap-6 lg:text-left">
-                <div data-live-cam-provider-identity className="flex min-w-0 flex-1 flex-col items-center gap-3 md:gap-4 lg:flex-row lg:items-center">
+              <div data-live-cam-attribution-footer className="mt-3 flex flex-col items-center gap-3 px-1 pb-1 text-center md:mt-4 md:px-0 md:pb-0 lg:flex-row lg:justify-between lg:gap-6 lg:text-left">
+                <div data-live-cam-provider-identity className="flex min-w-0 flex-1 flex-col items-center gap-3 sm:flex-row sm:items-center md:gap-3 lg:gap-4">
                   {/* The provider requires its remote logo; using img avoids changing Next image configuration. */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -174,7 +174,7 @@ export default function LiveCam({ locale = "en" }) {
                     <p className="mx-auto mt-1 max-w-[420px] text-[11px] leading-5 text-epicWhite/60 md:text-xs md:leading-5 lg:mx-0 lg:max-w-[390px] xl:max-w-[430px]">{copy.attribution}</p>
                   </div>
                 </div>
-                <div data-live-cam-provider-links className="flex w-full flex-col justify-center gap-2.5 sm:max-w-[360px] lg:w-[180px] lg:shrink-0 lg:gap-2 lg:justify-center">
+                <div data-live-cam-provider-links className="flex w-full flex-col justify-center gap-2 sm:grid sm:max-w-[360px] sm:grid-cols-2 lg:flex lg:w-[180px] lg:shrink-0 lg:justify-center">
                   <a
                     data-live-cam-provider-action="primary"
                     href={liveCam.fullStreamUrl}

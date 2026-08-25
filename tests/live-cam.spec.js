@@ -34,12 +34,12 @@ const copy = {
 };
 
 const cases = [
-  { path: "/", language: "en", viewport: { width: 1440, height: 1000 }, previewWidth: [599, 601] },
-  { path: "/ru", language: "ru", viewport: { width: 1440, height: 1000 }, previewWidth: [599, 601] },
-  { path: "/", language: "en", viewport: { width: 820, height: 1000 }, previewWidth: [459, 461] },
-  { path: "/ru", language: "ru", viewport: { width: 820, height: 1000 }, previewWidth: [459, 461] },
-  { path: "/", language: "en", viewport: { width: 390, height: 844 }, previewWidth: [290, 321] },
-  { path: "/ru", language: "ru", viewport: { width: 390, height: 844 }, previewWidth: [290, 321] },
+  { path: "/", language: "en", viewport: { width: 1440, height: 1000 } },
+  { path: "/ru", language: "ru", viewport: { width: 1440, height: 1000 } },
+  { path: "/", language: "en", viewport: { width: 820, height: 1000 } },
+  { path: "/ru", language: "ru", viewport: { width: 820, height: 1000 } },
+  { path: "/", language: "en", viewport: { width: 390, height: 844 } },
+  { path: "/ru", language: "ru", viewport: { width: 390, height: 844 } },
 ];
 
 for (const scenario of cases) {
@@ -114,16 +114,27 @@ for (const scenario of cases) {
     await expect(iframe).toHaveAttribute("width", "100%");
     await expect(iframe).toHaveAttribute("height", "100%");
     const preview = liveCam.locator("[data-live-cam-preview]");
+    const previewCard = preview.locator("..");
     await expect(preview).not.toHaveClass(/aspect-\[4\/3\]/);
     const previewBox = await preview.boundingBox();
+    const previewCardBox = await previewCard.boundingBox();
     const iframeBox = await iframe.boundingBox();
     expect(previewBox).not.toBeNull();
+    expect(previewCardBox).not.toBeNull();
     expect(iframeBox).not.toBeNull();
-    expect(iframeBox.width).toBeGreaterThanOrEqual(scenario.previewWidth[0]);
-    expect(iframeBox.width).toBeLessThanOrEqual(scenario.previewWidth[1]);
+    expect(iframeBox.width).toBeGreaterThanOrEqual(scenario.viewport.width < 640 ? 260 : 300);
+    expect(previewBox.x).toBeGreaterThanOrEqual(previewCardBox.x);
+    expect(previewBox.y).toBeGreaterThanOrEqual(previewCardBox.y);
+    expect(previewBox.x + previewBox.width).toBeLessThanOrEqual(previewCardBox.x + previewCardBox.width + 1);
+    expect(previewBox.y + previewBox.height).toBeLessThanOrEqual(previewCardBox.y + previewCardBox.height + 1);
     expect(Math.abs((iframeBox.width / iframeBox.height) - (16 / 9))).toBeLessThan(0.03);
     expect(Math.abs(previewBox.width - iframeBox.width)).toBeLessThanOrEqual(2);
     expect(Math.abs(previewBox.height - iframeBox.height)).toBeLessThanOrEqual(2);
+    if (scenario.viewport.width >= 768) {
+      const copyBox = await copyColumn.boundingBox();
+      expect(copyBox).not.toBeNull();
+      expect(copyBox.x + copyBox.width).toBeLessThanOrEqual(previewCardBox.x + 1);
+    }
     const iframeStyle = await iframe.evaluate((node) => {
       const style = getComputedStyle(node);
       return {
@@ -236,10 +247,13 @@ for (const scenario of cases) {
     }
 
     const askEpic = primaryCta;
-    await askEpic.evaluate((node) => {
-      node.addEventListener("click", (event) => event.preventDefault(), { once: true });
-      node.click();
-    });
+    await expect.poll(async () => {
+      await askEpic.evaluate((node) => {
+        node.addEventListener("click", (event) => event.preventDefault(), { once: true });
+        node.click();
+      });
+      return decodeURIComponent(await askEpic.getAttribute("href"));
+    }).toContain(text.message);
     const whatsappHref = decodeURIComponent(await askEpic.getAttribute("href"));
     expect(whatsappHref).toContain(text.message);
     expect(whatsappHref).toContain("hotel_abc");

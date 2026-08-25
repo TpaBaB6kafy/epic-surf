@@ -22,25 +22,25 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
       className: "inline-flex h-12 items-center gap-2 rounded-full bg-white/5 px-5 text-[11px] font-bold tracking-wide leading-snug text-white hover:bg-epicRed transition-all",
     },
   ];
-  const defaultSocialLinkClass = "p-4 bg-white/5 rounded-full hover:bg-epicRed transition-all";
+  const defaultSocialLinkClass = "rounded-full bg-white/5 p-3.5 transition-all hover:bg-epicRed lg:p-4";
   const rentalSocialLinkClass = "inline-flex h-11 items-center justify-center gap-2 rounded-md border border-epicWhite/15 bg-epicDark px-4 text-[11px] font-black uppercase tracking-wide leading-snug text-epicWhite/75 shadow-lg shadow-epicDark/35 transition-colors hover:border-epicMint hover:text-epicMint";
 
   return (
-    <footer id="location" className="bg-epicDark text-white pt-24 pb-12 px-6 border-t border-white/5">
+    <footer id="location" className={`border-t border-white/5 bg-epicDark px-4 text-white sm:px-6 ${isRentalVariant ? "pb-12 pt-24" : "pb-8 pt-16 md:pb-10 md:pt-20 lg:pb-12 lg:pt-24"}`}>
       <div className="max-w-7xl mx-auto">
-        <div className="mb-14 grid gap-12 text-center md:text-left lg:grid-cols-12 lg:items-start lg:gap-16">
-          <div className="lg:col-span-5 space-y-12">
+        <div data-footer-main className={`grid text-center md:text-left lg:grid-cols-12 lg:items-start ${isRentalVariant ? "mb-14 gap-12 lg:gap-16" : "mb-10 gap-8 md:mb-12 md:gap-10 lg:mb-14 lg:gap-16"}`}>
+          <div data-footer-copy className={`lg:col-span-5 ${isRentalVariant ? "space-y-12" : "space-y-8 lg:space-y-12"}`}>
             <div>
               <Image
                 src="/epic-logo-v-ksu-v4.png"
                 alt="EPIC SURF"
                 width={132}
                 height={32}
-                className="h-8 w-auto mb-6"
+                className={`h-8 w-auto ${isRentalVariant ? "mb-6" : "mb-4 lg:mb-6"}`}
               />
               <p className="text-white/55 text-base md:text-lg leading-relaxed max-w-sm mx-auto md:mx-0">{t.heroSub}</p>
             </div>
-            <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+            <div className={`flex flex-wrap justify-center md:justify-start ${isRentalVariant ? "gap-4" : "gap-3 lg:gap-4"}`}>
               {footerSocialLinks.map((item) => (
                 <a
                   key={item.platform}
@@ -57,7 +57,7 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
                 </a>
               ))}
             </div>
-            <div className="pt-8 border-t border-white/5 flex flex-col items-center md:items-start gap-3">
+            <div className={`flex flex-col items-center gap-3 border-t border-white/5 md:items-start ${isRentalVariant ? "pt-8" : "pt-6 lg:pt-8"}`}>
               <a
                 href={partnersHref}
                 onClick={() => trackEvent("partner_cta_click", { language: lang, service_type: "partnership", cta_location: "footer", cta_label: "for_partners" })}
@@ -73,7 +73,7 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
               </div>
             </div>
           </div>
-          <div className={`relative h-[300px] overflow-hidden md:h-[380px] lg:col-span-7 lg:h-[440px] ${isRentalVariant ? "border-0 shadow-2xl shadow-epicDark/70" : "rounded-[44px] border border-white/10 shadow-2xl lg:rounded-[56px]"}`}>
+          <div data-footer-map className={`relative h-[300px] overflow-hidden md:h-[380px] lg:col-span-7 lg:h-[440px] ${isRentalVariant ? "border-0 shadow-2xl shadow-epicDark/70" : "rounded-[44px] border border-white/10 shadow-2xl lg:rounded-[56px]"}`}>
             {isRentalVariant && (
               <Image
                 src="/rentals/page/rental-footer-map-frame.svg"
@@ -129,8 +129,8 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
           </div>
         </div>
         {lang === "en" && !isRentalVariant && (
-          <div className="mb-12 border-t border-white/5 pt-8 text-center md:text-left">
-            <p className="mb-4 text-[11px] font-black uppercase tracking-wide text-white/35">Surf Info</p>
+          <div data-footer-surf-info className="mb-8 border-t border-white/5 pt-6 text-center md:mb-10 md:pt-7 md:text-left lg:mb-12 lg:pt-8">
+            <p className="mb-3 text-[11px] font-black uppercase tracking-wide text-white/35 lg:mb-4">Surf Info</p>
             <div className="flex flex-wrap justify-center gap-x-5 gap-y-3 md:justify-start">
               {seoPageLinks.map((item) => (
                 <Link
@@ -146,7 +146,7 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
             </div>
           </div>
         )}
-        <div className="pt-12 border-t border-white/5 text-[11px] font-bold tracking-wide text-white/25 text-center md:text-left">
+        <div data-footer-legal className={`border-t border-white/5 text-center text-[11px] font-bold tracking-wide text-white/25 md:text-left ${isRentalVariant ? "pt-12" : "pt-8 lg:pt-12"}`}>
           <div>© 2026 Epic Surf School - Ride Every Day</div>
         </div>
       </div>

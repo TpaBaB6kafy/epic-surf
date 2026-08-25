@@ -6,14 +6,14 @@ import { Globe } from "lucide-react";
 
 export default function Reviews({ t, googleMapsUrl }) {
   return (
-    <section id="reviews" className="py-24 bg-epicWhite border-y border-epicDark/10 scroll-mt-24 text-center text-epicDark px-6">
+    <section id="reviews" className="py-16 md:py-20 lg:py-24 bg-epicWhite border-y border-epicDark/10 scroll-mt-24 text-center text-epicDark px-6">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-7xl font-black mb-20 tracking-normal leading-tight break-words">{t.reviewsTitle}</h2>
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <h2 className="text-4xl md:text-7xl font-black mb-10 md:mb-14 lg:mb-20 tracking-normal leading-tight break-words">{t.reviewsTitle}</h2>
+        <div className="grid md:grid-cols-3 gap-5 md:gap-6 lg:gap-8 mb-12 md:mb-14 lg:mb-16">
           {t.reviewsList.map((rev, i) => (
-            <motion.div key={i} whileHover={{ y: -5 }} className="bg-epicDark p-10 rounded-[40px] shadow-xl text-left flex flex-col justify-between border border-white/20 text-epicWhite">
-              <p className="font-medium leading-relaxed text-base md:text-lg mb-8 break-words">{rev.text}</p>
-              <div className="flex items-center gap-4 border-t border-white/20 pt-6">
+            <motion.div key={i} data-review-card={i + 1} whileHover={{ y: -5 }} className="bg-epicDark p-7 md:p-8 lg:p-10 rounded-[40px] shadow-xl text-left flex flex-col justify-between border border-white/20 text-epicWhite">
+              <p className="font-medium leading-relaxed text-base md:text-lg mb-6 lg:mb-8 break-words">{rev.text}</p>
+              <div className="flex items-center gap-4 border-t border-white/20 pt-5 lg:pt-6">
                 <div className="w-14 h-14 bg-epicDark text-white rounded-full flex items-center justify-center font-black overflow-hidden border-2 border-white shadow-sm relative">
                   {rev.img ? <Image src={rev.img} fill sizes="56px" className="object-cover" alt={rev.name} /> : rev.name.charAt(0)}
                 </div>
