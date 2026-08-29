@@ -94,9 +94,10 @@ export default function HomeV2Footer({ t, lang = "en", links }) {
         />
       </div>
 
-      <div data-home-v2-footer-body className="relative mx-auto min-h-[373px] max-w-[1440px] px-5 pb-24 pt-12 min-[1440px]:h-[373px] min-[1440px]:px-0 min-[1440px]:pb-0 min-[1440px]:pt-0">
-        <div data-home-v2-footer-main className="relative z-20 grid gap-10 md:grid-cols-3 min-[1440px]:absolute min-[1440px]:left-[233px] min-[1440px]:top-[58px] min-[1440px]:h-[198px] min-[1440px]:w-[975px] min-[1440px]:!block">
-          <section data-home-v2-footer-brand className="w-full min-[1440px]:absolute min-[1440px]:left-0 min-[1440px]:top-0 min-[1440px]:h-[198px] min-[1440px]:w-[306px]">
+      <div data-home-v2-footer-body className="relative min-h-[373px] w-full px-5 pb-24 pt-12 min-[1440px]:h-[373px] min-[1440px]:px-0 min-[1440px]:pb-0 min-[1440px]:pt-0">
+        <div data-home-v2-footer-frame className="home-v2-fluid-frame home-v2-fluid-grid !block !w-full min-[1440px]:!grid min-[1440px]:!w-[calc(100%-(2*var(--home-v2-fluid-gutter)))]">
+          <div data-home-v2-footer-main className="relative z-20 grid gap-10 md:grid-cols-3 min-[1440px]:col-span-12 min-[1440px]:mt-[58px] min-[1440px]:w-fit min-[1440px]:!grid-cols-[306px_clamp(191px,12vw,280px)_clamp(228px,14vw,320px)] min-[1440px]:gap-x-[clamp(125px,calc(11.36vw_-_38.6px),230px)] min-[1440px]:justify-self-center">
+          <section data-home-v2-footer-brand className="w-full min-[1440px]:h-[198px] min-[1440px]:w-[306px]">
             <Image src={`${assetRoot}/brand-logo.svg`} alt="EPIC" width={29} height={18} unoptimized className="h-[18px] w-[29px]" />
             <p className="mt-[24px] h-[101px] max-w-[306px] whitespace-pre-line text-[16px] font-light leading-[30px] text-white">
               {brandDescription}
@@ -106,7 +107,7 @@ export default function HomeV2Footer({ t, lang = "en", links }) {
             </div>
           </section>
 
-          <nav aria-label={isRu ? "Ссылки в подвале" : "Footer links"} data-home-v2-footer-quick-links className="space-y-3 min-[1440px]:absolute min-[1440px]:left-[431px] min-[1440px]:top-0 min-[1440px]:w-[191px] min-[1440px]:space-y-[20px]">
+          <nav aria-label={isRu ? "Ссылки в подвале" : "Footer links"} data-home-v2-footer-quick-links className="space-y-3 min-[1440px]:w-[clamp(191px,12vw,280px)] min-[1440px]:space-y-[20px]">
             {quickLinks.map((item) => (
               <Link key={item.href} href={item.href} data-footer-quick-link className="flex min-h-[25px] items-center gap-[6px] text-[16px] leading-[1.25] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-epicRed min-[1440px]:h-[13px] min-[1440px]:min-h-0 min-[1440px]:leading-[13px]">
                 <Image src={`${assetRoot}/link-icon.svg`} alt="" width={13} height={13} unoptimized className="h-[13px] w-[13px] shrink-0" />
@@ -115,21 +116,22 @@ export default function HomeV2Footer({ t, lang = "en", links }) {
             ))}
           </nav>
 
-          <section data-home-v2-footer-contacts className="space-y-5 min-[1440px]:absolute min-[1440px]:left-[747px] min-[1440px]:top-0 min-[1440px]:w-[228px] min-[1440px]:space-y-[20px]">
+          <section data-home-v2-footer-contacts className="space-y-5 min-[1440px]:w-[clamp(228px,14vw,320px)] min-[1440px]:space-y-[20px]">
             <ContactRow icon="location" href={links.googleMaps} external role="location" onClick={() => trackEvent("map_activate", { language: lang, cta_location: "footer", cta_label: "google_maps" })}>{t.locationAddress}</ContactRow>
             <ContactRow icon="email" href={`mailto:${email}`} role="email">{email}</ContactRow>
             <ContactRow icon="phone" href={`tel:${siteConfig.phone}`} role="phone">+84 383 880 164</ContactRow>
             <ContactRow icon="partners" href={partnersHref} role="partners" onClick={() => trackEvent("partner_cta_click", { language: lang, service_type: "partnership", cta_location: "footer", cta_label: "for_partners" })}>{isRu ? "Партнёрам" : "For Partners"}</ContactRow>
           </section>
+          </div>
         </div>
 
-        <Image data-home-v2-footer-surfboard src={`${assetRoot}/footer-surfboard-artwork.svg`} alt="" width={163} height={163} unoptimized className="pointer-events-none absolute bottom-0 right-4 z-10 h-[130px] w-[130px] object-fill min-[1440px]:-bottom-[12px] min-[1440px]:right-[25px] min-[1440px]:h-[163px] min-[1440px]:w-[163px]" />
+        <Image data-home-v2-footer-surfboard src={`${assetRoot}/footer-surfboard-artwork.svg`} alt="" width={163} height={163} unoptimized className="pointer-events-none absolute bottom-0 right-4 z-10 h-[130px] w-[130px] object-fill min-[1440px]:-bottom-[12px] min-[1440px]:right-[var(--home-v2-fluid-gutter)] min-[1440px]:h-[163px] min-[1440px]:w-[163px]" />
 
-        <svg data-home-v2-footer-wave aria-hidden="true" viewBox="0 0 1740 83" preserveAspectRatio="none" className="pointer-events-none absolute bottom-0 left-1/2 z-0 h-[83px] w-[1740px] -translate-x-1/2 fill-white/[0.08] min-[1440px]:left-[-70px] min-[1440px]:translate-x-0">
+        <svg data-home-v2-footer-wave aria-hidden="true" viewBox="0 0 1740 83" preserveAspectRatio="none" className="pointer-events-none absolute bottom-0 left-1/2 z-0 h-[83px] w-[1740px] -translate-x-1/2 fill-white/[0.08] min-[1440px]:left-0 min-[1440px]:w-full min-[1440px]:translate-x-0">
           {Array.from({ length: 10 }, (_, index) => <path key={index} d={`M${index * 174} 0C${index * 174 + 35} 0 ${index * 174 + 52} 24 ${index * 174 + 87} 24C${index * 174 + 122} 24 ${index * 174 + 139} 0 ${index * 174 + 174} 0V83H${index * 174}Z`} />)}
         </svg>
 
-        <div data-home-v2-footer-copyright className="absolute bottom-[31px] left-1/2 z-20 -translate-x-1/2 whitespace-nowrap text-center text-[13px] leading-[10px] text-white">
+        <div data-home-v2-footer-copyright className="absolute bottom-[31px] left-1/2 z-20 -translate-x-1/2 whitespace-nowrap text-center text-[13px] leading-[10px] text-white min-[1440px]:left-[var(--home-v2-fluid-gutter)] min-[1440px]:right-[var(--home-v2-fluid-gutter)] min-[1440px]:translate-x-0">
           © {year} Epic Surf School - Ride Every Day
         </div>
       </div>

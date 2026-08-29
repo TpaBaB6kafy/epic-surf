@@ -39,6 +39,7 @@ export default function Header({
   const headerBookingUrl = links.headerBooking?.[lang] || links.group;
   const navItems = [
     { href: sectionHref("lessons"), label: t.navLessons },
+    ...(isHomeV2 ? [{ href: sectionHref("rentals"), label: t.navRentals }] : []),
     { href: sectionHref("how-it-works"), label: t.navHow },
     { href: sectionHref("forecast"), label: t.navForecast },
     { href: sectionHref("events"), label: t.navEvents },

@@ -83,157 +83,6 @@ export function HomeV2Why({ items }) {
   );
 }
 
-const howDesktopAssets = [
-  {
-    src: "/design/home-v2/how-it-works/how-it-works-meet.jpg",
-    left: 100,
-    width: 249,
-    radius: 3,
-    borderOpacity: 0.69,
-    artwork: { left: 0, top: -158, width: 249, height: 540 },
-    title: { left: 103, right: 12, fontSize: 18 },
-    description: { left: 19, top: 277, width: 209, height: 95 },
-  },
-  {
-    src: "/design/home-v2/how-it-works/how-it-works-theory.jpg",
-    left: 426,
-    width: 251,
-    radius: 3,
-    borderOpacity: 0.69,
-    artwork: { left: -91, top: 0, width: 448, height: 260 },
-    title: { left: 115, right: 14, fontSize: 19.098 },
-    description: { left: 12, top: 273, width: 227, height: 103 },
-  },
-  {
-    src: "/design/home-v2/how-it-works/how-it-works-practice.jpg",
-    left: 755,
-    width: 252,
-    radius: 3,
-    borderOpacity: 0.69,
-    artwork: { left: -106, top: -3, width: 467, height: 263 },
-    title: { left: 103, right: 16, fontSize: 19.098 },
-    description: { left: 32, top: 284, width: 190, height: 82 },
-  },
-  {
-    src: "/design/home-v2/how-it-works/how-it-works-review.png",
-    left: 1089,
-    width: 254,
-    radius: 3,
-    borderOpacity: 0.69,
-    artwork: { left: 0, top: 0, width: 254, height: 260 },
-    title: { left: 117, right: 15, fontSize: 19.098 },
-    description: { left: 22, top: 271, width: 209, height: 107 },
-  },
-];
-
-function HomeV2HowItWorksDesktop({ steps, title, titleEnd, lang }) {
-  const isRu = lang === "ru";
-  return (
-    <div data-home-v2-how-desktop data-home-v2-how-desktop-en className="absolute left-1/2 top-0 hidden h-[720px] w-[1440px] -translate-x-1/2 min-[1440px]:block">
-      <div className="absolute left-[-29px] top-[357px] flex h-[139.604px] w-[1543.652px] items-center justify-center" aria-hidden="true">
-        <div className="flex-none rotate-[177.43deg] -scale-y-100">
-          <div className="relative h-[70.639px] w-[1542.036px]">
-            <Image
-              data-home-v2-how-wave-contour
-              src="/design/home-v2/how-it-works/how-it-works-wave-contour.svg"
-              alt=""
-              width={1540}
-              height={195}
-              unoptimized
-              sizes="1542px"
-              className="absolute left-0 max-w-none"
-              style={{ top: -62.39, width: 1540.032, height: 194.932 }}
-            />
-          </div>
-        </div>
-      </div>
-
-      <h2 data-home-v2-how-heading className="absolute left-0 top-[112px] h-[50.25px] w-full font-black uppercase leading-none">
-        <span
-          data-home-v2-how-heading-line="how-it"
-          className="absolute top-0 flex h-[49.536px] items-center text-epicWhite"
-          style={{ left: isRu ? 385 : 493, width: isRu ? 382 : 218.734, fontFamily: "Montserrat, var(--font-heading)", fontSize: isRu ? 42 : 48, lineHeight: "46.362px", transform: "skewX(-0.55deg)" }}
-        >
-          {title.toUpperCase()}
-        </span>
-        <span
-          data-home-v2-how-heading-line="works"
-          className="absolute top-0 flex h-[50.25px] items-center text-epicGray"
-          style={{ left: isRu ? 785 : 745, width: isRu ? 180 : 202.618, fontFamily: "Montserrat, var(--font-heading)", fontSize: isRu ? 42 : 48, lineHeight: "46.362px", transform: "rotate(0.2deg) skewX(-0.48deg)" }}
-        >
-          {titleEnd.toUpperCase()}
-        </span>
-      </h2>
-
-      <div data-home-v2-how-process-cards>
-        {steps.map((step, index) => {
-          const asset = howDesktopAssets[index];
-          return (
-            <article
-              key={step.title}
-              data-how-card
-              data-home-v2-how-process-card={index + 1}
-              className="absolute top-[226px] h-[394px] text-epicWhite"
-              style={{ left: asset.left, width: asset.width }}
-            >
-              <div
-                data-home-v2-how-card-border
-                className="absolute inset-0 border-[3px] border-solid border-epicWhite bg-[#1f1f1f]"
-                style={{ borderRadius: asset.radius, opacity: asset.borderOpacity }}
-                aria-hidden="true"
-              />
-
-              <div
-                data-home-v2-how-photo
-                className="absolute left-0 top-0 h-[260px] overflow-hidden bg-black"
-                style={{ width: asset.width, borderTopLeftRadius: asset.radius, borderTopRightRadius: asset.radius }}
-              >
-                <div data-home-v2-how-photo-artwork className="absolute" style={asset.artwork}>
-                  <Image
-                    data-how-step-photo={index}
-                    src={asset.src}
-                    alt=""
-                    fill
-                    unoptimized
-                    sizes={`${asset.artwork.width}px`}
-                    className="object-cover"
-                  />
-                </div>
-                <div data-home-v2-how-photo-title-overlay className="absolute bottom-0 left-0 h-[73px] w-full bg-[rgba(0,0,0,0.55)]" aria-hidden="true" />
-              </div>
-
-              <h3
-                className="absolute top-[210px] flex h-[27px] items-center justify-end text-right font-normal leading-none"
-                style={{
-                  left: asset.title.left,
-                  right: asset.title.right,
-                  fontFamily: "Arial, sans-serif",
-                  fontSize: isRu ? Math.min(asset.title.fontSize, 16) : asset.title.fontSize,
-                }}
-              >
-                {step.title}
-              </h3>
-
-              <p
-                className={`absolute flex items-center justify-center text-center font-normal ${isRu ? "text-[10.5px] leading-[18px]" : "text-[12px] leading-[24px]"}`}
-                style={{
-                  left: asset.description.left,
-                  top: asset.description.top,
-                  width: asset.description.width,
-                  height: asset.description.height,
-                  fontFamily: "Montserrat, var(--font-body)",
-                }}
-              >
-                {step.desc}
-              </p>
-            </article>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
 const howMobileAssets = [
   {
     src: "/design/home-v2/how-it-works/how-it-works-meet.jpg",
@@ -380,7 +229,7 @@ function HomeV2HowItWorksFluidDesktop({ steps, title, titleEnd, lang }) {
     <div
       data-home-v2-how-adaptive
       data-home-v2-how-fluid-desktop
-      className="relative hidden overflow-hidden min-[640px]:block min-[1440px]:!hidden"
+      className={`relative overflow-hidden ${isRu ? "block" : "hidden min-[640px]:block"}`}
     >
       <div
         data-home-v2-how-fluid-wave
@@ -388,6 +237,7 @@ function HomeV2HowItWorksFluidDesktop({ steps, title, titleEnd, lang }) {
         aria-hidden="true"
       >
         <Image
+          data-home-v2-how-wave-contour
           src="/design/home-v2/how-it-works/how-it-works-wave-contour.svg"
           alt=""
           width={1540}
@@ -398,7 +248,7 @@ function HomeV2HowItWorksFluidDesktop({ steps, title, titleEnd, lang }) {
         />
       </div>
 
-      <div className="home-v2-container relative z-10 pb-[var(--home-v2-space-standard)] pt-[var(--home-v2-space-heading)] min-[900px]:pt-[clamp(72px,7.5vw,108px)] min-[1200px]:px-[clamp(16px,1.4vw,20px)]">
+      <div className="home-v2-container relative z-10 pb-[var(--home-v2-space-standard)] pt-[var(--home-v2-space-heading)] min-[900px]:pt-[clamp(72px,7.5vw,108px)] min-[1200px]:px-[clamp(16px,1.4vw,20px)] min-[1440px]:h-[720px] min-[1440px]:!w-[calc(100%-(2*var(--home-v2-fluid-gutter)))] min-[1440px]:!max-w-none min-[1440px]:px-0 min-[1440px]:pb-0 min-[1440px]:pt-[112px]">
         <h2
           data-home-v2-how-fluid-heading
           className="flex items-baseline justify-center gap-[clamp(14px,2.35vw,34px)] whitespace-nowrap font-black uppercase leading-[1.08]"
@@ -410,7 +260,7 @@ function HomeV2HowItWorksFluidDesktop({ steps, title, titleEnd, lang }) {
 
         <div
           data-home-v2-how-fluid-grid
-          className="mt-[var(--home-v2-space-heading)] grid gap-[var(--home-v2-space-internal)] min-[900px]:mt-[clamp(50px,4.2vw,60px)] min-[900px]:grid-cols-2 min-[1200px]:grid-cols-[repeat(4,minmax(0,clamp(238px,calc(238px+((100vw-1200px)*0.067)),254px)))] min-[1200px]:justify-between min-[1200px]:gap-0"
+          className="mt-[var(--home-v2-space-heading)] grid gap-[var(--home-v2-space-internal)] min-[900px]:mt-[clamp(50px,4.2vw,60px)] min-[900px]:grid-cols-2 min-[1200px]:grid-cols-[repeat(4,minmax(0,clamp(238px,calc(238px+((100vw-1200px)*0.067)),254px)))] min-[1200px]:justify-between min-[1200px]:gap-0 min-[1440px]:mx-auto min-[1440px]:mt-[64px] min-[1440px]:w-[clamp(1240px,calc(56vw+440px),1875px)] min-[1440px]:grid-cols-[repeat(4,minmax(0,clamp(264px,calc(8vw+149px),354px)))]"
         >
           {steps.map((step, index) => {
             const asset = howMobileAssets[index];
@@ -421,7 +271,8 @@ function HomeV2HowItWorksFluidDesktop({ steps, title, titleEnd, lang }) {
                 data-how-card
                 data-home-v2-how-fluid-card={index + 1}
                 data-home-v2-how-adaptive-card={index + 1}
-                className="grid min-h-[210px] min-w-0 grid-cols-[minmax(0,47%)_minmax(0,53%)] overflow-hidden rounded-[3px] border-[3px] border-epicWhite/70 bg-[#1f1f1f] text-epicWhite min-[900px]:relative min-[900px]:h-[394px] min-[900px]:grid-cols-1"
+                className="grid min-h-[210px] min-w-0 grid-cols-[minmax(0,47%)_minmax(0,53%)] overflow-hidden rounded-[3px] border-[3px] border-epicWhite/70 bg-[#1f1f1f] text-epicWhite min-[900px]:relative min-[900px]:h-[394px] min-[900px]:grid-cols-1 min-[1440px]:h-[var(--home-v2-how-card-height)]"
+                style={{ "--home-v2-how-card-height": "clamp(444px, calc(2.5vw + 408px), 472px)" }}
               >
                 <div
                   data-home-v2-how-fluid-photo
@@ -434,14 +285,15 @@ function HomeV2HowItWorksFluidDesktop({ steps, title, titleEnd, lang }) {
                     aria-hidden="true"
                     fill
                     unoptimized
-                    sizes="(min-width: 1200px) 254px, 25vw"
+                    sizes="(min-width: 2560px) 354px, (min-width: 1920px) 303px, (min-width: 1440px) 264px, (min-width: 1200px) 254px, 25vw"
                     className="object-cover"
                     style={{ objectPosition: asset.objectPosition }}
                   />
-                  <div className="absolute inset-x-0 bottom-0 h-[clamp(58px,calc(34px+2.667vw),66px)] bg-black/55 min-[1200px]:h-[clamp(66px,5.1vw,73px)]" aria-hidden="true" />
+                  <div className="absolute inset-x-0 bottom-0 h-[clamp(58px,calc(34px+2.667vw),66px)] bg-black/55 min-[1200px]:h-[clamp(66px,5.1vw,73px)] min-[1440px]:h-[clamp(78px,calc(1.25vw+60px),92px)]" aria-hidden="true" />
                   <h3
-                    className="absolute bottom-[clamp(15px,1.6vw,23px)] right-[clamp(10px,1.1vw,16px)] flex h-[27px] max-w-[calc(100%-24px)] items-center justify-end text-right font-normal leading-none"
-                    style={{ fontFamily: "Arial, sans-serif", fontSize: isRu ? "clamp(13px,1.33vw,16px)" : "clamp(15px,1.5vw,19.1px)" }}
+                    data-home-v2-how-card-title
+                    className={`absolute bottom-[clamp(15px,1.6vw,23px)] right-[clamp(10px,1.1vw,16px)] flex h-[27px] max-w-[calc(100%-24px)] items-center justify-end text-right font-normal leading-none ${isRu ? "text-[clamp(13px,1.33vw,16px)]" : "text-[clamp(15px,1.5vw,19.1px)]"} min-[1440px]:bottom-0 min-[1440px]:left-0 min-[1440px]:right-0 min-[1440px]:h-[clamp(78px,calc(1.25vw+60px),92px)] min-[1440px]:max-w-none min-[1440px]:justify-center min-[1440px]:px-[clamp(16px,1.2vw,24px)] min-[1440px]:py-[clamp(14px,1vw,20px)] min-[1440px]:text-center min-[1440px]:text-[clamp(20px,calc(0.42vw+14px),25px)] min-[1440px]:leading-[1.15]`}
+                    style={{ fontFamily: "Arial, sans-serif" }}
                   >
                     {step.title}
                   </h3>
@@ -449,10 +301,10 @@ function HomeV2HowItWorksFluidDesktop({ steps, title, titleEnd, lang }) {
 
                 <div
                   data-home-v2-how-fluid-text
-                  className={`relative flex min-h-0 min-w-0 items-center justify-center px-[clamp(18px,3vw,34px)] py-5 text-center ${photoIsLeft ? "order-2" : "order-1"} min-[900px]:absolute min-[900px]:inset-x-0 min-[900px]:bottom-0 min-[900px]:order-2 min-[900px]:h-[clamp(134px,calc(222px-7.333vw),156px)] min-[900px]:px-[clamp(12px,1.55vw,22px)] min-[900px]:py-3 min-[1200px]:h-[clamp(134px,10.84vw,156px)]`}
+                  className={`relative flex min-h-0 min-w-0 items-center justify-center px-[clamp(18px,3vw,34px)] py-5 text-center ${photoIsLeft ? "order-2" : "order-1"} min-[900px]:absolute min-[900px]:inset-x-0 min-[900px]:bottom-0 min-[900px]:order-2 min-[900px]:h-[clamp(134px,calc(222px-7.333vw),156px)] min-[900px]:px-[clamp(12px,1.55vw,22px)] min-[900px]:py-3 min-[1200px]:h-[clamp(134px,10.84vw,156px)] min-[1440px]:h-[calc(var(--home-v2-how-card-height)-260px)] min-[1440px]:px-[clamp(22px,calc(1vw+8px),30px)] min-[1440px]:py-[clamp(16px,calc(0.833vw+4px),24px)]`}
                 >
                   <p
-                    className={`font-normal ${isRu ? "text-[clamp(9px,0.875vw,10.5px)] leading-[clamp(15px,1.5vw,18px)]" : "text-[clamp(10px,1vw,12px)] leading-[clamp(18px,2vw,24px)]"}`}
+                    className={`font-normal ${isRu ? "text-[clamp(9px,0.875vw,10.5px)] leading-[clamp(15px,1.5vw,18px)] min-[1440px]:text-[clamp(13px,calc(0.55vw+5px),17px)]" : "text-[clamp(10px,1vw,12px)] leading-[clamp(18px,2vw,24px)] min-[1440px]:text-[clamp(14px,calc(0.625vw+5px),18px)]"} min-[1440px]:leading-[clamp(24px,calc(0.625vw+15px),31px)]`}
                     style={{ fontFamily: "Montserrat, var(--font-body)" }}
                   >
                     {step.desc}
@@ -477,8 +329,6 @@ export function HomeV2HowItWorks({ t, lang }) {
       className={`relative isolate bg-epicDark text-epicWhite scroll-mt-24 min-[1440px]:h-[720px] min-[1440px]:overflow-hidden ${lang === "en" ? "-mt-8 min-[640px]:mt-0" : ""}`}
       data-desktop-approved="true"
     >
-      <HomeV2HowItWorksDesktop steps={t.howSteps} title={t.howTitle} titleEnd={t.howTitleEnd} lang={lang} />
-
       {lang === "en" && <HomeV2HowItWorksMobileEn steps={t.howSteps} title={t.howTitle} titleEnd={t.howTitleEnd} />}
 
       <HomeV2HowItWorksFluidDesktop steps={t.howSteps} title={t.howTitle} titleEnd={t.howTitleEnd} lang={lang} />
@@ -596,71 +446,74 @@ function MobileEnReviewCard({ review, index }) {
   );
 }
 
-function HomeV2ReviewsMobileEn({ googleMapsUrl }) {
+function HomeV2ReviewsMobileEn({ googleMapsUrl, title }) {
+  const [headingLead, ...headingRest] = title.split(" ");
+
   return (
-    <div data-home-v2-reviews-mobile data-home-v2-reviews-mobile-en className="relative mx-auto h-[853px] w-full max-w-[390px] overflow-visible font-['Montserrat',var(--font-body)]">
-      {desktopEnReviews.map((review, index) => (
-        <MobileEnReviewCard key={review.name} review={review} index={index} />
-      ))}
+    <div data-home-v2-reviews-mobile data-home-v2-reviews-mobile-en className="relative mx-auto h-[925px] w-full max-w-[390px] overflow-visible font-['Montserrat',var(--font-body)]">
+      <h2 className="absolute inset-x-0 top-[12px] text-center text-[34px] font-black uppercase leading-[1.05]">
+        <span className="text-epicWhite">{headingLead}</span>{" "}<span className="text-epicGray">{headingRest.join(" ")}</span>
+      </h2>
 
-      <div
-        data-google-rating-summary-mobile
-        className="absolute"
-        style={{ left: "calc(111.396px + (100% - 390px) / 2)", top: 637.517, width: 168.876, height: 49.524 }}
-      >
-        <p data-rating-label className="absolute left-[10.604px] top-[2.483px] h-[16.672px] w-[146.773px] text-right text-[15.052px] font-bold uppercase leading-[17.202px] text-epicGray">Google reviews</p>
-        <p data-rating-value className="absolute left-[0.022px] top-[28.832px] h-[17.309px] w-[41.274px] text-right text-[25.803px] font-bold leading-[17.202px] text-epicWhite">5.0</p>
-        <div data-rating-stars className="absolute left-[45.361px] top-[27.138px] flex h-[22.385px] w-[123.096px] items-center justify-between" aria-label="5 out of 5 stars">
-          {Array.from({ length: 5 }, (_, index) => (
-            <span key={index} data-rating-star className="flex size-[20.749px] items-center justify-center" aria-hidden="true">
-              <span className="block h-[16.16px] w-[16.847px] bg-gradient-to-br from-[#FFCD0F] to-[#FF6F47]" style={{ clipPath: "polygon(50% 3%, 61% 36%, 96% 36%, 68% 56%, 79% 91%, 50% 70%, 21% 91%, 32% 56%, 4% 36%, 39% 36%)" }} />
-            </span>
-          ))}
+      <div className="absolute inset-x-0 top-[72px] h-[853px]">
+        {desktopEnReviews.map((review, index) => (
+          <MobileEnReviewCard key={review.name} review={review} index={index} />
+        ))}
+
+        <div
+          data-google-rating-summary-mobile
+          className="absolute"
+          style={{ left: "calc(111.396px + (100% - 390px) / 2)", top: 637.517, width: 168.876, height: 49.524 }}
+        >
+          <p data-rating-label className="absolute left-[10.604px] top-[2.483px] h-[16.672px] w-[146.773px] text-right text-[15.052px] font-bold uppercase leading-[17.202px] text-epicGray">Google reviews</p>
+          <p data-rating-value className="absolute left-[0.022px] top-[28.832px] h-[17.309px] w-[41.274px] text-right text-[25.803px] font-bold leading-[17.202px] text-epicWhite">5.0</p>
+          <div data-rating-stars className="absolute left-[45.361px] top-[27.138px] flex h-[22.385px] w-[123.096px] items-center justify-between" aria-label="5 out of 5 stars">
+            {Array.from({ length: 5 }, (_, index) => (
+              <span key={index} data-rating-star className="flex size-[20.749px] items-center justify-center" aria-hidden="true">
+                <span className="block h-[16.16px] w-[16.847px] bg-gradient-to-br from-[#FFCD0F] to-[#FF6F47]" style={{ clipPath: "polygon(50% 3%, 61% 36%, 96% 36%, 68% 56%, 79% 91%, 50% 70%, 21% 91%, 32% 56%, 4% 36%, 39% 36%)" }} />
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <a
-        data-google-maps-cta-mobile
-        href={googleMapsUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="absolute block text-epicWhite outline-none focus-visible:ring-2 focus-visible:ring-epicWhite"
-        style={{ left: "calc(106px + (100% - 390px) / 2)", top: 725, width: 189.821, height: 71.132 }}
-      >
-        <Image data-cta-surface src={`${reviewsAssetRoot}/mobile-cta-surface.svg`} alt="" width={173} height={61} className="absolute left-0 top-[0.841px] h-[61px] w-[173px] max-w-none rotate-[1.348deg]" />
-        <span data-cta-label className="absolute left-[21.952px] top-0 flex h-[70.693px] w-[167.868px] items-center text-left text-[15.052px] font-black uppercase leading-[19.352px]">
-          Read more on<br />Google Maps
-        </span>
-      </a>
+        <a
+          data-google-maps-cta-mobile
+          href={googleMapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute block text-epicWhite outline-none focus-visible:ring-2 focus-visible:ring-epicWhite"
+          style={{ left: "calc(106px + (100% - 390px) / 2)", top: 725, width: 189.821, height: 71.132 }}
+        >
+          <Image data-cta-surface src={`${reviewsAssetRoot}/mobile-cta-surface.svg`} alt="" width={173} height={61} className="absolute left-0 top-[0.841px] h-[61px] w-[173px] max-w-none rotate-[1.348deg]" />
+          <span data-cta-label className="absolute left-[21.952px] top-0 flex h-[70.693px] w-[167.868px] items-center text-left text-[15.052px] font-black uppercase leading-[19.352px]">
+            Read more on<br />Google Maps
+          </span>
+        </a>
+      </div>
     </div>
   );
 }
 
-function DesktopReviewCard({ review, index, isRu }) {
+function FluidDesktopReviewCard({ review, index, isRu }) {
   const geometry = desktopReviewGeometry[index];
 
   return (
     <article
       data-home-v2-review-card
-      className="absolute"
-      style={{ left: geometry.left, top: geometry.top, width: geometry.width, height: geometry.height }}
+      data-home-v2-review-fluid-card={index + 1}
+      className="relative flex h-full min-w-0 flex-col px-[clamp(24px,1.8vw,36px)] pb-[20px] pt-[24px] text-epicWhite"
     >
       <div
         data-review-card-layer="outline"
-        className="absolute rounded-[2.4px] border-[3px] border-epicWhite"
+        className="absolute inset-[4px] rounded-[2.4px] border-[3px] border-epicWhite"
         style={{
-          left: geometry.base.left + (geometry.base.width - geometry.base.rawWidth) / 2,
-          top: geometry.base.top + (geometry.base.height - geometry.base.rawHeight) / 2,
-          width: geometry.base.rawWidth,
-          height: geometry.base.rawHeight,
           transform: `rotate(${geometry.base.rotation}deg)`,
         }}
         aria-hidden="true"
       />
       <p
         data-review-quote
-        className={`absolute z-10 flex whitespace-pre-line text-center font-bold text-epicWhite ${isRu ? "text-[13px] leading-[19px]" : "text-[15.052px] leading-[24px]"}`}
-        style={{ ...geometry.quote, alignItems: "center", justifyContent: "center" }}
+        className={`relative z-10 mx-auto flex w-full max-w-[440px] flex-1 items-center justify-center whitespace-pre-line text-center font-bold text-epicWhite ${isRu ? "text-[clamp(15px,calc(0.42vw+9px),19px)] leading-[1.45]" : "text-[clamp(16px,calc(0.52vw+8.5px),21px)] leading-[1.45]"}`}
       >
         {review.text}
       </p>
@@ -668,13 +521,14 @@ function DesktopReviewCard({ review, index, isRu }) {
         data-card-divider
         src={geometry.divider.src}
         alt=""
-        width={geometry.divider.width}
+        width={320}
         height={geometry.divider.height}
-        className="absolute z-10 max-w-none"
-        style={{ left: geometry.divider.left, top: geometry.divider.top, width: geometry.divider.width, height: geometry.divider.height }}
+        className="relative z-10 mt-3 h-auto w-full max-w-[440px] self-center"
       />
-      <p data-reviewer-name className="absolute z-10 whitespace-nowrap text-[9.676px] font-black uppercase leading-[13px] text-epicRed" style={geometry.name}>{review.name}</p>
-      <p data-review-date className="absolute z-10 whitespace-nowrap text-[9.676px] font-normal uppercase leading-[13px] text-epicWhite/35" style={geometry.date}>{review.date}</p>
+      <div className="relative z-10 mx-auto mt-2.5 w-full max-w-[440px]">
+        <p data-reviewer-name className="whitespace-nowrap text-[clamp(11px,0.45vw,12px)] font-black uppercase leading-[15px] text-epicRed">{review.name}</p>
+        <p data-review-date className="mt-0.5 whitespace-nowrap text-[clamp(10px,0.42vw,11px)] font-normal uppercase leading-[14px] text-epicWhite/40">{review.date}</p>
+      </div>
     </article>
   );
 }
@@ -702,7 +556,7 @@ function HomeV2ReviewsAdaptive({ reviews, title, googleMapsUrl, isRu }) {
   const headingRest = isRu ? headingWords.slice(1).join(" ") : headingWords.slice(2).join(" ");
 
   return (
-    <div data-home-v2-reviews-adaptive data-home-v2-reviews-mobile={isRu ? "true" : undefined} className={`${isRu ? "block" : "hidden min-[640px]:block"} min-[1440px]:!hidden`}>
+    <div data-home-v2-reviews-adaptive data-home-v2-reviews-mobile={isRu ? "true" : undefined} className={`${isRu ? "block" : "hidden min-[640px]:block"} min-[900px]:!hidden`}>
       <div className="home-v2-container py-[var(--home-v2-space-standard)]">
         <h2 className="text-center font-['Montserrat',var(--font-heading)] text-[clamp(34px,5vw,48px)] font-black uppercase leading-[1.05]">
           <span className="text-epicWhite">{headingLead}</span>{" "}<span className="text-epicGray">{headingRest}</span>
@@ -735,67 +589,70 @@ export function HomeV2Reviews({ t, googleMapsUrl }) {
 
   return (
     <section id="reviews" data-home-v2-reviews className="relative z-20 overflow-visible bg-epicDark text-epicWhite scroll-mt-24">
-        <div data-home-v2-reviews-grid className="relative mx-auto hidden h-[684px] w-full min-[1440px]:block">
+        <div data-home-v2-reviews-grid className="relative mx-auto hidden h-[684px] w-full min-[900px]:block">
           <div
             data-home-v2-reviews-desktop
             data-home-v2-reviews-desktop-en
-            className="relative left-1/2 mx-0 hidden h-[684px] w-[1440px] -translate-x-1/2 min-[1440px]:block"
+            className="relative mx-auto hidden h-[684px] w-[calc(100%-(2*var(--home-v2-fluid-gutter)))] min-[900px]:block"
           >
             <div
               data-surf-family-bridge-illustration
               aria-hidden="true"
-              className="pointer-events-none absolute z-10 overflow-visible"
-              style={{ left: 870, top: -139, width: 364, height: 337.13 }}
+              className="pointer-events-none absolute left-[63%] top-[-139px] z-10 h-auto w-[clamp(364px,20vw,397px)] overflow-visible"
             >
-              <Image src={`${reviewsAssetRoot}/surf-family-bridge-full-v2.svg`} alt="" width={364} height={337} className="block h-full w-full max-w-none" />
+              <Image src={`${reviewsAssetRoot}/surf-family-bridge-full-v2.svg`} alt="" width={364} height={337} className="block h-auto w-full max-w-none" />
             </div>
 
-            <div data-reviews-section-heading className="absolute left-[126px] top-[102px] z-20 h-[38.592px] w-[583.228px]">
-              <div data-heading-teal-offset className="absolute inset-0" aria-hidden="true" />
-              <span data-heading-the-best className={`absolute left-0 top-0 h-[38.592px] whitespace-nowrap font-black uppercase leading-[42.152px] text-epicWhite ${isRu ? "w-[210px] text-[42px]" : "w-[252.311px] text-[48px]"}`}>{headingLead}</span>
-              <span data-heading-surf-vibes className={`absolute top-[1px] h-[35.412px] whitespace-nowrap font-black uppercase leading-[42.152px] text-epicGray ${isRu ? "left-[240px] w-[470px] text-[38px]" : "left-[271px] w-[312.228px] text-[48px]"}`}>{headingRest.join(" ")}</span>
-            </div>
-
-            <div data-review-cards className="absolute left-[173px] top-[243px] z-20 h-[196.003px] w-[1093.458px]">
-              {desktopReviews.map((review, index) => (
-                <DesktopReviewCard key={review.name} review={review} index={index} isRu={isRu} />
-              ))}
-            </div>
-
-            <div data-google-rating-summary className="absolute left-[432.324px] top-[515.074px] z-20 h-[61.301px] w-[211.249px]">
-              <p data-rating-label className="absolute left-[0.873px] top-[2.908px] h-[20.839px] w-[183.467px] text-[18.815px] font-bold uppercase leading-[21.503px] text-epicGray">{isRu ? "Отзывы Google" : "Google reviews"}</p>
-              <p data-rating-value className="absolute left-[0.191px] top-[35.437px] h-[21.636px] w-[51.593px] text-[32.254px] font-bold leading-[21.503px] text-epicWhite">5.0</p>
-              <div data-rating-stars className="absolute left-[56.864px] top-[33.32px] flex h-[27.982px] w-[153.87px] items-center gap-[6.044px]">
-                {Array.from({ length: 5 }, (_, index) => (
-                  <span
-                    key={index}
-                    data-rating-star
-                    className="block size-[25.936px] shrink-0 bg-[#F8972D]"
-                    style={{ clipPath: "polygon(50% 3%, 61% 36%, 96% 36%, 68% 56%, 79% 91%, 50% 70%, 21% 91%, 32% 56%, 4% 36%, 39% 36%)" }}
-                    aria-hidden="true"
-                  />
-                ))}
+            <div data-reviews-section-heading className="absolute left-1/2 top-[102px] z-20 h-[38.592px] w-[clamp(1150px,calc(49vw+444px),1640px)] -translate-x-1/2">
+              <div className="relative h-[38.592px] w-[min(100%,710px)]">
+                <div data-heading-teal-offset className="absolute inset-0" aria-hidden="true" />
+                <span data-heading-the-best className={`absolute left-0 top-0 h-[38.592px] whitespace-nowrap font-black uppercase leading-[42.152px] text-epicWhite ${isRu ? "w-[210px] text-[42px]" : "w-[252.311px] text-[48px]"}`}>{headingLead}</span>
+                <span data-heading-surf-vibes className={`absolute top-[1px] h-[35.412px] whitespace-nowrap font-black uppercase leading-[42.152px] text-epicGray ${isRu ? "left-[240px] w-[470px] text-[38px]" : "left-[271px] w-[312.228px] text-[48px]"}`}>{headingRest.join(" ")}</span>
               </div>
             </div>
 
-            <a
-              data-google-maps-cta
-              href={googleMapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute left-[795.905px] top-[503.681px] z-20 block h-[88.915px] w-[237.276px] text-epicWhite outline-none focus-visible:ring-2 focus-visible:ring-epicWhite"
-            >
-              <span data-cta-surface className="absolute left-[0.019px] top-[1.051px] block h-[82.881px] w-[214.684px]" aria-hidden="true">
-                <Image src={`${reviewsAssetRoot}/cta-surface.svg`} alt="" width={216} height={76} className="absolute left-0 top-[4px] h-[76px] w-[216px] max-w-none" />
-              </span>
-              <span data-cta-label className="absolute left-[27.44px] top-0 flex h-[88.367px] w-[209.835px] items-center text-left text-[18.815px] font-black uppercase leading-[24.19px]">
-                {isRu ? <>Читать отзывы<br />на Google Maps</> : <>Read more on<br />Google Maps</>}
-              </span>
-            </a>
+            <div data-review-cards className="absolute left-1/2 top-[230px] z-20 grid h-[220px] w-[clamp(1150px,calc(49vw+444px),1640px)] -translate-x-1/2 grid-cols-3 gap-[clamp(40px,3vw,56px)]">
+              {desktopReviews.map((review, index) => (
+                <FluidDesktopReviewCard key={review.name} review={review} index={index} isRu={isRu} />
+              ))}
+            </div>
+
+            <div data-home-v2-reviews-trust-row className="absolute left-1/2 top-[503px] z-20 flex -translate-x-1/2 items-center gap-[clamp(48px,5vw,96px)]">
+              <div data-google-rating-summary className="relative h-[61.301px] w-[211.249px] shrink-0">
+                <p data-rating-label className="absolute left-[0.873px] top-[2.908px] h-[20.839px] w-[183.467px] text-[18.815px] font-bold uppercase leading-[21.503px] text-epicGray">{isRu ? "Отзывы Google" : "Google reviews"}</p>
+                <p data-rating-value className="absolute left-[0.191px] top-[35.437px] h-[21.636px] w-[51.593px] text-[32.254px] font-bold leading-[21.503px] text-epicWhite">5.0</p>
+                <div data-rating-stars className="absolute left-[56.864px] top-[33.32px] flex h-[27.982px] w-[153.87px] items-center gap-[6.044px]">
+                  {Array.from({ length: 5 }, (_, index) => (
+                    <span
+                      key={index}
+                      data-rating-star
+                      className="block size-[25.936px] shrink-0 bg-[#F8972D]"
+                      style={{ clipPath: "polygon(50% 3%, 61% 36%, 96% 36%, 68% 56%, 79% 91%, 50% 70%, 21% 91%, 32% 56%, 4% 36%, 39% 36%)" }}
+                      aria-hidden="true"
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <a
+                data-google-maps-cta
+                href={googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative block h-[88.915px] w-[237.276px] shrink-0 text-epicWhite outline-none focus-visible:ring-2 focus-visible:ring-epicWhite"
+              >
+                <span data-cta-surface className="absolute left-[0.019px] top-[1.051px] block h-[82.881px] w-[214.684px]" aria-hidden="true">
+                  <Image src={`${reviewsAssetRoot}/cta-surface.svg`} alt="" width={216} height={76} className="absolute left-0 top-[4px] h-[76px] w-[216px] max-w-none" />
+                </span>
+                <span data-cta-label className="absolute left-[27.44px] top-0 flex h-[88.367px] w-[209.835px] items-center text-left text-[18.815px] font-black uppercase leading-[24.19px]">
+                  {isRu ? <>Читать отзывы<br />на Google Maps</> : <>Read more on<br />Google Maps</>}
+                </span>
+              </a>
+            </div>
           </div>
         </div>
 
-      {!isRu && <div className="min-[640px]:hidden"><HomeV2ReviewsMobileEn googleMapsUrl={googleMapsUrl} /></div>}
+      {!isRu && <div className="min-[640px]:hidden"><HomeV2ReviewsMobileEn googleMapsUrl={googleMapsUrl} title={t.reviewsTitle} /></div>}
       <HomeV2ReviewsAdaptive reviews={desktopReviews} title={t.reviewsTitle} googleMapsUrl={googleMapsUrl} isRu={isRu} />
     </section>
   );
@@ -870,7 +727,7 @@ export function HomeV2FAQ({ lang = "en", title, titleEnd, items }) {
         key={item.q}
         data-faq-item
         className={desktop
-          ? `relative box-border min-h-[88.2px] border-b-[0.9px] border-epicWhite transition-colors ${isOpen ? "bg-epicWhite/[0.04]" : ""}`
+          ? `relative box-border border-b-[0.9px] border-epicWhite transition-colors ${isOpen ? "bg-epicWhite/[0.04]" : ""}`
           : `border-b border-epicWhite/40 transition-colors ${isOpen ? "bg-epicWhite/[0.035]" : ""}`}
       >
         <button
@@ -880,18 +737,18 @@ export function HomeV2FAQ({ lang = "en", title, titleEnd, items }) {
           aria-expanded={isOpen}
           aria-controls={answerId}
           className={desktop
-            ? "group absolute inset-x-0 top-0 z-10 block h-[88.2px] w-full text-left text-epicWhite outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-epicRed"
+            ? "group relative z-10 grid min-h-[88.2px] w-full grid-cols-[minmax(0,1fr)_49px] items-center gap-6 py-[18px] text-left text-epicWhite outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-epicRed"
             : "group grid min-h-[80px] w-full grid-cols-[minmax(0,1fr)_44px] items-center gap-5 py-4 text-left text-epicWhite outline-none transition focus-visible:bg-epicWhite/8 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-epicRed md:min-h-[88px] md:grid-cols-[minmax(0,1fr)_48px]"}
         >
           {desktop ? (
             <>
               <span
                 data-faq-question
-                className={`absolute left-0 top-[21.6px] h-[29.7px] whitespace-nowrap font-['Segoe_UI',var(--font-body)] font-bold leading-[29.7px] ${isRu ? "text-[18px]" : "text-[21.6px]"}`}
+                className={`min-w-0 pr-2 font-['Segoe_UI',var(--font-body)] font-bold leading-[1.375] ${isRu ? "text-[18px]" : "text-[21.6px]"}`}
               >
                 {item.q}
               </span>
-              <span data-faq-expand-control className="absolute left-[655.5px] top-[22.35px] h-[61px] w-[49px]" aria-hidden="true">
+              <span data-faq-expand-control className="relative h-[61px] w-[49px] self-center" aria-hidden="true">
                 <Image src={faqControlAssets[index]} alt="" width={49} height={62} className="absolute inset-0 h-auto w-[49px] max-w-none" />
                 <Image
                   data-faq-plus-icon
@@ -924,7 +781,7 @@ export function HomeV2FAQ({ lang = "en", title, titleEnd, items }) {
               className="overflow-hidden"
             >
               <p className={desktop
-                ? "max-w-[610px] pb-6 pr-8 pt-[88.2px] font-['Segoe_UI',var(--font-body)] text-[16px] font-semibold leading-6 text-epicWhite/80"
+                ? "max-w-[610px] pb-6 pr-8 font-['Segoe_UI',var(--font-body)] text-[16px] font-semibold leading-6 text-epicWhite/80"
                 : "max-w-4xl pb-6 pr-16 text-[15px] font-semibold leading-6 text-epicWhite/78 md:pb-8 md:leading-6"}
               >
                 {item.a}
@@ -1025,31 +882,36 @@ export function HomeV2FAQ({ lang = "en", title, titleEnd, items }) {
 
   return (
     <section id="faq" data-home-v2-faq className="relative bg-epicDark text-epicWhite scroll-mt-24">
-        <div data-home-v2-faq-desktop data-home-v2-faq-desktop-en className="relative left-1/2 hidden min-h-[619px] w-[1440px] -translate-x-1/2 min-[1440px]:block">
-          <h2
-            data-faq-heading
-            className={`absolute left-[204px] top-[105px] font-['Montserrat',var(--font-heading)] font-black uppercase ${isRu ? "h-[84px] w-[360px] text-[36px] leading-[38px]" : "h-[35.412px] w-[111.386px] text-[48px] leading-[42.152px]"}`}
+        <div data-home-v2-faq-desktop data-home-v2-faq-desktop-en className="relative hidden min-h-[619px] w-full min-[900px]:block">
+          <div
+            data-home-v2-faq-composition
+            className="relative mx-auto grid w-fit grid-cols-[268px_clamp(691.2px,calc(691.2px+((100vw-1440px)*0.13)),760px)] gap-[clamp(197px,calc(197px+((100vw-1440px)*0.03)),220px)] pb-[100px] pt-[123px]"
           >
-            {isRu ? `${title} ${titleEnd || ""}` : title}
-          </h2>
-          <Image
-            data-faq-illustration
-            src={`${faqAssetRoot}/faq-illustration.svg`}
-            alt=""
-            width={268}
-            height={338}
-            className="pointer-events-none absolute left-[126px] top-[181px] h-[337.622px] w-[268px] max-w-none"
-          />
-          <Image
-            data-faq-epic-logo
-            src={`${faqAssetRoot}/faq-epic-logo.svg`}
-            alt=""
-            width={40}
-            height={18}
-            className="pointer-events-none absolute left-[277px] top-[358px] h-[17.696px] w-[39.6px] max-w-none"
-          />
-          <div className="ml-[591px] w-[691.2px] pb-[100px] pt-[123px]">
-            <div data-faq-accordion className="space-y-[14.4px]">
+            <div data-home-v2-faq-art-column className="relative min-h-[396px] w-[268px]">
+              <h2
+                data-faq-heading
+                className={`absolute left-[78px] top-[-18px] font-['Montserrat',var(--font-heading)] font-black uppercase ${isRu ? "w-[360px] text-[36px] leading-[38px]" : "w-[111.386px] text-[48px] leading-[42.152px]"}`}
+              >
+                {isRu ? `${title} ${titleEnd || ""}` : title}
+              </h2>
+              <Image
+                data-faq-illustration
+                src={`${faqAssetRoot}/faq-illustration.svg`}
+                alt=""
+                width={268}
+                height={338}
+                className="pointer-events-none absolute left-0 top-[58px] h-[337.622px] w-[268px] max-w-none"
+              />
+              <Image
+                data-faq-epic-logo
+                src={`${faqAssetRoot}/faq-epic-logo.svg`}
+                alt=""
+                width={40}
+                height={18}
+                className="pointer-events-none absolute left-[151px] top-[235px] h-[17.696px] w-[39.6px] max-w-none"
+              />
+            </div>
+            <div data-faq-accordion className="min-w-0 space-y-[14.4px]">
               {renderItems({ desktop: true })}
             </div>
           </div>
@@ -1063,7 +925,7 @@ export function HomeV2FAQ({ lang = "en", title, titleEnd, items }) {
             className="absolute left-1/2 top-[19px] h-[42.999px] w-[82.289px] -translate-x-1/2"
           >
             <h2
-              className="absolute left-[0.289px] top-[-13px] font-['Montserrat',var(--font-heading)] text-[36px] font-black uppercase leading-[42.152px] text-epicGray"
+              className="absolute left-[0.289px] top-[-13px] font-['Montserrat',var(--font-heading)] text-[36px] font-black uppercase leading-[42.152px] text-epicWhite"
             >
               {title}
             </h2>
@@ -1074,9 +936,9 @@ export function HomeV2FAQ({ lang = "en", title, titleEnd, items }) {
         </div>
       )}
 
-      <div data-home-v2-faq-adaptive className={`min-[1440px]:!hidden ${isRu ? "block" : "hidden min-[640px]:block"}`}>
+      <div data-home-v2-faq-adaptive className={`min-[900px]:!hidden ${isRu ? "block" : "hidden min-[640px]:block"}`}>
         <div className="home-v2-container py-[var(--home-v2-space-standard)]">
-          <h2 data-faq-heading className="text-center font-['Montserrat',var(--font-heading)] text-[clamp(34px,5vw,48px)] font-black uppercase leading-none text-epicGray">{title} {titleEnd || ""}</h2>
+          <h2 data-faq-heading className="text-center font-['Montserrat',var(--font-heading)] text-[clamp(34px,5vw,48px)] font-black uppercase leading-none text-epicWhite">{title} {titleEnd || ""}</h2>
           <div className="mt-[var(--home-v2-space-heading)] grid items-start gap-[var(--home-v2-space-heading)] min-[900px]:grid-cols-[minmax(220px,0.34fr)_minmax(0,0.66fr)]">
             <div className="relative mx-auto hidden h-[clamp(260px,30vw,338px)] w-[clamp(206px,24vw,268px)] min-[900px]:block">
               <Image data-faq-illustration src={`${faqAssetRoot}/faq-illustration.svg`} alt="" fill sizes="268px" className="object-contain" />
@@ -1097,27 +959,21 @@ export function HomeV2Events({ t, openEventGallery }) {
   const [headingLead, ...headingRest] = t.eventsTitle.split(" ");
   const desktopCards = [
     {
-      frame: "min-[1440px]:left-[929.412px] min-[1440px]:top-[121px] min-[1440px]:h-[292.371px] min-[1440px]:w-[398.231px] min-[1440px]:rotate-[-0.501deg]",
-      image: "min-[1440px]:left-[1.827px] min-[1440px]:top-[-0.957px] min-[1440px]:h-[156.923px] min-[1440px]:w-[396.188px]",
-      title: "min-[1440px]:left-[13.908px] min-[1440px]:top-[158.007px] min-[1440px]:w-[306.081px]",
-      description: "min-[1440px]:left-[13.081px] min-[1440px]:top-[203.696px] min-[1440px]:w-[366.771px]",
-      cta: "min-[1440px]:left-[295.95px] min-[1440px]:top-[273.26px] min-[1440px]:rotate-[3.002deg]",
+      frame: "min-[1440px]:rotate-[-0.501deg]",
+      imagePosition: "50% 54.31%",
+      cta: "min-[1440px]:rotate-[3.002deg]",
       surface: "/design/home-v2/events/cta-surface-384-493.svg",
     },
     {
-      frame: "min-[1440px]:left-[924px] min-[1440px]:top-[465px] min-[1440px]:h-[297.233px] min-[1440px]:w-[403.673px] min-[1440px]:rotate-[1.22deg]",
-      image: "min-[1440px]:left-[0.002px] min-[1440px]:top-[0.041px] min-[1440px]:h-[152.745px] min-[1440px]:w-[398.265px]",
-      title: "min-[1440px]:left-[17.652px] min-[1440px]:top-[150.427px] min-[1440px]:w-[351.913px]",
-      description: "min-[1440px]:left-[19.321px] min-[1440px]:top-[201.139px] min-[1440px]:w-[367.89px]",
-      cta: "min-[1440px]:left-[308.48px] min-[1440px]:top-[272.29px] min-[1440px]:rotate-[-0.44deg]",
+      frame: "min-[1440px]:rotate-[1.22deg]",
+      imagePosition: "50% 56.43%",
+      cta: "min-[1440px]:rotate-[-0.44deg]",
       surface: "/design/home-v2/events/cta-surface-384-484.svg",
     },
     {
-      frame: "min-[1440px]:left-[931px] min-[1440px]:top-[817px] min-[1440px]:h-[289.549px] min-[1440px]:w-[395.066px] min-[1440px]:rotate-[0.088deg]",
-      image: "min-[1440px]:left-0 min-[1440px]:top-[0.6px] min-[1440px]:h-[144.479px] min-[1440px]:w-[396.013px]",
-      title: "min-[1440px]:left-[13.13px] min-[1440px]:top-[153.944px] min-[1440px]:w-[337.842px]",
-      description: "min-[1440px]:left-[13.26px] min-[1440px]:top-[208.329px] min-[1440px]:w-[366.102px]",
-      cta: "min-[1440px]:left-[298.6px] min-[1440px]:top-[278.98px] min-[1440px]:rotate-[1.824deg]",
+      frame: "min-[1440px]:rotate-[0.088deg]",
+      imagePosition: "50% 84.87%",
+      cta: "min-[1440px]:rotate-[1.824deg]",
       surface: "/design/home-v2/events/cta-surface.svg",
     },
   ];
@@ -1163,7 +1019,7 @@ export function HomeV2Events({ t, openEventGallery }) {
   ];
 
   return (
-    <section id="events" data-home-v2-events className={`scroll-mt-24 bg-epicDark px-4 py-16 text-epicWhite md:px-6 md:py-20 min-[1440px]:h-[1270px] min-[1440px]:!px-0 min-[1440px]:!py-0 ${isRu ? "" : "max-[639px]:h-[1420px] max-[639px]:!px-0 max-[639px]:!py-0"}`}>
+    <section id="events" data-home-v2-events className={`scroll-mt-24 bg-epicDark px-4 py-16 text-epicWhite md:px-6 md:py-20 min-[1440px]:!px-0 min-[1440px]:pb-[96px] min-[1440px]:pt-[124px] ${isRu ? "" : "max-[639px]:h-[1420px] max-[639px]:!px-0 max-[639px]:!py-0"}`}>
       {!isRu && (
         <div data-home-v2-events-mobile className="relative mx-auto h-[1420px] w-full max-w-[390px] overflow-hidden sm:hidden">
           <article
@@ -1207,30 +1063,30 @@ export function HomeV2Events({ t, openEventGallery }) {
           ))}
         </div>
       )}
-      <div data-home-v2-events-canvas className="relative mx-auto max-w-7xl min-[1440px]:h-[1270px] min-[1440px]:!max-w-[1440px]">
-        <div data-home-v2-events-heading className={`${isRu ? "" : "hidden min-[640px]:block min-[1440px]:flex"} text-center font-['Montserrat',var(--font-heading)] text-[clamp(34px,5vw,48px)] font-black uppercase leading-none min-[1440px]:absolute min-[1440px]:left-[185.105px] min-[1440px]:top-[130px] min-[1440px]:h-[35.412px] min-[1440px]:items-start min-[1440px]:text-[48px] min-[1440px]:leading-[42.152px]`}>
+      <div data-home-v2-events-canvas className="relative mx-auto max-w-7xl min-[1440px]:w-[calc(100%-(2*var(--home-v2-fluid-gutter)))] min-[1440px]:!max-w-none">
+        <div data-home-v2-events-heading className={`${isRu ? "" : "hidden min-[640px]:block min-[1440px]:flex"} text-center font-['Montserrat',var(--font-heading)] text-[clamp(34px,5vw,48px)] font-black uppercase leading-none min-[1440px]:mx-auto min-[1440px]:flex min-[1440px]:w-[clamp(1236px,80vw,1680px)] min-[1440px]:items-start min-[1440px]:pl-[clamp(82px,6vw,118px)] min-[1440px]:text-left min-[1440px]:text-[48px] min-[1440px]:leading-[42.152px]`}>
           <h2 className="text-epicWhite min-[1440px]:hidden">{t.eventsTitle}</h2>
           <span className="hidden text-epicWhite min-[1440px]:block">{headingLead}</span>
           <span className="hidden text-epicGray min-[1440px]:block">&nbsp;{headingRest.join(" ")}</span>
         </div>
 
-        <div data-home-v2-events-layout data-home-v2-events-adaptive className={`${isRu ? "grid" : "hidden min-[640px]:grid"} mt-12 gap-6 min-[900px]:mt-16 min-[900px]:grid-cols-12 min-[900px]:items-stretch min-[1440px]:absolute min-[1440px]:inset-0 min-[1440px]:!mt-0 min-[1440px]:block`}>
+        <div data-home-v2-events-layout data-home-v2-events-adaptive className={`${isRu ? "grid" : "hidden min-[640px]:grid"} mt-12 gap-6 min-[900px]:mt-16 min-[900px]:grid-cols-12 min-[900px]:items-stretch min-[1440px]:mx-auto min-[1440px]:mt-[84px] min-[1440px]:w-[clamp(1236px,80vw,1680px)] min-[1440px]:grid-cols-[minmax(0,1fr)_clamp(395px,22vw,440px)] min-[1440px]:items-start min-[1440px]:gap-[clamp(118px,8vw,220px)]`}>
           <article
             data-home-v2-event-card="featured"
-            className="flex h-full flex-col rounded-[3px] border-[3px] border-epicWhite bg-epicDark text-epicWhite min-[900px]:col-span-7 min-[1440px]:absolute min-[1440px]:left-[102px] min-[1440px]:top-[256.543px] min-[1440px]:h-[859.584px] min-[1440px]:w-[668.206px] min-[1440px]:rotate-[0.344deg] min-[1440px]:overflow-visible min-[1440px]:bg-transparent"
+            className="flex h-full flex-col rounded-[3px] border-[3px] border-epicWhite bg-epicDark text-epicWhite min-[900px]:col-span-7 min-[1440px]:col-span-1 min-[1440px]:h-[clamp(860px,48vw,960px)] min-[1440px]:min-w-0 min-[1440px]:rotate-[0.344deg] min-[1440px]:overflow-visible min-[1440px]:bg-transparent"
             style={{ boxShadow: "0 22.846px 50.397px rgba(0,0,0,.10), 0 91.386px 91.386px rgba(0,0,0,.09), 0 205.618px 123.64px rgba(0,0,0,.05)" }}
           >
-            <div data-home-v2-event-photo className="relative h-72 overflow-hidden border-b border-epicWhite/35 bg-epicGray md:h-[520px] min-[1440px]:absolute min-[1440px]:left-[0.088px] min-[1440px]:top-[-0.762px] min-[1440px]:!h-[590.415px] min-[1440px]:w-[664.274px] min-[1440px]:rounded-t-[3px] min-[1440px]:border-0">
-              <Image src={leadEvent.image} alt={leadEvent.title} fill sizes="(min-width: 1440px) 664px, (min-width: 1024px) 58vw, 90vw" className={leadEvent.imageClass} />
+            <div data-home-v2-event-photo className="relative h-72 overflow-hidden border-b border-epicWhite/35 bg-epicGray md:h-[520px] min-[1440px]:!h-[clamp(590px,32vw,650px)] min-[1440px]:w-full min-[1440px]:shrink-0 min-[1440px]:rounded-t-[3px] min-[1440px]:border-0">
+              <Image src={leadEvent.image} alt={leadEvent.title} fill sizes="(min-width: 2560px) 1020px, (min-width: 1920px) 900px, (min-width: 1440px) 700px, (min-width: 1024px) 58vw, 90vw" className={leadEvent.imageClass} />
             </div>
-            <div className="relative flex flex-1 flex-col p-6 min-[1440px]:contents">
-              <h3 data-home-v2-event-title className="text-3xl font-black leading-tight text-epicWhite min-[1440px]:absolute min-[1440px]:left-[23.987px] min-[1440px]:top-[629.758px] min-[1440px]:w-[600px] min-[1440px]:font-['Montserrat',var(--font-heading)] min-[1440px]:text-[32.254px] min-[1440px]:leading-[40.317px]">{leadEvent.title}</h3>
-              <p data-home-v2-event-description className="mt-3 max-w-xl text-sm font-normal leading-6 text-epicWhite/82 min-[1440px]:absolute min-[1440px]:left-[24.456px] min-[1440px]:top-[755.807px] min-[1440px]:mt-0 min-[1440px]:w-[631.207px] min-[1440px]:max-w-none min-[1440px]:text-[24.19px] min-[1440px]:leading-[30.238px] min-[1440px]:text-epicWhite">{leadEvent.desc}</p>
+            <div className="relative flex flex-1 flex-col p-6 min-[1440px]:min-h-0 min-[1440px]:px-[24px] min-[1440px]:pb-[28px] min-[1440px]:pt-[32px]">
+              <h3 data-home-v2-event-title className="text-3xl font-black leading-tight text-epicWhite min-[1440px]:max-w-[760px] min-[1440px]:font-['Montserrat',var(--font-heading)] min-[1440px]:text-[32.254px] min-[1440px]:leading-[40.317px]">{leadEvent.title}</h3>
+              <p data-home-v2-event-description className="mt-3 max-w-xl text-sm font-normal leading-6 text-epicWhite/82 min-[1440px]:mt-[28px] min-[1440px]:max-w-[760px] min-[1440px]:text-[24.19px] min-[1440px]:leading-[30.238px] min-[1440px]:text-epicWhite">{leadEvent.desc}</p>
               <button
                 data-home-v2-event-cta
                 type="button"
                 onClick={() => openEventGallery(leadEvent.galleryKey)}
-                className="mt-5 w-fit rounded-[3px] bg-epicRed px-5 py-3 text-xs font-black uppercase text-epicDark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-epicWhite min-[1440px]:absolute min-[1440px]:left-[571.18px] min-[1440px]:top-[831.52px] min-[1440px]:mt-0 min-[1440px]:h-[43.309px] min-[1440px]:w-[130.29px] min-[1440px]:rotate-[1.311deg] min-[1440px]:bg-transparent min-[1440px]:p-0"
+                className="mt-5 w-fit rounded-[3px] bg-epicRed px-5 py-3 text-xs font-black uppercase text-epicDark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-epicWhite min-[1440px]:absolute min-[1440px]:bottom-[-15px] min-[1440px]:right-[-32px] min-[1440px]:mt-0 min-[1440px]:h-[43.309px] min-[1440px]:w-[130.29px] min-[1440px]:rotate-[1.311deg] min-[1440px]:bg-transparent min-[1440px]:p-0"
               >
                 <Image aria-hidden="true" src="/design/home-v2/events/cta-surface-384-502.svg" alt="" fill sizes="131px" className="hidden min-[1440px]:block" />
                 <span className="relative z-10 min-[1440px]:font-['Montserrat',var(--font-heading)] min-[1440px]:text-[14.514px] min-[1440px]:leading-[29.028px]">{leadEvent.buttonLabel}</span>
@@ -1238,27 +1094,27 @@ export function HomeV2Events({ t, openEventGallery }) {
             </div>
           </article>
 
-          <div data-home-v2-events-column className="grid gap-6 min-[900px]:col-span-5 min-[900px]:h-full min-[900px]:grid-rows-3 min-[1440px]:contents">
+          <div data-home-v2-events-column className="grid gap-6 min-[900px]:col-span-5 min-[900px]:h-full min-[900px]:grid-rows-3 min-[1440px]:col-span-1 min-[1440px]:h-auto min-[1440px]:grid-rows-[repeat(3,minmax(0,1fr))] min-[1440px]:gap-[clamp(42px,3vw,58px)]">
             {secondaryEvents.map((event, index) => {
               const geometry = desktopCards[index];
               return (
               <article
                 key={event.title}
                 data-home-v2-event-card={`secondary-${index + 1}`}
-                className={`grid h-full overflow-hidden rounded-[3px] border-[3px] border-epicWhite bg-epicDark text-epicWhite sm:grid-cols-[0.4fr_0.6fr] min-[900px]:grid-cols-[0.42fr_0.58fr] min-[1440px]:absolute min-[1440px]:block min-[1440px]:overflow-visible min-[1440px]:bg-transparent ${geometry.frame}`}
+                className={`grid h-full overflow-hidden rounded-[3px] border-[3px] border-epicWhite bg-epicDark text-epicWhite sm:grid-cols-[0.4fr_0.6fr] min-[900px]:grid-cols-[0.42fr_0.58fr] min-[1440px]:relative min-[1440px]:h-[clamp(292px,16vw,310px)] min-[1440px]:!grid-cols-1 min-[1440px]:!grid-rows-[clamp(145px,8.2vw,160px)_minmax(0,1fr)] min-[1440px]:overflow-visible min-[1440px]:bg-transparent ${geometry.frame}`}
                 style={cardShadow}
               >
-                <div data-home-v2-event-photo className={`relative min-h-[210px] border-b border-epicWhite/35 bg-epicGray sm:min-h-0 sm:border-b-0 sm:border-r sm:border-epicWhite/35 min-[1440px]:absolute min-[1440px]:overflow-hidden min-[1440px]:rounded-t-[3px] min-[1440px]:border-0 ${geometry.image}`}>
-                  <Image src={event.image} alt={event.title} fill sizes="(min-width: 1440px) 400px, (min-width: 1024px) 18vw, (min-width: 640px) 38vw, 90vw" className={event.imageClass} />
+                <div data-home-v2-event-photo className="relative min-h-[210px] overflow-hidden border-b border-epicWhite/35 bg-epicGray sm:min-h-0 sm:border-b-0 sm:border-r sm:border-epicWhite/35 min-[1440px]:rounded-t-[3px] min-[1440px]:border-0">
+                  <Image src={event.image} alt={event.title} fill sizes="(min-width: 1440px) 440px, (min-width: 1024px) 18vw, (min-width: 640px) 38vw, 90vw" className={`${event.imageClass} min-[1440px]:object-cover`} style={{ objectPosition: geometry.imagePosition }} />
                 </div>
-                <div className="flex flex-col p-5 min-[1440px]:contents">
-                  <h3 data-home-v2-event-title className={`text-xl font-black leading-tight text-epicWhite min-[1440px]:absolute min-[1440px]:font-['Montserrat',var(--font-heading)] min-[1440px]:text-[24.19px] min-[1440px]:leading-[28.088px] ${isRu ? "min-[1440px]:!text-[21px] min-[1440px]:!leading-[23px]" : ""} ${geometry.title}`}>{event.title}</h3>
-                  <p data-home-v2-event-description className={`mt-2 text-xs font-normal leading-5 text-epicWhite/82 min-[1440px]:absolute min-[1440px]:mt-0 min-[1440px]:text-[18.815px] min-[1440px]:leading-[18.672px] min-[1440px]:text-epicWhite ${isRu ? "min-[1440px]:!top-[211px] min-[1440px]:!text-[16.5px] min-[1440px]:!leading-[17px]" : ""} ${geometry.description}`}>{event.desc}</p>
+                <div className="relative flex min-h-0 flex-col p-5 min-[1440px]:px-[14px] min-[1440px]:pb-[18px] min-[1440px]:pt-[10px]">
+                  <h3 data-home-v2-event-title className={`text-xl font-black leading-tight text-epicWhite min-[1440px]:font-['Montserrat',var(--font-heading)] min-[1440px]:text-[24.19px] min-[1440px]:leading-[28.088px] ${isRu ? "min-[1440px]:!text-[21px] min-[1440px]:!leading-[23px]" : ""}`}>{event.title}</h3>
+                  <p data-home-v2-event-description className={`mt-2 text-xs font-normal leading-5 text-epicWhite/82 min-[1440px]:mt-[8px] min-[1440px]:pr-[8px] min-[1440px]:text-[18.815px] min-[1440px]:leading-[18.672px] min-[1440px]:text-epicWhite ${isRu ? "min-[1440px]:!text-[16.5px] min-[1440px]:!leading-[17px]" : ""}`}>{event.desc}</p>
                   <button
                     data-home-v2-event-cta
                     type="button"
                     onClick={() => openEventGallery(event.galleryKey)}
-                    className={`mt-auto min-h-10 w-fit rounded-[3px] border-0 bg-epicRed px-4 py-2 text-[10px] font-black uppercase text-epicDark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-epicWhite min-[1440px]:absolute min-[1440px]:m-0 min-[1440px]:h-[36.116px] min-[1440px]:min-h-0 min-[1440px]:w-[108.793px] min-[1440px]:bg-transparent min-[1440px]:p-0 min-[1440px]:ring-offset-2 min-[1440px]:ring-offset-epicDark ${geometry.cta}`}
+                    className={`mt-auto min-h-10 w-fit rounded-[3px] border-0 bg-epicRed px-4 py-2 text-[10px] font-black uppercase text-epicDark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-epicWhite min-[1440px]:absolute min-[1440px]:bottom-[-14px] min-[1440px]:right-[-9px] min-[1440px]:m-0 min-[1440px]:h-[36.116px] min-[1440px]:min-h-0 min-[1440px]:w-[108.793px] min-[1440px]:bg-transparent min-[1440px]:p-0 min-[1440px]:ring-offset-2 min-[1440px]:ring-offset-epicDark ${geometry.cta}`}
                   >
                     <Image aria-hidden="true" src={geometry.surface} alt="" fill sizes="109px" className="hidden min-[1440px]:block" />
                     <span className="relative z-10 min-[1440px]:font-['Montserrat',var(--font-heading)] min-[1440px]:text-[12.095px] min-[1440px]:leading-[24.19px]">{event.buttonLabel}</span>
@@ -1306,46 +1162,46 @@ export function HomeV2Gallery({ lang, links, t, eventGalleryGroups, activeGaller
 
   const tileGeometry = [
     {
-      frame: "col-span-2 row-span-2 min-[1440px]:left-0 min-[1440px]:top-[0.36px] min-[1440px]:h-[600px] min-[1440px]:w-[600px]",
-      photo: "min-[1440px]:left-[-130px] min-[1440px]:top-0 min-[1440px]:h-[600px] min-[1440px]:w-[907px]",
+      frame: "col-span-2 row-span-2 min-[1440px]:col-span-1 min-[1440px]:row-span-2",
+      photo: "min-[1440px]:object-[47%_50%]",
       mobileFrame: "max-[639px]:left-0 max-[639px]:top-0 max-[639px]:h-[310px] max-[639px]:w-full",
       mobilePhoto: "max-[639px]:!left-[-100px] max-[639px]:!top-0 max-[639px]:!h-[345px] max-[639px]:!w-[522px]",
     },
     {
-      frame: "min-[1440px]:left-[632px] min-[1440px]:top-0 min-[1440px]:h-[290px] min-[1440px]:w-[290px]",
-      photo: "min-[1440px]:left-[-47px] min-[1440px]:top-[-21px] min-[1440px]:h-[311px] min-[1440px]:w-[554px]",
+      frame: "",
+      photo: "min-[1440px]:object-[35%_40%]",
       mobileFrame: "max-[639px]:left-0 max-[639px]:top-[320px] max-[639px]:h-[175px] max-[639px]:w-[calc((100%_-_9.722px)/2)]",
       mobilePhoto: "max-[639px]:!left-[-28px] max-[639px]:!top-[-9px] max-[639px]:!h-[186.6px] max-[639px]:!w-[331.733px]",
     },
     {
-      frame: "min-[1440px]:left-[951px] min-[1440px]:top-0 min-[1440px]:h-[290px] min-[1440px]:w-[290px]",
-      photo: "min-[1440px]:left-[-51px] min-[1440px]:top-[-54px] min-[1440px]:h-[454.134px] min-[1440px]:w-[340.601px]",
+      frame: "",
+      photo: "min-[1440px]:object-[28%_20%]",
       mobileFrame: "max-[639px]:left-[calc((100%_+_9.722px)/2)] max-[639px]:top-[320px] max-[639px]:h-[175px] max-[639px]:w-[calc((100%_-_9.722px)/2)]",
       mobilePhoto: "max-[639px]:!left-[-29px] max-[639px]:!top-[-32px] max-[639px]:!h-[272.481px] max-[639px]:!w-[204.36px]",
     },
     {
-      frame: "min-[1440px]:left-[632px] min-[1440px]:top-[310px] min-[1440px]:h-[290px] min-[1440px]:w-[290px]",
-      photo: "min-[1440px]:left-[-25.727px] min-[1440px]:top-[-75.393px] min-[1440px]:h-[454.134px] min-[1440px]:w-[340.601px]",
+      frame: "",
+      photo: "min-[1440px]:object-[35%_15%]",
       mobileFrame: "max-[639px]:left-0 max-[639px]:top-[505px] max-[639px]:h-[175px] max-[639px]:w-[calc((100%_-_9.722px)/2)]",
       mobilePhoto: "max-[639px]:!left-[-15.436px] max-[639px]:!top-[-45.236px] max-[639px]:!h-[272.481px] max-[639px]:!w-[204.36px]",
     },
     {
-      frame: "min-[1440px]:left-[951px] min-[1440px]:top-[310.36px] min-[1440px]:h-[290px] min-[1440px]:w-[290px]",
-      photo: "min-[1440px]:left-[-63px] min-[1440px]:top-[-22px] min-[1440px]:h-[533px] min-[1440px]:w-[353px]",
+      frame: "",
+      photo: "min-[1440px]:object-[23%_23%]",
       mobileFrame: "max-[639px]:left-[calc((100%_+_9.722px)/2)] max-[639px]:top-[505px] max-[639px]:h-[175px] max-[639px]:w-[calc((100%_-_9.722px)/2)]",
       mobilePhoto: "max-[639px]:!left-[-37px] max-[639px]:!top-[-13px] max-[639px]:!h-[319.8px] max-[639px]:!w-[211.8px]",
     },
   ];
 
   return (
-    <section id="gallery" data-home-v2-gallery className={`scroll-mt-24 bg-epicDark px-4 py-16 text-epicWhite md:px-6 md:py-20 min-[1440px]:h-[1062px] min-[1440px]:!px-0 min-[1440px]:!py-0 ${isEnglish ? "max-[639px]:h-[1058px] max-[639px]:!px-0 max-[639px]:!py-0" : ""}`}>
-      <div data-home-v2-gallery-canvas className={`relative mx-auto max-w-7xl min-[1440px]:h-[1062px] min-[1440px]:!max-w-[1440px] ${isEnglish ? "max-[639px]:h-full max-[639px]:w-full" : ""}`}>
-      <div data-home-v2-gallery-heading className={`${isEnglish ? "max-[639px]:absolute max-[639px]:left-1/2 max-[639px]:top-[68px] max-[639px]:flex max-[639px]:h-[25.291px] max-[639px]:w-[316px] max-[639px]:-translate-x-1/2 max-[639px]:items-center max-[639px]:justify-center max-[639px]:font-['Montserrat',var(--font-heading)] max-[639px]:text-[36px] max-[639px]:font-black max-[639px]:uppercase max-[639px]:leading-[25.291px]" : ""} text-center font-['Montserrat',var(--font-heading)] text-[clamp(34px,5vw,48px)] font-black uppercase leading-none min-[1440px]:absolute min-[1440px]:left-[510px] min-[1440px]:top-[89.36px] min-[1440px]:flex min-[1440px]:h-[35.412px] min-[1440px]:w-[420.632px] min-[1440px]:items-start min-[1440px]:text-[48px] min-[1440px]:leading-[42.152px]`}>
+    <section id="gallery" data-home-v2-gallery className={`scroll-mt-24 bg-epicDark px-4 py-16 text-epicWhite md:px-6 md:py-20 min-[1440px]:!px-0 min-[1440px]:pb-[120px] min-[1440px]:pt-[88px] ${isEnglish ? "max-[639px]:h-[1058px] max-[639px]:!px-0 max-[639px]:!py-0" : ""}`}>
+      <div data-home-v2-gallery-canvas className={`relative mx-auto max-w-7xl min-[1440px]:w-[calc(100%-(2*var(--home-v2-fluid-gutter)))] min-[1440px]:!max-w-none ${isEnglish ? "max-[639px]:h-full max-[639px]:w-full" : ""}`}>
+      <div data-home-v2-gallery-heading className={`${isEnglish ? "max-[639px]:absolute max-[639px]:left-1/2 max-[639px]:top-[68px] max-[639px]:flex max-[639px]:h-[25.291px] max-[639px]:w-[316px] max-[639px]:-translate-x-1/2 max-[639px]:items-center max-[639px]:justify-center max-[639px]:font-['Montserrat',var(--font-heading)] max-[639px]:text-[36px] max-[639px]:font-black max-[639px]:uppercase max-[639px]:leading-[25.291px]" : ""} text-center font-['Montserrat',var(--font-heading)] text-[clamp(34px,5vw,48px)] font-black uppercase leading-none min-[1440px]:flex min-[1440px]:items-start min-[1440px]:justify-center min-[1440px]:text-[48px] min-[1440px]:leading-[42.152px]`}>
         <h2 className={`${isEnglish ? "max-[639px]:hidden" : ""} text-epicWhite min-[1440px]:hidden`}>Epic <span className="text-epicGray">moments</span></h2>
         <span className={`${isEnglish ? "max-[639px]:block" : ""} hidden text-epicWhite min-[1440px]:block`}>EPIC</span>
         <span className={`${isEnglish ? "max-[639px]:block" : ""} hidden text-epicGray min-[1440px]:block`}>&nbsp;MOMENTS</span>
       </div>
-      <div data-home-v2-gallery-filters className={`mb-8 mt-12 flex flex-wrap gap-2 md:mt-16 min-[1440px]:absolute min-[1440px]:left-[269.035px] min-[1440px]:top-[172.576px] min-[1440px]:!m-0 min-[1440px]:h-[45.068px] min-[1440px]:w-[896.559px] min-[1440px]:block ${isEnglish ? "max-[639px]:absolute max-[639px]:left-[20px] max-[639px]:top-[120px] max-[639px]:m-0 max-[639px]:h-[69.709px] max-[639px]:w-[289.167px] max-[639px]:block" : ""}`}>
+      <div data-home-v2-gallery-filters className={`mb-8 mt-12 flex flex-wrap gap-2 md:mt-16 min-[1440px]:relative min-[1440px]:mx-auto min-[1440px]:mb-0 min-[1440px]:mt-[48px] min-[1440px]:h-[45.068px] min-[1440px]:w-[896.559px] min-[1440px]:block ${isEnglish ? "max-[639px]:absolute max-[639px]:left-[20px] max-[639px]:top-[120px] max-[639px]:m-0 max-[639px]:h-[69.709px] max-[639px]:w-[289.167px] max-[639px]:block" : ""}`}>
         {eventGalleryGroups.map((group) => (
           <button
             key={group.key}
@@ -1367,16 +1223,16 @@ export function HomeV2Gallery({ lang, links, t, eventGalleryGroups, activeGaller
           </button>
         ))}
       </div>
-      <div data-home-v2-gallery-grid className={`grid auto-rows-[180px] grid-cols-2 gap-4 md:auto-rows-[240px] min-[1440px]:absolute min-[1440px]:left-[99px] min-[1440px]:top-[262px] min-[1440px]:block min-[1440px]:h-[600.36px] min-[1440px]:w-[1241px] ${isEnglish ? "max-[639px]:absolute max-[639px]:left-[20px] max-[639px]:top-[207px] max-[639px]:block max-[639px]:h-[680px] max-[639px]:w-[calc(100%_-_40px)]" : ""}`}>
+      <div data-home-v2-gallery-grid className={`grid auto-rows-[180px] grid-cols-2 gap-4 md:auto-rows-[240px] min-[1440px]:mx-auto min-[1440px]:mt-[44px] min-[1440px]:aspect-[2.067/1] min-[1440px]:w-[clamp(1241px,calc(100vw-192px),1900px)] min-[1440px]:grid-cols-[minmax(0,1fr)_minmax(0,0.483fr)_minmax(0,0.483fr)] min-[1440px]:grid-rows-2 min-[1440px]:gap-[clamp(20px,1.65vw,32px)] ${isEnglish ? "max-[639px]:absolute max-[639px]:left-[20px] max-[639px]:top-[207px] max-[639px]:block max-[639px]:h-[680px] max-[639px]:w-[calc(100%_-_40px)]" : ""}`}>
         {activeGalleryGroup.photos.slice(0, 5).map((photo, index) => (
-          <div key={`${activeGalleryGroup.key}-${photo}-${index}`} data-home-v2-gallery-item={index + 1} className={`group relative overflow-hidden bg-epicGray min-[1440px]:absolute ${isEnglish ? `max-[639px]:absolute ${tileGeometry[index].mobileFrame}` : ""} ${tileGeometry[index].frame}`}>
+          <div key={`${activeGalleryGroup.key}-${photo}-${index}`} data-home-v2-gallery-item={index + 1} className={`group relative overflow-hidden bg-epicGray ${isEnglish ? `max-[639px]:absolute ${tileGeometry[index].mobileFrame}` : ""} ${tileGeometry[index].frame}`}>
             <Image
               src={galleryPhotoSrc(photo)}
               alt={`${activeGalleryGroup.label} photo ${index + 1} - Epic Surf School Da Nang`}
               width={907}
               height={600}
-              sizes={index === 0 ? "(min-width: 1440px) 907px, (max-width: 639px) 522px, 100vw" : "(min-width: 1440px) 554px, (max-width: 639px) 332px, 50vw"}
-              className={`absolute inset-0 h-full w-full max-w-none object-cover transition-transform duration-500 group-hover:scale-[1.025] min-[1440px]:max-w-none ${isEnglish ? tileGeometry[index].mobilePhoto : ""} ${tileGeometry[index].photo}`}
+              sizes={index === 0 ? "(min-width: 2560px) 930px, (min-width: 1920px) 840px, (min-width: 1440px) 600px, (max-width: 639px) 522px, 100vw" : "(min-width: 2560px) 450px, (min-width: 1920px) 400px, (min-width: 1440px) 290px, (max-width: 639px) 332px, 50vw"}
+              className={`absolute inset-0 h-full w-full max-w-none object-cover transition-transform duration-500 group-hover:scale-[1.025] ${isEnglish ? tileGeometry[index].mobilePhoto : ""} ${tileGeometry[index].photo}`}
             />
           </div>
         ))}

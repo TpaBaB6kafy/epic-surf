@@ -92,7 +92,7 @@ function HandoffHeading({ children, kind }) {
 
 function ProviderFooter({ copy, trackOutbound }) {
   return (
-    <div data-live-cam-attribution-footer className="grid h-[48.42px] w-[503.832px] grid-cols-[minmax(0,1fr)_auto] items-center gap-2 bg-epicWhite px-2 py-1 text-epicDark">
+    <div data-live-cam-attribution-footer className="grid h-[48.42px] w-[503.832px] grid-cols-[minmax(0,1fr)_auto] items-center gap-2 bg-epicWhite px-2 py-1 text-epicDark min-[1200px]:w-full">
       <div data-live-cam-provider-identity className="flex min-w-0 items-center gap-2">
         {/* The provider requires its remote logo; using img avoids changing Next image configuration. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -140,8 +140,8 @@ function MobileHandoffProviderFooter({ copy, trackOutbound }) {
 
 function LiveCamPreview({ copy, hasEnteredViewport, trackOutbound }) {
   return (
-    <div data-live-cam-preview-group className="h-[376.42px] w-[503.832px] bg-epicWhite">
-      <div data-live-cam-preview className="relative h-[327.722px] w-[503.277px] overflow-hidden bg-epicDark">
+    <div data-live-cam-preview-group className="w-[503.832px] bg-epicWhite min-[1200px]:w-full">
+      <div data-live-cam-preview className="relative h-[327.722px] w-[503.277px] overflow-hidden bg-epicDark min-[1200px]:aspect-[503.277/327.722] min-[1200px]:h-auto min-[1200px]:w-full">
         {hasEnteredViewport ? <LiveCamIframe copy={copy} /> : (
           <div data-live-cam-placeholder className="absolute inset-0 flex items-center justify-center bg-epicWhite/10 px-6 text-center">
             <span className="bg-epicWhite px-4 py-2 text-[10px] font-black uppercase tracking-[0.16em] text-epicDark">{copy.previewPlaceholder}</span>
@@ -359,9 +359,14 @@ export function HomeV2Conditions({ t, locale = "en" }) {
     <section ref={sectionRef} id="forecast" data-home-v2-live-cam data-home-v2-forecast data-live-cam-mounted={hasEnteredViewport ? "true" : "false"} data-surf-stack-scene="livecam-forecast" className="relative isolate overflow-visible bg-epicDark px-0 py-0 text-epicWhite scroll-mt-24">
       <span id="live-cam" className="absolute top-0 scroll-mt-24" aria-hidden="true" />
 
-      <div data-home-v2-conditions-adaptive data-livecam-visual-composition data-forecast-visual-composition data-live-cam-artboard data-forecast-artboard className="relative mx-auto hidden min-h-[1220px] w-full max-w-[1440px] min-[640px]:block min-[1100px]:min-h-[790px]">
-        <div className="mx-auto flex w-[calc(100%_-_48px)] max-w-[1148px] flex-col items-center gap-10 pt-[72px] min-[1100px]:grid min-[1100px]:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] min-[1100px]:items-start min-[1100px]:gap-[clamp(48px,8vw,140px)] min-[1100px]:pt-[100px] min-[1440px]:w-[79.72%] min-[1440px]:grid-cols-[503px_504.2px] min-[1440px]:gap-[140px]">
-          <div data-forecast-panel className="order-2 h-[587.2px] w-[503px] min-w-0 max-w-full min-[1100px]:order-1">
+      <div data-home-v2-conditions-adaptive data-livecam-visual-composition data-forecast-visual-composition data-live-cam-artboard data-forecast-artboard className="relative mx-auto hidden min-h-[1220px] w-full min-[640px]:block min-[1200px]:min-h-[clamp(790px,44vw,850px)]">
+        <div className="home-v2-fluid-frame">
+          <div
+            data-conditions-pair
+            className="mx-auto flex w-full max-w-[1148px] flex-col items-center gap-10 pt-[72px] min-[1200px]:grid min-[1200px]:w-fit min-[1200px]:max-w-none min-[1200px]:items-start min-[1200px]:gap-0 min-[1200px]:pt-[100px]"
+            style={{ gridTemplateColumns: "repeat(2, clamp(503px, 33vw, 650px))", columnGap: "clamp(125px, calc(6.25vw + 50px), 210px)" }}
+          >
+          <div data-forecast-panel className="order-2 h-[587.2px] w-[503px] min-w-0 max-w-full min-[1200px]:order-1 min-[1200px]:h-auto min-[1200px]:w-[clamp(503px,33vw,650px)]">
             <div data-forecast-map className="relative aspect-[503/376] w-full overflow-hidden bg-epicWhite">
               {usesAdaptiveLayout === true ? windyIframe : null}
               <HandoffHeading kind="forecast">Forecast</HandoffHeading>
@@ -384,16 +389,17 @@ export function HomeV2Conditions({ t, locale = "en" }) {
             </div>
           </div>
 
-          <div data-live-cam-panel-group className="order-1 h-[498.2px] w-[504.2px] min-w-0 max-w-full min-[1100px]:order-2">
-            <div data-live-cam-panel className="relative h-[376.42px] w-[503.832px]">
+          <div data-live-cam-panel-group className="order-1 h-[498.2px] w-[504.2px] min-w-0 max-w-full min-[1200px]:order-2 min-[1200px]:h-auto min-[1200px]:w-[clamp(503px,33vw,650px)]">
+            <div data-live-cam-panel className="relative w-full">
               {usesAdaptiveLayout === true ? <LiveCamPreview copy={copy} hasEnteredViewport={hasEnteredViewport} trackOutbound={trackOutbound} /> : null}
               <HandoffHeading kind="live-cam">Live <span className="text-epicRed">Cam</span></HandoffHeading>
             </div>
-            <div data-forecast-stats-panel className="relative ml-[2px] mt-[51.58px] h-[70.2px] w-[502.2px]">
+            <div data-forecast-stats-panel className="relative ml-[2px] mt-[51.58px] h-[70.2px] w-[502.2px] min-[1200px]:mx-auto">
               <HandoffStat type="wind" label={t.forecastWind} value={windSpeed} unit="km/h" style={{ position: "absolute", left: 0, top: 0, width: 142.2 }} />
               <HandoffStat type="direction" label={t.forecastDir} value={windCardinal} direction={windDirection} style={{ position: "absolute", left: 182, top: 0, width: 143.1 }} />
               <HandoffStat label={t.forecastWater} value="26°C" icon="stat-icon-water.svg" />
             </div>
+          </div>
           </div>
         </div>
       </div>

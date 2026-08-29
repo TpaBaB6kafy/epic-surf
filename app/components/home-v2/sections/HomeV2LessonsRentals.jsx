@@ -14,13 +14,16 @@ function useHomeV2Presentation() {
 
   useEffect(() => {
     const mobileMedia = window.matchMedia("(max-width: 639px)");
-    const desktopMedia = window.matchMedia("(min-width: 1440px)");
-    const updatePresentation = () => setPresentation(desktopMedia.matches ? "desktop" : mobileMedia.matches ? "mobile" : "adaptive");
+    const compactMedia = window.matchMedia("(min-width: 900px)");
+    const desktopMedia = window.matchMedia("(min-width: 1200px)");
+    const updatePresentation = () => setPresentation(desktopMedia.matches ? "desktop" : compactMedia.matches ? "compact" : mobileMedia.matches ? "mobile" : "adaptive");
     updatePresentation();
     mobileMedia.addEventListener?.("change", updatePresentation);
+    compactMedia.addEventListener?.("change", updatePresentation);
     desktopMedia.addEventListener?.("change", updatePresentation);
     return () => {
       mobileMedia.removeEventListener?.("change", updatePresentation);
+      compactMedia.removeEventListener?.("change", updatePresentation);
       desktopMedia.removeEventListener?.("change", updatePresentation);
     };
   }, []);
@@ -120,7 +123,7 @@ function DesktopLessonFeature({ feature, label, index, isRu }) {
   );
 }
 
-function DesktopLessonDetail({ item, image, isBookingLesson, links, onBookingClick, onMessengerClick, t, lang }) {
+function DesktopLessonDetail({ item, image, isBookingLesson, links, onBookingClick, onMessengerClick, t, lang, compact = false }) {
   const price = item.price.replace(/\s*VND$/i, "");
   const isRu = lang === "ru";
   const localizedCopy = desktopLessonCopy[lang] || desktopLessonCopy.en;
@@ -128,22 +131,26 @@ function DesktopLessonDetail({ item, image, isBookingLesson, links, onBookingCli
     "absolute left-[53px] top-[517px] flex h-[58px] w-[214px] items-center justify-center rounded-[3px] bg-[#fe746a] font-['Montserrat',var(--font-heading)] text-[19.474px] font-bold uppercase leading-[21.638px] tracking-[0.3787px] text-[#2e2e2e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f6f6f6]";
 
   return (
-    <div id="home-v2-lesson-detail" data-home-v2-lesson-detail className="absolute left-[659px] top-[100px] h-[615px] w-[682px]">
-      <article className="relative h-full w-full">
-        <div data-home-v2-lesson-photo-frame className="absolute left-0 top-0 h-[615px] w-[360px] overflow-hidden rounded-l-[3px]">
+    <div
+      id="home-v2-lesson-detail"
+      data-home-v2-lesson-detail
+      className={`relative h-[615px] w-[clamp(682px,48vw,1280px)] max-w-full ${compact ? "col-start-1 row-start-2 mt-[48px] justify-self-center" : "col-start-3 row-start-1 mt-[100px]"}`}
+    >
+      <article className="grid h-full w-full grid-cols-[minmax(360px,1fr)_325px]">
+        <div data-home-v2-lesson-photo-frame className="relative h-[615px] min-w-0 overflow-hidden rounded-l-[3px]">
           <Image
             key={image}
             data-lessons-photo
             src={image}
             alt={item.title}
             fill
-            sizes="360px"
+            sizes="(min-width: 2560px) 904px, (min-width: 1920px) 597px, 366px"
             className="object-cover object-center"
             priority={item.id === "group"}
           />
         </div>
 
-        <div data-home-v2-lesson-info-panel className="absolute left-[357px] top-0 h-[615px] w-[325px] overflow-hidden rounded-r-[3px] border-[3px] border-[#f6f6f6] bg-[#2e2e2e] text-[#f6f6f6]">
+        <div data-home-v2-lesson-info-panel className="relative h-[615px] w-[325px] overflow-hidden rounded-r-[3px] border-[3px] border-[#f6f6f6] bg-[#2e2e2e] text-[#f6f6f6]">
           <h3 className={`absolute flex items-center justify-center text-center font-['Montserrat',var(--font-heading)] font-bold uppercase ${isRu ? "left-[48px] top-[24px] h-[78px] w-[220px] text-[27px] leading-[31px]" : "left-[77px] top-[29px] h-[69px] w-[164px] text-[36px] leading-[43.056px]"}`}>
             {item.title}
           </h3>
@@ -195,74 +202,81 @@ function DesktopLessonDetail({ item, image, isBookingLesson, links, onBookingCli
   );
 }
 
-function DesktopLessonPresentation({ orderedLessons, activeLesson, setActiveLessonId, links, onBookingClick, onMessengerClick, t, lang }) {
+function DesktopLessonPresentation({ orderedLessons, activeLesson, setActiveLessonId, links, onBookingClick, onMessengerClick, t, lang, compact = false }) {
   const headingWords = t.sectionTitle.trim().split(/\s+/);
   const headingFirst = headingWords.shift();
   const headingSecond = [...headingWords, t.sectionTitleRide].join(" ");
   const isRu = lang === "ru";
 
   return (
-    <div data-home-v2-lessons-desktop data-home-v2-lessons-desktop-en className="absolute left-1/2 top-0 h-[843px] w-[1440px] -translate-x-1/2 overflow-hidden bg-[#2e2e2e]">
-      <h2 data-home-v2-lessons-heading className="absolute left-[126px] top-[98px] font-['Montserrat',var(--font-heading)] text-[48px] font-black uppercase leading-[42px]">
-        <span className="block text-[#f6f6f6]">{headingFirst}</span>
-        <span className={`mt-[19px] block whitespace-nowrap text-[#585858] ${isRu ? "ml-[24px] text-[43px]" : "ml-[49px]"}`}>{headingSecond}</span>
-      </h2>
+    <div data-home-v2-lessons-desktop data-home-v2-lessons-desktop-en data-home-v2-lessons-compact={compact ? "true" : undefined} className={`home-v2-fluid-frame relative bg-[#2e2e2e] ${compact ? "min-h-[1390px]" : "home-v2-fluid-grid h-[843px] overflow-hidden"}`}>
+      <div
+        data-home-v2-lessons-composition
+        className={`relative grid max-w-full justify-self-center ${compact ? "mx-auto min-h-[1390px] w-full grid-cols-1 justify-items-center" : "col-span-12 row-start-1 h-[843px] w-fit"}`}
+        style={compact ? undefined : { gridTemplateColumns: "405.9px clamp(48px, calc(42.5vw - 462px), calc(8.333vw + 30px)) clamp(682px, 48vw, 1280px)" }}
+      >
+        <h2 data-home-v2-lessons-heading className={`relative col-start-1 row-start-1 w-[405.9px] pl-[26px] font-['Montserrat',var(--font-heading)] text-[48px] font-black uppercase leading-[42px] ${compact ? "mt-[72px]" : "mt-[98px]"}`}>
+          <span className="block text-[#f6f6f6]">{headingFirst}</span>
+          <span className={`mt-[19px] block whitespace-nowrap text-[#585858] ${isRu ? "ml-[24px] text-[43px]" : "ml-[49px]"}`}>{headingSecond}</span>
+        </h2>
 
-      <div data-home-v2-lesson-selector className="absolute left-[100px] top-[254px] w-[405.9px]">
-        {orderedLessons.map(({ id, item }, index) => {
-          const isActive = id === activeLesson.id;
-          return (
-            <button
-              key={id}
-              type="button"
-              data-lesson-selector-item={id}
-              aria-pressed={isActive}
-              aria-controls="home-v2-lesson-detail"
-              onClick={() => setActiveLessonId(id)}
-              className={`group relative grid w-[405.9px] grid-cols-[75.44px_270px_60.46px] items-center text-left text-[#f6f6f6] focus-visible:z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f6f6f6] ${
-                isActive
-                  ? "h-[108.9px] rounded-[3.3px] border-[3.3px] border-[#fe746a]"
-                  : "-mt-[1.1px] h-[89.1px] border-[1.1px] border-[#f6f6f6] first:mt-0 last:rounded-b-[3.3px]"
-              }`}
-            >
-              <span className="flex h-full items-center justify-center font-['Bebas_Neue','Arial_Narrow',Arial,sans-serif] text-[36px] font-bold leading-[22.389px]">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <span className="relative flex h-full items-center justify-center">
-                <Image
-                  aria-hidden="true"
-                  src={isActive ? "/design/home-v2/lessons/lesson-number-divider-active.svg" : "/design/home-v2/lessons/lesson-number-divider.svg"}
-                  alt=""
-                  width={2}
-                  height={isActive ? 70 : 50}
-                  className={`absolute left-0 top-1/2 w-[2px] -translate-y-1/2 ${isActive ? "h-[69.3px]" : "h-[49.5px]"}`}
-                />
-                <span data-lesson-selector-title className={`px-2 text-center font-[Arial,sans-serif] font-bold uppercase leading-[20px] ${isRu ? "text-[18px]" : "text-[24px]"}`}>
-                  {item.title}
+        <div data-home-v2-lesson-selector className={`relative col-start-1 row-start-1 w-[405.9px] ${compact ? "mt-[228px]" : "mt-[254px]"}`}>
+          {orderedLessons.map(({ id, item }, index) => {
+            const isActive = id === activeLesson.id;
+            return (
+              <button
+                key={id}
+                type="button"
+                data-lesson-selector-item={id}
+                aria-pressed={isActive}
+                aria-controls="home-v2-lesson-detail"
+                onClick={() => setActiveLessonId(id)}
+                className={`group relative grid w-[405.9px] grid-cols-[75.44px_270px_60.46px] items-center text-left text-[#f6f6f6] focus-visible:z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f6f6f6] ${
+                  isActive
+                    ? "h-[108.9px] rounded-[3.3px] border-[3.3px] border-[#fe746a]"
+                    : "-mt-[1.1px] h-[89.1px] border-[1.1px] border-[#f6f6f6] first:mt-0 last:rounded-b-[3.3px]"
+                }`}
+              >
+                <span className="flex h-full items-center justify-center font-['Bebas_Neue','Arial_Narrow',Arial,sans-serif] text-[36px] font-bold leading-[22.389px]">
+                  {String(index + 1).padStart(2, "0")}
                 </span>
-              </span>
-              {isActive ? (
-                <span data-lesson-selector-arrow-area className="absolute bottom-0 right-0 top-0 flex w-[57.16px] items-center justify-center rounded-r-[1.5px] bg-[#585858]">
-                  <Image aria-hidden="true" src="/design/home-v2/lessons/lesson-selector-arrow.svg" alt="" width={30} height={12} className="h-[12px] w-[29.7px]" />
+                <span className="relative flex h-full items-center justify-center">
+                  <Image
+                    aria-hidden="true"
+                    src={isActive ? "/design/home-v2/lessons/lesson-number-divider-active.svg" : "/design/home-v2/lessons/lesson-number-divider.svg"}
+                    alt=""
+                    width={2}
+                    height={isActive ? 70 : 50}
+                    className={`absolute left-0 top-1/2 w-[2px] -translate-y-1/2 ${isActive ? "h-[69.3px]" : "h-[49.5px]"}`}
+                  />
+                  <span data-lesson-selector-title className={`px-2 text-center font-[Arial,sans-serif] font-bold uppercase leading-[20px] ${isRu ? "text-[18px]" : "text-[24px]"}`}>
+                    {item.title}
+                  </span>
                 </span>
-              ) : (
-                <span aria-hidden="true" />
-              )}
-            </button>
-          );
-        })}
+                {isActive ? (
+                  <span data-lesson-selector-arrow-area className="absolute bottom-0 right-0 top-0 flex w-[57.16px] items-center justify-center rounded-r-[1.5px] bg-[#585858]">
+                    <Image aria-hidden="true" src="/design/home-v2/lessons/lesson-selector-arrow.svg" alt="" width={30} height={12} className="h-[12px] w-[29.7px]" />
+                  </span>
+                ) : (
+                  <span aria-hidden="true" />
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        <DesktopLessonDetail
+          item={activeLesson.item}
+          image={activeLesson.image}
+          isBookingLesson={bookingLessonIds.has(activeLesson.id)}
+          links={links}
+          onBookingClick={onBookingClick}
+          onMessengerClick={onMessengerClick}
+          t={t}
+          lang={lang}
+          compact={compact}
+        />
       </div>
-
-      <DesktopLessonDetail
-        item={activeLesson.item}
-        image={activeLesson.image}
-        isBookingLesson={bookingLessonIds.has(activeLesson.id)}
-        links={links}
-        onBookingClick={onBookingClick}
-        onMessengerClick={onMessengerClick}
-        t={t}
-        lang={lang}
-      />
     </div>
   );
 }
@@ -564,18 +578,22 @@ export function HomeV2Lessons({ t, lang, links, openBookingModal }) {
   const activeLesson = orderedLessons.find(({ id }) => id === activeLessonId) || orderedLessons[0];
   const titleWords = t.sectionTitle.trim().split(/\s+/);
   const lessonHeadingLines = [titleWords[0], [...titleWords.slice(1), t.sectionTitleRide].join(" ")];
-  const useApprovedDesktop = presentation === "desktop";
+  const useApprovedDesktop = presentation === "desktop" || presentation === "compact";
+  const useCompactCurrent = presentation === "compact";
   const useApprovedMobileEn = presentation === "mobile" && lang === "en";
 
   useEffect(() => {
     const mobileMedia = window.matchMedia("(max-width: 639px)");
-    const desktopMedia = window.matchMedia("(min-width: 1440px)");
-    const updatePresentation = () => setPresentation(desktopMedia.matches ? "desktop" : mobileMedia.matches ? "mobile" : "adaptive");
+    const compactMedia = window.matchMedia("(min-width: 900px)");
+    const desktopMedia = window.matchMedia("(min-width: 1200px)");
+    const updatePresentation = () => setPresentation(desktopMedia.matches ? "desktop" : compactMedia.matches ? "compact" : mobileMedia.matches ? "mobile" : "adaptive");
     updatePresentation();
     mobileMedia.addEventListener("change", updatePresentation);
+    compactMedia.addEventListener("change", updatePresentation);
     desktopMedia.addEventListener("change", updatePresentation);
     return () => {
       mobileMedia.removeEventListener("change", updatePresentation);
+      compactMedia.removeEventListener("change", updatePresentation);
       desktopMedia.removeEventListener("change", updatePresentation);
     };
   }, []);
@@ -637,7 +655,7 @@ export function HomeV2Lessons({ t, lang, links, openBookingModal }) {
       data-home-v2-lessons-entered={hasEnteredViewport ? "true" : "false"}
       className={`relative isolate overflow-hidden text-epicWhite scroll-mt-24 ${
         useApprovedDesktop
-          ? "h-[843px] bg-[#2e2e2e] p-0"
+          ? `${useCompactCurrent ? "min-h-[1390px]" : "h-[843px]"} bg-[#2e2e2e] p-0`
           : useApprovedMobileEn
             ? "h-[1103px] bg-[#2e2e2e] p-0"
           : "bg-epicDark pb-[var(--home-v2-space-compact)] pt-[var(--home-v2-space-heading)] min-[900px]:pt-[clamp(64px,6.7vw,96px)]"
@@ -667,6 +685,7 @@ export function HomeV2Lessons({ t, lang, links, openBookingModal }) {
             onMessengerClick={handleMessengerClick}
             t={t}
             lang={lang}
+            compact={useCompactCurrent}
           />
         ) : useApprovedMobileEn ? (
           <MobileEnLessonPresentation
@@ -860,91 +879,99 @@ export function HomeV2Rentals({ lang, setRentalModalOpen }) {
     >
       <div
         data-rental-visual-composition
-        className="relative mx-auto w-full min-[1440px]:h-[900px] min-[1440px]:max-w-none"
+        className="relative mx-auto w-full min-[1024px]:h-[900px] min-[1024px]:max-w-none"
       >
-          {presentation === "desktop" && <div
+          {(presentation === "desktop" || presentation === "compact") && <div
             data-rentals-artboard
             data-rentals-desktop
             data-rentals-desktop-en
-            className="absolute left-1/2 top-0 h-[900px] w-[1440px] -translate-x-1/2 overflow-hidden bg-[#2e2e2e]"
+            data-rentals-compact={presentation === "compact" ? "true" : undefined}
+            className="relative h-[900px] w-full overflow-hidden bg-[#2e2e2e]"
           >
-            <div aria-hidden="true" className="absolute left-0 top-0 h-[810px] w-[1440px]">
+            <div
+              aria-hidden="true"
+              data-rentals-media-scene
+              className="absolute inset-x-0 top-0 aspect-[16/9] w-full"
+            >
               <Image
                 data-rentals-layer="background-overlay"
+                data-rentals-media-role="monochrome"
                 src="/design/home-v2/rentals/rentals-background-overlay.png"
                 alt=""
                 fill
-                sizes="1440px"
-                className="object-cover object-bottom opacity-[0.22]"
+                sizes="100vw"
+                className="object-fill object-center opacity-[0.22]"
               />
-            </div>
-
-            <div aria-hidden="true" className="absolute left-0 top-0 h-[366px] w-[1440px] overflow-hidden opacity-[0.82]">
               <Image
                 data-rentals-layer="background-photo"
+                data-rentals-media-role="color"
                 src="/design/home-v2/rentals/rentals-background-photo.jpg"
                 alt=""
-                width={4096}
-                height={2304}
-                sizes="1440px"
-                className="absolute left-0 top-[-0.37px] h-[810.76px] w-[1440px] max-w-none"
+                fill
+                sizes="100vw"
+                className="object-fill object-center opacity-[0.82]"
+                style={{ clipPath: "inset(0 0 calc(100% - 366px) 0)" }}
                 priority
               />
             </div>
 
-            <div data-rentals-heading className="absolute left-[118.68px] top-[27.54px] h-[129.406px] w-[356.645px] text-[#2e2e2e]">
-              <Image
-                aria-hidden="true"
-                src="/design/home-v2/rentals/rentals-heading-paper.svg"
-                alt=""
-                fill
-                sizes="357px"
-                className="object-fill"
-              />
-              <h2 aria-label="SURF BOARD RENTALS" className="absolute inset-0 font-['Montserrat',var(--font-heading)] text-[48px] font-black uppercase leading-[50.811px]">
-                <span className="absolute left-[7.89px] top-[-2.25px] block w-[365.78px] origin-center -rotate-[0.89deg] -skew-x-[0.52deg] whitespace-nowrap">
-                  SURF BOARD
-                </span>
-                <span className="absolute left-[9.77px] top-[79.74px] block w-[241.71px] -skew-x-[0.35deg] whitespace-nowrap">
-                  RENTALS
-                </span>
-              </h2>
-            </div>
-
-            <div data-rentals-intro className="absolute left-[99.5px] top-[405px] h-[30px] w-[1241px] rounded-[3px] bg-[rgba(81,81,81,0.82)]">
-              <p className={`absolute top-[-3px] whitespace-nowrap font-['Segoe_UI','Segoe_UI',Arial,sans-serif] text-[20px] font-normal leading-[32px] text-white ${lang === "ru" ? "left-0 w-full text-center" : "left-[14.5px]"}`}>
-                 {rentalPromoCopy[lang]?.description || rentalPromoCopy.en.description}
-              </p>
-            </div>
-
-            <div data-rentals-content className="absolute left-[265px] top-[493px] h-[223px] w-[909px] rounded-[3px] bg-[rgba(81,81,81,0.82)]">
-              <div data-rentals-price-block className="absolute inset-0 font-[Arial,sans-serif] font-bold uppercase">
-                <span className="absolute left-[60px] top-[34.84px] text-[24.786px] leading-[10.327px] text-[rgba(246,246,246,0.75)]">{copy.from}</span>
-                <span className="absolute left-[57px] top-[72.65px] text-[66.096px] leading-[50.811px] text-[#fe746a]">250.000</span>
-                <span className="absolute left-[308px] top-[83.00px] text-[33.048px] leading-[50.811px] text-[rgba(246,246,246,0.75)]">VND</span>
-                 <span className={`absolute left-[389px] top-[83.00px] whitespace-nowrap leading-[50.811px] text-white ${lang === "ru" ? "text-[28px]" : "text-[33.048px]"}`}>{lang === "ru" ? "/ 2 ЧАСА" : "/ 2 HOURS"}</span>
+            <div data-rentals-desktop-composition className="home-v2-fluid-frame home-v2-fluid-grid relative h-[900px] min-[1024px]:grid-cols-12">
+              <div data-rentals-heading className="relative col-span-5 col-start-1 row-start-1 mt-[27.54px] h-[129.406px] w-[min(356.645px,100%)] justify-self-center text-[#2e2e2e]">
+                <Image
+                  aria-hidden="true"
+                  src="/design/home-v2/rentals/rentals-heading-paper.svg"
+                  alt=""
+                  fill
+                  sizes="357px"
+                  className="object-fill"
+                />
+                <h2 aria-label="SURF BOARD RENTALS" className="absolute inset-0 font-['Montserrat',var(--font-heading)] text-[48px] font-black uppercase leading-[50.811px]">
+                  <span className="absolute left-[7.89px] top-[-2.25px] block w-[365.78px] origin-center -rotate-[0.89deg] -skew-x-[0.52deg] whitespace-nowrap">
+                    SURF BOARD
+                  </span>
+                  <span className="absolute left-[9.77px] top-[79.74px] block w-[241.71px] -skew-x-[0.35deg] whitespace-nowrap">
+                    RENTALS
+                  </span>
+                </h2>
               </div>
 
-              <div data-rentals-offer-description className="absolute left-[60px] top-[148px] font-['Segoe_UI','Segoe_UI',Arial,sans-serif]">
-                <p className={`h-[19px] font-normal leading-[22.032px] text-[#f6f6f6] ${lang === "ru" ? "w-[520px] text-[18px]" : "w-[388px] text-[19.278px]"}`}>{copy.description}</p>
-                <p className="mt-[11px] text-[15.147px] font-normal leading-[22.032px] text-[rgba(246,246,246,0.75)]">{copy.term}</p>
+              <div data-rentals-intro className={`relative col-span-12 col-start-1 row-start-1 mt-[405px] min-h-[30px] justify-self-center rounded-[3px] bg-[rgba(81,81,81,0.82)] ${presentation === "desktop" ? "w-[min(100%,clamp(1241px,72vw,1600px))]" : "w-full max-w-[1600px]"}`}>
+                <p className={`px-[14.5px] text-center font-['Segoe_UI','Segoe_UI',Arial,sans-serif] text-[clamp(16px,1.67vw,20px)] font-normal leading-[32px] text-white ${presentation === "desktop" ? "min-[1440px]:whitespace-nowrap" : ""}`}>
+                   {rentalPromoCopy[lang]?.description || rentalPromoCopy.en.description}
+                </p>
               </div>
 
-              <Link
-                data-home-v2-rental-catalog-cta
-                href={catalogHref}
-                className="absolute left-[641px] top-[41px] flex h-[56px] w-[214px] items-center justify-center rounded-[3px] bg-[#395962] font-['Segoe_UI','Segoe_UI',Arial,sans-serif] text-[19.474px] font-bold uppercase leading-[21.638px] tracking-[0.3787px] text-[#f6f6f6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f6f6f6]"
-              >
-                {copy.chooseBoard}
-              </Link>
-              <button
-                type="button"
-                data-home-v2-rental-cta
-                onClick={handleGenericRentalClick}
-                className="absolute left-[641px] top-[120px] flex h-[56px] w-[214px] items-center justify-center rounded-[3px] bg-[#fe746a] font-['Segoe_UI','Segoe_UI',Arial,sans-serif] text-[19.474px] font-bold uppercase leading-[21.638px] tracking-[0.3787px] text-[#2e2e2e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f6f6f6]"
-              >
-                {copy.rentNow}
-              </button>
+              <div data-rentals-content className={`relative col-span-12 col-start-1 row-start-1 mt-[493px] h-[223px] justify-self-center rounded-[3px] bg-[rgba(81,81,81,0.82)] ${presentation === "desktop" ? "w-[clamp(909px,52vw,1120px)]" : "w-full max-w-[1120px]"}`}>
+                <div data-rentals-content-inner className="relative mx-auto h-full w-[min(909px,100%)]">
+                  <div data-rentals-price-block className="absolute inset-0 font-[Arial,sans-serif] font-bold uppercase">
+                    <span className="absolute left-[60px] top-[34.84px] text-[24.786px] leading-[10.327px] text-[rgba(246,246,246,0.75)]">{copy.from}</span>
+                    <span className="absolute left-[57px] top-[72.65px] text-[66.096px] leading-[50.811px] text-[#fe746a]">250.000</span>
+                    <span className="absolute left-[308px] top-[83.00px] text-[33.048px] leading-[50.811px] text-[rgba(246,246,246,0.75)]">VND</span>
+                     <span className={`absolute left-[389px] top-[83.00px] whitespace-nowrap leading-[50.811px] text-white ${lang === "ru" ? "text-[28px]" : "text-[33.048px]"}`}>{lang === "ru" ? "/ 2 ЧАСА" : "/ 2 HOURS"}</span>
+                  </div>
+
+                  <div data-rentals-offer-description className="absolute left-[60px] top-[148px] font-['Segoe_UI','Segoe_UI',Arial,sans-serif]">
+                    <p className={`h-[19px] font-normal leading-[22.032px] text-[#f6f6f6] ${lang === "ru" ? "w-[520px] text-[18px]" : "w-[388px] text-[19.278px]"}`}>{copy.description}</p>
+                    <p className="mt-[11px] text-[15.147px] font-normal leading-[22.032px] text-[rgba(246,246,246,0.75)]">{copy.term}</p>
+                  </div>
+
+                  <Link
+                    data-home-v2-rental-catalog-cta
+                    href={catalogHref}
+                    className="absolute left-[641px] top-[41px] flex h-[56px] w-[214px] items-center justify-center rounded-[3px] bg-[#395962] font-['Segoe_UI','Segoe_UI',Arial,sans-serif] text-[19.474px] font-bold uppercase leading-[21.638px] tracking-[0.3787px] text-[#f6f6f6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f6f6f6]"
+                  >
+                    {copy.chooseBoard}
+                  </Link>
+                  <button
+                    type="button"
+                    data-home-v2-rental-cta
+                    onClick={handleGenericRentalClick}
+                    className="absolute left-[641px] top-[120px] flex h-[56px] w-[214px] items-center justify-center rounded-[3px] bg-[#fe746a] font-['Segoe_UI','Segoe_UI',Arial,sans-serif] text-[19.474px] font-bold uppercase leading-[21.638px] tracking-[0.3787px] text-[#2e2e2e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f6f6f6]"
+                  >
+                    {copy.rentNow}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>}
 
@@ -1056,7 +1083,7 @@ export function HomeV2Rentals({ lang, setRentalModalOpen }) {
           </div>
         )}
 
-        {presentation !== null && presentation !== "desktop" && !(presentation === "mobile" && lang === "en") && (
+        {presentation !== null && presentation !== "desktop" && presentation !== "compact" && !(presentation === "mobile" && lang === "en") && (
           <HomeV2RentalsAdaptive lang={lang} catalogHref={catalogHref} copy={copy} onRentNow={handleGenericRentalClick} />
         )}
       </div>
@@ -1064,7 +1091,7 @@ export function HomeV2Rentals({ lang, setRentalModalOpen }) {
   );
 }
 
-function HomeV2IncludedAdaptive({ items, subtitle, accentTitle }) {
+function HomeV2IncludedAdaptive({ items, subtitle, accentTitle, desktop = false }) {
   const assetByIcon = {
     camera: "/design/home-v2/included/included-icon-photos-videos.svg",
     zinc: "/design/home-v2/included/included-icon-zinc-spf.svg",
@@ -1078,20 +1105,26 @@ function HomeV2IncludedAdaptive({ items, subtitle, accentTitle }) {
   return (
     <div
       data-home-v2-included-adaptive
-      className="block"
+      data-home-v2-included-desktop={desktop ? "true" : undefined}
+      data-home-v2-included-desktop-en={desktop ? "true" : undefined}
+      className={desktop ? "relative block min-h-[700px] bg-[#2e2e2e]" : "block"}
     >
-      <div className="home-v2-container pb-[calc(var(--home-v2-space-compact)-24px)] md:pb-[calc(var(--home-v2-space-compact)-32px)]">
-        <div data-home-v2-included-adaptive-grid className="grid grid-cols-2 gap-x-[var(--home-v2-space-internal)] gap-y-10 min-[900px]:grid-cols-4 min-[900px]:gap-x-[clamp(18px,2.5vw,34px)]">
+      <div className={`home-v2-container pb-[calc(var(--home-v2-space-compact)-24px)] md:pb-[calc(var(--home-v2-space-compact)-32px)] ${desktop ? "!w-[calc(100%-(2*var(--home-v2-fluid-gutter)))] !max-w-none px-0 pb-0 pt-[9px]" : ""}`}>
+        <div data-home-v2-included-features={desktop ? "true" : undefined} data-home-v2-included-adaptive-grid className={`grid grid-cols-2 gap-x-[var(--home-v2-space-internal)] gap-y-10 min-[900px]:grid-cols-4 min-[900px]:gap-x-[clamp(18px,2.5vw,34px)] ${desktop ? "mx-auto w-[min(100%,clamp(1240px,75vw,1600px))]" : ""}`}>
           {orderedItems.map((item) => (
-            <article key={item.icon} data-home-v2-included-adaptive-feature={item.icon} className="flex min-w-0 flex-col items-center text-center text-epicWhite">
-              <div className={`relative flex items-center justify-center ${item.icon === "board" ? "h-[clamp(160px,22vw,300px)] w-[clamp(160px,22vw,300px)]" : "h-[clamp(132px,20vw,210px)] w-[clamp(132px,20vw,210px)]"}`}>
+            <article key={item.icon} data-home-v2-included-feature={desktop ? item.icon : undefined} data-home-v2-included-adaptive-feature={item.icon} className={`flex min-w-0 flex-col items-center text-center text-epicWhite ${desktop && item.icon === "board" ? "-mt-[60px]" : ""}`}>
+              <div
+                data-home-v2-included-board-frame={desktop && item.icon === "board" ? "true" : undefined}
+                className={`relative flex items-center justify-center ${item.icon === "board" ? (desktop ? "h-[333.864px] w-[333.864px]" : "h-[clamp(160px,22vw,300px)] w-[clamp(160px,22vw,300px)]") : "h-[clamp(132px,20vw,210px)] w-[clamp(132px,20vw,210px)]"}`}
+              >
                 <Image
                   data-home-v2-included-adaptive-icon={item.icon}
+                  data-home-v2-included-board-icon={desktop && item.icon === "board" ? "true" : undefined}
                   src={assetByIcon[item.icon]}
                   alt=""
-                  width={210}
-                  height={210}
-                  className={`h-full w-full object-contain ${item.icon === "board" ? "rotate-[21deg]" : ""}`}
+                  width={item.icon === "board" ? 258.404 : 210}
+                  height={item.icon === "board" ? 258.404 : 210}
+                  className={item.icon === "board" && desktop ? "h-[258.404px] w-[258.404px] rotate-[21.01deg] object-contain" : `h-full w-full object-contain ${item.icon === "board" ? "rotate-[21deg]" : ""}`}
                 />
               </div>
               <h3 className="mt-4 text-[clamp(16px,2.2vw,21px)] font-black uppercase leading-tight">{item.label}</h3>
@@ -1100,11 +1133,27 @@ function HomeV2IncludedAdaptive({ items, subtitle, accentTitle }) {
           ))}
         </div>
 
-        <div data-home-v2-included-adaptive-message className="mt-[var(--home-v2-space-heading)] grid items-center gap-6 border-t border-epicWhite/25 pt-[var(--home-v2-space-heading)] min-[900px]:grid-cols-[minmax(220px,0.32fr)_minmax(0,0.68fr)] min-[900px]:gap-10">
-          <p className="whitespace-pre-line text-center text-[clamp(24px,3vw,32px)] font-black uppercase leading-[1.05] text-epicMint min-[900px]:text-left">{accentTitle}</p>
-          <p className="text-center text-[clamp(18px,2.5vw,32px)] font-normal leading-[1.35] text-epicWhite min-[900px]:text-left">{subtitle}</p>
+        <div data-home-v2-included-adaptive-message className={`mt-[var(--home-v2-space-heading)] grid items-center gap-6 border-t border-epicWhite/25 pt-[var(--home-v2-space-heading)] min-[900px]:grid-cols-[minmax(220px,0.32fr)_minmax(0,0.68fr)] min-[900px]:gap-10 ${desktop ? "mx-auto w-[min(100%,clamp(980px,64vw,1360px))]" : ""}`}>
+          <p data-home-v2-included-callout={desktop ? "true" : undefined} className="whitespace-pre-line text-center text-[clamp(24px,3vw,32px)] font-black uppercase leading-[1.05] text-epicMint min-[900px]:text-left">{accentTitle}</p>
+          <p data-home-v2-included-description className={`text-center text-[clamp(18px,2.5vw,32px)] font-normal leading-[1.35] text-epicWhite min-[900px]:text-left ${desktop ? "max-w-[781px]" : ""}`}>{subtitle}</p>
         </div>
       </div>
+
+      {desktop && (
+        <div data-home-v2-included-marquee className="relative mt-[32px] h-[30px] overflow-hidden">
+          <div data-home-v2-included-marquee-track className="flex h-[40px] w-max gap-[63px]">
+            {Array.from({ length: 16 }, (_, index) => (
+              <div
+                key={index}
+                data-home-v2-included-marquee-repeat
+                className={`h-[30.094px] w-[216.973px] shrink-0 overflow-hidden ${index % 8 === 1 || index % 8 === 3 || index % 8 >= 5 ? "rotate-180" : ""}`}
+              >
+                <Image src="/design/home-v2/included/included-surf-school-logo.svg" alt="" width={216.798} height={29.965} className="h-[29.965px] w-[216.798px]" />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -1112,90 +1161,14 @@ function HomeV2IncludedAdaptive({ items, subtitle, accentTitle }) {
 export function HomeV2Included({ t }) {
   const isRu = t.includedLabel !== "Included";
   const presentation = useHomeV2Presentation();
-  const includedByIcon = new Map(t.includedItems.map((item) => [item.icon, item]));
-  const photosItem = includedByIcon.get("camera");
-  const zincItem = includedByIcon.get("zinc");
-  const boardItem = includedByIcon.get("board");
-  const rashguardItem = includedByIcon.get("rashguard");
-  const includedCalloutLines = t.includedAccentTitle.split("\n");
   return (
     <section
       id="included"
       data-home-v2-included
-      className={`relative isolate overflow-hidden bg-epicDark text-epicWhite scroll-mt-0 min-[1440px]:!h-[639px] min-[1440px]:px-0 min-[1440px]:py-0 min-[1440px]:shadow-[0_4px_4px_rgba(0,0,0,0.25)] ${isRu ? "" : "h-[746px] px-0 py-0 sm:h-auto"}`}
+      className={`relative isolate overflow-hidden bg-epicDark text-epicWhite scroll-mt-0 min-[1440px]:min-h-[700px] min-[1440px]:px-0 min-[1440px]:py-0 min-[1440px]:shadow-[0_4px_4px_rgba(0,0,0,0.25)] ${isRu ? "" : "h-[746px] px-0 py-0 sm:h-auto"}`}
     >
-        {presentation === "desktop" && <div data-home-v2-included-desktop data-home-v2-included-desktop-en className="relative left-1/2 h-[639px] w-[1440px] -translate-x-1/2 overflow-hidden bg-[#2e2e2e]">
-          <div data-home-v2-included-features className="absolute inset-0">
-            <article data-home-v2-included-feature="photos-videos" className="absolute left-[144px] top-[9px] h-[309px] w-[204px] text-center">
-              <Image src="/design/home-v2/included/included-icon-photos-videos.svg" alt="" width={200} height={200} className="absolute left-[2px] top-0 h-[200px] w-[200px]" />
-              <h3 className={`absolute left-0 top-[237px] flex h-[28px] w-[204px] items-center justify-center font-['Montserrat',var(--font-heading)] font-black uppercase leading-[22px] text-[#f6f6f6] ${isRu ? "text-[18px]" : "text-[21.503px]"}`}>
-                {photosItem.label}
-              </h3>
-              <p className="absolute left-[5px] top-[267px] flex h-[42px] w-[194px] items-center justify-center font-['Segoe_UI','Segoe_UI',Arial,sans-serif] text-[14.783px] font-normal leading-[21.503px] text-[#f6f6f6]">
-                {photosItem.desc}
-              </p>
-            </article>
+        {(presentation === "desktop" || presentation === "compact") && <HomeV2IncludedAdaptive items={t.includedItems} subtitle={t.includedSubtitle} accentTitle={t.includedAccentTitle} desktop />}
 
-            <article data-home-v2-included-feature="zinc-spf" className="absolute left-[440.52px] top-[3.52px] h-[316px] w-[211px] text-center">
-              <div className="absolute left-0 top-0 flex h-[210.951px] w-[210.951px] items-center justify-center overflow-hidden">
-                <Image src="/design/home-v2/included/included-icon-zinc-spf.svg" alt="" width={205.403} height={205.403} className="h-[205.403px] w-[205.403px] -rotate-[1.57deg]" />
-              </div>
-              <h3 className={`absolute top-[232px] flex h-[38px] items-center justify-center font-['Montserrat',var(--font-heading)] font-black uppercase leading-[22px] text-[#f6f6f6] ${isRu ? "left-[24px] w-[163px] text-[18px]" : "left-[49.48px] w-[111px] text-[21.503px]"}`}>
-                {zincItem.label}
-              </h3>
-              <p className="absolute left-[24.48px] top-[273.48px] flex h-[42px] w-[163px] items-center justify-center font-['Segoe_UI','Segoe_UI',Arial,sans-serif] text-[14.783px] font-normal leading-[21.503px] text-[#f6f6f6]">
-                {zincItem.desc}
-              </p>
-            </article>
-
-            <article data-home-v2-included-feature="board" className="absolute left-[702.07px] top-[-50.93px] h-[371px] w-[334px] text-center">
-              <div className="absolute left-0 top-0 flex h-[333.864px] w-[333.864px] items-center justify-center overflow-hidden">
-                <Image data-home-v2-included-board-icon src="/design/home-v2/included/included-icon-board.svg" alt="" width={258.404} height={258.404} className="h-[258.404px] w-[258.404px] rotate-[21.01deg]" />
-              </div>
-              <h3 className={`absolute flex items-center justify-center font-['Montserrat',var(--font-heading)] font-black uppercase text-[#f6f6f6] ${isRu ? "left-[94px] top-[296.93px] h-[18px] w-[150px] text-[18px] leading-[22px]" : "left-[126.89px] top-[296.93px] h-[14.111px] w-[87px] text-[21.503px] leading-[49.59px]"}`}>
-                {boardItem.label}
-              </h3>
-              <p className="absolute left-[79.89px] top-[322.93px] flex h-[47.946px] w-[183px] items-center justify-center font-['Segoe_UI','Segoe_UI',Arial,sans-serif] text-[14.783px] font-normal leading-[21.503px] text-[#f6f6f6]">
-                {boardItem.desc}
-              </p>
-            </article>
-
-            <article data-home-v2-included-feature="rashguard" className="absolute left-[1093px] top-[16px] h-[302px] w-[200px] text-center">
-              <Image src="/design/home-v2/included/included-icon-rashguard.svg" alt="" width={200} height={200} className="absolute left-0 top-0 h-[200px] w-[200px]" />
-              <h3 className={`absolute flex items-center justify-center font-['Montserrat',var(--font-heading)] font-black uppercase text-[#f6f6f6] ${isRu ? "left-[15px] top-[223px] h-[22px] w-[170px] text-[18px] leading-[22px]" : "left-[24px] top-[223px] h-[14.111px] w-[152px] text-[21.503px] leading-[49.59px]"}`}>
-                {rashguardItem.label}
-              </h3>
-              <p className="absolute left-[23px] top-[262px] flex h-[36.683px] w-[155px] items-center justify-center font-['Segoe_UI','Segoe_UI',Arial,sans-serif] text-[14.783px] font-normal leading-[21.503px] text-[#f6f6f6]">
-                {rashguardItem.desc}
-              </p>
-            </article>
-          </div>
-
-          <div data-home-v2-included-message className="absolute inset-0">
-            <div data-home-v2-included-callout className="absolute left-[207px] top-[421px] h-[65px] w-[208px] font-['Montserrat',var(--font-heading)] text-[28px] font-black uppercase text-[#aaffc7]">
-              <p className={`absolute top-0 h-[17px] -translate-y-[17px] whitespace-nowrap leading-[49.59px] ${isRu ? "left-[-18px] text-[23px]" : "left-[19.55px]"}`}>{includedCalloutLines[0]}</p>
-              <p className={`absolute top-[40.82px] h-[17px] -translate-y-[17px] whitespace-nowrap leading-[49.59px] ${isRu ? "left-[-18px] text-[23px]" : "left-[0.36px]"}`}>{includedCalloutLines[1]}</p>
-            </div>
-            <p data-home-v2-included-description className="absolute left-[452.2px] top-[330px] flex h-[227px] w-[781px] items-center justify-center text-center font-['Segoe_UI','Segoe_UI',Arial,sans-serif] text-[36px] font-normal leading-[40px] text-[#f6f6f6]">
-              {t.includedSubtitle}
-            </p>
-          </div>
-
-          <div data-home-v2-included-marquee className="absolute left-0 top-[539px] h-[30px] w-[1440px] overflow-hidden">
-            <div data-home-v2-included-marquee-track className="absolute left-0 top-0 h-[40px] w-[2307px]">
-              {[0, 280, 560, 840, 1120, 1400, 1740, 2090].map((left, index) => (
-                <div
-                  key={left}
-                  data-home-v2-included-marquee-repeat
-                  className={`absolute top-0 h-[30.094px] w-[216.973px] overflow-hidden ${index === 1 || index === 3 || index >= 5 ? "rotate-180" : ""}`}
-                  style={{ left }}
-                >
-                  <Image src="/design/home-v2/included/included-surf-school-logo.svg" alt="" width={216.798} height={29.965} className="h-[29.965px] w-[216.798px]" />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>}
 
       {presentation === "mobile" && !isRu && (
         <div
@@ -1246,7 +1219,7 @@ export function HomeV2Included({ t }) {
         </div>
       )}
 
-      {presentation !== null && presentation !== "desktop" && !(presentation === "mobile" && !isRu) && (
+      {presentation !== null && presentation !== "desktop" && presentation !== "compact" && !(presentation === "mobile" && !isRu) && (
         <HomeV2IncludedAdaptive items={t.includedItems} subtitle={t.includedSubtitle} accentTitle={t.includedAccentTitle} />
       )}
     </section>

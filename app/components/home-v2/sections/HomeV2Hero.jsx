@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import Image from "next/image";
+import { Dithering } from "@paper-design/shaders-react";
 
 const HERO_OCEAN_SRC = "/design/home-v2/why-epic/why-epic-bg-ocean.webp";
 const HERO_VIDEO_SRC = "/hero-surf.mp4";
@@ -10,6 +11,8 @@ const HERO_SURF_SCHOOL_MASK_SRC = "/brand/surf-school-hero-logo.svg";
 const HERO_MOBILE_EPIC_ARTWORK_SRC = "/design/home-v2/hero/mobile-epic-logo-artwork.svg";
 const HERO_MOBILE_EPIC_ACCENT_SRC = "/design/home-v2/hero/mobile-epic-logo-accent-dot.svg";
 const HERO_MOBILE_SURF_SCHOOL_SRC = "/design/home-v2/hero/mobile-surf-school-logo.svg";
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+const MOBILE_HERO_QUERY = "(max-width: 639px)";
 
 const SURF_SCHOOL_LETTERS = [
   ["letter-s-surf", "Letter S — Surf"],
@@ -22,33 +25,6 @@ const SURF_SCHOOL_LETTERS = [
   ["letter-o1-school", "Letter O1 — School"],
   ["letter-o2-school", "Letter O2 — School"],
   ["letter-l-school", "Letter L — School"],
-];
-
-const HERO_WAVES = [
-  {
-    fill: "#34474d",
-    path: "M0 42C58 9 101-6 160 3C240 10 297 41 360 43C432 45 492 10 560 9C650-5 722 14 800 29C901 49 990 49 1080 36C1163 10 1228 1 1300 15C1362 25 1410 39 1440 47V191H0Z",
-  },
-  {
-    fill: "#365057",
-    path: "M0 68C69 43 113 11 180 11C254 11 302 51 377 51C451 51 503 14 584 17C668 20 721 51 809 47C909 44 956 40 1047 58C1125 73 1182 95 1259 91C1331 87 1386 71 1440 70V191H0Z",
-  },
-  {
-    fill: "#37555c",
-    path: "M0 92C68 69 108 46 166 46C236 46 280 91 357 94C430 97 470 61 548 59C624 57 672 96 756 96C840 96 892 90 971 91C1058 91 1110 122 1191 130C1275 138 1333 101 1440 92V191H0Z",
-  },
-  {
-    fill: "#4c5960",
-    path: "M0 118C66 96 110 58 171 58C248 58 285 102 355 103C427 105 460 64 534 60C610 57 659 94 744 95C838 96 886 84 969 89C1050 94 1104 126 1185 133C1262 140 1327 96 1440 103V191H0Z",
-  },
-  {
-    fill: "#516867",
-    path: "M0 136C74 117 116 103 178 103C251 103 294 137 365 137C445 137 492 115 565 117C645 119 685 143 763 143C851 143 897 122 976 125C1054 128 1101 153 1175 154C1257 155 1323 130 1440 139V191H0Z",
-  },
-  {
-    fill: "#606a66",
-    path: "M0 190C65 166 118 150 183 150C253 150 301 178 369 181C445 184 500 166 573 168C650 171 695 188 773 188C852 188 913 179 982 183C1053 188 1097 164 1166 148C1240 131 1301 147 1366 173C1396 184 1420 190 1440 191V191H0Z",
-  },
 ];
 
 function SurfSchoolArtwork() {
@@ -71,19 +47,48 @@ function SurfSchoolArtwork() {
   );
 }
 
-function HeroWaveStack() {
+function subscribeToReducedMotion(onChange) {
+  const mediaQuery = window.matchMedia(REDUCED_MOTION_QUERY);
+  mediaQuery.addEventListener("change", onChange);
+  return () => mediaQuery.removeEventListener("change", onChange);
+}
+
+function getReducedMotionSnapshot() {
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
+}
+
+function subscribeToMobileHero(onChange) {
+  const mediaQuery = window.matchMedia(MOBILE_HERO_QUERY);
+  mediaQuery.addEventListener("change", onChange);
+  return () => mediaQuery.removeEventListener("change", onChange);
+}
+
+function getMobileHeroSnapshot() {
+  return window.matchMedia(MOBILE_HERO_QUERY).matches;
+}
+
+function HeroDitheringWave() {
+  const reducedMotion = useSyncExternalStore(subscribeToReducedMotion, getReducedMotionSnapshot, () => false);
+  const mobileHero = useSyncExternalStore(subscribeToMobileHero, getMobileHeroSnapshot, () => false);
+
   return (
-    <div data-home-v2-hero-wave-stack className="home-v2-hero-wave-stack" aria-hidden="true">
-      {HERO_WAVES.map((wave, index) => (
-        <svg
-          key={wave.path}
-          data-home-v2-hero-wave-layer={`Wave Layer ${String(index + 1).padStart(2, "0")}`}
-          viewBox="0 0 1440 191"
-          preserveAspectRatio="none"
-        >
-          <path d={wave.path} fill={wave.fill} />
-        </svg>
-      ))}
+    <div data-home-v2-hero-dithering-wave className="home-v2-hero-dithering-wave" aria-hidden="true">
+      <Dithering
+        data-home-v2-hero-dithering-shader
+        data-home-v2-dithering-motion={reducedMotion ? "paused" : "running"}
+        width="100%"
+        height="100%"
+        colorBack="#2E2E2E"
+        colorFront="#395962"
+        shape="wave"
+        type="8x8"
+        size={3}
+        speed={reducedMotion ? 0 : 0.6}
+        fit="cover"
+        scale={0.65}
+        offsetY={mobileHero ? 0.32 : 0.22}
+        maxPixelCount={640000}
+      />
     </div>
   );
 }
@@ -104,30 +109,33 @@ function DesktopHero({ t, whyItems }) {
       </div>
 
       <div className="home-v2-hero-desktop-body">
-        <div data-home-v2-hero-logo-lockup className="home-v2-hero-desktop-lockup">
-          <span data-home-v2-hero-logo-accent-dot className="home-v2-hero-accent-dot" aria-hidden="true" />
-          <Image
-            data-home-v2-hero-logo-epic
-            src={HERO_EPIC_MASK_SRC}
-            alt=""
-            width={198}
-            height={88.47}
-            priority
-            className="home-v2-hero-epic-artwork"
-          />
-          <SurfSchoolArtwork />
-        </div>
+        <div
+          data-home-v2-hero-grid
+          className="home-v2-fluid-frame home-v2-fluid-grid home-v2-hero-desktop-grid"
+        >
+          <div data-home-v2-hero-logo-lockup className="home-v2-hero-desktop-lockup">
+            <span data-home-v2-hero-logo-accent-dot className="home-v2-hero-accent-dot" aria-hidden="true" />
+            <Image
+              data-home-v2-hero-logo-epic
+              src={HERO_EPIC_MASK_SRC}
+              alt=""
+              width={198}
+              height={88.47}
+              priority
+              className="home-v2-hero-epic-artwork"
+            />
+            <SurfSchoolArtwork />
+          </div>
 
-        <div data-home-v2-hero-benefits className="home-v2-hero-desktop-benefits">
-          {benefits.map((item, index) => (
-            <article key={item.title} data-home-v2-benefit-card data-benefit-index={index + 1}>
-              <h2>{item.title}</h2>
-              <p>{item.desc}</p>
-            </article>
-          ))}
+          <div data-home-v2-hero-benefits className="home-v2-hero-desktop-benefits">
+            {benefits.map((item, index) => (
+              <article key={item.title} data-home-v2-benefit-card data-benefit-index={index + 1}>
+                <h2>{item.title}</h2>
+                <p>{item.desc}</p>
+              </article>
+            ))}
+          </div>
         </div>
-
-        <HeroWaveStack />
       </div>
     </div>
   );
@@ -171,7 +179,7 @@ function MobileEnHero({ t, whyItems }) {
         className="home-v2-hero-mobile-surf-school"
       />
 
-      <div data-home-v2-hero-mobile-benefits className="home-v2-hero-mobile-benefits">
+      <div data-home-v2-hero-mobile-benefits className="home-v2-hero-mobile-benefits z-[3]">
         {benefits.map((item, index) => (
           <article key={item.title} data-home-v2-mobile-benefit data-benefit-index={index + 1}>
             <h2>{item.title}</h2>
@@ -240,7 +248,6 @@ function AdaptiveHero({ t, whyItems }) {
         </div>
       </div>
 
-      <HeroWaveStack />
     </div>
   );
 }
@@ -372,6 +379,7 @@ export default function HomeV2Hero({ t, lang = "en", whyItems = [] }) {
       <DesktopHero t={t} whyItems={whyItems} />
       {lang === "en" ? <MobileEnHero t={t} whyItems={whyItems} /> : null}
       <AdaptiveHero t={t} whyItems={whyItems} />
+      <HeroDitheringWave />
     </section>
   );
 }
