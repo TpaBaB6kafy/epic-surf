@@ -9,7 +9,7 @@ const expectedEn = {
   split: { title: "Split Lesson", price: "2.500.000 VND", image: "lesson-2.webp", kind: "booking" },
   private: { title: "Private Lesson", price: "1.800.000 VND", image: "lesson-3.webp", kind: "booking" },
   surf_skate: { title: "Surf-skate", price: "600.000 VND", image: "lesson-4.webp", kind: "messenger" },
-  lineup_pro: { title: "Line-up / Pro", price: "2.400.000 VND", image: "lesson-5.webp", kind: "messenger" },
+  lineup_pro: { title: "Line-up / Pro", price: "1.200.000 VND", image: "lesson-5.webp", kind: "messenger" },
 };
 
 async function expectNoHorizontalOverflow(page) {
