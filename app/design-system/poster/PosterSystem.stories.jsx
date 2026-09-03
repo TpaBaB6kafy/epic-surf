@@ -51,7 +51,7 @@ const lessons = [
     title: "Line-up / Pro",
     audience: "Advanced surfers",
     description: "Coaching for green waves, trimming and riding down the line.",
-    price: "2.400.000 VND",
+    price: "1.200.000 VND",
     image: "/design/home-v2/lessons/lesson-line-up-pro-desktop.webp",
   },
 ];

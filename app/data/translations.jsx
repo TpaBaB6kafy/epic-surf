@@ -98,7 +98,7 @@ export const translations = {
         { id: "split", title: "Сплит урок", badge: "Выгодно", desc: "Идеально подходит для пар, друзей или детей - максимум внимания и практики в комфортной атмосфере. На уроке вы вдвоём и инструктор.", price: "2.500.000 VND" },
         { id: "private", title: "Приватный урок", badge: "Премиум", desc: "Формат один на один с инструктором, который даёт максимальный результат и быстрый прогресс уже за одно занятие.", price: "1.800.000 VND" },
         { id: "surf_skate", title: "Серф-скейт", badge: "Для базы", desc: "Идеальный тренажер для отработки маневров на суше.", price: "600.000 VND" },
-        { id: "lineup_pro", title: "Line-up / Pro", badge: "Для опытных", desc: "Урок для продолжающих сёрферов: зелёные волны, проезд по стенке.", price: "2.400.000 VND" }
+        { id: "lineup_pro", title: "Line-up / Pro", badge: "Для опытных", desc: "Урок для продолжающих сёрферов: зелёные волны, проезд по стенке.", price: "1.200.000 VND" }
       ],
       reviewsList: [
         { name: "Evgenia", text: "Отличные уроки! Ребята влюбили меня в серф! Очень понятные объяснения, много практики. 🔥", date: "Неделю назад" },
@@ -202,7 +202,7 @@ export const translations = {
         { id: "split", title: "Split Lesson", badge: "Best Value", desc: "Perfect for couples, friends, or kids — with maximum attention and practice in a comfortable atmosphere. Just two students and one instructor.", price: "2.500.000 VND" },
         { id: "private", title: "Private Lesson", badge: "Premium", desc: "One-on-one format with an instructor for maximum results and fast progress in just one lesson.", price: "1.800.000 VND" },
         { id: "surf_skate", title: "Surf-skate", badge: "Fundamentals", desc: "The perfect land-based training tool for practicing surf maneuvers.", price: "600.000 VND" },
-        { id: "lineup_pro", title: "Line-up / Pro", badge: "Advanced", desc: "A lesson for intermediate surfers: green waves, trimming, and riding down the line.", price: "2.400.000 VND" }
+        { id: "lineup_pro", title: "Line-up / Pro", badge: "Advanced", desc: "A lesson for intermediate surfers: green waves, trimming, and riding down the line.", price: "1.200.000 VND" }
       ],
       reviewsList: [
         { name: "Evgenia", text: "Great lessons! The team made us fall in love with surfing! 🔥", date: "1 week ago" },

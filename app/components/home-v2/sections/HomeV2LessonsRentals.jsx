@@ -79,12 +79,71 @@ const surfStackAssets = {
 };
 
 const lessonPresentationOrder = [
-  { id: "group", image: "/design/home-v2/lessons/lesson-group-desktop.webp" },
-  { id: "split", image: "/design/home-v2/lessons/lesson-split-desktop.webp" },
-  { id: "private", image: "/design/home-v2/lessons/lesson-private-desktop.webp" },
-  { id: "surf_skate", image: "/design/home-v2/lessons/lesson-surf-skate-desktop.webp" },
-  { id: "lineup_pro", image: "/design/home-v2/lessons/lesson-line-up-pro-desktop.webp" },
+  { id: "group", image: "/design/home-v2/lessons/lesson-group-desktop.webp", desktopMediaKey: "group" },
+  { id: "split", image: "/design/home-v2/lessons/lesson-split-desktop.webp", desktopMediaKey: "split" },
+  { id: "private", image: "/design/home-v2/lessons/lesson-private-desktop.webp", desktopMediaKey: "private" },
+  { id: "surf_skate", image: "/design/home-v2/lessons/lesson-surf-skate-desktop.webp", desktopMediaKey: "surfSkate" },
+  { id: "lineup_pro", image: "/design/home-v2/lessons/lesson-line-up-pro-desktop.webp", desktopMediaKey: "lineUp" },
 ];
+
+const desktopLessonMedia = {
+  group: {
+    asset: "/design/home-v2/lessons/group-lesson-photo.png",
+    fit: "cover",
+    position: "center",
+    transform: "none",
+    frameStyle: { position: "absolute", left: 0, top: "-24.347826%", width: "99.406968%", height: "155.478261%" },
+    mode: "figma-group",
+  },
+  split: {
+    asset: "/gallery/lesson-1.webp",
+    fit: "cover",
+    position: "center 12%",
+    transform: "none",
+    frameStyle: { position: "absolute", inset: 0 },
+    mode: "split",
+  },
+  private: {
+    asset: "/gallery/lesson-2.webp",
+    fit: "cover",
+    position: "center 54%",
+    transform: "none",
+    frameStyle: { position: "absolute", inset: 0 },
+    mode: "private",
+  },
+  surfSkate: {
+    asset: "/gallery/lesson-4.webp",
+    fit: "cover",
+    position: "center 46%",
+    transform: "none",
+    frameStyle: { position: "absolute", inset: 0 },
+    mode: "surf-skate",
+  },
+  lineUp: {
+    asset: "/gallery/lesson-5.webp",
+    fit: "cover",
+    position: "center 52%",
+    transform: "none",
+    frameStyle: { position: "absolute", inset: 0 },
+    mode: "line-up",
+  },
+};
+
+const lessonPosterTitleParts = {
+  surf_skate: {
+    en: ["Surf", "Skate"],
+    ru: ["Серф", "Скейт"],
+  },
+};
+
+function getLessonPosterTitleParts(item, lang) {
+  const explicitParts = lessonPosterTitleParts[item.id]?.[lang];
+  if (explicitParts) return explicitParts;
+
+  const words = item.title.trim().split(/\s+/);
+  const accent = words.pop() || "";
+  return [words.join(" "), accent];
+}
 
 const desktopLessonCopy = {
   en: {
@@ -202,6 +261,112 @@ function DesktopLessonDetail({ item, image, isBookingLesson, links, onBookingCli
   );
 }
 
+function LessonPosterStage({ orderedLessons, activeLesson, setActiveLessonId, links, onBookingClick, onMessengerClick, t, lang }) {
+  const headingWords = t.sectionTitle.trim().split(/\s+/);
+  const headingFirst = headingWords.shift();
+  const headingSecond = [...headingWords, t.sectionTitleRide].join(" ");
+  const [titleLead, titleAccent] = getLessonPosterTitleParts(activeLesson.item, lang);
+  const price = activeLesson.item.price.replace(/\s*VND$/i, "");
+  const isBookingLesson = bookingLessonIds.has(activeLesson.id);
+  const posterMedia = desktopLessonMedia[activeLesson.desktopMediaKey];
+  const ctaClass = "home-v2-lesson-poster-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6f6f6]";
+
+  return (
+    <div data-home-v2-lessons-desktop data-home-v2-lessons-poster data-lang={lang} className="home-v2-lesson-poster-stage">
+      <h2 data-home-v2-lessons-heading className="home-v2-lesson-poster-heading">
+        <span>{headingFirst}</span>{" "}<span>{headingSecond}</span>
+      </h2>
+      <div className="home-v2-lesson-poster-offset" aria-hidden="true" style={{ opacity: 1, background: "transparent", clipPath: "none" }}>
+        <Image src="/design/home-v2/lessons/lesson-card-outer-frame.svg" alt="" fill sizes="100vw" />
+      </div>
+      <article
+        id="home-v2-lesson-detail"
+        data-home-v2-lesson-detail
+        className="home-v2-lesson-poster-card"
+        style={{
+          clipPath: "none",
+          WebkitMaskImage: "url('/design/home-v2/lessons/lesson-card-mask.svg')",
+          WebkitMaskRepeat: "no-repeat",
+          WebkitMaskSize: "100% 100%",
+          maskImage: "url('/design/home-v2/lessons/lesson-card-mask.svg')",
+          maskRepeat: "no-repeat",
+          maskSize: "100% 100%",
+        }}
+      >
+        <div
+          className="home-v2-lesson-poster-photo-frame"
+          data-photo-mode={posterMedia.mode}
+          style={posterMedia.frameStyle}
+        >
+          <Image
+            key={posterMedia.asset}
+            data-lessons-photo
+            src={posterMedia.asset}
+            alt={activeLesson.item.title}
+            fill
+            priority={activeLesson.id === "group"}
+            sizes="100vw"
+            className="home-v2-lesson-poster-photo"
+            style={{ objectFit: posterMedia.fit, objectPosition: posterMedia.position, transform: posterMedia.transform }}
+          />
+        </div>
+        <div className="home-v2-lesson-poster-shade" aria-hidden="true" style={{ background: "transparent", clipPath: "none" }}>
+          <Image src="/design/home-v2/lessons/lesson-copy-overlay.svg" alt="" fill sizes="34vw" />
+        </div>
+        <div className="home-v2-lesson-poster-copy" style={{ inset: 0, width: "auto" }}>
+          <h3
+            data-home-v2-lesson-title
+            style={{
+              position: "absolute",
+              left: "2.816902%",
+              top: "42.782609%",
+              width: "27%",
+              height: lang === "ru" ? "20.836174%" : "25.043478%",
+              justifyContent: "flex-end",
+              ...(lang === "ru" ? { fontSize: "max(3rem, 5.2cqw)", lineHeight: 0.8 } : {}),
+            }}
+          >
+            {titleLead ? <span>{titleLead}</span> : null}
+            <span>{titleAccent}</span>
+          </h3>
+          <p data-home-v2-lesson-audience style={{ position: "absolute", left: "2.816902%", top: "70.956522%", margin: 0 }}>{(desktopLessonCopy[lang] || desktopLessonCopy.en).audience[activeLesson.id] || activeLesson.item.badge}</p>
+          <p data-home-v2-lesson-description style={{ position: "absolute", left: "2.965159%", top: "77.913043%", width: "25.648629%", margin: 0 }}>{activeLesson.item.desc}</p>
+        </div>
+      </article>
+      <div data-home-v2-lesson-selector className="home-v2-lesson-poster-selector">
+        {orderedLessons.map(({ id, item }, index) => {
+          const isActive = id === activeLesson.id;
+          return (
+            <button key={id} type="button" data-lesson-selector-item={id} data-active={isActive ? "true" : "false"} aria-pressed={isActive} aria-controls="home-v2-lesson-detail" onClick={() => setActiveLessonId(id)}>
+              <span className="home-v2-lesson-poster-number">{String(index + 1).padStart(2, "0")}</span>
+              <span data-lesson-selector-title>{item.title}</span>
+            </button>
+          );
+        })}
+      </div>
+      <div
+        data-home-v2-lesson-price
+        className="home-v2-lesson-poster-price"
+        style={{ left: "72.275069%", top: "72.682622%", width: "22.777778%", height: "11.690237%", background: "transparent", clipPath: "none" }}
+      >
+        <Image aria-hidden="true" src="/design/home-v2/lessons/lesson-price-paper.svg" alt="" fill sizes="330px" />
+        <span className="home-v2-lesson-poster-price-copy" style={{ position: "relative", zIndex: 1 }}><span>{price}</span><span> VND</span></span>
+      </div>
+      {isBookingLesson ? (
+        <button type="button" data-home-v2-booking-cta onClick={() => onBookingClick(activeLesson.item)} className={ctaClass} style={{ left: "72.142257%", top: "85.019751%", width: "22.771042%", height: "8.794318%", background: "transparent", clipPath: "none" }}>
+          <Image aria-hidden="true" src="/design/home-v2/lessons/lesson-book-now-paper.svg" alt="" fill sizes="330px" />
+          <span style={{ position: "relative", zIndex: 1 }}>{t.btnBook}</span>
+        </button>
+      ) : (
+        <Link data-home-v2-booking-cta href={links.whatsapp} onClick={(event) => onMessengerClick(event, activeLesson.item)} target="_blank" rel="noreferrer" className={ctaClass} style={{ left: "72.142257%", top: "85.019751%", width: "22.771042%", height: "8.794318%", background: "transparent", clipPath: "none" }}>
+          <Image aria-hidden="true" src="/design/home-v2/lessons/lesson-book-now-paper.svg" alt="" fill sizes="330px" />
+          <span style={{ position: "relative", zIndex: 1 }}>{t.btnBook}</span>
+        </Link>
+      )}
+    </div>
+  );
+}
+
 function DesktopLessonPresentation({ orderedLessons, activeLesson, setActiveLessonId, links, onBookingClick, onMessengerClick, t, lang, compact = false }) {
   const headingWords = t.sectionTitle.trim().split(/\s+/);
   const headingFirst = headingWords.shift();
@@ -281,114 +446,67 @@ function DesktopLessonPresentation({ orderedLessons, activeLesson, setActiveLess
   );
 }
 
-const mobileLessonFeatures = [
-  {
-    label: "Beginner",
-    border: "/design/home-v2/lessons/mobile-feature-cell-border-left.svg",
-    icon: "/design/home-v2/lessons/mobile-feature-icon-beginner.svg",
-  },
-  {
-    label: "Social format",
-    border: "/design/home-v2/lessons/mobile-feature-cell-border-center.svg",
-    icon: "/design/home-v2/lessons/mobile-feature-icon-social.svg",
-  },
-  {
-    label: "Easy start",
-    border: "/design/home-v2/lessons/mobile-feature-cell-border-right.svg",
-    icon: "/design/home-v2/lessons/mobile-feature-icon-easy-start.svg",
-  },
-];
+const mobileLessonMedia = {
+  group: { asset: "/design/home-v2/lessons/group-lesson-photo.png", className: "home-v2-lesson-mobile-photo-group", position: "center" },
+  split: { asset: "/design/home-v2/lessons/lesson-split-desktop.webp", className: "home-v2-lesson-mobile-photo-fill", position: "center 42%" },
+  private: { asset: "/design/home-v2/lessons/lesson-private-desktop.webp", className: "home-v2-lesson-mobile-photo-fill", position: "center 45%" },
+  surf_skate: { asset: "/design/home-v2/lessons/lesson-surf-skate-desktop.webp", className: "home-v2-lesson-mobile-photo-fill", position: "center 45%" },
+  lineup_pro: { asset: "/design/home-v2/lessons/lesson-line-up-pro-desktop.webp", className: "home-v2-lesson-mobile-photo-fill", position: "center 48%" },
+};
 
-function MobileEnLessonFeatures() {
-  return (
-    <div data-home-v2-lesson-features className="absolute left-[197px] top-[97px] flex h-[34px] w-[126px]">
-      {mobileLessonFeatures.map((feature) => (
-        <div key={feature.label} className="relative h-[34px] w-[42px] shrink-0">
-          <Image aria-hidden="true" src={feature.border} alt="" fill sizes="42px" className="object-fill" />
-          <Image aria-hidden="true" src={feature.icon} alt="" width={12} height={12} className="absolute left-[15px] top-[7px] h-[12px] w-[12px]" />
-          <span className="absolute inset-x-0 top-[22px] text-center font-['Bebas_Neue','Arial_Narrow',Arial,sans-serif] text-[4.536px] font-bold uppercase leading-[5px] tracking-[0.2147px] text-[#f6f6f6]">
-            {feature.label}
-          </span>
-        </div>
-      ))}
-    </div>
-  );
+function getMobileLessonTitleLines(item) {
+  if (item.id === "surf_skate") return [item.title];
+
+  const words = item.title.trim().split(/\s+/);
+  if (words.length < 2) return words;
+  return [words.slice(0, -1).join(" "), words.at(-1)];
 }
 
-function MobileEnLessonDetail({ item, image, isBookingLesson, links, onBookingClick, onMessengerClick, t }) {
-  const price = item.price.replace(/\s*VND$/i, "");
-  const ctaClass =
-    "absolute left-[197px] top-[161px] flex h-[34px] w-[126px] items-center justify-center rounded-[1.7px] bg-[#fe746a] font-['Montserrat',var(--font-heading)] text-[12px] font-bold uppercase leading-[12.269px] tracking-[0.2147px] text-[#2e2e2e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f6f6f6]";
+function MobileLessonPresentation({ orderedLessons, activeLesson, setActiveLessonId, links, onBookingClick, onMessengerClick, t, lang }) {
+  const headingWords = t.sectionTitle.trim().split(/\s+/);
+  const headingFirst = headingWords.shift();
+  const headingSecond = [...headingWords, t.sectionTitleRide].join(" ");
+  const titleLines = getMobileLessonTitleLines(activeLesson.item);
+  const photo = mobileLessonMedia[activeLesson.id] || mobileLessonMedia.group;
+  const price = activeLesson.item.price.replace(/\s*VND$/i, "");
+  const isBookingLesson = bookingLessonIds.has(activeLesson.id);
+  const isDenseDescription = activeLesson.item.desc.length > 92;
+  const ctaClass = "home-v2-lesson-mobile-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f6f6f6]";
 
   return (
-    <div id="home-v2-lesson-detail" data-home-v2-lesson-detail className="absolute left-[20px] top-[550px] h-[550px] w-[calc(100%_-_40px)]">
-      <div data-home-v2-lesson-photo-frame className="relative h-[280px] w-full overflow-hidden rounded-t-[3px]">
-        <Image
-          key={image}
-          data-lessons-photo
-          src={image}
-          alt={item.title}
-          fill
-          sizes="(max-width: 390px) calc(100vw - 40px), 350px"
-          className="object-cover object-center"
-          priority={item.id === "group"}
-        />
-      </div>
-
-      <article data-home-v2-lesson-info-panel className="relative h-[270px] w-full overflow-hidden rounded-b-[3px] border-[1.701px] border-[#f6f6f6] bg-[#2e2e2e] text-[#f6f6f6]">
-        <h3 data-home-v2-lesson-title className="absolute left-[27px] top-[26px] flex h-[49px] w-[139px] items-center justify-center text-center font-['Montserrat',var(--font-heading)] text-[24px] font-bold uppercase leading-[24.412px]">
-          {item.title}
-        </h3>
-        <Image aria-hidden="true" src="/design/home-v2/lessons/mobile-title-divider.svg" alt="" width={117} height={1} className="absolute left-[38px] top-[87px] h-[1px] w-[117px]" />
-        <p data-home-v2-lesson-audience className="absolute left-[27px] top-[98px] w-[139px] text-center font-['Montserrat',var(--font-body)] text-[12.247px] font-normal leading-[12px] text-[#3d535a]">
-          {desktopLessonCopy.en.audience[item.id] || item.badge}
-        </p>
-        <p
-          data-home-v2-lesson-description
-          className={`absolute left-[26px] top-[128px] flex h-[71px] w-[139px] items-center justify-center text-center font-[Arial,sans-serif] font-normal text-[#f6f6f6] ${
-            item.desc.length > 110 ? "text-[9.5px] leading-[12px]" : "text-[12px] leading-[17.176px]"
-          }`}
-        >
-          {item.desc}
-        </p>
-
-        <div data-home-v2-lesson-price className="absolute left-[197px] top-[32px] flex h-[34px] w-[126px] items-center justify-center rounded-[1.7px] bg-[#395962]">
-          <span className="font-['Montserrat',var(--font-body)] text-[16px] font-normal leading-[17.176px]">{price}</span>
-          <span className="ml-[5px] font-['Montserrat',var(--font-body)] text-[10.5px] font-normal leading-[17.176px]">VND</span>
-        </div>
-
-        <MobileEnLessonFeatures />
-
-        {isBookingLesson ? (
-          <button type="button" data-home-v2-booking-cta onClick={() => onBookingClick(item)} className={ctaClass}>
-            {t.btnBook}
-          </button>
-        ) : (
-          <Link
-            data-home-v2-booking-cta
-            href={links.whatsapp}
-            onClick={(event) => onMessengerClick(event, item)}
-            target="_blank"
-            rel="noreferrer"
-            className={ctaClass}
-          >
-            {t.btnBook}
-          </Link>
-        )}
-      </article>
-    </div>
-  );
-}
-
-function MobileEnLessonPresentation({ orderedLessons, activeLesson, setActiveLessonId, links, onBookingClick, onMessengerClick, t }) {
-  return (
-    <div data-home-v2-lessons-mobile-en className="relative mx-auto h-[1103px] w-full max-w-[390px] overflow-hidden bg-[#2e2e2e]">
-      <h2 data-home-v2-lessons-heading className="absolute left-1/2 top-0 h-[80px] w-[275px] -translate-x-1/2 text-center font-['Montserrat',var(--font-heading)] text-[36px] font-black uppercase leading-[42px]">
-        <span className="block text-[#f6f6f6]">Choose</span>
-        <span className="mt-[-4.58px] block whitespace-nowrap text-[#585858]">Your Lesson</span>
+    <div data-home-v2-lessons-mobile data-lang={lang} className="home-v2-lesson-mobile-stage">
+      <h2 data-home-v2-lessons-heading className="home-v2-lesson-mobile-heading">
+        <span>{headingFirst}</span>
+        <span>{headingSecond}</span>
       </h2>
 
-      <div data-home-v2-lesson-selector className="absolute left-[20px] top-[142px] w-[calc(100%_-_40px)]">
+      <article id="home-v2-lesson-detail" data-home-v2-lesson-detail className="home-v2-lesson-mobile-card">
+        <div data-home-v2-lesson-photo-frame className="home-v2-lesson-mobile-photo-frame">
+          <div className={photo.className}>
+            <Image
+              key={photo.asset}
+              data-lessons-photo
+              src={photo.asset}
+              alt={activeLesson.item.title}
+              fill
+              priority={activeLesson.id === "group"}
+              sizes="100vw"
+              className="home-v2-lesson-mobile-photo"
+              style={{ objectPosition: photo.position }}
+            />
+          </div>
+          <div data-home-v2-lesson-mobile-shadow className="home-v2-lesson-mobile-shadow" aria-hidden="true" />
+          <div data-home-v2-lesson-copy className="home-v2-lesson-mobile-copy">
+            <h3 data-home-v2-lesson-title>
+              {titleLines.map((line, index) => <span key={`${line}-${index}`}>{line}</span>)}
+            </h3>
+            <p data-home-v2-lesson-audience>{(desktopLessonCopy[lang] || desktopLessonCopy.en).audience[activeLesson.id] || activeLesson.item.badge}</p>
+            <p data-home-v2-lesson-description data-dense={isDenseDescription ? "true" : "false"}>{activeLesson.item.desc}</p>
+          </div>
+        </div>
+      </article>
+
+      <div data-home-v2-lesson-selector className="home-v2-lesson-mobile-selector">
         {orderedLessons.map(({ id, item }, index) => {
           const isActive = id === activeLesson.id;
           return (
@@ -396,53 +514,34 @@ function MobileEnLessonPresentation({ orderedLessons, activeLesson, setActiveLes
               key={id}
               type="button"
               data-lesson-selector-item={id}
+              data-active={isActive ? "true" : "false"}
               aria-pressed={isActive}
               aria-controls="home-v2-lesson-detail"
               onClick={() => setActiveLessonId(id)}
-              className={`relative grid w-full grid-cols-[65px_minmax(0,1fr)_52px] items-center text-left text-[#f6f6f6] focus-visible:z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f6f6f6] ${index === 0 ? "" : "-mt-[0.88px]"} ${
-                isActive
-                  ? "z-[1] h-[87.12px] rounded-[3px] border-[2.64px] border-[#ef5533]"
-                  : "h-[71.28px] border-[0.88px] border-[#f6f6f6] last:rounded-b-[3px]"
-              }`}
             >
-              <span className="flex h-full items-center justify-center font-['Bebas_Neue','Arial_Narrow',Arial,sans-serif] text-[28.8px] font-bold leading-[17.912px] text-white">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <span className="relative flex h-full min-w-0 items-center pl-[32px]">
-                <Image
-                  aria-hidden="true"
-                  src={isActive ? "/design/home-v2/lessons/mobile-number-divider-active.svg" : "/design/home-v2/lessons/mobile-number-divider.svg"}
-                  alt=""
-                  width={1}
-                  height={isActive ? 56 : 40}
-                  className={`absolute left-0 top-1/2 w-[1px] -translate-y-1/2 ${isActive ? "h-[56px]" : "h-[40px]"}`}
-                />
-                <span data-lesson-selector-title className="truncate font-[Arial,sans-serif] text-[19.2px] font-bold uppercase leading-[14px]">
-                  {item.title}
-                </span>
-              </span>
-              {isActive ? (
-                <span data-lesson-selector-arrow-area className="absolute bottom-[1.76px] right-[1.897px] top-[1.76px] flex w-[52.168px] items-center justify-center overflow-hidden rounded-r-[1.4px]">
-                  <Image aria-hidden="true" src="/design/home-v2/lessons/mobile-active-item-border.svg" alt="" fill sizes="53px" className="object-fill" />
-                  <Image aria-hidden="true" src="/design/home-v2/lessons/mobile-item-arrow.svg" alt="" width={10} height={24} className="relative z-10 h-[24px] w-[10px]" />
-                </span>
-              ) : (
-                <span aria-hidden="true" />
-              )}
+              <span className="home-v2-lesson-mobile-selector-number">{String(index + 1).padStart(2, "0")}</span>
+              {isActive ? <span data-lesson-selector-title>{item.title}</span> : null}
             </button>
           );
         })}
       </div>
 
-      <MobileEnLessonDetail
-        item={activeLesson.item}
-        image={activeLesson.image}
-        isBookingLesson={bookingLessonIds.has(activeLesson.id)}
-        links={links}
-        onBookingClick={onBookingClick}
-        onMessengerClick={onMessengerClick}
-        t={t}
-      />
+      <div data-home-v2-lesson-price data-long-price={price.length > 7 ? "true" : "false"} className="home-v2-lesson-mobile-price">
+        <Image aria-hidden="true" src="/design/home-v2/lessons/lesson-price-paper.svg" alt="" fill sizes="200px" />
+        <span>{price} VND</span>
+      </div>
+
+      {isBookingLesson ? (
+        <button type="button" data-home-v2-booking-cta onClick={() => onBookingClick(activeLesson.item)} className={ctaClass}>
+          <Image aria-hidden="true" src="/design/home-v2/lessons/lesson-book-now-paper.svg" alt="" fill sizes="200px" />
+          <span>{t.btnBook}</span>
+        </button>
+      ) : (
+        <Link data-home-v2-booking-cta href={links.whatsapp} onClick={(event) => onMessengerClick(event, activeLesson.item)} target="_blank" rel="noreferrer" className={ctaClass}>
+          <Image aria-hidden="true" src="/design/home-v2/lessons/lesson-book-now-paper.svg" alt="" fill sizes="200px" />
+          <span>{t.btnBook}</span>
+        </Link>
+      )}
     </div>
   );
 }
@@ -580,10 +679,11 @@ export function HomeV2Lessons({ t, lang, links, openBookingModal }) {
   const lessonHeadingLines = [titleWords[0], [...titleWords.slice(1), t.sectionTitleRide].join(" ")];
   const useApprovedDesktop = presentation === "desktop" || presentation === "compact";
   const useCompactCurrent = presentation === "compact";
-  const useApprovedMobileEn = presentation === "mobile" && lang === "en";
+  const useApprovedMobile = presentation === "mobile";
+  const usePosterDesktop = presentation === "desktop";
 
   useEffect(() => {
-    const mobileMedia = window.matchMedia("(max-width: 639px)");
+    const mobileMedia = window.matchMedia("(max-width: 480px)");
     const compactMedia = window.matchMedia("(min-width: 900px)");
     const desktopMedia = window.matchMedia("(min-width: 1200px)");
     const updatePresentation = () => setPresentation(desktopMedia.matches ? "desktop" : compactMedia.matches ? "compact" : mobileMedia.matches ? "mobile" : "adaptive");
@@ -655,13 +755,13 @@ export function HomeV2Lessons({ t, lang, links, openBookingModal }) {
       data-home-v2-lessons-entered={hasEnteredViewport ? "true" : "false"}
       className={`relative isolate overflow-hidden text-epicWhite scroll-mt-24 ${
         useApprovedDesktop
-          ? `${useCompactCurrent ? "min-h-[1390px]" : "h-[843px]"} bg-[#2e2e2e] p-0`
-          : useApprovedMobileEn
-            ? "h-[1103px] bg-[#2e2e2e] p-0"
+          ? `${useCompactCurrent ? "min-h-[1390px]" : "aspect-[1440/843]"} bg-[#2e2e2e] p-0`
+          : useApprovedMobile
+            ? "bg-[#2f2f2f] p-0"
           : "bg-epicDark pb-[var(--home-v2-space-compact)] pt-[var(--home-v2-space-heading)] min-[900px]:pt-[clamp(64px,6.7vw,96px)]"
       }`}
     >
-      {!useApprovedDesktop && !useApprovedMobileEn && (
+      {!useApprovedDesktop && !useApprovedMobile && (
         <>
           <Image
             aria-hidden="true"
@@ -674,8 +774,19 @@ export function HomeV2Lessons({ t, lang, links, openBookingModal }) {
           <div className="absolute inset-0 bg-black/10" aria-hidden="true" />
         </>
       )}
-      <div data-home-v2-lessons-grid className={useApprovedDesktop ? "relative mx-auto h-[843px] w-full" : useApprovedMobileEn ? "relative mx-auto h-[1103px] w-full" : "home-v2-container relative min-[900px]:px-[clamp(16px,1.4vw,20px)]"}>
-        {useApprovedDesktop ? (
+      <div data-home-v2-lessons-grid className={usePosterDesktop ? "relative mx-auto w-full" : useApprovedDesktop ? "relative mx-auto h-[843px] w-full" : useApprovedMobile ? "relative mx-auto w-full" : "home-v2-container relative min-[900px]:px-[clamp(16px,1.4vw,20px)]"}>
+        {usePosterDesktop ? (
+          <LessonPosterStage
+            orderedLessons={orderedLessons}
+            activeLesson={activeLesson}
+            setActiveLessonId={setActiveLessonId}
+            links={links}
+            onBookingClick={handleBookingClick}
+            onMessengerClick={handleMessengerClick}
+            t={t}
+            lang={lang}
+          />
+        ) : useApprovedDesktop ? (
           <DesktopLessonPresentation
             orderedLessons={orderedLessons}
             activeLesson={activeLesson}
@@ -687,8 +798,8 @@ export function HomeV2Lessons({ t, lang, links, openBookingModal }) {
             lang={lang}
             compact={useCompactCurrent}
           />
-        ) : useApprovedMobileEn ? (
-          <MobileEnLessonPresentation
+        ) : useApprovedMobile ? (
+          <MobileLessonPresentation
             orderedLessons={orderedLessons}
             activeLesson={activeLesson}
             setActiveLessonId={setActiveLessonId}
@@ -696,6 +807,7 @@ export function HomeV2Lessons({ t, lang, links, openBookingModal }) {
             onBookingClick={handleBookingClick}
             onMessengerClick={handleMessengerClick}
             t={t}
+            lang={lang}
           />
         ) : (
           <>
@@ -736,7 +848,7 @@ export function HomeV2Lessons({ t, lang, links, openBookingModal }) {
                   className={[
                     "group relative -mt-px grid w-full grid-cols-[64px_minmax(0,1fr)_56px] items-center text-left text-epicWhite first:mt-0 focus-visible:z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-epicWhite min-[900px]:grid-cols-[clamp(64px,6.3vw,76px)_minmax(0,1fr)_clamp(54px,5vw,60px)]",
                     isActive
-                      ? "z-[1] min-h-[88px] rounded-[3px] border-[3px] border-epicRed min-[900px]:min-h-[clamp(98px,9.1vw,109px)]"
+                      ? "z-[1] min-h-[88px] rounded-[3px] border-[3px] border-epicRed bg-epicRed text-epicDark min-[900px]:min-h-[clamp(98px,9.1vw,109px)]"
                       : "min-h-[72px] border border-epicWhite/75 hover:border-epicRed/70 min-[900px]:min-h-[clamp(80px,7.45vw,89px)]",
                   ].join(" ")}
                 >
@@ -746,7 +858,7 @@ export function HomeV2Lessons({ t, lang, links, openBookingModal }) {
                   <span className="relative z-[1] flex h-full min-w-0 items-center justify-center px-3 text-center font-[Arial,sans-serif] text-[clamp(16px,2.3vw,24px)] font-bold uppercase leading-tight">
                     <span data-lesson-selector-title className="block">{item.title}</span>
                   </span>
-                  <span className={`relative z-[1] flex h-full items-center justify-center border-l border-epicWhite/45 ${isActive ? "bg-epicGray" : ""}`}>
+                  <span className={`relative z-[1] flex h-full items-center justify-center border-l ${isActive ? "border-epicDark/35 bg-epicRed" : "border-epicWhite/45"}`}>
                     {isActive && <Image aria-hidden="true" src="/design/home-v2/lessons/lesson-selector-arrow.svg" alt="" width={30} height={12} className="h-3 w-[30px]" />}
                   </span>
                 </button>
@@ -1170,7 +1282,7 @@ export function HomeV2Included({ t }) {
         {(presentation === "desktop" || presentation === "compact") && <HomeV2IncludedAdaptive items={t.includedItems} subtitle={t.includedSubtitle} accentTitle={t.includedAccentTitle} desktop />}
 
 
-      {presentation === "mobile" && !isRu && (
+      {presentation === "mobile-legacy" && !isRu && (
         <div
           data-home-v2-included-mobile-en
           data-home-v2-included-grid
@@ -1219,7 +1331,7 @@ export function HomeV2Included({ t }) {
         </div>
       )}
 
-      {presentation !== null && presentation !== "desktop" && presentation !== "compact" && !(presentation === "mobile" && !isRu) && (
+      {presentation !== null && presentation !== "desktop" && presentation !== "compact" && (
         <HomeV2IncludedAdaptive items={t.includedItems} subtitle={t.includedSubtitle} accentTitle={t.includedAccentTitle} />
       )}
     </section>

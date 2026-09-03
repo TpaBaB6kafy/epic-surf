@@ -68,7 +68,7 @@ Do not edit partner page copy here.
 | Lessons | `translations.cards[4].title` | Line-up / Pro |  | Line-up / Pro |  | Lesson card |
 | Lessons | `translations.cards[4].badge` | Для опытных |  | Advanced |  | Lesson card badge |
 | Lessons | `translations.cards[4].desc` | Урок для продолжающих сёрферов: зелёные волны, проезд по стенке. |  | A lesson for intermediate surfers: green waves, trimming, and riding down the line. |  | Lesson card description |
-| Lessons | `translations.cards[4].price` | 2,400,000 VND |  | 2,400,000 VND |  | Lesson card price |
+| Lessons | `translations.cards[4].price` | 1,200,000 VND |  | 1,200,000 VND |  | Lesson card price |
 | Lessons / messenger CTA | `Lessons.jsx lessonMessages.ru.surf_skate` / `lessonMessages.en.surf_skate` | Здравствуйте! Хочу записаться на surf-skate урок. Подскажите, пожалуйста, доступное время и детали. |  | Hi! I'd like to book a surf-skate lesson. Could you please send me the available times and details? |  | Hardcoded WhatsApp prefill for non-booking lesson |
 | Lessons / messenger CTA | `Lessons.jsx lessonMessages.ru.lineup_pro` / `lessonMessages.en.lineup_pro` | Здравствуйте! Хочу записаться на Line-up / Pro урок. У меня уже есть опыт серфинга. Подскажите, пожалуйста, доступное время и детали. |  | Hi! I'd like to book a Line-up / Pro lesson. I already have surfing experience. Could you please send me the available times and details? |  | Hardcoded WhatsApp prefill for non-booking lesson |
 | Included | `translations.includedLabel` | Всё включено |  | Included |  | Passed from `LandingPage` but not rendered by current `IncludedBento.jsx` |
