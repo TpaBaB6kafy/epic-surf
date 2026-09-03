@@ -424,23 +424,6 @@ body {
     line-height: 1.35;
   }
 
-  .home-v2-hero-dithering-wave {
-    position: absolute;
-    inset: auto 0 0;
-    z-index: 1;
-    display: block;
-    width: 100%;
-    height: clamp(480px, 44vw, 540px);
-    overflow: hidden;
-    background: #2e2e2e;
-  }
-
-  .home-v2-hero-dithering-wave > div,
-  .home-v2-hero-dithering-wave canvas {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
 }
 
 @media (min-width: 900px) and (max-width: 1439px) {
@@ -532,22 +515,6 @@ body {
     line-height: 1.3;
   }
 
-  .home-v2-hero-dithering-wave {
-    position: absolute;
-    inset: auto 0 0;
-    z-index: 1;
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-    background: #2e2e2e;
-  }
-
-  .home-v2-hero-dithering-wave > div,
-  .home-v2-hero-dithering-wave canvas {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
 }
 
 /* Stage 5.1: the approved Hero owns compact desktop reflow as well as wide desktop. */
@@ -700,22 +667,6 @@ body {
     margin-top: 10px;
   }
 
-  .home-v2-hero-dithering-wave {
-    position: absolute;
-    inset: auto 0 0;
-    z-index: 1;
-    width: 100%;
-    height: 550px;
-    overflow: hidden;
-    background: #2e2e2e;
-  }
-
-  .home-v2-hero-dithering-wave > div,
-  .home-v2-hero-dithering-wave canvas {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
 }
 
 @media (min-width: 900px) and (max-width: 1199px) {
@@ -737,6 +688,424 @@ body {
   .home-v2-hero-desktop-benefits p {
     margin-left: 0;
     transform: none;
+  }
+}
+
+/* Figma handoff: Hero and How It Works form one continuous, fluid static collage. */
+.home-v2-hero-compact {
+  display: block;
+}
+
+@media (max-width: 899px) {
+  [data-home-v2-hero],
+  [data-home-v2-hero][data-home-v2-hero-locale="en"],
+  [data-home-v2-hero][data-home-v2-hero-locale="ru"] {
+    width: 100%;
+    height: 620px;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: linear-gradient(90deg, #2e2e2e 0%, #161616 52.2%, #2e2e2e 100%);
+  }
+
+  .home-v2-hero-desktop-en {
+    display: none;
+  }
+
+  .home-v2-hero-compact {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .home-v2-hero-compact-strip {
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 1;
+    width: 100%;
+    height: 24.24%;
+    max-width: none;
+    object-fit: cover;
+    object-position: center bottom;
+    opacity: .52;
+  }
+
+  .home-v2-hero-compact .home-v2-hero-collage-artwork {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    z-index: 2;
+    width: 158%;
+    height: auto;
+    max-width: none;
+    transform: translateX(-50%);
+    opacity: .24;
+  }
+
+  .home-v2-hero-mobile-logo {
+    position: absolute;
+    top: 19%;
+    left: 5.13%;
+    z-index: 3;
+    width: min(48vw, 304px);
+    height: min(29vw, 183px);
+  }
+
+  .home-v2-hero-mobile-logo .home-v2-hero-epic-logo {
+    display: block;
+    width: 65.13%;
+    height: auto;
+    max-width: none;
+  }
+
+  .home-v2-hero-mobile-logo .home-v2-hero-school-logo {
+    position: absolute;
+    left: 0;
+    top: 77%;
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: none;
+  }
+
+  .home-v2-hero-compact-benefits {
+    position: absolute;
+    top: 43%;
+    right: 5.13%;
+    z-index: 4;
+    width: 74%;
+    text-align: right;
+  }
+
+  .home-v2-hero-compact-benefits article + article {
+    margin-top: 14px;
+  }
+
+  .home-v2-hero-compact-benefits h2 {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: clamp(15px, 4.1vw, 24px);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .home-v2-hero-compact-benefits p {
+    margin: 4px 0 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: clamp(9px, 2.35vw, 14px);
+    font-weight: 400;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 639px) {
+  [data-home-v2-hero],
+  [data-home-v2-hero][data-home-v2-hero-locale="en"],
+  [data-home-v2-hero][data-home-v2-hero-locale="ru"] {
+    height: calc(100vw * 549 / 390);
+  }
+}
+
+@media (min-width: 900px) {
+  [data-home-v2-hero] {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 0;
+    background: linear-gradient(90deg, #2e2e2e 0%, #161616 52.2%, #2e2e2e 100%);
+  }
+
+  [data-home-v2-hero] > .home-v2-hero-compact {
+    display: none;
+  }
+
+  [data-home-v2-hero] > .home-v2-hero-desktop-en {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1440 / 726;
+    overflow: hidden;
+    background: transparent;
+    container-type: inline-size;
+  }
+
+  .home-v2-hero-video-strip {
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 1;
+    display: block;
+    width: 100cqw;
+    height: auto;
+    max-width: none;
+    opacity: .52;
+  }
+
+  .home-v2-hero-collage-artwork {
+    position: absolute;
+    left: 0;
+    top: 14.722cqw;
+    z-index: 2;
+    display: block;
+    width: 100cqw;
+    height: auto;
+    max-width: none;
+    opacity: .24;
+  }
+
+  .home-v2-hero-desktop-lockup {
+    position: absolute;
+    left: 6.875cqw;
+    top: 16.389cqw;
+    z-index: 3;
+    width: 21.111cqw;
+    height: 12.778cqw;
+  }
+
+  .home-v2-hero-epic-logo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    width: 13.75cqw;
+    height: auto;
+    max-width: none;
+  }
+
+  .home-v2-hero-school-logo {
+    position: absolute;
+    left: 0;
+    top: 9.792cqw;
+    display: block;
+    width: 21.111cqw;
+    height: auto;
+    max-width: none;
+  }
+
+  .home-v2-hero-desktop-benefits {
+    position: absolute;
+    left: auto;
+    right: 6.944cqw;
+    top: 17.847cqw;
+    z-index: 3;
+    grid-column: auto;
+    justify-self: auto;
+    width: 32.292cqw;
+    height: 14.722cqw;
+    color: #fff;
+    text-align: right;
+  }
+
+  .home-v2-hero-desktop-benefits article {
+    position: absolute;
+    right: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .home-v2-hero-desktop-benefits article:nth-child(1) { top: 0; }
+  .home-v2-hero-desktop-benefits article:nth-child(2) { top: 5.694cqw; }
+  .home-v2-hero-desktop-benefits article:nth-child(3) { top: 11.458cqw; }
+
+  .home-v2-hero-desktop-benefits h2 {
+    margin: 0;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 1.754cqw;
+    font-weight: 700;
+    line-height: 2.014cqw;
+  }
+
+  .home-v2-hero-desktop-benefits p,
+  .home-v2-hero-desktop-benefits article:first-child p {
+    width: 100%;
+    margin: .417cqw 0 0;
+    color: #fff;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 1.023cqw;
+    font-weight: 400;
+    line-height: 1.319cqw;
+    transform: none;
+  }
+}
+
+.home-v2-how-collage-continuation {
+  pointer-events: none;
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 0;
+  display: block;
+  width: 100cqw;
+  height: auto;
+  max-width: none;
+  opacity: .12;
+}
+
+/* Adaptive copy stays stable; proportional desktop copy scales with the stage. */
+[data-home-v2-how-it-works] [data-home-v2-how-mobile-text] p {
+  font-size: .75rem !important;
+}
+
+[data-home-v2-how-it-works] .home-v2-how-desktop-copy p {
+  font-size: .75rem;
+  line-height: 1.5;
+}
+
+@media (min-width: 640px) and (max-width: 1439px) {
+  .home-v2-how-desktop-card {
+    position: relative;
+  }
+}
+
+@media (max-width: 1439px) {
+  [data-home-v2-how-it-works] .home-v2-how-desktop-photo [data-home-v2-how-card-title] {
+    font-size: .9375rem;
+    line-height: 1;
+  }
+
+  [data-home-v2-how-it-works] .home-v2-how-paper-card,
+  [data-home-v2-how-it-works] .home-v2-how-card-border {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1440px) {
+  [data-home-v2-how-fluid-desktop] {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1440 / 720;
+    container-type: inline-size;
+  }
+
+  .home-v2-how-desktop-canvas {
+    position: relative;
+    width: 100% !important;
+    max-width: none !important;
+    height: 50cqw;
+    padding: 0 !important;
+  }
+
+  .home-v2-how-desktop-heading {
+    position: absolute;
+    left: 50%;
+    top: 7.778cqw;
+    width: 31.571cqw;
+    height: 3.542cqw;
+    gap: 2.361cqw;
+    transform: translateX(-50%);
+  }
+
+  .home-v2-how-desktop-heading > span {
+    font-size: 3.333cqw;
+    line-height: 3.219cqw;
+  }
+
+  .home-v2-how-desktop-cards {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 50cqw;
+    margin: 0;
+  }
+
+  .home-v2-how-desktop-card {
+    position: absolute;
+    display: block;
+    min-height: 0;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .home-v2-how-desktop-card-1 { left: 4.514cqw; top: 14.167cqw; width: 22.049cqw; height: 29.071cqw; color: #353535; }
+  .home-v2-how-desktop-card-2 { left: 29.583cqw; top: 15.694cqw; width: 17.431cqw; height: 27.361cqw; }
+  .home-v2-how-desktop-card-3 { left: 52.431cqw; top: 15.694cqw; width: 17.5cqw; height: 27.361cqw; }
+  .home-v2-how-desktop-card-4 { left: 75.278cqw; top: 14.653cqw; width: 17.708cqw; height: 28.403cqw; }
+
+  .home-v2-how-paper-card,
+  .home-v2-how-card-border {
+    pointer-events: none;
+    position: absolute;
+    z-index: 0;
+    display: block;
+    object-fit: fill;
+  }
+
+  .home-v2-how-paper-card {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    filter: brightness(.78);
+    opacity: .9;
+  }
+
+  .home-v2-how-card-border { inset: 0; width: 100%; height: 100%; }
+  .home-v2-how-desktop-card-4 .home-v2-how-card-border { top: 1.042cqw; right: .208cqw; bottom: 0; left: 0; width: 17.5cqw; height: 27.361cqw; }
+
+  .home-v2-how-desktop-photo {
+    position: absolute;
+    z-index: 2;
+    height: 18.056cqw;
+    border-radius: .208cqw .208cqw 0 0;
+  }
+
+  .home-v2-how-desktop-card-1 .home-v2-how-desktop-photo { left: 2.431cqw; top: 1.528cqw; width: 17.292cqw; }
+  .home-v2-how-desktop-card-2 .home-v2-how-desktop-photo,
+  .home-v2-how-desktop-card-3 .home-v2-how-desktop-photo { inset: 0 0 auto; width: 100%; }
+  .home-v2-how-desktop-card-4 .home-v2-how-desktop-photo { left: .208cqw; top: 0; width: 17.5cqw; }
+
+  .home-v2-how-desktop-photo > div[aria-hidden="true"] {
+    height: 5.069cqw;
+  }
+
+  [data-home-v2-how-it-works] .home-v2-how-desktop-photo [data-home-v2-how-card-title] {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 5.069cqw;
+    max-width: none;
+    padding: 0 .972cqw;
+    justify-content: flex-end;
+    color: #f6f6f6;
+    font-size: max(1.1875rem, 1.326cqw);
+    line-height: 1;
+    text-align: right;
+  }
+
+  .home-v2-how-desktop-copy {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    padding: 0;
+    text-align: center;
+  }
+
+  .home-v2-how-desktop-card-1 .home-v2-how-desktop-copy { left: 3.75cqw; top: 20.764cqw; width: 14.514cqw; height: 6.597cqw; }
+  .home-v2-how-desktop-card-2 .home-v2-how-desktop-copy { left: .833cqw; top: 18.958cqw; width: 15.764cqw; height: 7.153cqw; }
+  .home-v2-how-desktop-card-3 .home-v2-how-desktop-copy { left: 2.222cqw; top: 19.722cqw; width: 13.194cqw; height: 5.694cqw; }
+  .home-v2-how-desktop-card-4 .home-v2-how-desktop-copy { left: 1.458cqw; top: 19.861cqw; width: 14.514cqw; height: 7.431cqw; }
+
+  [data-home-v2-how-it-works] .home-v2-how-desktop-copy p {
+    color: inherit;
+    font-size: max(.75rem, .833cqw);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  [data-home-v2-how-it-works][data-home-v2-how] {
+    width: 100%;
+    height: auto !important;
+    overflow: hidden;
   }
 }
 

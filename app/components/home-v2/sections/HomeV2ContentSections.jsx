@@ -85,8 +85,9 @@ export function HomeV2Why({ items }) {
 
 const howMobileAssets = [
   {
-    src: "/design/home-v2/how-it-works/how-it-works-meet.jpg",
+    src: "/design/home-v2/how-it-works/photo-artwork-meet.svg",
     border: "/design/home-v2/how-it-works/mobile-card-border-01.svg",
+    desktopBorder: null,
     top: 118,
     photoSide: "left",
     objectPosition: "50% 53%",
@@ -95,8 +96,9 @@ const howMobileAssets = [
     descriptionLines: ["We meet, get to know", "you, prepare for the", "lesson, and choose the", "right surfboard."],
   },
   {
-    src: "/design/home-v2/how-it-works/how-it-works-theory.jpg",
+    src: "/design/home-v2/how-it-works/photo-artwork-theory.svg",
     border: "/design/home-v2/how-it-works/mobile-card-border-02.svg",
+    desktopBorder: "/design/home-v2/how-it-works/card-border-theory.svg",
     top: 312,
     photoSide: "right",
     objectPosition: "50% 50%",
@@ -105,8 +107,9 @@ const howMobileAssets = [
     descriptionLines: ["We cover the basics of surfing", "and ocean safety, then", "practice key movements on", "the beach: take-off,", "turns, and speed generation."],
   },
   {
-    src: "/design/home-v2/how-it-works/how-it-works-practice.jpg",
+    src: "/design/home-v2/how-it-works/photo-artwork-practice.svg",
     border: "/design/home-v2/how-it-works/mobile-card-border-03.svg",
+    desktopBorder: "/design/home-v2/how-it-works/card-border-practice.svg",
     top: 507,
     photoSide: "left",
     objectPosition: "50% 50%",
@@ -115,8 +118,9 @@ const howMobileAssets = [
     descriptionLines: ["Your instructor stays with", "you in the water, helps you", "catch waves, and gives", "quick feedback after each", "attempt."],
   },
   {
-    src: "/design/home-v2/how-it-works/how-it-works-review.png",
+    src: "/design/home-v2/how-it-works/photo-artwork-review.svg",
     border: "/design/home-v2/how-it-works/mobile-card-border-04.svg",
+    desktopBorder: "/design/home-v2/how-it-works/card-border-review.svg",
     top: 701,
     photoSide: "right",
     objectPosition: "50% 50%",
@@ -143,7 +147,7 @@ function HomeV2HowItWorksMobileEn({ steps, title, titleEnd }) {
         </span>
         <span
           data-home-v2-how-mobile-heading-line="works"
-          className="absolute left-[204px] top-[20px] flex h-[25.304px] w-[152px] items-center text-epicGray"
+          className="absolute left-[204px] top-[20px] flex h-[25.304px] w-[152px] items-center text-epicRed"
           style={{ fontSize: 36, lineHeight: "23.1809px", transform: "rotate(-0.203deg) skewX(-0.48deg)" }}
         >
           {titleEnd}
@@ -231,36 +235,30 @@ function HomeV2HowItWorksFluidDesktop({ steps, title, titleEnd, lang }) {
       data-home-v2-how-fluid-desktop
       className={`relative overflow-hidden ${isRu ? "block" : "hidden min-[640px]:block"}`}
     >
-      <div
-        data-home-v2-how-fluid-wave
-        className="pointer-events-none absolute left-1/2 top-[clamp(315px,24.8vw,357px)] hidden w-[calc(100%+104px)] -translate-x-1/2 min-[900px]:block"
+      <Image
+        data-home-v2-how-collage-continuation
+        src="/design/home-v2/how-it-works/how-collage-continuation.png"
+        alt=""
         aria-hidden="true"
-      >
-        <Image
-          data-home-v2-how-wave-contour
-          src="/design/home-v2/how-it-works/how-it-works-wave-contour.svg"
-          alt=""
-          width={1540}
-          height={195}
-          unoptimized
-          sizes="calc(100vw + 104px)"
-          className="h-auto w-full rotate-[177.43deg] -scale-y-100"
-        />
-      </div>
+        width={1440}
+        height={271}
+        unoptimized
+        className="home-v2-how-collage-continuation"
+      />
 
-      <div className="home-v2-container relative z-10 pb-[var(--home-v2-space-standard)] pt-[var(--home-v2-space-heading)] min-[900px]:pt-[clamp(72px,7.5vw,108px)] min-[1200px]:px-[clamp(16px,1.4vw,20px)] min-[1440px]:h-[720px] min-[1440px]:!w-[calc(100%-(2*var(--home-v2-fluid-gutter)))] min-[1440px]:!max-w-none min-[1440px]:px-0 min-[1440px]:pb-0 min-[1440px]:pt-[112px]">
+      <div className="home-v2-how-desktop-canvas home-v2-container relative z-10 pb-[var(--home-v2-space-standard)] pt-[var(--home-v2-space-heading)] min-[900px]:pt-[clamp(72px,7.5vw,108px)] min-[1200px]:px-[clamp(16px,1.4vw,20px)] min-[1440px]:h-[720px] min-[1440px]:!w-full min-[1440px]:!max-w-none min-[1440px]:px-0 min-[1440px]:pb-0 min-[1440px]:pt-0">
         <h2
           data-home-v2-how-fluid-heading
-          className="flex items-baseline justify-center gap-[clamp(14px,2.35vw,34px)] whitespace-nowrap font-black uppercase leading-[1.08]"
+          className="home-v2-how-desktop-heading flex items-baseline justify-center gap-[clamp(14px,2.35vw,34px)] whitespace-nowrap font-black uppercase leading-[1.08]"
           style={{ fontFamily: "Montserrat, var(--font-heading)" }}
         >
           <span className="text-[clamp(30px,5vw,48px)] text-epicWhite">{title}</span>
-          <span className="text-[clamp(30px,5vw,48px)] text-epicGray">{titleEnd}</span>
+          <span className="text-[clamp(30px,5vw,48px)] text-epicRed">{titleEnd}</span>
         </h2>
 
         <div
           data-home-v2-how-fluid-grid
-          className="mt-[var(--home-v2-space-heading)] grid gap-[var(--home-v2-space-internal)] min-[900px]:mt-[clamp(50px,4.2vw,60px)] min-[900px]:grid-cols-2 min-[1200px]:grid-cols-[repeat(4,minmax(0,clamp(238px,calc(238px+((100vw-1200px)*0.067)),254px)))] min-[1200px]:justify-between min-[1200px]:gap-0 min-[1440px]:mx-auto min-[1440px]:mt-[64px] min-[1440px]:w-[clamp(1240px,calc(56vw+440px),1875px)] min-[1440px]:grid-cols-[repeat(4,minmax(0,clamp(264px,calc(8vw+149px),354px)))]"
+          className="home-v2-how-desktop-cards mt-[var(--home-v2-space-heading)] grid gap-[var(--home-v2-space-internal)] min-[900px]:mt-[clamp(50px,4.2vw,60px)] min-[900px]:grid-cols-2 min-[1200px]:grid-cols-[repeat(4,minmax(0,clamp(238px,calc(238px+((100vw-1200px)*0.067)),254px)))] min-[1200px]:justify-between min-[1200px]:gap-0"
         >
           {steps.map((step, index) => {
             const asset = howMobileAssets[index];
@@ -271,12 +269,32 @@ function HomeV2HowItWorksFluidDesktop({ steps, title, titleEnd, lang }) {
                 data-how-card
                 data-home-v2-how-fluid-card={index + 1}
                 data-home-v2-how-adaptive-card={index + 1}
-                className="grid min-h-[210px] min-w-0 grid-cols-[minmax(0,47%)_minmax(0,53%)] overflow-hidden rounded-[3px] border-[3px] border-epicWhite/70 bg-[#1f1f1f] text-epicWhite min-[900px]:relative min-[900px]:h-[394px] min-[900px]:grid-cols-1 min-[1440px]:h-[var(--home-v2-how-card-height)]"
-                style={{ "--home-v2-how-card-height": "clamp(444px, calc(2.5vw + 408px), 472px)" }}
+                className={`home-v2-how-desktop-card home-v2-how-desktop-card-${index + 1} grid min-h-[210px] min-w-0 grid-cols-[minmax(0,47%)_minmax(0,53%)] overflow-hidden rounded-[3px] border-[3px] border-epicWhite/70 bg-[#1f1f1f] text-epicWhite min-[900px]:relative min-[900px]:h-[394px] min-[900px]:grid-cols-1`}
               >
+                {index === 0 ? (
+                  <Image
+                    data-home-v2-how-paper-card
+                    src="/design/home-v2/how-it-works/ASSET__how-card-paper-meet.svg"
+                    alt=""
+                    aria-hidden="true"
+                    fill
+                    unoptimized
+                    className="home-v2-how-paper-card"
+                  />
+                ) : (
+                  <Image
+                    data-home-v2-how-card-border
+                    src={asset.desktopBorder}
+                    alt=""
+                    aria-hidden="true"
+                    fill
+                    unoptimized
+                    className="home-v2-how-card-border"
+                  />
+                )}
                 <div
                   data-home-v2-how-fluid-photo
-                  className={`relative min-h-0 min-w-0 overflow-hidden bg-black ${photoIsLeft ? "order-1" : "order-2"} min-[900px]:absolute min-[900px]:inset-x-0 min-[900px]:top-0 min-[900px]:order-1 min-[900px]:h-[clamp(216px,calc(150px+7.333vw),238px)] min-[1200px]:h-[clamp(238px,18.1vw,260px)]`}
+                  className={`home-v2-how-desktop-photo relative min-h-0 min-w-0 overflow-hidden bg-black ${photoIsLeft ? "order-1" : "order-2"} min-[900px]:absolute min-[900px]:inset-x-0 min-[900px]:top-0 min-[900px]:order-1 min-[900px]:h-[clamp(216px,calc(150px+7.333vw),238px)] min-[1200px]:h-[clamp(238px,18.1vw,260px)]`}
                 >
                   <Image
                     data-how-step-photo={index}
@@ -286,7 +304,7 @@ function HomeV2HowItWorksFluidDesktop({ steps, title, titleEnd, lang }) {
                     fill
                     unoptimized
                     sizes="(min-width: 2560px) 354px, (min-width: 1920px) 303px, (min-width: 1440px) 264px, (min-width: 1200px) 254px, 25vw"
-                    className="object-cover"
+                    className="home-v2-how-photo-artwork object-cover"
                     style={{ objectPosition: asset.objectPosition }}
                   />
                   <div className="absolute inset-x-0 bottom-0 h-[clamp(58px,calc(34px+2.667vw),66px)] bg-black/55 min-[1200px]:h-[clamp(66px,5.1vw,73px)] min-[1440px]:h-[clamp(78px,calc(1.25vw+60px),92px)]" aria-hidden="true" />
@@ -301,7 +319,7 @@ function HomeV2HowItWorksFluidDesktop({ steps, title, titleEnd, lang }) {
 
                 <div
                   data-home-v2-how-fluid-text
-                  className={`relative flex min-h-0 min-w-0 items-center justify-center px-[clamp(18px,3vw,34px)] py-5 text-center ${photoIsLeft ? "order-2" : "order-1"} min-[900px]:absolute min-[900px]:inset-x-0 min-[900px]:bottom-0 min-[900px]:order-2 min-[900px]:h-[clamp(134px,calc(222px-7.333vw),156px)] min-[900px]:px-[clamp(12px,1.55vw,22px)] min-[900px]:py-3 min-[1200px]:h-[clamp(134px,10.84vw,156px)] min-[1440px]:h-[calc(var(--home-v2-how-card-height)-260px)] min-[1440px]:px-[clamp(22px,calc(1vw+8px),30px)] min-[1440px]:py-[clamp(16px,calc(0.833vw+4px),24px)]`}
+                  className={`home-v2-how-desktop-copy relative flex min-h-0 min-w-0 items-center justify-center px-[clamp(18px,3vw,34px)] py-5 text-center ${photoIsLeft ? "order-2" : "order-1"} min-[900px]:absolute min-[900px]:inset-x-0 min-[900px]:bottom-0 min-[900px]:order-2 min-[900px]:h-[clamp(134px,calc(222px-7.333vw),156px)] min-[900px]:px-[clamp(12px,1.55vw,22px)] min-[900px]:py-3 min-[1200px]:h-[clamp(134px,10.84vw,156px)]`}
                 >
                   <p
                     className={`font-normal ${isRu ? "text-[clamp(9px,0.875vw,10.5px)] leading-[clamp(15px,1.5vw,18px)] min-[1440px]:text-[clamp(13px,calc(0.55vw+5px),17px)]" : "text-[clamp(10px,1vw,12px)] leading-[clamp(18px,2vw,24px)] min-[1440px]:text-[clamp(14px,calc(0.625vw+5px),18px)]"} min-[1440px]:leading-[clamp(24px,calc(0.625vw+15px),31px)]`}
