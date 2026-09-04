@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 const HERO_ARTWORK_SRC = "/design/home-v2/hero/hero-collage-artwork.png";
+const HERO_DESKTOP_ARTWORK_SRC = "/design/home-v2/hero/hero-collage-composition-v3.svg";
 const HERO_STRIP_SRC = "/design/home-v2/hero/hero-video-strip.png";
 const HERO_VIDEO_SRC = "/hero-surf.mp4";
 const HERO_EPIC_LOGO_SRC = "/design/home-v2/hero/epic-logo.svg";
@@ -49,15 +50,19 @@ function HeroLogo({ mobile = false }) {
   );
 }
 
-function HeroArtwork() {
+function HeroArtwork({ desktop = false }) {
+  const src = desktop ? HERO_DESKTOP_ARTWORK_SRC : HERO_ARTWORK_SRC;
+  const width = desktop ? 1244 : 1440;
+  const height = desktop ? 387 : 514;
+
   return (
     <Image
       data-home-v2-hero-collage-artwork
-      src={HERO_ARTWORK_SRC}
+      src={src}
       alt=""
       aria-hidden="true"
-      width={1440}
-      height={514}
+      width={width}
+      height={height}
       priority
       unoptimized
       className="home-v2-hero-collage-artwork"
@@ -88,7 +93,7 @@ function DesktopHero({ t, whyItems }) {
       >
         <source src={HERO_VIDEO_SRC} type="video/mp4" />
       </video>
-      <HeroArtwork />
+      <HeroArtwork desktop />
       <HeroLogo />
       <HeroBenefits items={whyItems} className="home-v2-hero-desktop-benefits" />
     </div>

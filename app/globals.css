@@ -847,13 +847,14 @@ body {
   .home-v2-hero-collage-artwork {
     position: absolute;
     left: 0;
-    top: 14.722cqw;
+    top: 23.5417cqw;
     z-index: 2;
     display: block;
-    width: 100cqw;
+    width: 86.3889cqw;
     height: auto;
     max-width: none;
-    opacity: .24;
+    /* The exact Figma group export carries its 46% group opacity internally. */
+    opacity: 1;
   }
 
   .home-v2-hero-desktop-lockup {
@@ -945,6 +946,10 @@ body {
   opacity: .12;
 }
 
+.home-v2-how-collage-continuation-v3 {
+  display: none;
+}
+
 /* Adaptive copy stays stable; proportional desktop copy scales with the stage. */
 [data-home-v2-how-it-works] [data-home-v2-how-mobile-text] p {
   font-size: .75rem !important;
@@ -956,8 +961,68 @@ body {
 }
 
 @media (min-width: 640px) and (max-width: 1439px) {
+  [data-home-v2-how-fluid-desktop] {
+    container-type: inline-size;
+  }
+
+  .home-v2-how-desktop-heading {
+    position: relative;
+    display: flex;
+    width: max-content;
+    min-height: clamp(72px, 7.605vw, 109.5px);
+    margin-right: auto;
+    margin-left: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0;
+    transform: none;
+  }
+
+  .home-v2-how-desktop-heading > span {
+    position: relative;
+    display: block;
+    flex: none;
+    font-weight: 900;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .home-v2-how-desktop-heading > span:first-child {
+    color: #f6f6f6;
+    font-size: clamp(30px, 3.333vw, 48px);
+    line-height: .966;
+    transform: skewX(-.55deg);
+  }
+
+  .home-v2-how-desktop-heading > span:last-child {
+    margin-left: clamp(52px, 8.264vw, 119px);
+    color: #fe746a;
+    font-size: clamp(40px, 4.444vw, 64px);
+    line-height: .7245;
+    transform: rotate(-3.72deg) skewX(-.48deg);
+    transform-origin: center;
+  }
+
   .home-v2-how-desktop-card {
     position: relative;
+  }
+}
+
+@media (min-width: 900px) {
+  .home-v2-how-collage-continuation {
+    display: none;
+  }
+
+  .home-v2-how-collage-continuation-v3 {
+    right: auto;
+    left: 0;
+    top: 0;
+    display: block;
+    width: 86.3194cqw;
+    height: auto;
+    /* The exact Figma group export carries its 12% group opacity internally. */
+    opacity: 1;
   }
 }
 
@@ -991,17 +1056,59 @@ body {
 
   .home-v2-how-desktop-heading {
     position: absolute;
-    left: 50%;
-    top: 7.778cqw;
-    width: 31.571cqw;
-    height: 3.542cqw;
-    gap: 2.361cqw;
-    transform: translateX(-50%);
+    left: 36.112cqw;
+    top: 3.819cqw;
+    display: block;
+    width: 27.733cqw;
+    height: 7.605cqw;
+    gap: 0;
+    transform: none;
   }
 
   .home-v2-how-desktop-heading > span {
-    font-size: 3.333cqw;
-    line-height: 3.219cqw;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    font-weight: 900;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .home-v2-how-desktop-heading > span:first-child {
+    left: 0;
+    top: 0;
+    width: 15.19cqw;
+    height: 3.44cqw;
+    color: #f6f6f6;
+    font-size: max(2.25rem, 3.333cqw);
+    line-height: 3.2196cqw;
+    transform: skewX(-.55deg);
+  }
+
+  .home-v2-how-desktop-heading > span:last-child {
+    left: 8.264cqw;
+    top: 4.17cqw;
+    width: 19.316cqw;
+    height: 3.44cqw;
+    margin-left: 0;
+    color: #fe746a;
+    font-size: max(3rem, 4.444cqw);
+    line-height: 3.2196cqw;
+    transform: rotate(-3.72deg) skewX(-.48deg);
+    transform-origin: center;
+  }
+
+  .home-v2-how-collage-continuation {
+    display: none;
+  }
+
+  .home-v2-how-collage-continuation-v3 {
+    left: 0;
+    top: 0;
+    display: block;
+    width: 86.3194cqw;
+    /* The 12% opacity is carried by the exported SVG group. */
+    opacity: 1;
   }
 
   .home-v2-how-desktop-cards {

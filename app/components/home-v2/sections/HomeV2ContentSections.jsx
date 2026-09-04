@@ -237,6 +237,7 @@ function HomeV2HowItWorksFluidDesktop({ steps, title, titleEnd, lang }) {
     >
       <Image
         data-home-v2-how-collage-continuation
+        data-home-v2-how-collage-source="legacy-mobile"
         src="/design/home-v2/how-it-works/how-collage-continuation.png"
         alt=""
         aria-hidden="true"
@@ -244,6 +245,17 @@ function HomeV2HowItWorksFluidDesktop({ steps, title, titleEnd, lang }) {
         height={271}
         unoptimized
         className="home-v2-how-collage-continuation"
+      />
+      <Image
+        data-home-v2-how-collage-continuation
+        data-home-v2-how-collage-source="desktop-v3"
+        src="/design/home-v2/how-it-works/how-collage-composition-v3.svg"
+        alt=""
+        aria-hidden="true"
+        width={1243}
+        height={149}
+        unoptimized
+        className="home-v2-how-collage-continuation home-v2-how-collage-continuation-v3"
       />
 
       <div className="home-v2-how-desktop-canvas home-v2-container relative z-10 pb-[var(--home-v2-space-standard)] pt-[var(--home-v2-space-heading)] min-[900px]:pt-[clamp(72px,7.5vw,108px)] min-[1200px]:px-[clamp(16px,1.4vw,20px)] min-[1440px]:h-[720px] min-[1440px]:!w-full min-[1440px]:!max-w-none min-[1440px]:px-0 min-[1440px]:pb-0 min-[1440px]:pt-0">
