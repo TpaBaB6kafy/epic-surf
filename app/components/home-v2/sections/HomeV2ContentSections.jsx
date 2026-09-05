@@ -1,5 +1,6 @@
 "use client";
 
+import { HomeV2MobileHow } from "./HomeV2MobileTop";
 import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
@@ -129,102 +130,6 @@ const howMobileAssets = [
     descriptionLines: ["After the session, we review", "your progress and give", "simple tips", "for your next surf lesson", "or rental session."],
   },
 ];
-
-function HomeV2HowItWorksMobileEn({ steps, title, titleEnd }) {
-  return (
-    <div data-home-v2-how-mobile-en className="relative h-[933px] w-full overflow-hidden bg-epicDark sm:hidden">
-      <h2
-        data-home-v2-how-mobile-heading
-        className="absolute left-0 top-[30px] h-[66px] w-full bg-[#242424] font-black uppercase"
-        style={{ fontFamily: "Montserrat, var(--font-heading)" }}
-      >
-        <span
-          data-home-v2-how-mobile-heading-line="how-it"
-          className="absolute left-[35px] top-[20px] flex h-[25px] w-[150px] items-center text-epicWhite"
-          style={{ fontSize: 36, lineHeight: "23.1809px", transform: "skewX(-0.55deg)" }}
-        >
-          {title}
-        </span>
-        <span
-          data-home-v2-how-mobile-heading-line="works"
-          className="absolute left-[204px] top-[20px] flex h-[25.304px] w-[152px] items-center text-epicRed"
-          style={{ fontSize: 36, lineHeight: "23.1809px", transform: "rotate(-0.203deg) skewX(-0.48deg)" }}
-        >
-          {titleEnd}
-        </span>
-      </h2>
-
-      <div data-home-v2-how-mobile-process-cards className="absolute left-5 top-0 h-full w-[calc(100%-40px)]">
-        {steps.map((step, index) => {
-          const asset = howMobileAssets[index];
-          const photoIsLeft = asset.photoSide === "left";
-          return (
-            <article
-              key={step.title}
-              data-how-card
-              data-home-v2-how-mobile-card={index + 1}
-              className="absolute left-0 h-[172px] w-full text-epicWhite"
-              style={{ top: asset.top }}
-            >
-              <Image
-                data-home-v2-how-mobile-card-border
-                src={asset.border}
-                alt=""
-                aria-hidden="true"
-                fill
-                unoptimized
-                sizes="calc(100vw - 40px)"
-                className="pointer-events-none absolute inset-0 z-0 h-full w-full"
-              />
-
-              <div
-                data-home-v2-how-mobile-photo
-                className={`absolute top-0 z-10 h-[172px] w-[47.428571%] overflow-hidden bg-black ${photoIsLeft ? "left-0 rounded-l-[3px]" : "right-0 rounded-r-[3px]"}`}
-              >
-                <Image
-                  data-how-step-photo={index}
-                  src={asset.src}
-                  alt=""
-                  aria-hidden="true"
-                  fill
-                  unoptimized
-                  sizes="47vw"
-                  className="object-cover"
-                  style={{ objectPosition: asset.objectPosition }}
-                />
-              </div>
-
-              <div
-                data-home-v2-how-mobile-text
-                className={`absolute top-0 z-20 h-[172px] w-[52.571429%] ${photoIsLeft ? "right-0" : "left-0"}`}
-              >
-                <h3
-                  className="absolute flex items-center justify-center whitespace-nowrap text-center font-normal leading-none"
-                  style={{ ...asset.title, fontFamily: "Arial, sans-serif", fontSize: 18 }}
-                >
-                  {step.title}
-                </h3>
-                <p
-                  className="absolute flex items-center justify-center text-center font-normal text-epicWhite"
-                  style={{ ...asset.description, fontFamily: '"Century Gothic", Montserrat, var(--font-body)', fontSize: 11, lineHeight: "18px" }}
-                >
-                  <span>
-                    {asset.descriptionLines.map((line, lineIndex) => (
-                      <span key={line} className="block">
-                        {line}
-                        {lineIndex < asset.descriptionLines.length - 1 ? " " : null}
-                      </span>
-                    ))}
-                  </span>
-                </p>
-              </div>
-            </article>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
 
 function HomeV2HowItWorksFluidDesktop({ steps, title, titleEnd, lang }) {
   const isRu = lang === "ru";
@@ -359,7 +264,7 @@ export function HomeV2HowItWorks({ t, lang }) {
       className={`relative isolate bg-epicDark text-epicWhite scroll-mt-24 min-[1440px]:h-[720px] min-[1440px]:overflow-hidden ${lang === "en" ? "-mt-8 min-[640px]:mt-0" : ""}`}
       data-desktop-approved="true"
     >
-      {lang === "en" && <HomeV2HowItWorksMobileEn steps={t.howSteps} title={t.howTitle} titleEnd={t.howTitleEnd} />}
+      <HomeV2MobileHow steps={t.howSteps} title={t.howTitle} titleEnd={t.howTitleEnd} lang={lang} />
 
       <HomeV2HowItWorksFluidDesktop steps={t.howSteps} title={t.howTitle} titleEnd={t.howTitleEnd} lang={lang} />
     </section>

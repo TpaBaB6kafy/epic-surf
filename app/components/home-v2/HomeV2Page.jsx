@@ -20,6 +20,7 @@ import {
   galleryPhotoSrc
 } from "../../data/gallery";
 import { storeAttributionFromUrl, trackEvent } from "../../utils/tracking";
+import { useHomeV2MobileTop } from "./sections/HomeV2MobileTop";
 import HomeV2Hero from "./sections/HomeV2Hero";
 import {
   HomeV2Included,
@@ -37,6 +38,7 @@ import { HomeV2Conditions } from "./sections/HomeV2Conditions";
 
 export default function HomeV2Page({ locale = "en" }) {
   const rootRef = useRef(null);
+  const mobileTop = useHomeV2MobileTop();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isRentalModalOpen, setRentalModalOpen] = useState(false);
   const [selectedRentalBoard, setSelectedRentalBoard] = useState(null);
@@ -110,10 +112,11 @@ export default function HomeV2Page({ locale = "en" }) {
         languageHref={languageHref}
         sectionHrefBase={sectionHrefBase}
         variant="homeV2"
+        mobileTop={mobileTop}
       />
 
       <main data-home-v2-main-flow className="relative">
-        <HomeV2Hero t={t} lang={lang} links={links} openBookingModal={openBookingModal} whyItems={t.whyItems} />
+        <HomeV2Hero mobileTop={mobileTop} t={t} lang={lang} links={links} openBookingModal={openBookingModal} whyItems={t.whyItems} />
         <HomeV2HowItWorks t={t} lang={lang} />
         <HomeV2Lessons t={t} lang={lang} links={links} openBookingModal={openBookingModal} />
         <HomeV2Included t={t} />

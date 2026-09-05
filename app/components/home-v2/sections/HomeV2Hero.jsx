@@ -1,3 +1,4 @@
+import { HomeV2MobileHero } from "./HomeV2MobileTop";
 import Image from "next/image";
 
 const HERO_ARTWORK_SRC = "/design/home-v2/hero/hero-collage-artwork.png";
@@ -124,15 +125,17 @@ function CompactHero({ t, whyItems }) {
   );
 }
 
-export default function HomeV2Hero({ t, lang = "en", whyItems = [] }) {
+export default function HomeV2Hero({ t, lang = "en", whyItems = [], mobileTop = false }) {
   return (
     <section
       data-home-v2-hero
       data-home-v2-hero-locale={lang}
       className="relative isolate overflow-hidden text-epicWhite"
     >
-      <DesktopHero t={t} whyItems={whyItems} />
-      <CompactHero t={t} whyItems={whyItems} />
+      {mobileTop ? <HomeV2MobileHero t={t} whyItems={whyItems} lang={lang} /> : <>
+        <DesktopHero t={t} whyItems={whyItems} />
+        <CompactHero t={t} whyItems={whyItems} />
+      </>}
     </section>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { HomeV2MobileHeaderVideo } from "./home-v2/sections/HomeV2MobileTop";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -16,6 +17,7 @@ export default function Header({
   openBookingModal,
   languageHref,
   sectionHrefBase,
+  mobileTop = false,
   variant = "default"
 }) {
   const pathname = usePathname();
@@ -56,6 +58,7 @@ export default function Header({
         ? "absolute left-0 top-0 z-[100] w-full overflow-visible bg-epicDark/[0.18] text-epicWhite shadow-none backdrop-blur-[1.5px] md:bg-epicWhite/[0.24] md:text-epicDark"
         : "fixed top-0 left-0 w-full z-[100] bg-white shadow-md"}
     >
+      {isHomeV2 && mobileTop && <HomeV2MobileHeaderVideo />}
       <div data-home-v2-header-strip={isHomeV2 ? "true" : undefined} className={isHomeV2 ? "flex h-[62px] items-center md:h-[68px]" : "h-16 md:h-20 flex items-center"}>
         <div data-home-v2-header-frame={isHomeV2 ? "true" : undefined} className="max-w-7xl mx-auto px-4 md:px-6 w-full flex items-center justify-between gap-2">
           <Link
@@ -64,7 +67,9 @@ export default function Header({
             data-home-v2-brand-logo={isHomeV2 ? "true" : undefined}
             className="z-[110] flex flex-shrink-0 items-center transition-transform active:scale-95"
           >
-            {isHomeV2 && lang === "en" ? (
+            {isHomeV2 && mobileTop ? (
+              <Image src="/design/home-v2/mobile-top/brand-logo.svg" alt="EPIC SURF" width={51} height={23} priority unoptimized />
+            ) : isHomeV2 && lang === "en" ? (
               <picture>
                 <source
                   media="(max-width: 639px)"
@@ -160,7 +165,9 @@ export default function Header({
                 ? "flex h-9 w-9 items-center justify-center rounded-full border border-epicWhite/25 bg-epicWhite/90 text-epicDark transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-epicRed min-[1200px]:hidden"
                 : "lg:hidden w-9 h-9 flex items-center justify-center bg-epicMint rounded-full text-epicDark transition-all"}
             >
-              {isHomeV2 && lang === "en" && !isMenuOpen ? (
+              {isHomeV2 && mobileTop && !isMenuOpen ? (
+                <Image src="/design/home-v2/mobile-top/menu-icon.svg" alt="" width={18} height={16} unoptimized />
+              ) : isHomeV2 && lang === "en" && !isMenuOpen ? (
                 <span data-home-v2-hamburger-icon aria-hidden="true">
                   <span />
                   <span />

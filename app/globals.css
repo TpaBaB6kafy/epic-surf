@@ -2408,3 +2408,81 @@ body {
     font-weight: 400;
   }
 }
+
+/* Mobile top handoff 507:178. All geometry below is local to <=639px. */
+@font-face { font-family: "Home V2 Top Chivo"; src: url('/design/home-v2/mobile-top/chivo.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Home V2 Top Montserrat"; src: url('/design/home-v2/mobile-top/montserrat.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Home V2 Top Inter"; src: url('/design/home-v2/mobile-top/inter.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
+.home-v2-top-how { display: none; }
+
+@media (max-width: 639px) {
+  [data-home-v2-root] { overflow: clip visible; }
+  [data-home-v2-root] [data-home-v2-header][data-home-v2-header-locale] {
+    position: sticky; top: 0; z-index: 100; height: 86px; overflow: visible;
+    background: #777; color: #2e2e2e; box-shadow: none; backdrop-filter: none;
+  }
+  [data-home-v2-root] [data-home-v2-header] + [data-home-v2-main-flow] { padding-top: 0; margin-top: 0; }
+  .home-v2-top-header-media { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .home-v2-top-header-media video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; filter: grayscale(1); }
+  .home-v2-top-header-overlay { position: absolute; inset: 0; background: #484848; opacity: .46; }
+  [data-home-v2-root] [data-home-v2-header] [data-home-v2-header-strip] { display: block; height: 86px; }
+  [data-home-v2-root] [data-home-v2-header] [data-home-v2-header-frame] { position: relative; display: block; width: 100%; max-width: none; height: 86px; margin: 0; padding: 0; }
+  [data-home-v2-root] [data-home-v2-header] [data-home-v2-brand-logo] { position: absolute; left: 20px; top: 32px; display: block; width: 50.686px; height: 22.651px; transform: none; }
+  [data-home-v2-root] [data-home-v2-header] [data-home-v2-brand-logo] img { display: block; width: 50.686px; height: 22.651px; max-width: none; }
+  [data-home-v2-root] [data-home-v2-header] [data-home-v2-primary-navigation] { display: none; }
+  [data-home-v2-root] [data-home-v2-header] [data-home-v2-header-actions] { position: static; display: block; }
+  [data-home-v2-root] [data-home-v2-header] :is([data-home-v2-language-switcher],[data-home-v2-book-now],[data-home-v2-menu-control]) {
+    position: absolute; top: 25px; display: flex; align-items: center; justify-content: center;
+    height: 36px; min-height: 36px; padding: 0; border: 0; border-radius: 3px;
+    font-family: "Home V2 Top Inter", Arial, sans-serif; font-size: 12px; font-weight: 800; line-height: 15px;
+    letter-spacing: 0; text-transform: uppercase; color: #fff; box-shadow: none; transform: none;
+  }
+  [data-home-v2-root] [data-home-v2-header] [data-home-v2-language-switcher] { right: 180px; width: 36px; background: #2e2e2e; border: 1px solid #585858; }
+  [data-home-v2-root] [data-home-v2-header] [data-home-v2-book-now] { right: 70px; width: 96px; background: #fe746a; }
+  [data-home-v2-root] [data-home-v2-header] [data-home-v2-menu-control] { right: 20px; width: 36px; background: #f6f6f6; color: #2e2e2e; }
+  [data-home-v2-root] #home-v2-mobile-navigation { z-index: 120; max-height: calc(100dvh - 86px); overflow-y: auto; }
+  [data-home-v2-root] [data-home-v2-hero][data-home-v2-hero-locale] {
+    height: auto; min-height: 0; margin: 0; padding: 0;
+    background: linear-gradient(90deg, #2e2e2e, #242424 27.19%, #2e2e2e);
+  }
+  .home-v2-top-hero { container-type: inline-size; position: relative; width: 100%; aspect-ratio: 390 / 463; overflow: clip; }
+  .home-v2-top-art { position: absolute; max-width: none; object-fit: fill; pointer-events: none; }
+  .home-v2-top-benefits article { position: absolute; right: 4.615385cqw; width: 44.102564cqw; text-align: right; color: #fff; }
+  .home-v2-top-benefits h2 { margin: 0; font: 700 3.88522cqw/1 Arial, sans-serif; white-space: nowrap; }
+  .home-v2-top-benefits h2::before { content: ''; display: inline-block; width: 2.564103cqw; height: 2.564103cqw; margin-right: 1.282051cqw; border-radius: 50%; background: #fe746a; vertical-align: .05em; }
+  .home-v2-top-benefits p { margin: 3.717949cqw 0 0; font: 400 2.266378cqw/normal "Segoe UI", sans-serif; }
+  .home-v2-top-benefits article:nth-child(3) p { margin-left: auto; width: 29.487179cqw; }
+  .home-v2-top-hero:lang(ru) .home-v2-top-benefits h2 { font-size: 3.3cqw; }
+  [data-home-v2-root] [data-home-v2-how-it-works] { margin: 0; padding: 0; background: linear-gradient(90deg, #2e2e2e, #242424 50.962%, #2e2e2e); }
+  [data-home-v2-root] [data-home-v2-how-fluid-desktop] { display: none; }
+  .home-v2-top-how { display: block; container-type: inline-size; position: relative; width: 100%; aspect-ratio: 390 / 1090; overflow: clip; }
+  .home-v2-top-stripe { position: absolute; }
+  .home-v2-top-how-heading { margin: 0; font-family: "Home V2 Top Montserrat", sans-serif; font-weight: 900; text-transform: uppercase; }
+  .home-v2-top-how-heading span { position: absolute; display: flex; align-items: center; white-space: nowrap; font-size: 6.153846cqw; line-height: 5.943827cqw; color: #f6f6f6; transform: skewX(-.55deg); }
+  .home-v2-top-how-heading span + span { font-size: 9.230769cqw; color: #fe746a; transform: rotate(-2deg) skewX(-.48deg); }
+  .home-v2-top-how:lang(ru) .home-v2-top-how-heading span:first-child { left: 16cqw !important; width: 70cqw !important; font-size: 5.6cqw; }
+  .home-v2-top-card { position: absolute; left: 0; width: 100%; overflow: visible; }
+  .home-v2-top-paper-shadow { position: absolute; }
+  .home-v2-top-first-shadow { position: absolute; left: 50%; top: 50%; width: 39.220256cqw; height: 92.878718cqw; background: #585858; transform: translate(-50%, -50%) rotate(-90.658deg) skewX(-.33deg); }
+  .home-v2-top-card-border { position: absolute; border: 0 solid transparent; pointer-events: none; }
+  .home-v2-top-photo { position: absolute; overflow: visible; filter: drop-shadow(calc(var(--shadow-direction) * 1.538462cqw) 0 1.794872cqw rgb(0 0 0 / .1)) drop-shadow(calc(var(--shadow-direction) * 6.666667cqw) 0 3.333333cqw rgb(0 0 0 / .09)) drop-shadow(calc(var(--shadow-direction) * 14.871795cqw) 0 4.487179cqw rgb(0 0 0 / .05)) drop-shadow(calc(var(--shadow-direction) * 26.410256cqw) 0 5.256410cqw rgb(0 0 0 / .01)) drop-shadow(calc(var(--shadow-direction) * 41.282051cqw) 0 5.769231cqw rgb(0 0 0 / 0)); }
+  .home-v2-top-photo-mask { position: absolute; inset: 0; mask-size: 100% 100%; mask-repeat: no-repeat; }
+  .home-v2-top-photo-image { position: absolute; max-width: none; object-fit: cover; }
+  .home-v2-top-photo-mask-reverse { inset: auto; left: 1.076923cqw; top: -.615385cqw; width: 42.307692cqw; height: 47.692308cqw; transform: scaleX(-1); }
+  .home-v2-top-photo-mask-reverse img { left: -20.717949cqw !important; transform: scaleX(-1); }
+  .home-v2-top-card h3 { position: absolute; display: flex; align-items: center; justify-content: center; margin: 0; color: #d9d9d9; font: 700 5.641026cqw/1 Arial, sans-serif; white-space: nowrap; }
+  .home-v2-top-card p { position: absolute; display: flex; align-items: center; justify-content: center; margin: 0; color: #2e2e2e; text-align: center; font: 400 3.589744cqw/5.641026cqw "Home V2 Top Chivo", sans-serif; }
+  .home-v2-top-how:lang(ru) .home-v2-top-card h3 { font-size: 3.75cqw; line-height: 1.1; white-space: normal; }
+  .home-v2-top-how:lang(ru) .home-v2-top-card p { top: 14.1cqw !important; height: 32.3cqw !important; font-size: 3.25cqw; line-height: 4.8cqw; }
+}
+@media (max-width: 639px) {
+  .home-v2-top-benefits h2 { position: relative; top: -.6cqw; margin-left: auto; }
+  .home-v2-top-benefits h2::before { position: absolute; top: .6cqw; left: -4.358974cqw; margin: 0; }
+  .home-v2-top-benefits article:nth-child(1) h2 { width: 29.692308cqw; }
+  .home-v2-top-benefits article:nth-child(2) h2 { width: 34.923077cqw; }
+  .home-v2-top-benefits article:nth-child(3) h2 { width: 28.615385cqw; }
+  .home-v2-top-benefits p { position: absolute; right: 0; top: 5.128205cqw; width: 100%; margin: 0; white-space: pre-line; }
+  .home-v2-top-benefits article:nth-child(2) p { top: 4.615385cqw; }
+  .home-v2-top-hero:lang(ru) .home-v2-top-benefits h2 { width: max-content; max-width: 100%; }
+  .home-v2-top-card p { white-space: pre-line; }
+}
