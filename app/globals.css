@@ -2352,6 +2352,540 @@ body {
   line-height: calc(11 * var(--home-v2-lesson-mobile-unit));
 }
 
+/* Home V2 Lessons + Included mobile handoff v2.3 (390px source frame). */
+@font-face {
+  font-family: "Home V2 Lessons Chivo";
+  src: url('/design/home-v2/lessons-included-mobile-v2.3/Chivo-wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Home V2 Lessons Montserrat";
+  src: url('/design/home-v2/mobile-top/montserrat.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Home V2 Lessons Bebas Neue";
+  src: url('/design/home-v2/lessons-included-mobile-v2.3/BebasNeue-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+.home-v2-lesson-mobile-stage {
+  --home-v2-lesson-mobile-unit: calc(100cqw / 390);
+  width: min(100%, 390px);
+  max-width: 390px;
+  height: auto;
+  margin-inline: auto;
+  aspect-ratio: 390 / 742;
+  background: #2e2e2e;
+}
+
+.home-v2-lesson-mobile-heading-art,
+.home-v2-lesson-mobile-heading {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  pointer-events: none;
+}
+
+.home-v2-lesson-mobile-heading-art { z-index: 2; }
+.home-v2-lesson-mobile-heading { z-index: 3; }
+
+.home-v2-lesson-mobile-heading-art img {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  max-width: none;
+  object-fit: fill;
+}
+
+.home-v2-lesson-mobile-heading-art img:first-child {
+  top: calc(30 * var(--home-v2-lesson-mobile-unit));
+  height: calc(7 * var(--home-v2-lesson-mobile-unit));
+}
+
+.home-v2-lesson-mobile-heading-art img:last-child {
+  top: calc(46 * var(--home-v2-lesson-mobile-unit));
+  height: calc(30 * var(--home-v2-lesson-mobile-unit));
+}
+
+.home-v2-lesson-mobile-heading span {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font-family: "Home V2 Lessons Montserrat", Montserrat, sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.home-v2-lesson-mobile-heading span:first-child {
+  z-index: 2;
+  left: calc(138.73 * var(--home-v2-lesson-mobile-unit));
+  top: calc(11 * var(--home-v2-lesson-mobile-unit));
+  width: calc(110.27 * var(--home-v2-lesson-mobile-unit));
+  height: calc(42 * var(--home-v2-lesson-mobile-unit));
+  color: #f6f6f6;
+  font-size: calc(24 * var(--home-v2-lesson-mobile-unit));
+  line-height: calc(42 * var(--home-v2-lesson-mobile-unit));
+}
+
+.home-v2-lesson-mobile-heading span:last-child {
+  z-index: 1;
+  left: calc(55.53 * var(--home-v2-lesson-mobile-unit));
+  top: calc(32 * var(--home-v2-lesson-mobile-unit));
+  width: calc(276.3 * var(--home-v2-lesson-mobile-unit));
+  height: calc(51.57 * var(--home-v2-lesson-mobile-unit));
+  margin: 0;
+  color: #585858;
+  font-size: calc(36 * var(--home-v2-lesson-mobile-unit));
+  line-height: calc(41.7257 * var(--home-v2-lesson-mobile-unit));
+  transform: rotate(-2deg);
+}
+
+.home-v2-lesson-mobile-card,
+.home-v2-lesson-mobile-photo-frame {
+  top: calc(192 * var(--home-v2-lesson-mobile-unit));
+}
+
+.home-v2-lesson-mobile-card { height: calc(503.4 * var(--home-v2-lesson-mobile-unit)); }
+.home-v2-lesson-mobile-photo-frame { top: 0; height: calc(464 * var(--home-v2-lesson-mobile-unit)); }
+
+.home-v2-lesson-mobile-photo-group,
+.home-v2-lesson-mobile-photo-fill {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.home-v2-lesson-mobile-photo {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+.home-v2-lesson-mobile-shadow {
+  z-index: 1;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: fill;
+  background: none;
+}
+
+.home-v2-lesson-mobile-copy h3 {
+  left: calc(12 * var(--home-v2-lesson-mobile-unit));
+  top: calc(281 * var(--home-v2-lesson-mobile-unit));
+  justify-content: flex-start;
+  width: calc(300 * var(--home-v2-lesson-mobile-unit));
+  height: calc(72 * var(--home-v2-lesson-mobile-unit));
+  font-family: "Home V2 Lessons Bebas Neue", "Arial Narrow", sans-serif;
+  font-size: calc(48 * var(--home-v2-lesson-mobile-unit));
+  font-weight: 700;
+  line-height: calc(36 * var(--home-v2-lesson-mobile-unit));
+}
+
+.home-v2-lesson-mobile-copy [data-home-v2-lesson-audience] {
+  left: calc(12 * var(--home-v2-lesson-mobile-unit));
+  top: calc(378 * var(--home-v2-lesson-mobile-unit));
+  display: flex;
+  align-items: center;
+  width: calc(185 * var(--home-v2-lesson-mobile-unit));
+  height: calc(16 * var(--home-v2-lesson-mobile-unit));
+  font-family: "Home V2 Lessons Montserrat", Montserrat, sans-serif;
+  font-size: calc(18 * var(--home-v2-lesson-mobile-unit));
+  line-height: calc(15.8309 * var(--home-v2-lesson-mobile-unit));
+  white-space: nowrap;
+}
+
+.home-v2-lesson-mobile-description {
+  position: absolute;
+  left: calc(12 * var(--home-v2-lesson-mobile-unit));
+  top: calc(415 * var(--home-v2-lesson-mobile-unit));
+  display: flex;
+  align-items: center;
+  width: calc(185 * var(--home-v2-lesson-mobile-unit));
+  height: calc(88 * var(--home-v2-lesson-mobile-unit));
+  font-family: "Home V2 Lessons Chivo", Chivo, sans-serif;
+  font-size: calc(14 * var(--home-v2-lesson-mobile-unit));
+  font-variation-settings: "wght" 400;
+  line-height: calc(22 * var(--home-v2-lesson-mobile-unit));
+  text-transform: capitalize;
+  z-index: 3;
+}
+
+.home-v2-lesson-mobile-description[data-dense="true"] {
+  font-size: calc(11.5 * var(--home-v2-lesson-mobile-unit));
+  line-height: calc(17.5 * var(--home-v2-lesson-mobile-unit));
+}
+
+.home-v2-lesson-mobile-selector {
+  top: calc(131 * var(--home-v2-lesson-mobile-unit));
+  height: calc(61 * var(--home-v2-lesson-mobile-unit));
+}
+
+.home-v2-lesson-mobile-selector button {
+  position: relative;
+  top: calc(1 * var(--home-v2-lesson-mobile-unit));
+  height: calc(60 * var(--home-v2-lesson-mobile-unit));
+  flex: 0 0 calc(72 * var(--home-v2-lesson-mobile-unit));
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  color: #f6f6f6;
+  transition: none;
+}
+
+.home-v2-lesson-mobile-selector button:nth-child(3) {
+  top: 0;
+  height: calc(61 * var(--home-v2-lesson-mobile-unit));
+}
+
+.home-v2-lesson-mobile-selector button + button {
+  margin-left: calc(-1 * var(--home-v2-lesson-mobile-unit));
+}
+
+.home-v2-lesson-mobile-selector button[data-active="true"] {
+  flex-basis: calc(105 * var(--home-v2-lesson-mobile-unit));
+  border: 0;
+  background: transparent;
+  color: #2e2e2e;
+}
+
+.home-v2-lesson-mobile-selector-active-backplate,
+.home-v2-lesson-mobile-selector-pattern,
+.home-v2-lesson-mobile-selector-border {
+  position: absolute;
+  z-index: 0;
+  max-width: none;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+.home-v2-lesson-mobile-selector-active-backplate {
+  left: calc(-1 * var(--home-v2-lesson-mobile-unit));
+  top: calc(-1.5 * var(--home-v2-lesson-mobile-unit));
+  width: calc(107 * var(--home-v2-lesson-mobile-unit));
+  height: calc(63 * var(--home-v2-lesson-mobile-unit));
+}
+
+.home-v2-lesson-mobile-selector-pattern {
+  left: calc(1 * var(--home-v2-lesson-mobile-unit));
+  top: 0;
+  width: calc(69 * var(--home-v2-lesson-mobile-unit));
+  height: calc(60 * var(--home-v2-lesson-mobile-unit));
+  opacity: .16;
+}
+
+.home-v2-lesson-mobile-selector-border {
+  left: calc(-1 * var(--home-v2-lesson-mobile-unit));
+  top: calc(-1.5 * var(--home-v2-lesson-mobile-unit));
+  width: calc(74 * var(--home-v2-lesson-mobile-unit));
+  height: calc(63 * var(--home-v2-lesson-mobile-unit));
+}
+
+.home-v2-lesson-mobile-selector button:last-child .home-v2-lesson-mobile-selector-border {
+  width: calc(73 * var(--home-v2-lesson-mobile-unit));
+}
+
+.home-v2-lesson-mobile-selector-number,
+.home-v2-lesson-mobile-selector [data-lesson-selector-title] {
+  position: relative;
+  z-index: 1;
+  font-family: "Home V2 Lessons Chivo", Chivo, sans-serif;
+}
+
+.home-v2-lesson-mobile-selector-number {
+  font-size: calc(28 * var(--home-v2-lesson-mobile-unit));
+  font-weight: 400;
+  line-height: calc(17.9115 * var(--home-v2-lesson-mobile-unit));
+}
+
+.home-v2-lesson-mobile-selector button[data-active="true"] .home-v2-lesson-mobile-selector-number {
+  width: calc(54 * var(--home-v2-lesson-mobile-unit));
+  flex-basis: calc(54 * var(--home-v2-lesson-mobile-unit));
+  font-size: calc(42 * var(--home-v2-lesson-mobile-unit));
+  line-height: calc(17.9115 * var(--home-v2-lesson-mobile-unit));
+  letter-spacing: -0.08em;
+}
+
+.home-v2-lesson-mobile-selector [data-lesson-selector-title] {
+  width: calc(46 * var(--home-v2-lesson-mobile-unit));
+  padding: 0;
+  font-size: calc(10 * var(--home-v2-lesson-mobile-unit));
+  font-weight: 200;
+  font-variation-settings: "wght" 200;
+  line-height: calc(14 * var(--home-v2-lesson-mobile-unit));
+}
+
+.home-v2-lesson-mobile-price,
+.home-v2-lesson-mobile-cta {
+  transform: none;
+  font-family: "Home V2 Lessons Montserrat", Montserrat, sans-serif;
+}
+
+.home-v2-lesson-mobile-price {
+  left: calc(239 * var(--home-v2-lesson-mobile-unit));
+  top: calc(601 * var(--home-v2-lesson-mobile-unit));
+  width: calc(128.669 * var(--home-v2-lesson-mobile-unit));
+  height: calc(52.501 * var(--home-v2-lesson-mobile-unit));
+  font-size: calc(18 * var(--home-v2-lesson-mobile-unit));
+  line-height: calc(18 * var(--home-v2-lesson-mobile-unit));
+}
+
+.home-v2-lesson-mobile-price[data-long-price="true"] {
+  font-size: calc(14 * var(--home-v2-lesson-mobile-unit));
+}
+
+.home-v2-lesson-mobile-price-copy {
+  position: absolute !important;
+  left: calc(5 * var(--home-v2-lesson-mobile-unit));
+  top: calc(12 * var(--home-v2-lesson-mobile-unit));
+  display: flex;
+  width: calc(120.659 * var(--home-v2-lesson-mobile-unit));
+  height: calc(33.096 * var(--home-v2-lesson-mobile-unit));
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-1.302deg);
+}
+
+.home-v2-lesson-mobile-cta {
+  left: calc(239 * var(--home-v2-lesson-mobile-unit));
+  top: calc(657 * var(--home-v2-lesson-mobile-unit));
+  width: calc(125.038 * var(--home-v2-lesson-mobile-unit));
+  height: calc(38.399 * var(--home-v2-lesson-mobile-unit));
+  font-size: calc(14 * var(--home-v2-lesson-mobile-unit));
+  line-height: calc(16 * var(--home-v2-lesson-mobile-unit));
+  letter-spacing: calc(.1818 * var(--home-v2-lesson-mobile-unit));
+}
+
+.home-v2-lesson-mobile-cta > img {
+  filter: drop-shadow(calc(-1.01 * var(--home-v2-lesson-mobile-unit)) calc(2.55 * var(--home-v2-lesson-mobile-unit)) 0 #585858);
+}
+
+.home-v2-lesson-mobile-cta > span {
+  position: absolute;
+  left: calc(17 * var(--home-v2-lesson-mobile-unit));
+  top: calc(8 * var(--home-v2-lesson-mobile-unit));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(92.783 * var(--home-v2-lesson-mobile-unit));
+  height: calc(22.548 * var(--home-v2-lesson-mobile-unit));
+  transform: rotate(-1.302deg);
+}
+
+[data-home-v2-lessons-mobile][data-lang="ru"] .home-v2-lesson-mobile-heading span:first-child {
+  left: calc(94 * var(--home-v2-lesson-mobile-unit));
+  width: calc(202 * var(--home-v2-lesson-mobile-unit));
+  font-size: calc(22 * var(--home-v2-lesson-mobile-unit));
+}
+
+[data-home-v2-lessons-mobile][data-lang="ru"] .home-v2-lesson-mobile-heading span:last-child {
+  left: calc(40 * var(--home-v2-lesson-mobile-unit));
+  width: calc(310 * var(--home-v2-lesson-mobile-unit));
+  font-size: calc(30 * var(--home-v2-lesson-mobile-unit));
+}
+
+[data-home-v2-lessons-mobile][data-lang="ru"] .home-v2-lesson-mobile-copy h3 {
+  width: calc(220 * var(--home-v2-lesson-mobile-unit));
+  font-size: calc(40 * var(--home-v2-lesson-mobile-unit));
+  line-height: calc(34 * var(--home-v2-lesson-mobile-unit));
+}
+
+[data-home-v2-lessons-mobile][data-lang="ru"] .home-v2-lesson-mobile-description {
+  font-size: calc(12 * var(--home-v2-lesson-mobile-unit));
+  line-height: calc(18 * var(--home-v2-lesson-mobile-unit));
+  text-transform: none;
+}
+
+.home-v2-included-mobile-stage {
+  --home-v2-included-mobile-unit: calc(100cqw / 390);
+  position: relative;
+  width: min(100%, 390px);
+  max-width: 390px;
+  height: auto;
+  margin-inline: auto;
+  aspect-ratio: 390 / 746;
+  overflow: hidden;
+  container-type: inline-size;
+  background: #2e2e2e;
+}
+
+.home-v2-included-mobile-pattern {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  width: 100%;
+  max-width: none;
+  object-fit: fill;
+  opacity: .16;
+}
+
+.home-v2-included-mobile-pattern-upper {
+  top: calc(196 * var(--home-v2-included-mobile-unit));
+  height: calc(73.5 * var(--home-v2-included-mobile-unit));
+}
+
+.home-v2-included-mobile-pattern-lower {
+  top: calc(436.5 * var(--home-v2-included-mobile-unit));
+  height: calc(73 * var(--home-v2-included-mobile-unit));
+}
+
+.home-v2-included-mobile-stage article {
+  position: absolute;
+  z-index: 1;
+  color: #f6f6f6;
+  text-align: center;
+}
+
+.home-v2-included-mobile-stage article > img,
+.home-v2-included-mobile-stage article h3,
+.home-v2-included-mobile-stage article p {
+  position: absolute;
+  margin: 0;
+}
+
+.home-v2-included-mobile-stage article h3,
+.home-v2-included-mobile-stage article p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-v2-included-mobile-stage article h3 {
+  font-family: "Home V2 Lessons Montserrat", Montserrat, sans-serif;
+  font-size: calc(14 * var(--home-v2-included-mobile-unit));
+  font-weight: 900;
+  line-height: calc(29.7542 * var(--home-v2-included-mobile-unit));
+  text-transform: uppercase;
+}
+
+.home-v2-included-mobile-stage article p {
+  font-family: "Home V2 Lessons Chivo", Chivo, sans-serif;
+  font-size: calc(10 * var(--home-v2-included-mobile-unit));
+  font-weight: 400;
+  font-variation-settings: "wght" 400;
+  line-height: calc(14 * var(--home-v2-included-mobile-unit));
+}
+
+[data-home-v2-included-mobile-feature="camera"] {
+  left: calc(28 * var(--home-v2-included-mobile-unit));
+  top: calc(56 * var(--home-v2-included-mobile-unit));
+  width: calc(128.009 * var(--home-v2-included-mobile-unit));
+  height: calc(192.921 * var(--home-v2-included-mobile-unit));
+}
+
+[data-home-v2-included-mobile-feature="camera"] > img {
+  left: calc(4 * var(--home-v2-included-mobile-unit));
+  top: 0;
+  width: calc(120 * var(--home-v2-included-mobile-unit));
+  height: calc(120 * var(--home-v2-included-mobile-unit));
+}
+
+[data-home-v2-included-mobile-feature="camera"] h3 { left: 0; top: calc(139 * var(--home-v2-included-mobile-unit)); width: 100%; height: calc(30 * var(--home-v2-included-mobile-unit)); }
+[data-home-v2-included-mobile-feature="camera"] p { left: calc(6 * var(--home-v2-included-mobile-unit)); top: calc(170 * var(--home-v2-included-mobile-unit)); width: calc(116.453 * var(--home-v2-included-mobile-unit)); height: calc(22.921 * var(--home-v2-included-mobile-unit)); }
+
+[data-home-v2-included-mobile-feature="zinc"] {
+  left: calc(232 * var(--home-v2-included-mobile-unit));
+  top: calc(56 * var(--home-v2-included-mobile-unit));
+  width: calc(126.571 * var(--home-v2-included-mobile-unit));
+  height: calc(194 * var(--home-v2-included-mobile-unit));
+}
+
+[data-home-v2-included-mobile-feature="zinc"] > img { left: 0; top: 0; width: calc(126.571 * var(--home-v2-included-mobile-unit)); height: calc(126.571 * var(--home-v2-included-mobile-unit)); }
+[data-home-v2-included-mobile-feature="zinc"] h3 { left: calc(27 * var(--home-v2-included-mobile-unit)); top: calc(147 * var(--home-v2-included-mobile-unit)); width: calc(71 * var(--home-v2-included-mobile-unit)); height: calc(14 * var(--home-v2-included-mobile-unit)); line-height: calc(13.2 * var(--home-v2-included-mobile-unit)); }
+[data-home-v2-included-mobile-feature="zinc"] p { left: calc(9 * var(--home-v2-included-mobile-unit)); top: calc(170 * var(--home-v2-included-mobile-unit)); width: calc(108 * var(--home-v2-included-mobile-unit)); height: calc(24 * var(--home-v2-included-mobile-unit)); }
+
+[data-home-v2-included-mobile-feature="board"] {
+  left: calc(-8 * var(--home-v2-included-mobile-unit));
+  top: calc(259 * var(--home-v2-included-mobile-unit));
+  width: calc(200.318 * var(--home-v2-included-mobile-unit));
+  height: calc(236 * var(--home-v2-included-mobile-unit));
+}
+
+[data-home-v2-included-mobile-feature="board"] > img { left: 0; top: 0; width: calc(200.318 * var(--home-v2-included-mobile-unit)); height: calc(200.318 * var(--home-v2-included-mobile-unit)); }
+[data-home-v2-included-mobile-feature="board"] h3 { left: calc(72.139 * var(--home-v2-included-mobile-unit)); top: calc(180.159 * var(--home-v2-included-mobile-unit)); width: calc(56 * var(--home-v2-included-mobile-unit)); height: calc(30 * var(--home-v2-included-mobile-unit)); }
+[data-home-v2-included-mobile-feature="board"] p { left: calc(34 * var(--home-v2-included-mobile-unit)); top: calc(207 * var(--home-v2-included-mobile-unit)); width: calc(130 * var(--home-v2-included-mobile-unit)); height: calc(29 * var(--home-v2-included-mobile-unit)); }
+
+[data-home-v2-included-mobile-feature="rashguard"] {
+  left: calc(238 * var(--home-v2-included-mobile-unit));
+  top: calc(302 * var(--home-v2-included-mobile-unit));
+  width: calc(120 * var(--home-v2-included-mobile-unit));
+  height: calc(194 * var(--home-v2-included-mobile-unit));
+}
+
+[data-home-v2-included-mobile-feature="rashguard"] > img { left: calc(-18.344 * var(--home-v2-included-mobile-unit)); top: calc(-18.344 * var(--home-v2-included-mobile-unit)); width: calc(156.688 * var(--home-v2-included-mobile-unit)); height: calc(156.688 * var(--home-v2-included-mobile-unit)); }
+[data-home-v2-included-mobile-feature="rashguard"] h3 { left: calc(11 * var(--home-v2-included-mobile-unit)); top: calc(137 * var(--home-v2-included-mobile-unit)); width: calc(97 * var(--home-v2-included-mobile-unit)); height: calc(30 * var(--home-v2-included-mobile-unit)); }
+[data-home-v2-included-mobile-feature="rashguard"] p { left: calc(11 * var(--home-v2-included-mobile-unit)); top: calc(168 * var(--home-v2-included-mobile-unit)); width: calc(98 * var(--home-v2-included-mobile-unit)); height: calc(22 * var(--home-v2-included-mobile-unit)); }
+
+.home-v2-included-mobile-callout p {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font-family: "Home V2 Lessons Montserrat", Montserrat, sans-serif;
+  font-weight: 900;
+  line-height: calc(49.5903 * var(--home-v2-included-mobile-unit));
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.home-v2-included-mobile-callout p:first-child {
+  left: calc(129.098 * var(--home-v2-included-mobile-unit));
+  top: calc(556 * var(--home-v2-included-mobile-unit));
+  width: calc(123.942 * var(--home-v2-included-mobile-unit));
+  height: calc(16.187 * var(--home-v2-included-mobile-unit));
+  color: #fe746a;
+  font-size: calc(22 * var(--home-v2-included-mobile-unit));
+}
+
+.home-v2-included-mobile-callout p:last-child {
+  left: calc(100 * var(--home-v2-included-mobile-unit));
+  top: calc(572 * var(--home-v2-included-mobile-unit));
+  width: calc(190.363 * var(--home-v2-included-mobile-unit));
+  height: calc(49.998 * var(--home-v2-included-mobile-unit));
+  color: #aaffc7;
+  font-size: calc(26 * var(--home-v2-included-mobile-unit));
+}
+
+.home-v2-included-mobile-description {
+  position: absolute;
+  z-index: 2;
+  left: calc(38 * var(--home-v2-included-mobile-unit));
+  top: calc(627 * var(--home-v2-included-mobile-unit));
+  display: flex;
+  align-items: center;
+  width: calc(314.849 * var(--home-v2-included-mobile-unit));
+  height: calc(88 * var(--home-v2-included-mobile-unit));
+  margin: 0;
+  color: #f6f6f6;
+  font-family: "Home V2 Lessons Chivo", Chivo, sans-serif;
+  font-size: calc(18 * var(--home-v2-included-mobile-unit));
+  font-weight: 400;
+  font-variation-settings: "wght" 400;
+  line-height: calc(32 * var(--home-v2-included-mobile-unit));
+  text-align: center;
+}
+
+[data-home-v2-included-mobile][data-lang="ru"] article h3 { font-size: calc(12 * var(--home-v2-included-mobile-unit)); }
+[data-home-v2-included-mobile][data-lang="ru"] article p { font-size: calc(8.4 * var(--home-v2-included-mobile-unit)); line-height: calc(12 * var(--home-v2-included-mobile-unit)); }
+[data-home-v2-included-mobile][data-lang="ru"] .home-v2-included-mobile-callout p:first-child { left: calc(70 * var(--home-v2-included-mobile-unit)); width: calc(250 * var(--home-v2-included-mobile-unit)); font-size: calc(18 * var(--home-v2-included-mobile-unit)); }
+[data-home-v2-included-mobile][data-lang="ru"] .home-v2-included-mobile-callout p:last-child { left: calc(70 * var(--home-v2-included-mobile-unit)); width: calc(250 * var(--home-v2-included-mobile-unit)); font-size: calc(22 * var(--home-v2-included-mobile-unit)); }
+[data-home-v2-included-mobile][data-lang="ru"] .home-v2-included-mobile-description { font-size: calc(15 * var(--home-v2-included-mobile-unit)); line-height: calc(24 * var(--home-v2-included-mobile-unit)); }
+
 @layer base {
   h1,
   h2,

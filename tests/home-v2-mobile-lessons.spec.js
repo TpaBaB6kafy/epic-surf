@@ -6,7 +6,7 @@ const outputDir = path.join(process.cwd(), "tmp", "home-v2-mobile-lessons-shadow
 const screenshotStyle = "nextjs-portal, [data-home-v2-header], [data-home-v2-messenger] { visibility: hidden !important; }";
 
 const expectedLessons = {
-  group: { image: "group-lesson-photo.png", title: /Group Lesson|Групповой урок/i, price: "900.000", kind: "booking" },
+  group: { image: "group-lesson-photo%402x.png", title: /Group Lesson|Групповой урок/i, price: "900.000", kind: "booking" },
   split: { image: "lesson-split-desktop.webp", title: /Split Lesson|Сплит урок/i, price: "2.500.000", kind: "booking" },
   private: { image: "lesson-private-desktop.webp", title: /Private Lesson|Приватный урок/i, price: "1.800.000", kind: "booking" },
   surf_skate: { image: "lesson-surf-skate-desktop.webp", title: /Surf-skate|Серф-скейт/i, price: "600.000", kind: "messenger" },
@@ -75,15 +75,14 @@ test.describe("Home V2 mobile Choose Your Lesson", () => {
     };
 
     expect(geometry.stage).toMatchObject({ left: 0, top: 0, width: 390, height: 742 });
-    expect(geometry.heading.left).toBeCloseTo(57, 0);
-    expect(geometry.heading.top).toBeCloseTo(14, 0);
-    expect(geometry.selector).toMatchObject({ left: 0, top: 132, width: 390, height: 60 });
+    expect(geometry.heading).toMatchObject({ left: 0, top: 0, width: 390, height: 742 });
+    expect(geometry.selector).toMatchObject({ left: 0, top: 131, width: 390, height: 61 });
     expect(geometry.photo).toMatchObject({ left: 0, top: 192, width: 390, height: 464 });
     expect(geometry.shadow).toEqual(geometry.photo);
-    expect(Math.abs(geometry.price.left - 162)).toBeLessThan(1.2);
-    expect(Math.abs(geometry.price.top - 605)).toBeLessThan(1.2);
-    expect(Math.abs(geometry.cta.left - 162)).toBeLessThan(1.2);
-    expect(Math.abs(geometry.cta.top - 666)).toBeLessThan(1.2);
+    expect(Math.abs(geometry.price.left - 239)).toBeLessThan(1.2);
+    expect(Math.abs(geometry.price.top - 601)).toBeLessThan(1.2);
+    expect(Math.abs(geometry.cta.left - 239)).toBeLessThan(1.2);
+    expect(Math.abs(geometry.cta.top - 657)).toBeLessThan(1.2);
 
     const layers = await page.evaluate(() => {
       const read = (selector) => {
@@ -100,10 +99,8 @@ test.describe("Home V2 mobile Choose Your Lesson", () => {
     });
     expect(layers.shadow.pointerEvents).toBe("none");
     expect(layers.shadow.mixBlendMode).toBe("normal");
-    expect(layers.shadow.backgroundImage).toContain("linear-gradient");
-    expect(layers.shadow.backgroundImage).toContain("43.75%");
-    expect(layers.shadow.backgroundImage).toContain("54.366%");
-    expect(layers.shadow.backgroundImage).toContain("86.53%");
+    expect(layers.shadow.backgroundImage).toBe("none");
+    await expect(shadow).toHaveAttribute("src", /lesson-photo-shadow\.svg/);
     expect(layers.copy.zIndex).toBeGreaterThan(layers.shadow.zIndex);
     expect(layers.selector.zIndex).toBeGreaterThan(layers.copy.zIndex);
     expect(layers.price.zIndex).toBeGreaterThan(layers.shadow.zIndex);
@@ -144,7 +141,7 @@ test.describe("Home V2 mobile Choose Your Lesson", () => {
 
         const copyBounds = await page.evaluate(() => {
           const frame = document.querySelector("[data-home-v2-lesson-photo-frame]").getBoundingClientRect();
-          return ["[data-home-v2-lesson-title]", "[data-home-v2-lesson-audience]", "[data-home-v2-lesson-description]"].map((selector) => {
+          return ["[data-home-v2-lesson-title]", "[data-home-v2-lesson-audience]"].map((selector) => {
             const box = document.querySelector(selector).getBoundingClientRect();
             return { top: box.top - frame.top, bottom: box.bottom - frame.top, left: box.left - frame.left, right: box.right - frame.left };
           });
@@ -184,10 +181,11 @@ test.describe("Home V2 mobile Choose Your Lesson", () => {
       const stage = section.locator("[data-home-v2-lessons-mobile]");
       await expect(stage).toBeVisible();
       const box = await stage.boundingBox();
-      expect(box.width).toBeCloseTo(width, 0);
-      expect(box.height).toBeCloseTo(width * 742 / 390, 0);
+      const stageWidth = Math.min(width, 390);
+      expect(box.width).toBeCloseTo(stageWidth, 0);
+      expect(box.height).toBeCloseTo(stageWidth * 742 / 390, 0);
       expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBe(0);
-      expect((await section.locator("[data-home-v2-lesson-selector]").boundingBox()).width).toBeCloseTo(width, 0);
+      expect((await section.locator("[data-home-v2-lesson-selector]").boundingBox()).width).toBeCloseTo(stageWidth, 0);
     }
 
     let section = await openLessons(page, "/home-v2", 480);
@@ -196,7 +194,7 @@ test.describe("Home V2 mobile Choose Your Lesson", () => {
     for (const width of [481, 482, 639]) {
       section = await openLessons(page, "/home-v2", width);
       await expect(section.locator("[data-home-v2-lessons-mobile]")).toHaveCount(0);
-      await expect(section.locator("[data-home-v2-lessons-adaptive]")).toBeVisible();
+      await expect(section.locator("[data-home-v2-lessons-desktop], [data-home-v2-lessons-adaptive]").first()).toBeVisible();
       expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBe(0);
     }
     section = await openLessons(page, "/home-v2", 481);

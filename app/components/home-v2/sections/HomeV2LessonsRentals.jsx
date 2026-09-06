@@ -446,8 +446,18 @@ function DesktopLessonPresentation({ orderedLessons, activeLesson, setActiveLess
   );
 }
 
+const lessonsIncludedMobileAssetRoot = "/design/home-v2/lessons-included-mobile-v2.3";
+
+const mobileSelectorAssets = [
+  { pattern: "png/selector-tab-pattern-backplate-02@2x.png", border: "svg/item-description-513-121.svg", height: 60 },
+  { pattern: "png/selector-tab-pattern-backplate-02@2x.png", border: "svg/item-description-513-121.svg", height: 60 },
+  { pattern: "png/selector-tab-pattern-backplate-03@2x.png", border: "svg/item-description-513-118.svg", height: 61 },
+  { pattern: "png/selector-tab-pattern-backplate-04@2x.png", border: "svg/item-description-513-115.svg", height: 59 },
+  { pattern: "png/selector-tab-pattern-backplate-05@2x.png", border: "svg/item-description.svg", height: 60 },
+];
+
 const mobileLessonMedia = {
-  group: { asset: "/design/home-v2/lessons/group-lesson-photo.png", className: "home-v2-lesson-mobile-photo-group", position: "center" },
+  group: { asset: `${lessonsIncludedMobileAssetRoot}/png/group-lesson-photo@2x.png`, className: "home-v2-lesson-mobile-photo-group", position: "center" },
   split: { asset: "/design/home-v2/lessons/lesson-split-desktop.webp", className: "home-v2-lesson-mobile-photo-fill", position: "center 42%" },
   private: { asset: "/design/home-v2/lessons/lesson-private-desktop.webp", className: "home-v2-lesson-mobile-photo-fill", position: "center 45%" },
   surf_skate: { asset: "/design/home-v2/lessons/lesson-surf-skate-desktop.webp", className: "home-v2-lesson-mobile-photo-fill", position: "center 45%" },
@@ -475,6 +485,10 @@ function MobileLessonPresentation({ orderedLessons, activeLesson, setActiveLesso
 
   return (
     <div data-home-v2-lessons-mobile data-lang={lang} className="home-v2-lesson-mobile-stage">
+      <div className="home-v2-lesson-mobile-heading-art" aria-hidden="true">
+        <Image src={`${lessonsIncludedMobileAssetRoot}/svg/heading-stripe-upper.svg`} alt="" width={390} height={7} />
+        <Image src={`${lessonsIncludedMobileAssetRoot}/svg/heading-stripe-lower.svg`} alt="" width={390} height={30} />
+      </div>
       <h2 data-home-v2-lessons-heading className="home-v2-lesson-mobile-heading">
         <span>{headingFirst}</span>
         <span>{headingSecond}</span>
@@ -495,20 +509,28 @@ function MobileLessonPresentation({ orderedLessons, activeLesson, setActiveLesso
               style={{ objectPosition: photo.position }}
             />
           </div>
-          <div data-home-v2-lesson-mobile-shadow className="home-v2-lesson-mobile-shadow" aria-hidden="true" />
+          <Image
+            data-home-v2-lesson-mobile-shadow
+            src={`${lessonsIncludedMobileAssetRoot}/svg/lesson-photo-shadow.svg`}
+            alt=""
+            fill
+            sizes="100vw"
+            className="home-v2-lesson-mobile-shadow"
+          />
           <div data-home-v2-lesson-copy className="home-v2-lesson-mobile-copy">
             <h3 data-home-v2-lesson-title>
               {titleLines.map((line, index) => <span key={`${line}-${index}`}>{line}</span>)}
             </h3>
             <p data-home-v2-lesson-audience>{(desktopLessonCopy[lang] || desktopLessonCopy.en).audience[activeLesson.id] || activeLesson.item.badge}</p>
-            <p data-home-v2-lesson-description data-dense={isDenseDescription ? "true" : "false"}>{activeLesson.item.desc}</p>
           </div>
         </div>
+        <p data-home-v2-lesson-description data-dense={isDenseDescription ? "true" : "false"} className="home-v2-lesson-mobile-description">{activeLesson.item.desc}</p>
       </article>
 
       <div data-home-v2-lesson-selector className="home-v2-lesson-mobile-selector">
         {orderedLessons.map(({ id, item }, index) => {
           const isActive = id === activeLesson.id;
+          const selectorAssets = mobileSelectorAssets[index];
           return (
             <button
               key={id}
@@ -519,6 +541,35 @@ function MobileLessonPresentation({ orderedLessons, activeLesson, setActiveLesso
               aria-controls="home-v2-lesson-detail"
               onClick={() => setActiveLessonId(id)}
             >
+              {isActive ? (
+                <Image
+                  aria-hidden="true"
+                  src={`${lessonsIncludedMobileAssetRoot}/svg/selector-active-backplate.svg`}
+                  alt=""
+                  width={107}
+                  height={63}
+                  className="home-v2-lesson-mobile-selector-active-backplate"
+                />
+              ) : (
+                <>
+                  <Image
+                    aria-hidden="true"
+                    src={`${lessonsIncludedMobileAssetRoot}/${selectorAssets.pattern}`}
+                    alt=""
+                    width={69}
+                    height={selectorAssets.height}
+                    className="home-v2-lesson-mobile-selector-pattern"
+                  />
+                  <Image
+                    aria-hidden="true"
+                    src={`${lessonsIncludedMobileAssetRoot}/${selectorAssets.border}`}
+                    alt=""
+                    width={index === 4 ? 73 : 74}
+                    height={63}
+                    className="home-v2-lesson-mobile-selector-border"
+                  />
+                </>
+              )}
               <span className="home-v2-lesson-mobile-selector-number">{String(index + 1).padStart(2, "0")}</span>
               {isActive ? <span data-lesson-selector-title>{item.title}</span> : null}
             </button>
@@ -527,18 +578,18 @@ function MobileLessonPresentation({ orderedLessons, activeLesson, setActiveLesso
       </div>
 
       <div data-home-v2-lesson-price data-long-price={price.length > 7 ? "true" : "false"} className="home-v2-lesson-mobile-price">
-        <Image aria-hidden="true" src="/design/home-v2/lessons/lesson-price-paper.svg" alt="" fill sizes="200px" />
-        <span>{price} VND</span>
+        <Image aria-hidden="true" src={`${lessonsIncludedMobileAssetRoot}/png/price-box@2x.png`} alt="" fill sizes="129px" />
+        <span className="home-v2-lesson-mobile-price-copy"><span>{price}</span><span>VND</span></span>
       </div>
 
       {isBookingLesson ? (
         <button type="button" data-home-v2-booking-cta onClick={() => onBookingClick(activeLesson.item)} className={ctaClass}>
-          <Image aria-hidden="true" src="/design/home-v2/lessons/lesson-book-now-paper.svg" alt="" fill sizes="200px" />
+          <Image aria-hidden="true" src={`${lessonsIncludedMobileAssetRoot}/svg/book-now-cta.svg`} alt="" fill sizes="126px" />
           <span>{t.btnBook}</span>
         </button>
       ) : (
         <Link data-home-v2-booking-cta href={links.whatsapp} onClick={(event) => onMessengerClick(event, activeLesson.item)} target="_blank" rel="noreferrer" className={ctaClass}>
-          <Image aria-hidden="true" src="/design/home-v2/lessons/lesson-book-now-paper.svg" alt="" fill sizes="200px" />
+          <Image aria-hidden="true" src={`${lessonsIncludedMobileAssetRoot}/svg/book-now-cta.svg`} alt="" fill sizes="126px" />
           <span>{t.btnBook}</span>
         </Link>
       )}
@@ -1270,17 +1321,59 @@ function HomeV2IncludedAdaptive({ items, subtitle, accentTitle, desktop = false 
   );
 }
 
+const mobileIncludedIconAssets = {
+  camera: "svg/feature-icon-513-164.svg",
+  zinc: "svg/feature-icon-513-151.svg",
+  board: "svg/feature-icon.svg",
+  rashguard: "svg/icon-artwork.svg",
+};
+
+function MobileIncludedPresentation({ items, subtitle, accentTitle, lang }) {
+  const itemByIcon = new Map(items.map((item) => [item.icon, item]));
+  const orderedItems = ["camera", "zinc", "board", "rashguard"].map((icon) => itemByIcon.get(icon)).filter(Boolean);
+  const calloutLines = accentTitle.split("\n").map((line) => lang === "en" ? line.replace(/[.!]+$/, "") : line);
+
+  return (
+    <div data-home-v2-included-mobile data-lang={lang} className="home-v2-included-mobile-stage">
+      <Image aria-hidden="true" src={`${lessonsIncludedMobileAssetRoot}/png/feature-row-pattern-band-upper@2x.png`} alt="" width={390} height={74} className="home-v2-included-mobile-pattern home-v2-included-mobile-pattern-upper" />
+      <Image aria-hidden="true" src={`${lessonsIncludedMobileAssetRoot}/png/feature-row-pattern-band-lower@2x.png`} alt="" width={390} height={73} className="home-v2-included-mobile-pattern home-v2-included-mobile-pattern-lower" />
+
+      {orderedItems.map((item) => (
+        <article key={item.icon} data-home-v2-included-mobile-feature={item.icon}>
+          <Image
+            data-home-v2-included-mobile-icon={item.icon}
+            src={`${lessonsIncludedMobileAssetRoot}/${mobileIncludedIconAssets[item.icon]}`}
+            alt=""
+            width={item.icon === "board" ? 201 : item.icon === "zinc" ? 127 : item.icon === "rashguard" ? 157 : 120}
+            height={item.icon === "board" ? 201 : item.icon === "zinc" ? 127 : item.icon === "rashguard" ? 157 : 120}
+          />
+          <h3>{item.icon === "camera" && lang === "en" ? "Photos/videos" : item.label}</h3>
+          <p>{item.desc}</p>
+        </article>
+      ))}
+
+      <div data-home-v2-included-mobile-callout className="home-v2-included-mobile-callout">
+        <p>{calloutLines[0]}</p>
+        <p>{calloutLines[1]}</p>
+      </div>
+      <p data-home-v2-included-mobile-description className="home-v2-included-mobile-description">{subtitle}</p>
+    </div>
+  );
+}
+
 export function HomeV2Included({ t }) {
   const isRu = t.includedLabel !== "Included";
+  const lang = isRu ? "ru" : "en";
   const presentation = useHomeV2Presentation();
   return (
     <section
       id="included"
       data-home-v2-included
-      className={`relative isolate overflow-hidden bg-epicDark text-epicWhite scroll-mt-0 min-[1440px]:min-h-[700px] min-[1440px]:px-0 min-[1440px]:py-0 min-[1440px]:shadow-[0_4px_4px_rgba(0,0,0,0.25)] ${isRu ? "" : "h-[746px] px-0 py-0 sm:h-auto"}`}
+      className={`relative isolate overflow-hidden bg-epicDark text-epicWhite scroll-mt-0 min-[1440px]:min-h-[700px] min-[1440px]:px-0 min-[1440px]:py-0 min-[1440px]:shadow-[0_4px_4px_rgba(0,0,0,0.25)] ${presentation === "mobile" ? "h-[746px] px-0 py-0" : isRu ? "" : "sm:h-auto"}`}
     >
         {(presentation === "desktop" || presentation === "compact") && <HomeV2IncludedAdaptive items={t.includedItems} subtitle={t.includedSubtitle} accentTitle={t.includedAccentTitle} desktop />}
 
+      {presentation === "mobile" && <MobileIncludedPresentation items={t.includedItems} subtitle={t.includedSubtitle} accentTitle={t.includedAccentTitle} lang={lang} />}
 
       {presentation === "mobile-legacy" && !isRu && (
         <div
@@ -1331,7 +1424,7 @@ export function HomeV2Included({ t }) {
         </div>
       )}
 
-      {presentation !== null && presentation !== "desktop" && presentation !== "compact" && (
+      {presentation !== null && presentation !== "desktop" && presentation !== "compact" && presentation !== "mobile" && (
         <HomeV2IncludedAdaptive items={t.includedItems} subtitle={t.includedSubtitle} accentTitle={t.includedAccentTitle} />
       )}
     </section>
