@@ -1,5 +1,5 @@
-import LandingPage from "../../components/LandingPage";
+import HomeV2Page from "../../components/home-v2/HomeV2Page";
 
 export default function Page() {
-  return <LandingPage locale="ru" />;
+  return <HomeV2Page locale="ru" />;
 }

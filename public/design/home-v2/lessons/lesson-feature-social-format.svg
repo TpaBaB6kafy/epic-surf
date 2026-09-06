@@ -1,0 +1,31 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icon Mask" clip-path="url(#clip0_0_12)">
+<g id="group.svg" clip-path="url(#clip1_0_12)">
+<g id="Clip path group">
+<mask id="mask0_0_12" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+<g id="a">
+<path id="Vector" d="M24 0H0V24H24V0Z" fill="white"/>
+</g>
+</mask>
+<g mask="url(#mask0_0_12)">
+<g id="Group">
+<path id="Vector_2" d="M5 20V19C5 17.1435 5.7375 15.363 7.05025 14.0503C8.36301 12.7375 10.1435 12 12 12C13.8565 12 15.637 12.7375 16.9497 14.0503C18.2625 15.363 19 17.1435 19 19V20" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+<path id="Vector_3" d="M17 14C17 12.6739 17.5268 11.4021 18.4645 10.4645C19.4021 9.52678 20.6739 9 22 9C22.6566 9 23.3068 9.12933 23.9134 9.3806C24.52 9.63188 25.0712 10.0002 25.5355 10.4645C25.9998 10.9288 26.3681 11.48 26.6194 12.0866C26.8707 12.6932 27 13.3434 27 14V14.5" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+<path id="Vector_4" d="M7 14C7 12.6739 6.47322 11.4021 5.53553 10.4645C4.59785 9.52678 3.32608 9 2 9C1.34339 9 0.69321 9.12933 0.0865822 9.3806C-0.520046 9.63188 -1.07124 10.0002 -1.53553 10.4645C-1.99983 10.9288 -2.36812 11.48 -2.6194 12.0866C-2.87067 12.6932 -3 13.3434 -3 14V14.5" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
+<path id="Vector_5" d="M12 12C13.0609 12 14.0783 11.5786 14.8284 10.8284C15.5786 10.0783 16 9.06087 16 8C16 6.93913 15.5786 5.92172 14.8284 5.17157C14.0783 4.42143 13.0609 4 12 4C10.9391 4 9.92172 4.42143 9.17157 5.17157C8.42143 5.92172 8 6.93913 8 8C8 9.06087 8.42143 10.0783 9.17157 10.8284C9.92172 11.5786 10.9391 12 12 12Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_6" d="M2 9C1.20435 9 0.441288 8.68393 -0.121321 8.12132C-0.68393 7.55871 -1 6.79565 -1 6C-1 5.20435 -0.68393 4.44129 -0.121321 3.87868C0.441288 3.31607 1.20435 3 2 3C2.79565 3 3.55871 3.31607 4.12132 3.87868C4.68393 4.44129 5 5.20435 5 6C5 6.79565 4.68393 7.55871 4.12132 8.12132C3.55871 8.68393 2.79565 9 2 9Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_7" d="M22 9C21.2044 9 20.4413 8.68393 19.8787 8.12132C19.3161 7.55871 19 6.79565 19 6C19 5.20435 19.3161 4.44129 19.8787 3.87868C20.4413 3.31607 21.2044 3 22 3C22.7956 3 23.5587 3.31607 24.1213 3.87868C24.6839 4.44129 25 5.20435 25 6C25 6.79565 24.6839 7.55871 24.1213 8.12132C23.5587 8.68393 22.7956 9 22 9Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_12">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+<clipPath id="clip1_0_12">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg>
