@@ -55,10 +55,9 @@ export default function Header({
       data-home-v2-header={isHomeV2 ? "true" : undefined}
       data-home-v2-header-locale={isHomeV2 ? lang : undefined}
       className={isHomeV2
-        ? "absolute left-0 top-0 z-[100] w-full overflow-visible bg-epicDark/[0.18] text-epicWhite shadow-none backdrop-blur-[1.5px] md:bg-epicWhite/[0.24] md:text-epicDark"
+        ? "relative z-[100] w-full overflow-visible bg-epicDark/[0.18] text-epicWhite shadow-none backdrop-blur-[1.5px] md:bg-epicWhite/[0.24] md:text-epicDark"
         : "fixed top-0 left-0 w-full z-[100] bg-white shadow-md"}
     >
-      {isHomeV2 && mobileTop && <HomeV2MobileHeaderVideo />}
       <div data-home-v2-header-strip={isHomeV2 ? "true" : undefined} className={isHomeV2 ? "flex h-[62px] items-center md:h-[68px]" : "h-16 md:h-20 flex items-center"}>
         <div data-home-v2-header-frame={isHomeV2 ? "true" : undefined} className="max-w-7xl mx-auto px-4 md:px-6 w-full flex items-center justify-between gap-2">
           <Link
@@ -67,6 +66,8 @@ export default function Header({
             data-home-v2-brand-logo={isHomeV2 ? "true" : undefined}
             className="z-[110] flex flex-shrink-0 items-center transition-transform active:scale-95"
           >
+            {isHomeV2 && <Image className="home-v5-desktop-logo" src="/design/home-v5/header/epic-logo-artwork.svg" alt="EPIC SURF" width={79.185} height={35.384} priority unoptimized />}
+            <span className={isHomeV2 ? "home-v5-legacy-logo" : undefined}>
             {isHomeV2 && mobileTop ? (
               <Image src="/design/home-v2/mobile-top/brand-logo.svg" alt="EPIC SURF" width={51} height={23} priority unoptimized />
             ) : isHomeV2 && lang === "en" ? (
@@ -96,6 +97,7 @@ export default function Header({
                 style={isHomeV2 ? { width: "auto" } : undefined}
               />
             )}
+            </span>
           </Link>
 
           <nav
@@ -178,6 +180,7 @@ export default function Header({
           </div>
         </div>
       </div>
+      {isHomeV2 && <HomeV2MobileHeaderVideo />}
 
       <AnimatePresence>
         {isMenuOpen && (

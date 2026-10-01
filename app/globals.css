@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Home V5 Recursive";
+  src: url('/design/home-v5/how-it-works/recursive.ttf') format('truetype');
+  font-weight: 300 1000;
+  font-display: swap;
+}
+
 @theme {
  --color-epicDark: #2E2E2E;
   --color-epicRed: #FE746A;
@@ -63,6 +70,7 @@ body {
 @media (min-width: 1440px) {
   [data-home-v2-root] {
     --home-v2-fluid-gutter: clamp(32px, calc(4vw - 25.6px), 64px);
+    --home-v2-desktop-stage-width: clamp(1241px, calc(100vw - 192px), 1900px);
   }
 }
 
@@ -325,7 +333,7 @@ body {
 
 @media (min-width: 640px) and (max-width: 1439px) {
   [data-home-v2-header="true"] + [data-home-v2-main-flow] {
-    padding-top: 86px;
+    padding-top: 0;
   }
 
   [data-home-v2-hero] {
@@ -827,27 +835,16 @@ body {
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 1440 / 726;
+    aspect-ratio: 1440 / 550;
     overflow: hidden;
     background: transparent;
     container-type: inline-size;
   }
 
-  .home-v2-hero-video-strip {
-    position: absolute;
-    inset: 0 0 auto;
-    z-index: 1;
-    display: block;
-    width: 100cqw;
-    height: auto;
-    max-width: none;
-    opacity: .52;
-  }
-
   .home-v2-hero-collage-artwork {
     position: absolute;
     left: 0;
-    top: 23.5417cqw;
+    top: 11.3197cqw;
     z-index: 2;
     display: block;
     width: 86.3889cqw;
@@ -860,7 +857,7 @@ body {
   .home-v2-hero-desktop-lockup {
     position: absolute;
     left: 6.875cqw;
-    top: 16.389cqw;
+    top: 4.167cqw;
     z-index: 3;
     width: 21.111cqw;
     height: 12.778cqw;
@@ -890,7 +887,7 @@ body {
     position: absolute;
     left: auto;
     right: 6.944cqw;
-    top: 17.847cqw;
+    top: 5.625cqw;
     z-index: 3;
     grid-column: auto;
     justify-self: auto;
@@ -931,6 +928,621 @@ body {
     font-weight: 400;
     line-height: 1.319cqw;
     transform: none;
+  }
+}
+
+/* Home V2 desktop targeted update — Figma handoff v2.3.1. */
+[data-home-v2-how-target-desktop],
+[data-home-v2-included-target-desktop] {
+  display: none;
+}
+
+.home-v2-rental-target-edge {
+  position: absolute;
+  left: 50%;
+  z-index: 12;
+  width: max(100%, 1465.492px);
+  max-width: none;
+  height: 54.949px;
+  pointer-events: none;
+}
+
+.home-v2-rental-target-edge-top {
+  top: -1.5px;
+  transform: translateX(-50%);
+}
+
+.home-v2-rental-target-edge-bottom {
+  top: 765px;
+  transform: translateX(-50%);
+}
+
+@media (min-width: 1200px) {
+  [data-home-v2-root] [data-home-v2-hero] {
+    height: auto;
+    min-height: 0;
+    background: #2e2e2e;
+  }
+
+  .home-v2-hero-target-stage {
+    position: relative;
+    width: min(100%, 1440px);
+    height: auto;
+    aspect-ratio: 1440 / 726;
+    margin-inline: auto;
+    overflow: hidden;
+    container-type: inline-size;
+    background: #2e2e2e;
+  }
+
+  .home-v2-hero-target-stage > img,
+  .home-v2-hero-target-video,
+  .home-v2-hero-target-stage .home-v2-hero-desktop-lockup {
+    position: absolute;
+    max-width: none;
+  }
+
+  .home-v2-hero-target-ocean {
+    z-index: 1;
+    left: -6.736111cqw;
+    top: 20.347222cqw;
+    width: 87.847222cqw;
+    height: 29.305556cqw;
+    object-fit: fill;
+  }
+
+  .home-v2-hero-target-palm-back {
+    z-index: 5;
+    left: 21.666667cqw;
+    top: .277778cqw;
+    width: 50.138889cqw;
+    height: 63.194444cqw;
+    object-fit: fill;
+  }
+
+  .home-v2-hero-target-palm-front {
+    z-index: 6;
+    left: 12.638889cqw;
+    top: 3.402778cqw;
+    width: 34.444444cqw;
+    height: 49.027778cqw;
+    object-fit: fill;
+  }
+
+  .home-v2-hero-target-surfer {
+    z-index: 7;
+    left: 23.263889cqw;
+    top: 32.708333cqw;
+    width: 12.152778cqw;
+    height: 18.194444cqw;
+    object-fit: fill;
+  }
+
+  .home-v2-hero-target-location {
+    z-index: 8;
+    left: 28.888889cqw;
+    top: 30.138889cqw;
+    width: 8.557778cqw;
+    height: 3.301042cqw;
+    object-fit: fill;
+  }
+
+  .home-v2-hero-target-video-border {
+    z-index: 2;
+    left: 52.5cqw;
+    top: -.277778cqw;
+    width: 47.143403cqw;
+    height: 49.722222cqw;
+    object-fit: fill;
+  }
+
+  .home-v2-hero-target-video {
+    z-index: 3;
+    left: 52.85625cqw;
+    top: 0;
+    width: 47.143403cqw;
+    height: 49.722222cqw;
+    overflow: hidden;
+    -webkit-mask-image: url('/design/home-v2/targeted-v2.3.1/hero/hero-video-border-underlay@2x.png');
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-image: url('/design/home-v2/targeted-v2.3.1/hero/hero-video-border-underlay@2x.png');
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+  }
+
+  .home-v2-hero-target-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .home-v2-hero-target-stage .home-v2-hero-desktop-lockup {
+    z-index: 9;
+    left: 3.611111cqw;
+    top: 19.583333cqw;
+    width: 21.111111cqw;
+    height: 14.861111cqw;
+    transform: none;
+  }
+
+  .home-v2-hero-target-stage .home-v2-hero-epic-logo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 13.747361cqw;
+    height: 8.503403cqw;
+  }
+
+  .home-v2-hero-target-stage .home-v2-hero-school-logo {
+    position: absolute;
+    left: 0;
+    top: 11.597222cqw;
+    width: 21.111111cqw;
+    height: 2.986111cqw;
+  }
+
+  .home-v2-hero-target-sand-lower,
+  .home-v2-hero-target-sand-upper {
+    z-index: 11;
+    width: 123.194444cqw;
+    height: 4.791667cqw;
+    object-fit: fill;
+  }
+
+  .home-v2-hero-target-sand-lower { left: -20.625cqw; top: 45cqw; }
+  .home-v2-hero-target-sand-upper { left: -17.708333cqw; top: 45.625cqw; }
+
+  [data-home-v2-how-it-works] {
+    height: auto !important;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  [data-home-v2-how-fluid-desktop] { display: none !important; }
+
+  [data-home-v2-how-target-desktop] {
+    position: relative;
+    display: block;
+    width: min(100%, 1440px);
+    aspect-ratio: 1440 / 720;
+    margin-inline: auto;
+    overflow: hidden;
+    container-type: inline-size;
+    background: #2e2e2e;
+  }
+
+  [data-home-v2-how-target-heading] {
+    position: absolute;
+    z-index: 6;
+    left: 8.819444cqw;
+    top: 3.958333cqw;
+    width: 26cqw;
+    margin: 0;
+    font-family: "Home V2 Lessons Montserrat", Montserrat, sans-serif;
+    font-size: 1.944444cqw;
+    font-weight: 400;
+    line-height: 2.361111cqw;
+    text-transform: uppercase;
+  }
+
+  [data-home-v2-how-target-heading] span { display: block; color: #f6f6f6; }
+  [data-home-v2-how-target-heading] span + span { margin-left: .625cqw; color: #fe746a; }
+
+  [data-home-v2-how-target-cards] {
+    position: absolute;
+    inset: 0;
+  }
+
+  [data-home-v2-how-target-card] {
+    position: absolute;
+    top: 10.625cqw;
+    height: 36.6cqw;
+    color: #2e2e2e;
+  }
+
+  [data-home-v2-how-target-card]::before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    left: var(--paper-left);
+    top: 21.15cqw;
+    width: var(--paper-width);
+    height: 10.933333cqw;
+    background: #f6f6f6;
+  }
+
+  [data-home-v2-how-target-card="1"] { left: 5.555556cqw; width: 19.731319cqw; --paper-left: 1.25cqw; --paper-width: 17.013889cqw; --back-top: 18.107639cqw; }
+  [data-home-v2-how-target-card="2"] { left: 27.152778cqw; width: 21.844444cqw; --paper-left: 1.160694cqw; --paper-width: 19.444444cqw; --back-top: 18.309028cqw; }
+  [data-home-v2-how-target-card="3"] { left: 50.833333cqw; width: 20.634999cqw; --paper-left: 1.319444cqw; --paper-width: 18.055556cqw; --back-top: 18.611111cqw; }
+  [data-home-v2-how-target-card="4"] { left: 73.680556cqw; width: 20.917083cqw; --paper-left: 1.458403cqw; --paper-width: 18.055556cqw; --back-top: 18.333333cqw; }
+
+  .home-v2-how-target-paper,
+  .home-v2-how-target-photo,
+  .home-v2-how-target-edge,
+  .home-v2-how-target-backplate {
+    position: absolute;
+    max-width: none;
+  }
+
+  .home-v2-how-target-paper {
+    z-index: 0;
+    left: var(--paper-left);
+    top: 0;
+    width: var(--paper-width);
+    height: 32.083333cqw;
+  }
+
+  .home-v2-how-target-photo {
+    z-index: 1;
+    left: var(--paper-left);
+    top: .486111cqw;
+    width: var(--paper-width);
+    height: 20.486111cqw;
+    overflow: hidden;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    clip-path: polygon(0 2.2%, 5% .7%, 11% 1.8%, 18% .8%, 31% 2%, 50% 0, 72% 1.3%, 88% .8%, 100% 2%, 100% 100%, 0 100%);
+  }
+
+  .home-v2-how-target-photo img { object-position: center; }
+
+  .home-v2-how-target-edge {
+    z-index: 2;
+    left: var(--paper-left);
+    top: 20.85cqw;
+    width: calc(var(--paper-width) + .7cqw);
+    height: 11.2cqw;
+  }
+
+  .home-v2-how-target-backplate {
+    z-index: 3;
+    left: 0;
+    top: var(--back-top);
+    width: 100%;
+    height: auto;
+  }
+
+  [data-home-v2-how-target-card] h3 {
+    position: absolute;
+    z-index: 4;
+    left: 0;
+    top: 18.45cqw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 2.8cqw;
+    margin: 0;
+    color: #d9d9d9;
+    font-family: Arial, sans-serif;
+    font-size: 1.944444cqw;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+  }
+
+  [data-home-v2-how-target-card="1"] h3 { font-size: 1.805556cqw; }
+
+  [data-home-v2-how-target-card] p {
+    position: absolute;
+    z-index: 4;
+    top: 22.5cqw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-height: 5.35cqw;
+    margin: 0;
+    color: #2e2e2e;
+    font-family: "Home V2 Lessons Chivo", Chivo, sans-serif;
+    font-size: 1.25cqw;
+    font-weight: 200;
+    line-height: 1.333333;
+    text-align: center;
+  }
+
+  [data-home-v2-how-target-card="1"] p { left: 3.472222cqw; top: 23.194444cqw; width: 12.638889cqw; }
+  [data-home-v2-how-target-card="2"] p { left: 2.133333cqw; width: 17.5cqw; top: 22.291667cqw; }
+  [data-home-v2-how-target-card="3"] p { left: 2.777778cqw; width: 15.138889cqw; top: 22.708333cqw; }
+  [data-home-v2-how-target-card="4"] p { left: 2.708333cqw; width: 15.555556cqw; top: 22.291667cqw; }
+  [data-home-v2-how-target-card="4"] .home-v2-how-target-photo img { object-position: 42% center; }
+
+  [data-home-v2-how-target-desktop][data-lang="ru"] [data-home-v2-how-target-card] h3 { font-size: 1.1cqw; }
+  [data-home-v2-how-target-desktop][data-lang="ru"] [data-home-v2-how-target-card] p { font-size: .82cqw; line-height: 1.45; }
+
+  .home-v2-lesson-poster-stage {
+    position: relative;
+    width: min(100%, 1440px);
+    height: auto;
+    aspect-ratio: 1440 / 843;
+    margin-inline: auto;
+    overflow: hidden;
+    container-type: inline-size;
+    background: #3e3e3e;
+  }
+
+  .home-v2-lesson-target-heading {
+    position: absolute;
+    z-index: 8;
+    left: 8.263889cqw;
+    top: 3.611111cqw;
+    width: 20cqw;
+    margin: 0;
+    font-family: "Home V2 Lessons Chivo", Chivo, sans-serif;
+    font-size: 1.944444cqw;
+    font-weight: 400;
+    line-height: 1.944444cqw;
+    text-transform: uppercase;
+  }
+
+  .home-v2-lesson-target-heading span { display: block; color: #f6f6f6; }
+  .home-v2-lesson-target-heading span + span { margin-left: .972222cqw; color: #585858; white-space: nowrap; }
+
+  .home-v2-lesson-target-card {
+    position: absolute;
+    z-index: 1;
+    left: 8.131944cqw;
+    top: 9.3125cqw;
+    width: 84.3125cqw;
+    height: 35.9375cqw;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  .home-v2-lesson-target-photo-frame { position: absolute; inset: 0; overflow: hidden; }
+  .home-v2-lesson-target-photo-frame[data-photo-mode="figma-group"] { top: -8.75cqw; height: 55.875cqw; }
+  .home-v2-lesson-target-photo { width: 83.8125cqw !important; object-fit: cover; }
+
+  .home-v2-lesson-target-gradient {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 19.166667cqw;
+    width: 22.375cqw;
+    height: 16.010417cqw;
+  }
+
+  .home-v2-lesson-target-copy { position: absolute; z-index: 3; inset: 0; }
+  .home-v2-lesson-target-copy h3 {
+    position: absolute;
+    left: 2.076389cqw;
+    top: 21.875cqw;
+    display: flex;
+    flex-direction: column;
+    width: 18cqw;
+    margin: 0;
+    color: #f6f6f6;
+    font-family: "Arial Narrow", "Home V2 Lessons Chivo", sans-serif;
+    font-size: 3.333333cqw;
+    font-stretch: condensed;
+    font-weight: 400;
+    line-height: .875;
+    text-transform: uppercase;
+  }
+
+  .home-v2-lesson-target-copy h3 span { color: #f6f6f6; }
+  .home-v2-lesson-target-copy [data-home-v2-lesson-audience] {
+    position: absolute;
+    left: 2.291667cqw;
+    top: 29.791667cqw;
+    margin: 0;
+    color: #aee4c0;
+    font-family: "Home V2 Lessons Montserrat", Montserrat, sans-serif;
+    font-size: 1.666667cqw;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .home-v2-lesson-target-bottom-edge {
+    position: absolute;
+    z-index: 6;
+    left: -1.041667cqw;
+    top: 42.152014cqw;
+    width: 101.770278cqw;
+    height: 3.815903cqw;
+    max-width: none;
+    transform: none;
+  }
+
+  .home-v2-lesson-target-selector {
+    position: absolute;
+    z-index: 7;
+    left: 8.263889cqw;
+    top: 9.305556cqw;
+    display: flex;
+    width: 83.75cqw;
+    height: 4.5625cqw;
+  }
+
+  .home-v2-lesson-target-selector button {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    height: 100%;
+    flex: 1 1 17.16%;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    padding: 0 .8cqw;
+    border: 0;
+    background: transparent;
+    color: #2e2e2e;
+  }
+
+  .home-v2-lesson-target-selector button[data-active="true"] { flex-basis: 31.567%; }
+  .home-v2-lesson-target-selector button > img { z-index: 0; object-fit: fill; }
+  .home-v2-lesson-target-selector [data-lesson-selector-title] {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    font-family: "Home V2 Lessons Montserrat", Montserrat, sans-serif;
+    font-size: 1.25cqw;
+    font-weight: 500;
+    line-height: 1;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .home-v2-lesson-target-selector button[data-active="true"] [data-lesson-selector-title] { font-size: 1.666667cqw; }
+
+  .home-v2-lesson-target-description {
+    position: absolute;
+    z-index: 8;
+    left: 8.263889cqw;
+    top: 46.319444cqw;
+    width: 32.013889cqw;
+    margin: 0;
+    color: #fff;
+    font-family: "Home V2 Lessons Montserrat", Montserrat, sans-serif;
+    font-size: 1.666667cqw;
+    font-weight: 400;
+    line-height: 2.222222cqw;
+  }
+
+  .home-v2-lesson-target-price {
+    position: absolute;
+    z-index: 8;
+    left: 69.375cqw;
+    top: 45.902778cqw;
+    width: 23.084306cqw;
+    color: #fff;
+    font-family: "Home V2 Lessons Montserrat", Montserrat, sans-serif;
+    font-size: 3.333333cqw;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    transform: rotate(-1.302deg);
+  }
+
+  .home-v2-lesson-target-cta {
+    position: absolute;
+    z-index: 9;
+    left: 72.736597cqw;
+    top: 49.885972cqw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15.605cqw;
+    height: 4.768cqw;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-family: "Home V2 Lessons Montserrat", Montserrat, sans-serif;
+    font-size: 1.4cqw;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: .019cqw;
+    text-transform: uppercase;
+    transform: rotate(-1.302deg);
+  }
+
+  .home-v2-lesson-target-cta > img { z-index: 0; object-fit: fill; }
+  .home-v2-lesson-target-cta > span { position: relative; z-index: 1; }
+  [data-home-v2-lessons-target][data-lang="ru"] .home-v2-lesson-target-heading { font-size: 1.55cqw; }
+  [data-home-v2-lessons-target][data-lang="ru"] .home-v2-lesson-target-selector [data-lesson-selector-title] { font-size: .9cqw; }
+  [data-home-v2-lessons-target][data-lang="ru"] .home-v2-lesson-target-selector button[data-active="true"] [data-lesson-selector-title] { font-size: 1.25cqw; }
+  [data-home-v2-lessons-target][data-lang="ru"] .home-v2-lesson-target-description { font-size: 1.35cqw; line-height: 1.9cqw; }
+
+  [data-home-v2-included] {
+    min-height: 0 !important;
+    padding: 0 !important;
+    background: #3e3e3e;
+  }
+
+  [data-home-v2-included-target-desktop] {
+    position: relative;
+    display: block;
+    width: min(100%, 1440px);
+    aspect-ratio: 1440 / 639;
+    margin-inline: auto;
+    overflow: hidden;
+    container-type: inline-size;
+    background: #3e3e3e;
+  }
+
+  .home-v2-included-target-stage > img,
+  .home-v2-included-target-feature,
+  .home-v2-included-target-description { position: absolute; max-width: none; }
+  .home-v2-included-target-cut-wide { z-index: 1; left: -.716736cqw; top: 3.569444cqw; width: 101.814792cqw; height: 5.288194cqw; }
+  .home-v2-included-target-fills { z-index: 2; left: 26.388889cqw; top: 4.236111cqw; width: 55.486111cqw; height: 40.138889cqw; }
+  .home-v2-included-target-band { z-index: 3; object-fit: fill; }
+  .home-v2-included-target-band-one { left: -.417639cqw; top: 19.236111cqw; width: 101.537083cqw; height: 3.694444cqw; }
+  .home-v2-included-target-band-coral { z-index: 4; left: -1.25cqw; top: 21.547778cqw; width: 110.590278cqw; height: 3.470069cqw; }
+  .home-v2-included-target-band-dark { left: -1.25cqw; top: 22.569444cqw; width: 110.590278cqw; height: 3.164306cqw; }
+  .home-v2-included-target-band-two { left: -.767153cqw; top: 24.833889cqw; width: 101.561042cqw; height: 4.611319cqw; }
+  .home-v2-included-target-band-gray { z-index: 4; left: -5.277778cqw; top: 27.638889cqw; width: 106.946736cqw; height: 2.400972cqw; }
+
+  .home-v2-included-target-feature { z-index: 6; margin: 0; }
+  .home-v2-included-target-artwork { position: absolute; z-index: 5; max-width: none; object-fit: fill; }
+  .home-v2-included-target-feature h3,
+  .home-v2-included-target-feature p { position: absolute; z-index: 7; margin: 0; }
+  .home-v2-included-target-feature h3 {
+    color: #71a783;
+    font-family: "Bebas Neue", "Arial Narrow", sans-serif;
+    font-size: 1.666667cqw;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .home-v2-included-target-feature p {
+    font-family: "Home V2 Lessons Chivo", Chivo, sans-serif;
+    font-size: 1.555556cqw;
+    font-weight: 400;
+    line-height: 1.142857;
+  }
+
+  .home-v2-included-target-feature-rashguard { left: 14.166667cqw; top: 7.777778cqw; width: 37.25cqw; height: 33cqw; }
+  .home-v2-included-target-feature-rashguard .home-v2-included-target-artwork { left: 2.569444cqw; top: 2.986111cqw; width: 20.625cqw; height: 26.388889cqw; transform: rotate(1.267deg); }
+  .home-v2-included-target-feature-rashguard h3 { left: 31.944444cqw; top: .416667cqw; width: 5.277778cqw; }
+  .home-v2-included-target-feature-rashguard p { left: 17.708333cqw; top: 0; width: 11.25cqw; color: #585858; }
+
+  .home-v2-included-target-feature-zinc { left: 34.513889cqw; top: 8.125cqw; width: 27.75cqw; height: 30cqw; }
+  .home-v2-included-target-feature-zinc .home-v2-included-target-artwork { left: -1.458333cqw; top: 9.722222cqw; width: 16.180556cqw; height: 20.416667cqw; }
+  .home-v2-included-target-feature-zinc h3 { left: 18.402778cqw; top: 0; width: 4cqw; }
+  .home-v2-included-target-feature-zinc p { left: 10.833333cqw; top: 4.027778cqw; width: 11.875cqw; color: #fe746a; }
+
+  .home-v2-included-target-feature-camera { left: 59.583333cqw; top: 7.777778cqw; width: 28.057569cqw; height: 32.5cqw; }
+  .home-v2-included-target-feature-camera .home-v2-included-target-artwork { left: -2.361111cqw; top: 7.430556cqw; width: 26.388889cqw; height: 24.027778cqw; transform: rotate(-7.171deg); }
+  .home-v2-included-target-feature-camera h3 { left: 18.888819cqw; top: .625cqw; width: 9.16875cqw; font-size: 2.666667cqw; line-height: 1.354; }
+  .home-v2-included-target-feature-camera p { left: 5.972222cqw; top: 1.041667cqw; width: 11.426181cqw; color: #585858; }
+
+  .home-v2-included-target-cut { z-index: 5; }
+  .home-v2-included-target-cut-one { left: 61.25cqw; top: 6.527778cqw; width: 4.785486cqw; height: 5.561736cqw; }
+  .home-v2-included-target-cut-two { left: 43.956458cqw; top: 14.166667cqw; width: 1.742014cqw; height: 1.53625cqw; }
+  .home-v2-included-target-cut-four { left: 60.486111cqw; top: 12.152778cqw; width: 5.695139cqw; height: 5.524583cqw; }
+  .home-v2-included-target-cut-five { left: 42.569444cqw; top: 5.763889cqw; width: 4.766944cqw; height: 7.556389cqw; }
+
+  .home-v2-included-target-description {
+    z-index: 8;
+    left: 5.486111cqw;
+    top: 37.152778cqw;
+    width: 89.033264cqw;
+    margin: 0;
+    color: #f6f6f6;
+    font-family: "Home V2 Lessons Chivo", Chivo, sans-serif;
+    font-size: 1.944444cqw;
+    font-weight: 400;
+    line-height: 2.777778cqw;
+    white-space: nowrap;
+  }
+
+  [data-home-v2-included-target-desktop][data-lang="ru"] .home-v2-included-target-feature h3 { font-size: 1.2cqw; }
+  [data-home-v2-included-target-desktop][data-lang="ru"] .home-v2-included-target-feature-camera h3 { font-size: 1.7cqw; }
+  [data-home-v2-included-target-desktop][data-lang="ru"] .home-v2-included-target-feature p { font-size: 1.25cqw; }
+  [data-home-v2-included-target-desktop][data-lang="ru"] .home-v2-included-target-description { font-size: 1.55cqw; }
+
+}
+
+@media (min-width: 1440px) {
+  [data-home-v2-hero] > .home-v2-hero-desktop-en {
+    width: var(--home-v2-desktop-stage-width);
+    margin-inline: auto;
   }
 }
 
@@ -1040,10 +1652,21 @@ body {
 
 @media (min-width: 1440px) {
   [data-home-v2-how-fluid-desktop] {
-    width: 100%;
+    width: var(--home-v2-desktop-stage-width);
     height: auto;
+    margin-inline: auto;
     aspect-ratio: 1440 / 720;
     container-type: inline-size;
+  }
+
+  [data-home-v2-lessons-block] {
+    height: auto;
+    aspect-ratio: auto;
+  }
+
+  .home-v2-lesson-poster-stage {
+    width: var(--home-v2-desktop-stage-width);
+    margin-inline: auto;
   }
 
   .home-v2-how-desktop-canvas {
@@ -1405,16 +2028,29 @@ body {
   [data-home-v2-gallery-instagram] { display: none; }
 }
 
-@media (min-width: 1440px) {
+/* Header V5 keeps the existing mobile/tablet header below 1200px. */
+.home-v5-desktop-logo { display: none; }
+.home-v5-legacy-logo { display: contents; }
+@media (max-width: 1199px) {
+  [data-home-v2-root] [data-home-v2-header] [data-home-v2-brand-logo] img.home-v5-desktop-logo { display: none; }
+}
+
+@media (min-width: 1200px) {
   [data-home-v2-header="true"] {
+    width: 100%;
+    max-width: none;
     height: 86px;
-    background: #777777;
-    color: #2e2e2e;
+    margin-inline: 0;
+    overflow: hidden;
+    background: #1f1f1f;
+    color: #ffffff;
     box-shadow: none;
     backdrop-filter: none;
   }
 
   [data-home-v2-header="true"] [data-home-v2-header-strip="true"] {
+    position: relative;
+    z-index: 1;
     display: block;
     height: 86px;
   }
@@ -1422,11 +2058,11 @@ body {
   [data-home-v2-header="true"] [data-home-v2-header-frame="true"] {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr) 639.004px minmax(0, 1fr);
     align-items: center;
-    column-gap: var(--home-v2-grid-gap);
-    width: calc(100% - (2 * var(--home-v2-fluid-gutter)));
-    max-width: none;
+    column-gap: 20px;
+    width: calc(100% - 13.888889%);
+    max-width: 100%;
     height: 86px;
     margin-inline: auto;
     padding: 0;
@@ -1434,13 +2070,19 @@ body {
 
   [data-home-v2-header="true"] [data-home-v2-brand-logo="true"] {
     position: relative;
-    grid-column: 1 / span 2;
-    justify-self: center;
+    grid-column: 1;
+    justify-self: start;
     display: block;
     width: 79.1973px;
     height: 35.3928px;
     transform: none;
+    margin-top: -0.607px;
+    margin-left: -0.999px;
   }
+
+  [data-home-v2-header="true"] .home-v5-legacy-logo { display: none; }
+  [data-home-v2-header="true"] .home-v5-desktop-logo { display: block; }
+  [data-home-v2-root] [data-home-v2-header="true"] .home-v2-top-header-media { display: none; }
 
   [data-home-v2-header="true"] [data-home-v2-brand-logo="true"] img {
     display: block;
@@ -1451,42 +2093,45 @@ body {
 
   [data-home-v2-header="true"] [data-home-v2-primary-navigation="true"] {
     position: relative;
-    grid-column: 4 / span 6;
+    grid-column: 2;
     justify-self: center;
     display: block;
-    width: 639px;
+    width: 639.004px;
     height: 15px;
-    margin: 0;
+    margin: -1px 0 0;
   }
 
   [data-home-v2-header="true"] [data-home-v2-nav-link="true"] {
     position: absolute;
     top: 0;
     height: 15px;
-    color: #2e2e2e;
+    color: #ffffff;
     font-family: Arial, sans-serif;
     font-size: 12px;
     font-weight: 400;
     line-height: normal;
     letter-spacing: 0;
     text-transform: uppercase;
+    white-space: nowrap;
   }
 
   [data-home-v2-nav-link="true"]:nth-child(1) { left: 0; width: 60px; }
   [data-home-v2-nav-link="true"]:nth-child(2) { left: 101px; width: 60px; }
-  [data-home-v2-nav-link="true"]:nth-child(3) { left: 202px; width: 60px; }
-  [data-home-v2-nav-link="true"]:nth-child(4) { left: 303px; width: 68px; }
-  [data-home-v2-nav-link="true"]:nth-child(5) { left: 412px; width: 50px; }
-  [data-home-v2-nav-link="true"]:nth-child(6) { left: 503px; width: 29px; }
-  [data-home-v2-nav-link="true"]:nth-child(7) { left: 573px; width: 66px; }
+  [data-home-v2-nav-link="true"]:nth-child(3) { left: 201px; width: 60px; }
+  [data-home-v2-nav-link="true"]:nth-child(4) { left: 302.004px; width: 68px; }
+  [data-home-v2-nav-link="true"]:nth-child(5) { left: 411.004px; width: 50px; }
+  [data-home-v2-nav-link="true"]:nth-child(6) { left: 503.004px; width: 29px; }
+  [data-home-v2-nav-link="true"]:nth-child(7) { left: 573.004px; width: 66px; }
+  [data-home-v2-header="true"] [data-home-v2-nav-link="true"]:hover { color: #fe746a; }
 
   [data-home-v2-header="true"] [data-home-v2-header-actions="true"] {
     position: relative;
-    grid-column: 10 / span 3;
-    justify-self: center;
+    grid-column: 3;
+    justify-self: end;
     display: flex;
     gap: 11px;
     margin-left: 0;
+    margin-top: -1px;
   }
 
   [data-home-v2-header="true"] [data-home-v2-language-switcher="true"],
@@ -1499,12 +2144,12 @@ body {
     justify-content: center;
     height: 41px;
     border: 0;
-    border-radius: 3px;
+    border-radius: 33px;
     color: #ffffff;
-    font-family: Arial, sans-serif;
+    font-family: "Home V2 Top Inter", Arial, sans-serif;
     font-size: 12px;
-    font-weight: 700;
-    line-height: normal;
+    font-weight: 800;
+    line-height: 15px;
     letter-spacing: 0;
     text-transform: uppercase;
     box-shadow: none;
@@ -1519,24 +2164,36 @@ body {
   [data-home-v2-header="true"] [data-home-v2-book-now="true"] {
     width: 112px;
     padding: 0;
-    background: #fe746a;
+    background: #fe746a url('/design/home-v5/header/book-now-cta.svg') center / 100% 100% no-repeat;
   }
 
-  [data-home-v2-header="true"][data-home-v2-header-locale="ru"] [data-home-v2-nav-link="true"]:last-child {
-    width: 90px;
-    font-size: 10.5px;
-    white-space: nowrap;
+  [data-home-v2-header="true"] [data-home-v2-menu-control="true"] { display: none; }
+
+  [data-home-v2-header="true"][data-home-v2-header-locale="ru"] [data-home-v2-nav-link="true"] {
+    position: static;
+    width: auto;
+    flex: none;
+    font-size: 12px;
   }
 
   [data-home-v2-header="true"][data-home-v2-header-locale="ru"] [data-home-v2-primary-navigation="true"] {
-    width: 663px;
+    display: flex;
+    align-items: center;
+    gap: 41px;
+    width: max-content;
+  }
+  [data-home-v2-header="true"][data-home-v2-header-locale="ru"] [data-home-v2-header-frame="true"] {
+    grid-template-columns: minmax(0, 1fr) max-content minmax(0, 1fr);
   }
 }
 
-@media (min-width: 640px) and (max-width: 1439px) {
+@media (min-width: 640px) and (max-width: 1199px) {
   [data-home-v2-header="true"] {
+    width: 100%;
+    max-width: none;
     height: 86px;
-    overflow: visible;
+    margin-inline: 0;
+    overflow: hidden;
     background: #777777;
     color: #2e2e2e;
     box-shadow: none;
@@ -1544,13 +2201,15 @@ body {
   }
 
   [data-home-v2-header="true"] [data-home-v2-header-strip="true"] {
+    position: relative;
+    z-index: 1;
     height: 86px;
   }
 
   [data-home-v2-header="true"] [data-home-v2-header-frame="true"] {
     display: flex;
-    width: min(calc(100% - (2 * var(--home-v2-gutter))), var(--home-v2-content-max));
-    max-width: none;
+    width: min(calc(100% - (2 * var(--home-v2-gutter))), 1248px);
+    max-width: 100%;
     height: 86px;
     margin-inline: auto;
     padding: 0;
@@ -1625,18 +2284,34 @@ body {
   }
 }
 
-@media (min-width: 1200px) and (max-width: 1439px) {
-  [data-home-v2-header="true"] [data-home-v2-nav-link="true"] {
-    color: #2e2e2e;
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0;
-    white-space: nowrap;
+@media (min-width: 640px) {
+  [data-home-v2-header="true"] .home-v2-top-header-media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #2e2e2e;
+    pointer-events: none;
   }
 
-  [data-home-v2-header="true"] [data-home-v2-menu-control="true"] {
-    display: none;
+  [data-home-v2-header="true"] .home-v2-top-header-media video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 60%;
+    filter: grayscale(1);
+  }
+
+  [data-home-v2-header="true"] .home-v2-top-header-overlay {
+    position: absolute;
+    inset: 0;
+    display: block;
+    background: #484848;
+    opacity: .46;
   }
 }
 
@@ -2956,10 +3631,10 @@ body {
     background: #777; color: #2e2e2e; box-shadow: none; backdrop-filter: none;
   }
   [data-home-v2-root] [data-home-v2-header] + [data-home-v2-main-flow] { padding-top: 0; margin-top: 0; }
-  .home-v2-top-header-media { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .home-v2-top-header-media { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
   .home-v2-top-header-media video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; filter: grayscale(1); }
   .home-v2-top-header-overlay { position: absolute; inset: 0; background: #484848; opacity: .46; }
-  [data-home-v2-root] [data-home-v2-header] [data-home-v2-header-strip] { display: block; height: 86px; }
+  [data-home-v2-root] [data-home-v2-header] [data-home-v2-header-strip] { position: relative; z-index: 1; display: block; height: 86px; }
   [data-home-v2-root] [data-home-v2-header] [data-home-v2-header-frame] { position: relative; display: block; width: 100%; max-width: none; height: 86px; margin: 0; padding: 0; }
   [data-home-v2-root] [data-home-v2-header] [data-home-v2-brand-logo] { position: absolute; left: 20px; top: 32px; display: block; width: 50.686px; height: 22.651px; transform: none; }
   [data-home-v2-root] [data-home-v2-header] [data-home-v2-brand-logo] img { display: block; width: 50.686px; height: 22.651px; max-width: none; }
@@ -3019,4 +3694,281 @@ body {
   .home-v2-top-benefits article:nth-child(2) p { top: 4.615385cqw; }
   .home-v2-top-hero:lang(ru) .home-v2-top-benefits h2 { width: max-content; max-width: 100%; }
   .home-v2-top-card p { white-space: pre-line; }
+}
+
+@media (min-width: 1200px) {
+  [data-home-v2-hero] > .home-v2-hero-target-stage,
+  [data-home-v2-lessons-target].home-v2-lesson-poster-stage {
+    width: min(100%, 1440px);
+    max-width: 1440px;
+    margin-inline: auto;
+  }
+
+  [data-home-v2-hero] > .home-v2-hero-target-stage {
+    height: auto !important;
+    aspect-ratio: 1440 / 726 !important;
+    background: linear-gradient(180deg, #3e3e3e 0%, #9c9c9c 100%);
+  }
+}
+
+/* Home V5 / How It Works desktop handoff. Coordinates scale with the full section width. */
+[data-home-v5-how] { display: none; }
+@media (min-width: 1200px) {
+  [data-home-v2-root] [data-home-v2-how-it-works] {
+    height: auto !important;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    background: #1f1f1f;
+  }
+  [data-home-v2-root] [data-home-v2-how-it-works] [data-home-v2-how-target-desktop],
+  [data-home-v2-root] [data-home-v2-how-it-works] [data-home-v2-how-fluid-desktop],
+  [data-home-v2-root] [data-home-v2-how-it-works] .home-v2-top-how { display: none !important; }
+  [data-home-v2-root] [data-home-v2-how-it-works] [data-home-v5-how] {
+    display: block;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1440 / 730;
+    margin: 0;
+    overflow: hidden;
+    container-type: inline-size;
+    background: #1f1f1f;
+  }
+  [data-home-v5-how-heading] {
+    position: absolute;
+    z-index: 5;
+    top: 2.777778cqw;
+    left: 50%;
+    width: max-content;
+    margin: 0;
+    color: #f6f6f6;
+    font-family: "Home V5 Recursive", monospace;
+    font-size: 2.666667cqw;
+    font-weight: 400;
+    font-variation-settings: "MONO" 1, "CASL" 1, "CRSV" .5, "slnt" 0, "wght" 400;
+    line-height: 2.916667cqw;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transform: translateX(-50%);
+  }
+  [data-home-v5-how-heading] span:last-child { color: #fe746a; }
+  [data-home-v5-how-card] { position: static; }
+  [data-home-v5-how-card] :is(img, h3, p) { position: absolute; max-width: none; margin: 0; }
+  [data-home-v5-panel] { z-index: 1; }
+  [data-home-v5-photo] { z-index: 2; }
+  [data-home-v5-label-surface] { z-index: 3; }
+  [data-home-v5-card-title] {
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2e2e2e;
+    font: 400 1.5cqw/1 Arial, sans-serif;
+    white-space: nowrap;
+  }
+  [data-home-v5-card-copy] {
+    z-index: 3;
+    color: #f6f6f6;
+    font-family: "Home V2 Lessons Chivo", Chivo, sans-serif;
+    font-size: 1.375cqw;
+    font-weight: 200;
+    line-height: 2cqw;
+    text-align: left;
+    white-space: pre-line;
+  }
+  [data-home-v5-how][data-lang="ru"] [data-home-v5-how-heading] { font-size: 2.25cqw; }
+  [data-home-v5-how][data-lang="ru"] [data-home-v5-card-title] { font-size: .972222cqw; }
+  [data-home-v5-how][data-lang="ru"] [data-home-v5-card-copy] { font-size: 1.03cqw; line-height: 1.52cqw; }
+}
+
+/* V5 combined 1440 × 1077 handoff: the gear spans the two background regions. */
+@media (min-width: 1200px) {
+  [data-home-v2-root] [data-home-v2-lessons-block] {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: auto;
+    margin: 0;
+    padding: 0;
+    background: #201f1f;
+  }
+  [data-home-v5-lessons-included] {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1440 / 1077;
+    container-type: inline-size;
+    overflow: hidden;
+    color: #f6f6f6;
+    background: #201f1f;
+  }
+  [data-home-v5-lessons-included] :is(h2, h3, p) { margin: 0; }
+  .home-v5-li-art { position: absolute; max-width: none; pointer-events: none; }
+  .home-v5-li-band { position: absolute; inset: 58.541667cqw 0 0; background: #474747; }
+  .home-v5-li-heading {
+    position: absolute; top: 6.944444cqw; left: 0; width: 100%;
+    font-family: "Home V5 Recursive", monospace;
+    font-weight: 400;
+    font-size: 2.666667cqw;
+    line-height: 2.916667cqw;
+    font-variation-settings: "MONO" 1, "CASL" 1, "CRSV" .5, "slnt" 0, "wght" 400;
+    text-align: center; text-transform: uppercase;
+  }
+  .home-v5-li-title {
+    position: absolute; left: 16.875278cqw; top: 15.486111cqw; width: 14.861111cqw;
+    font: 700 2.222222cqw/2.916667cqw "Home V2 Lessons Montserrat", sans-serif;
+    color: #353535; text-align: center; text-transform: uppercase;
+  }
+  .home-v5-li-title span, .home-v5-li-price span { display: block; }
+  .home-v5-li-price {
+    position: absolute; left: 17.639167cqw; top: 22.569444cqw; width: 13.333333cqw;
+    font: 700 2.5cqw/2.5cqw "Home V2 Lessons Montserrat", sans-serif;
+    text-align: center; color: #353535;
+  }
+  .home-v5-li-price span:first-child { color: #fe746a; }
+  .home-v5-li-price[data-long] { font-size: 2.05cqw; }
+  .home-v5-li-description {
+    position: absolute; left: 11.875cqw; top: 29.861111cqw; width: 24.930556cqw; height: 11.666667cqw;
+    display: flex; align-items: center; justify-content: center;
+    font: 200 1.527778cqw/2.083333cqw "Home V2 Lessons Chivo", sans-serif;
+    text-align: center; white-space: pre-line; color: #fff;
+  }
+  [data-home-v5-lessons-included][data-lesson="group"] .home-v5-li-description {
+    left: 12.916667cqw; top: 31.458333cqw; width: 22.916667cqw; height: 8.888889cqw;
+    font-size: 1.666667cqw; line-height: 2.222222cqw;
+  }
+  [data-home-v5-lessons-included][data-lang="en"][data-lesson="group"] .home-v5-li-description { text-transform: capitalize; }
+  .home-v5-li-photo { position: absolute; left: 47.5cqw; top: 14.583333cqw; width: 40.625cqw; height: 27.083333cqw; overflow: hidden; border-radius: 11.111111cqw; }
+  .home-v5-li-control { position: absolute; top: 25.694444cqw; width: 4.305556cqw; height: 4.305556cqw; z-index: 3; padding: 0; border: 0; background: transparent; cursor: pointer; }
+  .home-v5-li-prev { left: 45.277778cqw; }
+  .home-v5-li-next { left: 86.388889cqw; }
+  .home-v5-li-control > img:first-child { width: 100%; height: auto; }
+  .home-v5-li-arrow { position: absolute; left: 50%; top: 50%; width: 1.180556cqw; height: 2.083333cqw; transform: translate(-50%, -50%); }
+  .home-v5-li-cta { position: absolute; left: 75.555556cqw; top: 39.305556cqw; width: 13.472431cqw; height: 4.785cqw; z-index: 4; padding: 0; border: 0; background: transparent; cursor: pointer; }
+  .home-v5-li-cta img { width: 100%; height: auto; }
+  .home-v5-li-cta span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font: 700 1.4cqw/1.1 "Home V2 Lessons Montserrat", sans-serif; color: #353535; text-transform: uppercase; }
+  :is(.home-v5-li-control, .home-v5-li-cta):focus-visible { outline: 3px solid #fff; outline-offset: 4px; border-radius: 999px; }
+  .home-v5-li-included { position: absolute; left: 0; top: 47.013889cqw; width: 100%; height: 27.777778cqw; }
+  .home-v5-li-feature { position: absolute; left: 42.152778cqw; width: 37.222222cqw; height: 5.138889cqw; padding-inline: 1.666667cqw; display: flex; align-items: center; justify-content: center; text-align: center; font: 200 1.666667cqw/1.777778cqw "Home V2 Lessons Chivo", sans-serif; }
+  .home-v5-li-rashguard { top: 5.347222cqw; }
+  .home-v5-li-camera { top: 12.430556cqw; color: #353535; font-size: 1.55cqw; }
+  [data-home-v5-lessons-included][data-lang="ru"] .home-v5-li-title { font-size: 1.6cqw; }
+  [data-home-v5-lessons-included][data-lang="ru"] .home-v5-li-description { font-size: 1.5cqw; line-height: 2.05cqw; }
+  [data-home-v5-lessons-included][data-lang="ru"] .home-v5-li-feature { font-family: Arial, sans-serif; font-size: 1.4cqw; line-height: 1.75cqw; }
+  [data-home-v5-lessons-included][data-lang="ru"] .home-v5-li-cta span { font-size: 1.15cqw; }
+}
+
+/* V5 desktop: the handoff is one continuous 1440 × 2203 composition. */
+[data-home-v5-reviews] { display: none; }
+@media (min-width: 1200px) {
+  [data-home-v2-surf-stack] { padding: 0; background: #598d80; }
+  [data-home-v2-surf-stack] > [data-home-v2-wave-layer] { display: none; }
+  [data-home-v2-surf-stack-content] > [data-home-v2-flow-stage] { margin: 0; }
+  [data-home-v5-rentals], [data-home-v5-conditions], [data-home-v5-reviews] {
+    position: relative; width: 100%; container-type: inline-size; background: #598d80;
+    color: #f6f6f6; font-family: "Segoe UI", Arial, sans-serif; font-weight: 700;
+  }
+  [data-home-v5-rentals] { aspect-ratio: 1440 / 900; overflow: hidden; scroll-margin-top: 86px; }
+  [data-home-v5-conditions] { aspect-ratio: 1440 / 684; }
+  [data-home-v5-reviews] { display: block; aspect-ratio: 1440 / 619; overflow: hidden; }
+  [data-home-v2-reviews] { margin: 0; padding: 0; background: #598d80; }
+  [data-home-v2-reviews] > :not([data-home-v5-reviews]) { display: none; }
+  .home-v5-surf-art { max-width: none; pointer-events: none; }
+  .home-v5-surf-text { display: flex; align-items: center; }
+  .home-v5-surf-montserrat { font-family: "Home V2 Lessons Montserrat", sans-serif; }
+  .home-v5-surf-chivo { font-family: "Home V2 Lessons Chivo", Arial, sans-serif; }
+  .home-v5-rental-muted { color: #f6f6f6bf; font-family: Arial, sans-serif; }
+  .home-v5-rental-photo { position: absolute; left: 20cqw; top: -30.416667cqw; width: 71.527778cqw; height: 71.527778cqw; border-radius: 50%; overflow: hidden; }
+  .home-v5-rental-photo img { position: absolute; top: 30.416667cqw; left: 0; width: 71.527778cqw; height: 41.111111cqw; max-width: none; }
+  .home-v5-rental-heading {
+    position: absolute; left: 24.930556cqw; top: .833333cqw; margin: 0;
+    font-family: "Home V5 Recursive", Arial, sans-serif; font-size: 2.666667cqw; line-height: 2.916667cqw; font-weight: 700;
+    font-variation-settings: "MONO" 0, "CASL" 0, "CRSV" .5, "slnt" 0, "wght" 700; text-transform: uppercase;
+  }
+  .home-v5-surf-cta { display: block; padding: 0; border: 0; background: transparent; cursor: pointer; text-decoration: none; }
+  .home-v5-surf-cta > img { display: block; width: 100%; height: 100%; }
+  .home-v5-surf-cta > span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; color: #f6f6f6; font: 700 1.3524cqw/1.50266cqw "Segoe UI", Arial, sans-serif; letter-spacing: .0263cqw; }
+  .home-v5-rent-cta > span { color: #fe746a; }
+  .home-v5-surf-cta:hover { filter: brightness(1.14); }
+  .home-v5-surf-cta:focus-visible { outline: 3px solid #fff; outline-offset: 4px; border-radius: 3cqw; }
+  .home-v5-wave-height { display: flex; align-items: baseline; gap: .7cqw; color: #2e2e2e; white-space: nowrap; line-height: 6.733cqw; }
+  .home-v5-wave-height strong { font-size: 5.416667cqw; }
+  .home-v5-wave-height > span { font-size: 2.95cqw; }
+  .home-v5-forecast-map, .home-v5-livecam { overflow: hidden; border-radius: 6.25cqw; background: #2e2e2e; }
+  .home-v5-forecast-map { box-shadow: 0 2.7cqw 3.5cqw -1cqw #0003; }
+  .home-v5-livecam { display: flex; flex-direction: column; }
+  .home-v5-camera-stream { flex: 1; min-height: 0; }
+  .home-v5-camera-placeholder { height: 100%; display: grid; place-items: center; font-size: 1cqw; }
+  .home-v5-livecam [data-live-cam-attribution-footer] { height: 3.3625cqw; flex-shrink: 0; padding-inline: 1.9cqw; }
+  .home-v5-livecam [data-live-cam-provider-identity] > img { width: 1.7cqw; height: 1.7cqw; }
+  .home-v5-livecam [data-live-cam-provider-identity] p:first-child { font-size: .56cqw; }
+  .home-v5-livecam [data-live-cam-provider-identity] p:last-child { font-size: .43cqw; }
+  .home-v5-livecam [data-live-cam-provider-action] { width: 5.7cqw; min-height: 2.05cqw; font-size: .42cqw; }
+  .home-v5-stat-centered { justify-content: center; }
+  .home-v5-stat-dark { color: #2e2e2e; }
+  .home-v5-stat-muted { color: #f6f6f68c; }
+  .home-v5-conditions-cta > span { inset: 2.6cqw .8cqw .8cqw 4.6cqw; font-family: "Home V2 Lessons Chivo", Arial, sans-serif; font-size: 1.388889cqw; line-height: 2.222222cqw; text-transform: uppercase; letter-spacing: 0; }
+  .home-v5-review-surface { filter: drop-shadow(0 2.2cqw 2.2cqw #0003); }
+  .home-v5-review blockquote { display: flex; align-items: center; justify-content: center; margin: 0; text-align: center; white-space: pre-line; color: #353535; font: 700 1.055556cqw/1.666667cqw "Home V2 Lessons Montserrat", Arial, sans-serif; }
+  .home-v5-review-emoji { font-size: 1.666667cqw; line-height: 0; vertical-align: baseline; }
+  .home-v5-review-name, .home-v5-review-date { color: #fe746a; font-family: "Home V2 Lessons Montserrat", Arial, sans-serif; text-transform: uppercase; }
+  .home-v5-review-name { font-weight: 900; }
+  .home-v5-review-link { border-radius: 4.3cqw; }
+  .home-v5-review-link:focus-visible { outline: 3px solid #fe746a; outline-offset: 4px; }
+  [data-home-v5-rentals][data-lang="ru"] .home-v5-surf-chivo { font-family: Arial, sans-serif; }
+  [data-home-v5-conditions][data-lang="ru"] .home-v5-conditions-cta > span { font-family: Arial, sans-serif; font-size: 1.15cqw; line-height: 1.7cqw; }
+  [data-home-v5-reviews][data-lang="ru"] blockquote { font-size: 1cqw; line-height: 1.4cqw; }
+}
+
+/* End V5 desktop surf sections. */
+
+/* V5 desktop FAQ, Events and Gallery. */
+[data-home-v5-faq], [data-home-v5-events], [data-home-v5-gallery] { display: none; }
+@media (min-width: 1200px) {
+  [data-home-v2-faq], [data-home-v2-events], [data-home-v2-gallery] { padding: 0 !important; margin: 0; }
+  [data-home-v2-faq] > :not([data-home-v5-faq]), [data-home-v2-events] > :not([data-home-v5-events]), [data-home-v2-gallery] > :not([data-home-v5-gallery]) { display: none !important; }
+  [data-home-v5-faq], [data-home-v5-events], [data-home-v5-gallery] { display: block; position: relative; width: 100%; container-type: inline-size; }
+  .v5-feg-art { position: absolute; pointer-events: none; max-width: none; }
+  [data-home-v5-faq] { color: #494949; background: #f6f6f6; overflow: hidden; }
+  .v5-faq-texture { min-height: 100%; object-fit: cover; }
+  .v5-faq-heading { position: absolute; left: 78.12535cqw; top: 21.1cqw; margin: 0; font: 900 3.333333cqw/2.9272cqw "Home V2 Lessons Montserrat", sans-serif; color: #1a1a1a; }
+  .v5-faq-items { position: relative; margin-left: 12.70868cqw; width: 48cqw; padding-top: 9.305556cqw; padding-bottom: 6.180556cqw; }
+  .v5-faq-item { border-bottom: .0625cqw solid #777; }
+  .v5-faq-item + .v5-faq-item { margin-top: 1cqw; }
+  .v5-faq-item > button { position: relative; display: block; width: 100%; min-height: 6.0625cqw; padding: 1.5cqw 3.7cqw 2.5625cqw 0; text-align: left; cursor: pointer; font: 700 1.5cqw/2.0625cqw "Segoe UI", Arial, sans-serif; }
+  .v5-faq-control { position: absolute; right: -.8cqw; top: 1.4cqw; width: 3.402778cqw; height: 4.305556cqw; }
+  .v5-faq-control > img:first-child { width: 3.402778cqw; height: auto; }
+  .v5-faq-plus { position: absolute; left: .979167cqw; top: .229167cqw; width: 1.527778cqw; height: 1.527778cqw; transition: transform .2s; }
+  .v5-faq-plus-open { transform: rotate(45deg); }
+  .v5-faq-answer { padding: 0 3cqw 1.8cqw 0; font: 400 1.2cqw/1.85cqw "Segoe UI", Arial, sans-serif; }
+  .v5-faq-answer p { margin: 0; }
+  [data-home-v5-events], [data-home-v5-gallery] { background: #2e2e2e; color: #353535; }
+  [data-home-v5-events] { aspect-ratio: 1440 / 986; }
+  .v5-event-card { position: absolute; overflow: hidden; border-radius: 6.25cqw; background: #f6f6f6; box-shadow: 0 3cqw 4cqw -1cqw #0003; }
+  .v5-event-photo { width: 100%; max-width: none; object-fit: cover; }
+  .v5-event-featured .v5-event-photo { height: 40.868056cqw; }
+  .v5-event-card h3 { margin: 0; font-family: "Home V2 Lessons Montserrat", Arial, sans-serif; font-weight: 700; }
+  .v5-event-featured h3 { margin: 1cqw 2cqw 0 5.972222cqw; white-space: nowrap; font-size: 2.23985cqw; line-height: 2.799813cqw; }
+  .v5-event-featured p { margin: 2.1cqw 3cqw 0 6.041667cqw; font-family: "Home V2 Lessons Chivo", Arial, sans-serif; font-weight: 200; font-size: 1.666667cqw; line-height: 2.916667cqw; }
+  .v5-event-small h3 { margin-top: 1.1cqw; text-align: center; font-size: 1.666667cqw; line-height: 1.9505cqw; }
+  .v5-event-small p { margin: 1.5cqw 2.4cqw 0; font: 400 1.30658cqw/1.29666cqw "Segoe UI", Arial, sans-serif; }
+  .v5-event-cta { position: absolute; padding: 0; border: 0; cursor: pointer; color: #2e2e2e; background: transparent; font: 700 1.388889cqw/1.6799cqw "Home V2 Lessons Montserrat", Arial, sans-serif; }
+  .v5-event-photos > img { width: 100%; height: auto; }
+  .v5-event-photos > span { position: absolute; inset: .4cqw .8cqw .6cqw; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: rotate(-4deg); }
+  .v5-event-all { transform: rotate(-4deg); }
+  [data-home-v5-gallery] { aspect-ratio: 1440 / 888; color: #f6f6f6; }
+  .v5-gallery-filter { position: absolute; padding: 0; cursor: pointer; font: 400 1.111111cqw/2.0159cqw "Home V2 Lessons Montserrat", Arial, sans-serif; text-transform: uppercase; }
+  .v5-gallery-filter-border { position: absolute; inset: 0; background: #f6f6f6; mask-size: 100% 100%; mask-repeat: no-repeat; }
+  .v5-gallery-filter[aria-pressed="true"] .v5-gallery-filter-border { background: #fe746a; }
+  .v5-gallery-tile { position: absolute; border-radius: 6.25cqw; overflow: hidden; background: #484848; }
+  .v5-gallery-tile img { object-fit: cover; }
+  :is(.v5-faq-item > button, .v5-event-cta, .v5-gallery-filter):focus-visible { outline: 3px solid #fe746a; outline-offset: 5px; border-radius: 1cqw; }
+  [data-home-v5-events][data-lang="ru"] .v5-event-featured p { font-family: Arial, sans-serif; font-size: 1.45cqw; line-height: 2.3cqw; }
+  [data-home-v5-events][data-lang="ru"] .v5-event-small p { font-size: 1.2cqw; line-height: 1.35cqw; }
+  [data-home-v5-events][data-lang="ru"] .v5-event-photos { font-size: 1.1cqw; }
+  @media (prefers-reduced-motion: reduce) { .v5-faq-plus { transition: none; } }
+}
+@media (min-width: 1200px) {
+  .v5-faq-item > button { padding-bottom: 2.5cqw; }
+  .v5-event-featured p { margin-top: 1.722222cqw; }
+  .v5-event-small:last-of-type p { margin-left: 2.430556cqw; margin-right: 1.805556cqw; }
 }

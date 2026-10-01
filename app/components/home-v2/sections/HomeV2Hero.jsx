@@ -1,141 +1,130 @@
-import { HomeV2MobileHero } from "./HomeV2MobileTop";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import styles from "./HomeV2Hero.module.css";
 
-const HERO_ARTWORK_SRC = "/design/home-v2/hero/hero-collage-artwork.png";
-const HERO_DESKTOP_ARTWORK_SRC = "/design/home-v2/hero/hero-collage-composition-v3.svg";
-const HERO_STRIP_SRC = "/design/home-v2/hero/hero-video-strip.png";
-const HERO_VIDEO_SRC = "/hero-surf.mp4";
-const HERO_EPIC_LOGO_SRC = "/design/home-v2/hero/epic-logo.svg";
-const HERO_SURF_SCHOOL_SRC = "/design/home-v2/hero/surf-school-logo.svg";
+const MEDIA_ROOT = "/video/hero";
 
-function HeroBenefits({ items, className }) {
+export default function HomeV2Hero({ t, lang = "en" }) {
+  const sectionRef = useRef(null);
+  const videoRef = useRef(null);
+  const [playing, setPlaying] = useState(false);
+  const [hasFrame, setHasFrame] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const section = sectionRef.current;
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    // Choose once per visit: resizing must not download a second video.
+    const variant = window.matchMedia("(max-width: 900px)").matches ? "mobile" : "desktop";
+    let wantsPlayback = !motion.matches && !navigator.connection?.saveData;
+    let inView = false;
+    let disposed = false;
+    let broken = false;
+    let attempt = 0;
+    let pending = false;
+
+    const sync = () => {
+      if (disposed) return;
+      if (!wantsPlayback || !inView || document.hidden || broken) {
+        attempt += 1;
+        pending = false;
+        video.pause();
+        return;
+      }
+      if (!video.hasAttribute("src")) {
+        video.muted = true;
+        video.src = `${MEDIA_ROOT}/${variant}.mp4`;
+        section.dataset.videoVariant = variant;
+      }
+      if (!video.paused || pending) return;
+      pending = true;
+      const thisAttempt = ++attempt;
+      video.play().then(() => {
+        if (thisAttempt === attempt) pending = false;
+        if (disposed || !wantsPlayback || !inView || document.hidden) video.pause();
+      }).catch(() => {
+        if (disposed || thisAttempt !== attempt) return;
+        pending = false;
+        // Autoplay rejection leaves the static poster visible.
+        wantsPlayback = false;
+        setPlaying(false);
+        setHasFrame(false);
+      });
+    };
+    const onPlaying = () => {
+      if (!wantsPlayback || !inView || document.hidden) { video.pause(); return; }
+      setHasFrame(true);
+      setPlaying(true);
+    };
+    const onPause = () => setPlaying(false);
+    const onError = () => {
+      if (disposed) return;
+      broken = true;
+      wantsPlayback = false;
+      setFailed(true);
+      setPlaying(false);
+      setHasFrame(false);
+    };
+    const onMotion = () => {
+      if (motion.matches) {
+        wantsPlayback = false;
+        setHasFrame(false);
+      }
+      sync();
+    };
+    const onPageHide = () => video.pause();
+
+    video.addEventListener("playing", onPlaying);
+    video.addEventListener("pause", onPause);
+    video.addEventListener("error", onError);
+    document.addEventListener("visibilitychange", sync);
+    window.addEventListener("pagehide", onPageHide);
+    window.addEventListener("pageshow", sync);
+    motion.addEventListener("change", onMotion);
+    const observer = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting && entry.intersectionRatio >= 0.05;
+      sync();
+    }, { threshold: [0, 0.05] });
+    observer.observe(section);
+    return () => {
+      disposed = true;
+      attempt += 1;
+      observer.disconnect();
+      motion.removeEventListener("change", onMotion);
+      document.removeEventListener("visibilitychange", sync);
+      window.removeEventListener("pagehide", onPageHide);
+      window.removeEventListener("pageshow", sync);
+      video.removeEventListener("playing", onPlaying);
+      video.removeEventListener("pause", onPause);
+      video.removeEventListener("error", onError);
+      video.pause();
+      video.removeAttribute("src");
+      video.load();
+    };
+  }, []);
+
   return (
-    <div data-home-v2-hero-benefits className={className}>
-      {items.slice(-3).map((item, index) => (
-        <article key={item.title} data-home-v2-benefit-card data-benefit-index={index + 1}>
-          <h2>{item.title}</h2>
-          <p>{item.desc}</p>
-        </article>
-      ))}
-    </div>
-  );
-}
-
-function HeroLogo({ mobile = false }) {
-  return (
-    <div
-      data-home-v2-hero-logo-lockup
-      className={mobile ? "home-v2-hero-mobile-logo" : "home-v2-hero-desktop-lockup"}
-    >
-      <Image
-        data-home-v2-hero-logo-epic
-        src={HERO_EPIC_LOGO_SRC}
-        alt=""
-        width={198}
-        height={123}
-        priority
-        unoptimized
-        className="home-v2-hero-epic-logo"
-      />
-      <Image
-        data-home-v2-hero-logo-surf-school
-        src={HERO_SURF_SCHOOL_SRC}
-        alt=""
-        width={304}
-        height={43}
-        priority
-        unoptimized
-        className="home-v2-hero-school-logo"
-      />
-    </div>
-  );
-}
-
-function HeroArtwork({ desktop = false }) {
-  const src = desktop ? HERO_DESKTOP_ARTWORK_SRC : HERO_ARTWORK_SRC;
-  const width = desktop ? 1244 : 1440;
-  const height = desktop ? 387 : 514;
-
-  return (
-    <Image
-      data-home-v2-hero-collage-artwork
-      src={src}
-      alt=""
-      aria-hidden="true"
-      width={width}
-      height={height}
-      priority
-      unoptimized
-      className="home-v2-hero-collage-artwork"
-    />
-  );
-}
-
-function DesktopHero({ t, whyItems }) {
-  return (
-    <div data-home-v2-hero-desktop data-home-v2-hero-desktop-en className="home-v2-hero-desktop-en">
-      <h1 className="sr-only">{t.heroTitle} {t.heroTitleEpic} {t.heroTitleEnd}</h1>
-      <video
-        data-home-v2-hero-video-strip
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        poster={HERO_STRIP_SRC}
-        aria-label="Epic Surf School ocean video"
-        className="home-v2-hero-video-strip"
-        style={{
-          height: "12.222cqw",
-          objectFit: "cover",
-          objectPosition: "50% 50%",
-          filter: "grayscale(1)",
-        }}
-      >
-        <source src={HERO_VIDEO_SRC} type="video/mp4" />
-      </video>
-      <HeroArtwork desktop />
-      <HeroLogo />
-      <HeroBenefits items={whyItems} className="home-v2-hero-desktop-benefits" />
-    </div>
-  );
-}
-
-function CompactHero({ t, whyItems }) {
-  return (
-    <div data-home-v2-hero-compact className="home-v2-hero-compact">
-      <h1 className="sr-only">{t.heroTitle} {t.heroTitleEpic} {t.heroTitleEnd}</h1>
-      <video
-        data-home-v2-hero-video-strip
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        poster={HERO_STRIP_SRC}
-        aria-label="Epic Surf School ocean video"
-        className="home-v2-hero-compact-strip"
-      >
-        <source src={HERO_VIDEO_SRC} type="video/mp4" />
-      </video>
-      <HeroArtwork />
-      <HeroLogo mobile />
-      <HeroBenefits items={whyItems} className="home-v2-hero-compact-benefits" />
-    </div>
-  );
-}
-
-export default function HomeV2Hero({ t, lang = "en", whyItems = [], mobileTop = false }) {
-  return (
-    <section
-      data-home-v2-hero
-      data-home-v2-hero-locale={lang}
-      className="relative isolate overflow-hidden text-epicWhite"
-    >
-      {mobileTop ? <HomeV2MobileHero t={t} whyItems={whyItems} lang={lang} /> : <>
-        <DesktopHero t={t} whyItems={whyItems} />
-        <CompactHero t={t} whyItems={whyItems} />
-      </>}
+    <section ref={sectionRef} data-home-v2-hero data-home-v2-hero-locale={lang}
+      data-hero-video-state={failed ? "error" : playing ? "playing" : "paused"}
+      className={styles.hero} aria-labelledby="home-hero-title">
+      <h1 id="home-hero-title" className="sr-only">{t.heroTitle} {t.heroTitleEpic} {t.heroTitleEnd}</h1>
+      <picture className={styles.poster}>
+        <source media="(max-width: 900px)" srcSet={`${MEDIA_ROOT}/mobile-poster.webp`} />
+        {/* Native picture avoids a desktop preload competing with the mobile poster. */}
+        <img src={`${MEDIA_ROOT}/desktop-poster.webp`} alt="" width="1920" height="1080" fetchPriority="high" loading="eager" />
+      </picture>
+      <video ref={videoRef} data-hero-video className={`${styles.video} ${hasFrame ? styles.revealed : ""}`}
+        autoPlay muted loop playsInline preload="none" aria-hidden="true" tabIndex={-1} />
+      <div className={styles.shade} aria-hidden="true" />
+      <div className={styles.brand} aria-label="EPIC Surf School" role="img">
+        <Image src="/design/home-v2/hero/epic-logo.svg" width={198} height={123}
+          alt="" unoptimized loading="eager" className={styles.epic} />
+        <Image src="/brand/surf-school-hero-logo.svg" width={1115} height={155}
+          alt="" unoptimized loading="eager" className={styles.school} />
+      </div>
     </section>
   );
 }

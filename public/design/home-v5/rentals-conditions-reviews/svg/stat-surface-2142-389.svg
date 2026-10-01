@@ -1,0 +1,10 @@
+<svg width="81" height="81" viewBox="0 0 81 81" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Stat Surface">
+<rect width="80.3722" height="80.3722" rx="40.1861" fill="#2E2E2E"/>
+<g id="Stat Icon">
+<path id="Vector" d="M39.7299 54.5042C47.8895 54.5042 54.5042 47.8895 54.5042 39.7299C54.5042 31.5703 47.8895 24.9556 39.7299 24.9556C31.5703 24.9556 24.9556 31.5703 24.9556 39.7299C24.9556 47.8895 31.5703 54.5042 39.7299 54.5042Z" stroke="white" stroke-width="3.69358" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M33.8181 39.7299C33.8181 34.229 35.9341 28.9389 39.7278 24.9556C43.5215 28.9389 45.6376 34.229 45.6376 39.7299C45.6376 45.2307 43.5215 50.5208 39.7278 54.5042C35.9341 50.5208 33.8181 45.2307 33.8181 39.7299Z" stroke="white" stroke-width="3.69358" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M24.9556 39.728H54.5042" stroke="white" stroke-width="3.69358" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</svg>

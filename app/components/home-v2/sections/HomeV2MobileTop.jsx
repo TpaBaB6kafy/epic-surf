@@ -22,9 +22,8 @@ function Artwork({ name, style, className, ...props }) {
 export function HomeV2MobileHeaderVideo() {
   return (
     <div className="home-v2-top-header-media" aria-hidden="true">
-      <video data-home-v2-header-video autoPlay muted loop playsInline preload="auto" poster="/design/home-v2/hero/hero-video-strip.png">
-        <source src="/hero-surf.mp4" type="video/mp4" />
-      </video>
+      {/* Keep the header artwork; the hero owns the only moving video. */}
+      <video data-home-v2-header-video muted playsInline preload="none" poster="/design/home-v2/hero/hero-video-strip.png" />
       <div className="home-v2-top-header-overlay" />
     </div>
   );

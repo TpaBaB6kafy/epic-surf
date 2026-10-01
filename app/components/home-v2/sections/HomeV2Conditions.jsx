@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { HomeV5Conditions } from "./HomeV5SurfSections";
 import { ExternalLink, Heart } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { liveCam } from "../../../data/liveCam";
@@ -35,16 +36,16 @@ const copyByLanguage = {
   },
 };
 
-function useConditionsAdaptiveSlot() {
+function useConditionsAdaptiveSlot(minWidth = 640) {
   const [usesAdaptiveLayout, setUsesAdaptiveLayout] = useState(null);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 640px)");
+    const mediaQuery = window.matchMedia(`(min-width: ${minWidth}px)`);
     const updateViewport = () => setUsesAdaptiveLayout(mediaQuery.matches);
     updateViewport();
     mediaQuery.addEventListener?.("change", updateViewport);
     return () => mediaQuery.removeEventListener?.("change", updateViewport);
-  }, []);
+  }, [minWidth]);
 
   return usesAdaptiveLayout;
 }
@@ -308,6 +309,7 @@ export function HomeV2Conditions({ t, locale = "en" }) {
   const [hasEnteredViewport, setHasEnteredViewport] = useState(false);
   const [forecast, setForecast] = useState(null);
   const usesAdaptiveLayout = useConditionsAdaptiveSlot();
+  const usesV5Desktop = useConditionsAdaptiveSlot(1200);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -352,6 +354,17 @@ export function HomeV2Conditions({ t, locale = "en" }) {
   const windDirection = forecast?.windDir ?? 225;
   const windCardinal = degreesToCardinal(windDirection);
   const windyIframe = <WindyIframe />;
+
+  if (usesV5Desktop) {
+    return <section ref={sectionRef} id="forecast" data-home-v2-live-cam data-home-v2-forecast data-live-cam-mounted={hasEnteredViewport ? "true" : "false"} className="relative scroll-mt-24">
+      <span id="live-cam" className="absolute top-0 scroll-mt-24" aria-hidden="true" />
+      <HomeV5Conditions language={language} t={t} copy={copy} map={windyIframe}
+        camera={hasEnteredViewport ? <LiveCamIframe copy={copy} /> : <div className="home-v5-camera-placeholder">{copy.previewPlaceholder}</div>}
+        footer={<ProviderFooter copy={copy} trackOutbound={trackOutbound} />}
+        waveHeight={waveHeight} wavePeriod={wavePeriod} windSpeed={windSpeed} windDirection={windDirection} windCardinal={windCardinal}
+        whatsappHref={links.whatsapp} onWhatsApp={handleWhatsAppClick} />
+    </section>;
+  }
 
   return (
     <section ref={sectionRef} id="forecast" data-home-v2-live-cam data-home-v2-forecast data-live-cam-mounted={hasEnteredViewport ? "true" : "false"} data-surf-stack-scene="livecam-forecast" className="relative isolate overflow-visible bg-epicDark px-0 py-0 text-epicWhite scroll-mt-24">

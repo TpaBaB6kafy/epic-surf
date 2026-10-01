@@ -1,0 +1,33 @@
+/* Shared sunset sky: the opaque charcoal cutouts keep their original edges.
+   The V5 wave/sun illustration exists at >=1200px; smaller layouts are separate. */
+[data-home-v5-sunset-scene] { position: relative; }
+[data-home-v5-sunset-sky] { display: none; }
+@media (min-width: 1200px) {
+  [data-home-v5-sunset-scene] { isolation: isolate; container-type: inline-size; }
+  [data-home-v5-sunset-sky] {
+    display: block; position: absolute; inset: 0; z-index: -1;
+    overflow: hidden; pointer-events: none;
+    background: linear-gradient(155deg, #4c7c73 12%, #598d80 52%, #749988 100%);
+  }
+  [data-home-v5-sunset-warmth] {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 95% 65% at 85% 100%, #e9b287 0%, #d3b28b99 42%, #c5ae8600 78%),
+      linear-gradient(180deg, #dbb68a00 28%, #dbb68a1a 52%, #dba17e73 100%);
+  }
+  [data-home-v5-sunset-glow] {
+    position: absolute; left: 72.9%; bottom: 7.85cqw;
+    width: 78cqw; height: 64cqw; translate: -50% 50%;
+    background: radial-gradient(ellipse, #ffc789b3 0%, #f1a47d80 21%, #e5ac7e40 43%, #e5ac7e00 70%);
+    transform-origin: center;
+  }
+  [data-home-v5-sunset-scene] :is(
+    [data-home-v2-surf-stack], [data-home-v5-rentals],
+    [data-home-v5-conditions], [data-home-v2-reviews], [data-home-v5-reviews]
+  ) { background: transparent; }
+}
+@media (min-width: 1200px) and (prefers-reduced-motion: reduce) {
+  /* Also protects the first paint before the preference hook is hydrated. */
+  [data-home-v5-sunset-warmth] { opacity: .75 !important; }
+  [data-home-v5-sunset-glow] { opacity: .8 !important; transform: none !important; }
+}

@@ -1,6 +1,9 @@
 "use client";
 
 import { HomeV2MobileHow } from "./HomeV2MobileTop";
+import HomeV5HowItWorks from "./HomeV5HowItWorks";
+import { HomeV5Reviews } from "./HomeV5SurfSections";
+import { HomeV5FAQ, HomeV5Events, HomeV5Gallery } from "./HomeV5FAQEventsGallery";
 import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
@@ -254,6 +257,63 @@ function HomeV2HowItWorksFluidDesktop({ steps, title, titleEnd, lang }) {
   );
 }
 
+const howTargetCards = [
+  {
+    photo: "/design/home-v2/how-it-works/how-it-works-meet.jpg",
+    border: "card-photo-border-2107-126.svg",
+    backplate: "photo-title-backplate-composite-2110-226.svg",
+    edge: "photo-top-edge-overlay-2107-136.svg",
+  },
+  {
+    photo: "/design/home-v2/how-it-works/how-it-works-theory.jpg",
+    border: "card-photo-border-2110-180.svg",
+    backplate: "photo-title-backplate-composite-2110-227.svg",
+    edge: "photo-top-edge-overlay-2110-219.svg",
+  },
+  {
+    photo: "/design/home-v2/how-it-works/how-it-works-practice.jpg",
+    border: "card-photo-border-2110-206.svg",
+    backplate: "photo-title-backplate-composite-2110-228.svg",
+    edge: "photo-top-edge-overlay-2110-221.svg",
+  },
+  {
+    photo: "/design/home-v2/how-it-works/how-it-works-review.png",
+    border: "card-photo-border.svg",
+    backplate: "photo-title-backplate-composite.svg",
+    edge: "photo-top-edge-overlay.svg",
+  },
+];
+
+function HomeV2HowItWorksTargetDesktop({ steps, title, titleEnd, lang }) {
+  const assetRoot = "/design/home-v2/targeted-v2.3.1/how-it-works";
+
+  return (
+    <div data-home-v2-how-target-desktop data-lang={lang}>
+      <h2 data-home-v2-how-target-heading>
+        <span>{title}</span>
+        <span>{titleEnd}</span>
+      </h2>
+      <div data-home-v2-how-target-cards>
+        {steps.map((step, index) => {
+          const asset = howTargetCards[index];
+          return (
+            <article key={step.title} data-home-v2-how-target-card={index + 1}>
+              <Image className="home-v2-how-target-paper" src={`${assetRoot}/${asset.border}`} alt="" width={280} height={462} />
+              <div className="home-v2-how-target-photo" style={{ WebkitMaskImage: `url('${assetRoot}/${asset.border}')`, maskImage: `url('${assetRoot}/${asset.border}')` }}>
+                <Image src={asset.photo} alt="" fill sizes="280px" className="object-cover" />
+              </div>
+              <Image className="home-v2-how-target-edge" src={`${assetRoot}/${asset.edge}`} alt="" width={290} height={162} />
+              <Image className="home-v2-how-target-backplate" src={`${assetRoot}/${asset.backplate}`} alt="" width={315} height={51} />
+              <h3>{step.title}</h3>
+              <p>{step.desc}</p>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export function HomeV2HowItWorks({ t, lang }) {
   return (
     <section
@@ -267,6 +327,8 @@ export function HomeV2HowItWorks({ t, lang }) {
       <HomeV2MobileHow steps={t.howSteps} title={t.howTitle} titleEnd={t.howTitleEnd} lang={lang} />
 
       <HomeV2HowItWorksFluidDesktop steps={t.howSteps} title={t.howTitle} titleEnd={t.howTitleEnd} lang={lang} />
+      <HomeV2HowItWorksTargetDesktop steps={t.howSteps} title={t.howTitle} titleEnd={t.howTitleEnd} lang={lang} />
+      <HomeV5HowItWorks steps={t.howSteps} title={t.howTitle} titleEnd={t.howTitleEnd} lang={lang} />
     </section>
   );
 }
@@ -524,6 +586,7 @@ export function HomeV2Reviews({ t, googleMapsUrl }) {
 
   return (
     <section id="reviews" data-home-v2-reviews className="relative z-20 overflow-visible bg-epicDark text-epicWhite scroll-mt-24">
+        <HomeV5Reviews reviews={desktopReviews} isRu={isRu} googleMapsUrl={googleMapsUrl} />
         <div data-home-v2-reviews-grid className="relative mx-auto hidden h-[684px] w-full min-[900px]:block">
           <div
             data-home-v2-reviews-desktop
@@ -817,6 +880,7 @@ export function HomeV2FAQ({ lang = "en", title, titleEnd, items }) {
 
   return (
     <section id="faq" data-home-v2-faq className="relative bg-epicDark text-epicWhite scroll-mt-24">
+        <HomeV5FAQ lang={lang} items={items} openFaq={openFaq} setOpenFaq={setOpenFaq} />
         <div data-home-v2-faq-desktop data-home-v2-faq-desktop-en className="relative hidden min-h-[619px] w-full min-[900px]:block">
           <div
             data-home-v2-faq-composition
@@ -955,6 +1019,7 @@ export function HomeV2Events({ t, openEventGallery }) {
 
   return (
     <section id="events" data-home-v2-events className={`scroll-mt-24 bg-epicDark px-4 py-16 text-epicWhite md:px-6 md:py-20 min-[1440px]:!px-0 min-[1440px]:pb-[96px] min-[1440px]:pt-[124px] ${isRu ? "" : "max-[639px]:h-[1420px] max-[639px]:!px-0 max-[639px]:!py-0"}`}>
+      <HomeV5Events t={t} openEventGallery={openEventGallery} isRu={isRu} />
       {!isRu && (
         <div data-home-v2-events-mobile className="relative mx-auto h-[1420px] w-full max-w-[390px] overflow-hidden sm:hidden">
           <article
@@ -1130,6 +1195,7 @@ export function HomeV2Gallery({ lang, links, t, eventGalleryGroups, activeGaller
 
   return (
     <section id="gallery" data-home-v2-gallery className={`scroll-mt-24 bg-epicDark px-4 py-16 text-epicWhite md:px-6 md:py-20 min-[1440px]:!px-0 min-[1440px]:pb-[120px] min-[1440px]:pt-[88px] ${isEnglish ? "max-[639px]:h-[1058px] max-[639px]:!px-0 max-[639px]:!py-0" : ""}`}>
+      <HomeV5Gallery lang={lang} eventGalleryGroups={eventGalleryGroups} activeGalleryKey={activeGalleryKey} setActiveGalleryKey={setActiveGalleryKey} activeGalleryGroup={activeGalleryGroup} galleryPhotoSrc={galleryPhotoSrc} />
       <div data-home-v2-gallery-canvas className={`relative mx-auto max-w-7xl min-[1440px]:w-[calc(100%-(2*var(--home-v2-fluid-gutter)))] min-[1440px]:!max-w-none ${isEnglish ? "max-[639px]:h-full max-[639px]:w-full" : ""}`}>
       <div data-home-v2-gallery-heading className={`${isEnglish ? "max-[639px]:absolute max-[639px]:left-1/2 max-[639px]:top-[68px] max-[639px]:flex max-[639px]:h-[25.291px] max-[639px]:w-[316px] max-[639px]:-translate-x-1/2 max-[639px]:items-center max-[639px]:justify-center max-[639px]:font-['Montserrat',var(--font-heading)] max-[639px]:text-[36px] max-[639px]:font-black max-[639px]:uppercase max-[639px]:leading-[25.291px]" : ""} text-center font-['Montserrat',var(--font-heading)] text-[clamp(34px,5vw,48px)] font-black uppercase leading-none min-[1440px]:flex min-[1440px]:items-start min-[1440px]:justify-center min-[1440px]:text-[48px] min-[1440px]:leading-[42.152px]`}>
         <h2 className={`${isEnglish ? "max-[639px]:hidden" : ""} text-epicWhite min-[1440px]:hidden`}>Epic <span className="text-epicGray">moments</span></h2>

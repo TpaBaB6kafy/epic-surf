@@ -35,6 +35,7 @@ import {
   HomeV2Reviews
 } from "./sections/HomeV2ContentSections";
 import { HomeV2Conditions } from "./sections/HomeV2Conditions";
+import HomeV5SunsetScene from "./HomeV5SunsetScene";
 
 export default function HomeV2Page({ locale = "en" }) {
   const rootRef = useRef(null);
@@ -120,35 +121,37 @@ export default function HomeV2Page({ locale = "en" }) {
         <HomeV2HowItWorks t={t} lang={lang} />
         <HomeV2Lessons t={t} lang={lang} links={links} openBookingModal={openBookingModal} />
         <HomeV2Included t={t} />
-        <section
-          data-home-v2-surf-stack
-          className="relative isolate overflow-hidden bg-epicDark pb-0 pt-6 text-epicWhite md:pb-0 md:pt-8"
-        >
-          <Image
-            data-home-v2-wave-layer
-            aria-hidden="true"
-            src="/design/home-v2/surf-stack/surf-stack-wave-contour.svg"
-            alt=""
-            width={2294}
-            height={3227}
-            sizes="(min-width: 1024px) 1980px, 1200px"
-            className="pointer-events-none absolute inset-y-0 left-1/2 z-0 h-full w-auto max-w-none -translate-x-1/2 opacity-[0.09] sm:opacity-[0.12] lg:opacity-[0.16]"
-          />
-          <div data-home-v2-surf-stack-content className="relative z-10 space-y-8 md:space-y-0">
-            <div data-home-v2-flow-stage="rental">
-              <HomeV2Rentals
-                t={t}
-                lang={lang}
-                setRentalModalOpen={setRentalModalOpenSafely}
-                onSelectRentalBoard={openRentalModal}
-              />
+        <HomeV5SunsetScene>
+          <section
+            data-home-v2-surf-stack
+            className="relative isolate overflow-hidden bg-epicDark pb-0 pt-6 text-epicWhite md:pb-0 md:pt-8"
+          >
+            <Image
+              data-home-v2-wave-layer
+              aria-hidden="true"
+              src="/design/home-v2/surf-stack/surf-stack-wave-contour.svg"
+              alt=""
+              width={2294}
+              height={3227}
+              sizes="(min-width: 1024px) 1980px, 1200px"
+              className="pointer-events-none absolute inset-y-0 left-1/2 z-0 h-full w-auto max-w-none -translate-x-1/2 opacity-[0.09] sm:opacity-[0.12] lg:opacity-[0.16]"
+            />
+            <div data-home-v2-surf-stack-content className="relative z-10 space-y-8 md:space-y-0">
+              <div data-home-v2-flow-stage="rental">
+                <HomeV2Rentals
+                  t={t}
+                  lang={lang}
+                  setRentalModalOpen={setRentalModalOpenSafely}
+                  onSelectRentalBoard={openRentalModal}
+                />
+              </div>
+              <div data-home-v2-flow-stage="livecam-forecast">
+                <HomeV2Conditions t={t} locale={lang} />
+              </div>
             </div>
-            <div data-home-v2-flow-stage="livecam-forecast">
-              <HomeV2Conditions t={t} locale={lang} />
-            </div>
-          </div>
-        </section>
-        <HomeV2Reviews t={t} googleMapsUrl={links.googleMaps} />
+          </section>
+          <HomeV2Reviews t={t} googleMapsUrl={links.googleMaps} />
+        </HomeV5SunsetScene>
       </main>
       <HomeV2FAQ lang={lang} title={t.faqTitle} titleEnd={t.faqTitleEnd} items={t.faqItems} />
       <HomeV2Events t={t} openEventGallery={openEventGallery} />

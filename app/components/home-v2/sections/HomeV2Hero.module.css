@@ -1,0 +1,53 @@
+/* Repeated local class intentionally supersedes legacy locale/size hero rules. */
+.hero.hero.hero.hero {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: calc(100svh - 86px);
+  min-height: 540px;
+  max-height: 1100px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #1f1f1f;
+  color: #fff;
+}
+.poster, .video, .shade { position: absolute; inset: 0; width: 100%; height: 100%; }
+.poster img, .video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.video { opacity: 0; transition: opacity 450ms ease; }
+.video.revealed { opacity: 1; }
+.shade {
+  pointer-events: none;
+  background: linear-gradient(180deg, rgb(15 29 29 / .12), transparent 40%, rgb(31 31 31 / .12) 68%, #1f1f1f 100%),
+    linear-gradient(90deg, rgb(15 29 29 / .21), transparent 57%);
+}
+.brand {
+  position: absolute;
+  top: 15%;
+  left: 6.95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(18px, 2vw, 30px);
+  width: clamp(260px, 26vw, 420px);
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / .34));
+  pointer-events: none;
+}
+.epic { display: block; width: 80%; height: auto; }
+.school { display: block; width: 100%; height: auto; }
+@media (max-width: 900px) {
+  .hero.hero.hero.hero { min-height: 580px; max-height: 1100px; }
+  .brand { top: 9%; left: 50%; transform: translateX(-50%); width: clamp(220px, 42vw, 330px); gap: 20px; }
+  .epic { width: 76%; }
+  .shade { background: linear-gradient(180deg, rgb(15 29 29 / .2), transparent 38%, rgb(31 31 31 / .05) 70%, #1f1f1f 100%); }
+}
+@media (max-width: 639px) {
+  .hero.hero.hero.hero { min-height: 500px; }
+  /* Match the existing mobile How It Works surface at the seam. */
+  .shade::after { content: ''; position: absolute; inset: auto 0 0; height: 30px; background: linear-gradient(90deg, #2e2e2e, #242424 50.962%, #2e2e2e); mask-image: linear-gradient(transparent, #000); }
+}
+@media (prefers-reduced-motion: reduce) { .video { transition: none; } }
+
+@media (min-width: 640px) and (max-width: 1199px) {
+  .shade::after { content: ''; position: absolute; inset: auto 0 0; height: 60px; background: linear-gradient(transparent, #2e2e2e); }
+}
