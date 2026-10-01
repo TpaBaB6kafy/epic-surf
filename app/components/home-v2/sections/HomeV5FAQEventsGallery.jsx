@@ -50,7 +50,7 @@ export function HomeV5Events({ t, openEventGallery, isRu }) {
     </article>)}
     <Art file="svg/event-ctas.svg" x={1079.307} y={415.956} width={71} height={440} />
     <button className="v5-event-cta v5-event-photos" type="button" onClick={() => openEventGallery(featured.galleryKey)} style={box(697.909, 826.14, 137, 75)}>
-      <Image src={`${root}/svg/view-photos-cta.svg`} alt="" width={137} height={75} unoptimized /><span>{isRu ? <>СМОТРЕТЬ<br />ФОТО</> : <>VIEW<br />PHOTOS</>}</span>
+      <Image src={`${root}/svg/view-photos-cta.svg`} alt="" width={137} height={75} unoptimized /><span>{isRu ? <>СМОТРЕТЬ <br />ФОТО</> : <>VIEW <br />PHOTOS</>}</span>
     </button>
     {[{ event: birthday, y: 415.956 }, { event: community, y: 783.358 }].map(({ event, y }) => <button key={event.galleryKey} className="v5-event-cta v5-event-all" type="button" onClick={() => openEventGallery(event.galleryKey)} aria-label={`${isRu ? "Все фото" : "All photos"}: ${event.title}`} style={box(1079.307, y, 71, 72)}>{isRu ? "ВСЕ" : "ALL"}</button>)}
   </div>;
@@ -79,7 +79,7 @@ export function HomeV5Gallery({ lang, eventGalleryGroups, activeGalleryKey, setA
     </div>
     <div aria-live="polite" className="sr-only">{activeGalleryGroup.label}</div>
     {activeGalleryGroup.photos.slice(0, 5).map((photo, index) => <div className="v5-gallery-tile" key={`${activeGalleryKey}-${index}`} style={box(...tiles[index])}>
-      <Image src={activeGalleryKey === "all" ? `${root}/gallery-${index + 1}.webp` : galleryPhotoSrc(photo)} alt={`${activeGalleryGroup.label} — ${lang === "ru" ? "фото" : "photo"} ${index + 1}`} fill sizes={index === 0 ? "33vw" : "22vw"} unoptimized={activeGalleryKey === "all"} />
+      <Image src={activeGalleryKey === "all" ? `${root}/gallery-${index + 1}.webp` : galleryPhotoSrc(photo)} alt={`${activeGalleryGroup.label} — ${lang === "ru" ? "фото" : "photo"} ${index + 1}`} fill sizes="(max-width: 699px) 46vw, (max-width: 1199px) 30vw, 33vw" unoptimized={activeGalleryKey === "all"} />
     </div>)}
   </div>;
 }

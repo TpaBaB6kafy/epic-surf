@@ -40,7 +40,7 @@ export default function HomeV5LessonsIncluded({ orderedLessons, activeLesson, se
           <p className="home-v5-li-description" data-home-v2-lesson-description>{description}</p>
           <div className="home-v5-li-photo">
             <Image key={activeLesson.id} data-lessons-photo src={group ? `${root}/png/group-lesson-photo@2x.png` : posterMedia.asset}
-              alt={activeLesson.item.title} fill sizes="41vw" unoptimized={group}
+              alt={activeLesson.item.title} fill sizes="(max-width: 699px) 92vw, (max-width: 1199px) 52vw, 41vw" unoptimized={group}
               style={{ objectFit: "cover", objectPosition: group ? "center" : posterMedia.position }} />
           </div>
         </div>
@@ -56,6 +56,7 @@ export default function HomeV5LessonsIncluded({ orderedLessons, activeLesson, se
 
       <section id="included" className="home-v5-li-included" aria-label={t.includedLabel}>
         {/* Both clipped Figma copies represent this single continuous gear composition. */}
+        <div className="home-v5-li-gear" aria-hidden="true">
         <Artwork file="svg/gear-background-2142-446.svg" x={298.999} y={0} width={332} height={166} />
         <Artwork file="svg/gear-background.svg" x={298.999} y={166} width={332} height={166} />
         <Artwork file="png/rashguard-artwork-2142-447@2x.png" x={339.999} y={37} width={246} height={129} />
@@ -64,6 +65,7 @@ export default function HomeV5LessonsIncluded({ orderedLessons, activeLesson, se
         <Artwork file="png/camera-artwork@2x.png" x={339.999} y={166} width={122} height={116} />
         <Artwork file="png/zinc-artwork-2142-449@2x.png" x={451.999} y={158} width={137} height={8} />
         <Artwork file="png/zinc-artwork@2x.png" x={451.999} y={166} width={137} height={129} />
+        </div>
         <Artwork file="svg/feature-surface-2142-450.svg" x={605.999} y={77} width={536} height={74} />
         <Artwork file="svg/feature-surface.svg" x={606.997} y={179} width={536} height={74} />
         <p className="home-v5-li-feature home-v5-li-rashguard">{t.includedItems.find(({ icon }) => icon === "rashguard")?.desc}</p>

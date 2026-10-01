@@ -35,6 +35,7 @@ import {
   HomeV2Reviews
 } from "./sections/HomeV2ContentSections";
 import { HomeV2Conditions } from "./sections/HomeV2Conditions";
+import "./home-v5-responsive.css";
 import HomeV5SunsetScene from "./HomeV5SunsetScene";
 
 export default function HomeV2Page({ locale = "en" }) {

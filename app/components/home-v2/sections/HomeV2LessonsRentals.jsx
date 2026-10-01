@@ -12,25 +12,8 @@ import { HomeV2SectionHeading, PosterButton, PosterLink } from "../PosterPrimiti
 const bookingLessonIds = new Set(["group", "private", "split"]);
 
 function useHomeV2Presentation() {
-  const [presentation, setPresentation] = useState(null);
-
-  useEffect(() => {
-    const mobileMedia = window.matchMedia("(max-width: 639px)");
-    const compactMedia = window.matchMedia("(min-width: 900px)");
-    const desktopMedia = window.matchMedia("(min-width: 1200px)");
-    const updatePresentation = () => setPresentation(desktopMedia.matches ? "desktop" : compactMedia.matches ? "compact" : mobileMedia.matches ? "mobile" : "adaptive");
-    updatePresentation();
-    mobileMedia.addEventListener?.("change", updatePresentation);
-    compactMedia.addEventListener?.("change", updatePresentation);
-    desktopMedia.addEventListener?.("change", updatePresentation);
-    return () => {
-      mobileMedia.removeEventListener?.("change", updatePresentation);
-      compactMedia.removeEventListener?.("change", updatePresentation);
-      desktopMedia.removeEventListener?.("change", updatePresentation);
-    };
-  }, []);
-
-  return presentation;
+  // One presentation at every width; CSS owns the layout.
+  return "desktop";
 }
 
 const lessonMessages = {
@@ -614,7 +597,7 @@ function LessonDetailPanel({
 
 export function HomeV2Lessons({ t, lang, links, openBookingModal }) {
   const [activeLessonId, setActiveLessonId] = useState("group");
-  const [presentation, setPresentation] = useState("mobile");
+  const presentation = "desktop";
   const [hasEnteredViewport, setHasEnteredViewport] = useState(false);
   const sectionRef = useRef(null);
   const reduceMotion = useReducedMotion();
@@ -635,21 +618,7 @@ export function HomeV2Lessons({ t, lang, links, openBookingModal }) {
   const useApprovedMobile = presentation === "mobile";
   const usePosterDesktop = presentation === "desktop";
 
-  useEffect(() => {
-    const mobileMedia = window.matchMedia("(max-width: 480px)");
-    const compactMedia = window.matchMedia("(min-width: 900px)");
-    const desktopMedia = window.matchMedia("(min-width: 1200px)");
-    const updatePresentation = () => setPresentation(desktopMedia.matches ? "desktop" : compactMedia.matches ? "compact" : mobileMedia.matches ? "mobile" : "adaptive");
-    updatePresentation();
-    mobileMedia.addEventListener("change", updatePresentation);
-    compactMedia.addEventListener("change", updatePresentation);
-    desktopMedia.addEventListener("change", updatePresentation);
-    return () => {
-      mobileMedia.removeEventListener("change", updatePresentation);
-      compactMedia.removeEventListener("change", updatePresentation);
-      desktopMedia.removeEventListener("change", updatePresentation);
-    };
-  }, []);
+
 
   useEffect(() => {
     if (reduceMotion) return undefined;

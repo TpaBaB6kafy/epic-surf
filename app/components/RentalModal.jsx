@@ -1,5 +1,6 @@
 ﻿"use client";
 
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUp, MessageCircle, X } from "lucide-react";
 import { buildTelegramUrl, buildWhatsAppUrl, buildZaloUrl, trackEvent } from "../utils/tracking";
@@ -7,6 +8,27 @@ import { getBoardLevelLabel, getBoardTrackingPayload } from "../data/rentalBoard
 
 export default function RentalModal({ isRentalModalOpen, setRentalModalOpen, t, links, selectedBoard = null }) {
   const language = t.btnBook === "Book Now" ? "en" : "ru";
+  useEffect(() => {
+    if (!isRentalModalOpen) return;
+    const previousFocus = document.activeElement;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.querySelector('[data-rental-dialog] button')?.focus();
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") setRentalModalOpen(false);
+      if (event.key !== "Tab") return;
+      const elements = [...document.querySelectorAll('[data-rental-dialog] a, [data-rental-dialog] button')];
+      const first = elements[0], last = elements.at(-1);
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", onKeyDown);
+      previousFocus?.focus();
+    };
+  }, [isRentalModalOpen, setRentalModalOpen]);
   const selectedBoardName = selectedBoard?.displayName || selectedBoard?.name;
   const selectedBoardLabel = language === "ru" ? "Выбранная доска" : "Selected board";
   const baseMessage = language === "ru"
@@ -50,12 +72,13 @@ export default function RentalModal({ isRentalModalOpen, setRentalModalOpen, t, 
             />
 
             <motion.div
+              data-rental-dialog role="dialog" aria-modal="true" aria-label={t.rentalModalTitle}
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-sm rounded-[50px] border border-epicDark/10 bg-epicWhite p-10 text-center shadow-2xl"
+              className="relative max-h-[calc(100dvh-32px)] w-full max-w-sm overflow-y-auto rounded-[40px] border border-epicDark/10 bg-epicWhite p-6 sm:p-10 text-center shadow-2xl"
             >
-              <button onClick={() => setRentalModalOpen(false)} className="absolute top-8 right-8 text-epicDark/20 hover:text-epicRed transition-colors">
+              <button onClick={() => setRentalModalOpen(false)} aria-label={language === "ru" ? "Закрыть аренду" : "Close rental dialog"} className="absolute top-3 right-3 flex h-11 w-11 items-center justify-center rounded-full text-epicDark/70 hover:text-epicRed transition-colors">
                 <X size={24} />
               </button>
 

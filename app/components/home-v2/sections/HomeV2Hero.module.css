@@ -43,11 +43,15 @@
 }
 @media (max-width: 639px) {
   .hero.hero.hero.hero { min-height: 500px; }
-  /* Match the existing mobile How It Works surface at the seam. */
-  .shade::after { content: ''; position: absolute; inset: auto 0 0; height: 30px; background: linear-gradient(90deg, #2e2e2e, #242424 50.962%, #2e2e2e); mask-image: linear-gradient(transparent, #000); }
+  /* Match the shared How It Works surface at the seam. */
+  .shade::after { content: ''; position: absolute; inset: auto 0 0; height: 30px; background: #1f1f1f; mask-image: linear-gradient(transparent, #000); }
 }
 @media (prefers-reduced-motion: reduce) { .video { transition: none; } }
 
 @media (min-width: 640px) and (max-width: 1199px) {
-  .shade::after { content: ''; position: absolute; inset: auto 0 0; height: 60px; background: linear-gradient(transparent, #2e2e2e); }
+  .shade::after { content: ''; position: absolute; inset: auto 0 0; height: 60px; background: linear-gradient(transparent, #1f1f1f); }
+}
+
+@media (max-width: 1199px) {
+  .hero.hero.hero.hero { height: calc(100svh - 76px); }
 }

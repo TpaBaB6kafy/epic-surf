@@ -23,11 +23,13 @@ export function HomeV5Rentals({ lang, copy, catalogHref, onRent }) {
     </div>
     <h2 className="home-v5-rental-heading">{ru ? "Аренда" : "Rental"}</h2>
     <Art file="svg/offer-surface.svg" x={109} y={345} width={349} height={267} />
+    <div className="home-v5-rental-offer">
     <Text x={170} y={378} width={150} height={29} size={24} className="home-v5-rental-muted">{copy.from}</Text>
     <Text x={170} y={411} width={131} height={51} size={28} line={51} className="home-v5-surf-montserrat" style={{ color: "#aaffc7" }}>250.000</Text>
     <Text x={301} y={411} width={70} height={51} size={28} line={51} className="home-v5-rental-muted">VND</Text>
     <Text x={170} y={457} width={260} height={24} size={ru ? 18 : 20} line={22} className="home-v5-surf-montserrat">{ru ? "СЕССИЯ НА ДВА ЧАСА" : "TWO HOURS SESSION"}</Text>
     <Text x={170} y={513} width={250} height={70} size={20} line={28} className="home-v5-surf-chivo">{copy.description}</Text>
+    </div>
     <button type="button" onClick={onRent} className="home-v5-surf-cta home-v5-rent-cta" style={box(1124, 435, 194, 69)}>
       <Image src={`${root}/svg/rent-now-cta.svg`} alt="" width={194} height={69} unoptimized /><span>{copy.rentNow}</span>
     </button>
@@ -52,6 +54,16 @@ export function HomeV5Conditions({ language, t, copy, map, camera, footer, waveH
     <div className="home-v5-wave-height" aria-label={language === "ru" ? "Высота волн" : "Wave height"} style={box(1075, -28, 240, 102)}><strong>{waveHeight}</strong><span>m</span></div>
     <div className="home-v5-forecast-map" style={box(121, 102, 530, 345.373)}>{map}</div>
     <div className="home-v5-livecam" style={box(789, 102, 530, 345)}><div className="home-v5-camera-stream">{camera}</div>{footer}</div>
+    <dl className="home-v5-responsive-stats">
+      {[
+        [language === "ru" ? "Высота волн" : "Wave height", waveHeight + " m"],
+        [t.forecastPeriod, wavePeriod + " s"],
+        [t.forecastWind, windSpeed + " km/h"],
+        [t.forecastDir, windCardinal],
+        [t.forecastWater, "26°C"],
+      ].map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
+    </dl>
+    <div className="home-v5-desktop-stats">
     {stats.map(({ x, y, background, surface }) => <div key={x} aria-hidden="true"><Art file={`svg/${background}`} x={x + 17} y={y + 6} width={194} height={69} /><Art file={`svg/${surface}`} x={x} y={y} width={81} height={81} /></div>)}
     <Text x={220} y={521} width={110} height={29} size={25.2} className="home-v5-stat-centered">{wavePeriod}s</Text>
     <Text x={220} y={548} width={110} height={26} size={24} className="home-v5-stat-centered home-v5-stat-dark">{t.forecastPeriod}</Text>
@@ -63,6 +75,7 @@ export function HomeV5Conditions({ language, t, copy, map, camera, footer, waveH
     <Text x={730.35} y={544.86} width={65} height={24} size={21.528}>{windCardinal}</Text>
     <Text x={929} y={529} width={90} height={12} size={8.324} className="home-v5-stat-muted">{t.forecastWater}</Text>
     <Text x={929} y={543.711} width={85} height={28} size={25.834}>26°C</Text>
+    </div>
     <a href={whatsappHref} target="_blank" rel="noopener noreferrer" onClick={onWhatsApp} className="home-v5-surf-cta home-v5-conditions-cta" style={box(1054, 484, 256, 135)}>
       <Image src={`${root}/svg/ask-conditions-cta.svg`} alt="" width={256} height={135} unoptimized /><span>{copy.askEpic}</span>
     </a>

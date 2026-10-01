@@ -309,7 +309,7 @@ export function HomeV2Conditions({ t, locale = "en" }) {
   const [hasEnteredViewport, setHasEnteredViewport] = useState(false);
   const [forecast, setForecast] = useState(null);
   const usesAdaptiveLayout = useConditionsAdaptiveSlot();
-  const usesV5Desktop = useConditionsAdaptiveSlot(1200);
+  const usesV5Desktop = true;
 
   useEffect(() => {
     const section = sectionRef.current;

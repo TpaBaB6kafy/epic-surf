@@ -3972,3 +3972,7 @@ body {
   .v5-event-featured p { margin-top: 1.722222cqw; }
   .v5-event-small:last-of-type p { margin-left: 2.430556cqw; margin-right: 1.805556cqw; }
 }
+
+/* V5 shared wrappers preserve desktop artwork coordinates. */
+.home-v5-li-gear, .home-v5-rental-offer, .home-v5-desktop-stats { display: contents; }
+.home-v5-responsive-stats { display: none; }
