@@ -21,7 +21,7 @@ export default function SurfLandingPage({ page, locale = "en", languageHref }) {
   const message = lang === "ru" ? `Привет! У меня вопрос про ${page.title} в Epic Surf School.` : `Hi! I have a question about ${page.title} at Epic Surf School.`;
   const relatedItems = getSeoPageLinks(lang).filter(item => page.related?.includes(item.href));
   const path = page.path.replace(/^\/ru(?=\/)/, "");
-  const kind = path === "/surf-lessons-danang" ? "lessons" : path === "/my-khe-beach-surfing" ? "beach" : "destination";
+  const kind = path === "/surf-guide" ? "guide" : path === "/surf-lessons-danang" ? "lessons" : path === "/my-khe-beach-surfing" ? "beach" : "destination";
 
   useEffect(() => {
     storeAttributionFromUrl({ includePartner: true });
@@ -67,6 +67,18 @@ export default function SurfLandingPage({ page, locale = "en", languageHref }) {
             </div>
           </div>
         </section>
+        {page.hubCards && (
+          <nav className="landing-container landing-guide-hub" aria-label={lang === "ru" ? "Темы гида" : "Surf guide topics"}>
+            <div className="landing-related-grid">
+              {page.hubCards.map(card => (
+                <Link key={card.href} href={card.href} className="landing-related-card">
+                  <h2>{card.title}<ArrowRight size={20} aria-hidden="true" /></h2>
+                  <p>{card.text}</p>
+                </Link>
+              ))}
+            </div>
+          </nav>
+        )}
         <div className="landing-content">
           {page.sections.map((section) => (
             <section className={`landing-section ${section.cards ? "landing-section-feature" : ""}`} key={section.title}>

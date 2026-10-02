@@ -1,4 +1,4 @@
-/* V5 vocabulary, fluid landing layouts. Every rule is isolated from home/rental/guide. */
+/* V5 vocabulary, fluid landing layouts. Every rule is isolated from home and rental. */
 .epic-landing {
   --landing-ink: #2e2e2e;
   --landing-paper: #f6f6f6;
@@ -168,3 +168,9 @@
 @media (prefers-reduced-motion: reduce) {
   .epic-landing *, .epic-landing *::before, .epic-landing *::after { scroll-behavior: auto !important; transition: none !important; }
 }
+
+/* The learning guide keeps its topic hub before the instructional sections. */
+.epic-landing.landing-guide .landing-guide-hub { padding-bottom: clamp(40px, 5vw, 72px); }
+.epic-landing.landing-guide .landing-guide-hub .landing-related-grid { margin-top: 0; }
+.epic-landing.landing-guide .landing-guide-hub h2 { display: flex; justify-content: space-between; gap: 16px; font: 700 20px/1.3 'Home V2 Lessons Montserrat', Arial, sans-serif; text-transform: none; letter-spacing: normal; }
+.epic-landing.landing-guide .landing-guide-hub h2 svg { flex-shrink: 0; color: var(--landing-coral); }

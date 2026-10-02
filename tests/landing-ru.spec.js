@@ -27,15 +27,13 @@ for(const slug of slugs) for(const width of widths) test(`RU ${slug} ${width}: g
   await expect(page.locator('[data-booking-dialog] iframe')).toHaveAttribute('src',links.booking.ru.group);
   await page.getByRole('button',{name:'Закрыть запись',exact:true}).click();
   await expect(page.locator('[data-booking-dialog]')).toHaveCount(0);
-  if(width<(slug==='surf-guide'?1024:1200)){
+  if(width<1200){
     await page.locator('header button').last().click();
     await expect(page.locator('header').getByRole('link',{name:'Уроки',exact:true}).last()).toBeVisible();
     await page.locator('header button').last().click();
   }
-  if(slug!=='surf-guide'){
-    await page.locator('.landing-faq-item summary').first().click();
-    await expect(page.locator('.landing-faq-item p').first()).toBeVisible();
-  }
+  await page.locator('.landing-faq-item summary').first().click();
+  await expect(page.locator('.landing-faq-item p').first()).toBeVisible();
   expect(errors).toEqual([]);
 });
 for(const slug of slugs) test(`${slug}: translation completeness, SEO and language pair`,async({page})=>{
@@ -47,6 +45,15 @@ for(const slug of slugs) test(`${slug}: translation completeness, SEO and langua
   for(const locale of ['en','ru']){
     const path=locale==='ru'?`/ru/${slug}`:`/${slug}`;
     await ready(page,path+query);
+    if(slug==='surf-guide'){
+      await expect(page.locator('.landing-guide')).toBeVisible();
+      await expect(page.locator('.landing-guide-hub a')).toHaveCount(4);
+      for(const card of getSeoPage(slug,locale).hubCards){
+        const link=page.locator('.landing-guide-hub a').filter({hasText:card.title});
+        await expect(link).toHaveAttribute('href',card.href);
+        await expect(link).toContainText(card.text);
+      }
+    }
     const base='https://www.surfdanang.com';
     await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href',base+path);
     await expect(page.locator('link[hreflang=ru]')).toHaveAttribute('href',`${base}/ru/${slug}`);

@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const fs = require('fs');
-const paths = ['/surf-lessons-danang', '/surfing-danang', '/my-khe-beach-surfing', '/partners', '/ru/partners'];
+const paths = ['/surf-lessons-danang', '/surfing-danang', '/my-khe-beach-surfing', '/surf-guide', '/partners', '/ru/partners'];
 const widths = [320, 360, 390, 480, 599, 600, 768, 899, 900, 1024, 1199, 1200, 1440];
 const normalize = text => text.replace(/\s+/g, ' ').trim();
 const seoPages = new Function(fs.readFileSync('app/data/seoPages.js', 'utf8').replaceAll('export ', '') + '; return seoPages;')();
@@ -60,7 +60,7 @@ for (const path of paths) {
       else if (Array.isArray(value)) value.forEach(v => collect(v, key));
       else if (value && typeof value === 'object') Object.entries(value).forEach(([k,v]) => collect(v,k));
     }
-    const keys = path.includes('partners') ? ['badge','subtitle','primaryCta','secondaryCta','sections'] : ['title','eyebrow','intro','primaryCta','secondaryCta','sections','faq'];
+    const keys = path.includes('partners') ? ['badge','subtitle','primaryCta','secondaryCta','sections'] : ['title','eyebrow','intro','primaryCta','secondaryCta','hubCards','sections','faq'];
     keys.forEach(k => collect(content[k],k));
     for (const text of strings) expect(body).toContain(normalize(text));
     const attribution = await page.evaluate(() => JSON.parse(localStorage.getItem('epic_surf_attribution')));
