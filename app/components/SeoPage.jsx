@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import Header from "./Header";
+import "./localized-guide.css";
 import Footer from "./Footer";
 import MessengerFab from "./MessengerFab";
 import BookingModal from "./BookingModal";
@@ -19,7 +20,7 @@ import {
 } from "./Icons";
 import { links } from "../data/links";
 import { getBoardTrackingPayload, rentalBoards } from "../data/rentalBoards";
-import { seoPageLinks } from "../data/seoPages";
+import { getSeoPageLinks } from "../data/seoPages";
 import { translations } from "../data/translations";
 import {
   buildTelegramUrl,
@@ -29,8 +30,8 @@ import {
   trackEvent,
 } from "../utils/tracking";
 
-function relatedPages(paths) {
-  return seoPageLinks.filter((item) => paths?.includes(item.href));
+function relatedPages(paths, locale) {
+  return getSeoPageLinks(locale).filter((item) => paths?.includes(item.href));
 }
 
 export default function SeoPage({ page, locale = "en", languageHref }) {
@@ -46,7 +47,7 @@ export default function SeoPage({ page, locale = "en", languageHref }) {
     : `Hi! I have a question about ${page.title} at Epic Surf School.`);
   const isRentalPage = page.primaryAction === "rental" || page.path === "/surfboard-rental-danang" || page.path === "/ru/surfboard-rental-danang";
   const rentalAvailabilityNote = page.rentalAvailabilityNote || "12 boards available - from 250,000 VND / 2 hours";
-  const relatedItems = relatedPages(page.related);
+  const relatedItems = relatedPages(page.related, lang);
 
   useEffect(() => {
     storeAttributionFromUrl({ includePartner: true });
@@ -131,7 +132,7 @@ export default function SeoPage({ page, locale = "en", languageHref }) {
   };
 
   return (
-    <div className="min-h-screen bg-epicWhite font-sans text-epicDark overflow-x-clip">
+    <div data-localized-guide={page.path === "/ru/surf-guide" ? "true" : undefined} className="min-h-screen bg-epicWhite font-sans text-epicDark overflow-x-clip">
       <Header
         t={t}
         lang={lang}
@@ -278,7 +279,7 @@ export default function SeoPage({ page, locale = "en", languageHref }) {
 
         <section className="bg-white px-6 py-16 md:py-20">
           <div className="mx-auto max-w-5xl">
-            <h2 className="text-4xl font-black uppercase leading-tight tracking-normal md:text-6xl">FAQ</h2>
+            <h2 className="text-4xl font-black uppercase leading-tight tracking-normal md:text-6xl">{lang === "ru" ? "Вопросы и ответы" : "FAQ"}</h2>
             <div className="mt-8 grid gap-4">
               {page.faq.map((item) => (
                 <div key={item.question} className="rounded-[28px] border border-epicDark/10 bg-epicWhite p-6">
@@ -295,9 +296,9 @@ export default function SeoPage({ page, locale = "en", languageHref }) {
           <div className="rounded-[34px] bg-epicDark p-7 text-epicWhite md:p-10">
             <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
               <div>
-                <p className="text-[11px] font-black uppercase tracking-wide text-epicMint">{page.relatedEyebrow || "Explore more"}</p>
+                <p className="text-[11px] font-black uppercase tracking-wide text-epicMint">{page.relatedEyebrow || (lang === "ru" ? "Узнайте больше" : "Explore more")}</p>
                 <h2 className="mt-3 text-3xl font-black uppercase leading-tight tracking-normal md:text-5xl">
-                  {page.relatedTitle || "Surf info for Da Nang"}
+                  {page.relatedTitle || (lang === "ru" ? "О сёрфинге в Дананге" : "Surf info for Da Nang")}
                 </h2>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
@@ -325,9 +326,9 @@ export default function SeoPage({ page, locale = "en", languageHref }) {
         <section className="bg-epicMint px-6 py-14 text-epicDark">
           <div className="mx-auto flex max-w-5xl flex-col gap-6 text-center md:flex-row md:items-center md:justify-between md:text-left">
             <div>
-              <p className="text-[11px] font-black uppercase tracking-wide">{page.contactEyebrow || "Ready to surf?"}</p>
+              <p className="text-[11px] font-black uppercase tracking-wide">{page.contactEyebrow || (lang === "ru" ? "Готовы к сёрфингу?" : "Ready to surf?")}</p>
               <h2 className="mt-2 text-3xl font-black uppercase leading-tight tracking-normal md:text-5xl">
-                {page.contactTitle || "Book or message Epic"}
+                {page.contactTitle || (lang === "ru" ? "Запишитесь или напишите Epic" : "Book or message Epic")}
               </h2>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
@@ -371,6 +372,7 @@ export default function SeoPage({ page, locale = "en", languageHref }) {
       </main>
 
       <Footer
+        pageLinks={page.path === "/ru/surf-guide" ? getSeoPageLinks(lang) : undefined}
         t={t}
         lang={lang}
         links={links}

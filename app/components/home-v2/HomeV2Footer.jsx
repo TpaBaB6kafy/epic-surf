@@ -70,11 +70,11 @@ export default function HomeV2Footer({ t, lang = "en", links, description }) {
   const isRu = lang === "ru";
   const partnersHref = isRu ? "/ru/partners" : "/partners";
   const quickLinks = isRu ? [
-    { href: "/surf-lessons-danang", label: "Уроки серфинга" },
-    { href: "/surfing-danang", label: "Серфинг в Дананге" },
+    { href: "/ru/surf-lessons-danang", label: "Уроки серфинга" },
+    { href: "/ru/surfing-danang", label: "Серфинг в Дананге" },
     { href: "/ru/surfboard-rental-danang", label: "Аренда серфборда" },
-    { href: "/my-khe-beach-surfing", label: "Серфинг на пляже Микхе" },
-    { href: "/surf-guide", label: "Гид по серфингу" },
+    { href: "/ru/my-khe-beach-surfing", label: "Серфинг на пляже Микхе" },
+    { href: "/ru/surf-guide", label: "Гид по серфингу" },
   ] : seoPageLinks;
   const year = new Date().getFullYear();
   const email = "epicsurf@gmail.com";

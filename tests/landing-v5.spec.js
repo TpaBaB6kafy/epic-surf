@@ -87,7 +87,7 @@ for (const path of paths) {
     await page.getByRole('button', { name:'Close messenger options' }).click();
     await expect(page.getByRole('link', {name:'WhatsApp chat',exact:true})).toHaveCount(0);
     await page.locator('[data-home-v2-language-switcher]').click();
-    const expected = path === '/partners' ? '/ru/partners' : path === '/ru/partners' ? '/partners' : '/ru';
+    const expected = path === '/partners' ? '/ru/partners' : path === '/ru/partners' ? '/partners' : `/ru${path}`;
     await expect(page).toHaveURL(new RegExp(expected.replaceAll('/','\\/')+'\\?partner=qa_partner&utm_source=qa&utm_campaign=landing_v5$'));
   });
 }

@@ -22,6 +22,7 @@ export const metadata = {
   description,
   alternates: {
     canonical: path,
+    languages: { en: path, ru: `/ru${path}`, "x-default": path },
   },
   openGraph: {
     type: "website",
@@ -39,7 +40,7 @@ export default function Page() {
   return (
     <>
       <PageJsonLd data={buildWebPageStructuredData({ path, title, description, locale: "en" })} />
-      <SeoPage page={page} />
+      <SeoPage page={page} languageHref="/ru/surf-guide" />
     </>
   );
 }

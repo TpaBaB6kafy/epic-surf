@@ -6,7 +6,7 @@ import { Handshake, MapPin, Send } from "lucide-react";
 import { seoPageLinks } from "../data/seoPages";
 import { trackEvent } from "../utils/tracking";
 
-export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookIcon, variant = "default" }) {
+export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookIcon, variant = "default", pageLinks = seoPageLinks }) {
   const isRentalVariant = variant === "rental";
   const partnersHref = lang === "ru" ? "/ru/partners" : "/partners";
   const partnersLabel = lang === "ru" ? "Партнёрам" : "For Partners";
@@ -132,7 +132,7 @@ export default function Footer({ t, lang = "en", links, InstagramIcon, FacebookI
           <div data-footer-surf-info className="mb-8 border-t border-white/5 pt-6 text-center md:mb-10 md:pt-7 md:text-left lg:mb-12 lg:pt-8">
             <p className="mb-3 text-[11px] font-black uppercase tracking-wide text-white/35 lg:mb-4">Surf Info</p>
             <div className="flex flex-wrap justify-center gap-x-5 gap-y-3 md:justify-start">
-              {seoPageLinks.map((item) => (
+              {pageLinks.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}

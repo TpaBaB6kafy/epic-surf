@@ -22,6 +22,7 @@ export const metadata = {
   description,
   alternates: {
     canonical: path,
+    languages: { en: path, ru: `/ru${path}`, "x-default": path },
   },
   openGraph: {
     type: "website",

@@ -48,10 +48,10 @@ export default function PartnersPage({ locale = "en" }) {
             </div>
             <div className="partner-hero-card">
               <div className="landing-hero-photo">
-                <Image src="/gallery/lesson-1.webp" alt="Epic Surf School lesson at My Khe Beach" fill priority sizes="(min-width: 900px) 50vw, 100vw" className="object-cover" />
-                <span className="partner-photo-label">My Khe</span>
+                <Image src="/gallery/lesson-1.webp" alt={lang === "ru" ? "Урок Epic Surf School на пляже Микхе" : "Epic Surf School lesson at My Khe Beach"} fill priority sizes="(min-width: 900px) 50vw, 100vw" className="object-cover" />
+                <span className="partner-photo-label">{lang === "ru" ? "Микхе" : "My Khe"}</span>
               </div>
-              <div className="partner-hero-benefits">{["Easy booking", "Safe lessons", "Partner rewards"].map(item => <div key={item}><Check size={18} />{item}</div>)}</div>
+              <div className="partner-hero-benefits">{(lang === "ru" ? ["Удобная запись", "Безопасные уроки", "Бонусы партнёрам"] : ["Easy booking", "Safe lessons", "Partner rewards"]).map(item => <div key={item}><Check size={18} />{item}</div>)}</div>
             </div>
           </div>
         </section>
