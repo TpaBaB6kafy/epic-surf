@@ -1,0 +1,170 @@
+/* V5 vocabulary, fluid landing layouts. Every rule is isolated from home/rental/guide. */
+.epic-landing {
+  --landing-ink: #2e2e2e;
+  --landing-paper: #f6f6f6;
+  --landing-coral: #fe746a;
+  --landing-green: #61988a;
+  --landing-gutter: clamp(18px, 4vw, 48px);
+  --landing-radius: clamp(32px, 4.5vw, 64px);
+  min-height: 100vh;
+  background: #1f1f1f;
+  color: var(--landing-paper);
+  font: 400 17px/1.65 'Home V2 Lessons Chivo', Arial, sans-serif;
+  overflow-wrap: break-word;
+}
+.epic-landing *, .epic-landing *::before, .epic-landing *::after { box-sizing: border-box; }
+.epic-landing :is(a, button, summary) { -webkit-tap-highlight-color: transparent; }
+.epic-landing :is(a, button, summary):focus-visible { outline: 3px solid var(--landing-coral); outline-offset: 5px; }
+.epic-landing :is(button, summary) { cursor: pointer; }
+.epic-landing :is(h1, h2, h3, p) { margin: 0; }
+.epic-landing h1 { font: 500 clamp(36px, 4.8vw, 68px)/1.08 'Home V5 Recursive', Arial, sans-serif; text-transform: uppercase; letter-spacing: -.035em; }
+.epic-landing h2 { font: 400 clamp(26px, 3vw, 40px)/1.2 'Home V5 Recursive', Arial, sans-serif; text-transform: uppercase; letter-spacing: -.025em; }
+.epic-landing h3 { font: 700 clamp(19px, 1.8vw, 24px)/1.3 'Home V2 Lessons Montserrat', Arial, sans-serif; }
+.epic-landing .landing-container { width: min(calc(100% - 2 * var(--landing-gutter)), 1248px); margin-inline: auto; }
+.epic-landing .landing-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; color: var(--landing-coral); font: 600 13px/1.5 'Home V2 Lessons Montserrat', Arial, sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+.epic-landing .landing-hero { padding: clamp(36px, 5vw, 72px) 0 clamp(48px, 6vw, 88px); background: #1f1f1f; }
+.epic-landing .landing-hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: center; gap: clamp(32px, 4vw, 64px); }
+.epic-landing .landing-intro { margin-top: 28px; max-width: 60ch; color: #d3d3d3; font-size: clamp(16px, 1.4vw, 20px); line-height: 1.65; }
+.epic-landing .landing-hero-photo { position: relative; min-width: 0; width: 100%; height: clamp(350px, 35vw, 520px); overflow: hidden; border: 4px solid #737373; border-radius: clamp(64px, 9vw, 136px); }
+.epic-landing .landing-actions { display: flex; flex-wrap: wrap; align-items: stretch; gap: 12px; margin-top: 32px; }
+.epic-landing .landing-button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; max-width: 100%; padding: 14px 24px; border: 1px solid var(--landing-coral); border-radius: 999px; background: var(--landing-coral); color: #242424; font: 700 13px/1.4 'Home V2 Lessons Montserrat', Arial, sans-serif; text-align: center; text-transform: uppercase; text-decoration: none; transition: background .18s, transform .18s; }
+.epic-landing .landing-button svg { flex-shrink: 0; }
+.epic-landing .landing-button:hover { background: #ff958d; }
+.epic-landing .landing-button:active { transform: translateY(2px); }
+.epic-landing .landing-button-secondary { background: #353535; border-color: #737373; color: #f6f6f6; }
+.epic-landing .landing-button-secondary:hover { background: #484848; border-color: #fe746a; }
+.epic-landing .landing-section { padding: clamp(40px, 5vw, 72px) 0; }
+.epic-landing .landing-content { background: #2e2e2e; }
+.epic-landing .landing-section-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 28px 64px; }
+.epic-landing .landing-section-copy { color: #dedede; }
+.epic-landing .landing-section-copy > * + * { margin-top: 24px; }
+.epic-landing .landing-section + .landing-section:not(.landing-section-feature) { border-top: 1px solid #ffffff17; }
+.epic-landing .landing-section-feature { background: #292929 url('/design/home-v5/lessons-included/png/section-background-texture@2x.png') center / cover; }
+.epic-landing .landing-list { display: grid; gap: 16px; padding: 0; margin: 0; list-style: none; }
+.epic-landing .landing-list li { position: relative; padding-left: 24px; }
+.epic-landing .landing-list li::before { content: ''; position: absolute; left: 0; top: .65em; width: 8px; height: 8px; border-radius: 50%; background: var(--landing-coral); }
+.epic-landing .landing-cards { display: grid; grid-column: 1 / -1; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 20px; margin-top: 12px; }
+.epic-landing .landing-card { padding: clamp(24px, 2.5vw, 36px); border-radius: var(--landing-radius); background: #f6f6f6; color: #353535; }
+.epic-landing .landing-card p { margin-top: 16px; font-size: 16px; line-height: 1.65; }
+.epic-landing .landing-card:nth-child(2) { background: #61988a; color: #fff; }
+.epic-landing .landing-cards-steps { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.epic-landing .landing-cards-steps .landing-card { border-radius: 36px; }
+.epic-landing .landing-faq { background: #f6f6f6; color: #2e2e2e; padding: clamp(48px, 6vw, 88px) 0; }
+.epic-landing .landing-faq-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 32px 64px; }
+.epic-landing .landing-faq h2 { font-family: 'Home V2 Lessons Montserrat', Arial, sans-serif; font-weight: 800; }
+.epic-landing .landing-faq-item { border-bottom: 1px solid #2e2e2e35; }
+.epic-landing .landing-faq-item summary { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px 0; list-style: none; font: 600 16px/1.5 'Home V2 Lessons Montserrat', Arial, sans-serif; }
+.epic-landing .landing-faq-item summary::-webkit-details-marker { display: none; }
+.epic-landing .landing-faq-item summary svg { flex-shrink: 0; transition: transform .2s; }
+.epic-landing .landing-faq-item[open] summary svg { transform: rotate(45deg); }
+.epic-landing .landing-faq-item p { padding: 0 32px 24px 0; font-size: 16px; }
+.epic-landing .landing-related { padding-block: clamp(48px, 6vw, 80px); }
+.epic-landing .landing-related-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 32px; }
+.epic-landing .landing-related-card { display: block; padding: 28px 32px; border: 1px solid #737373; border-radius: 36px; background: #292929; transition: border-color .18s, background .18s; }
+.epic-landing .landing-related-card:hover { background: #353535; border-color: #fe746a; }
+.epic-landing .landing-related-card h3 { display: flex; justify-content: space-between; gap: 16px; font-size: 20px; }
+.epic-landing .landing-related-card h3 svg { flex-shrink: 0; color: #fe746a; }
+.epic-landing .landing-related-card p { margin-top: 12px; color: #d3d3d3; font-size: 16px; }
+.epic-landing .landing-contact { padding: clamp(48px, 6vw, 88px) 0; background: linear-gradient(140deg, #4c7c73, #749988 65%, #e4ae86); }
+.epic-landing .landing-contact .landing-eyebrow { color: #fff; }
+.epic-landing .landing-contact h2 { max-width: 26ch; }
+.epic-landing.landing-beach .landing-hero-photo { border-radius: 50% 50% 36% 36%; }
+.epic-landing.landing-destination .landing-hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); }
+.epic-landing.landing-destination .landing-hero-photo { height: clamp(360px, 39vw, 560px); }
+/* Partnership keeps its audience, format, process and benefit groupings. */
+.epic-landing .partner-hero-card { min-width: 0; }
+.epic-landing.landing-partners h1 span { display: block; color: #fe746a; }
+.epic-landing .partner-photo-label { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); border-radius: 999px; padding: 8px 24px; background: #f6f6f6; color: #353535; font-size: 14px; }
+.epic-landing .partner-hero-benefits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 20px; }
+.epic-landing .partner-hero-benefits > div { display: flex; align-items: center; gap: 8px; font-size: 13px; line-height: 1.5; }
+.epic-landing .partner-hero-benefits svg { flex-shrink: 0; color: #fe746a; }
+.epic-landing .partner-section-heading { max-width: 780px; margin-bottom: 36px; }
+.epic-landing .partner-section-heading p { margin-top: 18px; color: #d3d3d3; }
+.epic-landing .partner-audience { background: #292929; }
+.epic-landing .partner-audience-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.epic-landing .partner-audience .landing-card { background: #191919; color: #f6f6f6; }
+.epic-landing .partner-audience .landing-card p { color: #d3d3d3; }
+.epic-landing .partner-icon { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; margin-bottom: 24px; border-radius: 50%; background: #f6f6f6; color: #353535; }
+.epic-landing .partner-formats { background: #292929 url('/design/home-v5/lessons-included/png/section-background-texture@2x.png') center / cover; }
+.epic-landing .partner-formats .partner-icon { background: #353535; color: #f6f6f6; }
+.epic-landing .partner-best-for { font-weight: 700; }
+.epic-landing .partner-process { background: #1f1f1f; }
+.epic-landing .partner-step { display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 24px; border-radius: 50%; background: #fe746a; color: #242424; font-weight: 700; }
+.epic-landing .partner-benefits { background: #f6f6f6; color: #353535; }
+.epic-landing .partner-benefits-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px; }
+.epic-landing .partner-benefits h2 { margin-bottom: 28px; }
+.epic-landing .partner-tracking { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .8fr); align-items: center; gap: 32px; margin-top: 48px; padding-top: 32px; border-top: 1px solid #35353530; }
+.epic-landing .partner-tracking p { margin-top: 12px; }
+.epic-landing .partner-example { padding: 24px; border-radius: 32px; background: #353535; color: #f6f6f6; }
+.epic-landing .partner-example p:last-child { overflow-wrap: anywhere; color: #fe746a; }
+.epic-landing .partner-contact { text-align: center; }
+.epic-landing .partner-contact :is(h2, p) { max-width: 780px; margin-inline: auto; }
+.epic-landing .partner-contact p { margin-top: 24px; }
+.epic-landing .partner-contact .landing-button { margin-top: 28px; }
+.epic-landing .partner-contact .partner-note { font-size: 14px; }
+/* Reuse header behavior/assets, replacing its homepage-only absolute canvas. */
+.epic-landing.epic-landing.epic-landing [data-home-v2-header] { position: sticky; top: 0; z-index: 100; width: 100%; height: 76px; margin: 0; overflow: visible; background: #1f1f1f; color: #f6f6f6; backdrop-filter: none; box-shadow: none; }
+.epic-landing.epic-landing [data-home-v2-header] .home-v2-top-header-media,
+.epic-landing.epic-landing [data-home-v2-header] .home-v5-legacy-logo { display: none; }
+.epic-landing.epic-landing.epic-landing [data-home-v2-header-strip] { display: flex; height: 76px; background: transparent; }
+.epic-landing.epic-landing.epic-landing [data-home-v2-header-frame] { position: relative; display: flex; align-items: center; justify-content: space-between; width: min(calc(100% - 2 * var(--landing-gutter)), 1248px); max-width: none; height: 76px; margin: auto; padding: 0; gap: 16px; }
+.epic-landing.epic-landing.epic-landing [data-home-v2-brand-logo] { position: static; display: block; width: 70px; height: auto; margin: 0; transform: none; }
+.epic-landing.epic-landing.epic-landing [data-home-v2-brand-logo] img.home-v5-desktop-logo { display: block; width: 70px; height: auto; max-width: 100%; }
+.epic-landing.epic-landing.epic-landing [data-home-v2-primary-navigation] { position: static; display: flex; align-items: center; justify-content: center; width: auto; height: auto; gap: clamp(12px, 1.4vw, 22px); margin: 0; padding: 0; }
+.epic-landing.epic-landing.epic-landing [data-home-v2-nav-link] { position: static; width: auto; height: auto; padding: 12px 0; color: #f6f6f6; font: 500 10px/1.4 'Home V2 Lessons Montserrat', Arial, sans-serif; letter-spacing: 0; white-space: normal; text-align: center; }
+.epic-landing.epic-landing.epic-landing [data-home-v2-header-actions] { position: static; display: flex; align-items: center; gap: 8px; margin: 0; }
+.epic-landing.epic-landing.epic-landing :is([data-home-v2-language-switcher], [data-home-v2-book-now], [data-home-v2-menu-control]) { position: static; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; min-height: 44px; padding: 0; border: 1px solid #666; border-radius: 999px; background: #353535; color: #fff; font: 700 12px/1 Arial, sans-serif; letter-spacing: 0; transform: none; }
+.epic-landing.epic-landing.epic-landing [data-home-v2-book-now] { width: auto; min-width: 96px; padding: 0 16px; background: #fe746a; border-color: #fe746a; }
+.epic-landing.epic-landing.epic-landing [data-home-v2-menu-control] { display: none; background: #f6f6f6; color: #2e2e2e; border-color: #f6f6f6; }
+.epic-landing.epic-landing [data-home-v2-hamburger-icon] { display: grid; gap: 4px; width: 18px; }
+.epic-landing.epic-landing [data-home-v2-hamburger-icon] > span { display: block; width: 18px; height: 2px; background: currentColor; }
+.epic-landing #home-v2-mobile-navigation { max-height: calc(100dvh - 76px); overflow-y: auto; border-radius: 0 0 28px 28px; background: #1f1f1f; }
+.epic-landing #home-v2-mobile-navigation a { min-height: 44px; font-size: 17px; font-weight: 600; }
+/* Keep the V5 footer in normal flow even when long Russian copy wraps. */
+.epic-landing [data-home-v2-footer] { scroll-margin-top: 90px; }
+.epic-landing.epic-landing [data-home-v2-footer-body] { height: auto; min-height: 0; padding: 48px var(--landing-gutter) 96px; }
+.epic-landing.epic-landing [data-home-v2-footer-frame] { display: block !important; width: 100% !important; max-width: 1248px; margin: auto; }
+.epic-landing.epic-landing [data-home-v2-footer-main] { display: grid !important; grid-template-columns: minmax(0, 1.2fr) minmax(0, .9fr) minmax(0, 1fr) !important; width: 100%; margin: 0; gap: 48px; }
+.epic-landing.epic-landing [data-home-v2-footer-main] > * { position: static; width: auto; height: auto; min-width: 0; }
+.epic-landing.epic-landing [data-home-v2-footer-brand] > p { height: auto; max-width: 35ch; white-space: normal; line-height: 1.7; }
+.epic-landing.epic-landing [data-home-v2-footer-socials] { flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.epic-landing [data-footer-social] { min-width: 44px; min-height: 44px; }
+.epic-landing [data-footer-contact] { overflow-wrap: anywhere; min-height: 44px; }
+.epic-landing [data-home-v2-footer-quick-links] a { display: flex; align-items: center; min-height: 44px; }
+.epic-landing.epic-landing [data-home-v2-footer-copyright] { right: auto; left: 50%; bottom: 24px; width: calc(100% - 36px); transform: translateX(-50%); white-space: normal; font-size: 12px; line-height: 1.5; }
+.epic-landing [data-home-v2-footer-surfboard] { opacity: .45; }
+.epic-landing [data-booking-dialog] { font-family: 'Home V2 Lessons Chivo', Arial, sans-serif; }
+@media (max-width: 1199px) {
+  .epic-landing.epic-landing.epic-landing [data-home-v2-primary-navigation] { display: none; }
+  .epic-landing.epic-landing.epic-landing [data-home-v2-menu-control] { display: flex; }
+  .epic-landing .landing-cards-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 899px) {
+  .epic-landing .landing-hero-grid, .epic-landing.landing-destination .landing-hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .epic-landing .landing-hero-copy { max-width: 760px; }
+  .epic-landing .landing-hero-photo, .epic-landing.landing-destination .landing-hero-photo { height: auto; aspect-ratio: 1.7; border-radius: clamp(48px, 10vw, 96px); }
+  .epic-landing .landing-section-grid, .epic-landing .landing-faq-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .epic-landing .partner-audience-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .epic-landing .partner-benefits-grid { gap: 32px; }
+  .epic-landing .partner-tracking { grid-template-columns: minmax(0, 1fr); }
+  .epic-landing.epic-landing [data-home-v2-footer-main] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 32px; }
+  .epic-landing [data-home-v2-footer-brand] { grid-column: 1 / -1; }
+}
+@media (max-width: 599px) {
+  .epic-landing { font-size: 16px; }
+  .epic-landing .landing-actions { flex-direction: column; align-items: stretch; }
+  .epic-landing .landing-button { width: 100%; }
+  .epic-landing .landing-cards, .epic-landing .landing-cards-steps, .epic-landing .landing-related-grid, .epic-landing .partner-audience-grid, .epic-landing .partner-benefits-grid { grid-template-columns: minmax(0, 1fr); }
+  .epic-landing .landing-related-card { padding: 24px; }
+  .epic-landing .landing-hero-photo, .epic-landing.landing-destination .landing-hero-photo { aspect-ratio: 1.25; border-width: 3px; }
+  .epic-landing .partner-hero-benefits { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .epic-landing.epic-landing [data-home-v2-footer-main] { grid-template-columns: minmax(0, 1fr) !important; }
+  .epic-landing.epic-landing [data-home-v2-footer-brand] { grid-column: auto; }
+  .epic-landing.epic-landing [data-home-v2-footer-surfboard] { display: none; }
+  .epic-landing.epic-landing.epic-landing [data-home-v2-header-frame] { gap: 8px; }
+  .epic-landing.epic-landing.epic-landing [data-home-v2-book-now] { min-width: 88px; padding-inline: 12px; font-size: 11px; }
+  .epic-landing.epic-landing.epic-landing [data-home-v2-brand-logo], .epic-landing.epic-landing.epic-landing [data-home-v2-brand-logo] img.home-v5-desktop-logo { width: 62px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .epic-landing *, .epic-landing *::before, .epic-landing *::after { scroll-behavior: auto !important; transition: none !important; }
+}

@@ -66,7 +66,7 @@ function ContactRow({ icon, href, external, children, onClick, role }) {
   ) : <div data-footer-contact={role} className={className}>{content}</div>;
 }
 
-export default function HomeV2Footer({ t, lang = "en", links }) {
+export default function HomeV2Footer({ t, lang = "en", links, description }) {
   const isRu = lang === "ru";
   const partnersHref = isRu ? "/ru/partners" : "/partners";
   const quickLinks = isRu ? [
@@ -100,7 +100,7 @@ export default function HomeV2Footer({ t, lang = "en", links }) {
           <section data-home-v2-footer-brand className="w-full min-[1440px]:h-[198px] min-[1440px]:w-[306px]">
             <Image src={`${assetRoot}/brand-logo.svg`} alt="EPIC" width={29} height={18} unoptimized className="h-[18px] w-[29px]" />
             <p className="mt-[24px] h-[101px] max-w-[306px] whitespace-pre-line text-[16px] font-light leading-[30px] text-white">
-              {brandDescription}
+              {description || brandDescription}
             </p>
             <div data-home-v2-footer-socials="true" className="mt-[20px] flex items-center gap-5 min-[1440px]:gap-[20px]">
               {socialItems.map((item) => <SocialLink key={item.key} item={item} href={links[item.key]} lang={lang} />)}
