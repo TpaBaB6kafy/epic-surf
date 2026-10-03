@@ -1,0 +1,75 @@
+{
+  "frameRate": "60000/1001",
+  "speed": 1,
+  "fadeFrames": 30,
+  "loop": "Last 30 frames dissolve into first 30; first 30 frames trimmed, final-to-first is consecutive source motion.",
+  "variants": {
+    "desktop": {
+      "width": 1920,
+      "height": 1080,
+      "crf": 38,
+      "clips": [
+        {
+          "id": "ocean",
+          "file": "public/hero-surf.mp4",
+          "start": 1.5,
+          "end": 6.0045,
+          "frames": 270,
+          "crop": null,
+          "grade": "eq=brightness=0.008:contrast=1.025:saturation=0.92:gamma=1.025"
+        },
+        {
+          "id": "ride",
+          "file": "tmp/hero-source/DJI_0679.MP4",
+          "start": 4,
+          "end": 11.007,
+          "frames": 420,
+          "crop": null,
+          "grade": "eq=brightness=0.008:contrast=1.015:saturation=0.91:gamma=1.04"
+        },
+        {
+          "id": "overhead",
+          "file": "tmp/hero-source/DJI_0691.MP4",
+          "start": 1.8,
+          "end": 7.806,
+          "frames": 360,
+          "crop": null,
+          "grade": "eq=brightness=0.005:contrast=1.01:saturation=0.88:gamma=1.025"
+        }
+      ],
+      "masterWidth": 1920,
+      "masterHeight": 1080,
+      "frames": 960,
+      "duration": 16.016
+    },
+    "mobile": {
+      "width": 720,
+      "height": 1280,
+      "crf": 44,
+      "clips": [
+        {
+          "id": "ride",
+          "file": "tmp/hero-source/DJI_0679.MP4",
+          "start": 3.5,
+          "end": 13.51,
+          "frames": 600,
+          "crop": "crop=1216:2160:x='iw*(0.28+0.22*t/10.01)-ow/2':y=0",
+          "grade": "eq=brightness=0.008:contrast=1.015:saturation=0.91:gamma=1.04"
+        },
+        {
+          "id": "overhead",
+          "file": "tmp/hero-source/DJI_0691.MP4",
+          "start": 1.5,
+          "end": 8.306799999999999,
+          "frames": 408,
+          "crop": "crop=1216:2160:x='iw*(0.28+0.10*t/6.8068)-ow/2':y=0",
+          "grade": "eq=brightness=0.005:contrast=1.01:saturation=0.88:gamma=1.025"
+        }
+      ],
+      "masterWidth": 900,
+      "masterHeight": 1600,
+      "frames": 948,
+      "duration": 15.8158
+    }
+  }
+}

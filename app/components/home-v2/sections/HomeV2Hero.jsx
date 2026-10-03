@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import styles from "./HomeV2Hero.module.css";
+import { selectHeroVideo } from "../heroVideoSource.mjs";
 
 const MEDIA_ROOT = "/video/hero";
 
@@ -25,9 +26,11 @@ export default function HomeV2Hero({ t, lang = "en" }) {
     let broken = false;
     let attempt = 0;
     let pending = false;
+    let source = null;
+    let triedFallback = false;
 
     const sync = () => {
-      if (disposed) return;
+      if (disposed || !source) return;
       if (!wantsPlayback || !inView || document.hidden || broken) {
         attempt += 1;
         pending = false;
@@ -36,8 +39,9 @@ export default function HomeV2Hero({ t, lang = "en" }) {
       }
       if (!video.hasAttribute("src")) {
         video.muted = true;
-        video.src = `${MEDIA_ROOT}/${variant}.mp4`;
+        video.src = source.src;
         section.dataset.videoVariant = variant;
+        section.dataset.videoCodec = source.codec;
       }
       if (!video.paused || pending) return;
       pending = true;
@@ -62,6 +66,18 @@ export default function HomeV2Hero({ t, lang = "en" }) {
     const onPause = () => setPlaying(false);
     const onError = () => {
       if (disposed) return;
+      if (source?.codec === "av1" && !triedFallback) {
+        triedFallback = true;
+        attempt += 1;
+        pending = false;
+        video.pause();
+        video.removeAttribute("src");
+        video.load();
+        source = { ...source, src: source.fallbackSrc, codec: "h264" };
+        setHasFrame(false);
+        sync();
+        return;
+      }
       broken = true;
       wantsPlayback = false;
       setFailed(true);
@@ -89,6 +105,11 @@ export default function HomeV2Hero({ t, lang = "en" }) {
       sync();
     }, { threshold: [0, 0.05] });
     observer.observe(section);
+    selectHeroVideo(variant).then((selected) => {
+      if (disposed) return;
+      source = selected;
+      sync();
+    });
     return () => {
       disposed = true;
       attempt += 1;
@@ -112,9 +133,9 @@ export default function HomeV2Hero({ t, lang = "en" }) {
       className={styles.hero} aria-labelledby="home-hero-title">
       <h1 id="home-hero-title" className="sr-only">{t.heroTitle} {t.heroTitleEpic} {t.heroTitleEnd}</h1>
       <picture className={styles.poster}>
-        <source media="(max-width: 900px)" srcSet={`${MEDIA_ROOT}/mobile-poster.webp`} />
+        <source media="(max-width: 900px)" srcSet={`${MEDIA_ROOT}/mobile-v2-poster.webp`} />
         {/* Native picture avoids a desktop preload competing with the mobile poster. */}
-        <img src={`${MEDIA_ROOT}/desktop-poster.webp`} alt="" width="1920" height="1080" fetchPriority="high" loading="eager" />
+        <img src={`${MEDIA_ROOT}/desktop-v2-poster.webp`} alt="" width="1920" height="1080" fetchPriority="high" loading="eager" />
       </picture>
       <video ref={videoRef} data-hero-video className={`${styles.video} ${hasFrame ? styles.revealed : ""}`}
         autoPlay muted loop playsInline preload="none" aria-hidden="true" tabIndex={-1} />
