@@ -1,0 +1,1318 @@
+[
+  {
+    "id": "umka-party-01",
+    "album": "umka-party",
+    "original": "1V7A8315.jpg",
+    "originalWidth": 3541,
+    "originalHeight": 5311,
+    "originalBytes": 12223072,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-01-480.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 16992
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-01-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 46480
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-01-2400.webp",
+        "width": 1600,
+        "height": 2400,
+        "bytes": 604438
+      }
+    ]
+  },
+  {
+    "id": "umka-party-02",
+    "album": "umka-party",
+    "original": "1V7A8327.jpg",
+    "originalWidth": 3380,
+    "originalHeight": 5070,
+    "originalBytes": 13419764,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-02-480.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 24110
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-02-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 72922
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-02-2400.webp",
+        "width": 1600,
+        "height": 2400,
+        "bytes": 918394
+      }
+    ]
+  },
+  {
+    "id": "umka-party-03",
+    "album": "umka-party",
+    "original": "1V7A8332.jpg",
+    "originalWidth": 3541,
+    "originalHeight": 5311,
+    "originalBytes": 15619246,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-03-480.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 26166
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-03-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 85742
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-03-2400.webp",
+        "width": 1600,
+        "height": 2400,
+        "bytes": 945642
+      }
+    ]
+  },
+  {
+    "id": "umka-party-04",
+    "album": "umka-party",
+    "original": "1V7A8333.jpg",
+    "originalWidth": 3541,
+    "originalHeight": 5311,
+    "originalBytes": 13046000,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-04-480.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 25992
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-04-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 78782
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-04-2400.webp",
+        "width": 1600,
+        "height": 2400,
+        "bytes": 820902
+      }
+    ]
+  },
+  {
+    "id": "umka-party-05",
+    "album": "umka-party",
+    "original": "1V7A8340.jpg",
+    "originalWidth": 3365,
+    "originalHeight": 5048,
+    "originalBytes": 10876289,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-05-480.webp",
+        "width": 319,
+        "height": 480,
+        "bytes": 18188
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-05-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 52250
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-05-2400.webp",
+        "width": 1600,
+        "height": 2400,
+        "bytes": 829326
+      }
+    ]
+  },
+  {
+    "id": "umka-party-06",
+    "album": "umka-party",
+    "original": "1V7A8348.jpg",
+    "originalWidth": 3413,
+    "originalHeight": 5119,
+    "originalBytes": 14510018,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-06-480.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 31060
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-06-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 94922
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-06-2400.webp",
+        "width": 1600,
+        "height": 2400,
+        "bytes": 962126
+      }
+    ]
+  },
+  {
+    "id": "umka-party-07",
+    "album": "umka-party",
+    "original": "1V7A8353.jpg",
+    "originalWidth": 3776,
+    "originalHeight": 5664,
+    "originalBytes": 16923939,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-07-480.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 21220
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-07-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 62074
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-07-2400.webp",
+        "width": 1600,
+        "height": 2400,
+        "bytes": 848656
+      }
+    ]
+  },
+  {
+    "id": "umka-party-08",
+    "album": "umka-party",
+    "original": "1V7A8356.jpg",
+    "originalWidth": 3068,
+    "originalHeight": 4602,
+    "originalBytes": 10157890,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-08-480.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 21274
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-08-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 62168
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-08-2400.webp",
+        "width": 1600,
+        "height": 2400,
+        "bytes": 875270
+      }
+    ]
+  },
+  {
+    "id": "umka-party-09",
+    "album": "umka-party",
+    "original": "1V7A8359.jpg",
+    "originalWidth": 3541,
+    "originalHeight": 5311,
+    "originalBytes": 14317362,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-09-480.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 32128
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-09-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 98170
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-09-2400.webp",
+        "width": 1600,
+        "height": 2400,
+        "bytes": 962520
+      }
+    ]
+  },
+  {
+    "id": "umka-party-10",
+    "album": "umka-party",
+    "original": "1V7A8363.jpg",
+    "originalWidth": 3541,
+    "originalHeight": 5311,
+    "originalBytes": 15740106,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-10-480.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 33632
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-10-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 105726
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-10-2400.webp",
+        "width": 1600,
+        "height": 2400,
+        "bytes": 1009928
+      }
+    ]
+  },
+  {
+    "id": "umka-party-11",
+    "album": "umka-party",
+    "original": "1V7A8370.jpg",
+    "originalWidth": 5733,
+    "originalHeight": 3822,
+    "originalBytes": 18117321,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-11-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 27848
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-11-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 85794
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-11-2400.webp",
+        "width": 2400,
+        "height": 1600,
+        "bytes": 925946
+      }
+    ]
+  },
+  {
+    "id": "umka-party-12",
+    "album": "umka-party",
+    "original": "1V7A8389.jpg",
+    "originalWidth": 5311,
+    "originalHeight": 3541,
+    "originalBytes": 14400529,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-12-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 26432
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-12-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 74822
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-12-2400.webp",
+        "width": 2400,
+        "height": 1600,
+        "bytes": 822470
+      }
+    ]
+  },
+  {
+    "id": "umka-party-13",
+    "album": "umka-party",
+    "original": "1V7A8399.jpg",
+    "originalWidth": 2985,
+    "originalHeight": 4478,
+    "originalBytes": 8819857,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-13-480.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 18890
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-13-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 49838
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-13-2400.webp",
+        "width": 1600,
+        "height": 2400,
+        "bytes": 785552
+      }
+    ]
+  },
+  {
+    "id": "umka-party-14",
+    "album": "umka-party",
+    "original": "1V7A8406.jpg",
+    "originalWidth": 5733,
+    "originalHeight": 3822,
+    "originalBytes": 17711940,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-14-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 32030
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-14-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 100200
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-14-2400.webp",
+        "width": 2400,
+        "height": 1600,
+        "bytes": 941328
+      }
+    ]
+  },
+  {
+    "id": "umka-party-15",
+    "album": "umka-party",
+    "original": "1V7A8410.jpg",
+    "originalWidth": 3822,
+    "originalHeight": 5733,
+    "originalBytes": 16816180,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-15-480.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 31188
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-15-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 99992
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-15-2400.webp",
+        "width": 1600,
+        "height": 2400,
+        "bytes": 948342
+      }
+    ]
+  },
+  {
+    "id": "umka-party-16",
+    "album": "umka-party",
+    "original": "1V7A8416.jpg",
+    "originalWidth": 3435,
+    "originalHeight": 2290,
+    "originalBytes": 6032171,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-16-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 28396
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-16-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 84394
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-16-2400.webp",
+        "width": 2400,
+        "height": 1600,
+        "bytes": 975712
+      }
+    ]
+  },
+  {
+    "id": "umka-party-17",
+    "album": "umka-party",
+    "original": "1V7A8417.jpg",
+    "originalWidth": 3541,
+    "originalHeight": 5311,
+    "originalBytes": 13218242,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-17-480.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 23562
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-17-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 67398
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-17-2400.webp",
+        "width": 1600,
+        "height": 2400,
+        "bytes": 823320
+      }
+    ]
+  },
+  {
+    "id": "umka-party-18",
+    "album": "umka-party",
+    "original": "1V7A8423.jpg",
+    "originalWidth": 3541,
+    "originalHeight": 5311,
+    "originalBytes": 15397884,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-18-480.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 30396
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-18-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 104874
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-18-2400.webp",
+        "width": 1600,
+        "height": 2400,
+        "bytes": 1057070
+      }
+    ]
+  },
+  {
+    "id": "umka-party-19",
+    "album": "umka-party",
+    "original": "1V7A8430.jpg",
+    "originalWidth": 4000,
+    "originalHeight": 2667,
+    "originalBytes": 7384653,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-19-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 24632
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-19-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 67884
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-19-2400.webp",
+        "width": 2400,
+        "height": 1600,
+        "bytes": 911160
+      }
+    ]
+  },
+  {
+    "id": "umka-party-20",
+    "album": "umka-party",
+    "original": "1V7A8431.jpg",
+    "originalWidth": 5311,
+    "originalHeight": 3541,
+    "originalBytes": 15999898,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-20-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 32324
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-20-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 111732
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-20-2400.webp",
+        "width": 2400,
+        "height": 1600,
+        "bytes": 1091632
+      }
+    ]
+  },
+  {
+    "id": "umka-party-21",
+    "album": "umka-party",
+    "original": "1V7A8434.jpg",
+    "originalWidth": 3541,
+    "originalHeight": 5311,
+    "originalBytes": 16978526,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-21-480.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 26626
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-21-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 79314
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-21-2400.webp",
+        "width": 1600,
+        "height": 2400,
+        "bytes": 870838
+      }
+    ]
+  },
+  {
+    "id": "umka-party-22",
+    "album": "umka-party",
+    "original": "1V7A8459.jpg",
+    "originalWidth": 5612,
+    "originalHeight": 3741,
+    "originalBytes": 14411734,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-22-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 22704
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-22-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 63024
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-22-2400.webp",
+        "width": 2400,
+        "height": 1600,
+        "bytes": 795654
+      }
+    ]
+  },
+  {
+    "id": "umka-party-23",
+    "album": "umka-party",
+    "original": "1V7A8510.jpg",
+    "originalWidth": 3541,
+    "originalHeight": 5311,
+    "originalBytes": 14474736,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-23-480.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 23972
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-23-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 87954
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-23-2400.webp",
+        "width": 1600,
+        "height": 2400,
+        "bytes": 949904
+      }
+    ]
+  },
+  {
+    "id": "umka-party-24",
+    "album": "umka-party",
+    "original": "1V7A8542.jpg",
+    "originalWidth": 5311,
+    "originalHeight": 3541,
+    "originalBytes": 14049180,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-24-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 27414
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-24-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 76036
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-24-2400.webp",
+        "width": 2400,
+        "height": 1600,
+        "bytes": 827854
+      }
+    ]
+  },
+  {
+    "id": "umka-party-25",
+    "album": "umka-party",
+    "original": "1V7A8577.jpg",
+    "originalWidth": 5199,
+    "originalHeight": 3466,
+    "originalBytes": 14423377,
+    "variants": [
+      {
+        "src": "/gallery/umka-party/umka-party-25-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 36636
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-25-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 118094
+      },
+      {
+        "src": "/gallery/umka-party/umka-party-25-2400.webp",
+        "width": 2400,
+        "height": 1600,
+        "bytes": 1050976
+      }
+    ]
+  },
+  {
+    "id": "surf-life-01",
+    "album": "surf-life",
+    "original": "DJI_0478.JPG",
+    "originalWidth": 4032,
+    "originalHeight": 3024,
+    "originalBytes": 5139662,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-01-480.webp",
+        "width": 480,
+        "height": 360,
+        "bytes": 27892
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-01-960.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 113520
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-01-2400.webp",
+        "width": 2400,
+        "height": 1800,
+        "bytes": 728936
+      }
+    ]
+  },
+  {
+    "id": "surf-life-02",
+    "album": "surf-life",
+    "original": "DJI_0822.JPG",
+    "originalWidth": 4032,
+    "originalHeight": 3024,
+    "originalBytes": 4601356,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-02-480.webp",
+        "width": 480,
+        "height": 360,
+        "bytes": 30640
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-02-960.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 107568
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-02-2400.webp",
+        "width": 2400,
+        "height": 1800,
+        "bytes": 572910
+      }
+    ]
+  },
+  {
+    "id": "surf-life-03",
+    "album": "surf-life",
+    "original": "DJI_0951.JPG",
+    "originalWidth": 8064,
+    "originalHeight": 6048,
+    "originalBytes": 15999013,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-03-480.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 18656
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-03-960.webp",
+        "width": 720,
+        "height": 960,
+        "bytes": 72182
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-03-2400.webp",
+        "width": 1800,
+        "height": 2400,
+        "bytes": 407950
+      }
+    ]
+  },
+  {
+    "id": "surf-life-04",
+    "album": "surf-life",
+    "original": "DSCN0696.JPG",
+    "originalWidth": 4608,
+    "originalHeight": 3456,
+    "originalBytes": 3683052,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-04-480.webp",
+        "width": 480,
+        "height": 360,
+        "bytes": 13812
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-04-960.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 49452
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-04-2400.webp",
+        "width": 2400,
+        "height": 1800,
+        "bytes": 250100
+      }
+    ]
+  },
+  {
+    "id": "surf-life-05",
+    "album": "surf-life",
+    "original": "DSCN0698 — копия.JPG",
+    "originalWidth": 4608,
+    "originalHeight": 3456,
+    "originalBytes": 3468853,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-05-480.webp",
+        "width": 480,
+        "height": 360,
+        "bytes": 6912
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-05-960.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 21842
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-05-2400.webp",
+        "width": 2400,
+        "height": 1800,
+        "bytes": 108584
+      }
+    ]
+  },
+  {
+    "id": "surf-life-06",
+    "album": "surf-life",
+    "original": "DSCN0702.JPG",
+    "originalWidth": 4608,
+    "originalHeight": 3456,
+    "originalBytes": 3415293,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-06-480.webp",
+        "width": 480,
+        "height": 360,
+        "bytes": 18406
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-06-960.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 68384
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-06-2400.webp",
+        "width": 2400,
+        "height": 1800,
+        "bytes": 383884
+      }
+    ]
+  },
+  {
+    "id": "surf-life-07",
+    "album": "surf-life",
+    "original": "DSCN1047.JPG",
+    "originalWidth": 4608,
+    "originalHeight": 3456,
+    "originalBytes": 6352671,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-07-480.webp",
+        "width": 480,
+        "height": 360,
+        "bytes": 15194
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-07-960.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 65432
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-07-2400.webp",
+        "width": 2400,
+        "height": 1800,
+        "bytes": 409688
+      }
+    ]
+  },
+  {
+    "id": "surf-life-08",
+    "album": "surf-life",
+    "original": "DSCN1397.JPG",
+    "originalWidth": 4608,
+    "originalHeight": 2592,
+    "originalBytes": 6200135,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-08-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 12204
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-08-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 41986
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-08-2400.webp",
+        "width": 2400,
+        "height": 1350,
+        "bytes": 212984
+      }
+    ]
+  },
+  {
+    "id": "surf-life-09",
+    "album": "surf-life",
+    "original": "DSCN1883.JPG",
+    "originalWidth": 4608,
+    "originalHeight": 3456,
+    "originalBytes": 6920134,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-09-480.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 10726
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-09-960.webp",
+        "width": 720,
+        "height": 960,
+        "bytes": 33156
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-09-2400.webp",
+        "width": 1800,
+        "height": 2400,
+        "bytes": 186478
+      }
+    ]
+  },
+  {
+    "id": "surf-life-10",
+    "album": "surf-life",
+    "original": "DSCN1991.JPG",
+    "originalWidth": 4608,
+    "originalHeight": 2592,
+    "originalBytes": 5798017,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-10-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 9266
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-10-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 30638
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-10-2400.webp",
+        "width": 2400,
+        "height": 1350,
+        "bytes": 161306
+      }
+    ]
+  },
+  {
+    "id": "surf-life-11",
+    "album": "surf-life",
+    "original": "DSCN2358.JPG",
+    "originalWidth": 4608,
+    "originalHeight": 2592,
+    "originalBytes": 6003144,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-11-480.webp",
+        "width": 270,
+        "height": 480,
+        "bytes": 9982
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-11-960.webp",
+        "width": 540,
+        "height": 960,
+        "bytes": 33436
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-11-2400.webp",
+        "width": 1350,
+        "height": 2400,
+        "bytes": 160320
+      }
+    ]
+  },
+  {
+    "id": "surf-life-12",
+    "album": "surf-life",
+    "original": "DSCN2490.JPG",
+    "originalWidth": 4608,
+    "originalHeight": 2592,
+    "originalBytes": 5157473,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-12-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 16574
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-12-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 61054
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-12-2400.webp",
+        "width": 2400,
+        "height": 1350,
+        "bytes": 294774
+      }
+    ]
+  },
+  {
+    "id": "surf-life-13",
+    "album": "surf-life",
+    "original": "DSCN2802.JPG",
+    "originalWidth": 4608,
+    "originalHeight": 2592,
+    "originalBytes": 5482228,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-13-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 8060
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-13-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 27064
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-13-2400.webp",
+        "width": 2400,
+        "height": 1350,
+        "bytes": 137666
+      }
+    ]
+  },
+  {
+    "id": "surf-life-14",
+    "album": "surf-life",
+    "original": "DSCN4177.JPG",
+    "originalWidth": 4608,
+    "originalHeight": 3456,
+    "originalBytes": 6736163,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-14-480.webp",
+        "width": 360,
+        "height": 480,
+        "bytes": 9842
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-14-960.webp",
+        "width": 720,
+        "height": 960,
+        "bytes": 34930
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-14-2400.webp",
+        "width": 1800,
+        "height": 2400,
+        "bytes": 192470
+      }
+    ]
+  },
+  {
+    "id": "surf-life-15",
+    "album": "surf-life",
+    "original": "DSCN5186.JPG",
+    "originalWidth": 4608,
+    "originalHeight": 3456,
+    "originalBytes": 6882538,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-15-480.webp",
+        "width": 480,
+        "height": 360,
+        "bytes": 9912
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-15-960.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 35388
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-15-2400.webp",
+        "width": 2400,
+        "height": 1800,
+        "bytes": 209546
+      }
+    ]
+  },
+  {
+    "id": "surf-life-16",
+    "album": "surf-life",
+    "original": "P9810161.JPG",
+    "originalWidth": 1920,
+    "originalHeight": 1080,
+    "originalBytes": 698880,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-16-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 12054
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-16-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 37446
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-16-2400.webp",
+        "width": 1920,
+        "height": 1080,
+        "bytes": 107838
+      }
+    ]
+  },
+  {
+    "id": "surf-life-17",
+    "album": "surf-life",
+    "original": "P9820770.JPG",
+    "originalWidth": 5472,
+    "originalHeight": 3080,
+    "originalBytes": 6815744,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-17-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 14966
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-17-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 44620
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-17-2400.webp",
+        "width": 2400,
+        "height": 1351,
+        "bytes": 203560
+      }
+    ]
+  },
+  {
+    "id": "surf-life-18",
+    "album": "surf-life",
+    "original": "P9830755.JPG",
+    "originalWidth": 5472,
+    "originalHeight": 3080,
+    "originalBytes": 6056448,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-18-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 10700
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-18-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 33796
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-18-2400.webp",
+        "width": 2400,
+        "height": 1351,
+        "bytes": 158500
+      }
+    ]
+  },
+  {
+    "id": "surf-life-19",
+    "album": "surf-life",
+    "original": "P9830759.JPG",
+    "originalWidth": 5472,
+    "originalHeight": 3080,
+    "originalBytes": 7533056,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-19-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 12350
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-19-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 45738
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-19-2400.webp",
+        "width": 2400,
+        "height": 1351,
+        "bytes": 239480
+      }
+    ]
+  },
+  {
+    "id": "surf-life-20",
+    "album": "surf-life",
+    "original": "P9830826.JPG",
+    "originalWidth": 1920,
+    "originalHeight": 1080,
+    "originalBytes": 807936,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-20-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 16964
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-20-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 48218
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-20-2400.webp",
+        "width": 1920,
+        "height": 1080,
+        "bytes": 133790
+      }
+    ]
+  },
+  {
+    "id": "surf-life-21",
+    "album": "surf-life",
+    "original": "P9840008.JPG",
+    "originalWidth": 5472,
+    "originalHeight": 3080,
+    "originalBytes": 7331328,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-21-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 13648
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-21-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 42394
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-21-2400.webp",
+        "width": 2400,
+        "height": 1351,
+        "bytes": 195732
+      }
+    ]
+  },
+  {
+    "id": "surf-life-22",
+    "album": "surf-life",
+    "original": "P9950173.JPG",
+    "originalWidth": 1920,
+    "originalHeight": 1080,
+    "originalBytes": 871424,
+    "variants": [
+      {
+        "src": "/gallery/surf-life/surf-life-22-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 14736
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-22-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 46614
+      },
+      {
+        "src": "/gallery/surf-life/surf-life-22-2400.webp",
+        "width": 1920,
+        "height": 1080,
+        "bytes": 142524
+      }
+    ]
+  }
+]

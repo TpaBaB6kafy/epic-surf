@@ -45,8 +45,8 @@ export const translations = {
       eventsItems: [
         { title: "Da Nang Surfing Open 2025", type: "Фестиваль", desc: "Большой день на пляже: серф-контест, музыка, фото, друзья школы и много волн.", image: "/gallery/events/danang-open-2026.webp", galleryKey: "surf-fest", imageClass: "object-cover object-center", buttonLabel: "Смотреть фото" },
         { title: "День рождения школы", type: "Community", desc: "Празднуем вместе с учениками, инструкторами и друзьями Epic Surf.", image: "/gallery/events/school-birthday.webp", galleryKey: "birthday", imageClass: "object-cover object-center", buttonLabel: "Смотреть фото" },
-        { title: "Sunset surf sessions", type: "Регулярно", desc: "Вечерние катания, мягкий свет, фото сессии и спокойный вайб после уроков.", image: "/gallery/events/sunset-surf.webp", galleryKey: "sunset", imageClass: "object-cover object-center", buttonLabel: "Смотреть фото" },
-        { title: "Community rides", type: "Meet-up", desc: "Совместные выезды и сессии для учеников, которые хотят больше практики.", image: "/gallery/events/community-rides.webp", galleryKey: "community", imageClass: "object-cover object-center", buttonLabel: "Смотреть фото" }
+        { title: "Sunset surf sessions", type: "Регулярно", desc: "Вечерние катания, мягкий свет, фото сессии и спокойный вайб после уроков.", image: "/gallery/events/sunset-surf.webp", galleryKey: "lessons", imageClass: "object-cover object-center", buttonLabel: "Смотреть фото" },
+        { title: "Детский праздник Умка", type: "Детский праздник", desc: "Игры и балансборды с детским садом «Умка» в Дананге.", image: "/gallery/umka-party/umka-party-11-960.webp", galleryKey: "umka", imageClass: "object-cover object-center", buttonLabel: "Смотреть фото" }
       ],
       locationTitle: "Найди наш", locationTitleSpot: "Спот",
       locationAddress: "Пляж Микхе, Дананг", locationLandmark: "Ищите красный флаг EPIC SURF на песке напротив TMS Hotel",
@@ -149,8 +149,8 @@ export const translations = {
       eventsItems: [
         { title: "Da Nang Surfing Open 2025", type: "Festival", desc: "A full beach day with surf contests, music, photos, school friends, and plenty of waves.", image: "/gallery/events/danang-open-2026.webp", galleryKey: "surf-fest", imageClass: "object-cover object-center", buttonLabel: "View photos" },
         { title: "School birthday", type: "Community", desc: "We celebrate together with students, instructors, and friends of Epic Surf.", image: "/gallery/events/school-birthday.webp", galleryKey: "birthday", imageClass: "object-cover object-center", buttonLabel: "View photos" },
-        { title: "Sunset surf sessions", type: "Regular", desc: "Evening rides, soft light, photo moments, and a relaxed after-lesson vibe.", image: "/gallery/events/sunset-surf.webp", galleryKey: "sunset", imageClass: "object-cover object-center", buttonLabel: "View photos" },
-        { title: "Community rides", type: "Meet-up", desc: "Shared trips and sessions for students who want more water time and practice.", image: "/gallery/events/community-rides.webp", galleryKey: "community", imageClass: "object-cover object-center", buttonLabel: "View photos" }
+        { title: "Sunset surf sessions", type: "Regular", desc: "Evening rides, soft light, photo moments, and a relaxed after-lesson vibe.", image: "/gallery/events/sunset-surf.webp", galleryKey: "lessons", imageClass: "object-cover object-center", buttonLabel: "View photos" },
+        { title: "Umka kids party", type: "Kids event", desc: "Games and balance boards with Umka kindergarten in Da Nang.", image: "/gallery/umka-party/umka-party-11-960.webp", galleryKey: "umka", imageClass: "object-cover object-center", buttonLabel: "View photos" }
       ],
       locationTitle: "Find the", locationTitleSpot: "Spot",
       locationAddress: "My Khe Beach, Da Nang", locationLandmark: "Look for the Red EPIC SURF flag opposite TMS Hotel",

@@ -1,0 +1,73 @@
+/* Native horizontal scrolling keeps vertical page gestures untouched. */
+[data-home-v2-root] [data-home-v2-gallery] { height: auto !important; aspect-ratio: auto; }
+[data-home-v2-root] .epic-photo-gallery[data-home-v5-gallery] { display: block; aspect-ratio: auto; padding: 7vw 8.4vw 5vw; color: #f6f6f6; background: #2e2e2e; }
+[data-home-v2-root] .epic-photo-gallery > [role=group] { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px 24px; margin: 0 0 6vw; }
+[data-home-v2-root] .epic-photo-gallery .v5-gallery-filter { position: relative; inset: auto; width: auto; height: auto; min-height: 44px; padding: 10px 22px; border: 2px solid #eee; border-radius: 999px; color: inherit; font: 400 clamp(12px, 1.2vw, 19px)/1.3 'Home V2 Lessons Montserrat', Arial, sans-serif; text-transform: uppercase; cursor: pointer; transition: border-color .2s, background .2s; }
+[data-home-v2-root] .epic-photo-gallery .v5-gallery-filter[aria-pressed=true] { border-color: #fe746a; background: #fe746a; color: #292929; }
+.epic-album { min-width: 0; }
+.epic-gallery-viewport { display: flex; gap: clamp(32px, 5vw, 96px); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; border-radius: 28px; }
+.epic-gallery-viewport::-webkit-scrollbar { display: none; }
+.epic-gallery-viewport.is-dragging { scroll-snap-type: none; user-select: none; cursor: grabbing; }
+.epic-gallery-viewport.is-dragging * { cursor: grabbing !important; }
+.epic-gallery-page { flex: 0 0 100%; min-width: 0; display: grid; grid-template-columns: 1.5fr 1fr 1fr; grid-template-rows: repeat(2, 1fr); gap: 18px 3.4%; aspect-ratio: 2.5; scroll-snap-align: start; scroll-snap-stop: always; }
+[data-home-v2-root] .epic-gallery-page .epic-gallery-tile { position: relative; inset: auto; width: 100%; height: 100% !important; aspect-ratio: auto; grid-row: auto; grid-column: auto; padding: 0; border: 0; overflow: hidden; border-radius: clamp(28px, 6.25vw, 120px); background: #414141; cursor: zoom-in; }
+[data-home-v2-root] .epic-gallery-page .epic-gallery-tile:first-child { grid-row: 1 / 3; }
+.epic-gallery-tile img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; transition: filter .3s ease; }
+@media (hover: hover) { .epic-gallery-tile:hover img { filter: brightness(1.04); } }
+.epic-photo-gallery :is(button, [tabindex]):focus-visible, .epic-photo-dialog button:focus-visible { outline: 3px solid #aaffc7; outline-offset: -4px; }
+.epic-photo-dialog { position: fixed; inset: 0; margin: 0; width: 100%; height: 100dvh; max-width: none; max-height: none; padding: 0; border: 0; background: transparent; color: #fff; overflow: hidden; }
+.epic-photo-dialog[open] { display: grid; place-items: center; }
+.epic-photo-dialog::backdrop { background: #1515158c; backdrop-filter: blur(3px); animation: epic-backdrop-in .38s ease both; }
+.epic-photo-dialog.is-closing::backdrop { animation: epic-backdrop-out .26s ease both; }
+.epic-photo-stage { position: relative; width: min(calc(100vw - 176px), calc(78dvh * var(--photo-ratio))); aspect-ratio: var(--photo-ratio); max-height: 78dvh; border-radius: 18px; box-shadow: 0 24px 100px #0006; }
+.epic-photo-full { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; background-size: contain; background-position: center; background-repeat: no-repeat; animation: epic-photo-in .3s ease both; }
+.epic-photo-full img { width: 100%; height: 100%; object-fit: contain; }
+.epic-photo-dialog button { display: grid; place-items: center; padding: 0; border: 0; cursor: pointer; color: #2e2e2e; transition: transform .2s ease, background .2s; }
+.epic-photo-dialog button svg { width: 26px; height: 26px; }
+.epic-photo-arrow { position: absolute; top: 50%; width: 58px; height: 60px; border-radius: 46% 54% 49% 51% / 53% 45% 55% 47%; background: #fe746a; box-shadow: 0 0 0 4px #61988a, 0 8px 20px #0003; transform: translateY(-50%) rotate(-5deg); }
+.epic-photo-arrow svg { transform: rotate(5deg); }
+.epic-photo-prev { left: -80px; }
+.epic-photo-next { right: -80px; }
+.epic-photo-arrow:hover { background: #ff9188; transform: translateY(-50%) rotate(0deg) scale(1.06); }
+.epic-photo-close { position: absolute; right: -15px; top: -20px; width: 42px; height: 42px; border-radius: 50%; background: #f6f6f6; box-shadow: 0 4px 16px #0004; }
+.epic-photo-close:hover { transform: rotate(8deg); background: #fe746a; }
+@keyframes epic-backdrop-in { from { background: #15151500; backdrop-filter: blur(0); } }
+@keyframes epic-backdrop-out { to { background: #15151500; backdrop-filter: blur(0); } }
+@keyframes epic-photo-in { from { opacity: .5; } to { opacity: 1; } }
+.epic-gallery-tuner { position: fixed; z-index: 90; bottom: 16px; right: 16px; width: 300px; max-height: 60dvh; overflow-y: auto; padding: 18px; border: 1px solid #61988a; border-radius: 18px; background: #242424f5; box-shadow: 0 10px 40px #0008; color: #fff; font: 13px/1.5 Arial, sans-serif; }
+.epic-gallery-tuner strong { color: #aaffc7; }
+.epic-gallery-tuner p { margin: 6px 0 12px; color: #ccc; }
+.epic-gallery-tuner .epic-tuner-filename { overflow-wrap: anywhere; font-size: 11px; }
+.epic-gallery-tuner label { display: block; margin: 12px 0; }
+.epic-gallery-tuner output { float: right; }
+.epic-gallery-tuner input { display: block; width: 100%; accent-color: #fe746a; }
+.epic-tuner-nudge, .epic-tuner-export { display: flex; gap: 8px; margin-top: 12px; }
+.epic-gallery-tuner button { min-height: 36px; padding: 7px 10px; border-radius: 8px; background: #454545; cursor: pointer; }
+.epic-tuner-export button { background: #fe746a; color: #222; }
+@media (max-width: 1199px) {
+  [data-home-v2-root] .epic-photo-gallery[data-home-v5-gallery] { padding: 28px var(--v5-gutter) 56px; }
+  .epic-photo-gallery > h2 { margin-bottom: 28px !important; }
+  [data-home-v2-root] .epic-photo-gallery > [role=group] { gap: 10px; margin-bottom: 28px; }
+  [data-home-v2-root] .epic-photo-gallery .v5-gallery-filter { padding: 10px 14px; border-width: 1px; }
+}
+@media (max-width: 699px) {
+  .epic-gallery-page { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: 1.55fr 1fr 1fr; aspect-ratio: .55; gap: 14px; }
+  [data-home-v2-root] .epic-gallery-page .epic-gallery-tile { border-radius: 32px; }
+  [data-home-v2-root] .epic-gallery-page .epic-gallery-tile:first-child { grid-row: 1; grid-column: 1 / -1; }
+  .epic-photo-stage { width: min(calc(100vw - 32px), calc(80dvh * var(--photo-ratio))); max-height: 80dvh; border-radius: 14px; }
+  .epic-photo-dialog .epic-photo-arrow { display: none; }
+  .epic-photo-close { right: -6px; top: -22px; }
+  .epic-gallery-tuner { width: min(300px, calc(100vw - 24px)); bottom: 12px; right: 12px; max-height: 42dvh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .epic-photo-gallery *, .epic-photo-dialog, .epic-photo-dialog *, .epic-photo-dialog::backdrop { scroll-behavior: auto !important; transition: none !important; animation-duration: .001ms !important; }
+}
+
+/* Keep the section frame stationary while the photograph is zoomed/reframed. */
+.epic-editable-photo { position: relative; overflow: hidden; }
+.epic-editable-photo > img { object-fit: cover; user-select: none; }
+.epic-editable-photo[data-home-v5-photo] { aspect-ratio: 504 / 468; border-radius: 40px; }
+@media (min-width: 1200px) { .epic-editable-photo[data-home-v5-photo] { position: absolute; } }
+.epic-editable-photo[data-photo-editing] { cursor: crosshair; }
+.epic-editable-photo[data-photo-editing]:hover { outline: 2px dashed #fe746a; outline-offset: -3px; }
+.epic-editable-photo[data-photo-selected], .epic-editable-photo:focus-visible { outline: 3px solid #aaffc7; outline-offset: -3px; }

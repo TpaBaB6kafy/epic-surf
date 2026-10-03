@@ -1,3 +1,4 @@
+import EditablePhoto from "./EditablePhoto";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -38,11 +39,10 @@ export default function HomeV5LessonsIncluded({ orderedLessons, activeLesson, se
           <h3 className="home-v5-li-title" data-home-v2-lesson-title>{titleParts.map((part, i) => <span key={i}>{part}</span>)}</h3>
           <p className="home-v5-li-price" data-home-v2-lesson-price data-long={price.length > 7 ? "true" : undefined}><span>{price}</span><span>VND</span></p>
           <p className="home-v5-li-description" data-home-v2-lesson-description>{description}</p>
-          <div className="home-v5-li-photo">
-            <Image key={activeLesson.id} data-lessons-photo src={group ? `${root}/png/group-lesson-photo@2x.png` : posterMedia.asset}
-              alt={activeLesson.item.title} fill sizes="(max-width: 699px) 92vw, (max-width: 1199px) 52vw, 41vw" unoptimized={group}
-              style={{ objectFit: "cover", objectPosition: group ? "center" : posterMedia.position }} />
-          </div>
+          <EditablePhoto className="home-v5-li-photo" slot={`lesson-${activeLesson.id}`} label={`Уроки: ${activeLesson.item.title}`}
+            src={group ? `${root}/png/group-lesson-photo@2x.png` : posterMedia.asset} alt={activeLesson.item.title}
+            sizes="(max-width: 699px) 92vw, (max-width: 1199px) 52vw, 41vw" unoptimized={group} imageProps={{ 'data-lessons-photo': true }}
+            fallback={{ x:50, y:group ? 50 : Number.parseFloat(posterMedia.position?.split(' ')[1]) || 50, scale:1 }} />
         </div>
         {[-1, 1].map((direction) => <button key={direction} type="button" className={`home-v5-li-control ${direction < 0 ? "home-v5-li-prev" : "home-v5-li-next"}`}
           aria-label={isRu ? direction < 0 ? "Предыдущий урок" : "Следующий урок" : direction < 0 ? "Previous lesson" : "Next lesson"}

@@ -36,9 +36,10 @@ import {
 } from "./sections/HomeV2ContentSections";
 import { HomeV2Conditions } from "./sections/HomeV2Conditions";
 import "./home-v5-responsive.css";
+import { PhotoFramingProvider } from "./sections/GalleryFraming";
 import HomeV5SunsetScene from "./HomeV5SunsetScene";
 
-export default function HomeV2Page({ locale = "en" }) {
+function HomeV2PageContent({ locale = "en" }) {
   const rootRef = useRef(null);
   const mobileTop = useHomeV2MobileTop();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -197,4 +198,8 @@ export default function HomeV2Page({ locale = "en" }) {
       </div>
     </div>
   );
+}
+
+export default function HomeV2Page(props) {
+  return <PhotoFramingProvider><HomeV2PageContent {...props} /></PhotoFramingProvider>;
 }

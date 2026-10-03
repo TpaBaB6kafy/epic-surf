@@ -1,3 +1,4 @@
+import EditablePhoto from "./EditablePhoto";
 import Image from "next/image";
 
 const root = "/design/home-v5/how-it-works";
@@ -54,8 +55,7 @@ export default function HomeV5HowItWorks({ steps, title, titleEnd, lang }) {
           <article data-home-v5-how-card={index + 1} key={step.title}>
             <Image data-home-v5-panel src={`${root}/${card.surface}`} alt="" aria-hidden="true"
               width={card.panel[2]} height={card.panel[3]} unoptimized style={geometry(card.panel)} />
-            <Image data-home-v5-photo src={`${root}/${card.photo}`} alt="" aria-hidden="true"
-              width={504} height={468} unoptimized style={geometry(card.photoBox)} />
+            <EditablePhoto data-home-v5-photo slot={`how-${index + 1}`} label={`Как это работает: ${step.title}`} src={`${root}/${card.photo}`} alt={step.title} sizes="(max-width: 699px) 42vw, 22vw" unoptimized style={geometry(card.photoBox)} />
             <Image data-home-v5-label-surface src={`${root}/${card.titleSurface}`} alt="" aria-hidden="true"
               width={180} height={44.1} unoptimized style={geometry(card.label)} />
             <h3 data-home-v5-card-title style={geometry(card.label)}>{step.title}</h3>

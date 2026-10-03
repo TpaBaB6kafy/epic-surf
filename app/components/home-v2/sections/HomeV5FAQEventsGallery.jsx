@@ -1,3 +1,4 @@
+import EditablePhoto from "./EditablePhoto";
 import Image from "next/image";
 
 const root = "/design/home-v5/faq-events-gallery";
@@ -37,49 +38,23 @@ export function HomeV5FAQ({ lang, items, openFaq, setOpenFaq }) {
 export function HomeV5Events({ t, openEventGallery, isRu }) {
   const featured = t.eventsItems[0];
   const birthday = t.eventsItems.find(e => e.galleryKey === "birthday") || t.eventsItems[1];
-  const community = t.eventsItems.find(e => e.galleryKey === "community") || t.eventsItems[3];
+  const umka = t.eventsItems.find(e => e.galleryKey === "umka") || t.eventsItems[3];
   return <div data-home-v5-events data-lang={isRu ? "ru" : "en"}>
     <h2 className="sr-only">{t.eventsTitle}</h2>
     <article className="v5-event-card v5-event-featured" style={box(117, 85, 664, 788)}>
-      <Image className="v5-event-photo" src={`${root}/event-featured.webp`} alt={featured.title} width={664} height={589} unoptimized />
+      <EditablePhoto className="v5-event-photo" slot={`event-${featured.galleryKey}`} label={`Эвенты: ${featured.title}`} src={`${root}/event-featured.webp`} alt={featured.title} sizes="(max-width: 699px) 92vw, 46vw" unoptimized />
       <h3>{featured.title}</h3><p>{featured.desc}</p>
     </article>
-    {[{ event: birthday, y: 149, file: "event-birthday.webp", h: 292, photoHeight: 157 }, { event: community, y: 520, file: "event-community.webp", h: 290, photoHeight: 145 }].map(({ event, y, file, h, photoHeight }) => <article className="v5-event-card v5-event-small" key={file} style={box(921, y, 397, h)}>
-      <Image className="v5-event-photo" src={`${root}/${file}`} alt={event.title} width={397} height={photoHeight} unoptimized style={{ height: unit(photoHeight) }} />
+    {[{ event: birthday, y: 149, file: "event-birthday.webp", h: 292, photoHeight: 157 }, { event: umka, y: 520, file: "event-community.webp", h: 290, photoHeight: 145 }].map(({ event, y, file, h, photoHeight }) => <article className="v5-event-card v5-event-small" key={file} style={box(921, y, 397, h)}>
+      <EditablePhoto className="v5-event-photo" slot={`event-${event.galleryKey}`} label={`Эвенты: ${event.title}`} src={event.galleryKey === "umka" ? event.image : `${root}/${file}`} alt={event.title} sizes="(max-width: 699px) 92vw, 28vw" unoptimized fallback={{ x:50, y:event.galleryKey === "umka" ? 30 : 50, scale:1 }} style={{ height: unit(photoHeight) }} />
       <h3>{event.title}</h3><p>{event.desc}</p>
     </article>)}
     <Art file="svg/event-ctas.svg" x={1079.307} y={415.956} width={71} height={440} />
     <button className="v5-event-cta v5-event-photos" type="button" onClick={() => openEventGallery(featured.galleryKey)} style={box(697.909, 826.14, 137, 75)}>
       <Image src={`${root}/svg/view-photos-cta.svg`} alt="" width={137} height={75} unoptimized /><span>{isRu ? <>СМОТРЕТЬ <br />ФОТО</> : <>VIEW <br />PHOTOS</>}</span>
     </button>
-    {[{ event: birthday, y: 415.956 }, { event: community, y: 783.358 }].map(({ event, y }) => <button key={event.galleryKey} className="v5-event-cta v5-event-all" type="button" onClick={() => openEventGallery(event.galleryKey)} aria-label={`${isRu ? "Все фото" : "All photos"}: ${event.title}`} style={box(1079.307, y, 71, 72)}>{isRu ? "ВСЕ" : "ALL"}</button>)}
+    {[{ event: birthday, y: 415.956 }, { event: umka, y: 783.358 }].map(({ event, y }) => <button key={event.galleryKey} className="v5-event-cta v5-event-all" type="button" onClick={() => openEventGallery(event.galleryKey)} aria-label={`${isRu ? "Все фото" : "All photos"}: ${event.title}`} style={box(1079.307, y, 71, 72)}>{isRu ? "ВСЕ" : "ALL"}</button>)}
   </div>;
 }
 
-const filters = {
-  all: [272, 134, 55, 43, "rectangle-29.svg"],
-  "surf-fest": [342, 135, 307, 43, "filter-border-2142-112.svg"],
-  birthday: [687, 135, 135, 43, "filter-border-2142-109.svg"],
-  sunset: [851, 136, 135, 41, "filter-border-2142-106.svg"],
-  community: [1014, 136, 156, 41, "filter-border.svg"],
-};
-const tiles = [[121, 273, 475, 479], [639, 273, 318, 232], [1000, 273, 318, 232], [639, 521, 318, 232], [1000, 521, 318, 232]];
-
-export function HomeV5Gallery({ lang, eventGalleryGroups, activeGalleryKey, setActiveGalleryKey, activeGalleryGroup, galleryPhotoSrc }) {
-  return <div data-home-v5-gallery data-lang={lang}>
-    <h2 className="sr-only">{lang === "ru" ? "Фотографии EPIC" : "EPIC photo gallery"}</h2>
-    <div role="group" aria-label={lang === "ru" ? "Альбомы" : "Photo albums"}>
-      {eventGalleryGroups.map(group => {
-        const [x, y, w, h, file] = filters[group.key];
-        return <button key={group.key} type="button" className="v5-gallery-filter" aria-pressed={activeGalleryKey === group.key} onClick={() => setActiveGalleryKey(group.key)} style={box(x, y, w, h)}>
-          <span aria-hidden="true" className="v5-gallery-filter-border" style={{ maskImage: `url(${root}/svg/${file})`, WebkitMaskImage: `url(${root}/svg/${file})` }} />
-          <span>{lang === "ru" && group.key === "all" ? "Все" : group.label}</span>
-        </button>;
-      })}
-    </div>
-    <div aria-live="polite" className="sr-only">{activeGalleryGroup.label}</div>
-    {activeGalleryGroup.photos.slice(0, 5).map((photo, index) => <div className="v5-gallery-tile" key={`${activeGalleryKey}-${index}`} style={box(...tiles[index])}>
-      <Image src={activeGalleryKey === "all" ? `${root}/gallery-${index + 1}.webp` : galleryPhotoSrc(photo)} alt={`${activeGalleryGroup.label} — ${lang === "ru" ? "фото" : "photo"} ${index + 1}`} fill sizes="(max-width: 699px) 46vw, (max-width: 1199px) 30vw, 33vw" unoptimized={activeGalleryKey === "all"} />
-    </div>)}
-  </div>;
-}
+export { default as HomeV5Gallery } from "./PhotoGallery";
