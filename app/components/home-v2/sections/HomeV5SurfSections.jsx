@@ -27,7 +27,7 @@ export function HomeV5Rentals({ lang, copy, catalogHref, onRent }) {
     <Text x={170} y={378} width={150} height={29} size={24} className="home-v5-rental-muted">{copy.from}</Text>
     <Text x={170} y={411} width={131} height={51} size={28} line={51} className="home-v5-surf-montserrat" style={{ color: "#aaffc7" }}>250.000</Text>
     <Text x={301} y={411} width={70} height={51} size={28} line={51} className="home-v5-rental-muted">VND</Text>
-    <Text x={170} y={457} width={260} height={24} size={ru ? 18 : 20} line={22} className="home-v5-surf-montserrat">{ru ? "СЕССИЯ НА ДВА ЧАСА" : "TWO HOURS SESSION"}</Text>
+    <Text x={170} y={457} width={260} height={24} size={ru ? 18 : 20} line={22} className="home-v5-surf-montserrat">{ru ? "СЕССИЯ НА ДВА ЧАСА" : "TWO HOURS SESSION"}<span className="home-v5-rental-duration-mobile" aria-hidden="true">{ru ? "за 2 часа" : "for 2 hours"}</span></Text>
     <Text x={170} y={513} width={250} height={70} size={20} line={28} className="home-v5-surf-chivo">{copy.description}</Text>
     </div>
     <button type="button" onClick={onRent} className="home-v5-surf-cta home-v5-rent-cta" style={box(1124, 435, 194, 69)}>

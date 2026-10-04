@@ -163,6 +163,49 @@
   }
   [data-home-v2-root] .v5-event-cta:active { box-shadow: var(--epic-pressed-shadow); }
 }
+/* Mobile rentals: one offer, a clear action hierarchy and a straight section edge. */
+.home-v5-rental-duration-mobile { display: none; }
+@media (max-width: 699px) {
+  [data-home-v2-root] [data-home-v5-rentals] { border-radius: 0; }
+  [data-home-v2-root] .home-v5-rental-offer {
+    position: relative;
+    z-index: 1;
+    margin-top: -34px;
+    padding: 24px 20px;
+    grid-template-columns: repeat(3, max-content);
+    justify-content: center;
+    align-items: baseline;
+    gap: 4px 6px;
+    text-align: center;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 12%), 0 3px 0 rgb(0 0 0 / 16%), 0 12px 18px -10px rgb(0 0 0 / 28%);
+  }
+  [data-home-v2-root] .home-v5-rental-offer .home-v5-surf-text:nth-child(1) { grid-column: 1; grid-row: 1; justify-self: end; }
+  [data-home-v2-root] .home-v5-rental-offer .home-v5-surf-text:nth-child(2) { grid-column: 2; grid-row: 1; }
+  [data-home-v2-root] .home-v5-rental-offer .home-v5-surf-text:nth-child(3) { grid-column: 3; grid-row: 1; justify-self: start; }
+  [data-home-v2-root] .home-v5-rental-offer .home-v5-surf-text:nth-child(4) { grid-row: 2; font-size: 0 !important; }
+  [data-home-v2-root] .home-v5-rental-offer .home-v5-surf-text:nth-child(5) { grid-row: 3; margin-top: 12px; max-width: 28ch; font-size: 16px !important; }
+  [data-home-v2-root] .home-v5-rental-offer .home-v5-rental-muted { font-size: 14px !important; }
+  .home-v5-rental-duration-mobile { display: inline-block; font-size: 16px; line-height: 1.5; }
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-surf-cta {
+    height: 60px !important;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: #6c6c6c;
+    box-shadow: var(--epic-raised-shadow);
+    transition: translate 160ms ease, box-shadow 160ms ease;
+  }
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-rent-cta {
+    background: linear-gradient(165deg, #ff8d80 0%, #fe746a 55%, #ee665e 100%);
+  }
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-surf-cta > img { display: none; }
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-surf-cta > span { padding-inline: 8px; font-size: 12px; }
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-rent-cta > span { color: #292929; }
+  @media (hover: hover) and (pointer: fine) {
+    [data-home-v2-root] [data-home-v5-rentals] > .home-v5-surf-cta:hover { box-shadow: var(--epic-hover-shadow); }
+  }
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-surf-cta:active { box-shadow: var(--epic-pressed-shadow); }
+}
 /* Reduced-motion users retain depth and feedback without sliding controls. */
 @media (prefers-reduced-motion: reduce) {
   [data-home-v2-root] :is(.home-v5-surf-cta, .v5-event-cta, .v5-faq-control, .epic-gallery-tile),
