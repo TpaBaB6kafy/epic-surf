@@ -1,0 +1,58 @@
+/* Desktop-only rental surfaces and a single path across the section seam. */
+.home-v5-rental-marquee { display: none; }
+@media (min-width: 1200px) {
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-surf-cta {
+    border: 3px solid #4a302c;
+    border-radius: 999px;
+    background: linear-gradient(165deg, #ff8d80 0%, #fe746a 55%, #ee665e 100%);
+    box-shadow: inset 0 2px 1px rgb(255 255 255 / 30%), 0 5px 0 #4a302c, 0 14px 22px -8px rgb(0 0 0 / 38%);
+    transition: translate 160ms ease, box-shadow 160ms ease;
+  }
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-surf-cta > img { visibility: hidden; }
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-surf-cta > span { color: #292929; font-family: 'Home V2 Lessons Montserrat', Arial, sans-serif; font-weight: 700; }
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-surf-cta:is(:hover, :active) > img { filter: none; }
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-surf-cta:active {
+    translate: 0 4px;
+    box-shadow: inset 0 1px 3px rgb(0 0 0 / 12%), 0 1px 0 #4a302c, 0 5px 9px -4px rgb(0 0 0 / 24%);
+  }
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-surf-cta:focus-visible { outline: 3px solid #fe746a; outline-offset: 7px; }
+  .home-v5-rental-marquee-static { visibility: hidden; }
+  .home-v5-rental-marquee {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: -14.3cqw;
+    width: 100%;
+    height: 37.361111cqw;
+    overflow: hidden;
+    pointer-events: none;
+  }
+}
+@media (min-width: 1200px) and (hover: hover) and (pointer: fine) {
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-surf-cta:hover:not(:active) {
+    translate: 0 -3px;
+    box-shadow: inset 0 2px 1px rgb(255 255 255 / 35%), 0 8px 0 #4a302c, 0 18px 26px -8px rgb(0 0 0 / 38%);
+  }
+}
+@media (min-width: 1200px) and (prefers-reduced-motion: reduce) {
+  .home-v5-rental-marquee { display: none; }
+  .home-v5-rental-marquee-static { visibility: visible; }
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-surf-cta { transition: none; translate: none !important; }
+}
+/* A quieter graphite surface keeps rental as the primary action. */
+@media (min-width: 1200px) {
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-choose-board-cta {
+    border-color: #343434;
+    background: linear-gradient(165deg, #858585 0%, #686868 55%, #505050 100%);
+    box-shadow: inset 0 2px 1px rgb(255 255 255 / 30%), 0 5px 0 #202020, 0 14px 22px -8px rgb(0 0 0 / 38%);
+  }
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-choose-board-cta > span { color: #f6f6f6; }
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-choose-board-cta:active {
+    box-shadow: inset 0 1px 3px rgb(0 0 0 / 12%), 0 1px 0 #202020, 0 5px 9px -4px rgb(0 0 0 / 24%);
+  }
+}
+@media (min-width: 1200px) and (hover: hover) and (pointer: fine) {
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-choose-board-cta:hover:not(:active) {
+    box-shadow: inset 0 2px 1px rgb(255 255 255 / 35%), 0 8px 0 #202020, 0 18px 26px -8px rgb(0 0 0 / 38%);
+  }
+}

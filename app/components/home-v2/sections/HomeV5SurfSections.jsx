@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import HomeV5RentalMarquee from "./HomeV5RentalMarquee";
 import { ArrowUp, ExternalLink, Star, Thermometer, Waves, Wind } from "lucide-react";
 import { googleFeaturedReviews, googleReviewsSummary } from "../../../data/googleReviews";
 
@@ -35,10 +36,10 @@ export function HomeV5Rentals({ lang, copy, catalogHref, onRent }) {
     <button type="button" onClick={onRent} className="home-v5-surf-cta home-v5-rent-cta" style={box(1124, 435, 194, 69)}>
       <Image src={`${root}/svg/rent-now-cta.svg`} alt="" width={194} height={69} unoptimized /><span>{copy.rentNow}</span>
     </button>
-    <Link href={catalogHref} className="home-v5-surf-cta" style={box(986, 523, 258, 69)}>
+    <Link href={catalogHref} className="home-v5-surf-cta home-v5-choose-board-cta" style={box(986, 523, 258, 69)}>
       <Image src={`${root}/svg/choose-board-cta.svg`} alt="" width={258} height={69} unoptimized /><span>{copy.chooseBoard}</span>
     </Link>
-    <Art file="svg/surf-school-marquee-artwork-2142-240.svg" x={0} y={694.072} width={1440} height={206} />
+    <Art className="home-v5-rental-marquee-static" file="svg/surf-school-marquee-artwork-2142-240.svg" x={0} y={694.072} width={1440} height={206} />
   </section>;
 }
 
@@ -52,7 +53,8 @@ export function HomeV5Conditions({ language, t, copy, map, camera, footer, waveH
   return <div data-home-v5-conditions data-lang={language}>
     <h2 className="sr-only">{language === "ru" ? "Камера и прогноз волн" : "Live cam and surf forecast"}</h2>
     <Art file="svg/vector.svg" x={0} y={0} width={1440} height={332} />
-    <Art file="svg/surf-school-marquee-artwork.svg" x={155.664} y={0} width={1285} height={184} />
+    <HomeV5RentalMarquee />
+    <Art className="home-v5-rental-marquee-static" file="svg/surf-school-marquee-artwork.svg" x={155.664} y={0} width={1285} height={184} />
     <div className="home-v5-wave-height" aria-label={language === "ru" ? "Высота волн" : "Wave height"} style={box(1075, -28, 240, 102)}><strong>{waveHeight}</strong><span>m</span></div>
     <div className="home-v5-forecast-map" style={box(121, 102, 530, 345.373)}>{map}</div>
     <div className="home-v5-livecam" style={box(789, 102, 530, 345)}><div className="home-v5-camera-stream">{camera}</div>{footer}</div>
