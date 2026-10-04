@@ -49,11 +49,11 @@ export function HomeV5Events({ t, openEventGallery, isRu }) {
       <EditablePhoto className="v5-event-photo" slot={`event-${event.galleryKey}`} label={`Эвенты: ${event.title}`} src={event.galleryKey === "umka" ? event.image : `${root}/${file}`} alt={event.title} sizes="(max-width: 699px) 92vw, 28vw" unoptimized fallback={{ x:50, y:event.galleryKey === "umka" ? 30 : 50, scale:1 }} style={{ height: unit(photoHeight) }} />
       <h3>{event.title}</h3><p>{event.desc}</p>
     </article>)}
-    <Art file="svg/event-ctas.svg" x={1079.307} y={415.956} width={71} height={440} />
+
     <button className="v5-event-cta v5-event-photos" type="button" onClick={() => openEventGallery(featured.galleryKey)} style={box(697.909, 826.14, 137, 75)}>
       <Image src={`${root}/svg/view-photos-cta.svg`} alt="" width={137} height={75} unoptimized /><span>{isRu ? <>СМОТРЕТЬ <br />ФОТО</> : <>VIEW <br />PHOTOS</>}</span>
     </button>
-    {[{ event: birthday, y: 415.956 }, { event: umka, y: 783.358 }].map(({ event, y }) => <button key={event.galleryKey} className="v5-event-cta v5-event-all" type="button" onClick={() => openEventGallery(event.galleryKey)} aria-label={`${isRu ? "Все фото" : "All photos"}: ${event.title}`} style={box(1079.307, y, 71, 72)}>{isRu ? "ВСЕ" : "ALL"}</button>)}
+    {[{ event: birthday, y: 415.956 }, { event: umka, y: 783.358 }].map(({ event, y }) => <button key={event.galleryKey} className="v5-event-cta v5-event-all" type="button" onClick={() => openEventGallery(event.galleryKey)} aria-label={`${isRu ? "Все фото" : "All photos"}: ${event.title}`} style={box(1079.307, y, 71, 72)}><Image src={`${root}/svg/${event.galleryKey === "birthday" ? "event-all-birthday-surface.svg" : "event-all-community-surface.svg"}`} alt="" aria-hidden="true" width={71} height={72} unoptimized /><span>{isRu ? "ВСЕ" : "ALL"}</span></button>)}
   </div>;
 }
 

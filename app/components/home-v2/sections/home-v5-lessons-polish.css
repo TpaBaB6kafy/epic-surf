@@ -1,0 +1,113 @@
+/* Surface polish only: preserve the artwork, coordinates and content flow. */
+[data-home-v2-root] [data-home-v5-lessons-included] {
+  --li-depth: #203d36;
+  --li-shadow: rgb(0 0 0 / 24%);
+}
+[data-home-v2-root] .home-v5-li-heading { text-shadow: 0 3px 0 rgb(0 0 0 / 18%); }
+[data-home-v2-root] :is(.home-v5-li-title, .home-v5-li-price, .home-v5-li-camera) { color: #f6f6f6; }
+[data-home-v2-root] .home-v5-li-price span:first-child { color: #fe746a; }
+[data-home-v2-root] :is(.home-v5-li-description, .home-v5-li-feature) { font-weight: 400; }
+[data-home-v2-root] .home-v5-li-photo {
+  box-shadow: 0 0 0 2px rgb(198 226 214 / 26%), 0 16px 28px -12px var(--li-shadow);
+}
+[data-home-v2-root] .home-v5-li-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 2px 1px rgb(255 255 255 / 18%), inset 0 -2px 2px rgb(0 0 0 / 15%);
+  pointer-events: none;
+}
+/* Raised sea-green buttons retain the original arrow artwork. */
+[data-home-v2-root] .home-v5-li-control {
+  border: 2px solid #f6f6f6;
+  border-radius: 50%;
+  background: linear-gradient(155deg, #70a99b 0%, #598d80 55%, #477568 100%);
+  box-shadow: inset 0 2px 1px rgb(255 255 255 / 24%), 0 5px 0 var(--li-depth), 0 12px 18px -5px rgb(0 0 0 / 38%);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+[data-home-v2-root] .home-v5-li-control > img:first-child,
+[data-home-v2-root] .home-v5-li-cta > img { visibility: hidden; }
+/* Preserve the coral CTA silhouette and its overlap with the photograph. */
+[data-home-v2-root] .home-v5-li-cta {
+  border: 3px solid #4a302c;
+  border-radius: 999px;
+  background: linear-gradient(165deg, #ff8d80 0%, #fe746a 55%, #ee665e 100%);
+  box-shadow: inset 0 2px 1px rgb(255 255 255 / 30%), 0 5px 0 #4a302c, 0 14px 22px -8px rgb(0 0 0 / 38%);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+[data-home-v2-root] .home-v5-li-cta span { color: #292929; }
+@media (hover: hover) and (pointer: fine) {
+  [data-home-v2-root] .home-v5-li-control:hover {
+    transform: translateY(-3px);
+    box-shadow: inset 0 2px 1px rgb(255 255 255 / 30%), 0 8px 0 var(--li-depth), 0 16px 22px -5px rgb(0 0 0 / 38%);
+  }
+  [data-home-v2-root] .home-v5-li-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: inset 0 2px 1px rgb(255 255 255 / 35%), 0 8px 0 #4a302c, 0 18px 26px -8px rgb(0 0 0 / 38%);
+  }
+}
+[data-home-v2-root] .home-v5-li-control:active {
+  transform: translateY(4px);
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 14%), 0 1px 0 var(--li-depth), 0 5px 9px -4px var(--li-shadow);
+}
+[data-home-v2-root] .home-v5-li-cta:active {
+  transform: translateY(4px);
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 12%), 0 1px 0 #4a302c, 0 5px 9px -4px var(--li-shadow);
+}
+[data-home-v2-root] :is(.home-v5-li-control, .home-v5-li-cta):focus-visible {
+  outline: 3px solid #fe746a;
+  outline-offset: 7px;
+}
+@media (min-width: 1200px) {
+  [data-home-v2-root] .home-v5-li-price-surface {
+    filter: brightness(.2) drop-shadow(0 7px 0 #202623) drop-shadow(0 12px 14px rgb(0 0 0 / 18%));
+  }
+  [data-home-v2-root] .home-v5-li-description-surface {
+    filter: drop-shadow(0 5px 0 #365a50) drop-shadow(0 10px 12px rgb(0 0 0 / 20%));
+  }
+  [data-home-v2-root] .home-v5-li-photo-surface { filter: brightness(.65); }
+  [data-home-v2-root] .home-v5-li-rashguard-surface {
+    filter: drop-shadow(0 4px 0 #191919) drop-shadow(0 8px 10px rgb(0 0 0 / 18%));
+  }
+  [data-home-v2-root] .home-v5-li-camera-surface {
+    filter: brightness(.2) drop-shadow(0 4px 0 #232323) drop-shadow(0 8px 10px rgb(0 0 0 / 18%));
+  }
+  /* Grow arrows around their original centres without moving the photograph. */
+  [data-home-v2-root] .home-v5-li-control {
+    top: 25.416667cqw;
+    width: 4.861111cqw;
+    height: 4.861111cqw;
+    border-width: clamp(2px, .18cqw, 4px);
+  }
+  [data-home-v2-root] .home-v5-li-prev { left: 45cqw; }
+  [data-home-v2-root] .home-v5-li-next { left: 86.111111cqw; }
+}
+@media (max-width: 1199px) {
+  [data-home-v2-root] .home-v5-li-title,
+  [data-home-v2-root] .home-v5-li-price { background: #313632; }
+  [data-home-v2-root] .home-v5-li-title { box-shadow: inset 0 2px 0 rgb(255 255 255 / 9%); }
+  [data-home-v2-root] .home-v5-li-price { box-shadow: 0 5px 0 #202623, 0 14px 22px -10px var(--li-shadow); }
+  [data-home-v2-root] .home-v5-li-description {
+    background: linear-gradient(150deg, #659e90, #598d80 60%, #4d7d70);
+    box-shadow: inset 0 2px 0 rgb(255 255 255 / 14%), 0 5px 0 #365a50, 0 14px 22px -10px var(--li-shadow);
+  }
+  [data-home-v2-root] .home-v5-li-photo { border-color: #4f615a; }
+  [data-home-v2-root] [data-home-v5-lessons-included] > [role=region] { grid-template-columns: 58px minmax(0, 1fr) 58px; }
+  [data-home-v2-root] .home-v5-li-control { width: 58px; height: 58px; }
+  [data-home-v2-root] .home-v5-li-feature {
+    background: #232323;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 10%), 0 4px 0 #191919, 0 12px 20px -10px var(--li-shadow);
+  }
+  [data-home-v2-root] .home-v5-li-camera {
+    background: #313632;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 12%), 0 4px 0 #242824, 0 12px 20px -10px var(--li-shadow);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-home-v2-root] :is(.home-v5-li-control, .home-v5-li-cta) { transition: none; }
+}

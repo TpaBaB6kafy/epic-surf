@@ -50,8 +50,8 @@
     "scale": 1
   },
   "section:lesson-private|desktop": {
-    "x": 58,
-    "y": 54,
+    "x": 50,
+    "y": 50,
     "scale": 1
   },
   "/gallery/events/danang-open-2025/danang-open-2025-1.webp|desktop|large": {
@@ -478,5 +478,40 @@
     "x": 42,
     "y": 40,
     "scale": 1.4
+  },
+  "section:lesson-split|desktop": {
+    "x": 50,
+    "y": 50,
+    "scale": 1
+  },
+  "section:lesson-split|mobile": {
+    "x": 50,
+    "y": 50,
+    "scale": 1
+  },
+  "section:lesson-private|mobile": {
+    "x": 50,
+    "y": 50,
+    "scale": 1
+  },
+  "section:lesson-lineup_pro|desktop": {
+    "x": 50,
+    "y": 50,
+    "scale": 1
+  },
+  "section:lesson-lineup_pro|mobile": {
+    "x": 50,
+    "y": 50,
+    "scale": 1
+  },
+  "section:how-4|desktop": {
+    "x": 50,
+    "y": 50,
+    "scale": 1
+  },
+  "section:how-4|mobile": {
+    "x": 50,
+    "y": 50,
+    "scale": 1
   }
 }

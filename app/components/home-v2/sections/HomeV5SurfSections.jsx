@@ -22,7 +22,7 @@ export function HomeV5Rentals({ lang, copy, catalogHref, onRent }) {
       <Image src={`${root}/boards.webp`} alt={ru ? "Доски EPIC для аренды" : "EPIC surfboards available to rent"} width={1030} height={592} unoptimized />
     </div>
     <h2 className="home-v5-rental-heading">{ru ? "Аренда" : "Rental"}</h2>
-    <Art file="svg/offer-surface.svg" x={109} y={345} width={349} height={267} />
+    <Art file="svg/offer-surface.svg" className="home-v5-rental-offer-surface" x={109} y={345} width={349} height={267} />
     <div className="home-v5-rental-offer">
     <Text x={170} y={378} width={150} height={29} size={24} className="home-v5-rental-muted">{copy.from}</Text>
     <Text x={170} y={411} width={131} height={51} size={28} line={51} className="home-v5-surf-montserrat" style={{ color: "#aaffc7" }}>250.000</Text>
@@ -64,7 +64,7 @@ export function HomeV5Conditions({ language, t, copy, map, camera, footer, waveH
       ].map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
     </dl>
     <div className="home-v5-desktop-stats">
-    {stats.map(({ x, y, background, surface }) => <div key={x} aria-hidden="true"><Art file={`svg/${background}`} x={x + 17} y={y + 6} width={194} height={69} /><Art file={`svg/${surface}`} x={x} y={y} width={81} height={81} /></div>)}
+    {stats.map(({ x, y, background, surface }) => <div key={x} aria-hidden="true"><Art file={`svg/${background}`} className="home-v5-stat-base" x={x + 17} y={y + 6} width={194} height={69} /><Art file={`svg/${surface}`} className="home-v5-stat-icon" x={x} y={y} width={81} height={81} /></div>)}
     <Text x={220} y={521} width={110} height={29} size={25.2} className="home-v5-stat-centered">{wavePeriod}s</Text>
     <Text x={220} y={548} width={110} height={26} size={24} className="home-v5-stat-centered home-v5-stat-dark">{t.forecastPeriod}</Text>
     <Text x={445} y={514} width={65} height={65} size={48} line={60} className="home-v5-stat-centered">{windSpeed}</Text>

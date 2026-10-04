@@ -1,0 +1,181 @@
+/* Extend the approved lesson depth to existing surfaces; keep palette and geometry. */
+[data-home-v2-root] {
+  --epic-raised-shadow: inset 0 2px 1px rgb(255 255 255 / 18%), 0 4px 0 rgb(0 0 0 / 24%), 0 12px 20px -8px rgb(0 0 0 / 32%);
+  --epic-hover-shadow: inset 0 2px 1px rgb(255 255 255 / 22%), 0 6px 0 rgb(0 0 0 / 24%), 0 16px 24px -8px rgb(0 0 0 / 34%);
+  --epic-pressed-shadow: inset 0 1px 3px rgb(0 0 0 / 14%), 0 1px 0 rgb(0 0 0 / 24%), 0 5px 10px -6px rgb(0 0 0 / 28%);
+  --epic-card-shadow: inset 0 1px 0 rgb(255 255 255 / 12%), 0 5px 0 rgb(0 0 0 / 14%), 0 18px 28px -12px rgb(0 0 0 / 30%);
+}
+
+/* Native button surfaces keep their existing fill, border, size and radius. */
+[data-home-v2-root] [data-home-v2-header] :is([data-home-v2-book-now], [data-home-v2-language-switcher], [data-home-v2-menu-control]),
+[data-home-v2-root] .epic-photo-gallery .v5-gallery-filter,
+[data-home-v2-root] [data-live-cam-provider-action],
+[data-home-v2-root] [data-rental-dialog] a,
+[data-home-v2-root] [data-booking-dialog] > div:first-child :is(a, button),
+[data-home-v2-root] [data-home-v2-messenger-fab] > button {
+  box-shadow: var(--epic-raised-shadow);
+  transition: translate 160ms ease, box-shadow 160ms ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* SVG-backed buttons: shadow the silhouette, not a rectangular container. */
+[data-home-v2-root] .home-v5-surf-cta > img,
+[data-home-v2-root] .v5-event-cta > img {
+  filter: drop-shadow(0 4px 0 rgb(0 0 0 / 24%)) drop-shadow(0 10px 10px rgb(0 0 0 / 22%));
+  transition: filter 160ms ease;
+}
+[data-home-v2-root] :is(.home-v5-surf-cta, .v5-event-cta),
+[data-home-v2-root] [data-home-v2-footer-socials] a,
+[data-home-v2-root] [data-home-v2-messenger-fab] a {
+  transition: translate 160ms ease, box-shadow 160ms ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+[data-home-v2-root] .home-v5-surf-cta:hover { filter: none; }
+[data-home-v2-root] [data-home-v2-footer-socials] a > img:first-child {
+  filter: drop-shadow(0 3px 0 rgb(0 0 0 / 22%)) drop-shadow(0 7px 6px rgb(0 0 0 / 18%));
+}
+[data-home-v2-root] [data-home-v2-messenger-fab] a { box-shadow: var(--epic-raised-shadow); }
+
+/* Keep event button artwork attached to its own hit target. */
+[data-home-v2-root] .v5-event-all > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(4deg);
+  pointer-events: none;
+}
+[data-home-v2-root] .v5-event-all > span {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+/* Existing information cards gain depth without pretending to be buttons. */
+[data-home-v2-root] [data-home-v5-how] [data-home-v5-how-card],
+[data-home-v2-root] [data-home-v5-how] [data-home-v5-card-title],
+[data-home-v2-root] :is(.v5-event-card, .home-v5-forecast-map, .home-v5-livecam),
+[data-home-v2-root] .home-v5-responsive-stats > div {
+  box-shadow: var(--epic-card-shadow);
+}
+[data-home-v2-root] [data-home-v5-how] .epic-editable-photo[data-home-v5-photo] {
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 12%), 0 10px 20px -10px rgb(0 0 0 / 30%);
+}
+
+/* Highlight follows each photo's existing mask, without zooming or reframing. */
+[data-home-v2-root] .epic-gallery-page .epic-gallery-tile {
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 20%), 0 5px 0 rgb(0 0 0 / 16%), 0 12px 18px -10px rgb(0 0 0 / 28%);
+  transition: box-shadow 160ms ease;
+}
+[data-home-v2-root] :is(.v5-event-card, .home-v5-forecast-map, .home-v5-livecam, .epic-gallery-tile)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 12%), inset 0 2px 1px rgb(255 255 255 / 12%), inset 0 -2px 2px rgb(0 0 0 / 12%);
+  pointer-events: none;
+}
+
+/* FAQ retains its original line-based layout and hand-drawn control. */
+[data-home-v2-root] .v5-faq-control {
+  filter: drop-shadow(0 2px 1px rgb(0 0 0 / 15%));
+  transition: translate 160ms ease, filter 160ms ease;
+}
+[data-home-v2-root] .v5-faq-item > button:active .v5-faq-control {
+  translate: 0 2px;
+  filter: none;
+}
+[data-home-v2-root] .v5-faq-item > button:focus-visible {
+  outline: 3px solid #fe746a;
+  outline-offset: 4px;
+}
+[data-home-v2-root] :is(.home-v5-surf-cta, .v5-event-cta, .home-v5-review-link, [data-live-cam-provider-action], [data-home-v2-footer-socials] a):focus-visible {
+  outline: 3px solid #fe746a;
+  outline-offset: 6px;
+}
+
+/* Independent translate preserves pre-existing rotations and centring transforms. */
+@media (hover: hover) and (pointer: fine) {
+  [data-home-v2-root] [data-home-v2-header] :is([data-home-v2-book-now], [data-home-v2-language-switcher], [data-home-v2-menu-control]):hover,
+  [data-home-v2-root] .epic-photo-gallery .v5-gallery-filter:hover,
+  [data-home-v2-root] [data-live-cam-provider-action]:hover,
+  [data-home-v2-root] [data-rental-dialog] a:hover,
+  [data-home-v2-root] [data-booking-dialog] > div:first-child :is(a, button):hover,
+  [data-home-v2-root] [data-home-v2-messenger-fab] > button:hover {
+    translate: 0 -2px;
+    box-shadow: var(--epic-hover-shadow);
+  }
+  [data-home-v2-root] :is(.home-v5-surf-cta, .v5-event-cta):hover,
+  [data-home-v2-root] [data-home-v2-footer-socials] a:hover,
+  [data-home-v2-root] [data-home-v2-messenger-fab] a:hover { translate: 0 -2px; }
+  [data-home-v2-root] .home-v5-surf-cta:hover > img,
+  [data-home-v2-root] .v5-event-cta:hover > img {
+    filter: drop-shadow(0 6px 0 rgb(0 0 0 / 24%)) drop-shadow(0 13px 12px rgb(0 0 0 / 24%));
+  }
+  [data-home-v2-root] .v5-faq-item > button:hover .v5-faq-control {
+    translate: 0 -2px;
+    filter: drop-shadow(0 4px 2px rgb(0 0 0 / 20%));
+  }
+  [data-home-v2-root] .epic-gallery-page .epic-gallery-tile:hover {
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 24%), 0 5px 0 rgb(0 0 0 / 18%), 0 16px 22px -10px rgb(0 0 0 / 32%);
+  }
+}
+[data-home-v2-root] [data-home-v2-header] :is([data-home-v2-book-now], [data-home-v2-language-switcher], [data-home-v2-menu-control]):active,
+[data-home-v2-root] .epic-photo-gallery .v5-gallery-filter:active,
+[data-home-v2-root] [data-live-cam-provider-action]:active,
+[data-home-v2-root] [data-rental-dialog] a:active,
+[data-home-v2-root] [data-booking-dialog] > div:first-child :is(a, button):active,
+[data-home-v2-root] [data-home-v2-messenger-fab] > button:active {
+  translate: 0 3px;
+  box-shadow: var(--epic-pressed-shadow);
+}
+[data-home-v2-root] :is(.home-v5-surf-cta, .v5-event-cta):active,
+[data-home-v2-root] [data-home-v2-footer-socials] a:active,
+[data-home-v2-root] [data-home-v2-messenger-fab] a:active { translate: 0 3px; }
+[data-home-v2-root] .home-v5-surf-cta:active > img,
+[data-home-v2-root] .v5-event-cta:active > img {
+  filter: drop-shadow(0 1px 0 rgb(0 0 0 / 24%)) drop-shadow(0 3px 4px rgb(0 0 0 / 18%));
+}
+@media (min-width: 1200px) {
+  [data-home-v2-root] :is(.home-v5-rental-offer-surface, .home-v5-stat-base) {
+    filter: drop-shadow(0 4px 0 rgb(0 0 0 / 18%)) drop-shadow(0 12px 14px rgb(0 0 0 / 22%));
+  }
+  [data-home-v2-root] .home-v5-stat-icon { filter: drop-shadow(0 3px 3px rgb(0 0 0 / 20%)); }
+  [data-home-v2-root] .home-v5-review-surface {
+    filter: drop-shadow(0 4px 0 rgb(0 0 0 / 18%)) drop-shadow(0 18px 20px rgb(0 0 0 / 22%));
+  }
+  [data-home-v2-root] .home-v5-review-link {
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 22%);
+  }
+}
+@media (max-width: 1199px) {
+  [data-home-v2-root] :is(.home-v5-rental-offer, .home-v5-review) {
+    box-shadow: var(--epic-card-shadow);
+  }
+  [data-home-v2-root] .v5-event-cta { box-shadow: var(--epic-raised-shadow); }
+  [data-home-v2-root] .v5-event-all > img { display: none; }
+  [data-home-v2-root] .v5-event-all > span { position: static; display: inline; }
+  @media (hover: hover) and (pointer: fine) {
+    [data-home-v2-root] .v5-event-cta:hover { box-shadow: var(--epic-hover-shadow); }
+  }
+  [data-home-v2-root] .v5-event-cta:active { box-shadow: var(--epic-pressed-shadow); }
+}
+/* Reduced-motion users retain depth and feedback without sliding controls. */
+@media (prefers-reduced-motion: reduce) {
+  [data-home-v2-root] :is(.home-v5-surf-cta, .v5-event-cta, .v5-faq-control, .epic-gallery-tile),
+  [data-home-v2-root] [data-home-v2-header] :is([data-home-v2-book-now], [data-home-v2-language-switcher], [data-home-v2-menu-control]),
+  [data-home-v2-root] .epic-photo-gallery .v5-gallery-filter,
+  [data-home-v2-root] [data-live-cam-provider-action],
+  [data-home-v2-root] [data-rental-dialog] a,
+  [data-home-v2-root] [data-booking-dialog] > div:first-child :is(a, button),
+  [data-home-v2-root] [data-home-v2-footer-socials] a,
+  [data-home-v2-root] [data-home-v2-messenger-fab] :is(button, a) {
+    transition: none;
+    translate: none !important;
+  }
+  [data-home-v2-root] .home-v5-surf-cta > img,
+  [data-home-v2-root] .v5-event-cta > img { transition: none; }
+}

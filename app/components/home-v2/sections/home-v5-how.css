@@ -1,0 +1,165 @@
+/* Shared geometry: photo height follows the copy, with the label inside its column. */
+[data-home-v2-root] [data-home-v2-how-it-works] [data-home-v5-how] {
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(36px, 4.5vw, 64px) clamp(28px, 4vw, 64px);
+  width: 100%;
+  max-width: 1760px;
+  height: auto;
+  aspect-ratio: auto;
+  margin: 0 auto;
+  padding: clamp(48px, 4vw, 72px) clamp(24px, 9.9vw, 160px) clamp(64px, 6vw, 100px);
+  overflow: visible;
+  background: #1f1f1f;
+}
+[data-home-v2-root] [data-home-v5-how] [data-home-v5-how-heading] {
+  position: static;
+  grid-column: 1 / -1;
+  width: auto;
+  height: auto;
+  margin: 0 0 4px;
+  transform: none;
+  color: #f6f6f6;
+  font: 400 clamp(28px, 2.67vw, 46px)/1.2 'Home V5 Recursive', monospace;
+  font-variation-settings: "MONO" 1, "CASL" 1, "CRSV" .5, "slnt" 0, "wght" 400;
+  text-align: center;
+  white-space: normal;
+}
+[data-home-v2-root] [data-home-v5-how] [data-home-v5-how-card] {
+  position: relative;
+  display: grid;
+  grid-template-columns: 44% minmax(0, 1fr);
+  align-items: stretch;
+  gap: clamp(18px, 1.8vw, 28px);
+  min-width: 0;
+  min-height: 248px;
+  padding: 0 clamp(20px, 2vw, 32px) 0 0;
+  margin: 0;
+  border-radius: clamp(52px, 5.5vw, 84px);
+  background: linear-gradient(145deg, #1c1c1c, #171717);
+  box-shadow: 0 14px 30px rgb(0 0 0 / 23%), inset 0 1px 0 rgb(255 255 255 / 4%);
+}
+[data-home-v2-root] [data-home-v5-how] .home-v5-how-media {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  min-width: 0;
+}
+[data-home-v2-root] [data-home-v5-how] .epic-editable-photo[data-home-v5-photo] {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  height: auto;
+  min-height: 226px;
+  aspect-ratio: auto;
+  border-radius: 48px;
+  box-shadow: 0 6px 16px rgb(0 0 0 / 16%);
+}
+[data-home-v2-root] [data-home-v5-how] [data-home-v5-card-title] {
+  position: relative;
+  z-index: 3;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  max-width: calc(100% - 16px);
+  height: auto;
+  min-height: 42px;
+  margin: -20px 8px 0;
+  margin-bottom: 0 !important;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #f6f6f6;
+  color: #2e2e2e;
+  font: 400 clamp(14px, 1.4vw, 20px)/1.2 Arial, sans-serif;
+  text-align: center;
+  white-space: normal;
+  box-shadow: 0 5px 12px rgb(0 0 0 / 20%);
+}
+[data-home-v2-root] [data-home-v5-how] [data-home-v5-card-copy] {
+  position: static;
+  align-self: center;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 26px 0;
+  color: #f6f6f6;
+  font: 300 clamp(16px, 1.38vw, 22px)/1.5 'Home V2 Lessons Chivo', Arial, sans-serif;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+@media (max-width: 999px) {
+  [data-home-v2-root] [data-home-v2-how-it-works] [data-home-v5-how] {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    max-width: 760px;
+    padding: 48px clamp(18px, 4vw, 40px) 56px;
+  }
+  [data-home-v2-root] [data-home-v5-how] [data-home-v5-how-card] {
+    grid-template-columns: 42% minmax(0, 1fr);
+    min-height: 174px;
+    gap: 16px;
+    padding-right: 22px;
+    border-radius: 48px;
+  }
+  [data-home-v2-root] [data-home-v5-how] .epic-editable-photo[data-home-v5-photo] { min-height: 152px; }
+}
+@media (max-width: 699px) {
+  [data-home-v2-root] [data-home-v5-how] [data-home-v5-how-heading] { font-size: clamp(24px, 6.2vw, 32px); }
+  [data-home-v2-root] [data-home-v5-how] [data-home-v5-how-card] {
+    gap: 14px;
+    padding-right: 18px;
+    border-radius: 44px;
+  }
+  [data-home-v2-root] [data-home-v5-how] [data-home-v5-card-copy] { padding-block: 20px; font-size: 15px; line-height: 1.5; }
+  [data-home-v2-root] [data-home-v5-how] [data-home-v5-card-title] {
+    min-height: 36px;
+    max-width: calc(100% - 10px);
+    margin: -18px 5px 0;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
+@media (max-width: 359px) {
+  [data-home-v2-root] [data-home-v5-how] [data-home-v5-how-card] { gap: 12px; padding-right: 14px; }
+  [data-home-v2-root] [data-home-v5-how] [data-home-v5-card-copy] { font-size: 14px; }
+  [data-home-v2-root] [data-home-v5-how] [data-home-v5-card-title] { padding-inline: 7px; font-size: 11px; }
+}
+
+/* Desktop follows the same proportional scale as the adjacent lesson section. */
+@media (min-width: 1000px) {
+  [data-home-v2-root] [data-home-v2-how-it-works] [data-home-v5-how] {
+    max-width: none;
+    gap: 3.75vw 4.5vw;
+    padding: 2.777778vw 9.930556vw 5.555556vw;
+  }
+  [data-home-v2-root] [data-home-v5-how] [data-home-v5-how-heading] {
+    margin: 0;
+    font-size: 2.666667vw;
+  }
+  [data-home-v2-root] [data-home-v5-how] [data-home-v5-how-card] {
+    grid-template-columns: 48% minmax(0, 1fr);
+    min-height: 17.222222vw;
+    gap: 1.666667vw;
+    padding-right: 2.222222vw;
+    border-radius: 6.944444vw;
+  }
+  [data-home-v2-root] [data-home-v5-how] .epic-editable-photo[data-home-v5-photo] {
+    min-height: 16.25vw;
+    border-radius: 5.555556vw;
+  }
+  [data-home-v2-root] [data-home-v5-how] [data-home-v5-card-title] {
+    max-width: calc(100% - 1.111111vw);
+    min-height: 3.055556vw;
+    margin: -2.361111vw .555556vw 0;
+    padding: .694444vw .972222vw;
+    font-size: 1.5vw;
+  }
+  [data-home-v2-root] [data-home-v5-how] [data-home-v5-card-copy] {
+    padding-block: 1.805556vw;
+    font-size: 1.375vw;
+  }
+}
