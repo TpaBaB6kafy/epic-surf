@@ -108,6 +108,31 @@
     box-shadow: inset 0 1px 0 rgb(255 255 255 / 12%), 0 4px 0 #242824, 0 12px 20px -10px var(--li-shadow);
   }
 }
+/* On phones, place navigation over the title plate instead of beside booking. */
+@media (max-width: 699px) {
+  [data-home-v2-root] [data-home-v5-lessons-included] > [role=region] {
+    grid-template-rows: auto auto auto auto auto;
+    row-gap: 0;
+  }
+  [data-home-v2-root] [data-home-v5-lessons-included] #home-v2-lesson-detail {
+    grid-row: 1 / 5;
+    grid-template-rows: subgrid;
+  }
+  [data-home-v2-root] .home-v5-li-title {
+    padding-inline: 34px;
+    font-size: clamp(18px, 5.64vw, 22px);
+  }
+  [data-home-v2-root] .home-v5-li-control {
+    grid-row: 2;
+    z-index: 2;
+    align-self: center;
+  }
+  [data-home-v2-root] .home-v5-li-cta {
+    grid-column: 1 / -1;
+    grid-row: 5;
+    margin-top: 16px;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   [data-home-v2-root] :is(.home-v5-li-control, .home-v5-li-cta) { transition: none; }
 }
