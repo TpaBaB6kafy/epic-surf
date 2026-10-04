@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUp, Thermometer, Waves, Wind } from "lucide-react";
 
 const root = "/design/home-v5/rentals-conditions-reviews";
 const unit = (value) => `${value / 14.4}cqw`;
@@ -62,6 +63,25 @@ export function HomeV5Conditions({ language, t, copy, map, camera, footer, waveH
         [t.forecastDir, windCardinal],
         [t.forecastWater, "26°C"],
       ].map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
+    </dl>
+    <dl className="home-v5-mobile-conditions">
+      <div className="home-v5-mobile-condition home-v5-mobile-waves">
+        <span className="home-v5-condition-badge" aria-hidden="true"><Waves /></span>
+        <div><dt>{language === "ru" ? "Высота волн" : "Wave height"}</dt><dd>{waveHeight}<small> m</small></dd></div>
+        <div className="home-v5-mobile-period"><dt>{t.forecastPeriod}</dt><dd>{wavePeriod}<small> s</small></dd></div>
+      </div>
+      <div className="home-v5-mobile-condition home-v5-mobile-wind">
+        <span className="home-v5-condition-badge" aria-hidden="true"><Wind /></span>
+        <dt>{t.forecastWind}</dt><dd>{windSpeed}<small> km/h</small></dd>
+        <dt className="sr-only">{t.forecastDir}</dt>
+        <dd className="home-v5-mobile-direction"><ArrowUp aria-hidden="true" data-mobile-wind-direction style={{ transform: `rotate(${windDirection}deg)` }} /><span>{windCardinal}</span></dd>
+      </div>
+      <div className="home-v5-mobile-condition home-v5-mobile-water">
+        <span className="home-v5-condition-badge" aria-hidden="true"><Thermometer /></span>
+        <dt>{t.forecastWater}</dt><dd>≈26<small>°C</small></dd>
+        <dt className="sr-only">{language === "ru" ? "Источник значения" : "Value source"}</dt>
+        <dd className="home-v5-condition-note">{language === "ru" ? "Ориентир" : "Estimate"}</dd>
+      </div>
     </dl>
     <div className="home-v5-desktop-stats">
     {stats.map(({ x, y, background, surface }) => <div key={x} aria-hidden="true"><Art file={`svg/${background}`} className="home-v5-stat-base" x={x + 17} y={y + 6} width={194} height={69} /><Art file={`svg/${surface}`} className="home-v5-stat-icon" x={x} y={y} width={81} height={81} /></div>)}

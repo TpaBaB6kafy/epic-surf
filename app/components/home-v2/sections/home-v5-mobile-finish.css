@@ -1,0 +1,91 @@
+/* This pass is restricted to phones; original tablet and desktop surfaces stay intact. */
+.home-v5-mobile-conditions, .home-v5-included-short-copy { display: none; }
+.home-v5-included-full-copy { display: contents; }
+@media (max-width: 699px) {
+  [data-home-v2-root] .home-v5-li-description { padding-bottom: 42px; }
+  [data-home-v2-root] .home-v5-li-cta { margin-top: -20px; z-index: 2; }
+  [data-home-v2-root] .home-v5-li-included { margin-top: 18px; }
+  [data-home-v2-root] .home-v5-li-feature {
+    min-height: 84px;
+    padding: 16px 22px;
+    display: grid;
+    place-items: center;
+    text-wrap: balance;
+  }
+  .home-v5-included-full-copy { display: none; }
+  .home-v5-included-short-copy { display: inline; }
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-surf-cta {
+    border: 3px solid #494949;
+    box-shadow: inset 0 2px 1px rgb(255 255 255 / 30%), 0 5px 0 #494949, 0 14px 22px -8px rgb(0 0 0 / 38%);
+  }
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-rent-cta {
+    border-color: #4a302c;
+    box-shadow: inset 0 2px 1px rgb(255 255 255 / 30%), 0 5px 0 #4a302c, 0 14px 22px -8px rgb(0 0 0 / 38%);
+  }
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-surf-cta > span {
+    padding-inline: 6px;
+    font: 700 14px/1.2 'Home V2 Lessons Montserrat', Arial, sans-serif;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    [data-home-v2-root] [data-home-v5-rentals] > .home-v5-surf-cta:hover {
+      box-shadow: inset 0 2px 1px rgb(255 255 255 / 35%), 0 8px 0 #494949, 0 18px 26px -8px rgb(0 0 0 / 38%);
+    }
+    [data-home-v2-root] [data-home-v5-rentals] > .home-v5-rent-cta:hover {
+      box-shadow: inset 0 2px 1px rgb(255 255 255 / 35%), 0 8px 0 #4a302c, 0 18px 26px -8px rgb(0 0 0 / 38%);
+    }
+  }
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-surf-cta:active { translate: 0 4px; box-shadow: inset 0 1px 3px rgb(0 0 0 / 12%), 0 1px 0 #494949, 0 5px 9px -4px rgb(0 0 0 / 24%); }
+  [data-home-v2-root] [data-home-v5-rentals] > .home-v5-rent-cta:active { box-shadow: inset 0 1px 3px rgb(0 0 0 / 12%), 0 1px 0 #4a302c, 0 5px 9px -4px rgb(0 0 0 / 24%); }
+  [data-home-v2-root] .home-v5-responsive-stats { display: none; }
+  .home-v5-mobile-conditions {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 32px 14px;
+    margin: 22px 0 0;
+  }
+  .home-v5-mobile-condition {
+    position: relative;
+    min-width: 0;
+    padding: 34px 16px 20px;
+    border: 1px solid rgb(255 255 255 / 18%);
+    border-radius: 34px;
+    background: #2e2e2e;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 10%), 0 5px 0 rgb(0 0 0 / 16%), 0 15px 22px -12px rgb(0 0 0 / 32%);
+    text-align: center;
+  }
+  .home-v5-condition-badge {
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 2px solid #f6f6f6;
+    border-radius: 50%;
+    color: #f6f6f6;
+    background: linear-gradient(155deg, #70a99b, #477568);
+    box-shadow: inset 0 2px 1px rgb(255 255 255 / 24%), 0 4px 0 #203d36, 0 8px 14px -6px rgb(0 0 0 / 32%);
+  }
+  .home-v5-condition-badge svg { width: 25px; height: 25px; stroke-width: 2; }
+  .home-v5-mobile-condition dt { font-size: 14px; line-height: 1.3; color: #ddd; }
+  .home-v5-mobile-condition dd { margin: 6px 0 0; color: #aaffc7; font: 700 28px/1.2 'Home V2 Lessons Montserrat', Arial, sans-serif; }
+  .home-v5-mobile-condition dd small { font-size: 15px; font-weight: 500; }
+  .home-v5-mobile-waves { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); align-items: center; gap: 12px; }
+  .home-v5-mobile-waves > div:first-of-type dd { font-size: 34px; }
+  .home-v5-mobile-period { padding-left: 12px; border-left: 1px solid rgb(255 255 255 / 18%); }
+  .home-v5-mobile-period dd { font-size: 24px; }
+  .home-v5-mobile-condition .home-v5-mobile-direction { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 10px; color: #f6f6f6; font-size: 18px; }
+  .home-v5-mobile-direction svg { width: 28px; height: 28px; padding: 3px; border-radius: 50%; background: rgb(255 255 255 / 10%); color: #aaffc7; stroke-width: 2.5; }
+  .home-v5-mobile-condition .home-v5-condition-note { margin-top: 14px; color: #ddd; font: 400 12px/1.3 'Home V2 Lessons Chivo', Arial, sans-serif; }
+  [data-home-v2-root] .home-v5-review { border-radius: 40px; }
+  [data-home-v2-root] [data-home-v5-reviews] { padding-bottom: calc(43.45vw + 24px); }
+  [data-home-v2-root] [data-home-v5-reviews] > .home-v5-surf-art {
+    inset: auto auto 0 -30% !important;
+    width: 160% !important;
+    max-width: none;
+    height: auto !important;
+    object-fit: contain;
+  }
+}

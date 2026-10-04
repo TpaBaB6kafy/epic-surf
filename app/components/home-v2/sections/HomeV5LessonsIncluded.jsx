@@ -68,8 +68,8 @@ export default function HomeV5LessonsIncluded({ orderedLessons, activeLesson, se
         </div>
         <Artwork file="svg/feature-surface-2142-450.svg" className="home-v5-li-rashguard-surface" x={605.999} y={77} width={536} height={74} />
         <Artwork file="svg/feature-surface.svg" className="home-v5-li-camera-surface" x={606.997} y={179} width={536} height={74} />
-        <p className="home-v5-li-feature home-v5-li-rashguard">{t.includedItems.find(({ icon }) => icon === "rashguard")?.desc}</p>
-        <p className="home-v5-li-feature home-v5-li-camera">{t.includedItems.find(({ icon }) => icon === "camera")?.desc}</p>
+        <p className="home-v5-li-feature home-v5-li-rashguard"><span className="home-v5-included-full-copy">{t.includedItems.find(({ icon }) => icon === "rashguard")?.desc}</span><span className="home-v5-included-short-copy">{isRu ? "Лайкра для защиты от солнца и натирания." : "Lycra for sun and rash protection."}</span></p>
+        <p className="home-v5-li-feature home-v5-li-camera"><span className="home-v5-included-full-copy">{t.includedItems.find(({ icon }) => icon === "camera")?.desc}</span><span className="home-v5-included-short-copy">{isRu ? "Фото лучших моментов вашего урока." : "Photos of your best surf moments."}</span></p>
       </section>
     </div>
   );
