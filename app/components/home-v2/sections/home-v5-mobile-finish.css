@@ -89,3 +89,99 @@
     object-fit: contain;
   }
 }
+/* Compact phone details; one coral treatment for lesson, rental and event actions. */
+.v5-event-label-original { display: contents; }
+.v5-event-label-mobile { display: none; }
+@media (max-width: 699px) {
+  [data-home-v2-root] {
+    --epic-coral-fill: linear-gradient(165deg, #ff8d80 0%, #fe746a 55%, #ee665e 100%);
+    --epic-coral-raised: inset 0 2px 1px rgb(255 255 255 / 30%), 0 5px 0 #4a302c, 0 14px 22px -8px rgb(0 0 0 / 38%);
+    --epic-coral-hover: inset 0 2px 1px rgb(255 255 255 / 35%), 0 8px 0 #4a302c, 0 18px 26px -8px rgb(0 0 0 / 38%);
+    --epic-coral-pressed: inset 0 1px 3px rgb(0 0 0 / 12%), 0 1px 0 #4a302c, 0 5px 9px -4px rgb(0 0 0 / 24%);
+  }
+  [data-home-v2-root] .v5-faq-control {
+    width: 44px;
+    height: 44px;
+    filter: none;
+  }
+  [data-home-v2-root] .v5-faq-control > img { display: none; }
+  [data-home-v2-root] .v5-faq-control::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid #747474;
+    border-radius: 10px;
+    background: linear-gradient(155deg, #fff, #ededed);
+    box-shadow: inset 0 1px 0 #fff, 0 2px 0 #c5c5c5, 0 6px 10px -4px rgb(0 0 0 / 25%);
+  }
+  [data-home-v2-root] .v5-faq-control::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(#fe746a, #fe746a) center / 14px 2px no-repeat, linear-gradient(#fe746a, #fe746a) center / 2px 14px no-repeat;
+    transition: transform 160ms ease;
+  }
+  [data-home-v2-root] .v5-faq-item > button[aria-expanded=true] .v5-faq-control::after { transform: rotate(45deg); }
+  [data-home-v2-root] .v5-faq-item > button:is(:hover, :active) .v5-faq-control { filter: none; }
+  [data-home-v2-root] .home-v5-li-included { gap: 8px; }
+  [data-home-v2-root] .home-v5-li-rashguard { position: relative; z-index: 1; margin-top: -20px; }
+  [data-home-v2-root] .home-v5-rental-offer { border-radius: 44px; }
+  [data-home-v2-root] :is(.home-v5-li-cta, [data-home-v5-rentals] > .home-v5-rent-cta, [data-home-v5-events] > .v5-event-cta) {
+    border: 3px solid #4a302c;
+    border-radius: 999px;
+    background: var(--epic-coral-fill);
+    box-shadow: var(--epic-coral-raised);
+    transition: translate 160ms ease, box-shadow 160ms ease;
+  }
+  [data-home-v2-root] :is(.home-v5-li-cta, [data-home-v5-rentals] > .home-v5-rent-cta, [data-home-v5-events] > .v5-event-cta) > span { color: #292929; }
+  [data-home-v2-root] .v5-event-cta { min-width: 132px; min-height: 54px; max-width: 100%; }
+  [data-home-v2-root] .v5-event-cta > img { display: none; }
+  .v5-event-label-original { display: none; }
+  .v5-event-label-mobile { display: inline; }
+  @media (hover: hover) and (pointer: fine) {
+    [data-home-v2-root] :is(.home-v5-li-cta, [data-home-v5-rentals] > .home-v5-rent-cta, [data-home-v5-events] > .v5-event-cta):hover {
+      transform: none;
+      translate: 0 -3px;
+      box-shadow: var(--epic-coral-hover);
+    }
+  }
+  [data-home-v2-root] :is(.home-v5-li-cta, [data-home-v5-rentals] > .home-v5-rent-cta, [data-home-v5-events] > .v5-event-cta):active {
+    transform: none;
+    translate: 0 4px;
+    box-shadow: var(--epic-coral-pressed);
+  }
+}
+@media (max-width: 699px) and (prefers-reduced-motion: reduce) {
+  [data-home-v2-root] .v5-faq-control::after { transition: none; }
+  [data-home-v2-root] :is(.home-v5-li-cta, [data-home-v5-rentals] > .home-v5-rent-cta, [data-home-v5-events] > .v5-event-cta) { transition: none; translate: none !important; transform: none; }
+}
+/* Phone maps scroll with the page until the visitor explicitly enables them. */
+.home-v5-windy { width: 100%; height: 100%; }
+.home-v5-windy-frame { display: block; width: 100%; height: 100%; }
+.home-v5-windy-toggle { display: none; }
+@media (max-width: 699px) {
+  .home-v5-windy { display: flex; flex-direction: column; touch-action: pan-y pinch-zoom; }
+  .home-v5-windy-frame { flex: 1; min-height: 0; height: auto; pointer-events: none; }
+  .home-v5-windy[data-map-active=true] { touch-action: auto; }
+  .home-v5-windy[data-map-active=true] .home-v5-windy-frame { pointer-events: auto; }
+  .home-v5-windy-toggle {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 44px;
+    padding: 8px 16px;
+    border: 0;
+    border-top: 1px solid rgb(255 255 255 / 16%);
+    background: #2e2e2e;
+    color: #f6f6f6;
+    font: 600 12px/1.3 'Home V2 Lessons Montserrat', Arial, sans-serif;
+    cursor: pointer;
+    touch-action: pan-y pinch-zoom;
+  }
+  .home-v5-windy-toggle svg { width: 18px; height: 18px; color: #aaffc7; }
+  .home-v5-windy-toggle:focus-visible { outline: 2px solid #fe746a; outline-offset: -4px; }
+  .home-v5-windy-toggle:active { background: #3a3a3a; }
+}

@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { HomeV5Conditions } from "./HomeV5SurfSections";
-import { ExternalLink, Heart } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { Check, ExternalLink, Heart, Map } from "lucide-react";
+import { useEffect, useId, useRef, useState } from "react";
 import { liveCam } from "../../../data/liveCam";
 import { links } from "../../../data/links";
 import { buildWhatsAppUrl, trackEvent } from "../../../utils/tracking";
@@ -71,14 +71,62 @@ function LiveCamIframe({ copy }) {
   );
 }
 
-function WindyIframe() {
+function WindyIframe({ language = "en" }) {
+  const [mapActive, setMapActive] = useState(false);
+  const usesDesktopLayout = useConditionsAdaptiveSlot(700);
+  const isMobile = usesDesktopLayout === false;
+  const containerRef = useRef(null);
+  const frameId = useId();
+  const active = isMobile && mapActive;
+  const isRu = language === "ru";
+
+  useEffect(() => {
+    if (!mapActive) return;
+    const container = containerRef.current;
+    const stopOutside = (event) => {
+      if (!container.contains(event.target)) setMapActive(false);
+    };
+    const viewportQuery = window.matchMedia("(min-width: 700px)");
+    const stopOnViewportChange = () => setMapActive(false);
+    const stopOnEscape = (event) => {
+      if (event.key === "Escape") setMapActive(false);
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) setMapActive(false);
+    });
+    observer.observe(container);
+    document.addEventListener("pointerdown", stopOutside, true);
+    document.addEventListener("keydown", stopOnEscape);
+    viewportQuery.addEventListener("change", stopOnViewportChange);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("pointerdown", stopOutside, true);
+      document.removeEventListener("keydown", stopOnEscape);
+      viewportQuery.removeEventListener("change", stopOnViewportChange);
+    };
+  }, [mapActive]);
+
   return (
-    <iframe
-      src="https://embed.windy.com/embed2.html?lat=16.061&lon=108.247&zoom=11&overlay=waves&product=ecmwf&metricWind=km%2Fh"
-      loading="lazy"
-      className="h-full w-full border-0"
-      title="Windy Forecast"
-    />
+    <div ref={containerRef} className="home-v5-windy" data-map-active={active}>
+      <iframe
+        id={frameId}
+        src="https://embed.windy.com/embed2.html?lat=16.061&lon=108.247&zoom=11&overlay=waves&product=ecmwf&metricWind=km%2Fh"
+        loading="lazy"
+        className="home-v5-windy-frame border-0"
+        title={isRu ? "Прогноз Windy" : "Windy Forecast"}
+        tabIndex={isMobile && !active ? -1 : 0}
+      />
+      <button
+        type="button"
+        className="home-v5-windy-toggle"
+        aria-controls={frameId}
+        aria-pressed={active}
+        onClick={() => setMapActive((previous) => !previous)}
+      >
+        {active ? <Check aria-hidden="true" /> : <Map aria-hidden="true" />}
+        {active ? (isRu ? "Готово · листать страницу" : "Done · scroll page") : (isRu ? "Управлять картой" : "Explore map")}
+      </button>
+    </div>
   );
 }
 
@@ -353,7 +401,7 @@ export function HomeV2Conditions({ t, locale = "en" }) {
   const windSpeed = Math.round(forecast?.windSpeed ?? 7);
   const windDirection = forecast?.windDir ?? 225;
   const windCardinal = degreesToCardinal(windDirection);
-  const windyIframe = <WindyIframe />;
+  const windyIframe = <WindyIframe language={language} />;
 
   if (usesV5Desktop) {
     return <section ref={sectionRef} id="forecast" data-home-v2-live-cam data-home-v2-forecast data-live-cam-mounted={hasEnteredViewport ? "true" : "false"} className="relative scroll-mt-24">

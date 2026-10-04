@@ -39,6 +39,7 @@ import "./home-v5-responsive.css";
 import "./sections/home-v5-lessons-polish.css";
 import "./sections/home-v5-surfaces-polish.css";
 import "./sections/home-v5-mobile-finish.css";
+import "./sections/home-v5-reviews.css";
 import { PhotoFramingProvider } from "./sections/GalleryFraming";
 import HomeV5SunsetScene from "./HomeV5SunsetScene";
 

@@ -53,7 +53,7 @@ export function HomeV5Events({ t, openEventGallery, isRu }) {
     <button className="v5-event-cta v5-event-photos" type="button" onClick={() => openEventGallery(featured.galleryKey)} style={box(697.909, 826.14, 137, 75)}>
       <Image src={`${root}/svg/view-photos-cta.svg`} alt="" width={137} height={75} unoptimized /><span>{isRu ? <>СМОТРЕТЬ <br />ФОТО</> : <>VIEW <br />PHOTOS</>}</span>
     </button>
-    {[{ event: birthday, y: 415.956 }, { event: umka, y: 783.358 }].map(({ event, y }) => <button key={event.galleryKey} className="v5-event-cta v5-event-all" type="button" onClick={() => openEventGallery(event.galleryKey)} aria-label={`${isRu ? "Все фото" : "All photos"}: ${event.title}`} style={box(1079.307, y, 71, 72)}><Image src={`${root}/svg/${event.galleryKey === "birthday" ? "event-all-birthday-surface.svg" : "event-all-community-surface.svg"}`} alt="" aria-hidden="true" width={71} height={72} unoptimized /><span>{isRu ? "ВСЕ" : "ALL"}</span></button>)}
+    {[{ event: birthday, y: 415.956 }, { event: umka, y: 783.358 }].map(({ event, y }) => <button key={event.galleryKey} className="v5-event-cta v5-event-all" type="button" onClick={() => openEventGallery(event.galleryKey)} aria-label={`${isRu ? "Все фото" : "All photos"}: ${event.title}`} style={box(1079.307, y, 71, 72)}><Image src={`${root}/svg/${event.galleryKey === "birthday" ? "event-all-birthday-surface.svg" : "event-all-community-surface.svg"}`} alt="" aria-hidden="true" width={71} height={72} unoptimized /><span><span className="v5-event-label-original">{isRu ? "ВСЕ" : "ALL"}</span><span className="v5-event-label-mobile">{isRu ? "ВСЕ ФОТО" : "ALL PHOTOS"}</span></span></button>)}
   </div>;
 }
 

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUp, Thermometer, Waves, Wind } from "lucide-react";
+import { ArrowUp, ExternalLink, Star, Thermometer, Waves, Wind } from "lucide-react";
+import { googleFeaturedReviews, googleReviewsSummary } from "../../../data/googleReviews";
 
 const root = "/design/home-v5/rentals-conditions-reviews";
 const unit = (value) => `${value / 14.4}cqw`;
@@ -102,25 +103,27 @@ export function HomeV5Conditions({ language, t, copy, map, camera, footer, waveH
   </div>;
 }
 
-const reviewGeometry = [
-  { base: [170.564, 60.508, 325, 171], file: "review-card-base-2142-57.svg", quote: [196, 84, 267.799, 81.144], name: [230, 165], date: [230.227, 177.312] },
-  { base: [542.001, 65.001, 325, 171], file: "review-card-base-2142-51.svg", quote: [578.991, 84.901, 276.639, 79.867], name: [576.574, 190.615], date: [576.737, 203.737] },
-  { base: [911.002, 22.523, 326, 210], file: "review-card-base.svg", quote: [955.634, 43.504, 267.492, 99.254], name: [954.061, 172.051], date: [953.997, 187.688] },
-];
-
-export function HomeV5Reviews({ reviews, isRu, googleMapsUrl }) {
+export function HomeV5Reviews({ isRu, googleMapsUrl }) {
   return <div data-home-v5-reviews data-lang={isRu ? "ru" : "en"}>
     <h2 className="sr-only">{isRu ? "Отзывы учеников" : "Student reviews"}</h2>
+    <a className="home-v5-review-rating" href={googleMapsUrl} target="_blank" rel="noopener noreferrer" aria-label={isRu ? "Рейтинг EPIC: 5 из 5 в Google Maps. Читать отзывы" : "EPIC rating: 5 out of 5 on Google Maps. Read reviews"}>
+      <strong>{new Intl.NumberFormat(isRu ? "ru-RU" : "en-US", { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(googleReviewsSummary.rating)}</strong>
+      <span className="home-v5-review-stars" aria-hidden="true">{Array.from({ length: 5 }, (_, i) => <Star key={i} />)}</span>
+      <span>Google Maps</span><ExternalLink aria-hidden="true" />
+    </a>
     <Art file="reviews-wave.webp" x={0} y={228} width={1440} height={391} />
-    {reviews.slice(0, 3).map((review, index) => {
-      const g = reviewGeometry[index];
-      return <article key={review.name} className="home-v5-review">
-        <Art file={`svg/${g.file}`} x={g.base[0]} y={g.base[1]} width={g.base[2]} height={g.base[3]} className="home-v5-review-surface" />
-        <blockquote style={box(...g.quote)}><span>{review.text.split(/(🔥|👍|👌)/u).map((part, partIndex) => /^(🔥|👍|👌)$/u.test(part) ? <span className="home-v5-review-emoji" key={partIndex}>{part}</span> : part)}</span></blockquote>
-        {index === 2 && <Art file="svg/card-divider.svg" x={953} y={152} width={261} height={8} />}
-        <Text x={g.name[0]} y={g.name[1]} width={220} height={16} size={9.676} line={14} className="home-v5-review-name">{review.name}</Text>
-        <Text x={g.date[0]} y={g.date[1]} width={150} height={16} size={9.676} line={14} className="home-v5-review-date">{review.date}</Text>
-        <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" className="home-v5-review-link" style={box(...g.base)} aria-label={isRu ? `Отзыв ${review.name} на Google Maps` : `Read ${review.name}'s review on Google Maps`} />
+    {googleFeaturedReviews.map((review) => {
+      const text = isRu ? review.excerpt : review.englishTranslation || review.excerpt;
+      return <article key={review.reviewUrl} className="home-v5-review">
+        <blockquote><span className="home-v5-review-copy" lang={isRu ? review.language : "en"}>{text}</span></blockquote>
+        <div className="home-v5-review-author home-v5-review-author-with-photo">
+          <div className="home-v5-review-author-details">
+            <span className="home-v5-review-author-name">{review.name}</span>
+            {!isRu && review.englishTranslation && <span className="home-v5-review-translation">Translated from Russian</span>}
+            <a href={review.reviewUrl} target="_blank" rel="noopener noreferrer" aria-label={isRu ? `Полный отзыв ${review.name} в Google Maps` : `${review.name}'s full review on Google Maps`}>{isRu ? "Полный отзыв" : "Full review"} <ExternalLink aria-hidden="true" /></a>
+          </div>
+          <span className="home-v5-review-avatar" aria-hidden="true"><Image src={review.avatarUrl} alt="" width={88} height={104} unoptimized /></span>
+        </div>
       </article>;
     })}
   </div>;

@@ -586,7 +586,7 @@ export function HomeV2Reviews({ t, googleMapsUrl }) {
 
   return (
     <section id="reviews" data-home-v2-reviews className="relative z-20 overflow-visible bg-epicDark text-epicWhite scroll-mt-24">
-        <HomeV5Reviews reviews={desktopReviews} isRu={isRu} googleMapsUrl={googleMapsUrl} />
+        <HomeV5Reviews isRu={isRu} googleMapsUrl={googleMapsUrl} />
         <div data-home-v2-reviews-grid className="relative mx-auto hidden h-[684px] w-full min-[900px]:block">
           <div
             data-home-v2-reviews-desktop

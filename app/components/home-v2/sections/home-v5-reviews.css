@@ -1,0 +1,147 @@
+/* The same verified reviews and compact cards on every screen. */
+[data-home-v2-root] [data-home-v5-reviews] > h2.sr-only {
+  position: static;
+  z-index: 1;
+  grid-column: 1 / -1;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  white-space: normal;
+  color: #f6f6f6;
+  font: 400 var(--v5-heading, 32px)/1.25 'Home V5 Recursive', Arial, sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+}
+.home-v5-review-rating { position: relative; z-index: 1; }
+[data-home-v2-root] [data-home-v5-reviews] > h2 { margin-bottom: 0; }
+  [data-home-v2-root] .home-v5-review-rating {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    gap: 10px;
+    margin: -4px 0 10px;
+    padding: 12px 16px;
+    border: 1px solid rgb(255 255 255 / 20%);
+    border-radius: 999px;
+    background: #2e2e2e;
+    color: #f6f6f6;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 12%), 0 4px 0 rgb(0 0 0 / 16%), 0 12px 20px -10px rgb(0 0 0 / 30%);
+    font: 500 12px/1.2 'Home V2 Lessons Montserrat', Arial, sans-serif;
+  }
+  .home-v5-review-rating strong { font-size: 22px; font-weight: 700; }
+  .home-v5-review-rating > svg { width: 13px; height: 13px; }
+  .home-v5-review-stars { display: flex; gap: 2px; color: #fe746a; }
+  .home-v5-review-stars svg { width: 15px; height: 15px; fill: currentColor; stroke-width: 1; }
+  [data-home-v2-root] .home-v5-review {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+    gap: 10px;
+    padding: 24px 30px;
+    border-radius: 40px;
+    background: #f6f6f6;
+    color: #353535;
+    box-shadow: var(--epic-card-shadow);
+  }
+  [data-home-v2-root] .home-v5-review blockquote {
+    position: static !important;
+    display: block;
+    width: auto !important;
+    height: 6em !important;
+    margin: 0;
+    text-align: left;
+    white-space: normal;
+    font: 500 var(--v5-body, clamp(16px, 1.1vw, 18px))/1.5 'Home V2 Lessons Montserrat', Arial, sans-serif !important;
+    flex: none;
+    padding-bottom: 0;
+  }
+  .home-v5-review-author {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: end;
+    gap: 14px;
+    margin-top: 2px;
+  }
+  .home-v5-review-copy {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    max-height: 6em;
+    overflow: hidden;
+  }
+  .home-v5-review-translation { color: #666; font: 400 11px/1.3 'Home V2 Lessons Montserrat', Arial, sans-serif; }
+  .home-v5-review-author-details { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; min-width: 0; }
+  .home-v5-review-author-name { color: #c6524b; font: 700 13px/1.35 'Home V2 Lessons Montserrat', Arial, sans-serif; }
+  .home-v5-review-author-details time { color: #666; font: 400 12px/1.3 'Home V2 Lessons Montserrat', Arial, sans-serif; }
+  .home-v5-review-author-details a {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    min-height: 32px;
+    margin-left: -5px;
+    padding: 4px 5px;
+    color: #666;
+    font: 500 12px/1.3 'Home V2 Lessons Montserrat', Arial, sans-serif;
+  }
+  .home-v5-review-author-details a svg { width: 12px; height: 12px; }
+  .home-v5-review-author-with-photo {
+    grid-template-columns: minmax(0, 1fr) 88px;
+    margin-right: -10px;
+    margin-bottom: -10px;
+  }
+  .home-v5-review-avatar {
+    display: block;
+    align-self: end;
+    width: 88px;
+    height: 104px;
+    overflow: hidden;
+    border: 0;
+    border-radius: 44px 44px 18px 18px;
+    background: transparent;
+    box-shadow: none;
+  }
+  .home-v5-review-avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .home-v5-review-rating:focus-visible, .home-v5-review-author-details a:focus-visible { outline: 3px solid #fe746a; outline-offset: 4px; }
+  @media (hover: hover) and (pointer: fine) {
+    .home-v5-review-author-details a:hover { color: #c6524b; text-decoration: underline; }
+  }
+
+@media (min-width: 700px) and (max-width: 899px) {
+  [data-home-v2-root] [data-home-v5-reviews] { grid-template-columns: 1fr; }
+  [data-home-v2-root] .home-v5-review { max-width: 520px; justify-self: center; }
+}
+@media (min-width: 900px) and (max-width: 1199px) {
+  [data-home-v2-root] [data-home-v5-reviews] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  [data-home-v2-root] .home-v5-review:last-child { grid-column: 1 / -1; width: calc((100% - 20px) / 2); justify-self: center; }
+}
+@media (min-width: 1200px) {
+  [data-home-v2-root] [data-home-v5-reviews] {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-content: start;
+    gap: 32px;
+    /* Reserve the visible part of the collage and an 88px gap above it. */
+    padding: 40px max(40px, calc((100% - 1280px) / 2)) calc(17.326389vw + 88px);
+    aspect-ratio: auto;
+  }
+  [data-home-v2-root] [data-home-v5-reviews] > h2.sr-only {
+    grid-column: 1 / 3;
+    align-self: center;
+    text-align: left;
+  }
+  [data-home-v2-root] .home-v5-review-rating { grid-column: 3; justify-self: end; align-self: center; margin: 0; }
+  [data-home-v2-root] [data-home-v5-reviews] > .home-v5-surf-art { inset: auto 0 0 !important; width: 100% !important; height: auto !important; }
+}
