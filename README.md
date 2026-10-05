@@ -31,6 +31,12 @@ Open `http://localhost:3000`.
 - `npm run start` - start production server
 - `npm run lint` - run ESLint
 
+## Design Rules
+
+- Repository instructions: [AGENTS.md](AGENTS.md)
+- Approved page layout and scale: [docs/design/layout-and-scale.md](docs/design/layout-and-scale.md)
+- Apply this standard to future homepage, rental and landing-page changes. Historical QA/release notes are not current design instructions.
+
 ## Project Docs
 
 - Project context docs: `docs/project-context/`

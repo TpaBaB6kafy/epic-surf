@@ -4,6 +4,10 @@
 
 Epic Surf School Da Nang website: Next.js App Router, React, Tailwind CSS v4. Goal: sell surf lessons/rentals, route users to booking and messengers, support EN/RU visitors and partner referrals.
 
+## Current design instructions
+
+Read [the approved layout and scale standard](../design/layout-and-scale.md) before UI work. The current homepage is HomeV2Page; earlier handoff/release reports are historical. Some non-design notes below are older snapshots: verify them against the current code and repository state.
+
 ## Routes
 
 - `/`: English homepage.
@@ -15,8 +19,11 @@ Epic Surf School Da Nang website: Next.js App Router, React, Tailwind CSS v4. Go
 
 ## Key Files
 
-- `app/components/LandingPage.jsx`: homepage composition.
-- `app/components/Rentals.jsx`, `app/components/RentalBoardMiniShowroom.jsx`: updated homepage rental block.
+- `app/components/home-v2/HomeV2Page.jsx`: current homepage composition.
+- `app/components/home-v2/sections/home-v5-desktop-scale.css`: approved bounded desktop layout.
+- `app/components/landing-v5/`: existing landing-page shell; not all pages use the new width standard yet.
+- `app/components/home-v2/sections/HomeV2LessonsRentals.jsx`, `HomeV5SurfSections.jsx`: current homepage lesson/rental composition.
+- `app/components/RentalDesignTestPage.jsx`, `RentalBoardShowroom.jsx`: separate rental catalog page.
 - `app/components/LiveCam.jsx`, `app/data/liveCam.js`: Da Nang Surf Cam partner preview and links.
 - `app/data/seoPages.js`: SEO page content and route links.
 - `app/components/RootLayoutShell.jsx`: GTM, Umami, structured data shell.
@@ -35,8 +42,7 @@ Epic Surf School Da Nang website: Next.js App Router, React, Tailwind CSS v4. Go
 - `epicWhite`: `#F6F6F6`
 - `epicMint`: `#AAFFC7`
 - `epicGray`: `#585858`
-- Headings: `"Arial Black", Arial, "Helvetica Neue", Helvetica, sans-serif`
-- Body/UI: system sans stack.
+- Current V5 typography: Home V5 Recursive, Home V2 Lessons Chivo and Home V2 Lessons Montserrat, with existing section-specific fallbacks. See the design standard; older base font declarations are not a replacement instruction.
 
 ## Partner System
 
@@ -55,15 +61,9 @@ Epic Surf School Da Nang website: Next.js App Router, React, Tailwind CSS v4. Go
 - `trackEvent()` sends to `dataLayer` and Umami when configured.
 - Events include `page_view`, `booking_cta_click`, `gallery_open`, `map_activate`, `language_switch`, messenger clicks, `rental_cta_click`, `partner_cta_click`, `live_cam_preview_load`, `live_cam_outbound_click`, and `live_cam_cta_click`.
 
-## Current Main State
+## Repository state
 
-- Current HEAD is `86dcc76` (`Fix live cam preview aspect ratio`).
-- The redesigned EN/RU surfboard rental pages are in `main`.
-- The homepage rental block uses the updated mini showroom and links to the locale-specific rental page.
-- `LiveCam` is in `main` between Rentals and Forecast on both homepages.
-- The block uses the Da Nang Surf Cam / Ryan partner embed with partner ID `epicsurf`.
-- The embedded preview is responsive 16:9. The full stream remains on `danangsurfcam.com`.
-- Former preview-branch deployment URLs are obsolete and must not be treated as the current site.
+Use git status/log and the current route modules to determine the active commit and deployment state. Do not rely on a fixed SHA in context notes. The approved layout rule is documented separately; its presence does not imply every page has been migrated or published.
 
 ## Do Not Break
 
@@ -81,7 +81,6 @@ Epic Surf School Da Nang website: Next.js App Router, React, Tailwind CSS v4. Go
 - Wix history: needs confirmation.
 - Production analytics delivery needs validation.
 - LiveCam availability depends on the external Da Nang Surf Cam provider.
-- README still contains create-next-app boilerplate.
 
 ## Next Tasks
 
@@ -96,4 +95,4 @@ Epic Surf School Da Nang website: Next.js App Router, React, Tailwind CSS v4. Go
 
 ## Last updated
 
-2026-06-15
+2026-10-05

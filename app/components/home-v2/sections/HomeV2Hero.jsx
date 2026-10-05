@@ -140,7 +140,7 @@ export default function HomeV2Hero({ t, lang = "en" }) {
       <video ref={videoRef} data-hero-video className={`${styles.video} ${hasFrame ? styles.revealed : ""}`}
         autoPlay muted loop playsInline preload="none" aria-hidden="true" tabIndex={-1} />
       <div className={styles.shade} aria-hidden="true" />
-      <div className={styles.brand} aria-label="EPIC Surf School" role="img">
+      <div data-home-v5-hero-brand className={styles.brand} aria-label="EPIC Surf School" role="img">
         <Image src="/design/home-v2/hero/epic-logo.svg" width={198} height={123}
           alt="" unoptimized loading="eager" className={styles.epic} />
         <Image src="/brand/surf-school-hero-logo.svg" width={1115} height={155}

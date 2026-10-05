@@ -19,7 +19,8 @@
 
 ## Key components
 
-- `LandingPage.jsx`: main page composition and modal state.
+- `home-v2/HomeV2Page.jsx`: current homepage composition and modal state.
+- `LandingPage.jsx` and legacy standalone sections: retained older implementation, not the current homepage visual reference.
 - `RootLayoutShell.jsx`: HTML shell, GTM, Umami, structured data.
 - `Header.jsx`: navigation and language switch.
 - `Hero.jsx`: first screen.
@@ -37,9 +38,9 @@
 
 ## Homepage section order
 
-`LandingPage.jsx` currently renders: Header, Hero, Why Epic, How It Works, Lessons, Included Bento, Rentals, LiveCam, Forecast, Reviews, FAQ, Events, Gallery, Footer, Messenger FAB, Booking Modal, Rental Modal.
+The homepage routes render home-v2/HomeV2Page.jsx. Inspect its current JSX for section order; older standalone section names below may describe the retired composition. The V5 forecast contains both the map and camera, followed by reviews.
 
-LiveCam is intentionally placed between Rentals and Forecast.
+UI changes follow [the approved layout and scale standard](../design/layout-and-scale.md).
 
 ## Translations
 

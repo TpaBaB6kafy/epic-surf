@@ -13,14 +13,14 @@ function Art({ file, x, y, width, height, className = "" }) {
 }
 
 function Text({ children, x, y, width, height, size, line = size, className = "", style }) {
-  return <span className={`home-v5-surf-text ${className}`} style={{ ...box(x, y, width, height), fontSize: unit(size), lineHeight: unit(line), ...style }}>{children}</span>;
+  return <span className={`home-v5-surf-text ${size >= 40 ? "home-v5-surf-text-large" : ""} ${className}`} style={{ ...box(x, y, width, height), "--home-v5-text-size": unit(size), fontSize: unit(size), lineHeight: unit(line), ...style }}>{children}</span>;
 }
 
 export function HomeV5Rentals({ lang, copy, catalogHref, onRent }) {
   const ru = lang === "ru";
   return <section id="rentals" data-home-v2-rentals-block data-home-v5-rentals data-lang={lang} aria-label={ru ? "Аренда досок" : "Board rentals"}>
     {/* Both background exports are clipped at their Figma section boundaries. */}
-    <Art file="svg/rentals-background-shape.svg" x={0} y={0} width={1440} height={900} />
+    <Art className="home-v5-rental-backdrop" file="svg/rentals-background-shape.svg" x={0} y={0} width={1440} height={900} />
     <div className="home-v5-rental-photo">
       <Image src={`${root}/boards.webp`} alt={ru ? "Доски EPIC для аренды" : "EPIC surfboards available to rent"} width={1030} height={592} unoptimized />
     </div>
@@ -52,7 +52,7 @@ export function HomeV5Conditions({ language, t, copy, map, camera, footer, waveH
   ];
   return <div data-home-v5-conditions data-lang={language}>
     <h2 className="sr-only">{language === "ru" ? "Камера и прогноз волн" : "Live cam and surf forecast"}</h2>
-    <Art file="svg/vector.svg" x={0} y={0} width={1440} height={332} />
+    <Art className="home-v5-conditions-backdrop" file="svg/vector.svg" x={0} y={0} width={1440} height={332} />
     <HomeV5RentalMarquee />
     <Art className="home-v5-rental-marquee-static" file="svg/surf-school-marquee-artwork.svg" x={155.664} y={0} width={1285} height={184} />
     <div className="home-v5-wave-height" aria-label={language === "ru" ? "Высота волн" : "Wave height"} style={box(1075, -28, 240, 102)}><strong>{waveHeight}</strong><span>m</span></div>
@@ -113,7 +113,7 @@ export function HomeV5Reviews({ isRu, googleMapsUrl }) {
       <span className="home-v5-review-stars" aria-hidden="true">{Array.from({ length: 5 }, (_, i) => <Star key={i} />)}</span>
       <span>Google Maps</span><ExternalLink aria-hidden="true" />
     </a>
-    <Art file="reviews-wave.webp" x={0} y={228} width={1440} height={391} />
+    <Art className="home-v5-review-collage" file="reviews-wave.webp" x={0} y={228} width={1440} height={391} />
     {googleFeaturedReviews.map((review) => {
       const text = isRu ? review.excerpt : review.englishTranslation || review.excerpt;
       return <article key={review.reviewUrl} className="home-v5-review">

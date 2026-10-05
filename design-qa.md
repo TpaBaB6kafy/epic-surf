@@ -1,5 +1,7 @@
 # Home V2 targeted correction — design QA
 
+> Historical QA log of earlier implementations, not current design instructions. Approved composition, width and vertical spacing now follow [the layout and scale standard](docs/design/layout-and-scale.md). Preserve these entries as evidence; do not restore their old geometry.
+
 ## Lessons + Included V5 — 2026-09-30
 
 - Source: `tmp/figma-handoff/v5/lessons-included/`, exporter 2.3.1, 1440 × 1077, zero unresolved layers. Combined desktop stage preserves the background boundary at y=843 and the gear composition spanning y=677–1009.

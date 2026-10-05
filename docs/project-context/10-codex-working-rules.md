@@ -16,6 +16,10 @@
 
 ## Design
 
+- Read [the approved layout and scale standard](../design/layout-and-scale.md) before changing page UI. It applies to rental and landing pages as well as the homepage.
+- Old QA/release reports and archived briefs describe earlier iterations; do not use them as current layout instructions.
+- Apply the current user request without asking again for actions already authorized.
+
 - Reuse existing Tailwind theme tokens.
 - Do not change colors, fonts, or core visual direction without confirmation.
 - Keep surf imagery and current brand style.
@@ -42,4 +46,4 @@
 
 ## Last updated
 
-2026-05-29
+2026-10-05

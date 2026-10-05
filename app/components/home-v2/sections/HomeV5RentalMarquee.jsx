@@ -24,12 +24,36 @@ export default function HomeV5RentalMarquee() {
       visible = entry.isIntersecting;
       update();
     });
+    // Stretch the existing boundary horizontally while keeping each logo undistorted.
+    // Foreground sections use a capped canvas; their background spans the viewport.
+    const fit = () => {
+      const canvasWidth = svg.parentElement.getBoundingClientRect().width;
+      if (!canvasWidth) return;
+      const ratio = window.innerWidth / canvasWidth;
+      let coordinate = 0;
+      const fittedRoute = route.replace(/-?\d+(?:\.\d+)?/g, value =>
+        String(Number(value) * (coordinate++ % 2 === 0 ? ratio : 1)));
+      svg.setAttribute("viewBox", `0 694.072 ${1440 * ratio} 538`);
+      svg.querySelector("path").setAttribute("d", fittedRoute);
+    };
+    const seed = () => {
+      fit();
+      if (!media.matches) svg.setCurrentTime(18);
+      update();
+    };
+    const resize = new ResizeObserver(fit);
+    resize.observe(svg);
+    fit();
+    if (document.readyState === "complete") seed();
+    else window.addEventListener("load", seed, { once: true });
     update();
     observer.observe(svg);
     media.addEventListener("change", update);
     document.addEventListener("visibilitychange", update);
     return () => {
       observer.disconnect();
+      resize.disconnect();
+      window.removeEventListener("load", seed);
       media.removeEventListener("change", update);
       document.removeEventListener("visibilitychange", update);
     };
