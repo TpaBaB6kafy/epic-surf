@@ -1,0 +1,283 @@
+/* Selected photo-led lesson composition. All rules remain inside the library. */
+@font-face { font-family: 'EPIC Lesson Display'; src: url('/design/service-page/Neucha-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+.epic-ds .ds-service-page { outline: none; --lesson-display: 'EPIC Lesson Display', var(--ds-font-display); }
+.epic-ds .ds-service-page .ds-heading { font-family: var(--lesson-display); font-weight: 400; text-transform: uppercase; font-size: clamp(30px,2.8vw,44px); line-height: 1.15; }
+.epic-ds .ds-service-hero { position: relative; display: flex; align-items: center; min-height: clamp(600px,47.5vw,760px); padding-block: 72px; isolation: isolate; background: var(--ds-deep); }
+.epic-ds .ds-service-hero::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg,rgb(18 29 29 / 85%) 0%,rgb(20 31 31 / 58%) 32%,transparent 68%),linear-gradient(0deg,rgb(31 31 31 / 40%),transparent 35%); pointer-events: none; }
+.epic-ds .ds-lesson-hero-photo { object-fit: cover; object-position: center 54%; z-index: -2; }
+.epic-ds .ds-lesson-hero-copy { width: min(660px,60%); }
+.epic-ds .ds-service-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; font-size: 18px; }
+.epic-ds .ds-service-eyebrow svg { width: 24px; height: 24px; color: var(--ds-coral); }
+.epic-ds .ds-service-hero .ds-hero-title { font-size: clamp(56px,5.1vw,80px); line-height: 1.05; font-weight: 700; letter-spacing: .015em; text-wrap: initial; }
+.epic-ds .ds-hero-title > .ds-hero-line { display: block; color: inherit; }
+.epic-ds .ds-hero-intro { max-width: 30ch; margin-top: 24px; font-size: clamp(20px,1.5vw,24px); line-height: 1.45; color: var(--ds-paper); }
+.epic-ds .ds-page-actions { display: flex; flex-wrap: wrap; gap: 18px; align-items: stretch; margin-top: 28px; }
+.epic-ds .ds-page-actions > .ds-action { flex: 0 1 auto; }
+.epic-ds .ds-lesson-textured { background-color: var(--ds-graphite); background-image: linear-gradient(rgb(31 31 31 / 45%),rgb(31 31 31 / 45%)),url('/design/home-v5/lessons-included/png/section-background-texture@2x.png'); background-position: center top; background-size: cover; background-repeat: no-repeat; padding-bottom: 0; }
+.epic-ds .ds-lesson-formats { padding-block: 54px 52px; scroll-margin-top: 110px; }
+.epic-ds .ds-service-choices { display: grid; grid-template-columns: minmax(0,.72fr) minmax(0,1fr); gap: 40px; align-items: center; margin-top: 32px; }
+.epic-ds .ds-lesson-choice-list { min-width: 0; }
+.epic-ds .ds-lesson-choice { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.2fr); align-items: center; gap: 20px; width: 100%; max-width: none; min-height: 132px; padding: 22px 20px; color: var(--ds-paper); border: 0;  border-radius: 36px; background: transparent; box-shadow: none; text-align: left; text-transform: none; font: inherit; transition: background var(--ds-feedback); }
+
+.epic-ds .ds-lesson-choice[aria-pressed=true] { background: var(--ds-fill-panel); border: 0; border-radius: 36px; color: var(--ds-paper); box-shadow: inset 1px 1px 0 #ffffff6b,0 4px 0 #3f6a61; }
+.epic-ds .ds-lesson-choice:not([aria-pressed=true]):hover { background: #ffffff0c; }
+.epic-ds .ds-lesson-choice-heading { min-width: 0; display: grid; gap: 10px; }
+.epic-ds .ds-lesson-choice-heading > strong { font: 700 clamp(14px,1.1vw,19px)/1.35 var(--ds-font-label); text-transform: uppercase; overflow-wrap: normal; }
+.epic-ds .ds-lesson-choice-price { color: var(--ds-coral); font: 700 clamp(22px,1.8vw,32px)/1.15 var(--ds-font-label); }
+.epic-ds .ds-lesson-choice-price > span { color: var(--ds-paper); font-size: .72em; }
+.epic-ds .ds-lesson-choice-description { font-size: clamp(15px,1.05vw,18px); line-height: 1.5; }
+.epic-ds .ds-lesson-selected { min-width: 0; }
+.epic-ds .ds-lesson-offer { position: relative; padding-bottom: 24px; }
+.epic-ds .ds-lesson-offer[hidden] { display: none; }
+.epic-ds .ds-lesson-offer-photo { border-radius: clamp(64px,7vw,144px); box-shadow: 0 6px 0 #414b47; aspect-ratio: 1.5; }
+.epic-ds .ds-lesson-offer .ds-icon-control { position: absolute; top: 50%; translate: 0 -50%; z-index: 1; }
+.epic-ds .ds-lesson-prev { left: -29px; }
+.epic-ds .ds-lesson-next { right: -29px; }
+.epic-ds .ds-lesson-book { position: absolute; right: 14px; bottom: 0; min-width: 190px; font-size: 18px; }
+.epic-ds .ds-lesson-included-section { position: relative; scroll-margin-top: 110px; padding-block: 10px 22px; }
+.epic-ds .ds-lesson-included-section::before { content: ''; position: absolute; inset: 40px 0 42px; background: #1f1f1fd9; }
+.epic-ds .ds-lesson-included { position: relative; display: grid; grid-template-columns: minmax(240px,.43fr) minmax(0,1fr); align-items: center; gap: 32px; }
+.epic-ds .ds-lesson-gear { position: relative; width: 100%; max-width: 332px; aspect-ratio: 1; justify-self: center; }
+.epic-ds .ds-lesson-gear > img { position: absolute; max-width: none; }
+.epic-ds .ds-lesson-included-copy > p { margin-top: 16px; max-width: 60ch; font-size: 18px; line-height: 1.45; }
+.epic-ds .ds-lesson-included-items { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; margin: 28px 0 0; padding: 0; list-style: none; }
+.epic-ds .ds-lesson-included-items > li { display: flex; align-items: center; gap: 14px; padding: 20px 18px; border-radius: 36px; background: var(--ds-graphite); box-shadow: inset 0 1px 0 #ffffff26,0 5px 0 #151515; font-size: 16px; line-height: 1.4; }
+.epic-ds .ds-lesson-included-items svg { flex: 0 0 36px; width: 36px; height: 36px; stroke-width: 1.5; }
+.epic-ds .ds-lesson-process-section { padding-top: 20px; scroll-margin-top: 110px; }
+.epic-ds .ds-lesson-process-heading { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding-bottom: 24px; }
+.epic-ds .ds-lesson-process-heading > p { font-size: 18px; }
+.epic-ds .ds-lesson-final-band { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 54px; padding: 40px 44px 32px; margin-bottom: 0; background: var(--ds-fill-panel); border-radius: 70px 70px 0 0; }
+.epic-ds .ds-lesson-final-band .ds-heading { font-size: clamp(28px,2.4vw,38px); }
+.epic-ds .ds-lesson-faq { min-width: 0; scroll-margin-top: 110px; }
+.epic-ds .ds-lesson-faq .ds-faq-list { margin-top: 20px; width: 100%; }
+.epic-ds .ds-lesson-faq .ds-faq-item { border: 0; margin-top: 10px; }
+.epic-ds .ds-lesson-faq .ds-faq-item > button { padding: 10px 18px; min-height: 54px; gap: 12px; border-radius: 30px; background: var(--ds-deep); color: var(--ds-paper); font: 600 15px/1.3 var(--ds-font-body); box-shadow: 0 3px 0 #395952; }
+.epic-ds .ds-lesson-faq .ds-faq-symbol { flex: 0 0 26px; width: 26px; height: 26px; }
+.epic-ds .ds-lesson-faq .ds-faq-symbol::before { display: none; }
+.epic-ds .ds-lesson-faq .ds-faq-symbol svg { color: var(--ds-paper); }
+.epic-ds .ds-lesson-faq .ds-faq-answer { padding: 18px; font-size: 16px; }
+.epic-ds .ds-lesson-more { margin-top: 16px; }
+.epic-ds .ds-lesson-more > summary { display: flex; align-items: center; min-height: 44px; cursor: pointer; font-size: 15px; text-decoration: underline; text-underline-offset: 4px; }
+.epic-ds .ds-lesson-more .ds-faq-list { margin-top: 6px; }
+.epic-ds .ds-lesson-related { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 18px; }
+.epic-ds .ds-lesson-related h3 { width: 100%; font-size: 16px; }
+.epic-ds .ds-lesson-related a { display: flex; align-items: center; min-height: 44px; text-decoration: underline; font-size: 15px; }
+.epic-ds .ds-lesson-contact { border-left: 1px solid #ffffff65; padding-left: 44px; min-width: 0; scroll-margin-top: 110px; }
+.epic-ds .ds-lesson-contact > p { margin-top: 20px; font-size: 18px; line-height: 1.45; }
+.epic-ds .ds-lesson-contact .ds-page-actions { gap: 14px; }
+.epic-ds .ds-lesson-contact .ds-action { font-size: 13px; padding-inline: 16px; }
+.epic-ds .ds-lesson-contact-links { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 14px; }
+.epic-ds .ds-lesson-contact-links .ds-action { min-height: 44px; padding: 0 6px; border: 0; background: transparent; box-shadow: none; color: var(--ds-paper); text-transform: none; font-weight: 400; text-decoration: underline; }
+/* Legacy ContentStory remains available to consumers, outside this page layout. */
+.epic-ds .ds-story-grid { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 32px; }
+.epic-ds .ds-story-copy { max-width: var(--ds-readable); }
+@media (min-width:1800px) { .epic-ds .ds-service-choices { gap: 60px; } .epic-ds .ds-lesson-choice { min-height: 158px; } }
+@media (max-width:1199px) {
+  .epic-ds .ds-lesson-choice { gap: 14px; padding-inline: 16px; }
+  .epic-ds .ds-lesson-included-items { gap: 10px; }
+  .epic-ds .ds-lesson-included-items > li { flex-direction: column; align-items: flex-start; padding: 16px; }
+  .epic-ds .ds-lesson-final-band { gap: 30px; padding-inline: 28px; }
+  .epic-ds .ds-lesson-contact { padding-left: 28px; }
+}
+@media (max-width:799px) {
+  .epic-ds .ds-service-hero { min-height: 650px; align-items: flex-end; padding-block: 48px; }
+  .epic-ds .ds-service-hero::after { background: linear-gradient(0deg,rgb(16 28 28 / 93%),rgb(16 28 28 / 75%) 45%,rgb(16 28 28 / 10%) 85%); }
+  .epic-ds .ds-lesson-hero-photo { object-position: 35% 50%; }
+  .epic-ds .ds-lesson-hero-copy { width: 100%; max-width: 600px; }
+  .epic-ds .ds-service-hero .ds-hero-title { font-size: clamp(44px,9vw,64px); }
+  .epic-ds .ds-service-eyebrow { font-size: 16px; }
+  .epic-ds .ds-hero-intro { font-size: 20px; }
+  .epic-ds .ds-service-choices { grid-template-columns: 1fr; gap: 32px; }
+  .epic-ds .ds-lesson-choice { min-height: 110px; grid-template-columns: minmax(0,1fr) minmax(0,1.25fr); }
+  .epic-ds .ds-lesson-choice-heading > strong { font-size: 15px; }
+  .epic-ds .ds-lesson-choice-price { font-size: 24px; }
+  .epic-ds .ds-lesson-choice-description { font-size: 16px; }
+  .epic-ds .ds-lesson-prev { left: -12px; }
+  .epic-ds .ds-lesson-next { right: -12px; }
+  .epic-ds .ds-lesson-included { grid-template-columns: 1fr; gap: 12px; }
+  .epic-ds .ds-lesson-gear { width: min(270px,75%); }
+  .epic-ds .ds-lesson-included-copy { padding-bottom: 20px; }
+  .epic-ds .ds-lesson-included-items > li { flex-direction: row; align-items: center; }
+  .epic-ds .ds-lesson-process-heading { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .epic-ds .ds-lesson-final-band { grid-template-columns: 1fr; border-radius: 40px 40px 0 0; gap: 26px; padding: 32px 24px 26px; }
+  .epic-ds .ds-lesson-contact { border-left: 0; border-top: 1px solid #ffffff65; padding: 26px 0 0; }
+  .epic-ds .ds-story-grid { grid-template-columns: 1fr; }
+}
+@media (max-width:599px) {
+  .epic-ds .ds-service-page .ds-heading { font-size: 32px; }
+  .epic-ds .ds-service-hero .ds-hero-title { font-size: 48px; }
+  .epic-ds .ds-page-actions { flex-direction: column; gap: 18px; }
+  .epic-ds .ds-page-actions > .ds-action { width: 100%; flex: auto; font-size: 14px; }
+  .epic-ds .ds-lesson-formats { padding-block: 36px 42px; }
+  .epic-ds .ds-service-choices { margin-top: 24px; }
+  .epic-ds .ds-lesson-choice { padding: 18px 14px; gap: 12px; border-radius: 26px; }
+  .epic-ds .ds-lesson-choice[aria-pressed=true] { border-radius: 26px; }
+  .epic-ds .ds-lesson-choice-heading > strong { font-size: 13px; }
+  .epic-ds .ds-lesson-choice-price { font-size: 22px; }
+  .epic-ds .ds-lesson-choice-description { font-size: 15px; }
+  .epic-ds .ds-lesson-offer-photo { border-radius: 64px; }
+  .epic-ds .ds-lesson-book { min-width: 154px; font-size: 16px; right: 8px; }
+  .epic-ds .ds-lesson-included-items { grid-template-columns: 1fr; gap: 14px; margin-top: 20px; }
+  .epic-ds .ds-lesson-included-items > li { padding: 18px 22px; }
+  .epic-ds .ds-lesson-final-band { padding-inline: 20px; }
+  .epic-ds .ds-lesson-faq .ds-faq-item > button { font-size: 14px; padding-inline: 14px; }
+}
+@media (prefers-reduced-motion:reduce) { .epic-ds .ds-lesson-choice { transition: none; } }
+/* Post-comparison refinements: headline strength, controlled texture and footer. */
+.epic-ds .ds-service-page { --lesson-display: var(--ds-font-service-display); }
+
+.epic-ds .ds-service-page .ds-heading { font-weight: 700; letter-spacing: .025em; }
+.epic-ds .ds-service-hero .ds-hero-title { font-size: var(--ds-photo-hero-size); }
+.epic-ds .ds-hero-intro { font-size: 24px; }
+.epic-ds .ds-lesson-included { grid-template-columns: minmax(280px,.48fr) minmax(0,1fr); }
+.epic-ds .ds-lesson-included-copy > p { font-size: 20px; }
+.epic-ds .ds-lesson-choice-heading > strong { font-size: clamp(16px,1.2vw,20px); }
+.epic-ds .ds-lesson-choice-description { font-size: clamp(16px,1.2vw,20px); }
+.epic-ds .ds-lesson-choice-price { font-size: clamp(26px,2.1vw,34px); }
+.epic-ds .ds-lesson-choice { grid-template-columns: minmax(0,1fr) minmax(0,1.05fr); }
+.epic-ds .ds-lesson-final-band { width: var(--ds-stage-width); margin-left: calc((var(--ds-content-width) - var(--ds-stage-width)) / 2); padding-inline: calc(var(--ds-stage-width) * .084); gap: 48px; }
+.epic-ds .ds-lesson-contact .ds-heading { max-width: 18ch; font-size: 40px; }
+.epic-ds .ds-lesson-contact .ds-page-actions > .ds-action { font-size: 14px; }
+.epic-ds .ds-lesson-contact { padding-left: 36px; }
+@media (max-width:1199px) {
+  .epic-ds .ds-lesson-final-band { width: 100%; margin-left: 0; padding-inline: 28px; gap: 28px; }
+  .epic-ds .ds-lesson-contact .ds-heading { font-size: 34px; }
+  .epic-ds .ds-lesson-choice { grid-template-columns: 1fr; gap: 8px; min-height: 130px; }
+}
+@media (max-width:799px) {
+  .epic-ds .ds-lesson-included { grid-template-columns: 1fr; }
+  .epic-ds .ds-service-hero .ds-hero-title { font-size: clamp(52px,9vw,72px); }
+  .epic-ds .ds-hero-intro { font-size: 20px; }
+  .epic-ds .ds-lesson-choice { grid-template-columns: minmax(0,1fr) minmax(0,1.15fr); min-height: 120px; gap: 14px; }
+  .epic-ds .ds-lesson-choice-description { font-size: 16px; }
+  .epic-ds .ds-lesson-choice-heading > strong { font-size: 14px; }
+  .epic-ds .ds-lesson-choice-price { font-size: 24px; }
+  .epic-ds .ds-lesson-contact { padding-left: 0; }
+  .epic-ds .ds-lesson-final-band { padding-inline: 24px; }
+}
+@media (max-width:359px) {
+  .epic-ds .ds-lesson-choice { grid-template-columns: 1fr; }
+  .epic-ds .ds-lesson-choice-heading { grid-template-columns: minmax(0,1fr) auto; gap: 8px; align-items: center; }
+  .epic-ds .ds-lesson-choice-heading > strong { font-size: 13px; }
+  .epic-ds .ds-lesson-choice-price { font-size: 20px; }
+  .epic-ds .ds-lesson-choice-price > span { display: block; text-align: right; }
+}
+.epic-ds [data-service-template].ds-service-page .ds-heading { font-size: 44px; }
+.epic-ds [data-service-template].ds-service-page .ds-service-hero .ds-hero-title { font-size: var(--ds-photo-hero-size); }
+.epic-ds [data-service-template] .ds-lesson-final-band .ds-heading { font-size: 36px; }
+.epic-ds [data-service-template] .ds-lesson-contact .ds-heading { font-size: 40px; }
+.epic-ds .ds-lesson-included { grid-template-columns: minmax(320px,.5fr) minmax(0,1fr); }
+.epic-ds .ds-lesson-gear { max-width: 400px; margin-block: -18px; }
+.epic-ds .ds-lesson-contact-links .ds-action { min-width: 44px; }
+@media (max-width:1199px) { .epic-ds [data-service-template].ds-service-page .ds-heading { font-size: 38px; } .epic-ds [data-service-template] .ds-lesson-contact .ds-heading { font-size: 34px; } }
+@media (max-width:799px) {
+  .epic-ds .ds-lesson-included { grid-template-columns: 1fr; }
+  .epic-ds .ds-lesson-gear { margin-block: 0; max-width: 270px; }
+  .epic-ds [data-service-template].ds-service-page .ds-heading { font-size: 32px; }
+  .epic-ds [data-service-template].ds-service-page .ds-service-hero .ds-hero-title { font-size: clamp(52px,9vw,72px); }
+  .epic-ds [data-service-template] .ds-lesson-contact .ds-heading { font-size: 34px; }
+}
+/* Mobile has its own readable offer rows; desktop composition stays unchanged. */
+@media (max-width:599px) {
+  .epic-ds .ds-lesson-choice { grid-template-columns: 1fr; gap: 12px; min-height: 124px; }
+  .epic-ds .ds-lesson-choice-heading { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 14px; }
+  .epic-ds .ds-lesson-choice-heading > strong { font-size: 14px; overflow-wrap: anywhere; }
+  .epic-ds .ds-lesson-choice-price { font-size: 24px; }
+  .epic-ds .ds-lesson-choice-price > span { display: block; font-size: 17px; }
+  .epic-ds .ds-lesson-choice-description { font-size: 16px; }
+  .epic-ds .ds-lesson-book { left: 12px; right: auto; }
+}
+@media (max-width:359px) {
+  .epic-ds .ds-lesson-choice-heading { grid-template-columns: 1fr; gap: 10px; }
+  .epic-ds .ds-lesson-choice-price > span { display: inline; text-align: left; margin-left: 6px; }
+}
+@media (min-width:1800px) { .epic-ds .ds-lesson-hero-photo { object-position: center 20%; } }
+
+/* Lesson polish: one continuous sand surface and the original wave silhouette. */
+.epic-ds .ds-lesson-textured-wrap { position: relative; margin-top: -64px; filter: drop-shadow(0 -6px 8px rgb(0 0 0 / 18%)); }
+.epic-ds .ds-lesson-textured { padding-top: 64px; background-repeat: no-repeat; background-position: center top; background-size: cover; mask-image: url('/design/home-v5/rentals-conditions-reviews/reviews-wave.webp'),linear-gradient(#000,#000); mask-size: 100% 64px,100% calc(100% - 63px); mask-position: center top,center bottom; mask-repeat: no-repeat; }
+.epic-ds .ds-lesson-choice-list { display: grid; gap: 10px; }
+.epic-ds .ds-lesson-choice { border: 0; border-radius: 36px; min-height: 112px; padding-block: 18px; }
+.epic-ds .ds-lesson-offer-media { position: relative; }
+.epic-ds .ds-lesson-offer-photo img { object-position: center; }
+.epic-ds .ds-lesson-book { min-width: 190px; max-width: calc(100% - 28px); }
+.epic-ds .ds-lesson-process-photos { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); height: clamp(230px,19vw,360px); width: 100%; gap: 4px; }
+.epic-ds .ds-lesson-process-photo { position: relative; min-width: 0; height: 100%; margin: 0; overflow: hidden; }
+.epic-ds .ds-lesson-process-photo .ds-photo { height: 100%; aspect-ratio: auto; border-radius: 0; box-shadow: none; }
+.epic-ds .ds-lesson-process-photo img { transition: filter 350ms ease,transform 600ms ease; filter: brightness(.74) saturate(.85); }
+.epic-ds .ds-lesson-process-photo[data-active=true] img { filter: brightness(1) saturate(1); }
+.epic-ds .ds-lesson-process-photo figcaption { position: absolute; inset: auto 0 0; display: flex; align-items: center; gap: 10px; padding: 32px 20px 16px; color: #fff; background: linear-gradient(transparent,rgb(0 0 0 / 68%)); font-size: 16px; pointer-events: none; }
+.epic-ds .ds-lesson-process-photo figcaption > span { font: 700 24px/1 var(--lesson-display); color: #bde0d4; }
+.epic-ds .ds-lesson-process-photo::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: var(--ds-sea); transform: scaleX(0); transform-origin: left; transition: transform 450ms ease; }
+.epic-ds .ds-lesson-process-photo[data-active=true]::after { transform: scaleX(1); }
+.epic-ds .ds-lesson-process-steps { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 28px; list-style: none; margin: 0; padding: 28px 0 40px; }
+.epic-ds .ds-lesson-process-steps > li { position: relative; min-width: 0; }
+.epic-ds .ds-lesson-step-control { position: relative; display: grid; grid-template-columns: 60px minmax(0,1fr); align-items: center; gap: 2px 14px; width: 100%; padding: 0; border: 0; text-align: left; color: var(--ds-paper); background: transparent; cursor: pointer; }
+.epic-ds .ds-lesson-step-control:focus-visible { outline: 3px solid var(--ds-coral); outline-offset: 7px; border-radius: 14px; }
+.epic-ds .ds-lesson-step-icon { position: relative; grid-row: span 2; display: grid; place-items: center; width: 60px; height: 60px; border-radius: 20px; background: #393e3b; box-shadow: inset 0 1px 0 #ffffff26,0 3px 0 #1f2422; transition: background 250ms; }
+.epic-ds .ds-lesson-step-icon > svg { width: 30px; height: 30px; stroke-width: 1.6; }
+.epic-ds .ds-lesson-step-number { position: absolute; top: -4px; left: -4px; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--ds-graphite); color: #cce8dd; font: 700 13px/1 var(--ds-font-body); }
+.epic-ds .ds-lesson-step-title { font: 700 17px/1.35 var(--ds-font-body); }
+.epic-ds .ds-lesson-step-duration { color: #bde0d4; font: 600 15px/1.3 var(--ds-font-body); }
+.epic-ds .ds-lesson-process-steps p { padding-top: 18px; font-size: 16px; line-height: 1.5; max-width: 28ch; }
+.epic-ds .ds-lesson-process-steps li[data-active=true] .ds-lesson-step-icon { background: var(--ds-fill-sea); }
+.epic-ds .ds-lesson-process-steps li[data-active=true] .ds-lesson-step-icon-1 > svg { animation: lesson-gear 650ms ease both; }
+.epic-ds .ds-lesson-process-steps li[data-active=true] .ds-lesson-step-icon-2 > svg { animation: lesson-stand 700ms ease both; }
+.epic-ds .ds-lesson-process-steps li[data-active=true] .ds-lesson-step-icon-3 > svg { animation: lesson-wave 900ms ease both; }
+.epic-ds .ds-lesson-process-steps li[data-active=true] .ds-lesson-step-icon-4 > svg { animation: lesson-review 650ms ease both; }
+@keyframes lesson-gear { 0% { transform: translateY(4px) scale(.8); opacity: .5; } 70% { transform: translateY(-2px) scale(1.05); } 100% { transform: none; opacity: 1; } }
+@keyframes lesson-stand { 0% { transform: translateY(5px) rotate(-15deg); } 65% { transform: translateY(-3px) rotate(5deg); } 100% { transform: none; } }
+@keyframes lesson-wave { 0%,100% { transform: none; } 25% { transform: translate(-3px,2px); } 60% { transform: translate(3px,-2px); } }
+@keyframes lesson-review { 0%,100% { opacity: 1; transform: none; } 45% { opacity: .4; transform: scale(.9); } }
+@media (min-width:1800px) { .epic-ds .ds-lesson-choice { min-height: 128px; } }
+@media (max-width:1199px) and (min-width:800px) { .epic-ds .ds-lesson-choice { min-height: 124px; } .epic-ds .ds-lesson-step-control { grid-template-columns: 1fr; gap: 12px; } .epic-ds .ds-lesson-step-duration { margin-left: 0; } }
+@media (max-width:799px) {
+  .epic-ds .ds-lesson-textured-wrap { margin-top: -40px; }
+  .epic-ds .ds-lesson-textured { padding-top: 40px; mask-size: 100% 40px,100% calc(100% - 39px); }
+  .epic-ds .ds-lesson-process-photos { display: flex; height: 260px; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; padding-inline: 16px; scrollbar-width: none; }
+  .epic-ds .ds-lesson-process-photo { flex: 0 0 82%; scroll-snap-align: start; border-radius: 28px; }
+  .epic-ds .ds-lesson-process-steps { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 26px 20px; padding: 28px 0 36px; }
+  .epic-ds .ds-lesson-step-control { grid-template-columns: 52px minmax(0,1fr); gap: 4px 12px; }
+  .epic-ds .ds-lesson-step-icon { width: 52px; height: 52px; border-radius: 18px; }
+  .epic-ds .ds-lesson-step-title { font-size: 15px; }
+  .epic-ds .ds-lesson-step-duration { font-size: 14px; margin-left: 0; }
+  .epic-ds .ds-lesson-process-steps p { font-size: 15px; }
+}
+@media (max-width:599px) {
+  .epic-ds .ds-lesson-choice { border-radius: 26px; min-height: 124px; }
+  .epic-ds .ds-lesson-offer { padding-bottom: 0; }
+  .epic-ds .ds-lesson-book { position: relative; left: auto; right: auto; bottom: auto; margin-top: 22px; width: 100%; max-width: none; min-height: 60px; }
+  .epic-ds .ds-lesson-process-photos { height: 230px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .epic-ds .ds-lesson-process-photo img,.epic-ds .ds-lesson-process-photo::after,.epic-ds .ds-lesson-step-icon { transition: none; }
+  .epic-ds .ds-lesson-process-steps li[data-active=true] .ds-lesson-step-icon > svg { animation: none; }
+}
+
+/* FAQ grows independently; the sand ends behind the rounded top of its panel. */
+.epic-ds .ds-lesson-textured { padding-bottom: 70px; margin-bottom: -70px; }
+.epic-ds .ds-service-page { background: var(--ds-graphite); }
+.epic-ds .ds-lesson-final-container { position: relative; z-index: 1; }
+@media (min-width:1200px) {
+  .epic-ds .ds-service-choices { align-items: stretch; }
+  .epic-ds .ds-lesson-selected { display: grid; min-height: 0; }
+  .epic-ds .ds-lesson-offer:not([hidden]) { display: grid; grid-template-rows: minmax(0,1fr); min-height: 0; }
+  .epic-ds .ds-lesson-offer-media { min-height: 0; }
+  .epic-ds .ds-lesson-offer-photo { height: 100%; aspect-ratio: auto; }
+}
+@media (min-width:600px) and (max-width:1199px) {
+  .epic-ds .ds-service-choices { grid-template-columns: 1fr; gap: 28px; }
+  .epic-ds .ds-lesson-choice-list { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+  .epic-ds .ds-lesson-choice { grid-template-columns: 1fr; gap: 12px; min-height: 144px; padding: 20px; }
+  .epic-ds .ds-lesson-choice:last-child { grid-column: 1 / -1; grid-template-columns: minmax(0,1fr) minmax(0,1fr); min-height: 110px; }
+  .epic-ds .ds-lesson-offer { padding-bottom: 0; }
+  .epic-ds .ds-lesson-book { position: relative; left: auto; right: auto; bottom: auto; margin-top: 22px; width: 100%; max-width: none; min-height: 60px; }
+}
+
+
+/* Portrait sources retain the complete activity inside the same offer frame. */
+.epic-ds .ds-lesson-offer-backdrop { position: absolute; inset: 0; border-radius: clamp(64px,7vw,144px); overflow: hidden; pointer-events: none; }
+.epic-ds .ds-lesson-offer-backdrop > img { object-fit: cover; filter: blur(24px) brightness(.55); transform: scale(1.15); }
+.epic-ds .ds-lesson-offer-photo-portrait { background: transparent; }
+.epic-ds .ds-lesson-offer-photo-portrait > img { object-fit: contain; }
+@media (max-width:599px) { .epic-ds .ds-lesson-offer-backdrop { border-radius: 64px; } }

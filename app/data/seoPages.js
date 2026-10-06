@@ -62,7 +62,7 @@ export const seoPages = {
       {
         title: "How a lesson works",
         body:
-          "The standard lesson flow on the site is 10 minutes to meet and gear up, 15 minutes of beach theory, 75 minutes of ocean practice, and 10 minutes of review and tips. You learn board position, take-off movement, ocean safety, and how to adjust after each ride.",
+          "The standard lesson flow on the site is 10 minutes to meet and gear up, 15 minutes of beach theory, 60 minutes of ocean practice, and 10 minutes of review and tips. You learn board position, take-off movement, ocean safety, and how to adjust after each ride.",
         cards: [
           { title: "Meet & Gear Up", text: "Meet the team, prepare for the lesson, and choose the right surfboard." },
           { title: "Beach Theory", text: "Cover surfing basics, ocean safety, take-off, turns, and speed generation on the sand." },
@@ -119,7 +119,7 @@ export const seoPages = {
       },
       {
         question: "How long is a surf lesson?",
-        answer: "The site lesson flow is 10 minutes to meet and gear up, 15 minutes of beach theory, 75 minutes of ocean practice, and 10 minutes of review and tips.",
+        answer: "The site lesson flow is 10 minutes to meet and gear up, 15 minutes of beach theory, 60 minutes of ocean practice, and 10 minutes of review and tips.",
       },
       {
         question: "Where do we meet?",
@@ -721,7 +721,7 @@ const ruSeoPages = {
       },
       {
         "title": "Как проходит урок",
-        "body": "Стандартный план занятия на сайте: 10 минут на знакомство и подготовку, 15 минут теории на пляже, 75 минут практики в океане и 10 минут разбора с рекомендациями. Вы освоите положение на доске, подъём на ноги, безопасность в океане и работу над ошибками после каждой волны.",
+        "body": "Стандартный план занятия на сайте: 10 минут на знакомство и подготовку, 15 минут теории на пляже, 60 минут практики в океане и 10 минут разбора с рекомендациями. Вы освоите положение на доске, подъём на ноги, безопасность в океане и работу над ошибками после каждой волны.",
         "cards": [
           {
             "title": "Знакомство и подготовка",
@@ -787,7 +787,7 @@ const ruSeoPages = {
       },
       {
         "question": "Сколько длится урок сёрфинга?",
-        "answer": "План занятия на сайте: 10 минут на знакомство и подготовку, 15 минут теории на пляже, 75 минут практики в океане и 10 минут разбора с рекомендациями."
+        "answer": "План занятия на сайте: 10 минут на знакомство и подготовку, 15 минут теории на пляже, 60 минут практики в океане и 10 минут разбора с рекомендациями."
       },
       {
         "question": "Где мы встречаемся?",

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { seoPageLinks } from "../../data/seoPages";
@@ -66,7 +67,8 @@ function ContactRow({ icon, href, external, children, onClick, role }) {
   ) : <div data-footer-contact={role} className={className}>{content}</div>;
 }
 
-export default function HomeV2Footer({ t, lang = "en", links, description }) {
+export default function HomeV2Footer({ t, lang = "en", links, description, mapInitiallyActive = true, layout = "home" }) {
+  const [mapActive, setMapActive] = useState(mapInitiallyActive);
   const isRu = lang === "ru";
   const partnersHref = isRu ? "/ru/partners" : "/partners";
   const quickLinks = isRu ? [
@@ -84,6 +86,9 @@ export default function HomeV2Footer({ t, lang = "en", links, description }) {
     <footer id="location" data-home-v2-footer="true" className="relative isolate overflow-hidden bg-epicDark text-white">
       <div data-home-v2-footer-map className="relative isolate h-[189px] w-full overflow-hidden bg-epicGray">
         <iframe
+          tabIndex={mapActive ? undefined : -1}
+          inert={!mapActive}
+          style={mapActive ? undefined : { pointerEvents: "none" }}
           data-home-v2-footer-map-iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1024.2523782017452!2d108.25027605520296!3d16.046658364986484!2m3!1f0!2f0!3f0!2m3!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217f20b1fa357%3A0xa323fdd182ae974!2sEPIC%20Surf%20School%20Da%20Nang!5e1!3m2!1sru!2s!4v1777015710238!5m2!1sru!2s"
           title="Epic Surf School Da Nang location map"
@@ -92,11 +97,12 @@ export default function HomeV2Footer({ t, lang = "en", links, description }) {
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
+        {!mapActive && <button type="button" data-map-activate onClick={() => { setMapActive(true); trackEvent("map_activate", { language: lang, cta_location: "footer", cta_label: "embedded_map" }); }}><span>{isRu ? "Включить карту" : "Enable map"}</span></button>}
       </div>
 
       <div data-home-v2-footer-body className="relative min-h-[373px] w-full px-5 pb-24 pt-12 min-[1440px]:h-[373px] min-[1440px]:px-0 min-[1440px]:pb-0 min-[1440px]:pt-0">
-        <div data-home-v2-footer-frame className="home-v2-fluid-frame home-v2-fluid-grid !block !w-full min-[1440px]:!grid min-[1440px]:!w-[calc(100%-(2*var(--home-v2-fluid-gutter)))]">
-          <div data-home-v2-footer-main className="relative z-20 grid gap-10 md:grid-cols-3 min-[1440px]:col-span-12 min-[1440px]:mt-[58px] min-[1440px]:w-fit min-[1440px]:!grid-cols-[306px_clamp(191px,12vw,280px)_clamp(228px,14vw,320px)] min-[1440px]:gap-x-[clamp(125px,calc(11.36vw_-_38.6px),230px)] min-[1440px]:justify-self-center">
+        <div data-home-v2-footer-frame className={layout === "library" ? "relative" : "home-v2-fluid-frame home-v2-fluid-grid !block !w-full min-[1440px]:!grid min-[1440px]:!w-[calc(100%-(2*var(--home-v2-fluid-gutter)))]"}>
+          <div data-home-v2-footer-main className={layout === "library" ? "relative" : "relative z-20 grid gap-10 md:grid-cols-3 min-[1440px]:col-span-12 min-[1440px]:mt-[58px] min-[1440px]:w-fit min-[1440px]:!grid-cols-[306px_clamp(191px,12vw,280px)_clamp(228px,14vw,320px)] min-[1440px]:gap-x-[clamp(125px,calc(11.36vw_-_38.6px),230px)] min-[1440px]:justify-self-center"}>
           <section data-home-v2-footer-brand className="w-full min-[1440px]:h-[198px] min-[1440px]:w-[306px]">
             <Image src={`${assetRoot}/brand-logo.svg`} alt="EPIC" width={29} height={18} unoptimized className="h-[18px] w-[29px]" />
             <p className="mt-[24px] h-[101px] max-w-[306px] whitespace-pre-line text-[16px] font-light leading-[30px] text-white">

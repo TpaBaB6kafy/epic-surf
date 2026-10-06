@@ -18,6 +18,9 @@ export default function Header({
   languageHref,
   sectionHrefBase,
   mobileTop = false,
+  showMobileBackdrop = true,
+  styleScope = "home",
+  bookingAction,
   variant = "default"
 }) {
   const pathname = usePathname();
@@ -52,7 +55,7 @@ export default function Header({
 
   return (
     <header
-      data-home-v2-header={isHomeV2 ? "true" : undefined}
+      data-home-v2-header={isHomeV2 ? (styleScope === "library" ? "library" : "true") : undefined}
       data-home-v2-header-locale={isHomeV2 ? lang : undefined}
       className={isHomeV2
         ? "relative z-[100] w-full overflow-visible bg-epicDark/[0.18] text-epicWhite shadow-none backdrop-blur-[1.5px] md:bg-epicWhite/[0.24] md:text-epicDark"
@@ -142,7 +145,7 @@ export default function Header({
               {languageLabel}
             </Link>
 
-            <button
+            {bookingAction || <button
               type="button"
               data-home-v2-book-now={isHomeV2 ? "true" : undefined}
               onClick={() => openBookingModal(headerBookingUrl, {
@@ -154,7 +157,7 @@ export default function Header({
                 : "bg-epicRed text-white px-4 md:px-8 h-9 md:h-10 rounded-full font-bold uppercase text-[11px] tracking-wide leading-snug shadow-lg shadow-epicRed/20 active:scale-95 transition-all"}
             >
               {t.btnBook}
-            </button>
+            </button>}
 
             <button
               type={isHomeV2 ? "button" : undefined}
@@ -180,7 +183,7 @@ export default function Header({
           </div>
         </div>
       </div>
-      {isHomeV2 && <HomeV2MobileHeaderVideo />}
+      {isHomeV2 && showMobileBackdrop && <HomeV2MobileHeaderVideo />}
 
       <AnimatePresence>
         {isMenuOpen && (

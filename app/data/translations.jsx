@@ -73,7 +73,7 @@ export const translations = {
         },
         {
           title: "Практика в воде",
-          time: "75 мин",
+          time: "60 мин",
           desc: "Инструктор находится рядом, помогает ловить волны и даёт короткие подсказки после каждой попытки.",
           details: "Основная часть урока проходит в воде: вы пробуете ловить подходящие волны, вставать на доску и постепенно исправлять ошибки. Инструктор помогает с выбором волны, положением на доске, таймингом и стойкой. Наша цель — не просто «поставить на доску», а чтобы вы поняли, что именно получается."
         },
@@ -177,7 +177,7 @@ export const translations = {
         },
         {
           title: "Ocean Practice",
-          time: "75 min",
+          time: "60 min",
           desc: "Your instructor stays with you in the water, helps you catch waves, and gives quick feedback after each attempt.",
           details: "Most of the lesson is focused on real practice in the ocean. We help you choose suitable waves, correct your position on the board, and adjust your pop-up step by step. The goal is not only to stand up once, but to understand what worked and feel more confident in the water."
         },

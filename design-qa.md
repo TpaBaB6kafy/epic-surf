@@ -124,3 +124,93 @@ This pass supersedes the earlier Rentals geometry notes above for desktop widths
 - Captures: qa-output/faq-events-gallery-v5/desktop-en.png and desktop-ru.png.
 - Targeted ESLint and git diff --check passed. Exported images loaded without failures. No deployment performed.
 - Scope: desktop handoff; no new mobile design, gallery lightbox or hero changes.
+
+## Страница уроков по выбранному первому макету — 2026-10-05
+
+### Target and evidence
+
+- Source visual truth: `C:/Users/TpaBa/epic-surf/output/lesson-selected-mockup/selected-reference.png`, copied from the first displayed Image Gen result `exec-2a9f8a18-6153-4f0a-a832-f703041b242c.png`. The user selected this image with «Первый».
+- Implementation: `http://localhost:3000/ru/surf-lessons-danang`, EN peer `/surf-lessons-danang`; screenshot `output/lesson-selected-mockup/after-ru-1440.jpg`.
+- State: initial group offer, FAQ closed, extra details and footer contacts/map closed, reduced motion, 100% browser scale. Real source assets and prices; outside services stubbed in QA, never submitted.
+- Source pixels: 904×1739. CSS viewport: 1440×900, deviceScaleFactor=1; full-page implementation pixels: 1440×2868. Source normalized proportionally to width1440 (height2770), never stretched to match page height. Full comparison uses both images proportionally downsampled to width720, displayed side by side in the same comparison input.
+- Full-view evidence: `output/lesson-selected-mockup/comparison-full.png`. Focused comparisons: `comparison-hero.png`, `comparison-choice.png`, `comparison-lower.png`. These were opened and compared together, with source on left and browser capture on right.
+- Responsive evidence: `after-ru-2560.jpg`, EN/RU full390 captures, readable `mobile-hero-en.png`, `mobile-choice-ru.png`, `focused-details.json`; snapshots for both languages at320/360/390/1024/1200/1440/1920/2560/3200.
+- Library evidence: `catalog-included-ru.png`, `catalog-included-en.png`, `catalog-validation.json`.
+
+### Comparison history and fixes
+
+1. First comparison (`comparison-iteration-1.png`), result blocked: [P1] old large footer/map materially extended the compact target; [P2] display typography was too weak; [P2] first process image showed an empty beach rather than the people/lesson. Fixed with compact footer and accessible disclosure preserving the full existing contacts/map, stronger local display typography, and actual EPIC theory photo.
+2. Second comparison (`comparison-iteration-2.png`), result blocked: [P2] texture fill became too light through blending; [P2] library specificity overrode section heading sizes; [P2] small native header/short links fell below44px. Fixed darker texture overlay, scoped heading specificity, and control dimensions. Hero and process remained actual source photographs.
+3. Interaction review, result blocked: [P1] English mobile native header booking button overlapped language switch. Fixed mobile native button positioning within the existing header frame; both locales then passed selection/book/language/menu checks.
+4. Focused mobile review, result blocked: [P2] long private format title crowded the adjacent description; [P2] floating chat could obscure the photo's lower-right booking text. Fixed separate readable mobile title/price and description rows, and left-side photo booking. New `mobile-choice-ru.png` shows clean rows and unobscured booking; 320/360/390 retain no overflow.
+5. Wide-screen review, result blocked: [P2] fixed-height full-bleed photo cropped people's heads at2560. Corrected wide hero object-position to20% and theory photo's focal point to25%/scale1.15. Revised `after-ru-2560.jpg` and `comparison-lower.png` were opened; heads and focal subjects remain visible. All responsive snapshots were recaptured after the fix.
+
+### Required fidelity surfaces
+
+- Fonts/typography: Neucha is supplied locally with Cyrillic/Latin; photo hero uses `--ds-photo-hero-size`80–104px, section headings44px max. Body/CTA retain existing Arial/Chivo/Montserrat roles. Headlines have the handwritten uppercase character and strong hierarchy of the mock. Mobile and RU names are readable, without clipped words. Neucha is a deliberate closest real-font interpretation of generated lettering; no text has been rasterized.
+- Spacing/layout: same photo hero → linked selector/photo → current Included → photo strip/four steps → FAQ/booking band → compact footer sequence. Content obeys the user's normative C=min(94vw,2160px)×.832, with wider header/final-band S and fullbleed photo backgrounds. This intentionally uses the real approved site edges rather than copying the generated image's looser margins. No repeated copy-card stacks or isolated centered desktop controls. CTA/radii retain approved library values.
+- Colors/tokens: EPIC charcoal, coral, sea-green and white; texture darkened for clear contrast. Selected, hover and keyboard focus states use shared roles. Header, controls and lower band remain the existing palette. Secondary gray tactile buttons retain the user's accepted design; their tone and label color differ slightly from the raster concept intentionally.
+- Image quality/assets: actual `practice-photo.webp` for hero, original group practice photo for chooser; actual EPIC theory/practice imagery for process. Original gear-background/rashguard/camera/zinc split exports join in their native proportions. No old `incl-1.webp`, invented people, placeholders, generated brand assets or CSS drawings replace imagery. Real photography differs from the Image Gen scene retouching intentionally.
+- Copy/content: concise EN/RU promise, prices from shared homepage translations, original booking destinations; three prominent FAQ and original detailed information behind disclosures. Timing remains10/15/75/10. Existing canonical/alternates/JSON-LD/title remain unchanged. Related public links and contact/map behavior remain available.
+- Icons/states/accessibility: consistent library outline icons; semantic native controls, labels/alt text, keyboard selection and FAQ, visible focus, reduced motion. Native header reused on desktop. Ten measured locale/viewport header sets contain no obscured controls and no sub44px targets. Modal Escape restores focus and scroll; map needs explicit activation.
+
+### Validation and practical limits
+
+- Production build and targeted ESLint passed.
+- `scripts/verify-lesson-rework.mjs`:120 checks passed; zero browser exceptions/failed local assets. Correct group/private/split destinations, keyboard/FAQ, language with query, attribution including footer WhatsApp, Telegram/Zalo, mobile navigation, explicit map activation, preserved homepage content/geometry.
+- 18 responsive snapshot sets: no horizontal overflow, visible local photos loaded, common bounded edges, metadata/schema retained.
+- Catalog EN/RU at320/390/1440: no overflow; private selection and demo booking/close work; current gear artwork present, retired asset absent.
+- Forms/maps and offsite requests were stubbed for reproducible QA. No real booking submitted or message sent. This does not certify external provider availability.
+- Scope: only lesson routes and their reusable library examples. No commit, push, publication or migration of other pages is included.
+
+### Findings and follow-up
+
+No actionable P0/P1/P2 findings remain in the inspected scope. [P3] Raster-generated letter shapes and retouched photo tone are not pixel-identical to live font/actual photography; they are documented interpretations, not placeholders. Optional future refinements can tune the display letter spacing and photo grade after the user reviews the live page.
+
+The latest browser-rendered page and focused comparisons are the post-fix evidence. Technical/visual QA does not assert that the user has approved the live implementation.
+
+final result: passed
+
+## Lesson polish, 2026-10-07
+
+Source targets: the user's attached desktop/mobile screenshots and the previously selected first mockup. Latest instructions override the original three-format/two-photo composition: five formats, four process photos, 60 minutes in water, no chooser dividers, a wave transition, a centered mobile action, FAQ-independent sand and an adaptive offer photo. The hero subtitle is removed in EN/RU following the user's final correction.
+
+### Findings and repairs
+
+- P2: Chooser separators and rectangular hover patches competed with the selected plaque. Removed borders, consistent rounded hover/selected geometry.
+- P2: Group export contained a baked rounded alpha mask under a second CSS frame. Reused the opaque original group photo with one frame and one lower edge.
+- P2: Sand repeated a non-tileable source at 1440px, exposing seams on large viewports. Replaced tiling with a single proportional, non-repeating image. Iteration 1 used cover across FAQ too; the user identified resizing on answer expansion. Final static sand wrapper contains formats/Included/process only, with a 70px overlap behind the FAQ's rounded top. FAQ content can grow independently.
+- P2: Five rows made narrow desktop photos look undersized and stranded in vertical space. Desktop photo fills its grid row; 600–1199px uses a two-column choice grid followed by a full-width photo/action. Mobile keeps the action below the photo.
+- P2: Portrait Surf-skate source cropped the rider's head in a landscape slot. Final portrait variant preserves the complete photo with contain and a softly blurred copy behind it. No synthetic photograph or substitute drawing was introduced.
+- Content: Restored Surf-skate and Line-up Pro using homepage prices and their existing WhatsApp booking pattern; three form-backed services retain their original destinations. Ocean practice now reads 60 minutes in the model, homepage translations, SEO copy and FAQ schema.
+- Process: Four real photos, semantic library icons, linked pressed state, arrows/Home/End keyboard handling, mobile scroll-snap, short single-play icon motion. Reduced motion disables animation and smooth programmatic scrolling.
+
+### Visual comparisons
+
+Evidence under `output/lesson-polish-2026-10-07`:
+
+- `comparison-full-en.png` / `comparison-full-ru.png`: before and final implementation at 1440 CSS px, both resized equally to 600px per side.
+- `comparison-focus-photo.png` / `comparison-focus-process.png`: attached source crops and rendered components normalized to equal widths. User crops omit different surrounding areas; these compare frame/asset treatment and the deliberately changed process, not exact viewport coordinates.
+- `comparison-adaptive-800.png` / `comparison-adaptive-1440.png`: user's undersized-photo evidence beside the corrected layout; source screenshots are cropped, so viewport equality is not assumed.
+- `all-offer-photo-crops.png`: all five offers at 390, 1440 and 2560px; final Surf-skate head and board are both visible. Screenshots include dev indicator/floating chat where present; neither is artwork.
+- `focus-transition-en.png`, `focus-mobile-book-en.png`, `focus-mobile-book-ru.png`, and process captures: curved source-asset alpha mask, single photo edge, centered mobile action and readable EN/RU steps.
+
+Required fidelity surfaces reviewed: existing Neucha/Montserrat/body roles retained; no clipping in inspected headings/actions, changed hero density intentional. Approved C/S geometry retained; tablet row/photo reflow resolves vertical imbalance. Palette/CTA treatments retained. Real source imagery and library icons retained, rounded group alpha halo eliminated; portrait fallback reviewed. Copy reflects all five services, 60-minute practice and removal of hero subtitle. Included and lower contact/map presentation retain their component styles.
+
+### Verification
+
+- Production build passed after the final subtitle/portrait changes; targeted ESLint passed.
+- 18 responsive captures: EN/RU × 320/360/390/1024/1200/1440/1920/2560/3200px, no horizontal overflow, photos load when their horizontal-gallery positions are visited, approved desktop content widths.
+- `scripts/verify-lesson-polish.mjs`: 180 checks passed against the production build on localhost:3001. Includes all five destinations, modal focus/scroll restoration, messenger attribution, FAQ, menu, language/query, keyboard/reduced motion, portrait fit and absence of hero subtitle. No browser exceptions or failed local assets.
+- `sand-adaptive-validation.json`: EN/RU at eight widths, static sand height unchanged by FAQ and More expansion; desktop photo/list height relationship and tablet stacking checked.
+- `sand-pixel-validation.json`: background pixel crops are identical before/after FAQ + More expansion at 390/800/1440/2560px.
+- `verify-polish-smooth.cjs`: normal-motion mobile progression and final-photo alignment passed. Catalog EN/RU choice/dialog checks and 320/390/1440px overflow checks passed.
+- External widgets/forms/messengers are stubbed in automation. These checks do not submit a booking or send a message.
+
+No actionable P0/P1/P2 findings remain in the inspected scope. P3: the reused Surf-skate source has lower source detail than the other lesson photos; its portrait treatment preserves the activity. Final visual approval remains the user's judgment of the live page.
+
+final result: passed
+
+### Mobile hero correction before release — 2026-10-07
+
+The user clarified that the mobile photo must be repaired before commit and deployment. The existing 62% crop cut people at both edges and centered a board fragment. At widths below 800px the focal position is now 35%: the learner carrying the board remains inside the frame. The source photograph, overlay, hero content and desktop layout are retained. Captured EN/RU at 320/360/390/430/600/799px; verified the actual rendered hero at 800/1440/2560px is pixel-identical to the prior crop rule. All 18 cases passed with loaded photo, no horizontal overflow, both CTA actions and no removed subtitle. Inspected the before/candidate, final EN 320px and RU 390px images. Artifacts: `output/lesson-mobile-hero-2026-10-07`. Production build and targeted lint passed after this correction.

@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss" source("./");
 
 @font-face {
   font-family: "Home V5 Recursive";

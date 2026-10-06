@@ -4,6 +4,8 @@
 
 Before creating or changing a page, section, layout, card or button, read [the approved layout and scale standard](docs/design/layout-and-scale.md). Apply it to the homepage, board rental pages, landing pages and guides in both EN and RU.
 
+For the complete design-system context, read [the design-system entry point](docs/design/README.md) and its foundations and component map. The measured homepage baseline records current behavior and known differences; it does not override the approved layout standard. Planned library components are not implemented until the corresponding phase is completed.
+
 Use the approved homepage as the visual reference. Keep its palette, imagery and composition unless the user's current request changes them. Reuse its bounded desktop width, common content edges and controlled vertical spacing; do not copy a legacy narrow container or scale the whole page with CSS zoom/transform.
 
 The standard describes the approved target for future work. Existing rental/landing pages have not all been migrated. Update only the pages and breakpoints authorized by the current task.

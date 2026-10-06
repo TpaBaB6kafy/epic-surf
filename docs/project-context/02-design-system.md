@@ -2,6 +2,8 @@
 
 Current design authority: [EPIC layout and scale standard](../design/layout-and-scale.md), approved 2026-10-05. Read it before changing any page UI. It replaces the older composition and sizing guidance in this file and historical briefs.
 
+Complete system context: [design-system documentation](../design/README.md). Foundations, component ownership, measured homepage styles and pending decisions are maintained there; the layout standard remains authoritative for geometry.
+
 ## Brand foundations
 
 Theme tokens remain in app/globals.css:

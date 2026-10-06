@@ -1,4 +1,4 @@
-import SurfLandingPage from "../../components/landing-v5/SurfLandingPage";
+import LessonServicePage from "../../components/LessonServicePage";
 import { getSeoPage } from "../../data/seoPages";
 import PageJsonLd from "../../components/PageJsonLd";
 import {
@@ -40,7 +40,7 @@ export default function Page() {
   return (
     <>
       <PageJsonLd data={buildWebPageStructuredData({ path, title, description, locale: "en" })} />
-      <SurfLandingPage page={page} />
+      <LessonServicePage page={page} />
     </>
   );
 }

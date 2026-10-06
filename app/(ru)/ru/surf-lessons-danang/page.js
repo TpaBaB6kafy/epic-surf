@@ -1,4 +1,4 @@
-import SurfLandingPage from "../../../components/landing-v5/SurfLandingPage";
+import LessonServicePage from "../../../components/LessonServicePage";
 import { getSeoPage } from "../../../data/seoPages";
 import PageJsonLd from "../../../components/PageJsonLd";
 import { buildWebPageStructuredData, openGraphImages, siteConfig, twitterMetadata } from "../../../data/siteConfig";
@@ -21,7 +21,7 @@ export default function Page() {
   return (
     <>
       <PageJsonLd data={buildWebPageStructuredData({ path, title, description, locale: "ru" })} />
-      <SurfLandingPage page={page} locale="ru" languageHref="/surf-lessons-danang" />
+      <LessonServicePage page={page} locale="ru" />
     </>
   );
 }
