@@ -76,3 +76,5 @@ Known tracked events include `page_view`, `booking_cta_click`, `gallery_open`, `
 - Vercel project/domain settings
 - Partner QR code workflow
 - Alteg/YClients partner or UTM passthrough support
+
+Partner email requests use server-only `PARTNER_TELEGRAM_BOT_TOKEN` and `PARTNER_TELEGRAM_CHAT_ID` after a bot is created. See [partner code requests](docs/partner-code-requests.md). An unconfigured or failed delivery is not shown as a successful submission. Email codes are sent manually by the team.

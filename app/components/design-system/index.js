@@ -3,4 +3,5 @@ export { PageFrame, ContentFrame, Section, SectionHeading, Surface, Action, Icon
 export { FAQItem, FAQList, Field, FormStatus, Dialog } from './interactive';
 export { ProcessGrid, ServiceOffer, IncludedPanel, ReviewCard, ReviewRating, ReviewsSection, PhotoGallery, RelatedAction } from './recipes';
 export { SiteShell } from './SiteShell';
+export { SiteFooter } from './SiteFooter';
 export { ServiceChoices, LessonGearArtwork, LessonIncluded, LessonProcess, ContentStory, ServicePageTemplate } from './service-page';

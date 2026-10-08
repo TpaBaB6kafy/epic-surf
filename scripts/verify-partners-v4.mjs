@@ -1,0 +1,103 @@
+import {chromium} from '@playwright/test';
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const root=process.env.EPIC_QA_OUTPUT || 'output/partner-implementation-2026-10-08';
+await fs.mkdir(root,{recursive:true});
+const base=process.env.EPIC_QA_URL || 'http://localhost:3000'; const limitations=[];
+const checks=[], errors=[];
+const check=(name,value)=>{assert.ok(value,name);checks.push(name);};
+const load=async file=>import('data:text/javascript,'+encodeURIComponent(await fs.readFile(file,'utf8')));
+const {partnersContent}=await load('app/data/partners.js');const {links}=await load('app/data/links.js');
+const oldGtm=process.env.NEXT_PUBLIC_GTM_ID;
+process.env.NEXT_PUBLIC_GTM_ID='GTM-QA-ONLY';
+const tracking=await load('app/utils/tracking.js');
+if(oldGtm===undefined)delete process.env.NEXT_PUBLIC_GTM_ID;else process.env.NEXT_PUBLIC_GTM_ID=oldGtm;
+const memory=new Map();
+globalThis.window={location:{pathname:'/ru/partners',search:'?partner=partner_v4_qa&utm_source=qa&utm_campaign=partners'},localStorage:{getItem:key=>memory.get(key)||null,setItem:(key,value)=>memory.set(key,value)},dataLayer:[]};
+tracking.storeAttributionFromUrl({includePartner:true});
+for(const [event,label] of [['partner_cta_click','get_partner_code'],['telegram_click','message_us'],['partner_cta_click','discuss_partnership']]){
+ tracking.trackEvent(event,{language:'ru',service_type:'partnership',cta_location:'partners_page',cta_label:label});
+ const payload=window.dataLayer.at(-1);
+ check('Mock sender preserves '+label,payload.event===event&&payload.cta_label===label&&payload.partner==='partner_v4_qa'&&payload.utm_source==='qa'&&payload.language==='ru'&&payload.service_type==='partnership'&&payload.cta_location==='partners_page');
+}
+check('Language query helper retains attribution',tracking.getHrefWithCurrentQuery('/partners')==='/partners?partner=partner_v4_qa&utm_source=qa&utm_campaign=partners');
+delete globalThis.window;
+const browser=await chromium.launch({headless:true});
+for(const locale of ['en','ru']) {
+ const ru=locale==='ru', c=partnersContent[locale];
+ const ctx=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce'});
+ await ctx.addInitScript(()=>{window.__partnerEvents=[];window.umami={track:(event,payload)=>window.__partnerEvents.push({event,...payload})};});
+ const page=await ctx.newPage();page.on('pageerror',e=>errors.push(e.message));
+ await page.route('**/*',r=>new URL(r.request().url()).hostname===new URL(base).hostname?r.continue():r.fulfill({contentType:'text/html',body:'<body>QA stub. No external submission.</body>'}));
+ await page.goto(base+(ru?'/ru':'')+'/partners?partner=partner_v4_qa&utm_source=qa&utm_medium=reference&utm_campaign=partners',{waitUntil:'networkidle'});
+ check(`${locale}: six actual sections`,await page.locator('main > section').count()===6);
+ check(`${locale}: one H1`,await page.locator('main h1').count()===1);
+ check(`${locale}: original homepage Header`,await page.locator('header').getAttribute('data-home-v2-header')==='true');
+ check(`${locale}: same painted surface source`,await page.locator('.partner-painted').evaluateAll(ns=>new Set(ns.map(n=>getComputedStyle(n,'::before').backgroundImage)).size===1));
+ for(const audience of c.sections.audience.items)check(`${locale}: audience ${audience.title}`,(await page.locator('.partner-audiences').textContent()).includes(audience.title)&&(await page.locator('.partner-audiences').textContent()).includes(audience.text));
+ for(const group of ['partnerGets','recommend'])for(const text of c.sections[group].items)check(`${locale}: preserved ${text}`,(await page.locator('.partner-benefit-columns').textContent()).includes(text));
+ for(let i=0;i<3;i++){
+  await page.getByRole('tab').nth(i).click();
+  check(`${locale}/format${i}: selection`,await page.getByRole('tab').nth(i).getAttribute('aria-selected')==='true');
+  check(`${locale}/format${i}: original title and conditions`,(await page.locator('.partner-format-caption').textContent()).includes(c.sections.formats.items[i].text));
+  const img=page.locator('.partner-format-photo img');await img.scrollIntoViewIfNeeded();await img.evaluate(n=>n.decode());
+  check(`${locale}/format${i}: photo loads`,await img.evaluate(n=>n.naturalWidth===1536));
+  await page.locator('.partner-slider').screenshot({path:root+`/${locale}-format-${i}-1440.png`});
+ }
+ await page.getByRole('tab').last().focus(); await page.keyboard.press('ArrowRight');check(`${locale}: next wraps`,await page.getByRole('tab').first().getAttribute('aria-selected')==='true');
+ await page.keyboard.press('ArrowLeft');check(`${locale}: previous wraps`,await page.getByRole('tab').last().getAttribute('aria-selected')==='true');
+ check(`${locale}: no circular slider controls`,await page.locator('.partner-slider .ds-icon-control').count()===0);
+ check(`${locale}: no format underlines`,await page.getByRole('tab').evaluateAll(ns=>ns.every(n=>parseFloat(getComputedStyle(n).borderBottomWidth)===0)));
+ const details=page.locator('.ds-site-footer-wide > details');
+ check(`${locale}: footer starts collapsed`,!await details.evaluate(n=>n.open)&&!await page.locator('[data-home-v2-footer-map]').isVisible());
+ await details.locator('summary').click();
+ check(`${locale}: expanded map fills viewport`,await page.locator('[data-home-v2-footer-map]').evaluate(n=>Math.abs(n.getBoundingClientRect().width-innerWidth)<1));
+ await page.locator('[data-map-activate]').click();
+ check(`${locale}: existing map activation`,!await page.locator('[data-home-v2-footer-map-iframe]').evaluate(n=>n.inert));
+ await details.locator('summary').click();
+ check(`${locale}: footer collapses again`,!await details.evaluate(n=>n.open));
+ await page.getByRole('tab').last().focus();await page.keyboard.press('Home');check(`${locale}: keyboard Home`,await page.getByRole('tab').first().evaluate(n=>document.activeElement===n));
+ await page.keyboard.press('ArrowRight');check(`${locale}: keyboard ArrowRight`,await page.getByRole('tab').nth(1).getAttribute('aria-selected')==='true');
+ await page.keyboard.press('End');check(`${locale}: keyboard End`,await page.getByRole('tab').last().getAttribute('aria-selected')==='true');
+ await page.locator('.partner-format-previews button').first().click();check(`${locale}: thumbnail selects`,await page.getByRole('tab').first().getAttribute('aria-selected')==='true');
+ check(`${locale}: clean hero in reduced motion`,await page.locator('.partner-paths').count()===0);
+ await page.emulateMedia({reducedMotion:'no-preference'});check(`${locale}: clean hero in normal motion`,await page.locator('.partner-paths').count()===0);
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await page.evaluate(()=>document.addEventListener('click',event=>{if(event.target.closest('a[target="_blank"]'))event.preventDefault();}));
+ const actions=page.locator('main .ds-action');
+ await actions.first().click();
+ check(`${locale}: primary opens email dialog`,await page.locator('dialog[open]').isVisible());
+ check(`${locale}: dialog focuses email`,await page.locator('dialog input[type=email]').evaluate(n=>document.activeElement===n));
+ await page.keyboard.press('Escape');await page.locator('dialog').waitFor({state:'detached'});
+ check(`${locale}: code dialog restores focus`,await actions.first().evaluate(n=>document.activeElement===n));
+ for(const [index,label] of [[1,'message_us'],[2,'discuss_partnership']]){
+  await actions.nth(index).click();const href=decodeURIComponent(await actions.nth(index).getAttribute('href'));
+  check(`${locale}: ${label} messenger+partner`,href.startsWith(ru?links.telegram:links.whatsapp)&&href.includes('partner_v4_qa')&&href.includes(ru?'Код партнёра':'Partner code'));
+ }
+ const events=await page.evaluate(()=>[...(window.__partnerEvents||[]),...(window.dataLayer||[])]);
+ if (!events.length) limitations.push(locale+': local analytics environment is unconfigured; sender/payload tested separately with mock provider.');
+ if(events.length) for(const [event,label] of [['partner_cta_click','get_partner_code'],[ru?'telegram_click':'whatsapp_click','message_us'],['partner_cta_click','discuss_partnership']])check(`${locale}: tracking ${label}`,events.some(e=>e.event===event&&e.cta_label===label&&e.partner==='partner_v4_qa'&&e.utm_source==='qa'&&e.language===locale&&e.cta_location==='partners_page'&&e.service_type==='partnership'));
+ for(const name of ['WhatsApp','Telegram']) {const a=page.locator('.ds-lesson-footer-socials').getByRole('link',{name,exact:true});await a.click();check(`${locale}: footer ${name} partner attribution`,decodeURIComponent(await a.getAttribute('href')).includes('partner_v4_qa'));}
+ const langSwitch=page.locator('[data-home-v2-language-switcher]');await langSwitch.click();await page.waitForURL('**/'+(ru?'partners':'ru/partners')+'?**');
+ check(`${locale}: language retains query`,new URL(page.url()).searchParams.get('partner')==='partner_v4_qa'&&new URL(page.url()).searchParams.get('utm_campaign')==='partners');
+ check(`${locale}: attribution storage survives`,await page.evaluate(()=>JSON.parse(localStorage.getItem('epic_surf_attribution')).partner==='partner_v4_qa'));
+ await page.setViewportSize({width:390,height:844});
+ check(`${locale}: all mobile format tabs visible`,await page.getByRole('tab').evaluateAll(ns=>ns.every(n=>{const r=n.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth;})));
+ await page.locator('[data-home-v2-menu-control]').click();check(`${locale}: mobile menu opens`,await page.locator('#home-v2-mobile-navigation').isVisible());
+ await page.locator('[data-home-v2-menu-control]').click(); await page.locator('#home-v2-mobile-navigation').waitFor({state:'hidden'});
+ check(`${locale}: mobile menu closes`,!await page.locator('#home-v2-mobile-navigation').isVisible());
+ await page.locator('[data-home-v2-book-now]').click();await page.locator('[data-booking-dialog]').waitFor();
+ check(`${locale}: existing header booking flow`,(await page.locator('[data-booking-dialog] iframe').getAttribute('src'))===(links.headerBooking?.[ru?'en':'ru'] || links.group));
+ await page.keyboard.press('Escape');await page.locator('[data-booking-dialog]').waitFor({state:'detached'});
+ check(`${locale}: booking close restores focus`,await page.locator('[data-home-v2-book-now]').evaluate(n=>document.activeElement===n));
+ const swipe=page.locator('.partner-slider-photo');await swipe.scrollIntoViewIfNeeded();
+ const was=await page.getByRole('tab').evaluateAll(ns=>ns.findIndex(n=>n.getAttribute('aria-selected')==='true'));
+ await swipe.dispatchEvent('pointerdown',{clientX:290,clientY:100,pointerId:1,pointerType:'touch'});await swipe.dispatchEvent('pointerup',{clientX:80,clientY:110,pointerId:1,pointerType:'touch'});
+ check(`${locale}: horizontal swipe advances`,await page.getByRole('tab').nth((was+1)%3).getAttribute('aria-selected')==='true');
+ check(`${locale}: active mobile tab stays visible`,await page.getByRole('tab').nth((was+1)%3).evaluate(n=>{const a=n.getBoundingClientRect(),b=n.parentElement.getBoundingClientRect();return a.left>=b.left-1&&a.right<=b.right+1;}));
+ const current=await page.getByRole('tab').evaluateAll(ns=>ns.findIndex(n=>n.getAttribute('aria-selected')==='true'));
+ await swipe.dispatchEvent('pointerdown',{clientX:200,clientY:100,pointerId:2,pointerType:'touch'});await swipe.dispatchEvent('pointerup',{clientX:190,clientY:310,pointerId:2,pointerType:'touch'});
+ check(`${locale}: vertical gesture retains selection`,await page.getByRole('tab').nth(current).getAttribute('aria-selected')==='true');
+ await ctx.close();
+}
+await browser.close();check('No browser exceptions',errors.length===0);await fs.writeFile(root+'/behavior.json',JSON.stringify({checks,errors,limitations},null,2));console.log('Passed',checks.length,'behavior checks');

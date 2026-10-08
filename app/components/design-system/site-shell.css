@@ -62,22 +62,7 @@
   .epic-ds.ds-site-shell [data-home-v2-nav-link] { display: inline-flex; align-items: center; min-height: 44px; top: 0; }
   .epic-ds.ds-site-shell [data-home-v2-brand-logo] { display: flex; align-items: center; min-height: 44px; }
 }
-.epic-ds .ds-lesson-footer { background: var(--ds-deep); color: var(--ds-paper); padding-block: 30px 10px; }
-.epic-ds .ds-lesson-footer-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-.epic-ds .ds-lesson-footer-logo { display: flex; align-items: center; min-height: 44px; flex-shrink: 0; }
-.epic-ds .ds-lesson-footer-row nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; }
-.epic-ds .ds-lesson-footer-row nav a { display: flex; align-items: center; min-height: 44px; font: 400 11px/1.3 Arial,sans-serif; text-transform: uppercase; }
-.epic-ds .ds-lesson-footer-socials { display: flex; gap: 8px; align-items: center; }
-.epic-ds .ds-lesson-footer-socials > a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; font: 700 12px/1 var(--ds-font-label); }
-.epic-ds .ds-lesson-footer-socials > a:first-child { background: var(--ds-graphite); }
-.epic-ds .ds-lesson-footer-socials svg { width: 22px; height: 22px; }
-.epic-ds .ds-lesson-footer-details { margin-top: 8px; }
-.epic-ds .ds-lesson-footer-details > summary { display: flex; align-items: center; width: max-content; min-height: 44px; cursor: pointer; font-size: 13px; text-decoration: underline; text-underline-offset: 4px; }
-.epic-ds .ds-lesson-footer-details [data-home-v2-footer-frame] { width: 100% !important; }
-@media (max-width:1199px) { .epic-ds .ds-lesson-footer-row { flex-wrap: wrap; } .epic-ds .ds-lesson-footer-row nav { order: 3; width: 100%; justify-content: flex-start; } }
-@media (max-width:599px) { .epic-ds .ds-lesson-footer-row { gap: 16px; } .epic-ds .ds-lesson-footer-row nav { gap: 4px 16px; } .epic-ds .ds-lesson-footer-row nav a { font-size: 12px; } .epic-ds .ds-lesson-footer-logo img { width: 68px; height: auto; } }
 .epic-ds.ds-site-shell [data-home-v2-book-now] { min-height: 44px; }
-.epic-ds .ds-lesson-footer-row nav a { min-width: 44px; }
 @media (min-width:1200px) { .epic-ds.ds-site-shell [data-home-v2-nav-link], .epic-ds.ds-site-shell [data-home-v2-language-switcher] { min-width: 44px; min-height: 44px; } }
 @media (max-width:1199px) {
   .epic-ds.ds-site-shell [data-home-v2-header] [data-home-v2-book-now] { position: static; inset: auto; display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: auto; min-width: 96px; height: 44px; min-height: 44px; margin: 0; padding: 0 14px; border: 0; border-radius: var(--ds-radius-pill); background: var(--ds-coral); color: var(--ds-paper); font: 700 11px/1.2 var(--ds-font-label); }

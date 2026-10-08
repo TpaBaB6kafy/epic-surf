@@ -214,3 +214,43 @@ final result: passed
 ### Mobile hero correction before release — 2026-10-07
 
 The user clarified that the mobile photo must be repaired before commit and deployment. The existing 62% crop cut people at both edges and centered a board fragment. At widths below 800px the focal position is now 35%: the learner carrying the board remains inside the frame. The source photograph, overlay, hero content and desktop layout are retained. Captured EN/RU at 320/360/390/430/600/799px; verified the actual rendered hero at 800/1440/2560px is pixel-identical to the prior crop rule. All 18 cases passed with loaded photo, no horizontal overflow, both CTA actions and no removed subtitle. Inspected the before/candidate, final EN 320px and RU 390px images. Artifacts: `output/lesson-mobile-hero-2026-10-07`. Production build and targeted lint passed after this correction.
+
+## Partners v4 — 2026-10-08
+
+Approved source: `output/partner-reference-v4-2026-10-08/partner-reference-v4.png`. Six actual partner sections; green painted hero/final, transparent surfer/hands, dark semantic-photo slider, open audience/benefit layouts. Existing EN/RU content, commercial conditions, Header/Footer, public routes, metadata and attribution retained. No team block or ordinal labels.
+
+Fixed P2 findings before handoff: desktop slider photo aspect ratio, hero path visibility, mobile hand edge framing, non-library CTA font override and horizontal active-tab visibility. Reviewed typography, geometry, palette/surfaces, assets and copy/actions against v4 and the approved design standard. Full factual copy and existing complete footer intentionally differ from the condensed raster concept.
+
+Production build and targeted lint passed. Behavior: 103 checks; messengers: 8 checks; responsive/SEO: 20 EN/RU screens at 320/360/390/430/800/1024/1200/1440/1920/2560px. No overflow or failed local images. Playwright explicitly authorized by the user after the embedded browser failed before opening the page. No bookings/messages submitted. External widgets stubbed; analytics delivery not verified because local GTM/Umami are unconfigured, while callback payloads and partner attribution passed mock/browser checks.
+
+Evidence and full report: `output/partner-implementation-2026-10-08/design-qa.md`, `comparison-final-ru.png`, `before/`, `after/`, `behavior.json`, `messengers.json`, `layout-validation.json`. Local preview: http://localhost:3010/ru/partners. No actionable P0/P1/P2 findings remain in inspected scope. No commit/push/deploy.
+
+final result: passed
+
+## Partners v4 feedback corrections — 2026-10-08
+
+Replaced yellow hero board with generated painted scarlet EPIC fish (real alpha, split tail, black logo); removed circular photo arrows and format underlines; made all mobile labels visible; reused the lesson compact/native-details footer as SiteFooter with full-width partner expansion; increased referral-panel contrast; reduced/lifted mobile hands with green bottom space. Source copy, conditions, metadata and attribution preserved.
+
+Final production build, lint and whitespace checks passed. 121 behavior checks, 20 EN/RU production viewports (320–2560px), 18 partner/lesson footer cases. Previous lesson footer geometry/defaults retained. External services stubbed, no submissions/messages. Real analytics delivery remains unverified in unconfigured local environment; sender payloads and partner links checked. No actionable P0/P1/P2 findings remain in inspected scope.
+
+Evidence: `output/partner-refinements-2026-10-08/design-qa.md`, `comparison-hero.png`, `comparison-mobile-final.png`, `after/`, `behavior.json`, `layout-validation.json`, `footer-validation.json`. Local production preview on localhost:3010. No commit/push/deploy.
+
+final result: passed
+
+Hero correction following user's blue-water feedback: final no-blue `surfer-epic-fish-v3.png` exported to the existing runtime WebP. Transparent underside, original surfer/white-spray visual composition, branded red fish with explicit forked tail. 15 asset/hero checks and refreshed 20 EN/RU responsive captures passed. Comparison and task report refreshed in `output/partner-refinements-2026-10-08`. Earlier generated v1 is superseded. No pixel-identical preservation claim is made for the imagegen edit.
+
+final result: passed
+
+## Partner page: layout, email request flow and RU wording, 2026-10-08
+
+Hero surfer reduced/inset; mobile hands resized with proportional clearance; desktop process evenly fills the shared content width. RU label changed to «Турагентства и организаторы частных туров». The primary partner CTA opens a shared-library email dialog; discussion uses Telegram for RU and WhatsApp for EN. VI Zalo mapping is prepared without creating a VI page. Email/partner attribution forwards through a server-only Telegram endpoint; no email enters analytics.
+
+Production build/scoped lint passed; 125 page behavior, 53 email form, 28 mocked API, 4 contact/analytics, 2 landscape-access and 20 EN/RU responsive/SEO checks passed. Final full-page screenshots cover 320–2560px, additional isolated sections cover 699px. No overflow, missing page images or browser exceptions; SEO values are preserved. Detailed evidence: [report](output/partner-email-flow-2026-10-08/design-qa.md).
+
+**Operational dependency remains:** the bot does not exist yet. Actual endpoint returns 503 until server-only PARTNER_TELEGRAM_BOT_TOKEN/PARTNER_TELEGRAM_CHAT_ID are configured; the UI shows an error with messenger fallback. Delivery success was tested only with mock transport. No real messages were sent. The team emails partner codes manually. See [setup](docs/partner-code-requests.md). No commit/push/deploy; unrelated homepage work preserved.
+
+## Partner page: monitor-scale hands and clean hero, 2026-10-08
+
+Desktop/tablet hand image switched from oversized cover to centered proportional contain, capped at 460px (previously 826.656px at 2560px). Mobile drawing geometry unchanged. Background Paths component, import and styles removed: the page's short entrance had left static stripes; the textured surfer/spray hero reads more clearly without this layer.
+
+Production build/scoped lint passed. 16 EN/RU before/after captures at 320/390/430/1024/1440/1920/2560/3200px passed image loading, overflow, SEO and drawing-scale checks. 125 existing behavior checks passed on refreshed localhost:3010. No real submissions or messages; no commit/push/deploy. [Evidence and rationale](output/partner-wide-hands-2026-10-08/design-qa.md).
