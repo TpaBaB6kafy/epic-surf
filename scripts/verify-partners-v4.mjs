@@ -28,7 +28,7 @@ for(const locale of ['en','ru']) {
  const ctx=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce'});
  await ctx.addInitScript(()=>{window.__partnerEvents=[];window.umami={track:(event,payload)=>window.__partnerEvents.push({event,...payload})};});
  const page=await ctx.newPage();page.on('pageerror',e=>errors.push(e.message));
- await page.route('**/*',r=>new URL(r.request().url()).hostname===new URL(base).hostname?r.continue():r.fulfill({contentType:'text/html',body:'<body>QA stub. No external submission.</body>'}));
+ await page.route('**/*',r=>new URL(r.request().url()).hostname===new URL(base).hostname?r.continue():r.fulfill(r.request().resourceType()==='script'?{contentType:'application/javascript',body:''}:{contentType:'text/html',body:'<body>QA stub. No external submission.</body>'}));
  await page.goto(base+(ru?'/ru':'')+'/partners?partner=partner_v4_qa&utm_source=qa&utm_medium=reference&utm_campaign=partners',{waitUntil:'networkidle'});
  check(`${locale}: six actual sections`,await page.locator('main > section').count()===6);
  check(`${locale}: one H1`,await page.locator('main h1').count()===1);
