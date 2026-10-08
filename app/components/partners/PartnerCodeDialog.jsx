@@ -5,6 +5,16 @@ import { Action, Dialog, Field, FormStatus } from '../design-system';
 import { getStoredAttribution, trackEvent } from '../../utils/tracking';
 
 const copy = {
+  vi: {
+    title: 'Đăng ký mã đối tác',
+    description: 'Vui lòng để lại địa chỉ email. Đội ngũ Epic Surf sẽ liên hệ và gửi mã đối tác đến địa chỉ này.',
+    email: 'Địa chỉ email', submit: 'Gửi yêu cầu', sending: 'Đang gửi…', close: 'Đóng biểu mẫu',
+    invalid: 'Vui lòng kiểm tra địa chỉ email, ví dụ: name@example.com.',
+    error: 'Chưa gửi được yêu cầu. Vui lòng thử lại hoặc liên hệ qua Zalo để trao đổi về việc hợp tác.',
+    limited: 'Quý đối tác đã gửi yêu cầu nhiều lần. Vui lòng thử lại sau ít phút.',
+    success: 'Đã gửi yêu cầu. Đội ngũ Epic Surf sẽ gửi mã đối tác đến địa chỉ email đã cung cấp.',
+    done: 'Hoàn tất', contact: 'Trao đổi qua Zalo',
+  },
   ru: { title: 'Получить партнёрский код', description: 'Оставьте email. Команда Epic Surf свяжется с вами и пришлёт партнёрский код на этот адрес.', email: 'Ваш email', submit: 'Запросить код', sending: 'Отправляем…', close: 'Закрыть форму', invalid: 'Проверьте email — например, name@example.com.', error: 'Не удалось отправить заявку. Попробуйте ещё раз или обсудите партнёрство в мессенджере.', limited: 'Слишком много попыток. Попробуйте немного позже.', success: 'Заявка отправлена. Команда Epic Surf пришлёт партнёрский код на указанный email.', done: 'Готово', contact: 'Обсудить партнёрство' },
   en: { title: 'Get your partner code', description: 'Leave your email. The Epic Surf team will contact you and send your partner code to this address.', email: 'Your email', submit: 'Request code', sending: 'Sending…', close: 'Close form', invalid: 'Check your email — for example, name@example.com.', error: 'We could not send your request. Try again or discuss your partnership in the messenger.', limited: 'Too many attempts. Please try again later.', success: 'Request sent. The Epic Surf team will send your partner code to the email you provided.', done: 'Done', contact: 'Discuss partnership' },
 };

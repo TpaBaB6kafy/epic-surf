@@ -1,7 +1,7 @@
 import { links } from '../data/links';
 import { buildTelegramUrl, buildWhatsAppUrl, buildZaloUrl } from './tracking';
 
-// The Vietnamese destination is ready for a future page; no VI route is added here.
+// Preferred partnership channel for each supported page language.
 const channels = { ru: ['telegram', buildTelegramUrl], en: ['whatsapp', buildWhatsAppUrl], vi: ['zalo', buildZaloUrl] };
 export function getPartnerContact(locale) {
   const language = channels[locale] ? locale : 'en';

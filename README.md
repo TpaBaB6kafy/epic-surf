@@ -1,6 +1,6 @@
 # Epic Surf School Da Nang
 
-Website for Epic Surf School Da Nang. It sells surf lessons and board rentals, routes visitors to booking and messengers, supports EN/RU pages, and tracks partner referrals.
+Website for Epic Surf School Da Nang. It sells surf lessons and board rentals, routes visitors to booking and messengers, supports EN/RU pages and EN/RU/VI partner pages, and tracks partner referrals.
 
 ## Stack
 
@@ -14,6 +14,7 @@ Website for Epic Surf School Da Nang. It sells surf lessons and board rentals, r
 - `/ru` - Russian homepage
 - `/partners` - English partner page
 - `/ru/partners` - Russian partner page
+- `/vi/partners` - Vietnamese partner page
 
 ## Local Development
 

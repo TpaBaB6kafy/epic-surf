@@ -182,3 +182,29 @@
 .partner-page .partner-code-dialog .ds-action { justify-self: start; }
 .partner-page .partner-form-contact { width: fit-content; min-height: 44px; display: flex; align-items: center; font-size: 15px; text-decoration: underline; text-underline-offset: 4px; }
 @media (max-width:699px) { .partner-page .partner-code-dialog .ds-action { width: 100%; } }
+
+/* Independent language routes, using the same round controls as the homepage. */
+.partner-page .site-language-control { position: relative; display: inline-flex; flex-shrink: 0; }
+.partner-page .site-language-switcher,
+.partner-page .site-language-options > a {
+  display: grid; place-items: center; width: 44px; height: 44px; min-width: 44px; min-height: 44px;
+  padding: 0; border: 1px solid #666; border-radius: 50%;
+  background: var(--ds-graphite); color: var(--ds-paper);
+  font: 700 12px/1.4 var(--ds-font-label); text-decoration: none; cursor: pointer;
+}
+.partner-page .site-language-options {
+  position: absolute; z-index: 150; right: 0; top: calc(100% + 8px);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.partner-page .site-language-footer .site-language-options { top: auto; bottom: calc(100% + 8px); }
+.partner-page .site-language-options > a { box-shadow: 0 3px 8px #0004; }
+.partner-page .site-language-options > a[aria-current="page"] { border-color: var(--ds-coral); }
+.partner-page .site-language-options > a:hover { border-color: var(--ds-coral); }
+.partner-page .partner-navigation-note {
+  margin-top: 14px; color: var(--ds-muted-light); font-size: 13px; line-height: 1.5;
+}
+.partner-page:lang(vi) .partner-title { line-height: 1.18; }
+.partner-page:lang(vi) .partner-heading { line-height: 1.3; }
+@media (max-width: 699px) {
+  .partner-page:lang(vi) .partner-title { font-size: clamp(34px, 9vw, 58px); }
+}

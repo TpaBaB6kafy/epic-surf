@@ -23,6 +23,7 @@ export const metadata = {
     languages: {
       en: "/partners",
       ru: "/ru/partners",
+      vi: "/vi/partners",
       "x-default": "/partners",
     },
   },

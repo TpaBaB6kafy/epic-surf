@@ -70,8 +70,15 @@ function ContactRow({ icon, href, external, children, onClick, role }) {
 export default function HomeV2Footer({ t, lang = "en", links, description, mapInitiallyActive = true, layout = "home" }) {
   const [mapActive, setMapActive] = useState(mapInitiallyActive);
   const isRu = lang === "ru";
-  const partnersHref = isRu ? "/ru/partners" : "/partners";
-  const quickLinks = isRu ? [
+  const isVi = lang === "vi";
+  const partnersHref = isVi ? "/vi/partners" : isRu ? "/ru/partners" : "/partners";
+  const quickLinks = isVi ? [
+    { href: "/surf-lessons-danang", label: "Lớp học lướt sóng (EN)" },
+    { href: "/surfing-danang", label: "Lướt sóng tại Đà Nẵng (EN)" },
+    { href: "/surfboard-rental-danang", label: "Thuê ván lướt sóng (EN)" },
+    { href: "/my-khe-beach-surfing", label: "Lướt sóng tại biển Mỹ Khê (EN)" },
+    { href: "/surf-guide", label: "Cẩm nang lướt sóng (EN)" },
+  ] : isRu ? [
     { href: "/ru/surf-lessons-danang", label: "Уроки серфинга" },
     { href: "/ru/surfing-danang", label: "Серфинг в Дананге" },
     { href: "/ru/surfboard-rental-danang", label: "Аренда серфборда" },
@@ -91,13 +98,13 @@ export default function HomeV2Footer({ t, lang = "en", links, description, mapIn
           style={mapActive ? undefined : { pointerEvents: "none" }}
           data-home-v2-footer-map-iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1024.2523782017452!2d108.25027605520296!3d16.046658364986484!2m3!1f0!2f0!3f0!2m3!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217f20b1fa357%3A0xa323fdd182ae974!2sEPIC%20Surf%20School%20Da%20Nang!5e1!3m2!1sru!2s!4v1777015710238!5m2!1sru!2s"
-          title="Epic Surf School Da Nang location map"
+          title={isVi ? "Bản đồ vị trí Epic Surf tại Đà Nẵng" : "Epic Surf School Da Nang location map"}
           className="pointer-events-auto absolute inset-0 z-0 block h-full w-full cursor-grab border-0 grayscale contrast-125 opacity-60 active:cursor-grabbing"
           allowFullScreen=""
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
-        {!mapActive && <button type="button" data-map-activate onClick={() => { setMapActive(true); trackEvent("map_activate", { language: lang, cta_location: "footer", cta_label: "embedded_map" }); }}><span>{isRu ? "Включить карту" : "Enable map"}</span></button>}
+        {!mapActive && <button type="button" data-map-activate onClick={() => { setMapActive(true); trackEvent("map_activate", { language: lang, cta_location: "footer", cta_label: "embedded_map" }); }}><span>{isVi ? "Mở bản đồ tương tác" : isRu ? "Включить карту" : "Enable map"}</span></button>}
       </div>
 
       <div data-home-v2-footer-body className="relative min-h-[373px] w-full px-5 pb-24 pt-12 min-[1440px]:h-[373px] min-[1440px]:px-0 min-[1440px]:pb-0 min-[1440px]:pt-0">
@@ -113,7 +120,7 @@ export default function HomeV2Footer({ t, lang = "en", links, description, mapIn
             </div>
           </section>
 
-          <nav aria-label={isRu ? "Ссылки в подвале" : "Footer links"} data-home-v2-footer-quick-links className="space-y-3 min-[1440px]:w-[clamp(191px,12vw,280px)] min-[1440px]:space-y-[20px]">
+          <nav aria-label={isVi ? "Liên kết cuối trang" : isRu ? "Ссылки в подвале" : "Footer links"} data-home-v2-footer-quick-links className="space-y-3 min-[1440px]:w-[clamp(191px,12vw,280px)] min-[1440px]:space-y-[20px]">
             {quickLinks.map((item) => (
               <Link key={item.href} href={item.href} data-footer-quick-link className="flex min-h-[25px] items-center gap-[6px] text-[16px] leading-[1.25] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-epicRed min-[1440px]:h-[13px] min-[1440px]:min-h-0 min-[1440px]:leading-[13px]">
                 <Image src={`${assetRoot}/link-icon.svg`} alt="" width={13} height={13} unoptimized className="h-[13px] w-[13px] shrink-0" />
@@ -126,7 +133,7 @@ export default function HomeV2Footer({ t, lang = "en", links, description, mapIn
             <ContactRow icon="location" href={links.googleMaps} external role="location" onClick={() => trackEvent("map_activate", { language: lang, cta_location: "footer", cta_label: "google_maps" })}>{t.locationAddress}</ContactRow>
             <ContactRow icon="email" href={`mailto:${email}`} role="email">{email}</ContactRow>
             <ContactRow icon="phone" href={`tel:${siteConfig.phone}`} role="phone">+84 383 880 164</ContactRow>
-            <ContactRow icon="partners" href={partnersHref} role="partners" onClick={() => trackEvent("partner_cta_click", { language: lang, service_type: "partnership", cta_location: "footer", cta_label: "for_partners" })}>{isRu ? "Партнёрам" : "For Partners"}</ContactRow>
+            <ContactRow icon="partners" href={partnersHref} role="partners" onClick={() => trackEvent("partner_cta_click", { language: lang, service_type: "partnership", cta_location: "footer", cta_label: "for_partners" })}>{isVi ? "Dành cho đối tác" : isRu ? "Партнёрам" : "For Partners"}</ContactRow>
           </section>
           </div>
         </div>

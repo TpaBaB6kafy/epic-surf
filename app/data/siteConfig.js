@@ -291,7 +291,7 @@ export function buildStructuredData(locale = siteConfig.defaultLocale) {
         "@id": absoluteUrl("/#website"),
         name: siteConfig.name,
         url: siteConfig.siteUrl,
-        inLanguage: ["en", "ru"],
+        inLanguage: ["en", "ru", "vi"],
         publisher: { "@id": absoluteUrl("/#business") },
       },
       {

@@ -1,8 +1,8 @@
 import Script from "next/script";
 import { buildStructuredData } from "../data/siteConfig";
 
-export default function RootLayoutShell({ children, locale }) {
-  const structuredData = buildStructuredData(locale);
+export default function RootLayoutShell({ children, locale, includeHomepageStructuredData = true }) {
+  const structuredData = includeHomepageStructuredData ? buildStructuredData(locale) : null;
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
   const umamiScriptUrl = process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL;
   const umamiWebsiteId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
@@ -51,13 +51,13 @@ export default function RootLayoutShell({ children, locale }) {
             </noscript>
           </>
         )}
-        <script
+        {structuredData && <script
           type="application/ld+json"
           suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
           }}
-        />
+        />}
         {children}
       </body>
     </html>

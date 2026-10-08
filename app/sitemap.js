@@ -30,6 +30,7 @@ export default function sitemap() {
         languages: {
           en: absoluteUrl("/partners"),
           ru: absoluteUrl("/ru/partners"),
+          vi: absoluteUrl("/vi/partners"),
           "x-default": absoluteUrl("/partners"),
         },
       },
@@ -43,11 +44,25 @@ export default function sitemap() {
         languages: {
           en: absoluteUrl("/partners"),
           ru: absoluteUrl("/ru/partners"),
+          vi: absoluteUrl("/vi/partners"),
           "x-default": absoluteUrl("/partners"),
         },
       },
     },
   ];
+
+  pages.push({
+    url: absoluteUrl("/vi/partners"),
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.7,
+    alternates: {
+      languages: {
+        en: absoluteUrl("/partners"), ru: absoluteUrl("/ru/partners"),
+        vi: absoluteUrl("/vi/partners"), "x-default": absoluteUrl("/partners"),
+      },
+    },
+  });
 
   seoPageLinks.forEach((page) => {
     const languages = { en: absoluteUrl(page.href), ru: absoluteUrl(`/ru${page.href}`), "x-default": absoluteUrl(page.href) };

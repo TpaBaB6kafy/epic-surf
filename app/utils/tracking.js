@@ -86,7 +86,7 @@ export function buildMessageWithPartnerCode(message, language = "en") {
   const partner = getPartnerCode();
   if (!partner) return message;
 
-  const label = language === "ru" ? "\u041a\u043e\u0434 \u043f\u0430\u0440\u0442\u043d\u0451\u0440\u0430" : "Partner code";
+  const label = language === "ru" ? "\u041a\u043e\u0434 \u043f\u0430\u0440\u0442\u043d\u0451\u0440\u0430" : language === "vi" ? "Mã đối tác" : "Partner code";
   return `${message} ${label}: ${partner}`;
 }
 

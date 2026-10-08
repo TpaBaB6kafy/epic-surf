@@ -9,6 +9,8 @@ import LandingShell from './landing-v5/LandingShell';
 import PartnerCodeDialog from './partners/PartnerCodeDialog';
 import { getPartnerContact } from '../utils/partner-contact';
 import { partnersContent } from '../data/partners';
+import { partnersVi, partnerShellVi } from '../data/partners-vi';
+import { partnerLanguages } from '../data/partner-languages';
 import { storeAttributionFromUrl, trackEvent } from '../utils/tracking';
 import './partners/partners-v4.css';
 
@@ -16,9 +18,9 @@ const assetRoot = '/design/partners-v4';
 const audienceIcons = [Hotel, Building2, Plane, Coffee, Camera, Users];
 const processIcons = [MessageCircle, Mail, Waves, Check];
 const formatPhotos = [
-  { name: 'referral-reception', framing: { x: 50, y: 48 }, mobile: { x: 55, y: 45 }, alt: { en: 'A concierge recommends a coastal activity to hotel guests', ru: 'Сотрудник ресепшена рекомендует гостям пляжную активность' } },
-  { name: 'content-creator', framing: { x: 48, y: 48 }, mobile: { x: 38, y: 48 }, alt: { en: 'A travel creator films the coastline with a camera', ru: 'Автор контента снимает побережье на камеру' } },
-  { name: 'group-program-planning', framing: { x: 50, y: 52 }, mobile: { x: 50, y: 52 }, alt: { en: 'An organizer and local coordinator plan a group itinerary', ru: 'Организатор и координатор согласуют групповой маршрут' } },
+  { name: 'referral-reception', framing: { x: 50, y: 48 }, mobile: { x: 55, y: 45 }, alt: { en: 'A concierge recommends a coastal activity to hotel guests', ru: 'Сотрудник ресепшена рекомендует гостям пляжную активность', vi: 'Nhân viên lễ tân giới thiệu hoạt động biển cho khách lưu trú' } },
+  { name: 'content-creator', framing: { x: 48, y: 48 }, mobile: { x: 38, y: 48 }, alt: { en: 'A travel creator films the coastline with a camera', ru: 'Автор контента снимает побережье на камеру', vi: 'Nhà sáng tạo nội dung quay cảnh bờ biển' } },
+  { name: 'group-program-planning', framing: { x: 50, y: 52 }, mobile: { x: 50, y: 52 }, alt: { en: 'An organizer and local coordinator plan a group itinerary', ru: 'Организатор и координатор согласуют групповой маршрут', vi: 'Đơn vị tổ chức và điều phối viên địa phương lên lịch trình cho đoàn' } },
 ];
 
 function Heading({ title, subtitle, id }) {
@@ -52,7 +54,7 @@ function FormatsSlider({ content, lang }) {
   };
   const photo = formatPhotos[active];
   const item = items[active];
-  return <div className="partner-slider" role="region" aria-roledescription={lang === 'ru' ? 'карусель' : 'carousel'} aria-labelledby="partner-formats-heading">
+  return <div className="partner-slider" role="region" aria-roledescription={lang === 'vi' ? 'trình chiếu' : lang === 'ru' ? 'карусель' : 'carousel'} aria-labelledby="partner-formats-heading">
     <div className="partner-format-tabs" role="tablist" aria-label={content.title}>
       {items.map((format, index) => <button key={format.title} ref={node => { tabs.current[index] = node; }} type="button" role="tab" id={`partner-format-tab-${index}`} aria-selected={active === index} aria-controls="partner-format-panel" tabIndex={active === index ? 0 : -1} onKeyDown={event => onTabKey(event, index)} onClick={() => select(index)}>{format.title}</button>)}
     </div>
@@ -71,8 +73,8 @@ function FormatsSlider({ content, lang }) {
         </div>
         <div className="partner-format-caption" aria-live="polite" aria-atomic="true"><h3>{item.title}</h3><p className="partner-format-best">{item.bestFor}</p><p>{item.text}</p></div>
       </div>
-      <div className="partner-format-previews" role="group" aria-label={lang === 'ru' ? 'Другие форматы' : 'Other formats'}>
-        {items.map((format, index) => index !== active && <button type="button" key={format.title} onClick={() => select(index)} aria-label={`${lang === 'ru' ? 'Показать формат' : 'Show format'}: ${format.title}`}>
+      <div className="partner-format-previews" role="group" aria-label={lang === 'vi' ? 'Các hình thức hợp tác khác' : lang === 'ru' ? 'Другие форматы' : 'Other formats'}>
+        {items.map((format, index) => index !== active && <button type="button" key={format.title} onClick={() => select(index)} aria-label={`${lang === 'vi' ? 'Xem hình thức hợp tác' : lang === 'ru' ? 'Показать формат' : 'Show format'}: ${format.title}`}>
           <FramedPhoto src={`${assetRoot}/${formatPhotos[index].name}-preview.webp`} alt="" shape="plain" ratio="3 / 2" framing={formatPhotos[index].framing} mobileFraming={formatPhotos[index].mobile} sizes="(min-width: 2300px) 520px, (min-width: 700px) 25vw, 40vw" className="partner-preview-photo" /><span>{format.title}</span>
         </button>)}
       </div>
@@ -81,8 +83,8 @@ function FormatsSlider({ content, lang }) {
 }
 
 export default function PartnersPage({ locale = 'en' }) {
-  const lang = locale === 'ru' ? 'ru' : 'en';
-  const content = partnersContent[lang];
+  const lang = ['en', 'ru', 'vi'].includes(locale) ? locale : 'en';
+  const content = lang === 'vi' ? partnersVi : partnersContent[lang];
   const contact = getPartnerContact(lang);
   const [codeFormOpen, setCodeFormOpen] = useState(false);
   useEffect(() => {
@@ -97,13 +99,13 @@ export default function PartnersPage({ locale = 'en' }) {
     trackEvent('partner_cta_click', { language: lang, service_type: 'partnership', cta_location: 'partners_page', cta_label: 'get_partner_code' });
     setCodeFormOpen(true);
   };
-  return <MotionConfig reducedMotion="user"><PageFrame locale={lang} className="partner-page"><LandingShell locale={lang} languageHref={content.languageHref} className="landing-partners partners-v4" footerCollapsible footerServiceType="partnership">
-    <a className="partner-skip-link" href="#partner-content">{lang === 'ru' ? 'К содержимому' : 'Skip to content'}</a>
+  return <MotionConfig reducedMotion="user"><PageFrame locale={lang} className="partner-page"><LandingShell locale={lang} shellCopy={lang === 'vi' ? partnerShellVi : undefined} languageOptions={partnerLanguages} languageHref={content.languageHref} className="landing-partners partners-v4" footerCollapsible footerServiceType="partnership">
+    <a className="partner-skip-link" href="#partner-content">{lang === 'vi' ? 'Đến nội dung chính' : lang === 'ru' ? 'К содержимому' : 'Skip to content'}</a>
     <main id="partner-content">
       <section className="partner-hero-v4 partner-painted" aria-labelledby="partner-title">
         <div className="partner-hero-art" aria-hidden="true"><Image src={`${assetRoot}/surfer-epic-fish.webp`} alt="" width={1536} height={1024} priority unoptimized /></div>
         <ContentFrame className="partner-hero-frame">
-          <SectionHeading as="h1" id="partner-title" recipe="utility" align="left" className="partner-title">{lang === 'ru' ? <><span className="partner-title-opening">Станьте</span> партнёром </> : <>Partner with<br /></>}<em>Epic Surf</em></SectionHeading>
+          <SectionHeading as="h1" id="partner-title" recipe="utility" align="left" className="partner-title">{lang === 'vi' ? <>Hợp tác cùng<br /></> : lang === 'ru' ? <><span className="partner-title-opening">Станьте</span> партнёром </> : <>Partner with<br /></>}<em>Epic Surf</em></SectionHeading>
           <div className="partner-hero-copy"><p className="partner-eyebrow">{content.badge}</p><p className="partner-hero-description">{content.subtitle}</p><div className="partner-actions">
             <Action onClick={openCodeForm} aria-haspopup="dialog">{content.primaryCta}</Action>
             <Action href={contact.href} variant="secondary" onClick={event => handlePartnerClick(event, contact.eventName, 'message_us', contact.buildHref)} target="_blank" rel="noopener noreferrer">{content.secondaryCta}</Action>
@@ -120,7 +122,7 @@ export default function PartnersPage({ locale = 'en' }) {
       <section className="partner-process-v4 partner-dark" aria-labelledby="partner-process-heading"><ContentFrame>
         <Heading {...content.sections.process} id="partner-process-heading" /><ol className="partner-process-list">{content.sections.process.items.map((item, index) => { const Icon = processIcons[index]; return <li key={item.title}><div className="partner-process-icon"><Icon aria-hidden="true" /></div><h3>{item.title}</h3><p>{item.text}</p></li>; })}</ol>
       </ContentFrame></section>
-      <section className="partner-benefits-v4 partner-paper" aria-label={lang === 'ru' ? 'Преимущества и отслеживание заявок' : 'Benefits and referral tracking'}><ContentFrame>
+      <section className="partner-benefits-v4 partner-paper" aria-label={lang === 'vi' ? 'Quyền lợi và ghi nhận khách giới thiệu' : lang === 'ru' ? 'Преимущества и отслеживание заявок' : 'Benefits and referral tracking'}><ContentFrame>
         <div className="partner-benefit-columns"><BenefitsColumn {...content.sections.partnerGets} /><BenefitsColumn {...content.sections.recommend} /></div>
         <div className="partner-attribution"><div><h3>{content.sections.tracking.title}</h3><p>{content.sections.tracking.text}</p></div><div className="partner-link-example"><p>{content.sections.tracking.exampleLabel}</p><code>surfdanang.com/?partner=hotel_abc</code></div></div>
       </ContentFrame></section>

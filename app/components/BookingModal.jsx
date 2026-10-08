@@ -21,10 +21,13 @@ function BookingModalFrame({ bookingModalUrl, setBookingModalUrl, title }) {
   const [hasTimedOut, setHasTimedOut] = useState(false);
   const pathname = usePathname();
   const isRussian = pathname ? pathname.startsWith("/ru") : title !== "Booking";
-  const loadingText = isRussian ? "Загружаем форму записи..." : "Loading booking form...";
-  const timeoutText = isRussian
+  const isVietnamese = pathname?.startsWith("/vi/");
+  const loadingText = isVietnamese ? "Đang tải biểu mẫu đặt lịch…" : isRussian ? "Загружаем форму записи..." : "Loading booking form...";
+  const timeoutText = isVietnamese ? "Nếu biểu mẫu tải quá lâu, vui lòng mở trang đặt lịch trong tab mới." : isRussian
     ? "Загрузка занимает больше времени? Откройте запись в новой вкладке."
     : "Taking longer than usual? Open booking in a new tab.";
+
+  const openLabel = isVietnamese ? "Mở trang đặt lịch trong tab mới" : isRussian ? "Открыть запись в новой вкладке" : "Open booking in new tab";
 
   useEffect(() => {
     if (!isLoading) {
@@ -72,9 +75,9 @@ function BookingModalFrame({ bookingModalUrl, setBookingModalUrl, title }) {
           <span>{title}</span>
           <div className="flex items-center gap-2">
             <a href={bookingModalUrl} target="_blank" rel="noopener noreferrer" className="flex min-h-11 items-center rounded-full bg-epicDark px-3 py-2 text-[10px] font-bold uppercase leading-none text-white transition-colors hover:bg-epicRed">
-              {isRussian ? "Открыть запись в новой вкладке" : "Open booking in new tab"}
+              {openLabel}
             </a>
-            <button onClick={() => setBookingModalUrl(null)} className="flex h-11 w-11 shrink-0 items-center justify-center bg-epicMint rounded-full text-epicDark" aria-label={isRussian ? "Закрыть запись" : "Close booking modal"}><X size={18} /></button>
+            <button onClick={() => setBookingModalUrl(null)} className="flex h-11 w-11 shrink-0 items-center justify-center bg-epicMint rounded-full text-epicDark" aria-label={isVietnamese ? "Đóng biểu mẫu đặt lịch" : isRussian ? "Закрыть запись" : "Close booking modal"}><X size={18} /></button>
           </div>
         </div>
         <div className="flex-1 bg-white relative">
@@ -86,11 +89,11 @@ function BookingModalFrame({ bookingModalUrl, setBookingModalUrl, title }) {
                 <p className="max-w-sm text-sm font-medium leading-relaxed text-epicDark/70">{timeoutText}</p>
               )}
               <a href={bookingModalUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-epicRed underline underline-offset-4">
-                {isRussian ? "Открыть запись в новой вкладке" : "Open booking in new tab"}
+                {openLabel}
               </a>
             </div>
           )}
-          <iframe src={bookingModalUrl} onLoad={handleIframeLoad} className="w-full h-full border-none" title="Booking" />
+          <iframe src={bookingModalUrl} onLoad={handleIframeLoad} className="w-full h-full border-none" title={isVietnamese ? "Biểu mẫu đặt lịch bằng tiếng Anh" : "Booking"} />
         </div>
       </motion.div>
     </div>

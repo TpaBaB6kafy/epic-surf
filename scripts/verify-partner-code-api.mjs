@@ -21,12 +21,17 @@ for(const [name,req,status] of [
  ['Array rejected',request([]),400],
  ['Invalid email',request({...body,email:'a@'}),400],
  ['Newline in email rejected',request({...body,email:'a@b.com\nInjected'}),400],
- ['Unsupported locale',request({...body,language:'vi'}),400],
+ ['Unsupported locale',request({...body,language:'fr'}),400],
 ])check(name,(await h(req)).status===status);
 check('Honeypot returns without delivery',(await h(request({...body,website:'spam'}))).status===200&&calls.length===0);
 check('Valid request accepted only after delivery',(await h(request())).status===200&&calls.length===1);
 const sent=JSON.parse(calls[0].options.body);
 check('Email language and attribution sent as plain text',sent.text.includes('Email: qa@example.com')&&sent.text.includes('Язык: ru')&&sent.text.includes('partner: qa_partner')&&sent.text.includes('utm_source: qa source')&&!sent.text.includes('unknown')&&!sent.parse_mode);
+const viCalls=[];
+const viHandler=createPartnerCodeHandler({env,fetchImpl:async(url,options)=>{viCalls.push({url,options});return Response.json({ok:true});}});
+check('Vietnamese request accepted',(await viHandler(request({...body,language:'vi'}))).status===200);
+const viSent=JSON.parse(viCalls[0].options.body);
+check('Vietnamese source routed correctly',viSent.text.includes('Язык: vi')&&viSent.text.includes('Страница: /vi/partners'));
 check('Transport uses bounded timeout',calls[0].options.signal instanceof AbortSignal);
 check('Duplicate email is not delivered twice',(await h(request({...body,email:'QA@example.com'}))).status===200&&calls.length===1);
 for(const [name,response] of [['HTTP failure',()=>Response.json({ok:true},{status:500})],['Telegram failure',()=>Response.json({ok:false})],['Network failure',()=>{throw new Error('test failure');}]]){

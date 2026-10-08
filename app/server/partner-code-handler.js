@@ -26,7 +26,7 @@ export function createPartnerCodeHandler({ fetchImpl = fetch, env = process.env,
     if (data.website) return reply(200, { ok: true }); // Honeypot never reaches the bot.
     const email = typeof data.email === 'string' ? data.email.trim() : '';
     const language = data.language;
-    if (email.length > 254 || !/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email) || !['en', 'ru'].includes(language)) return reply(400, { ok: false, error: 'invalid_email' });
+    if (email.length > 254 || !/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email) || !['en', 'ru', 'vi'].includes(language)) return reply(400, { ok: false, error: 'invalid_email' });
     const token = env.PARTNER_TELEGRAM_BOT_TOKEN;
     const chatId = env.PARTNER_TELEGRAM_CHAT_ID;
     if (!token || !chatId) return reply(503, { ok: false, error: 'unavailable' });
@@ -43,7 +43,7 @@ export function createPartnerCodeHandler({ fetchImpl = fetch, env = process.env,
     if (attempts.size >= 10000) return reply(429, { ok: false }, { 'Retry-After': '60' });
     attempts.set(ipKey, { ...quota, count: quota.count + 1 });
     const attribution = data.attribution && typeof data.attribution === 'object' ? data.attribution : {};
-    const lines = ['EPIC — запрос партнёрского кода', `Email: ${email}`, `Язык: ${language}`, `Страница: ${language === 'ru' ? '/ru/partners' : '/partners'}`];
+    const lines = ['EPIC — запрос партнёрского кода', `Email: ${email}`, `Язык: ${language}`, `Страница: ${language === 'vi' ? '/vi/partners' : language === 'ru' ? '/ru/partners' : '/partners'}`];
     for (const key of attributionKeys) {
       const raw = attribution[key];
       if (typeof raw === 'string' && raw.trim()) lines.push(`${key}: ${raw.replace(/[\r\n\u0000-\u001f]/g, ' ').slice(0, 200)}`);

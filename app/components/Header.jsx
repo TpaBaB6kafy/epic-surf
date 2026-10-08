@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import LanguageSwitcher from "./LanguageSwitcher";
 import { getHrefWithCurrentQuery, trackEvent } from "../utils/tracking";
 
 export default function Header({
@@ -16,6 +17,7 @@ export default function Header({
   setIsMenuOpen,
   openBookingModal,
   languageHref,
+  languageOptions,
   sectionHrefBase,
   mobileTop = false,
   showMobileBackdrop = true,
@@ -39,9 +41,9 @@ export default function Header({
   };
   const baseLanguageHref = languageHref || (lang === "ru" ? "/" : "/ru");
   const languageLabel = lang === "ru" ? "EN" : "RU";
-  const partnersHref = lang === "ru" ? "/ru/partners" : "/partners";
-  const partnersLabel = lang === "ru" ? "Для партнеров" : "Partners";
-  const headerBookingUrl = links.headerBooking?.[lang] || links.group;
+  const partnersHref = lang === "vi" ? "/vi/partners" : lang === "ru" ? "/ru/partners" : "/partners";
+  const partnersLabel = lang === "vi" ? "Đối tác" : lang === "ru" ? "Для партнеров" : "Partners";
+  const headerBookingUrl = links.headerBooking?.[lang] || (lang === "vi" ? links.headerBooking?.en : undefined) || links.group;
   const navItems = [
     { href: sectionHref("lessons"), label: t.navLessons },
     { href: sectionHref("rentals"), label: t.navRentals },
@@ -108,7 +110,7 @@ export default function Header({
             className={isHomeV2
               ? "hidden min-[1200px]:ml-auto min-[1200px]:flex min-[1200px]:items-center min-[1200px]:gap-5 min-[1320px]:gap-8"
               : "hidden items-center gap-6 lg:flex"}
-            aria-label={isHomeV2 ? "Primary navigation" : undefined}
+            aria-label={isHomeV2 ? (lang === "vi" ? "Điều hướng chính" : "Primary navigation") : undefined}
           >
             {navItems.map((item) => (
               <a
@@ -125,7 +127,7 @@ export default function Header({
           </nav>
 
           <div data-home-v2-header-actions={isHomeV2 ? "true" : undefined} className={`z-[110] flex items-center gap-2 md:gap-4 ${isHomeV2 ? "min-[1200px]:ml-auto" : ""}`}>
-            <Link
+            {languageOptions ? <LanguageSwitcher locale={lang} options={languageOptions} /> : <Link
               href={baseLanguageHref}
               onClick={(event) => {
                 event.preventDefault();
@@ -143,7 +145,7 @@ export default function Header({
                 : "w-9 h-9 flex items-center justify-center bg-epicDark text-white rounded-full font-bold text-[10px] uppercase shadow-md"}
             >
               {languageLabel}
-            </Link>
+            </Link>}
 
             {bookingAction || <button
               type="button"
@@ -163,7 +165,7 @@ export default function Header({
               type={isHomeV2 ? "button" : undefined}
               data-home-v2-menu-control={isHomeV2 ? "true" : undefined}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label={isHomeV2 ? (isMenuOpen ? "Close navigation" : "Open navigation") : undefined}
+              aria-label={isHomeV2 ? (lang === "vi" ? (isMenuOpen ? "Đóng menu" : "Mở menu") : (isMenuOpen ? "Close navigation" : "Open navigation")) : undefined}
               aria-expanded={isHomeV2 ? isMenuOpen : undefined}
               aria-controls={isHomeV2 ? menuId : undefined}
               className={isHomeV2
