@@ -86,7 +86,7 @@ export default function HomeV2Footer({ t, lang = "en", links, description, mapIn
     { href: "/ru/surf-guide", label: "Гид по серфингу" },
   ] : seoPageLinks;
   const year = new Date().getFullYear();
-  const email = "epicsurf@gmail.com";
+  const email = "epicsurfvn@gmail.com";
   const brandDescription = isRu ? t.heroSub : "Best surf school on My Khe Beach.\nExpert\ncoaching, top-tier gear, and the best\ncommunity.";
 
   return (

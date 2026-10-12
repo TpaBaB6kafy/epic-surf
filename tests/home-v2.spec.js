@@ -205,7 +205,7 @@ test.describe("Home V2 approved fluid regression", () => {
     await ready(page, "/");
     const footer = page.locator("[data-home-v2-footer]");
     await expect(footer.locator("[data-footer-quick-link]")).toHaveCount(5);
-    await expect(footer.locator('[data-footer-contact="email"]')).toHaveAttribute("href", "mailto:epicsurf@gmail.com");
+    await expect(footer.locator('[data-footer-contact="email"]')).toHaveAttribute("href", "mailto:epicsurfvn@gmail.com");
     await expect(footer.locator('[data-footer-contact="phone"]')).toHaveAttribute("href", "tel:+84383880164");
     await expect(footer.locator('[data-footer-contact="partners"]')).toHaveAttribute("href", "/partners");
     await expect(footer.locator("[data-footer-social]")).toHaveCount(4);
