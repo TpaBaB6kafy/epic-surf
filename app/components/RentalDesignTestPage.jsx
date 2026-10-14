@@ -16,9 +16,8 @@ import { FacebookIcon, InstagramIcon } from "./Icons";
 import { links } from "../data/links";
 import { liveCam } from "../data/liveCam";
 import {
-  boardLevelLabels,
   boardTypeLabels,
-  getBoardLevelLabel,
+  getBoardLevelSummary,
   getBoardTrackingPayload,
   getBoardTypeLabel,
   getLocalizedBoard,
@@ -105,6 +104,7 @@ const localeUi = {
     finalCta: "Book or\nmessage Epic",
     call: "Call",
     specs: ["Length", "Type", "Level", "Conditions", "Includes"],
+    waves: "Waves",
     leash: "Leash",
     backLong: "Back to Epic Surf",
     backShort: "Epic Surf",
@@ -143,6 +143,7 @@ const localeUi = {
     finalCta: "Написать\nEpic",
     call: "Позвонить",
     specs: ["Длина", "Тип", "Уровень", "Условия", "В комплекте"],
+    waves: "Волны",
     leash: "Лиш",
     backLong: "Назад в Epic Surf",
     backShort: "Epic Surf",
@@ -337,17 +338,12 @@ function referencePrice(price) {
   return price.amount.toLocaleString("de-DE");
 }
 
-function readableLevels(board, locale) {
-  return board.level.map((level) => (
-    locale === "ru" ? getBoardLevelLabel(level, "ru") : boardLevelLabels[level] || level
-  )).join(", ");
-}
-
 function boardSpecs(board, locale, ui) {
   return [
     [ui.specs[0], board.size],
-    [ui.specs[1], locale === "ru" ? getBoardTypeLabel(board.type, "ru") : boardTypeLabels[board.type] || board.type],
-    [ui.specs[2], readableLevels(board, locale)],
+    [ui.specs[1], board.finSetup || (locale === "ru" ? getBoardTypeLabel(board.type, "ru") : boardTypeLabels[board.type] || board.type)],
+    [ui.specs[2], getBoardLevelSummary(board, locale)],
+    ...(board.finSetup ? [[ui.waves, board.waves]] : []),
   ];
 }
 
@@ -730,6 +726,10 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
   const showroomImageRef = useRef(null);
   const dragStateRef = useRef({ active: false, moved: false, startX: 0, startScroll: 0 });
   const activeBoard = boards.find((board) => board.id === activeBoardId) || initialBoard;
+  const lightboxViews = lightboxAssets.map((view) => ({
+    ...view,
+    label: activeBoard.imageLabels?.[view.key] || view.label,
+  }));
   const activeAdjustment = getImageAdjustment(imageAdjustments, activeBoard.id, tunerSlot);
   const t = translations[lang];
   const [, , , rentalProcess, pickupDetails, lessonDetails] = content.infoCards;
@@ -1006,12 +1006,12 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                   <button
                     type="button"
                     onClick={() => setLightboxAsset(activeMobileAsset)}
-                    aria-label={`Open ${activeBoard.displayName || activeBoard.name} ${activeMobileAsset} view`}
+                    aria-label={`Open ${activeBoard.displayName || activeBoard.name} ${activeBoard.imageLabels?.[activeMobileAsset] || activeMobileAsset}`}
                     className="group absolute inset-0 cursor-zoom-in shadow-xl shadow-epicDark/60"
                   >
                     <Image
                       src={activeBoard.processedImages[activeMobileAsset]}
-                      alt={`${activeBoard.displayName || activeBoard.name} ${activeMobileAsset} view`}
+                      alt={`${activeBoard.displayName || activeBoard.name} ${activeBoard.imageLabels?.[activeMobileAsset] || activeMobileAsset}`}
                       data-image-slot={activeMobileAsset}
                       fill
                       priority
@@ -1027,12 +1027,12 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                 </div>
 
                 <div className="grid grid-cols-3 gap-2.5 bg-epicDark pt-2 lg:hidden">
-                  {lightboxAssets.map(({ key, label }) => (
+                  {lightboxViews.map(({ key, label }) => (
                     <button
                       key={key}
                       type="button"
                       onClick={() => setActiveMobileAsset(key)}
-                      aria-label={`Show ${activeBoard.displayName || activeBoard.name} ${key} image`}
+                      aria-label={`Show ${activeBoard.displayName || activeBoard.name} ${label}`}
                       aria-pressed={activeMobileAsset === key}
                       className={`relative h-32 overflow-hidden border-2 bg-epicDark transition-colors sm:h-36 ${activeMobileAsset === key ? "border-epicRed shadow-[4px_4px_0_0_#FE746A]" : "border-epicWhite/35"}`}
                     >
@@ -1073,12 +1073,12 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                         <button
                           type="button"
                           onClick={() => setLightboxAsset(asset)}
-                          aria-label={`Open ${activeBoard.displayName || activeBoard.name} ${asset} view`}
+                          aria-label={`Open ${activeBoard.displayName || activeBoard.name} ${activeBoard.imageLabels?.[asset] || asset}`}
                           className="absolute inset-0 cursor-zoom-in"
                         >
                           <Image
                             src={activeBoard.processedImages[asset]}
-                            alt={`${activeBoard.displayName || activeBoard.name} ${label}`}
+                            alt={`${activeBoard.displayName || activeBoard.name} ${activeBoard.imageLabels?.[asset] || label}`}
                             data-image-slot={asset}
                             fill
                             priority={asset === "front"}
@@ -1111,7 +1111,7 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
                 <p className="mt-7 max-w-[420px] text-[15px] font-semibold leading-7 text-epicWhite/82">{activeBoard.description}</p>
                 <dl data-section="rental-board-specs" className="mt-6 w-full min-w-0 max-w-[420px]">
                   {boardSpecs(activeBoard, lang, ui).map(([label, value]) => (
-                    <div key={label} data-role="rental-spec-row" className="grid min-w-0 grid-cols-[minmax(0,1fr)_minmax(88px,auto)] gap-4 border-t-2 border-epicRed py-3 text-sm leading-5 last:border-b-2">
+                    <div key={label} data-role="rental-spec-row" className={`grid min-w-0 ${label === ui.waves ? "grid-cols-[64px_minmax(0,1fr)]" : "grid-cols-[minmax(0,1fr)_minmax(88px,auto)]"} gap-4 border-t-2 border-epicRed py-3 text-sm leading-5 last:border-b-2`}>
                       <dt className="min-w-0 text-left font-bold text-epicWhite/78">{label}</dt>
                       <dd className="min-w-0 break-words text-right font-black text-epicWhite">{value}</dd>
                     </div>
@@ -1491,7 +1491,7 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
           <div className="relative flex min-h-0 w-full max-w-6xl flex-1 items-center justify-center">
             <Image
               src={activeBoard.processedImages[`${lightboxAsset}-full`]}
-              alt={`${activeBoard.displayName || activeBoard.name} ${lightboxAsset} enlarged view`}
+              alt={`${activeBoard.displayName || activeBoard.name} ${activeBoard.imageLabels?.[lightboxAsset] || lightboxAsset}`}
               fill
               unoptimized
               sizes="100vw"
@@ -1516,7 +1516,7 @@ export default function RentalDesignTestPage({ locale = "en", pageContent = null
           </div>
 
           <div className="mt-4 grid w-full max-w-lg grid-cols-3 gap-2 sm:gap-3">
-            {lightboxAssets.map(({ key, label }) => (
+            {lightboxViews.map(({ key, label }) => (
               <button
                 key={key}
                 type="button"

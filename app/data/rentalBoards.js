@@ -58,6 +58,14 @@ function boardBase({
   bestFor,
   bestForRu,
   recommended = false,
+  image = boardImage(number),
+  backImage = boardBackImage(number),
+  images = [image],
+  imageLabels,
+  imageLabelsRu,
+  finSetup,
+  levelLabel,
+  levelLabelRu,
 }) {
   return {
     id: `board-${String(number).padStart(2, "0")}`,
@@ -65,6 +73,8 @@ function boardBase({
     type,
     size,
     level,
+    finSetup,
+    levelLabel,
     price: boardPrice(price),
     waves,
     bestFor,
@@ -74,11 +84,14 @@ function boardBase({
         waves: wavesRu,
         bestFor: bestForRu,
         description: descriptionRu,
+        imageLabels: imageLabelsRu,
+        levelLabel: levelLabelRu,
       },
     },
-    image: boardImage(number),
-    backImage: boardBackImage(number),
-    images: [boardImage(number)],
+    image,
+    backImage,
+    images,
+    imageLabels,
     available: true,
     recommended,
     visualScale: 1,
@@ -258,6 +271,70 @@ export const rentalBoards = [
     description: "A great step-up from a softboard. Easy to paddle, catches waves effortlessly, and remains forgiving. Perfect for building confidence and progressing in a wide range of conditions.",
     descriptionRu: "Отличная доска для перехода с софтборда. Легко ловит волны, хорошо разгоняется и прощает ошибки. Идеальный вариант для первых самостоятельных катаний на лайн-апе.",
   }),
+  boardBase({
+    number: 13,
+    name: "Fish Epic Surf",
+    type: "fish",
+    size: "5'6",
+    finSetup: "Twin Fin",
+    level: ["intermediate", "advanced"],
+    levelLabelRu: "средний, продвинутый",
+    price: 350000,
+    waves: "Small and medium mellow waves",
+    wavesRu: "Маленькие и средние пологие волны",
+    bestFor: ["Small and medium mellow waves", "Confident wave catching", "Trying a short board"],
+    bestForRu: ["Маленькие и средние пологие волны", "Уверенная ловля волн", "Знакомство с короткой доской"],
+    description: "Fast, manoeuvrable, and stylish. For surfers who already catch waves confidently and want to try a short board.",
+    descriptionRu: "Быстрый, манёвренный и стильный. Для тех, кто уже уверенно ловит волны и хочет попробовать короткую доску.",
+    image: "/rentals/boards/processed/board-13/front-full.webp",
+    backImage: "/rentals/boards/processed/board-13/back-full.webp",
+    images: ["/rentals/boards/processed/board-13/front-full.webp", "/rentals/boards/processed/board-13/back-full.webp"],
+    imageLabels: { front: "Deck", back: "Another angle", fins: "Swallow tail" },
+    imageLabelsRu: { front: "Верх доски", back: "Другой ракурс", fins: "Хвост доски" },
+  }),
+  boardBase({
+    number: 14,
+    name: "Longboard EPIC Surf 9'0",
+    type: "longboard",
+    size: "9'0",
+    finSetup: "2+1",
+    level: ["beginner", "intermediate"],
+    levelLabelRu: "начинающий, средний",
+    price: 350000,
+    waves: "Small and medium waves",
+    wavesRu: "Маленькие и средние",
+    bestFor: ["Small and medium waves", "First steps in surfing", "First turns"],
+    bestForRu: ["Маленькие и средние волны", "Первые шаги в сёрфинге", "Первые повороты"],
+    description: "A stable and versatile board that is ideal for your first steps in surfing and continued progression. Helps you catch waves more easily, stand up confidently, and learn your first turns.",
+    descriptionRu: "Стабильная и универсальная доска, которая отлично подходит для первых шагов в сёрфинге и дальнейшего прогресса. Помогает легче ловить волны, уверенно вставать и осваивать первые повороты.",
+    image: "/rentals/boards/processed/board-14/front-full.webp",
+    backImage: "/rentals/boards/processed/board-14/back-full.webp",
+    images: ["/rentals/boards/processed/board-14/front-full.webp", "/rentals/boards/processed/board-14/back-full.webp"],
+    imageLabels: { front: "Deck", back: "Underside", fins: "2+1 fin boxes" },
+    imageLabelsRu: { front: "Верх доски", back: "Низ доски", fins: "Крепления 2+1" },
+  }),
+  boardBase({
+    number: 15,
+    name: "Longboard EPIC Surf",
+    type: "longboard",
+    size: "9'0",
+    finSetup: "Single Fin",
+    level: ["beginner", "improver", "intermediate", "advanced"],
+    levelLabel: "All levels",
+    levelLabelRu: "все уровни",
+    price: 350000,
+    waves: "Small and medium mellow waves",
+    wavesRu: "Маленькие и средние пологие волны",
+    bestFor: ["Small and medium mellow waves", "Learning and technique practice", "Cross-steps and first noserides"],
+    bestForRu: ["Маленькие и средние пологие волны", "Обучение и отработка техники", "Кросс-степы и первые попытки ноузрайда"],
+    description: "A classic longboard for relaxed surfing. Ideal for learning, refining technique, cross-steps, and your first attempts at noseriding.",
+    descriptionRu: "Классический лонгборд для расслабленного катания. Отлично подходит для обучения, отработки техники, кросс-степов и первых попыток ноузрайда.",
+    image: "/rentals/boards/processed/board-15/front-full.webp",
+    backImage: "/rentals/boards/processed/board-15/back-full.webp",
+    images: ["/rentals/boards/processed/board-15/front-full.webp", "/rentals/boards/processed/board-15/back-full.webp"],
+    imageLabels: { front: "Deck", back: "Underside", fins: "Single fin box" },
+    imageLabelsRu: { front: "Верх доски", back: "Низ доски", fins: "Крепление сингл-фина" },
+  }),
 ];
 
 function normalizedLanguage(lang = "en") {
@@ -276,6 +353,13 @@ export function getBoardLevelLabel(level, lang = "en") {
     : boardLevelLabels[level] || level;
 }
 
+export function getBoardLevelSummary(board, lang = "en") {
+  const label = normalizedLanguage(lang) === "ru"
+    ? board.localized?.ru?.levelLabel || board.levelLabel
+    : board.levelLabel;
+  return label || board.level.map((level) => getBoardLevelLabel(level, lang)).join(", ");
+}
+
 export function getLocalizedBoard(board, lang = "en") {
   if (!board || normalizedLanguage(lang) !== "ru") return board;
 
@@ -287,6 +371,7 @@ export function getLocalizedBoard(board, lang = "en") {
     description: localized.description || board.description,
     bestFor: localized.bestFor || board.bestFor,
     waves: localized.waves || board.waves,
+    imageLabels: localized.imageLabels || board.imageLabels,
   };
 }
 

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUp, MessageCircle, X } from "lucide-react";
 import { buildTelegramUrl, buildWhatsAppUrl, buildZaloUrl, trackEvent } from "../utils/tracking";
-import { getBoardLevelLabel, getBoardTrackingPayload } from "../data/rentalBoards";
+import { getBoardLevelSummary, getBoardTrackingPayload } from "../data/rentalBoards";
 
 export default function RentalModal({ isRentalModalOpen, setRentalModalOpen, t, links, selectedBoard = null }) {
   const language = t.btnBook === "Book Now" ? "en" : "ru";
@@ -42,7 +42,7 @@ export default function RentalModal({ isRentalModalOpen, setRentalModalOpen, t, 
   const message = `${baseMessage}${selectedBoardMessage}`;
   const boardPayload = getBoardTrackingPayload(selectedBoard);
   const selectedBoardMeta = selectedBoard
-    ? `${selectedBoard.size} - ${selectedBoard.level.map((level) => getBoardLevelLabel(level, language)).join(", ")}`
+    ? `${selectedBoard.size} - ${getBoardLevelSummary(selectedBoard, language)}`
     : "";
   const handleMessengerClick = (event, eventName, label, hrefBuilder) => {
     if (hrefBuilder) {
