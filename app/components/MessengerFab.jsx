@@ -10,6 +10,7 @@ export default function MessengerFab({ links, lang = "en", ChatWhatsAppIcon, Cha
   const isHomeV2Variant = variant === "homeV2";
   const message = serviceType === "partnership"
     ? (lang === "vi" ? "Xin chào Epic Surf School! Tôi muốn trao đổi về việc hợp tác." : lang === "ru" ? "Привет! Хочу обсудить партнёрство с Epic Surf School." : "Hi Epic Surf School! I want to discuss a partnership.")
+    : serviceType === "board_rental" ? (lang === "ru" ? "Привет! Хочу арендовать доску для серфинга в EPIC." : "Hi! I would like to rent a surfboard at EPIC.")
     : (lang === "vi" ? "Xin chào Epic Surf School! Tôi muốn tìm hiểu thêm về trường." : lang === "ru" ? "Привет! Хочу задать вопрос про Epic Surf School." : "Hi! I have a question about Epic Surf School.");
   const channels = [
     { name: "whatsapp", label: "WhatsApp", Icon: ChatWhatsAppIcon, build: buildWhatsAppUrl },

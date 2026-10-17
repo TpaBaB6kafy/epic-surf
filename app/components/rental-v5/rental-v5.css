@@ -1,0 +1,306 @@
+@font-face { font-family: "EPIC Rental Display"; src: url('/design/service-page/Neucha-Regular.ttf') format('truetype'); font-display: swap; }
+
+/* The public rental routes opt in to their own composition and the shared frame. */
+.rental-v5 { --rv-display: "EPIC Rental Display", Arial, sans-serif; }
+.rental-v5 .epic-landing.rental-v5-shell { background: var(--ds-graphite); font: 400 18px/1.6 var(--ds-font-label); }
+.rental-v5 .rv-section { padding-block: 68px; scroll-margin-top: 104px; }
+.rental-v5 .rv-section h2 { font: 400 clamp(32px,3vw,44px)/1.1 var(--rv-display); text-transform: uppercase; letter-spacing: 0; text-wrap: balance; }
+.rental-v5 .rv-section h3 { font-family: var(--ds-font-label); }
+.rental-v5 .rv-skip-link { position: fixed; z-index: 200; left: 20px; top: 8px; padding: 12px 18px; background: var(--ds-paper); color: var(--ds-ink); translate: 0 -150%; }
+.rental-v5 .rv-skip-link:focus { translate: none; }
+.rental-v5 .ds-action > span { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.rental-v5 .ds-action > span > svg { flex-shrink: 0; }
+.rental-v5.rental-v5 .epic-landing [data-home-v2-header-frame] { width: var(--ds-stage-width); max-width: none; }
+.rental-v5.rental-v5 .epic-landing [data-home-v2-book-now] { background: var(--ds-fill-coral); border: 3px solid var(--ds-coral-edge); box-shadow: var(--ds-shadow-coral); color: var(--ds-action-ink); }
+.rental-v5 .rv-hero { position: relative; height: clamp(680px,55vw,900px); background: var(--ds-deep); isolation: isolate; }
+.rental-v5 .rv-hero-picture { position: absolute; inset: 0; z-index: -2; display: block; }
+.rental-v5 .rv-hero-art { object-fit: cover; object-position: center 56%; }
+.rental-v5 .rv-hero:before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(180deg,rgb(16 25 25 / 42%),transparent 68%),linear-gradient(90deg,rgb(16 25 25 / 58%),transparent 70%); }
+.rental-v5 .rv-hero:after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 110px; background: linear-gradient(transparent,var(--ds-graphite)); pointer-events: none; }
+.rental-v5 .rv-hero-frame { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; align-items: flex-start; padding-block: 66px 58px; }
+.rental-v5 .rv-hero h1 { margin-top: 0; max-width: 13ch; font: 400 clamp(72px,6.1vw,104px)/1.04 var(--rv-display); text-transform: uppercase; letter-spacing: .005em; text-shadow: 0 3px 12px rgb(0 0 0 / 20%); }
+.rental-v5 .rv-hero-price { margin-top: 39px; font: 500 20px/1.45 var(--ds-font-label); text-shadow: 0 2px 10px #000; }
+.rental-v5 .rv-hero-price strong { color: var(--ds-mint); font-size: 29px; font-weight: 800; }
+.rental-v5 .rv-hero-actions { display: flex; gap: 20px; margin-top: auto; }
+.rental-v5 .rv-hero-actions .ds-action { width: 280px; max-width: 100%; min-width: 0; }
+/* One continuous surface, using the partner page's calm graphite role. */
+.rental-v5 .rv-sand { background: var(--ds-graphite); }
+.rental-v5 .rv-catalog { padding-top: 40px; padding-bottom: 20px; }
+.rental-v5 .rv-catalog-heading { margin-bottom: 28px; }
+.rental-v5 .rv-catalog-heading p { margin-top: 12px; color: var(--ds-muted-light); font-size: 16px; }
+.rental-v5 .rv-board-layout { display: grid; grid-template-columns: minmax(0,2.1fr) minmax(0,1fr); grid-template-areas: 'gallery copy' 'selector selector'; gap: 28px 54px; }
+.rental-v5 :is(.rv-mobile-board-title,.rv-mobile-booking) { display: none; }
+.rental-v5 .rv-gallery { grid-area: gallery; display: grid; grid-template-columns: minmax(0,1.95fr) minmax(0,1fr); grid-template-rows: 1fr 1fr; gap: 16px; align-self: stretch; min-width: 0; min-height: 580px; }
+.rental-v5 .rv-photo { position: relative; display: block; overflow: hidden; border-radius: clamp(32px,3.6vw,64px); border: 0; background: var(--ds-graphite); box-shadow: var(--ds-shadow-photo); min-width: 0; min-height: 0; padding: 0; touch-action: pan-y; }
+.rental-v5 .rv-photo-front { grid-row: 1 / 3; }
+.rental-v5 .rv-photo img { object-fit: cover; object-position: center; pointer-events: none; }
+.rental-v5 .rv-photo-fins img { object-position: center bottom; }
+.rental-v5 .rv-board-copy { grid-area: copy; min-width: 0; display: flex; flex-direction: column; }
+.rental-v5 :is(.rv-board-title-stack,.rv-board-description-stack,.rv-board-specs-stack) { display: grid; min-width: 0; }
+.rental-v5 .rv-board-stack-entry { grid-area: 1 / 1; min-width: 0; visibility: hidden; }
+.rental-v5 .rv-board-stack-entry[data-active=true] { visibility: visible; }
+.rental-v5 .rv-board-description-stack { margin-top: 18px; }
+.rental-v5 .rv-board-specs-stack { margin-top: 20px; }
+.rental-v5 .rv-board-description-stack .rv-board-description,.rental-v5 .rv-board-specs-stack .rv-specs { margin-top: 0; }
+.rental-v5 :is(.rv-desktop-board-title,.rv-mobile-board-title) > span { color: var(--ds-mint); font: 700 12px/1.3 var(--ds-font-label); text-transform: uppercase; letter-spacing: .08em; }
+.rental-v5 :is(.rv-desktop-board-title,.rv-mobile-board-title) h3 { margin-top: 12px; font: 700 clamp(27px,2.3vw,36px)/1.15 var(--ds-font-label); text-transform: none; }
+.rental-v5 .rv-board-description { color: var(--ds-muted-light); margin-top: 18px; font-size: 16px; line-height: 1.5; }
+.rental-v5 .rv-specs { display: grid; gap: 10px; margin: 20px 0 0; padding-top: 19px; border-top: 1px solid rgb(255 255 255 / 28%); font-size: 14px; line-height: 1.5; }
+.rental-v5 .rv-specs > div { display: grid; grid-template-columns: .9fr 1.4fr; gap: 12px; }
+.rental-v5 .rv-specs dt { color: var(--ds-muted-light); }
+.rental-v5 .rv-specs dd { margin: 0; text-align: right; font-weight: 600; overflow-wrap: anywhere; }
+.rental-v5 .rv-board-price { margin-top: auto; padding-top: 22px; color: var(--ds-mint); font: 800 34px/1.25 var(--ds-font-label); }
+.rental-v5 .rv-board-price span { color: var(--ds-paper); font-size: 17px; }
+.rental-v5 .rv-duration { color: var(--ds-muted-light); font-size: 15px; margin-top: 4px; }
+.rental-v5 .rv-board-copy > .ds-action { width: min(100%,320px); margin-top: 24px; }
+.rental-v5 .rv-availability { color: var(--ds-muted-light); font-size: 13px; line-height: 1.55; margin-top: 20px; }
+.rental-v5 .rv-board-selector { grid-area: selector; display: grid; grid-template-columns: 76px minmax(0,1fr) 76px; align-items: center; gap: 22px; min-width: 0; }
+.rental-v5 .rv-board-arrow { width: 76px; height: 76px; border: 2px solid #ffffff24; background: #272727c4; box-shadow: inset 0 1px 2px #ffffff12,0 3px 10px #0005; color: var(--ds-paper); }
+.rental-v5 .rv-board-arrow:hover { background: #444; border-color: #ffffff60; }
+.rental-v5 .rv-board-arrow svg { width: 32px; height: 32px; }
+.rental-v5 .rv-swipe-hint { display: none; }
+.rental-v5 .rv-board-rail { position: relative; display: flex; gap: 20px; min-width: 0; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-width: none; padding: 5px 3px 10px; }
+.rental-v5 .rv-board-rail::-webkit-scrollbar { display: none; }
+.rental-v5 .rv-board-thumb { position: relative; flex: 0 0 calc((100% - 60px) / 4); aspect-ratio: 1.38; border: 2px solid transparent; background: #344248; border-radius: 22px; overflow: hidden; padding: 0; scroll-snap-align: center; }
+.rental-v5 .rv-board-thumb[aria-pressed=true] { border-color: var(--ds-mint); }
+.rental-v5 .rv-board-thumb img { object-fit: contain; pointer-events: none; }
+.rental-v5 .rv-board-thumb > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.rental-v5 .rv-process { padding-top: 28px; padding-bottom: 48px; }
+.rental-v5 .rv-process ol { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 0; margin: 32px 0 0; padding: 0; list-style: none; }
+.rental-v5 .rv-process li { position: relative; border-top: 1px solid rgb(255 255 255 / 40%); padding: 18px 28px 0 0; }
+.rental-v5 .rv-step-number { position: absolute; left: 0; top: -7px; width: 14px; height: 14px; border-radius: 50%; background: var(--ds-coral); font-size: 0; box-shadow: 0 0 0 5px var(--ds-graphite); }
+.rental-v5 .rv-process h3 { font-size: 16px; margin-top: 0; }
+.rental-v5 .rv-process p { font-size: 14px; line-height: 1.5; color: var(--ds-muted-light); margin-top: 7px; }
+.rental-v5 .rv-comparison { position: relative; isolation: isolate; overflow: hidden; padding-block: 58px; }
+.rental-v5 .rv-comparison-map { width: min(100%,920px); margin: 36px auto 0; }
+.rental-v5 .rv-map-canvas { position: relative; width: 100%; aspect-ratio: 1414 / 490; }
+.rental-v5 .rv-map-canvas > img { display: block; width: 100%; height: auto; opacity: .48; }
+.rental-v5 .rv-school-marker { position: absolute; left: 55.162659%; top: 44.489796%; transform: translate(-14px,-36px); display: flex; align-items: center; gap: 6px; height: 44px; min-width: 80px; padding-block: 8px; text-decoration: none; }
+.rental-v5 .rv-school-marker svg { color: var(--ds-coral); fill: var(--ds-graphite); flex-shrink: 0; }
+.rental-v5 .rv-school-marker span { padding: 3px 8px; border-radius: 5px; background: var(--ds-graphite); color: var(--ds-paper); font-size: 12px; font-weight: 800; }
+.rental-v5 .rv-comparison-map figcaption { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px 20px; border-top: 1px solid #ffffff20; padding-top: 8px; font-size: 13px; color: var(--ds-muted-light); }
+.rental-v5 .rv-map-link { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; color: var(--ds-mint); font-size: 13px; }
+.rental-v5 .rv-choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 96px; margin-top: 34px; }
+.rental-v5 .rv-choice-grid article + article { border-left: 1px solid rgb(255 255 255 / 24%); padding-left: 48px; }
+.rental-v5 .rv-choice-grid h3 { font: 400 31px/1.1 var(--rv-display); color: var(--ds-mint); }
+.rental-v5 .rv-choice-grid article + article h3 { color: var(--ds-coral); }
+.rental-v5 .rv-choice-grid ul { list-style: disc; padding-left: 19px; margin: 20px 0 0; display: grid; gap: 12px; }
+.rental-v5 .rv-choice-grid li::marker { color: var(--ds-mint); }
+.rental-v5 .rv-choice-grid :is(li,p) { color: var(--ds-muted-light); font-size: 17px; line-height: 1.5; }
+.rental-v5 .rv-choice-grid p { margin-top: 21px; }
+.rental-v5 .rv-choice-grid .ds-action { width: 300px; max-width: 100%; margin-top: 27px; }
+.rental-v5 .rv-pickup-grid { display: grid; grid-template-columns: minmax(0,1.25fr) minmax(0,1fr); gap: 54px; align-items: stretch; }
+.rental-v5 .rv-pickup-photo { position: relative; min-height: 480px; border-radius: clamp(36px,4.5vw,78px); overflow: hidden; }
+.rental-v5 .rv-pickup-photo img { object-fit: cover; object-position: center; }
+.rental-v5 .rv-pickup-copy p { color: var(--ds-muted-light); font-size: 16px; line-height: 1.55; margin-top: 18px; }
+.rental-v5 .rv-pickup-copy > .ds-action { width: 280px; max-width: 100%; margin-top: 22px; font-size: 14px; }
+.rental-v5 .rv-spot-camera { margin-top: 30px; padding-top: 24px; border-top: 1px solid #ffffff30; }
+.rental-v5 .rv-spot-camera h3 { font: 400 27px/1.15 var(--rv-display); }
+.rental-v5 .rv-spot-camera p { font-size: 14px; margin-top: 10px; }
+.rental-v5 .rv-livecam { min-width: 0; }
+.rental-v5 .rv-livecam-media { position: relative; min-height: 92px; overflow: hidden; border-radius: 20px; background: #1c2524b0; margin-top: 17px; }
+.rental-v5 .rv-livecam[data-live-cam-state=loading] .rv-livecam-media,.rental-v5 .rv-livecam[data-live-cam-state=loaded] .rv-livecam-media { aspect-ratio: 16 / 9; }
+.rental-v5 .rv-livecam-start { display: flex; align-items: center; gap: 20px; width: 100%; min-height: 92px; padding: 18px 24px; background: none; border: 1px solid #ffffff30; border-radius: inherit; color: var(--ds-paper); text-align: left; font: 600 15px/1.4 var(--ds-font-label); }
+.rental-v5 .rv-livecam-start > svg { color: var(--ds-mint); flex-shrink: 0; }
+.rental-v5 .rv-livecam-start small { display: block; font-size: 12px; font-weight: 400; color: var(--ds-muted-light); margin-top: 5px; }
+.rental-v5 .rv-livecam-start:hover { border-color: var(--ds-mint); }
+.rental-v5 .rv-livecam-media > p { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 8px; align-items: center; justify-content: center; color: var(--ds-mint); font-size: 15px; }
+.rental-v5 .rv-livecam-media > p span { font-size: 12px; color: var(--ds-muted-light); }
+.rental-v5 .rv-livecam iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.rental-v5 .rv-livecam-meta { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 12px; }
+.rental-v5 .rv-livecam-meta > span,.rental-v5 .rv-livecam-meta a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 13px; }
+.rental-v5 .rv-livecam-meta a { color: var(--ds-mint); font-weight: 700; }
+.rental-v5 .rv-livecam-meta > span svg { color: var(--ds-coral); }
+.rental-v5 .rv-faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 64px; margin-top: 28px; }
+.rental-v5 .rv-faq .ds-faq-item { border-bottom-color: rgb(255 255 255 / 35%); }
+.rental-v5 .rv-faq .ds-faq-item > button { font: 600 17px/1.45 var(--ds-font-label); min-height: 86px; }
+.rental-v5 .rv-faq .ds-faq-symbol:before { display: none; }
+.rental-v5 .rv-faq .ds-faq-answer { color: var(--ds-muted-light); font-size: 16px; }
+.rental-v5 .rv-related h2 { color: var(--ds-mint); }
+.rental-v5 .rv-related-list { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3,minmax(110px,auto)); gap: 0 54px; margin-top: 32px; }
+.rental-v5 .rv-related-list > a { display: grid; grid-template-columns: 104px minmax(0,1fr) 24px; gap: 22px; align-items: center; padding-block: 20px; border-bottom: 1px solid #ffffff38; text-decoration: none; }
+.rental-v5 .rv-related-photo { position: relative; display: block; width: 104px; height: 92px; border-radius: 16px; overflow: hidden; }
+.rental-v5 .rv-related-photo img { object-fit: cover; transition: transform .25s ease; }
+.rental-v5 .rv-related-list a:hover img { transform: scale(1.04); }
+.rental-v5 .rv-related-list strong { font: 400 26px/1.1 var(--rv-display); text-transform: uppercase; }
+.rental-v5 .rv-related-list > a > span:nth-child(2) > span { display: block; margin-top: 9px; color: var(--ds-muted-light); font-size: 13px; line-height: 1.5; }
+.rental-v5 .rv-related-list > a:first-child { grid-row: 1 / 4; display: flex; flex-wrap: wrap; align-content: start; padding-top: 0; gap: 22px; border: 0; }
+.rental-v5 .rv-related-list > a:first-child .rv-related-photo { width: 100%; height: auto; aspect-ratio: 1.65; border-radius: 32px; }
+.rental-v5 .rv-related-list > a:first-child > span:nth-child(2) { flex: 1; }
+.rental-v5 .rv-related-list > a:first-child strong { font-size: 36px; }
+.rental-v5 .rv-related-list a:hover strong { color: var(--ds-coral); }
+.rental-v5 .rv-final { position: relative; isolation: isolate; margin-top: 0; padding-block: 100px 90px; background: var(--ds-sea) url('/design/partners-v4/sea-texture.webp') center / max(100vw,1254px) auto no-repeat; }
+.rental-v5 .rv-final:before { content: ''; position: absolute; z-index: -1; inset: 0; background: rgb(0 0 0 / 18%); pointer-events: none; }
+.rental-v5 .ds-lesson-footer { background: var(--ds-graphite); }
+.rental-v5 .rv-final-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,480px); align-items: center; gap: 44px; }
+.rental-v5 .rv-final p { font-size: 17px; margin-top: 16px; }
+.rental-v5 .rv-final-actions { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px 16px; width: 100%; max-width: 480px; justify-self: end; }
+.rental-v5 .rv-final .ds-action { font-size: 15px; min-width: 0; }
+.rental-v5 .rv-lightbox { width: min(1100px,calc(100vw - 32px)); max-height: calc(100dvh - 32px); padding: 22px; color: var(--ds-paper); background: var(--ds-deep); }
+.rental-v5 .rv-lightbox .ds-dialog-header h2 { font-size: 23px; }
+.rental-v5 .rv-lightbox-stage { position: relative; height: min(68vh,720px); touch-action: pan-y; }
+.rental-v5 .rv-lightbox-stage img { object-fit: contain; }
+.rental-v5 .rv-lightbox-arrow { position: absolute; top: calc(50% - 29px); left: 6px; }
+.rental-v5 .rv-lightbox-arrow:last-child { right: 6px; left: auto; }
+.rental-v5 .rv-lightbox-views { display: flex; gap: 12px; justify-content: center; margin-top: 14px; }
+.rental-v5 .rv-lightbox-views button { min-height: 44px; padding: 9px 16px; border-radius: 999px; border: 1px solid #666; background: var(--ds-graphite); color: var(--ds-paper); font-size: 13px; }
+.rental-v5 .rv-lightbox-views button[aria-pressed=true] { border-color: var(--ds-mint); color: var(--ds-mint); }
+.rental-v5 .rv-tuner { position: fixed; z-index: 90; bottom: 12px; right: 12px; width: min(300px,calc(100vw - 24px)); max-height: 75dvh; overflow-y: auto; padding: 16px; background: var(--ds-deep); border: 1px solid #666; border-radius: 16px; font: 500 12px/1.5 var(--ds-font-label); }
+.rental-v5 .rv-tuner label { display: grid; margin-top: 16px; }
+.rental-v5 .rv-tuner input { width: 100%; }
+.rental-v5 .rv-tuner button { min-height: 36px; padding: 8px; margin: 4px; border: 1px solid #666; background: #333; border-radius: 8px; color: white; }
+.rental-v5 .rv-tuner-slots { display: flex; flex-wrap: wrap; }
+
+/* The map joins the desktop comparison; its school anchor stays in the image. */
+@media(min-width:1200px) {
+  .rental-v5 .rv-comparison-frame { position: relative; min-height: 360px; padding-bottom: 48px; }
+  .rental-v5 .rv-comparison-frame > h2,.rental-v5 .rv-choice-grid { position: relative; z-index: 1; }
+  .rental-v5 .rv-comparison-map { position: absolute; top: 38px; right: -420px; width: 1000px; max-width: none; margin: 0; pointer-events: none; }
+  .rental-v5 .rv-map-canvas > img { opacity: .4; mask-image: linear-gradient(90deg,transparent,#0003 40%,#0006 56%,black 70%,black 85%,transparent),linear-gradient(transparent,black 16%,black 72%,transparent); mask-composite: intersect; }
+  .rental-v5 .rv-school-marker { z-index: 2; pointer-events: auto; }
+  .rental-v5 .rv-school-marker:hover span { color: var(--ds-mint); }
+  .rental-v5 .rv-school-marker:focus-visible { outline: 3px solid var(--ds-coral); outline-offset: 4px; border-radius: 6px; }
+  .rental-v5 .rv-comparison-map figcaption { display: none; }
+  .rental-v5 .rv-choice-grid article + article p { max-width: min(42ch,calc(100% - 100px)); }
+}
+
+/* The wide source contains real extended surroundings, without duplicate sides. */
+@media(min-width:1800px) {
+  .rental-v5 .rv-hero-art { object-position: center; }
+}
+
+@media(max-width:1199px) {
+  .rental-v5 .rv-hero { height: 720px; }
+  .rental-v5 .rv-hero-frame { padding-top: 50px; }
+  .rental-v5 .rv-hero h1 { font-size: clamp(60px,7.5vw,88px); }
+  .rental-v5 .rv-board-layout { gap: 24px 30px; }
+  .rental-v5 .rv-gallery { gap: 12px; }
+  .rental-v5 .rv-board-selector { display: block; }
+  .rental-v5 .rv-board-arrow { display: none; }
+  .rental-v5 .rv-board-thumb { flex-basis: calc((100% - 60px) / 4); }
+  .rental-v5 .rv-swipe-hint { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px; color: var(--ds-muted-light); }
+  .rental-v5 .rv-choice-grid { gap: 40px; }
+  .rental-v5 .rv-choice-grid article + article { padding-left: 30px; }
+  .rental-v5 .rv-pickup-grid { gap: 32px; }
+  .rental-v5 .rv-related-list { gap: 0 32px; }
+  .rental-v5 .rv-related-list > a { gap: 16px; grid-template-columns: 80px minmax(0,1fr) 22px; }
+  .rental-v5 .rv-related-photo { width: 80px; height: 80px; }
+}
+@media(max-width:999px) {
+  .rental-v5 .rv-final-grid { grid-template-columns: minmax(0,1fr); }
+  .rental-v5 .rv-final-actions { justify-self: start; }
+}
+@media(max-width:699px) {
+  .rental-v5[data-catalog-active=true] [data-home-v2-messenger-fab] { display: none; }
+  .rental-v5.rental-v5 .epic-landing [data-home-v2-header] { height: 64px; }
+  .rental-v5.rental-v5 .epic-landing :is([data-home-v2-header-strip],[data-home-v2-header-frame]) { height: 64px; }
+  .rental-v5.rental-v5 .epic-landing [data-home-v2-header-frame] { width: var(--ds-content-width); }
+  .rental-v5.rental-v5 .epic-landing [data-home-v2-book-now] { display: none; }
+  .rental-v5 .rv-section { padding-block: 42px; scroll-margin-top: 80px; }
+  .rental-v5 .rv-section h2 { font-size: 32px; }
+  .rental-v5 .rv-hero { height: auto; display: grid; background: var(--ds-graphite); }
+  .rental-v5 .rv-hero-picture { position: relative; inset: auto; z-index: 0; width: 100%; aspect-ratio: 16 / 9; grid-row: 2; }
+  .rental-v5 .rv-hero-art { object-fit: contain; object-position: center; }
+  .rental-v5 .rv-hero-picture:after { content: ''; position: absolute; inset: auto 0 0; height: 20px; background: linear-gradient(transparent,var(--ds-graphite)); pointer-events: none; }
+  .rental-v5 .rv-hero:before,.rental-v5 .rv-hero:after { display: none; }
+  .rental-v5 .rv-hero-frame { display: contents; }
+  .rental-v5 .rv-hero h1 { grid-row: 1; margin: 26px var(--ds-page-gutter) 18px; font-size: clamp(38px,10.8vw,48px); max-width: none; line-height: 1.03; }
+  .rental-v5 .rv-hero-price { grid-row: 3; margin: 18px var(--ds-page-gutter) 16px; font-size: 15px; white-space: nowrap; text-shadow: none; }
+  .rental-v5 .rv-hero-price strong { font-size: 24px; }
+  .rental-v5 .rv-hero-actions { grid-row: 4; display: grid; width: auto; gap: 16px; margin: 0 var(--ds-page-gutter) 30px; }
+  .rental-v5 .rv-hero-actions .ds-action { width: 100%; min-width: 0; min-height: 56px; font-size: 14px; }
+  .rental-v5 .rv-hero-actions .ds-action-secondary { --ds-action-fill: var(--ds-fill-graphite); --ds-action-shadow: var(--ds-shadow-secondary); --ds-action-edge: var(--ds-graphite-edge); }
+  .rental-v5 .rv-hero:after { height: 76px; }
+  .rental-v5 .rv-catalog { padding-top: 22px; padding-bottom: 10px; }
+  .rental-v5 .rv-catalog-heading { margin-bottom: 20px; }
+  .rental-v5 .rv-catalog-heading h2 { font-size: 28px; }
+  .rental-v5 .rv-catalog-heading p { display: none; }
+  .rental-v5 .rv-board-layout { grid-template-columns: minmax(0,1fr); grid-template-areas: 'title' 'gallery' 'selector' 'booking' 'copy'; gap: 12px; scroll-margin-top: 80px; }
+  .rental-v5 .rv-mobile-board-title { display: block; grid-area: title; min-height: 48px; }
+  .rental-v5 .rv-mobile-board-title > span { display: block; font-size: 10px; line-height: 1.3; }
+  .rental-v5 .rv-mobile-board-title h3 { font-size: 23px; margin-top: 4px; line-height: 1.15; }
+  .rental-v5 .rv-board-title-stack { display: none; }
+  .rental-v5 .rv-board-stack-entry[aria-hidden=true] { display: none; }
+  .rental-v5 .rv-gallery { height: clamp(150px,calc(100svh - 430px),420px); min-height: 0; grid-template-columns: minmax(0,1.9fr) minmax(0,1fr); grid-template-rows: 1fr 1fr; gap: 8px; }
+  .rental-v5 .rv-photo { border-radius: 23px; }
+  .rental-v5 .rv-photo-front { grid-row: 1 / 3; }
+  .rental-v5 .rv-photo img { object-fit: cover; }
+  .rental-v5 .rv-board-rail { gap: 10px; padding-block: 2px; }
+  .rental-v5 .rv-board-thumb { flex: 0 0 72px; height: 64px; aspect-ratio: auto; border-radius: 13px; }
+  .rental-v5 .rv-swipe-hint { font-size: 11px; gap: 6px; margin-bottom: 5px; line-height: 1.3; }
+  .rental-v5 .rv-swipe-hint svg { width: 16px; height: 16px; }
+  .rental-v5 .rv-mobile-booking { grid-area: booking; display: grid; grid-template-columns: auto minmax(0,1fr); align-items: center; gap: 14px; padding-top: 3px; }
+  .rental-v5 .rv-mobile-booking > div > p:last-child { font-size: 11px; line-height: 1.4; color: var(--ds-muted-light); }
+  .rental-v5 .rv-mobile-price { white-space: nowrap; color: var(--ds-mint); font: 800 25px/1.2 var(--ds-font-label); }
+  .rental-v5 .rv-mobile-price span { font-size: 10px; color: var(--ds-paper); }
+  .rental-v5 .rv-mobile-booking > .ds-action { min-height: 52px; padding: 10px 14px; font-size: 12px; line-height: 1.2; }
+  .rental-v5 .rv-board-copy { display: block; margin-top: 20px; padding-top: 22px; border-top: 1px solid #ffffff30; }
+  .rental-v5 .rv-board-description-stack { margin-top: 0; }
+  .rental-v5 .rv-board-specs-stack { margin-top: 18px; }
+  .rental-v5 .rv-board-copy > :is(.rv-board-price,.rv-duration,.ds-action) { display: none; }
+  .rental-v5 .rv-board-description { font-size: 16px; margin-top: 0; }
+  .rental-v5 .rv-specs { font-size: 14px; gap: 10px; margin-top: 18px; }
+  .rental-v5 .rv-availability { font-size: 12px; margin-top: 18px; }
+  .rental-v5 .rv-process ol { grid-template-columns: minmax(0,1fr); gap: 0; margin: 26px 0 0 6px; }
+  .rental-v5 .rv-process li { padding: 0 0 24px 25px; border-top: 0; border-left: 1px solid #ffffff60; }
+  .rental-v5 .rv-process li:last-child { border-color: transparent; padding-bottom: 0; }
+  .rental-v5 .rv-step-number { top: 3px; left: -7px; width: 13px; height: 13px; }
+  .rental-v5 .rv-process h3 { font-size: 16px; }
+  .rental-v5 .rv-process p { font-size: 14px; margin-top: 5px; }
+  .rental-v5 .rv-choice-grid { grid-template-columns: minmax(0,1fr); gap: 28px; margin-top: 26px; }
+  .rental-v5 .rv-choice-grid article + article { border-left: 0; border-top: 1px solid rgb(255 255 255 / 25%); padding: 25px 0 0; }
+  .rental-v5 .rv-choice-grid h3 { font-size: 29px; }
+  .rental-v5 .rv-choice-grid :is(li,p) { font-size: 16px; line-height: 1.55; }
+  .rental-v5 .rv-choice-grid ul { gap: 12px; margin-top: 18px; }
+  .rental-v5 .rv-choice-grid .ds-action { min-height: 52px; font-size: 13px; }
+  .rental-v5 .rv-comparison-map { margin-top: 28px; }
+  .rental-v5 .rv-comparison-map figcaption { font-size: 12px; gap: 0; }
+  .rental-v5 .rv-pickup-grid { grid-template-columns: minmax(0,1fr); gap: 25px; }
+  .rental-v5 .rv-pickup-photo { min-height: 0; aspect-ratio: 1.5; border-radius: 36px; }
+  .rental-v5 .rv-pickup-copy p { font-size: 16px; margin-top: 16px; }
+  .rental-v5 .rv-pickup-copy > .ds-action { font-size: 13px; }
+  .rental-v5 .rv-spot-camera { margin-top: 24px; padding-top: 22px; }
+  .rental-v5 .rv-spot-camera p { font-size: 14px; }
+  .rental-v5 .rv-livecam-start { padding: 16px 20px; font-size: 14px; }
+  .rental-v5 .rv-livecam-meta { gap: 8px; flex-wrap: wrap; margin-top: 5px; }
+  .rental-v5 .rv-livecam-meta :is(a,span) { font-size: 12px; }
+  .rental-v5 .rv-faq-grid { grid-template-columns: minmax(0,1fr); gap: 0; margin-top: 22px; }
+  .rental-v5 .rv-faq .ds-faq-item > button { font-size: 15px; min-height: 76px; }
+  .rental-v5 .rv-faq .ds-faq-answer { font-size: 15px; }
+  .rental-v5 .rv-related-list { grid-template-columns: minmax(0,1fr); gap: 0; margin-top: 26px; }
+  .rental-v5 .rv-related-list > a { grid-template-columns: 76px minmax(0,1fr) 20px; gap: 14px; min-height: 112px; padding-block: 18px; }
+  .rental-v5 .rv-related-list > a:first-child { grid-row: auto; padding-bottom: 24px; gap: 18px; border-bottom: 1px solid #ffffff38; }
+  .rental-v5 .rv-related-photo { width: 76px; height: 76px; border-radius: 15px; }
+  .rental-v5 .rv-related-list > a:first-child .rv-related-photo { border-radius: 27px; }
+  .rental-v5 .rv-related-list strong { font-size: 24px; }
+  .rental-v5 .rv-related-list > a:first-child strong { font-size: 32px; }
+  .rental-v5 .rv-related-list > a > span:nth-child(2) > span { font-size: 12px; margin-top: 6px; }
+  .rental-v5 .rv-final { padding-block: 64px 58px; }
+  .rental-v5 .rv-final-grid { grid-template-columns: minmax(0,1fr); gap: 27px; }
+  .rental-v5 .rv-final h2 { font-size: 38px; }
+  .rental-v5 .rv-final p { font-size: 15px; margin-top: 12px; }
+  .rental-v5 .rv-final-actions { gap: 17px 12px; }
+  .rental-v5 .rv-final .ds-action { min-height: 52px; font-size: 12px; padding-inline: 14px; }
+  .rental-v5 .rv-lightbox { padding: 16px; }
+  .rental-v5 .rv-lightbox .ds-dialog-header h2 { font-size: 18px; }
+  .rental-v5 .rv-lightbox-arrow { display: none; }
+  .rental-v5 .rv-lightbox-views { gap: 8px; flex-wrap: wrap; }
+  .rental-v5 .rv-lightbox-views button { font-size: 12px; padding: 8px 12px; }
+}
+@media(max-width:360px) {
+  .rental-v5 .rv-section h2 { font-size: 30px; }
+  .rental-v5 .rv-hero h1 { font-size: 38px; }
+  .rental-v5 .rv-hero-price strong { font-size: 22px; }
+  .rental-v5 .rv-hero-price { font-size: 13px; }
+  .rental-v5 .rv-mobile-board-title h3 { font-size: 21px; }
+  .rental-v5 .rv-mobile-price { font-size: 22px; }
+  .rental-v5 .rv-mobile-booking { gap: 10px; }
+  .rental-v5 .rv-mobile-booking > .ds-action { font-size: 11px; padding-inline: 10px; }
+}
+
+@media(max-width:699px) and (max-height:640px) {
+  .rental-v5 .rv-photo img { object-fit: contain; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .rental-v5 :is(*,*:before,*:after) { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}

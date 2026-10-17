@@ -15,8 +15,10 @@ export function SiteFooter({ locale, languageHref, languageOptions, shellCopy, f
   const t = shellCopy || translations[locale] || translations.en;
   const isVi = locale === 'vi';
   const partnership = serviceType === 'partnership';
+  const rental = serviceType === 'board_rental';
   const message = partnership
     ? (isVi ? 'Xin chào Epic Surf School! Tôi muốn trao đổi về việc hợp tác.' : locale === 'ru' ? 'Привет! Хочу обсудить партнёрство с Epic Surf School.' : 'Hi Epic Surf School! I want to discuss a partnership.')
+    : rental ? (locale === 'ru' ? 'Привет! Хочу арендовать доску для серфинга в EPIC.' : 'Hi! I would like to rent a surfboard at EPIC.')
     : (isVi ? 'Xin chào! Tôi muốn tìm hiểu về các lớp học lướt sóng tại Epic Surf.' : locale === 'ru' ? 'Привет! Хочу узнать об уроках в EPIC.' : 'Hi! I would like to ask about EPIC surf lessons.');
   const details = <details className="ds-lesson-footer-details"><summary>{isVi ? 'Thông tin liên hệ và bản đồ' : locale === 'ru' ? 'Контакты и карта' : 'Contacts and map'}</summary><HomeV2Footer t={t} lang={locale} links={links} description={t.heroSub} mapInitiallyActive={false} layout="library" /></details>;
   const home = locale === 'ru' ? '/ru' : '/';
@@ -34,7 +36,7 @@ export function SiteFooter({ locale, languageHref, languageOptions, shellCopy, f
         {languageOptions ? <LanguageSwitcher locale={locale} options={languageOptions} location="footer" /> : <a href={languageHref} aria-label={locale === 'ru' ? 'Switch to English' : 'Переключить на русский'} onClick={event=>{ event.preventDefault(); trackEvent('language_switch',{language:locale,cta_location:'footer',cta_label:locale==='ru'?'en':'ru'}); window.location.assign(getHrefWithCurrentQuery(languageHref)); }}>{locale === 'ru' ? 'EN' : 'RU'}</a>}
         {socials.map(([name,label,Icon])=><a key={name} href={links[name]} aria-label={label} target="_blank" rel="noopener noreferrer" onClick={event=>{
           if(builders[name]) {
-            event.currentTarget.href=builders[name](links[name],message,{language:locale,includePartnerCode:partnership});
+            event.currentTarget.href=builders[name](links[name],message,{language:locale,includePartnerCode:partnership || rental});
             trackEvent(name + '_click',{language:locale,service_type:serviceType,cta_location:'footer',cta_label:name});
           } else trackEvent('social_click',{platform:name,location:'footer',language:locale});
         }}><Icon /></a>)}

@@ -28,7 +28,7 @@ export default function LandingShell({ locale = "en", languageHref, languageOpti
         setIsMenuOpen={setIsMenuOpen} openBookingModal={book} />
       {children}
       {footerCollapsible ? <SiteFooter locale={locale} shellCopy={shellCopy} languageOptions={languageOptions} languageHref={languageHref} fullWidthDetails serviceType={footerServiceType} /> : <HomeV2Footer t={t} lang={locale} links={links} description={t.heroSub} layout={footerLayout} />}
-      <MessengerFab links={links} lang={locale} variant="homeV2" serviceType={footerServiceType === "partnership" ? "partnership" : "general_question"} ChatWhatsAppIcon={ChatWhatsAppIcon}
+      <MessengerFab links={links} lang={locale} variant="homeV2" serviceType={footerServiceType === "partnership" ? "partnership" : footerServiceType === "board_rental" ? "board_rental" : "general_question"} ChatWhatsAppIcon={ChatWhatsAppIcon}
         ChatTelegramIcon={ChatTelegramIcon} ChatZaloIcon={ChatZaloIcon} />
       <BookingModal bookingModalUrl={bookingUrl} setBookingModalUrl={setBookingUrl} title={t.modalTitle} />
     </div>
