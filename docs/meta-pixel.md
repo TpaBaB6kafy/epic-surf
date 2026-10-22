@@ -16,6 +16,10 @@ Existing GTM and Umami integrations are unchanged.
   returning to a previously visited page. Consecutive effect replays for the same
   pathname do not send extra events. Query/hash-only changes are not new views.
 - Uses `trackSingle` so these views target this Pixel ID only.
+- Sets `fbq.disablePushState = true` before SDK loading: Next.js owns pathname
+  tracking, so Meta's automatic history listener must not duplicate page views
+  or count hash-only changes. This flag is also used in Meta's official template:
+  https://github.com/facebook/GoogleTagManager-WebTemplate-For-FacebookPixel/blob/main/template.tpl
 - Does not load on localhost, Vercel preview domains or the design-system catalog.
 - Renders no UI. Does not add a JavaScript-disabled image fallback.
 - Does not forward the existing analytics payload, form fields, partner codes or

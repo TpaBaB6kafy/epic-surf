@@ -62,6 +62,16 @@ test("SDK dispatch keeps working after load and an effect replay stays deduplica
   assert.deepEqual(liveCalls, [["trackSingle", META_PIXEL_ID, "PageView"]]);
 });
 
+test("Meta history tracking is disabled before the SDK can install its listener", () => {
+  browser();
+  let disabledAtLoad = false;
+  document.head.appendChild = () => {
+    disabledAtLoad = window.fbq.disablePushState === true;
+  };
+  assert.equal(trackMetaPageView("/"), true);
+  assert.equal(disabledAtLoad, true);
+});
+
 test("an existing SDK and fbq are reused", () => {
   const { scripts } = browser();
   scripts.push({ src: "https://connect.facebook.net/en_US/fbevents.js" });

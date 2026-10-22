@@ -29,6 +29,11 @@ export function trackMetaPageView(pathname) {
       fbq.queue = [];
     }
 
+    // Next.js pathname changes are tracked below. Meta's own history listener
+    // would otherwise count the same navigation again, including hash changes.
+    // Set this before loading the SDK, while it can still skip that listener.
+    window.fbq.disablePushState = true;
+
     // Keep the queue available before the asynchronous SDK finishes loading.
     if (!state.scriptRequested && !document.querySelector(`script[src="${SDK_URL}"]`)) {
       const script = document.createElement("script");
