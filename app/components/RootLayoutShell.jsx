@@ -1,5 +1,6 @@
 import Script from "next/script";
 import { buildStructuredData } from "../data/siteConfig";
+import MetaPixel from "./MetaPixel";
 
 export default function RootLayoutShell({ children, locale, includeHomepageStructuredData = true }) {
   const structuredData = includeHomepageStructuredData ? buildStructuredData(locale) : null;
@@ -30,6 +31,7 @@ export default function RootLayoutShell({ children, locale, includeHomepageStruc
         )}
       </head>
       <body className="min-h-screen">
+        <MetaPixel />
         {gtmId && (
           <>
             <Script id="gtm-data-layer" strategy="beforeInteractive">
